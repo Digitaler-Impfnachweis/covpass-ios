@@ -9,7 +9,7 @@
 import Compression
 import Foundation
 
-public struct Compression {
+public enum Compression {
     typealias Config = (operation: compression_stream_operation, algorithm: compression_algorithm)
 
     static func perform(_ config: Config, source: UnsafePointer<UInt8>, sourceSize: Int, preload: Data = Data()) -> Data? {

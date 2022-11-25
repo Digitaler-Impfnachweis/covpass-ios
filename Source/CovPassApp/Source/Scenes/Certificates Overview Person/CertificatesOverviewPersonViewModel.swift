@@ -19,16 +19,14 @@ private enum Constants {
 }
 
 class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelProtocol {
-    
-    
     // MARK: - Properties
-    
+
     weak var delegate: CertificatesOverviewPersonViewModelDelegate?
     var pageTitle: String { certificateOwnerName }
     var pageSubtitle: String
     var modalButtonTitle: String = Constants.Keys.modalButtonTitle
     var certificateViewModels: [CardViewModel] { cardViewModels(for: certificates) }
-    var showBadge: Bool { certificateViewModels.contains(where:\.showNotification) }
+    var showBadge: Bool { certificateViewModels.contains(where: \.showNotification) }
     var manageCertificatesIcon: UIImage { showBadge ? .manageNotification : .manage }
     var manageCertificatesButtonStyle: MainButtonStyle { .alternativeWhiteTitle }
     var dotPageIndicatorIsHidden: Bool { certificateViewModels.count == 1 }
@@ -50,11 +48,12 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
         }
         return latestCertificate
     }
+
     private var holderNeedsMask: Bool
     private var persistence: Persistence
 
     // MARK: - Lifecycle
-    
+
     init(router: CertificatesOverviewPersonRouterProtocol,
          persistence: Persistence,
          repository: VaccinationRepositoryProtocol,
@@ -71,15 +70,15 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
         self.boosterLogic = boosterLogic
         self.certificateHolderStatusModel = certificateHolderStatusModel
         self.certificates = certificates
-        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: persistence.stateSelection)
-        self.certificatesToShow = certificates.filterFirstOfAllTypes
+        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: persistence.stateSelection)
+        certificatesToShow = certificates.filterFirstOfAllTypes
         self.resolver = resolver
-        self.pageSubtitle = String(format: Constants.Keys.modalSubline, certificatesToShow.count)
+        pageSubtitle = String(format: Constants.Keys.modalSubline, certificatesToShow.count)
     }
-    
+
     // MARK: - Methods
-    
-    private func cardViewModels(for certificates: [ExtendedCBORWebToken]) -> [CardViewModel] {
+
+    private func cardViewModels(for _: [ExtendedCBORWebToken]) -> [CardViewModel] {
         certificatesToShow.map { cert in
             CertificateCardViewModel(token: cert,
                                      holderNeedsMask: holderNeedsMask,
@@ -88,11 +87,11 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
                                      boosterLogic: boosterLogic)
         }
     }
-    
-    private func showCertificate(_ certificate: ExtendedCBORWebToken) {
+
+    private func showCertificate(_: ExtendedCBORWebToken) {
         showCertificates()
     }
-    
+
     private func showCertificates() {
         firstly {
             router.showCertificatesDetail(certificates: certificates)
@@ -109,13 +108,13 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
             self?.router.showUnexpectedErrorDialog(error)
         }
     }
-    
+
     private func handleCertificateDetailSceneResult(_ result: CertificateDetailSceneResult) {
         switch result {
         case .didDeleteCertificate:
             resolver.fulfill(.didDeleteCertificate)
         case let .showCertificatesOnOverview(certificate):
-            self.refresh()
+            refresh()
             delegate?.viewModelDidUpdate()
             let indexOfCertType = certificatesToShow.indexOfSameCertType(cert: certificate)
             delegate?.viewModelNeedsCertificateVisible(at: indexOfCertType)
@@ -123,7 +122,7 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
             resolver.fulfill(.addNewCertificate)
         }
     }
-    
+
     private func refresh() {
         firstly {
             repository.getCertificateList()
@@ -139,16 +138,16 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
         }
         .cauterize()
     }
-    
+
     private func setCertificates(_ certificates: [ExtendedCBORWebToken]) {
         self.certificates = certificates
-        self.certificatesToShow = certificates.filterFirstOfAllTypes
+        certificatesToShow = certificates.filterFirstOfAllTypes
     }
-    
+
     func showDetails() {
         showCertificates()
     }
-    
+
     func close() {
         resolver.cancel()
     }

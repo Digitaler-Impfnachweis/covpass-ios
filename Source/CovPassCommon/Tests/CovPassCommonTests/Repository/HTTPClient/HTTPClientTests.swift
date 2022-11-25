@@ -1,6 +1,6 @@
 //
 //  HTTPClientTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -57,7 +57,7 @@ class HTTPClientTests: XCTestCase {
                 expectation.fulfill()
             }
             .cauterize()
-        
+
         // Then
         wait(for: [expectation], timeout: 2)
     }
@@ -95,7 +95,7 @@ class HTTPClientTests: XCTestCase {
 
         // When
         sut.httpRequest(request)
-            .catch { error in
+            .catch { _ in
                 expectation.fulfill()
             }
 
@@ -110,7 +110,7 @@ class HTTPClientTests: XCTestCase {
 
         // When
         sut.httpRequest(request)
-            .catch { error in
+            .catch { _ in
                 expectation.fulfill()
             }
 
@@ -132,7 +132,7 @@ class HTTPClientTests: XCTestCase {
 
         // When
         sut.httpRequest(request)
-            .done { response in
+            .done { _ in
                 expectation.fulfill()
             }
             .cauterize()

@@ -7,5 +7,5 @@
 
 public struct RevocationInfoRouterMock: RevocationInfoRouterProtocol {
     public init() {}
-    public func showPDFExport(with exportData: RevocationPDFExportDataProtocol) {}
+    public func showPDFExport(with _: RevocationPDFExportDataProtocol) {}
 }

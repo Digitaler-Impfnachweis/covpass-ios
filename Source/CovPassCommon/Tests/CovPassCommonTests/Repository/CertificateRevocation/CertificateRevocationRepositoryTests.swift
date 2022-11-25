@@ -1,12 +1,12 @@
 //
 //  CertificateRevocationRepositoryTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassCommon
 import Compression
+@testable import CovPassCommon
 import XCTest
 
 class CertificateRevocationRepositoryTests: XCTestCase {
@@ -313,7 +313,8 @@ private extension ExtendedCBORWebToken {
         let cborWebToken = try JSONDecoder().decode(CBORWebToken.self, from: messagePayload)
         let extendedCborWebToken = ExtendedCBORWebToken(
             vaccinationCertificate: cborWebToken,
-            vaccinationQRCodeData: revokedVaccinationCertificateQRCode)
+            vaccinationQRCodeData: revokedVaccinationCertificateQRCode
+        )
         return extendedCborWebToken
     }
 }

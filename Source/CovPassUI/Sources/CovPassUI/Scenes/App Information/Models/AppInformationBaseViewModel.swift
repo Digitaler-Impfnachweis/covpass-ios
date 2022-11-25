@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -33,8 +33,8 @@ open class AppInformationBaseViewModel: AppInformationViewModelProtocol {
     }
 }
 
-extension AppInformationBaseViewModel {
-    public enum Texts {
+public extension AppInformationBaseViewModel {
+    enum Texts {
         public static let leichteSprache = "app_information_title_company_easy_language".localized(bundle: .main)
         public static let contactTitle = "app_information_title_contact".localized(bundle: .main)
         public static let faqTitle = "app_information_title_faq".localized(bundle: .main)
@@ -48,7 +48,8 @@ extension AppInformationBaseViewModel {
         public static let federalStateTitle = "infschg_settings_federal_state_title".localized(bundle: .main)
         public static let appVersion = String(format: "Version %@", Bundle.main.appVersion())
     }
-    public enum Accessibility {
+
+    enum Accessibility {
         public enum Opening {
             public static let informationAnnounce = "accessibility_app_information_title_information_announce".localized(bundle: .main)
             public static let leichteSprache = "accessibility_app_information_title_simple_language_announce".localized(bundle: .main)
@@ -59,6 +60,7 @@ extension AppInformationBaseViewModel {
             public static let openSourceLicenseTitle = "accessibility_app_information_title_open_source_announce".localized(bundle: .main)
             public static let accessibilityStatementTitle = "accessibility_app_information_title_accessibility_statement_announce".localized(bundle: .main)
         }
+
         public enum Closing {
             public static let informationAnnounce = "accessibility_app_information_title_information_closing_announce".localized(bundle: .main)
             public static let leichteSprache = "accessibility_app_information_title_simple_language_announce_closing".localized(bundle: .main)

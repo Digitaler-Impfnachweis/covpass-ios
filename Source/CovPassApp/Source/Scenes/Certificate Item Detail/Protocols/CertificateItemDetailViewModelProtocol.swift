@@ -6,9 +6,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import UIKit
-import CovPassCommon
 
 protocol CertificateItemDetailViewModelProtocol {
     var title: String { get }

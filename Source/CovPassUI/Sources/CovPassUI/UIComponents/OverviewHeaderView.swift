@@ -11,9 +11,8 @@ import UIKit
 
 @IBDesignable
 public class OverviewHeaderView: XibView {
-    
     // MARK: - Outlets
-    
+
     @IBOutlet public var titleButton: MainButton!
     @IBOutlet public var actionButton: MainButton!
     @IBOutlet public var titleIcon: UIImageView!
@@ -49,6 +48,7 @@ public class OverviewHeaderView: XibView {
             }
         }
     }
+
     public var action: (() -> Void)? {
         didSet {
             actionButton.action = action

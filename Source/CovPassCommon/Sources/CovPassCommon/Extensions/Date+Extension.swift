@@ -1,6 +1,6 @@
 //
 //  Date+Extension.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -8,21 +8,20 @@
 import Foundation
 
 public extension Date {
-    
     var passed24Hours: Bool {
         guard let date = Calendar.current.date(byAdding: .day, value: 1, to: self) else {
             return false
         }
         return Date() > date
     }
-    
+
     var isOlderThan29Days: Bool {
         guard let date = Calendar.current.date(byAdding: .day, value: 29, to: self) else {
             return false
         }
         return Date() > date
     }
-    
+
     func monthsSince(_ date: Date) -> Int {
         let components: Set<Calendar.Component> = [.month]
         let diffComponents = Calendar.current.dateComponents(
@@ -76,7 +75,7 @@ public extension Date {
         let dateInterval = Calendar.current.dateInterval(of: .month, for: self)
         return dateInterval?.end
     }
-    
+
     func add(days: Int) -> Self? {
         var dateComponent = DateComponents()
         dateComponent.day = days

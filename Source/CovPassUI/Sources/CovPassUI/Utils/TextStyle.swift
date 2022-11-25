@@ -50,7 +50,7 @@ public enum TextStyle {
             return string
                 .font(named: UIFont.sansRegular, size: 14.0, lineHeight: 21.0, textStyle: .headline)
                 .colored(.onBackground70)
-            
+
         case .body:
             return string
                 .font(named: UIFont.sansRegular, size: 14.0, lineHeight: 21.0, textStyle: .body)

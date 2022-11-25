@@ -15,7 +15,7 @@ import XCTest
 class CheckAppUpdateServiceMock: CheckAppUpdateServiceProtocol {
     var versionResult: Promise<String>?
     func getAppStoreVersion() -> Promise<String> {
-        return versionResult ?? Promise.value("")
+        versionResult ?? Promise.value("")
     }
 }
 

@@ -45,7 +45,7 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
     var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
 
     var reasonViewModels: [CertificateInvalidReasonViewModelProtocol]
-    
+
     private let token: ExtendedCBORWebToken?
     private let resolver: Resolver<ValidatorDetailSceneResult>
     private let router: CertificateInvalidResultRouterProtocol
@@ -57,11 +57,10 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
          resolver: Resolver<ValidatorDetailSceneResult>,
          router: CertificateInvalidResultRouterProtocol,
          persistence: Persistence,
-         revocationKeyFilename: String
-    ) {
+         revocationKeyFilename: String) {
         self.token = token
         self.countdownTimerModel = countdownTimerModel
-        self.subtitle = .init(
+        subtitle = .init(
             format: Constants.subtitleFormat,
             ("DE_" + persistence.stateSelection).localized
         )
@@ -77,15 +76,15 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
         } else {
             holderBirthday = ""
         }
-        self.reasonViewModels = Self.reasonViewModels()
-        self.checkSituationType = .init(rawValue: persistence.checkSituation) ?? .withinGermany
-        self.travelRulesIsHidden = checkSituationType == .withinGermany
+        reasonViewModels = Self.reasonViewModels()
+        checkSituationType = .init(rawValue: persistence.checkSituation) ?? .withinGermany
+        travelRulesIsHidden = checkSituationType == .withinGermany
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()
     }
-    
+
     private static func reasonViewModels() -> [CertificateInvalidReasonViewModelProtocol] {
-        return [
+        [
             CertificateInvalidInvalidSignatureReasonViewModel(),
             CertificateInvalidQRCodeReasonViewModel()
         ]

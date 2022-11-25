@@ -11,11 +11,10 @@ import PromiseKit
 import UIKit
 
 public struct StateSelectionSceneFactory: ResolvableSceneFactory {
-    
     // MARK: - Lifecycle
 
     public init() {}
-    
+
     public func make(resolvable: Resolver<Void>) -> UIViewController {
         let persistence = UserDefaultsPersistence()
         let viewModel = StateSelectionViewModel(persistence: persistence,

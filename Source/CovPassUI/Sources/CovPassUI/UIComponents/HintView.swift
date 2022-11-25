@@ -26,11 +26,11 @@ public class HintView: XibView {
     @IBOutlet public var iconStackviewCenterYConstraint: NSLayoutConstraint!
     @IBOutlet public var iconStackViewAlignToTopTile: NSLayoutConstraint!
     @IBOutlet public var titleSuperViewBottomConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var titleToSubTitleConstraint: NSLayoutConstraint!
+
+    @IBOutlet var titleToSubTitleConstraint: NSLayoutConstraint!
 
     // MARK: -
-    
+
     public enum Style {
         case warning
         case info
@@ -92,7 +92,7 @@ public class HintView: XibView {
         subTitleConstraint.isActive = !(subTitleLabel.text?.isEmpty ?? true)
         super.updateConstraints()
     }
-    
+
     public func setConstraintsToEdge() {
         containerTopConstraint.constant = 0
         containerLeadingConstraint.constant = 0

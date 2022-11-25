@@ -6,8 +6,8 @@
 //
 
 @testable import CovPassCheckApp
-@testable import CovPassUI
 import CovPassCommon
+@testable import CovPassUI
 
 class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
     private var persistence: MockPersistence!
@@ -32,7 +32,7 @@ class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
     func testDefault() {
         verifyView(view: sut.view)
     }
-    
+
     func testDefaultAlternative() {
         // Given
         persistence.revocationExpertMode = true

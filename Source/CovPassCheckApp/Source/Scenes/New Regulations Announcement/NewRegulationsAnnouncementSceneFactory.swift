@@ -19,4 +19,3 @@ struct NewRegulationsAnnouncementSceneFactory: ResolvableSceneFactory {
         return viewController
     }
 }
-

@@ -3,7 +3,6 @@ import Foundation
 import PromiseKit
 
 class ReissueResultRouter: ReissueResultRouterProtocol, DialogRouterProtocol {
-
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator

@@ -91,7 +91,7 @@ extension Name: Equatable {
             return false
         }
         if let lhsGnt = lhs.gnt, let rhsGnt = rhs.gnt {
-             return lhsGnt.matches(with: rhsGnt)
+            return lhsGnt.matches(with: rhsGnt)
         }
         return true
     }

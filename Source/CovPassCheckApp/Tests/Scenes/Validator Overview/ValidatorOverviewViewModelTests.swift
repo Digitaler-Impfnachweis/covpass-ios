@@ -5,10 +5,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 @testable import CovPassCheckApp
 @testable import CovPassCommon
 @testable import CovPassUI
-import CertLogic
 import SwiftyJSON
 import XCTest
 
@@ -43,7 +43,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         userDefaults = .init()
         prepareSut()
     }
-    
+
     override func tearDown() {
         revocationRepository = nil
         repository = nil
@@ -52,9 +52,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         router = nil
         userDefaults = nil
         sut = nil
-       super.tearDown()
+        super.tearDown()
     }
-    
+
     private func prepareSut(lastUpdateTrustList: Date? = nil, lastUpdateDccrRules: Date? = nil) {
         if let lastUpdateTrustList = lastUpdateTrustList {
             userDefaults.lastUpdatedTrustList = lastUpdateTrustList
@@ -73,7 +73,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             audioPlayer: audioPlayer
         )
     }
-    
+
     func testInitDate() throws {
         let title: String = Localizer.localized(Constants.Keys.syncTitle, bundle: Bundle.main)
         XCTAssert(sut.ntpOffset == 0.0)
@@ -81,7 +81,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         XCTAssert(sut.timeHintTitle == title)
         XCTAssert(sut.timeHintIsHidden == true)
     }
-    
+
     func testNow() throws {
         let date = Date()
         sut.ntpDate = date
@@ -96,7 +96,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         XCTAssert(sut.timeHintTitle == title)
         XCTAssert(sut.timeHintIsHidden == true)
     }
-    
+
     func testBeforeTwoHours() throws {
         let date = Date()
         sut.ntpDate = date
@@ -111,7 +111,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         XCTAssert(sut.timeHintTitle == title)
         XCTAssert(sut.timeHintIsHidden == false)
     }
-    
+
     func testAfterTwoHours() throws {
         let date = Date()
         sut.ntpDate = date
@@ -126,43 +126,43 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         XCTAssert(sut.timeHintTitle == title)
         XCTAssert(sut.timeHintIsHidden == false)
     }
-    
+
     func testRandomOffsetsWhereHintShouldBeHidden() throws {
-        for _ in 0...10 {
-            let random = Double.random(in: 0...7199)
+        for _ in 0 ... 10 {
+            let random = Double.random(in: 0 ... 7199)
             sut.ntpOffset = random
             XCTAssert(sut.ntpOffset == random)
             XCTAssert(sut.timeHintIsHidden == true)
         }
     }
-    
+
     func testRandomOffsetsWhereHintShouldBeNotHidden() throws {
-        for _ in 0...10 {
-            let random = Double.random(in: 7200...20000)
+        for _ in 0 ... 10 {
+            let random = Double.random(in: 7200 ... 20000)
             sut.ntpOffset = random
             XCTAssert(sut.ntpOffset == random)
             XCTAssert(sut.timeHintIsHidden == false)
         }
     }
-    
+
     func testRandomOffsetsWhereHintShouldBeHiddenPast() throws {
-        for _ in 0...10 {
+        for _ in 0 ... 10 {
             let random = Double.random(in: -7199 ... -0)
             sut.ntpOffset = random
             XCTAssert(sut.ntpOffset == random)
             XCTAssert(sut.timeHintIsHidden == true)
         }
     }
-    
+
     func testRandomOffsetsWhereHintShouldBeNotHiddenPast() throws {
-        for _ in 0...10 {
+        for _ in 0 ... 10 {
             let random = Double.random(in: -20000 ... -7200)
             sut.ntpOffset = random
             XCTAssert(sut.ntpOffset == random)
             XCTAssert(sut.timeHintIsHidden == false)
         }
     }
-    
+
     func testTick() throws {
         let expectationOfTick = expectation(description: "Tick method has to be called and completed")
         let fakeDate = Date()
@@ -175,7 +175,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             XCTAssert(dateHasChanged && offsetHasChanged)
             expectationOfTick.fulfill()
         }
-        self.waitForExpectations(timeout: 1.0, handler: nil)
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
 
     func testShowNotificationsIfNeeded_dont_showDataPrivacy_never_shown_before() {
@@ -184,7 +184,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         userDefaults.privacyHash = nil
         router.showDataPrivacyExpectation.isInverted = true
         prepareSut()
-        
+
         // When
         sut.showNotificationsIfNeeded()
 
@@ -253,7 +253,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
     }
-    
+
     func testStartQRCodeValidation() {
         // When
         sut.scanAction()
@@ -264,7 +264,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             audioPlayer.playCovPassCheckCertificateScannedIfEnabledExpectation
         ], timeout: 1)
     }
-    
+
     func testStateSelection() {
         // When
         sut.chooseAction()
@@ -272,7 +272,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [router.routeToStateSelectionExpectation], timeout: 1)
     }
-    
+
     func test_scanAction_showMaskRequiredTechnicalError_unexpected() {
         // When
         sut.scanAction()
@@ -282,7 +282,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showMaskRequiredTechnicalErrorExpectation
         ], timeout: 1)
     }
-    
+
     func test_scanAction_showMaskRequiredTechnicalError_alternative() {
         // GIVEN
         certLogic.validateResult = []
@@ -295,7 +295,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showMaskRequiredBusinessRulesSecondScanAllowedExpectation
         ], timeout: 1)
     }
-    
+
     func test_scanAction_showMaskRequiredBusinessRules() {
         // GIVEN
         certLogic.validateResult = [.init(rule: acceptenceRule, result: .fail)]
@@ -308,7 +308,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showMaskRequiredBusinessRulesExpectation
         ], timeout: 1)
     }
-    
+
     func test_scanAction_showMaskRequiredBusinessRulesSecondScanAllowed() {
         // GIVEN
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed)]
@@ -321,7 +321,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showMaskRequiredBusinessRulesSecondScanAllowedExpectation
         ], timeout: 1)
     }
-    
+
     func test_scanAction_showMaskRequiredBusinessRules_testCertificate() {
         // GIVEN
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed)]
@@ -334,7 +334,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showMaskRequiredBusinessRulesExpectation
         ], timeout: 1)
     }
-    
+
     func test_scanAction_showNoMaskRules() {
         // GIVEN
         certLogic.areRulesAvailable = false
@@ -347,7 +347,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showNoMaskRulesExpectation
         ], timeout: 1)
     }
-    
+
     func test_scanAction_showMaskRequiredTechnicalError_alternative_revoked() {
         // GIVEN
         revocationRepository.isRevoked = true
@@ -360,7 +360,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showMaskRequiredTechnicalErrorExpectation
         ], timeout: 1)
     }
-    
+
     func test_scanAction_secondScan_differentPerson() {
         // GIVEN
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
@@ -374,7 +374,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showDifferentPersonExpectation
         ], timeout: 1)
     }
-    
+
     func test_scanAction_secondScan_sameCertType() {
         // GIVEN
         repository.checkedCert = CBORWebToken.mockVaccinationCertificateWithOtherName
@@ -386,7 +386,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showSameCertTypeExpectation
         ], timeout: 1)
     }
-    
+
     func test_scanAction_showMaskOptional() {
         // GIVEN
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
@@ -400,7 +400,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showMaskOptionalExpectation
         ], timeout: 1)
     }
-    
+
     func test_checkImmunityStatus_vaccinationCycleIsComplete() {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
@@ -414,7 +414,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showVaccinationCycleCompleteExpectation
         ], timeout: 1)
     }
-    
+
     func test_checkImmunityStatus_vaccinationCycleIsComplete_but_invalidation_fails() {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
@@ -428,7 +428,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showIfsg22aCheckErrorExpectation
         ], timeout: 1)
     }
-    
+
     func test_checkImmunityStatus_vaccinationCycleIsNOTComplete() {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
@@ -442,7 +442,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showIfsg22aNotCompleteExpectation
         ], timeout: 1)
     }
-    
+
     func test_checkImmunityStatus_certificate_is_revoked() {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
@@ -455,8 +455,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showIfsg22aCheckErrorExpectation
         ], timeout: 1)
     }
-    
-    
+
     func test_checkImmunityStatus_secondScan_differentPerson() {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
@@ -476,7 +475,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showIfsg22aCheckDifferentPersonExpectation
         ], timeout: 1)
     }
-    
+
     func test_checkImmunityStatus_secondScan_sameCertType() {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
@@ -492,7 +491,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showIfsg22aNotCompleteExpectation
         ], timeout: 1)
     }
-    
+
     func test_checkImmunityStatus_error() {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
@@ -503,7 +502,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showIfsg22aCheckErrorExpectation
         ], timeout: 1)
     }
-    
+
     func test_checkImmunityStatus_entering_germany_valid() {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.enteringGermany.rawValue
@@ -529,7 +528,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showTravelRulesInvalidExpectation
         ], timeout: 1)
     }
-    
+
     func test_checkImmunityStatus_entering_germany_invalid() {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.enteringGermany.rawValue
@@ -540,21 +539,21 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showTravelRulesInvalidExpectation
         ], timeout: 1)
     }
-    
+
     func test_selectedCheckType_mask() {
         // When
         sut.selectedCheckType = .mask
         // Then
         XCTAssertEqual(userDefaults.selectedCheckType, CheckType.mask.rawValue)
     }
-    
+
     func test_selectedCheckType_immunity() {
         // When
         sut.selectedCheckType = .immunity
         // Then
         XCTAssertEqual(userDefaults.selectedCheckType, CheckType.immunity.rawValue)
     }
-    
+
     func test_selectedCheckType_immunity_checkSituationNotSeenBefore() {
         // GIVEN
         UserDefaults.standard.set(nil, forKey: UserDefaults.keyCheckSituation)
@@ -565,7 +564,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.routeToChooseCheckSituationExpectation
         ], timeout: 1)
     }
-    
+
     func test_selectedCheckType_immunity_checkSituationSeenBefore() {
         // GIVEN
         UserDefaults.standard.set(CheckSituationType.withinGermany.rawValue, forKey: UserDefaults.keyCheckSituation)
@@ -577,5 +576,4 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.routeToChooseCheckSituationExpectation
         ], timeout: 1)
     }
-    
 }

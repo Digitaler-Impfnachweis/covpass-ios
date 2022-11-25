@@ -8,12 +8,12 @@
 import UIKit
 
 public final class CertificateImportSelectionItemView: XibView {
-    @IBOutlet public weak var checkmarkButton: UIButton!
-    @IBOutlet public weak var titleLabel: UILabel!
-    @IBOutlet public weak var subtitleLabel: UILabel!
-    @IBOutlet public weak var stackView: UIStackView!
+    @IBOutlet public var checkmarkButton: UIButton!
+    @IBOutlet public var titleLabel: UILabel!
+    @IBOutlet public var subtitleLabel: UILabel!
+    @IBOutlet public var stackView: UIStackView!
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
 
         checkmarkButton.setImage(.checkboxChecked, for: .selected)

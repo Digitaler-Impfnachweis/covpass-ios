@@ -9,23 +9,23 @@ import CovPassUI
 import UIKit
 
 final class CertificateImportSelectionViewController: UIViewController {
-    @IBOutlet weak var infoHeaderView: InfoHeaderView!
-    @IBOutlet weak var selectionTitleLabel: UILabel!
-    @IBOutlet weak var selectionTitleView: UIView!
-    @IBOutlet weak var selectionTitleCheckboxButton: UIButton!
-    @IBOutlet weak var itemSelectionStackView: UIStackView!
-    @IBOutlet weak var hintView: HintView!
-    @IBOutlet weak var importButton: MainButton!
+    @IBOutlet var infoHeaderView: InfoHeaderView!
+    @IBOutlet var selectionTitleLabel: UILabel!
+    @IBOutlet var selectionTitleView: UIView!
+    @IBOutlet var selectionTitleCheckboxButton: UIButton!
+    @IBOutlet var itemSelectionStackView: UIStackView!
+    @IBOutlet var hintView: HintView!
+    @IBOutlet var importButton: MainButton!
 
     private var viewModel: CertificateImportSelectionViewModelProtocol
-    
+
     init(viewModel: CertificateImportSelectionViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.viewModel.delegate = self
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         nil
     }
 
@@ -75,8 +75,8 @@ final class CertificateImportSelectionViewController: UIViewController {
     private func configureItemSelectionStackView() {
         itemSelectionStackView.removeAllArrangedSubviews()
         itemSelectionStackView.isHidden = viewModel.hideSelection
-        
-        for index in 0..<viewModel.items.count {
+
+        for index in 0 ..< viewModel.items.count {
             let item = viewModel.items[index]
             let view = CertificateImportSelectionItemView()
 
@@ -144,5 +144,5 @@ extension CertificateImportSelectionViewController: ViewModelDelegate {
         configureButton()
     }
 
-    func viewModelUpdateDidFailWithError(_ error: Error) {}
+    func viewModelUpdateDidFailWithError(_: Error) {}
 }

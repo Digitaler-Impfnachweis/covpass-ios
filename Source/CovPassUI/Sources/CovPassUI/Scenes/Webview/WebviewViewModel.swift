@@ -9,8 +9,6 @@
 import Foundation
 
 public class WebviewViewModel: WebviewViewModelProtocol {
-
-    
     // MARK: - Properties
 
     public let title: String?
@@ -20,7 +18,7 @@ public class WebviewViewModel: WebviewViewModelProtocol {
     public var enableDynamicFonts: Bool
     public var openingAnnounce: String
     public var closingAnnounce: String
-    
+
     // MARK: - Lifecycle
 
     public init(title: String? = nil,

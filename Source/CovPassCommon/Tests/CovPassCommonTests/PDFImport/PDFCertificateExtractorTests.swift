@@ -1,6 +1,6 @@
 //
 //  PDFCertificateExtractorTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -30,7 +30,7 @@ class PDFCertificateExtractorTests: XCTestCase {
 
     func configureSut(
         maximalNumberOfTokens: Int = 100,
-        existingTokens: [ExtendedCBORWebToken] = []
+        existingTokens _: [ExtendedCBORWebToken] = []
     ) {
         sut = .init(
             maximalNumberOfTokens: maximalNumberOfTokens,

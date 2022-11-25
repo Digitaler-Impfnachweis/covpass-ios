@@ -1,6 +1,6 @@
 //
 //  CertificateListTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -27,7 +27,7 @@ class CertificateListTests: XCTestCase {
         let certificates: [ExtendedCBORWebToken] = [
             CBORWebToken.mockVaccinationCertificate.extended(),
             CBORWebToken.mockTestCertificate.extended(),
-            CBORWebToken.mockRecoveryCertificate.extended(),
+            CBORWebToken.mockRecoveryCertificate.extended()
         ]
         let sut = CertificateList(certificates: certificates)
 

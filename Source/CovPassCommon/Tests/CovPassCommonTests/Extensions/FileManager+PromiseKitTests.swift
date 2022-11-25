@@ -1,6 +1,6 @@
 //
 //  FileManager+PromiseKitTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -69,9 +69,9 @@ class FileManagerPromiseKitTests: XCTestCase {
 
         // When
         sut.createFilePromise(atPath: expectedPath, contents: expectedData, attributes: [:])
-        .catch { _ in
-            expectation.fulfill()
-        }
+            .catch { _ in
+                expectation.fulfill()
+            }
 
         // Then
         wait(for: [expectation], timeout: 1)
@@ -85,10 +85,10 @@ class FileManagerPromiseKitTests: XCTestCase {
 
         // When
         sut.createFilePromise(atPath: expectedPath, contents: expectedData, attributes: [:])
-        .done { _ in
-            expectation.fulfill()
-        }
-        .cauterize()
+            .done { _ in
+                expectation.fulfill()
+            }
+            .cauterize()
 
         // Then
         wait(for: [expectation], timeout: 1)

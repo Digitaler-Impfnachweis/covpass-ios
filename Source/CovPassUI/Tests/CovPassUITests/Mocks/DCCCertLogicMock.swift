@@ -5,28 +5,27 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassCommon
 import CertLogic
-import PromiseKit
+import CovPassCommon
 import Foundation
+import PromiseKit
 import XCTest
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
-   
     var rulesAreAvailable: Bool = true
 
     var rulesShouldBeUpdated: Bool = true
-    
+
     var boosterRulesShouldBeUpdated: Bool = true
-    
+
     var valueSetsShouldBeUpdated: Bool = true
-    
+
     var domesticRulesShouldBeUpdated: Bool = true
-    
+
     var domesticRulesUpdateTestExpectation = XCTestExpectation()
-    
+
     var domesticRulesUpdateIfNeededTestExpectation = XCTestExpectation()
-    
+
     var throwErrorOnUpdateRules: Bool = false
 
     var rules: [Rule] = []
@@ -34,37 +33,37 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateBoosterRulesIfNeeded() -> Promise<Void> {
         .value
     }
-    
-    var didUpdateValueSets: (()->Void)?
+
+    var didUpdateValueSets: (() -> Void)?
 
     func updateValueSets() -> Promise<Void> {
         didUpdateValueSets?()
         return Promise.value
     }
-    
+
     func updateValueSetsIfNeeded() -> Promise<Void> {
         .value
     }
-    
+
     var countries: [Country] {
         [Country("DE")]
     }
-    
+
     func updateBoosterRules() -> Promise<Void> {
         .value
     }
 
-    func rulesAvailable(logicType: CovPassCommon.DCCCertLogic.LogicType, region: String?) -> Bool {
+    func rulesAvailable(logicType _: CovPassCommon.DCCCertLogic.LogicType, region _: String?) -> Bool {
         rulesAreAvailable
     }
 
-    func rules(logicType: CovPassCommon.DCCCertLogic.LogicType, region: String?) -> [Rule] {
+    func rules(logicType _: CovPassCommon.DCCCertLogic.LogicType, region _: String?) -> [Rule] {
         rules
     }
-    
+
     var validationError: Error?
     var validateResult: [ValidationResult]?
-    func validate(type: DCCCertLogic.LogicType, countryCode: String, region: String?, validationClock: Date, certificate: CovPassCommon.CBORWebToken) throws -> [CertLogic.ValidationResult] {
+    func validate(type _: DCCCertLogic.LogicType, countryCode _: String, region _: String?, validationClock _: Date, certificate _: CovPassCommon.CBORWebToken) throws -> [CertLogic.ValidationResult] {
         if let err = validationError {
             throw err
         }
@@ -74,8 +73,8 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateRulesIfNeeded() -> Promise<Void> {
         Promise.value
     }
-    
-    var didUpdateRules: (()->Void)?
+
+    var didUpdateRules: (() -> Void)?
 
     func updateRules() -> Promise<Void> {
         if throwErrorOnUpdateRules {
@@ -85,12 +84,12 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
             return Promise.value
         }
     }
-    
+
     func updateDomesticIfNeeded() -> Promise<Void> {
         domesticRulesUpdateIfNeededTestExpectation.fulfill()
         return .value
     }
-    
+
     func updateDomesticRules() -> Promise<Void> {
         domesticRulesUpdateTestExpectation.fulfill()
         return .value

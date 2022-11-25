@@ -5,10 +5,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import CovPassCommon
-import UIKit
+import CovPassUI
 import PromiseKit
+import UIKit
 
 private enum Constants {
     enum Keys {
@@ -22,6 +22,7 @@ private enum Constants {
         static let result_2G_button_startover = "result_2G_button_startover".localized
         static let validation_check_popup_test_date_of_birth = "validation_check_popup_test_date_of_birth".localized
     }
+
     enum Images {
         static let iconCardInverse = UIImage.iconCardInverse
         static let iconCardInverseWarning = UIImage.iconCardInverseWarning
@@ -29,7 +30,6 @@ private enum Constants {
 }
 
 class DifferentPersonViewModel: DifferentPersonViewModelProtocol {
-
     var title: String { Constants.Keys.title }
     var subtitle: String { Constants.Keys.subtitle }
     var firstResultCardImage: UIImage { Constants.Images.iconCardInverse }
@@ -43,37 +43,39 @@ class DifferentPersonViewModel: DifferentPersonViewModelProtocol {
     var firstResultName: String { firstResultCert.hcert.dgc.nam.fullName }
     var firstResultNameTranslittered: String { firstResultCert.hcert.dgc.nam.fullNameTransliterated }
     var firstResultDateOfBirth: String {
-        return String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(firstResultCert.hcert.dgc))
+        String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(firstResultCert.hcert.dgc))
     }
+
     var secondResultName: String { secondResultCert.hcert.dgc.nam.fullName }
     var secondResultNameTranslittered: String { secondResultCert.hcert.dgc.nam.fullNameTransliterated }
     var secondResultDateOfBirth: String {
-        return String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(secondResultCert.hcert.dgc))
+        String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(secondResultCert.hcert.dgc))
     }
+
     var firstResultCert: CBORWebToken
     var secondResultCert: CBORWebToken
     let countdownTimerModel: CountdownTimerModel
-    var delegate: ViewModelDelegate? = nil {
+    var delegate: ViewModelDelegate? {
         didSet {
             countdownTimerModel.onUpdate = { [weak self] _ in
                 self?.delegate?.viewModelDidUpdate()
             }
         }
     }
+
     private var resolver: Resolver<DifferentPersonResult>
-    
+
     init(firstResultCert: CBORWebToken,
          secondResultCert: CBORWebToken,
          resolver: Resolver<DifferentPersonResult>,
-         countdownTimerModel: CountdownTimerModel
-    ) {
+         countdownTimerModel: CountdownTimerModel) {
         self.firstResultCert = firstResultCert
         self.secondResultCert = secondResultCert
         self.resolver = resolver
         self.countdownTimerModel = countdownTimerModel
         countdownTimerModel.start()
     }
-    
+
     func startover() {
         resolver.fulfill(.startover)
     }

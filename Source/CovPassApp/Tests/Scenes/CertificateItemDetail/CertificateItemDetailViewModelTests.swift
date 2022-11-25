@@ -8,13 +8,12 @@
 @testable import CovPassApp
 @testable import CovPassCommon
 @testable import CovPassUI
-import XCTest
 import PromiseKit
+import XCTest
 
 class CertificateItemDetailViewModelTests: XCTestCase {
-    
     private var sut: CertificateItemDetailViewModel!
-    
+
     private func configureSut(token: ExtendedCBORWebToken) {
         let (_, resolver) = Promise<CertificateDetailSceneResult>.pending()
         sut = CertificateItemDetailViewModel(router: CertificateItemDetailRouterMock(),
@@ -23,7 +22,7 @@ class CertificateItemDetailViewModelTests: XCTestCase {
                                              resolvable: resolver,
                                              vaasResultToken: nil)
     }
-    
+
     func testGerman() {
         // GIVEN
         let token = CBORWebToken.mockVaccinationCertificate
@@ -34,7 +33,7 @@ class CertificateItemDetailViewModelTests: XCTestCase {
         let countryVaccinationValue = sut.items[9].value
         XCTAssertEqual(countryVaccinationValue, "Germany")
     }
-    
+
     func testTurkish() {
         // GIVEN
         let token = CBORWebToken.mockVaccinationCertificate
@@ -45,7 +44,7 @@ class CertificateItemDetailViewModelTests: XCTestCase {
         let countryVaccinationValue = sut.items[9].value
         XCTAssertEqual(countryVaccinationValue, "Turkey")
     }
-    
+
     func testGreatBritain() {
         // GIVEN
         let token = CBORWebToken.mockVaccinationCertificate
@@ -56,7 +55,7 @@ class CertificateItemDetailViewModelTests: XCTestCase {
         let countryVaccinationValue = sut.items[9].value
         XCTAssertEqual(countryVaccinationValue, "Great Britain")
     }
-    
+
     func testChina() {
         // GIVEN
         let token = CBORWebToken.mockVaccinationCertificate

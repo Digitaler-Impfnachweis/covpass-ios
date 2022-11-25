@@ -28,7 +28,7 @@ final class VaccinationCycleIncompleteResultViewController: UIViewController {
         self.viewModel.delegate = self
     }
 
-    required init?(coder: NSCoder) { nil }
+    required init?(coder _: NSCoder) { nil }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ final class VaccinationCycleIncompleteResultViewController: UIViewController {
         configureReasonStackView()
         configureAccessibility()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: headerStackView)
@@ -109,7 +109,7 @@ final class VaccinationCycleIncompleteResultViewController: UIViewController {
             self?.viewModel.openFAQ(url)
         }
     }
-    
+
     private func configureAccessibility() {
         if #available(iOS 13.0, *) {
             headerStackView.accessibilityRespondsToUserInteraction = true

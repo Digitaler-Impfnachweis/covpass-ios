@@ -5,10 +5,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
-import PromiseKit
 import CovPassCommon
+import CovPassUI
 import Foundation
+import PromiseKit
 
 protocol ValidationServiceRoutable: DialogRouterProtocol {
     func routeToConsentGeneralConsent()

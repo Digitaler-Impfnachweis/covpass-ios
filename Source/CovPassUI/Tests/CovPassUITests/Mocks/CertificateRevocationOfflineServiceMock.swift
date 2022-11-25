@@ -1,17 +1,16 @@
 //
 //  CertificateRevocationOfflineServiceMock.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
 import CovPassCommon
 import Foundation
-import XCTest
 import PromiseKit
+import XCTest
 
 final class CertificateRevocationOfflineServiceMock: CertificateRevocationOfflineServiceProtocol {
-
     var lastSuccessfulUpdate: Date?
     var shouldOfflineUpdate: Bool = false
     var state: CertificateRevocationServiceState = .idle
@@ -22,7 +21,7 @@ final class CertificateRevocationOfflineServiceMock: CertificateRevocationOfflin
         updateExpectation.fulfill()
         return .value
     }
-    
+
     func updateNeeded() -> Bool {
         shouldOfflineUpdate
     }

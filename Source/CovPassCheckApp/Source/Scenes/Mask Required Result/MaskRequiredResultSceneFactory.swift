@@ -15,7 +15,7 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
     private let reasonType: MaskRequiredReasonType
     private let secondCertificateHintHidden: Bool
     private let token: ExtendedCBORWebToken?
-    
+
     init(router: MaskRequiredResultRouterProtocol,
          reasonType: MaskRequiredReasonType,
          secondCertificateHintHidden: Bool,

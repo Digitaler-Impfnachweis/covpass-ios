@@ -5,14 +5,14 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import CovPassCommon
-import UIKit
+import CovPassUI
 import PromiseKit
+import UIKit
 
 struct ValidationFailedFactory: ResolvableSceneFactory {
-
     // MARK: - Properties
+
     let ticket: ValidationServiceInitialisation
 
     // MARK: - Lifecycle

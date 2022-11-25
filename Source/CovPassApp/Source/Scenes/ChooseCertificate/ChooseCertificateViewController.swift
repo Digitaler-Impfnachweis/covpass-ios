@@ -22,14 +22,13 @@ class ChooseCertificateViewController: UIViewController {
     @IBOutlet var subtitleLabel: PlainLabel!
     @IBOutlet var certDetailsLabel: PlainLabel!
     @IBOutlet var toolbarView: CustomToolbarView!
-    
-    @IBOutlet weak var noMatchInfoView: UIView!
-    @IBOutlet weak var noMatchImageView: UIImageView!
-    @IBOutlet weak var notMatchTitleLabel: UILabel!
-    @IBOutlet weak var noMatchSubtitleLabel: UILabel!
+
+    @IBOutlet var noMatchInfoView: UIView!
+    @IBOutlet var noMatchImageView: UIImageView!
+    @IBOutlet var notMatchTitleLabel: UILabel!
+    @IBOutlet var noMatchSubtitleLabel: UILabel!
     let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
 
-    
     // MARK: - Properties
 
     private(set) var viewModel: ChooseCertificateViewModelProtocol
@@ -62,7 +61,7 @@ class ChooseCertificateViewController: UIViewController {
         addActivityIndicator()
         updateView()
     }
-    
+
     private func addActivityIndicator() {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         let activityIndicatorContainer = UIView()
@@ -76,7 +75,7 @@ class ChooseCertificateViewController: UIViewController {
         activityIndicator.leftAnchor.constraint(equalTo: activityIndicatorContainer.leftAnchor, constant: 40.0).isActive = true
         activityIndicator.rightAnchor.constraint(equalTo: activityIndicatorContainer.rightAnchor, constant: -40.0).isActive = true
     }
-    
+
     private func setupTitle() {
         headline.attributedTitleText = viewModel.title.styledAs(.header_2)
         headline.action = { [weak self] in
@@ -85,32 +84,32 @@ class ChooseCertificateViewController: UIViewController {
         headline.image = .close
         headline.actionButton.enableAccessibility(label: Constant.Accessibility.labelClose)
     }
-    
+
     private func setupSubtitle() {
         subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body)
         subtitleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
     }
-    
+
     private func updateView() {
         updateCertDetails()
         updateCertificates()
         updateToolbarView()
-        
+
         noMatchInfoView.isHidden = viewModel.certificatesAvailable || viewModel.isLoading
         noMatchImageView.image = viewModel.noMatchImage
         notMatchTitleLabel.attributedText = viewModel.noMatchTitle.styledAs(.mainButton).aligned(to: .center)
         noMatchSubtitleLabel.attributedText = viewModel.noMatchSubtitle.styledAs(.subheader_2).aligned(to: .center)
-        
+
         viewModel.isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
-    
+
     private func updateCertDetails() {
         certDetailsLabel.isHidden = viewModel.isLoading
         certDetailsLabel.attributedText = viewModel.certdetails.styledAs(.subheader_2)
         certDetailsLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         stackView.setCustomSpacing(40, after: certDetailsLabel)
     }
-    
+
     private func updateCertificates() {
         vaccinationsStackView.isHidden = viewModel.isLoading
         vaccinationsStackView.subviews.forEach {
@@ -121,7 +120,7 @@ class ChooseCertificateViewController: UIViewController {
             self.vaccinationsStackView.addArrangedSubview($0)
         }
     }
-    
+
     private func updateToolbarView() {
         toolbarView.state = .confirm(Constant.Keys.NoMatch.actionButton)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)

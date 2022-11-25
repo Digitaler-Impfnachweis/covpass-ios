@@ -12,7 +12,6 @@ import PromiseKit
 import UIKit
 
 class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProtocol {
-
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -45,14 +44,14 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
                                           closingAnnounce: faqTitleClose)
         sceneCoordinator.present(factory)
     }
-    
+
     @discardableResult
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
         sceneCoordinator.present(
             CertificateSceneFactory(token: token)
         )
     }
-    
+
     func showReissue(for tokens: [ExtendedCBORWebToken],
                      context: ReissueContext) -> Promise<Void> {
         sceneCoordinator.present(

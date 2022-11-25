@@ -12,7 +12,6 @@ import XCTest
 @testable import CovPassCommon
 
 class KeyedDecodingContainterTests: XCTestCase {
-
     func testTrimmedDecoding() {
         let json = ["trimmedString": "  test  "]
         let data = try! JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)

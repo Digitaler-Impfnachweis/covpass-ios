@@ -37,6 +37,6 @@ final class WhatsNewSettingsViewModel: WhatsNewSettingsViewModelProtocol {
 
     init(persistence: Persistence, whatsNewURL: URL) {
         self.persistence = persistence
-        self.whatsNewURLRequest = .init(url: whatsNewURL)
+        whatsNewURLRequest = .init(url: whatsNewURL)
     }
 }

@@ -6,9 +6,9 @@
 //
 
 @testable import CovPassCommon
-import XCTest
 import iOSSnapshotTestCase
 import iOSSnapshotTestCaseCore
+import XCTest
 
 class BaseSnapShotTests: FBSnapshotTestCase {
     override func setUp() {
@@ -19,7 +19,7 @@ class BaseSnapShotTests: FBSnapshotTestCase {
     func verifyView(vc: UIViewController, record: Bool = false) {
         recordMode = record
         FBSnapshotVerifyViewController(vc,
-                                       identifier: Locale.preferredLanguages[0] ,
+                                       identifier: Locale.preferredLanguages[0],
                                        suffixes: NSOrderedSet(arrayLiteral: "_64"),
                                        perPixelTolerance: 0.1)
     }
@@ -34,7 +34,7 @@ class BaseSnapShotTests: FBSnapshotTestCase {
         view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: height)
         RunLoop.current.run(for: waitAfter)
         FBSnapshotVerifyView(view,
-                             identifier: Locale.preferredLanguages[0] ,
+                             identifier: Locale.preferredLanguages[0],
                              suffixes: NSOrderedSet(arrayLiteral: "_64"),
                              perPixelTolerance: 0.1)
     }

@@ -1,0 +1,4 @@
+--exclude **/fastlane
+--commas false
+--allman false
+--disable wrapMultilineStatementBraces

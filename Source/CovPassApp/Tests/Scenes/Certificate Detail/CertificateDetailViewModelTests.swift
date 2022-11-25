@@ -21,7 +21,7 @@ class CertificateDetailViewModelTests: XCTestCase {
     private var sut: CertificateDetailViewModel!
     private var vaccinationRepo: VaccinationRepositoryMock!
     private var persistence: MockPersistence!
-    
+
     override func setUpWithError() throws {
         let certificates: [ExtendedCBORWebToken] = try [
             .token1Of2(),
@@ -36,7 +36,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         persistence = MockPersistence()
         configureCustomSut(certificates: certificates)
     }
-    
+
     private func configureCustomSut(certificates: [ExtendedCBORWebToken],
                                     maskRulesAvailable: Bool = false,
                                     needsMask: Bool = false) {
@@ -57,7 +57,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         )
         sut.delegate = delegate
     }
-    
+
     private func configureSut(booosterState: BoosterCandidate.BoosterState = .none) throws {
         let token3Of3 = try ExtendedCBORWebToken.token3Of3()
         var boosterCandidate = BoosterCandidate(certificate: token3Of3)
@@ -118,7 +118,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showBoosterNotification)
     }
-    
+
     func testShowBoosterNotification_booster_candidate_state_new() throws {
         // Given
         try configureSut(booosterState: .new)
@@ -129,7 +129,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showBoosterNotification)
     }
-    
+
     func testStartReissue() throws {
         // When
         sut.triggerBoosterReissue()
@@ -137,106 +137,106 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         wait(for: [router.expectationShowReissue], timeout: 0.1)
     }
-    
+
     func testShowReissueNotification_ReissueQualifiedCase1() throws {
         // GIVEN: 1/1 and 2/2 qualifies for reissue
         let certificates: [ExtendedCBORWebToken] = try [
             .token1Of1(),
-            .token2Of2(),
+            .token2Of2()
         ]
         configureCustomSut(certificates: certificates)
-        
+
         // THEN
         XCTAssertTrue(sut.showBoosterReissueNotification)
     }
-    
+
     func testShowReissueNotification_ReissueNotQualifiedCase_RecoveryIsYoungerThanVaccinations() throws {
         // GIVEN: 1/1 and 2/2 and recovery cert qualifies for reissue
         let certificates: [ExtendedCBORWebToken] = try [
             CBORWebToken.mockRecoveryCertificate.extended(),
             .token1Of1(),
-            .token2Of2(),
+            .token2Of2()
         ]
         configureCustomSut(certificates: certificates)
-        
+
         // THEN
         XCTAssert(sut.showBoosterReissueNotification)
     }
-    
+
     func testShowReissueNotification_ReissueQualifiedCase2() throws {
         // GIVEN: 1/1 and 2/2 and recovery cert qualifies for reissue
         let certificates: [ExtendedCBORWebToken] = try [
             CBORWebToken.mockRecoveryCertificate.extended(),
             .token1Of1(),
-            .token2Of2(),
+            .token2Of2()
         ]
         certificates[0].firstRecovery!.fr = Date().addingTimeInterval(-2000)
         certificates[1].firstVaccination!.dt = Date().addingTimeInterval(-1500)
         certificates[2].firstVaccination!.dt = Date().addingTimeInterval(-1000)
         configureCustomSut(certificates: certificates)
-        
+
         // THEN
         XCTAssertTrue(sut.showBoosterReissueNotification)
     }
-    
+
     func testNotShowReissueNotification_NotQualified() throws {
         // GIVEN: 2/2 doesnt qualifies for reissue
         let certificates: [ExtendedCBORWebToken] = try [
-            .token2Of2(),
+            .token2Of2()
         ]
         configureCustomSut(certificates: certificates)
-        
+
         // THEN
         XCTAssertFalse(sut.showBoosterReissueNotification)
     }
-    
+
     func testShowReissueNotification_WithNewBadge() throws {
         // GIVEN: 1/1 and 2/2 qualifies for reissue and set its already new seen property to false
         var certificates: [ExtendedCBORWebToken] = try [
             .token1Of1(),
-            .token2Of2(),
+            .token2Of2()
         ]
         certificates[0].reissueProcessNewBadgeAlreadySeen = false
         certificates[1].reissueProcessNewBadgeAlreadySeen = false
         configureCustomSut(certificates: certificates)
-        
+
         // THEN
         XCTAssertTrue(sut.showBoosterReissueIsNewBadge)
     }
-    
+
     func testShowReissueNotification_WithoutNewBadge() throws {
         // GIVEN: 1/1 and 2/2 qualifies for reissue and set its already new seen property to true
         var certificates: [ExtendedCBORWebToken] = try [
             .token1Of1(),
-            .token2Of2(),
+            .token2Of2()
         ]
         certificates[0].reissueProcessNewBadgeAlreadySeen = true
         certificates[1].reissueProcessNewBadgeAlreadySeen = true
         configureCustomSut(certificates: certificates)
-        
+
         // THEN
         XCTAssertFalse(sut.showBoosterReissueIsNewBadge)
     }
-    
+
     func testShowReissueNotification_WithoutNewBadge_alternative() throws {
         // GIVEN: 1/1 and 2/2 qualifies for reissue and set its already new seen property to true only on one cert should be enough
         var certificates: [ExtendedCBORWebToken] = try [
             .token1Of1(),
-            .token2Of2(),
+            .token2Of2()
         ]
         certificates[0].reissueProcessNewBadgeAlreadySeen = true
         certificates[1].reissueProcessNewBadgeAlreadySeen = false
         configureCustomSut(certificates: certificates)
-        
+
         // THEN
         XCTAssertFalse(sut.showBoosterReissueIsNewBadge)
     }
-    
+
     func testUpdateReissueCandidate() throws {
         // GIVEN: 1/1 and 2/2 qualifies for reissue
         let certificates: [ExtendedCBORWebToken] = try [
             .token1Of1(),
-            .token2Of2(),
+            .token2Of2()
         ]
         configureCustomSut(certificates: certificates)
 
@@ -750,7 +750,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertFalse(showVaccinationExpiryReissueIsNewBadge)
     }
-    
+
     func testShowRecoveryExpiryReissueIsNewBadge_is_new() {
         // Given
         var token = ExtendedCBORWebToken.reissuableRecovery
@@ -763,7 +763,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showRecoveryExpiryReissueIsNewBadge)
     }
-    
+
     func testShowRecoveryExpiryReissueIsNewBadge_is_new_with_nil() {
         // Given
         var token = ExtendedCBORWebToken.reissuableRecovery
@@ -799,13 +799,13 @@ class CertificateDetailViewModelTests: XCTestCase {
                 token1,
                 token2,
                 .reissuableRecovery,
-                .reissuableRecovery,
+                .reissuableRecovery
             ]
         )
-        
+
         // When
         sut.triggerVaccinationExpiryReissue()
-        
+
         // Then
         wait(for: [
             router.expectationShowReissue,
@@ -864,14 +864,14 @@ class CertificateDetailViewModelTests: XCTestCase {
             vaccinationRepo.replaceExpectation
         ], timeout: 1)
     }
-    
+
     func testRecoveryExpiryReissueCandidatesCount() {
         // Given
         configureCustomSut(
             certificates: [
                 .reissuableRecovery,
                 .reissuableRecovery,
-                .reissuableVaccination,
+                .reissuableVaccination
             ]
         )
 
@@ -881,7 +881,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(count, 1)
     }
-    
+
     func testRecoveryExpiryReissueCandidatesCount_withNonReissuable() {
         // Given
         configureCustomSut(
@@ -920,7 +920,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(count, 0)
     }
-    
+
     func testMaskStatusViewModel_noMaskRulesAvailable() throws {
         // When
         let certificates: [ExtendedCBORWebToken] = try [.token1Of1()]
@@ -932,7 +932,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.subtitle, nil)
         XCTAssertEqual(viewModel.federalStateText, "in Schleswig-Holstein*")
     }
-    
+
     func testMaskStatusViewModel_optional() throws {
         // When
         let certificates: [ExtendedCBORWebToken] = try [.token1Of1()]
@@ -943,7 +943,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel is CertificateHolderMaskNotRequiredStatusViewModel)
         XCTAssertEqual(viewModel.subtitle, "Exempt until May 3, 2021")
     }
-    
+
     func testMaskStatusViewModel_required() throws {
         // Given
         let certificates: [ExtendedCBORWebToken] = try [.token1Of1()]
@@ -956,7 +956,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel is CertificateHolderMaskRequiredStatusViewModel)
         XCTAssertEqual(viewModel.subtitle, nil)
     }
-    
+
     func testMaskStatusViewModel_required_withRecoveryAsFreshest_butOlderThan29Days() throws {
         // Given
         try configureCustomSut(certificates: [.token3Of3(), .reissuableRecovery], maskRulesAvailable: true, needsMask: true)
@@ -968,11 +968,11 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel is CertificateHolderMaskRequiredStatusViewModel)
         XCTAssertEqual(viewModel.subtitle, nil)
     }
-    
+
     func testMaskStatusViewModel_required_withRecoveryAsFreshest_notOlderThan29Days() throws {
         // Given
         let recoveryCert: ExtendedCBORWebToken = .reissuableRecovery
-        let dateOfRecovery: Date = Date().add(days: 5)!
+        let dateOfRecovery = Date().add(days: 5)!
         recoveryCert.vaccinationCertificate.hcert.dgc.r!.first!.fr = dateOfRecovery
         try configureCustomSut(certificates: [.token3Of3(),
                                               recoveryCert],
@@ -1008,7 +1008,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderIncompleteImmunizationStatusViewModel)
     }
-    
+
     func testImmunizationStatusViewModel_incomplete_because_of_missing_vaccination() throws {
         // Given
         let recovery = CBORWebToken
@@ -1024,7 +1024,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderIncompleteImmunizationStatusViewModel)
     }
-    
+
     func testImmunizationStatusViewModel_incomplete_because_to_low_doseNumber() throws {
         // Given
         let vaccination = CBORWebToken
@@ -1040,7 +1040,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderIncompleteImmunizationStatusViewModel)
     }
-    
+
     func testImmunizationStatusViewModel_incomplete_because_of_missing_recovery() throws {
         // Given
         let vaccination = CBORWebToken
@@ -1056,7 +1056,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderIncompleteImmunizationStatusViewModel)
     }
-    
+
     func testImmunizationStatusViewModel_complete_B2() throws {
         // Given
         let vaccination = CBORWebToken
@@ -1072,7 +1072,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderCompleteImmunizationB2StatusViewModel)
     }
-    
+
     func testImmunizationStatusViewModel_complete_C2() throws {
         // Given
         let vaccination = CBORWebToken
@@ -1088,7 +1088,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderImmunizationC2StatusViewModel)
     }
-    
+
     func testImmunizationStatusViewModel_complete_E2_recovery_older_than_vaccination() throws {
         // Given
         let vaccination = CBORWebToken
@@ -1109,7 +1109,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderImmunizationE2StatusViewModel)
     }
-    
+
     func testImmunizationStatusViewModel_complete_E22_recovery_fresher_than_vaccination_and_revovery_frehser_than_29_days() throws {
         // Given
         let vaccination = CBORWebToken
@@ -1122,7 +1122,7 @@ class CertificateDetailViewModelTests: XCTestCase {
             .recoveryTestDate(Date().add(days: -29)! + 1)
             .extended()
         certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination,recovery])
+        configureCustomSut(certificates: [vaccination, recovery])
 
         // When
         let viewModel = sut.immunizationStatusViewModel
@@ -1131,7 +1131,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel is CertificateHolderImmunizationE22StatusViewModel)
         XCTAssertEqual(viewModel.description, "You are considered fully vaccinated based on your vaccination and the infection you have had. However, your immune protection is only effective in 1 days. Please bear in mind that you can still be contagious, but also inform yourself about recommended booster vaccinations")
     }
-    
+
     func testImmunizationStatusViewModel_complete_E22_recovery_fresher_than_vaccination_and_revovery_just_done() throws {
         // Given
         let vaccination = CBORWebToken
@@ -1144,7 +1144,7 @@ class CertificateDetailViewModelTests: XCTestCase {
             .recoveryTestDate(Date() - 1)
             .extended()
         certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination,recovery])
+        configureCustomSut(certificates: [vaccination, recovery])
 
         // When
         let viewModel = sut.immunizationStatusViewModel
@@ -1153,7 +1153,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel is CertificateHolderImmunizationE22StatusViewModel)
         XCTAssertEqual(viewModel.description, "You are considered fully vaccinated based on your vaccination and the infection you have had. However, your immune protection is only effective in 29 days. Please bear in mind that you can still be contagious, but also inform yourself about recommended booster vaccinations")
     }
-    
+
     func testImmunizationStatusViewModel_complete_E2_recovery_fresher_than_vaccination_and_revovery_older_than_29_days() throws {
         // Given
         let vaccinationDate = try XCTUnwrap(Date().add(days: -45))
@@ -1168,7 +1168,7 @@ class CertificateDetailViewModelTests: XCTestCase {
             .recoveryTestDate(recoveryDate)
             .extended()
         certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination,recovery])
+        configureCustomSut(certificates: [vaccination, recovery])
 
         // When
         let viewModel = sut.immunizationStatusViewModel
@@ -1176,7 +1176,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderImmunizationE2StatusViewModel)
     }
-    
+
     func testImmunizationStatusViewModel_invalid() throws {
         // Given
         var token: ExtendedCBORWebToken = try .token2Of2Mustermann()
@@ -1218,21 +1218,22 @@ private extension ExtendedCBORWebToken {
 
     static func token1Of2SchmidtMustermann() throws -> Self {
         try token(from: """
-        {"1":"DE","4":1682239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Erika","fn":"Schmidt-Mustermann","gnt":"ERIKA","fnt":"SCHMIDT<MUSTERMANN"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":1,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}
-        """
+            {"1":"DE","4":1682239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Erika","fn":"Schmidt-Mustermann","gnt":"ERIKA","fnt":"SCHMIDT<MUSTERMANN"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":1,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}
+            """
         )
     }
+
     static func token2Of2Mustermann() throws -> Self {
         try token(from: """
-        {"1":"DE","4":1682239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Erika","fn":"Mustermann","gnt":"ERIKA","fnt":"MUSTERMANN"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":2,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}
-        """
+            {"1":"DE","4":1682239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Erika","fn":"Mustermann","gnt":"ERIKA","fnt":"MUSTERMANN"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":2,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}
+            """
         )
     }
 
     static func token2Of2Pérez() throws -> Self {
         try token(from: """
-        {"1":"DE","4":1682239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Juan","fn":"Pérez","gnt":"JUAN","fnt":"PEREZ"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":2,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}
-        """
+            {"1":"DE","4":1682239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Juan","fn":"Pérez","gnt":"JUAN","fnt":"PEREZ"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":2,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}
+            """
         )
     }
 }

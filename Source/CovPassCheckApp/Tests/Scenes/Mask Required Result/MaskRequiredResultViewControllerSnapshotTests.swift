@@ -6,10 +6,10 @@
 //
 
 @testable import CovPassCheckApp
+import CovPassCommon
 import CovPassUI
 import PromiseKit
 import XCTest
-import CovPassCommon
 
 final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
     private var sut: MaskRequiredResultViewController!

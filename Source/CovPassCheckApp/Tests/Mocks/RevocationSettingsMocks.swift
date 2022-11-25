@@ -5,9 +5,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 @testable import CovPassCheckApp
 import CovPassUI
+import Foundation
 
 class RevocationSettingsRouterMock: RevocationSettingsRouterProtocol {
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()

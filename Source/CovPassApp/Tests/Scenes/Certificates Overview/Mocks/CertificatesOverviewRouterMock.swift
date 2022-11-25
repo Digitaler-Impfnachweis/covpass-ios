@@ -33,7 +33,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     var receivedCertificatePickerTokens: [ExtendedCBORWebToken]?
     var showQRCodeScanAndSelectionViewValue = QRCodeImportResult.scanResult(.success(""))
 
-    func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
+    func showCheckSituation(userDefaults _: Persistence) -> Promise<Void> {
         showCheckSituationExpectation.fulfill()
         return .value
     }
@@ -53,12 +53,12 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     }
 
     func showCertificates(certificates: [ExtendedCBORWebToken],
-                          vaccinationRepository: VaccinationRepositoryProtocol,
-                          boosterLogic: BoosterLogicProtocol) -> Promise<CertificateDetailSceneResult> {
+                          vaccinationRepository _: VaccinationRepositoryProtocol,
+                          boosterLogic _: BoosterLogicProtocol) -> Promise<CertificateDetailSceneResult> {
         showCertificateModalExpectation.fulfill()
         return .value(.showCertificatesOnOverview(certificates.first!))
     }
-    
+
     func showCertificatesDetail(certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
         showCertificateExpectation.fulfill()
         return .value(.showCertificatesOnOverview(certificates.first!))
@@ -89,9 +89,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
         return .value(showQRCodeScanAndSelectionViewValue)
     }
 
-    func showAppInformation() {
-
-    }
+    func showAppInformation() {}
 
     func showBoosterNotification() -> Promise<Void> {
         .value
@@ -101,7 +99,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
         .value
     }
 
-    func showDialog(title: String?, message: String?, actions: [DialogAction], style: UIAlertController.Style) {
+    func showDialog(title _: String?, message _: String?, actions _: [DialogAction], style _: UIAlertController.Style) {
         showDialogExpectation.fulfill()
     }
 
@@ -110,8 +108,9 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
         receivedFaqURL = url
         toWebsiteFAQExpectation.fulfill()
     }
-    func startValidationAsAService(with data: ValidationServiceInitialisation) {}
-    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken], context: ReissueContext) -> Promise<Void> {
+
+    func startValidationAsAService(with _: ValidationServiceInitialisation) {}
+    func showCertificatesReissue(for _: [ExtendedCBORWebToken], context _: ReissueContext) -> Promise<Void> {
         showCertificatesReissueExpectation.fulfill()
         return .value
     }
@@ -128,7 +127,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     func showCertificateImportError() {
         showCertificateImportErrorExpectation.fulfill()
     }
-    
+
     func showStateSelectionOnboarding() -> PromiseKit.Promise<Void> {
         showStateSelectionOnboardingExpectation.fulfill()
         return .value

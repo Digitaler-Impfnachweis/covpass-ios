@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationRepository.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -105,7 +105,7 @@ private struct RevocationParameters {
 
         kid = message.keyIdentifier
         hashes = [
-            .signature:signatureHash,
+            .signature: signatureHash,
             .uci: uciHash,
             .countryCodeUCI: countryUCIHash
         ]

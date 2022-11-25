@@ -17,7 +17,7 @@ struct ValidationResultFactory {
                                 repository: VaccinationRepositoryProtocol,
                                 certificate: ExtendedCBORWebToken?,
                                 error: Error?,
-                                type: DCCCertLogic.LogicType = .eu,
+                                type _: DCCCertLogic.LogicType = .eu,
                                 token: VAASValidaitonResultToken,
                                 userDefaults: Persistence) -> ValidationResultViewModel {
         guard let cert = certificate?.vaccinationCertificate, error == nil else {
@@ -28,10 +28,9 @@ struct ValidationResultFactory {
                                         token: token,
                                         userDefaults: userDefaults)
         }
-        
+
         let validationResult = token.result
-        
-        
+
         switch validationResult {
         case .passed:
             if cert.hcert.dgc.r != nil {
@@ -73,6 +72,5 @@ struct ValidationResultFactory {
                                         token: token,
                                         userDefaults: userDefaults)
         }
-        
     }
 }

@@ -12,7 +12,6 @@ import PromiseKit
 import UIKit
 
 class TestResultViewModel: ValidationResultViewModel {
-    
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
@@ -39,7 +38,7 @@ class TestResultViewModel: ValidationResultViewModel {
     }
 
     var paragraphs: [Paragraph] {
-        return [
+        [
             Paragraph(
                 icon: .none,
                 title: "",
@@ -49,21 +48,21 @@ class TestResultViewModel: ValidationResultViewModel {
     }
 
     var info: String? {
-        return nil
+        nil
     }
-    
+
     var buttonHidden: Bool = false
     var userDefaults: Persistence
     var isLoadingScan: Bool = false
-    
+
     // MARK: - Lifecycle
-    
+
     init(resolvable: Resolver<ExtendedCBORWebToken>,
          router: ValidationResultRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          certificate: ExtendedCBORWebToken?,
          token: VAASValidaitonResultToken?,
-         userDefaults: Persistence ) {
+         userDefaults: Persistence) {
         self.router = router
         self.repository = repository
         self.certificate = certificate
@@ -71,12 +70,12 @@ class TestResultViewModel: ValidationResultViewModel {
         self.userDefaults = userDefaults
         self.resolvable = resolvable
     }
-    
+
     func scanCertificateStarted() {
-        self.isLoadingScan = true
+        isLoadingScan = true
     }
-    
+
     func scanCertificateEnded() {
-        self.isLoadingScan = false
+        isLoadingScan = false
     }
 }

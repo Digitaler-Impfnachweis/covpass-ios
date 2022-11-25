@@ -7,8 +7,8 @@
 
 import CovPassCommon
 import Foundation
-import PromiseKit
 import PDFKit
+import PromiseKit
 import Security
 
 public final class RevocationPDFGenerator: RevocationPDFGeneratorProtocol {
@@ -18,6 +18,7 @@ public final class RevocationPDFGenerator: RevocationPDFGeneratorProtocol {
         static let expirationDate = "$te"
         static let qrCode = "$qr"
     }
+
     private typealias RevocationCode = (code: String, qr: String)
     private let converter: SVGToPDFConverterProtocol
     private let svgTemplate: String
@@ -92,5 +93,3 @@ public final class RevocationPDFGenerator: RevocationPDFGeneratorProtocol {
         return .value(data)
     }
 }
-
-

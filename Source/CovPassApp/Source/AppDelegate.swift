@@ -18,7 +18,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _: UIApplication,
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-
         try? setupKeychain()
         UIFont.loadCustomFonts()
 
@@ -40,9 +39,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         return true
     }
-    
-    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-        guard let window = self.window,
+
+    func application(_: UIApplication, handleOpen url: URL) -> Bool {
+        guard let window = window,
               let rootViewController = window.rootViewController,
               let navigationController = rootViewController as? UINavigationController,
               let certificateOverviewViewController = navigationController.viewControllers.first as? CertificatesOverviewViewController else {

@@ -13,16 +13,16 @@ import XCTest
 
 class ChooseCheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
     private var sut: ChooseCheckSituationViewController!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
     }
-    
+
     override func tearDownWithError() throws {
         sut = nil
         try super.tearDownWithError()
     }
-    
+
     func configureSut(situationType: CheckSituationType) {
         let (_, resolver) = Promise<Void>.pending()
         let router = ChooseCheckSituationRouterMock()
@@ -33,12 +33,12 @@ class ChooseCheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
                                                       persistence: persistence)
         sut = .init(viewModel: viewModel)
     }
-    
+
     func test_withinGermany() {
         configureSut(situationType: .withinGermany)
         verifyView(view: sut.view, height: 1000)
     }
-    
+
     func test_enteringGermany() {
         configureSut(situationType: .enteringGermany)
         verifyView(view: sut.view, height: 1000)

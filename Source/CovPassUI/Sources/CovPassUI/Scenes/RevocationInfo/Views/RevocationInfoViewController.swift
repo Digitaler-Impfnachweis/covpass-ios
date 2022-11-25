@@ -5,8 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassCommon
+import UIKit
 
 private enum Constants {
     enum Accessibility {
@@ -16,14 +16,17 @@ private enum Constants {
 
 public class RevocationInfoViewController: UIViewController {
     // MARK: - IBOutlet
+
     @IBOutlet public var headerView: InfoHeaderView!
     @IBOutlet public var exportButton: MainButton!
     @IBOutlet public var stackView: UIStackView!
 
     // MARK: - Properties
+
     private var viewModel: RevocationInfoViewModelProtocol
 
     // MARK: - Lifecycle
+
     @available(*, unavailable)
     public required init?(coder _: NSCoder) { nil }
 
@@ -33,7 +36,7 @@ public class RevocationInfoViewController: UIViewController {
         self.viewModel.delegate = self
     }
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         configureHeadline()
         configureList()
@@ -80,7 +83,7 @@ extension RevocationInfoViewController: ViewModelDelegate {
         refresh()
     }
 
-    public func viewModelUpdateDidFailWithError(_ error: Error) {
+    public func viewModelUpdateDidFailWithError(_: Error) {
         refresh()
     }
 }

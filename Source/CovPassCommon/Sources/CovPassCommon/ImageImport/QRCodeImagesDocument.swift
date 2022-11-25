@@ -1,6 +1,6 @@
 //
 //  QRCodeImageDocument.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -26,8 +26,8 @@ public final class QRCodeImagesDocument: QRCodeDocumentProtocol {
 
     public func qrCodes(on page: Int) throws -> Set<String> {
         guard numberOfPages > 0,
-              1...numberOfPages ~= page,
-              let cgImage = images[page-1].cgImage else {
+              1 ... numberOfPages ~= page,
+              let cgImage = images[page - 1].cgImage else {
             throw QRCodePDFDocumentError.image
         }
         let qrCodesOnPage = try detectQRCodes(in: cgImage)

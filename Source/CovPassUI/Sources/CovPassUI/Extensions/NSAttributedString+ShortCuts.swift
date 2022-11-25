@@ -25,8 +25,7 @@ public extension NSAttributedString {
               lineHeight: CGFloat? = nil,
               textStyle: UIFont.TextStyle = .body,
               in range: NSRange? = nil,
-              traitCollection: UITraitCollection? = nil) -> NSAttributedString
-    {
+              traitCollection: UITraitCollection? = nil) -> NSAttributedString {
         if NSClassFromString("XCTest") != nil {
             UIFont.loadCustomFonts()
         }
@@ -45,8 +44,7 @@ public extension NSAttributedString {
 
     func underlined(style: NSUnderlineStyle = .single,
                     color: UIColor? = nil,
-                    in range: NSRange? = nil) -> NSAttributedString
-    {
+                    in range: NSRange? = nil) -> NSAttributedString {
         let result = setAttribute(.underlineStyle, value: style.rawValue, in: range)
 
         if let color = color ?? attribute(.foregroundColor, at: range?.location) {
@@ -61,8 +59,7 @@ public extension NSAttributedString {
     func lineHeight(_ value: CGFloat,
                     in range: NSRange? = nil,
                     fontMetrics: UIFontMetrics = .default,
-                    traitCollection: UITraitCollection? = nil) -> NSAttributedString
-    {
+                    traitCollection: UITraitCollection? = nil) -> NSAttributedString {
         paragraphStyled(in: range) { style in
             guard let font: UIFont = attribute(.font) else { return }
 

@@ -5,12 +5,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import XCTest
 @testable import CovPassApp
 @testable import CovPassCommon
+import XCTest
 
 class ScanCountWarningViewSnapShotTests: BaseSnapShotTests {
-    
     func testDefault() {
         let vm = ScanCountWarningViewModel(router: nil,
                                            resolvable: nil)

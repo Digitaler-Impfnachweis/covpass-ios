@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -3698,6 +3698,7 @@
 				65D6D4DB25F8B8FB000CB339 /* Frameworks */,
 				65D6D4DC25F8B8FB000CB339 /* Resources */,
 				09590D1F2715E3ED004410D7 /* Embed Frameworks */,
+				38108AA6292EC0CF00C8B552 /* Run Swiftformat */,
 			);
 			buildRules = (
 			);
@@ -3741,6 +3742,7 @@
 				65D6D51025F8B94D000CB339 /* Sources */,
 				65D6D51125F8B94D000CB339 /* Frameworks */,
 				65D6D51225F8B94D000CB339 /* Resources */,
+				38108AA7292EC11F00C8B552 /* Run Swiftformat */,
 			);
 			buildRules = (
 			);
@@ -3930,6 +3932,46 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		38108AA6292EC0CF00C8B552 /* Run Swiftformat */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Swiftformat";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ -z $FASTLANE_LANE_NAME ]]; then\n  cd BuildTools\n  SDKROOT=(xcrun --sdk macosx --show-sdk-path)\n  swift run -c release swiftformat \"$SRCROOT\"\nelse\n  echo \"Fastlane build; skip swiftformat\"\nfi\n";
+		};
+		38108AA7292EC11F00C8B552 /* Run Swiftformat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Swiftformat";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ -z $FASTLANE_LANE_NAME ]]; then\n  cd BuildTools\n  SDKROOT=(xcrun --sdk macosx --show-sdk-path)\n  swift run -c release swiftformat \"$SRCROOT\"\nelse\n  echo \"Fastlane build; skip swiftformat\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		65D6D4DA25F8B8FB000CB339 /* Sources */ = {

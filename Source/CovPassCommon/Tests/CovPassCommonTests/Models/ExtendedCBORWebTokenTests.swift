@@ -17,12 +17,12 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         let sut1 = [
             CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
             CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
-            CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "bar")).extended(),
+            CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "bar")).extended()
         ]
 
         let sut2 = [
             CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
-            CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
+            CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended()
         ]
 
         // When & Then
@@ -38,7 +38,8 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Given
         let sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: "")
+            vaccinationQRCodeData: ""
+        )
 
         // When & Then
         XCTAssertThrowsError(try sut.coseSign1Message())
@@ -48,7 +49,8 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Given
         let sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: "NOT BASE45 ENCODED")
+            vaccinationQRCodeData: "NOT BASE45 ENCODED"
+        )
 
         // When & Then
         XCTAssertThrowsError(try sut.coseSign1Message())
@@ -59,7 +61,8 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         let data = [UInt8](try XCTUnwrap("QRCODE".data(using: .utf8)))
         let sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: Base45Coder.encode(data))
+            vaccinationQRCodeData: Base45Coder.encode(data)
+        )
 
         // When & Then
         XCTAssertThrowsError(try sut.coseSign1Message())
@@ -72,7 +75,8 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         let encodedData = Base45Coder.encode([UInt8](compressedData))
         let sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: encodedData)
+            vaccinationQRCodeData: encodedData
+        )
 
         // When & Then
         XCTAssertThrowsError(try sut.coseSign1Message())
@@ -82,7 +86,8 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Given
         let sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: CertificateMock.validCertificate)
+            vaccinationQRCodeData: CertificateMock.validCertificate
+        )
 
         // When
         let message = try sut.coseSign1Message()
@@ -103,7 +108,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertFalse(isRevoked)
     }
-    
+
     func testIsRevoked_true() {
         var sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -131,7 +136,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertFalse(isRevoked)
     }
-    
+
     func testIsNotRevoked_true() {
         var sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -145,7 +150,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertFalse(isRevoked)
     }
-    
+
     func testIsNotRevoked_false() {
         var sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -159,7 +164,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertTrue(isRevoked)
     }
-    
+
     func testIsInvalid() {
         var sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -173,7 +178,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertTrue(isInvalid)
     }
-    
+
     func testIsNotInvalid() {
         var sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -187,7 +192,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertFalse(isNotInvalid)
     }
-    
+
     func testIsNotExpired() {
         var sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -201,7 +206,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertTrue(isNotExpired)
     }
-    
+
     func testExpiryAlertWasNotShown_false() {
         var sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -215,7 +220,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertFalse(expiryAlertWasNotShown)
     }
-    
+
     func testExpiryAlertWasNotShown_true() {
         var sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -229,10 +234,10 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertTrue(expiryAlertWasNotShown)
     }
-    
+
     func test_dtFrOrSc_recovery() {
         // GIVEN
-        let frDate: Date = Date() - 1
+        let frDate = Date() - 1
         let sut = CBORWebToken.mockRecoveryCertificate
             .mockRecoverySetDate(frDate)
             .mockRecoveryUVCI("1r")
@@ -244,10 +249,10 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertEqual(dtFrOrSc, frDate)
     }
-    
+
     func test_dtFrOrSc_vaccination() {
         // GIVEN
-        let dtDate: Date = Date() + 1
+        let dtDate = Date() + 1
         let sut = CBORWebToken.mockVaccinationCertificate
             .mockVaccinationSetDate(dtDate)
             .mockVaccinationUVCI("1v")
@@ -259,10 +264,10 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertEqual(dtFrOrSc, dtDate)
     }
-    
+
     func test_dtFrOrSc_test() {
         // GIVEN
-        let scDate: Date = Date() - 2
+        let scDate = Date() - 2
         let sut = CBORWebToken.mockTestCertificate
             .mockTestSetDate(scDate)
             .mockTestUVCI("1t")

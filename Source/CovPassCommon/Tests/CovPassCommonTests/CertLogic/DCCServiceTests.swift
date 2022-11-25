@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 @testable import CovPassCommon
 import Foundation
-import XCTest
 import PromiseKit
-import CertLogic
+import XCTest
 
 class DCCServiceTests: XCTestCase {
     var sut: DCCService!
@@ -101,13 +101,13 @@ class DCCServiceTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, APIError.invalidResponse.localizedDescription)
         }
     }
-    
+
     func testLoadBoosterRules() throws {
         sessionMock.requestResponse = Promise.value(try XCTUnwrap(String(data: try JSONEncoder().encode([RuleSimple.mock]), encoding: .utf8)))
         let res = try sut.loadBoosterRules().wait()
         XCTAssertEqual(res.count, 1)
     }
-    
+
     func testLoadDomesticRules() throws {
         // GIVEN
         sessionMock.requestResponse = Promise.value(try XCTUnwrap(String(data: try JSONEncoder().encode([RuleSimple.mock]), encoding: .utf8)))
@@ -116,7 +116,7 @@ class DCCServiceTests: XCTestCase {
         // THEN
         XCTAssertEqual(res.count, 1)
     }
-    
+
     func testLoadDomesticRulesInvalidResponse() throws {
         // GIVEN
         sessionMock.requestResponse = Promise.value(try XCTUnwrap("FOO"))
@@ -139,13 +139,13 @@ class DCCServiceTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, APIError.invalidResponse.localizedDescription)
         }
     }
-    
+
     func testLoadBoosterRule() throws {
         sessionMock.requestResponse = Promise.value(try XCTUnwrap(String(data: try JSONEncoder().encode(Rule.mock), encoding: .utf8)))
         let res = try sut.loadBoosterRule(hash: "foo").wait()
         XCTAssertEqual(res.identifier, "rule-identifier")
     }
-    
+
     func testLoadDomesticRule() throws {
         // GIVEN
         sessionMock.requestResponse = Promise.value(try XCTUnwrap(String(data: try JSONEncoder().encode(Rule.mock), encoding: .utf8)))
@@ -154,7 +154,7 @@ class DCCServiceTests: XCTestCase {
         // THEN
         XCTAssertEqual(res.identifier, "rule-identifier")
     }
-    
+
     func testLoadDomesticRuleInvalidResponse() throws {
         // GIVEN
         sessionMock.requestResponse = Promise.value(try XCTUnwrap(String("FOO")))

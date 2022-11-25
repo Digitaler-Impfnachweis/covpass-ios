@@ -5,13 +5,13 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
-@testable import CovPassUI
-import PromiseKit
 import AVFoundation
+@testable import CovPassUI
+import Foundation
+import PromiseKit
 
 struct CameraAccessProviderMock: CameraAccessProviderProtocol {
-    func requestAccess(for mediaType: AVMediaType) -> Promise<Void> {
+    func requestAccess(for _: AVMediaType) -> Promise<Void> {
         Promise.value
     }
 }

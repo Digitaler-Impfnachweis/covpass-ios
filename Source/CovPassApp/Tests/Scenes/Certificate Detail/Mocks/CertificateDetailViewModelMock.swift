@@ -8,11 +8,10 @@
 @testable import CovPassApp
 import CovPassCommon
 import CovPassUI
-import UIKit
 import PromiseKit
+import UIKit
 
 final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
-
     var router: CertificateDetailRouterProtocol = CertificateDetailRouterMock()
     var delegate: ViewModelDelegate?
     var favoriteIcon: UIImage?
@@ -57,6 +56,7 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
     var recoveryExpiryReissueCandidatesCount: Int {
         showRecoveryExpiryReissueIsNewBadgeValues.count
     }
+
     var showRecoveryExpiryReissueIsNewBadgeValues: [Bool] = []
     var accessibilityBackToStart: String = "backToStart"
     var immunizationStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol = CertificateHolderImmunizationStatusViewModelMock()
@@ -72,12 +72,12 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
 
     func triggerBoosterReissue() {}
     func triggerVaccinationExpiryReissue() {}
-    func triggerRecoveryExpiryReissue(index: Int) {}
+    func triggerRecoveryExpiryReissue(index _: Int) {}
     func refresh() {}
     func immunizationButtonTapped() {}
     func toggleFavorite() {}
     func updateBoosterCandiate() {}
-    func updateReissueCandidate(to value: Bool) {}
+    func updateReissueCandidate(to _: Bool) {}
     func markExpiryReissueCandidatesAsSeen() {}
     func showStateSelection() {}
 }

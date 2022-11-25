@@ -18,12 +18,12 @@ private enum Constants {
         static let popupLinkText = "certificates_start_screen_pop_up_app_reference_hyperlink".localized
         static let buttonOkText = "certificates_start_screen_pop_up_app_reference_button".localized
     }
+
     enum Accessibility {
         static let image = "accessibility_image_alternative_text".localized
         static let openingAnnounce = "accessibility_certificate_popup_checkapp_announce".localized
         static let close = "accessibility_certificates_start_screen_pop_up_app_reference_label".localized
     }
-
 }
 
 class ScanPleaseViewModel: BaseViewModel, CancellableViewModelProtocol {

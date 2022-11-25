@@ -33,7 +33,7 @@ public class InfoHeaderView: XibView {
             actionButton.icon = image
         }
     }
-    
+
     public var actionButtonWidth: CGFloat = 44.0 {
         didSet {
             actionButtonWidthConstraint.constant = actionButtonWidth

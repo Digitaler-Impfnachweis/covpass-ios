@@ -1,6 +1,6 @@
 //
 //  String+Base45Tests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -16,7 +16,7 @@ class StringBase45Tests: XCTestCase {
 
         // When
         sut.decodedBase45
-            .done { data in
+            .done { _ in
                 expectation.fulfill()
             }
             .catch { error in
@@ -34,10 +34,10 @@ class StringBase45Tests: XCTestCase {
 
         // When
         sut.decodedBase45
-            .done { data in
+            .done { _ in
                 XCTFail("Must fail with error.")
             }
-            .catch { error in
+            .catch { _ in
                 expectation.fulfill()
             }
 

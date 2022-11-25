@@ -23,7 +23,7 @@ class SecondScanSnapShotTests: BaseSnapShotTests {
         sut = nil
         try super.tearDownWithError()
     }
-    
+
     func configureSut(secondToken: ExtendedCBORWebToken?) {
         let (_, resolver) = Promise<ValidatorDetailSceneResult>.pending()
         let countdownTimerModel = CountdownTimerModel(
@@ -37,11 +37,11 @@ class SecondScanSnapShotTests: BaseSnapShotTests {
                                             countdownTimerModel: countdownTimerModel)
         sut = .init(viewModel: viewModel)
     }
-    
+
     func testDefault() throws {
         verifyView(view: sut.view, height: 1000)
     }
-    
+
     func testDefaultThirdScan() throws {
         configureSut(secondToken: CBORWebToken.mockRecoveryCertificate.extended())
         verifyView(view: sut.view, height: 1000)

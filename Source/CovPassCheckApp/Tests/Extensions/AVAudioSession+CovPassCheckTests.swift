@@ -5,8 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassCheckApp
 import AVFoundation
+@testable import CovPassCheckApp
 import XCTest
 
 class AVAudioSession_CovPassCheckTests: XCTestCase {

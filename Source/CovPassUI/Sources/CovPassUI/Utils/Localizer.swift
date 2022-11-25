@@ -17,6 +17,6 @@ public class Localizer {
     ///   - bundle: module bundle
     /// - Returns: localized string
     public class func localized(_ string: String, bundle: Bundle) -> String {
-        return NSLocalizedString(string, tableName: nil, bundle: bundle, comment: "")
+        NSLocalizedString(string, tableName: nil, bundle: bundle, comment: "")
     }
 }

@@ -34,9 +34,10 @@ final class VaccinationCycleIncompleteResultViewModel: VaccinationCycleIncomplet
         [
             CertificateCycleIncompleteReasonIncomplete(),
             CertificateCycleIncompleteReasonInvalid(),
-            CertificateCycleIncompleteResultWrongVaccine(),
+            CertificateCycleIncompleteResultWrongVaccine()
         ]
     }
+
     var faqLinkTitle = Constants.faqLink
 
     private let resolver: Resolver<ValidatorDetailSceneResult>
@@ -44,8 +45,7 @@ final class VaccinationCycleIncompleteResultViewModel: VaccinationCycleIncomplet
 
     init(countdownTimerModel: CountdownTimerModel,
          resolver: Resolver<ValidatorDetailSceneResult>,
-         router: VaccinationCycleIncompleteResultRouterProtocol
-    ) {
+         router: VaccinationCycleIncompleteResultRouterProtocol) {
         self.countdownTimerModel = countdownTimerModel
         self.resolver = resolver
         self.router = router

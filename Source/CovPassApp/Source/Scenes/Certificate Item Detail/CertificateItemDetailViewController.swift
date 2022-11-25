@@ -30,7 +30,7 @@ class CertificateItemDetailViewController: UIViewController {
 
     private(set) var viewModel: CertificateItemDetailViewModelProtocol
 
-    private let toolbar: CustomToolbarView = CustomToolbarView(frame: .zero)
+    private let toolbar: CustomToolbarView = .init(frame: .zero)
 
     // MARK: - Lifecycle
 
@@ -137,7 +137,7 @@ class CertificateItemDetailViewController: UIViewController {
             hintView.containerView?.layer.borderColor = UIColor.resultGreen.cgColor
             hintView.titleLabel.attributedText = "share_certificate_detail_view_requirements_met_title".localized.styledAs(.header_3)
             hintView.subTitleLabel.attributedText =
-            String(format: "share_certificate_detail_view_requirements_met_subline".localized, viewModel.vaasResultToken?.verifyingService ?? "").styledAs(.body).colored(.onBackground70)
+                String(format: "share_certificate_detail_view_requirements_met_subline".localized, viewModel.vaasResultToken?.verifyingService ?? "").styledAs(.body).colored(.onBackground70)
             hintView.bodyLabel.layoutMargins = .init(top: .space_24, left: .zero, bottom: .zero, right: .zero)
             hintView.bodyLabel.attributedText = String(format: "share_certificate_detail_view_requirements_met_message".localized, viewModel.vaasResultToken?.provider ?? "").styledAs(.body)
         case .crossCheck:
@@ -147,7 +147,7 @@ class CertificateItemDetailViewController: UIViewController {
             hintView.containerView?.layer.borderColor = UIColor.resultYellow.cgColor
             hintView.titleLabel.attributedText = "share_certificate_detail_view_requirements_not_verifiable_title".localized.styledAs(.header_3)
             hintView.subTitleLabel.attributedText =
-            String(format: "share_certificate_detail_view_requirements_not_verifiable_subline".localized, viewModel.vaasResultToken?.verifyingService ?? "").styledAs(.body).colored(.onBackground70)
+                String(format: "share_certificate_detail_view_requirements_not_verifiable_subline".localized, viewModel.vaasResultToken?.verifyingService ?? "").styledAs(.body).colored(.onBackground70)
             hintView.bodyLabel.layoutMargins = .init(top: .space_14, left: .zero, bottom: .zero, right: .zero)
             hintView.bodyLabel.attributedText = String(format: "share_certificate_detail_view_requirements_not_verifiable_message".localized, viewModel.vaasResultToken?.provider ?? "").styledAs(.body)
         case .fail:
@@ -157,7 +157,7 @@ class CertificateItemDetailViewController: UIViewController {
             hintView.containerView?.layer.borderColor = UIColor.resultRed.cgColor
             hintView.titleLabel.attributedText = "share_certificate_detail_view_requirements_not_met_title".localized.styledAs(.header_3)
             hintView.subTitleLabel.attributedText =
-            String(format: "share_certificate_detail_view_requirements_not_met_subline".localized, viewModel.vaasResultToken?.verifyingService ?? "").styledAs(.body).colored(.onBackground70)
+                String(format: "share_certificate_detail_view_requirements_not_met_subline".localized, viewModel.vaasResultToken?.verifyingService ?? "").styledAs(.body).colored(.onBackground70)
             hintView.bodyLabel.layoutMargins = .init(top: .space_14, left: .zero, bottom: .zero, right: .zero)
             hintView.bodyLabel.attributedText = String(format: "share_certificate_detail_view_requirements_not_met_message".localized, viewModel.vaasResultToken?.provider ?? "").styledAs(.body)
         default:
@@ -194,16 +194,16 @@ class CertificateItemDetailViewController: UIViewController {
         }
         qrCodeButton.action = viewModel.showQRCode
         qrCodeButton.isHidden = viewModel.hideQRCodeButtons
-        
+
         pdfExportButton.title = "vaccination_certificate_detail_view_pdf_action_button_title".localized
         pdfExportButton.style = .secondary
         pdfExportButton.icon = .share
         pdfExportButton.action = viewModel.startPDFExport
 
         pdfExportButton.disable()
-        if viewModel.hideQRCodeButtons  {
-           pdfExportButton.isHidden = true
-       } else if viewModel.canExportToPDF {
+        if viewModel.hideQRCodeButtons {
+            pdfExportButton.isHidden = true
+        } else if viewModel.canExportToPDF {
             // Some certificates such as tests or non-German ones cannot be exported
             pdfExportButton.enable()
         } else {
@@ -212,8 +212,8 @@ class CertificateItemDetailViewController: UIViewController {
             disclaimer.bodyAttributedString = "vaccination_certificate_detail_view_pdf_action_button_note".localized.styledAs(.body)
             buttonStackView.addArrangedSubview(disclaimer)
         }
-        
-        if pdfExportButton.isHidden && qrCodeButton.isHidden {
+
+        if pdfExportButton.isHidden, qrCodeButton.isHidden {
             stackView.setCustomSpacing(0, after: buttonStackView)
         } else {
             stackView.setCustomSpacing(40, after: buttonStackView)
@@ -231,7 +231,6 @@ class CertificateItemDetailViewController: UIViewController {
         viewModel.deleteCertificate()
     }
 }
-
 
 extension CertificateItemDetailViewController: CustomToolbarViewDelegate {
     func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {

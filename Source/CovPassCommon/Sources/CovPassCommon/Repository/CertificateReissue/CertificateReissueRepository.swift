@@ -1,6 +1,6 @@
 //
 //  CertificateReissueRepository.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -31,11 +31,11 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
     public func renew(_ webTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
         reissue(webTokens.map(\.vaccinationQRCodeData).certificateRenewRequestBody)
     }
-    
+
     public func extend(_ webTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
         reissue(webTokens.map(\.vaccinationQRCodeData).certificateExtendRequestBody)
     }
-    
+
     private func reissue(_ certificateExtendRequestBody: CertificateReissueRequestBody) -> Promise<CertificateReissueRepositoryResponse> {
         Promise { seal in
             jsonEncoder
@@ -101,7 +101,7 @@ private extension Array where Element == String {
     var certificateRenewRequestBody: CertificateReissueRequestBody {
         .init(action: .renew, certificates: self)
     }
-    
+
     var certificateExtendRequestBody: CertificateReissueRequestBody {
         .init(action: .extend, certificates: self)
     }

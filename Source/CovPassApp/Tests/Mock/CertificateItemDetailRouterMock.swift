@@ -5,20 +5,19 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassCommon
-import PromiseKit
-import CovPassUI
 @testable import CovPassApp
+import CovPassCommon
+import CovPassUI
+import PromiseKit
 
 struct CertificateItemDetailRouterMock: CertificateItemDetailRouterProtocol {
-    
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
-    func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
+    func showCertificate(for _: ExtendedCBORWebToken) -> Promise<Void> {
         .value(())
     }
-    
-    func showPDFExport(for token: ExtendedCBORWebToken) -> Promise<Void> {
+
+    func showPDFExport(for _: ExtendedCBORWebToken) -> Promise<Void> {
         .value(())
     }
 }

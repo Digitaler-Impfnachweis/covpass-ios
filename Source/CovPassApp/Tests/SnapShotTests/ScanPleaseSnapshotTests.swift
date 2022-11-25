@@ -7,16 +7,14 @@
 //
 
 @testable import CovPassApp
-import XCTest
 import PromiseKit
+import XCTest
 
 class ScanPleaseSnapshotTests: BaseSnapShotTests {
-
     func testScanPlease() {
         let (_, resolver) = Promise<Void>.pending()
         let vm = ScanPleaseViewModel(router: ScanPleaseRouterMock(), resolvable: resolver)
         let vc = ScanPleaseViewController(viewModel: vm)
         verifyView(vc: vc)
     }
-
 }

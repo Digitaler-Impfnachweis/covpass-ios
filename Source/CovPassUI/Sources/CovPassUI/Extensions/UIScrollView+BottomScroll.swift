@@ -16,7 +16,7 @@ enum ScrollDirection {
 extension UIScrollView {
     /// Returns 'true' if the scrollView is scrolled all the way to the bottom of it's content, 'false' if not.
     var isScrolledToBottom: Bool {
-        return contentOffset.y + 1 >= contentSize.height - frame.size.height
+        contentOffset.y + 1 >= contentSize.height - frame.size.height
     }
 
     /// Scrolls automatically to the specified direction.

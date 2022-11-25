@@ -1,6 +1,6 @@
 //
 //  PDFCBORExtractor.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -34,7 +34,7 @@ public final class PDFCBORExtractor: CertificateExtractorProtocol {
                 var pageNumber = 1
                 existingTokens = ignoreTokens
 
-                while pageNumber <= document.numberOfPages && results.count < maximalNumberOfTokens {
+                while pageNumber <= document.numberOfPages, results.count < maximalNumberOfTokens {
                     do {
                         let qrCodes = try document.qrCodes(on: pageNumber)
                         let tokens = extendedCBORWebTokens(Array(qrCodes)).wait()

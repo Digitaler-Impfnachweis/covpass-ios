@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationServiceProtocol.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -32,10 +32,8 @@ public protocol CertificateRevocationOfflineServiceProtocol {
     // if 24h passed since last successful `update()` this method return true
     /// update.
     func updateNeeded() -> Bool
-    
+
     /// Performs an update as described for `update()`, but only if 24h passed since last successful
     /// update.
     func updateIfNeeded()
 }
-
-

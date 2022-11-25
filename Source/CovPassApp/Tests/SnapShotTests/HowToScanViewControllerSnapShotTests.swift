@@ -9,7 +9,6 @@
 import PromiseKit
 
 class HowToScanViewControllerSnapShotTests: BaseSnapShotTests {
-
     func testDefault() {
         let (_, resolver) = Promise<Void>.pending()
         let vm = HowToScanViewModel(router: HowToScanRouterMock(),
@@ -17,5 +16,4 @@ class HowToScanViewControllerSnapShotTests: BaseSnapShotTests {
         let vc = HowToScanViewController(viewModel: vm)
         verifyView(vc: vc)
     }
-
 }

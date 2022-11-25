@@ -65,7 +65,7 @@ public class QRContainerView: XibView {
             updateViews()
         }
     }
-    
+
     public var subtitleColorValue: UIColor = .onBrandAccent70
 
     public var titleColorValue: UIColor = .onBrandAccent70

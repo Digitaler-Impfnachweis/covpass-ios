@@ -1,7 +1,7 @@
+import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
-import CovPassUI
-import CovPassCommon
 
 private enum Constants {
     enum Keys {
@@ -12,8 +12,8 @@ private enum Constants {
 }
 
 class RevocationSettingsViewModel: RevocationSettingsViewModelProtocol {
-    
     // MARK: - Properties
+
     weak var delegate: ViewModelDelegate?
     let titleText = Constants.Keys.titleText
     let descriptionText = Constants.Keys.descriptionText
@@ -23,15 +23,15 @@ class RevocationSettingsViewModel: RevocationSettingsViewModelProtocol {
     private var userDefaults: Persistence
 
     // MARK: - Lifecyle
-    
+
     init(router: RevocationSettingsRouterProtocol,
          userDefaults: Persistence) {
         self.router = router
         self.userDefaults = userDefaults
     }
-    
+
     // MARK: - Methods
-    
+
     func switchChanged(isOn: Bool) {
         userDefaults.revocationExpertMode = isOn
     }

@@ -48,7 +48,7 @@ class WelcomeViewController: UIViewController {
         configureAccessibilityRespondsToUserInteraction()
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         configureImageView()
     }
@@ -77,7 +77,7 @@ class WelcomeViewController: UIViewController {
                                        left: .space_24,
                                        bottom: .zero,
                                        right: .space_24)
-        
+
         headline.enableAccessibility(label: viewModel.title,
                                      traits: .header)
     }
@@ -112,7 +112,7 @@ class WelcomeViewController: UIViewController {
                                               value: viewModel.secureText,
                                               traits: .staticText)
     }
-    
+
     private func configureAccessibilityRespondsToUserInteraction() {
         if #available(iOS 13.0, *) {
             headline.accessibilityRespondsToUserInteraction = true

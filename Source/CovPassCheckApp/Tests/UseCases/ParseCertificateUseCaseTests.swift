@@ -5,28 +5,28 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import XCTest
 @testable import CovPassCheckApp
 @testable import CovPassCommon
 @testable import CovPassUI
 import Scanner
+import XCTest
 
 class ParseCertificateUseCaseTests: XCTestCase {
     var sut: ParseCertificateUseCase!
     var vaccinationRepository: VaccinationRepositoryMock!
-    
+
     override func setUpWithError() throws {
         let scanResult = ScanResult.success("BAR")
         vaccinationRepository = VaccinationRepositoryMock()
         sut = ParseCertificateUseCase(scanResult: scanResult,
                                       vaccinationRepository: vaccinationRepository)
     }
-    
+
     override func tearDownWithError() throws {
         vaccinationRepository = nil
         sut = nil
     }
-    
+
     func test_ScanResultSuccess_TokenSuccess() {
         // GIVEN
         let testExpectation = XCTestExpectation()
@@ -39,21 +39,21 @@ class ParseCertificateUseCaseTests: XCTestCase {
             XCTAssertEqual(token.vaccinationCertificate.hcert.dgc.uvci, "FOO")
             testExpectation.fulfill()
         }
-        .catch { error in
+        .catch { _ in
             XCTFail("Should not fail")
         }
         wait(for: [testExpectation],
              timeout: 0.1,
              enforceOrder: true)
     }
-    
+
     func test_ScanResultSuccess_TokenError() {
         // GIVEN
         let testExpectation = XCTestExpectation()
         vaccinationRepository.checkedCert = nil
         vaccinationRepository.checkedCertError = Base45CodingError.base45Decoding
         // WHEN
-        sut.execute().done { token in
+        sut.execute().done { _ in
             // THEN
             XCTFail("Should fail")
         }
@@ -66,14 +66,14 @@ class ParseCertificateUseCaseTests: XCTestCase {
              timeout: 0.1,
              enforceOrder: true)
     }
-    
+
     func test_ScanResultError() {
         // GIVEN
         let testExpectation = XCTestExpectation()
         sut = ParseCertificateUseCase(scanResult: ScanResult.failure(.badInput),
                                       vaccinationRepository: vaccinationRepository)
         // WHEN
-        sut.execute().done { token in
+        sut.execute().done { _ in
             // THEN
             XCTFail("Should fail")
         }

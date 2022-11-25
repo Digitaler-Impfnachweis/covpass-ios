@@ -86,7 +86,7 @@ public final class DotPulseActivityIndicator: UIView {
     }
 
     override public var intrinsicContentSize: CGSize {
-        return CGSize(width: bounds.width, height: bounds.height)
+        CGSize(width: bounds.width, height: bounds.height)
     }
 
     /**

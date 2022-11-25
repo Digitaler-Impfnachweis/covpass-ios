@@ -11,7 +11,6 @@ import PromiseKit
 import XCTest
 
 class PDFExportViewControllerTests: XCTestCase {
-
     private var viewModel: PDFExportViewModel!
     private var sut: PDFExportViewController!
 

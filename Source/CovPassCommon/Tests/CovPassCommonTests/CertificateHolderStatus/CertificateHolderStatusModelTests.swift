@@ -1,14 +1,14 @@
 //
 //  CertificateHolderStatusModelTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassCommon
-import XCTest
 import CertLogic
+@testable import CovPassCommon
 import SwiftyJSON
+import XCTest
 
 class CertificateHolderStatusModelTests: XCTestCase {
     private var certLogic: DCCCertLogicMock!
@@ -16,30 +16,30 @@ class CertificateHolderStatusModelTests: XCTestCase {
     private var token: ExtendedCBORWebToken!
     private var rule: Rule!
     private let maskStatusRuleTypeIdentifier = "Mask"
-    
+
     override func setUpWithError() throws {
         certLogic = .init()
         token = CBORWebToken.mockVaccinationCertificate.extended()
         rule = Rule(identifier: "FOO", type: "Invalidation", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "")
         sut = .init(dccCertLogic: certLogic)
     }
-    
+
     override func tearDownWithError() throws {
         certLogic = nil
         token = nil
         rule = nil
         sut = nil
     }
-    
+
     // MARK: checkDomesticAcceptanceAndInvalidationRules
-    
+
     func test_checkDomesticAcceptanceAndInvalidationRules_emptyToken() {
         // WHEN
         let result = sut.checkDomesticAcceptanceAndInvalidationRules([])
         // THEN
         XCTAssertEqual(result, .failedTechnical)
     }
-    
+
     func test_checkDomesticAcceptanceAndInvalidationRules_someError() {
         // GIVEN
         certLogic.validationError = NSError(domain: "some error", code: 1)
@@ -48,7 +48,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .failedTechnical)
     }
-    
+
     func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsFailed() {
         // GIVEN
         rule.type = "Invalidation"
@@ -58,7 +58,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .failedFunctional)
     }
-    
+
     func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeMaskWhichIsFailed() {
         // GIVEN
         rule.type = "Mask"
@@ -68,7 +68,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .passed)
     }
-    
+
     func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeMaskWhichIsPassed() {
         // GIVEN
         rule.type = "Mask"
@@ -78,7 +78,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .passed)
     }
-    
+
     func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeOfAcceptanceWhichIsFailed() {
         // GIVEN
         rule.type = "Acceptance"
@@ -88,7 +88,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .failedFunctional)
     }
-    
+
     func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeOfAcceptanceWhichIsOpen() {
         // GIVEN
         rule.type = "Acceptance"
@@ -98,7 +98,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .failedFunctional)
     }
-    
+
     func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeOfAcceptanceWhichIsPassed() {
         // GIVEN
         rule.type = "Acceptance"
@@ -108,16 +108,16 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .passed)
     }
-    
+
     // MARK: checkEuInvalidationRules
-    
+
     func test_checkEuInvalidationRules_emptyToken() {
         // WHEN
         let result = sut.checkEuInvalidationRules([])
         // THEN
         XCTAssertEqual(result, .failedTechnical)
     }
-    
+
     func test_checkEuInvalidationRules_someError() {
         // GIVEN
         certLogic.validationError = NSError(domain: "some error", code: 1)
@@ -126,7 +126,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .failedTechnical)
     }
-    
+
     func test_checkEuInvalidationRuless_with_ruleWhichHasTypeOfInvalidationWhichIsFailed() {
         // GIVEN
         rule.type = "Invalidation"
@@ -136,7 +136,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .failedFunctional)
     }
-    
+
     func test_checkEuInvalidationRules_with_ruleWhichHasTypeMaskWhichIsFailed() {
         // GIVEN
         rule.type = "Mask"
@@ -146,7 +146,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .passed)
     }
-    
+
     func test_checkEuInvalidationRules_with_ruleWhichHasTypeMaskWhichIsPassed() {
         // GIVEN
         rule.type = "Mask"
@@ -156,7 +156,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .passed)
     }
-    
+
     func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsFailed() {
         // GIVEN
         rule.type = "Invalidation"
@@ -166,7 +166,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .failedFunctional)
     }
-    
+
     func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsOpen() {
         // GIVEN
         rule.type = "Invalidation"
@@ -176,7 +176,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .failedFunctional)
     }
-    
+
     func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsPassed() {
         // GIVEN
         rule.type = "Invalidation"
@@ -186,9 +186,9 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, .passed)
     }
-    
+
     // MARK: holderIsFullyImmunized
-    
+
     func test_holderIsFullyImmunized_emptyToken() {
         // GIVEN
         // WHEN
@@ -196,7 +196,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, false)
     }
-    
+
     func test_holderIsFullyImmunized_someError() {
         // GIVEN
         certLogic.validationError = NSError(domain: "some error", code: 1)
@@ -205,7 +205,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, false)
     }
-    
+
     func test_holderIsFullyImmunized_noAcceptanceOrInvalidationRulesAvailable_inResult() {
         // GIVEN
         rule.type = "Mask"
@@ -215,7 +215,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, false)
     }
-    
+
     func test_holderIsFullyImmunized_Failed_AcceptanceRuleAvailable_inResult() {
         // GIVEN
         rule.type = "Acceptance"
@@ -225,7 +225,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, false)
     }
-    
+
     func test_holderIsFullyImmunized_Open_AcceptanceRuleAvailable_inResult() {
         // GIVEN
         rule.type = "Acceptance"
@@ -235,7 +235,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, false)
     }
-    
+
     func test_holderIsFullyImmunized_Failed_InvalidationRuleAvailable_inResult() {
         // GIVEN
         rule.type = "Invalidation"
@@ -245,7 +245,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, false)
     }
-    
+
     func test_holderIsFullyImmunized_Open_InvalidationRuleAvailable_inResult() {
         // GIVEN
         rule.type = "Invalidation"
@@ -255,7 +255,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, false)
     }
-    
+
     func test_holderIsFullyImmunized_Passed_AcceptanceRuleAvailable_inResult() {
         // GIVEN
         rule.type = "Acceptance"
@@ -265,7 +265,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, true)
     }
-    
+
     func test_holderIsFullyImmunized_Passed_InvalidationRuleAvailable_inResult() {
         // GIVEN
         rule.type = "Invalidation"
@@ -275,17 +275,16 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, true)
     }
-    
-    
+
     // MARK: holderNeedsMask
-    
+
     func test_holderNeedsMask_emptyToken() {
         // WHEN
         let result = sut.holderNeedsMask([], region: nil)
         // THEN
         XCTAssertEqual(result, true)
     }
-    
+
     func test_holderNeedsMask_someError() {
         // GIVEN
         certLogic.validationError = NSError(domain: "some error", code: 1)
@@ -294,7 +293,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, true)
     }
-    
+
     func test_holderNeedsMask_Failed_inResult() {
         // GIVEN
         rule.type = "Mask"
@@ -304,7 +303,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, true)
     }
-    
+
     func test_holderNeedsMask_Open_inResult() {
         // GIVEN
         rule.type = "Acceptance"
@@ -314,7 +313,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, true)
     }
-    
+
     func test_holderNeedsMask_Passed_ButNotMaskRule_inResult() {
         // GIVEN
         rule.type = "Acceptance"
@@ -324,7 +323,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, true)
     }
-    
+
     func test_holderNeedsMask_Passed_MaskRule_inResult() {
         // GIVEN
         rule.type = maskStatusRuleTypeIdentifier
@@ -334,7 +333,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, false)
     }
-    
+
     func test_holderNeedsMaskAsync_Passed_MaskRule_inResult() {
         // GIVEN
         let expectation = XCTestExpectation(description: "Should have same result like non async method")
@@ -349,9 +348,9 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         wait(for: [expectation], timeout: 1)
     }
-    
+
     // MARK: maskRulesAvailable
-    
+
     func test_maskRulesAvailable_true() {
         // GIVEN
         let expectedResult = true
@@ -361,7 +360,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, expectedResult)
     }
-    
+
     func test_maskRulesAvailable_false() {
         // GIVEN
         let expectedResult = false
@@ -391,7 +390,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertNil(result)
     }
-    
+
     func test_ifsg22aRulesAvailable_true() {
         // GIVEN
         let expectedResult = true
@@ -401,7 +400,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, expectedResult)
     }
-    
+
     func test_ifsg22aRulesAvailable_false() {
         // GIVEN
         let expectedResult = false
@@ -411,7 +410,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, expectedResult)
     }
-    
+
     func test_ifsg22a_passed() {
         // GIVEN
         certLogic.validateResult = [.init(rule: rule, result: .passed)]
@@ -420,7 +419,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertTrue(result)
     }
-    
+
     func test_ifsg22a_invalidation_rule_fails() {
         // GIVEN
         certLogic.validateResult = [.init(rule: rule, result: .fail)]
@@ -429,7 +428,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertFalse(result)
     }
-    
+
     func test_ifsg22a_invalidation_someError() {
         // GIVEN
         certLogic.validationError = NSError(domain: "some error", code: 1)
@@ -438,5 +437,4 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, false)
     }
-    
 }

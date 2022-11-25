@@ -1,7 +1,6 @@
 import CovPassUI
 
 class RevocationSettingsRouter: RevocationSettingsRouterProtocol {
-
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -13,5 +12,4 @@ class RevocationSettingsRouter: RevocationSettingsRouterProtocol {
     }
 
     // MARK: - Methods
-
 }

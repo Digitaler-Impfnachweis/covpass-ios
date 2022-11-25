@@ -21,10 +21,10 @@ public class CertificateItem: XibView {
     @IBOutlet public var activeView: UIView!
     @IBOutlet public var activeLabel: UILabel!
     @IBOutlet public var chevron: UIImageView!
-    @IBOutlet weak var statusIconWrapper: UIView!
-    @IBOutlet weak var statusIconLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusIconTopConstraint: NSLayoutConstraint!
-    
+    @IBOutlet var statusIconWrapper: UIView!
+    @IBOutlet var statusIconLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var statusIconTopConstraint: NSLayoutConstraint!
+
     private let action: (() -> Void)?
     private let hasAction: Bool
     public let viewModel: CertificateItemViewModel
@@ -32,7 +32,7 @@ public class CertificateItem: XibView {
     // MARK: - Lifecycle
 
     public init(viewModel: CertificateItemViewModel, action: (() -> Void)? = nil) {
-        self.hasAction = action != nil
+        hasAction = action != nil
         self.viewModel = viewModel
         self.action = action
         super.init(frame: CGRect.zero)
@@ -100,8 +100,8 @@ public class CertificateItem: XibView {
     @objc func onPressItem() {
         action?()
     }
-    
-    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+
+    override public func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         super.didUpdateFocus(in: context, with: coordinator)
         updateFocusBorderView()
     }

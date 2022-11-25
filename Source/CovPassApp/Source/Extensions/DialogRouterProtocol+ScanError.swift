@@ -68,7 +68,7 @@ extension DialogRouterProtocol {
             let title = "revocation_error_scan_title".localized
             let message = (
                 token.vaccinationCertificate.isGermanIssuer ?
-                "revocation_error_scan_single_DE" : "revocation_error_scan_single_notDE"
+                    "revocation_error_scan_single_DE" : "revocation_error_scan_single_notDE"
             ).localized
             let action = DialogAction(
                 title: "error_test_certificate_not_valid_button_title".localized,

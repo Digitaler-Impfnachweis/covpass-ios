@@ -1,12 +1,12 @@
 //
 //  CertificateReissueRepositoryMock.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import PromiseKit
 import Foundation
+import PromiseKit
 
 public class CertificateReissueRepositoryMock: CertificateReissueRepositoryProtocol {
     public var reissueResponse: CertificateReissueRepositoryResponse = []
@@ -19,19 +19,19 @@ public class CertificateReissueRepositoryMock: CertificateReissueRepositoryProto
         receivedRenewTokens = cborWebTokens
         if let error = error {
             return after(seconds: responseDelay).then {
-                Promise.init(error: error)
+                Promise(error: error)
             }
         }
         return after(seconds: responseDelay).then {
             Promise.value(self.reissueResponse)
         }
     }
-    
+
     public func extend(_ webTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
         receivedExtendTokens = webTokens
         if let error = error {
             return after(seconds: responseDelay).then {
-                Promise.init(error: error)
+                Promise(error: error)
             }
         }
         return after(seconds: responseDelay).then {

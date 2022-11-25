@@ -10,11 +10,11 @@ import Foundation
 
 extension String {
     var localized: String {
-        return Localizer.localized(self, bundle: Bundle.uiBundle)
+        Localizer.localized(self, bundle: Bundle.uiBundle)
     }
-    
+
     func localized(bundle: Bundle) -> String {
-        return Localizer.localized(self, bundle: bundle)
+        Localizer.localized(self, bundle: bundle)
     }
 }
 

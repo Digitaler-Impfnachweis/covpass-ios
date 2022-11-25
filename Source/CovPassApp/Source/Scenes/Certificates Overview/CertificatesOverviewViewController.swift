@@ -65,12 +65,12 @@ class CertificatesOverviewViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnouncment)
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnouncment)

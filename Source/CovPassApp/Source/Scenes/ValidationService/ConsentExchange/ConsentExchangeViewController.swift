@@ -5,8 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassUI
+import UIKit
 
 private enum Constants {
     enum Text {
@@ -25,13 +25,12 @@ private enum Constants {
 }
 
 class ConsentExchangeViewController: UIViewController {
-
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
 
     private let viewModel: ConsentExchangeViewModel
 
-    private let toolbar: CustomToolbarView = CustomToolbarView(frame: .zero)
-    private let toolbarCancel: CustomToolbarView = CustomToolbarView(frame: .zero)
+    private let toolbar: CustomToolbarView = .init(frame: .zero)
+    private let toolbarCancel: CustomToolbarView = .init(frame: .zero)
     private let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
     private let activityIndicatorContainer = UIView()
 
@@ -39,8 +38,8 @@ class ConsentExchangeViewController: UIViewController {
         let button = MainButton()
         button.setConstant(size: Constants.Layout.mainButtonSize)
         button.innerButton.setAttributedTitle(Constants.Text.confirmButton
-                                                .styledAs(.header_3)
-                                                .colored(.neutralWhite, in: nil), for: .normal)
+            .styledAs(.header_3)
+            .colored(.neutralWhite, in: nil), for: .normal)
         button.action = { [weak self] in
             self?.accept()
         }
@@ -51,8 +50,8 @@ class ConsentExchangeViewController: UIViewController {
         let button = MainButton()
         button.setConstant(size: Constants.Layout.mainButtonSize)
         button.innerButton.setAttributedTitle(Constants.Text.cancelButton
-                                    .styledAs(.header_3)
-                                                .colored(.neutralWhite, in: nil), for: .normal)
+            .styledAs(.header_3)
+            .colored(.neutralWhite, in: nil), for: .normal)
         button.action = { [weak self] in
             self?.cancel()
         }
@@ -69,7 +68,7 @@ class ConsentExchangeViewController: UIViewController {
             self?.cancel()
         }
         view.actionButton.enableAccessibility(label: ValidationServiceViewModel.Accessibility.close.label)
-        
+
         var vm: CertificateItemViewModel?
         if viewModel.certificate.vaccinationCertificate.hcert.dgc.r != nil {
             vm = RecoveryCertificateItemViewModel(viewModel.certificate, active: true, neutral: true)
@@ -162,7 +161,7 @@ class ConsentExchangeViewController: UIViewController {
         tableView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
 
         updateView()
-        
+
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorContainer.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorContainer.addSubview(activityIndicator)
@@ -186,10 +185,10 @@ class ConsentExchangeViewController: UIViewController {
         super.viewWillDisappear(animated)
         UIAccessibility.post(notification: .announcement, argument: ValidationServiceViewModel.Accessibility.closeViewController.label)
     }
-    
+
     func updateView() {
         tableView.reloadData()
-        viewModel.isLoading ? toolbar.primaryButton.disable() : toolbar.primaryButton.enable() 
+        viewModel.isLoading ? toolbar.primaryButton.disable() : toolbar.primaryButton.enable()
     }
 
     @objc func cancel() {
@@ -209,14 +208,12 @@ extension ConsentExchangeViewController: UITableViewDelegate {
         }
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
 }
 
-
 extension ConsentExchangeViewController: UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let reuseIdentifier = ValidationServiceViewModel.Rows(rawValue: indexPath.row)?.reuseIdentifier else {
             fatalError("There's something wrong with the tableview - we don't have a reuseidentifier")
@@ -227,7 +224,7 @@ extension ConsentExchangeViewController: UITableViewDataSource {
         cell.accessoryType = .none
         cell.accessoryView = nil
         cell.isUserInteractionEnabled = false
-        
+
         activityIndicator.stopAnimating()
         guard !viewModel.isLoading else {
             cell.textLabel?.text = ""
@@ -279,15 +276,14 @@ extension ConsentExchangeViewController: UITableViewDataSource {
         return cell
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections
+    func numberOfSections(in _: UITableView) -> Int {
+        viewModel.numberOfSections
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.isLoading ? 1 : viewModel.numberOfRows
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        viewModel.isLoading ? 1 : viewModel.numberOfRows
     }
 }
-
 
 // MARK: - CustomToolbarViewDelegate
 
@@ -297,12 +293,12 @@ extension ConsentExchangeViewController: CustomToolbarViewDelegate {
         case .navigationArrow:
             navigationController?.popViewController(animated: true)
         case .cancelButton:
-            self.cancel()
+            cancel()
         case .textButton:
             if view == toolbar {
                 viewModel.routeToValidation()
             } else {
-                self.cancel()
+                cancel()
             }
         default:
             return

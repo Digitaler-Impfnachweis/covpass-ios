@@ -8,12 +8,10 @@
 
 import CovPassCommon
 import CovPassUI
-import UIKit
 import PromiseKit
+import UIKit
 
 class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
-
-   
     // MARK: - Private Properties
 
     private var token: ExtendedCBORWebToken
@@ -30,6 +28,7 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         guard let boosterCandidate = boosterLogic.checkCertificates([token]) else { return false }
         return boosterCandidate.state == .new
     }
+
     private var showNotificationForExpiryOrInvalid: Bool {
         guard token.vaccinationCertificate.isNotTest else {
             return false
@@ -42,14 +41,16 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         }
         return cert.expiresSoon || token.isInvalid || cert.isExpired
     }
+
     private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
     private var holderNeedsMask: Bool
-    
+
     // MARK: public properties
-    
+
     var showNotification: Bool {
         showBoosterAvailabilityNotification || showNotificationForExpiryOrInvalid
     }
+
     var maskRulesNotAvailable: Bool = true
     var regionText: String? {
         guard !isInvalid else { return nil }
@@ -65,20 +66,20 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         tokens: [ExtendedCBORWebToken],
         onAction: @escaping (ExtendedCBORWebToken) -> Void,
         certificateHolderStatusModel: CertificateHolderStatusModelProtocol,
-        repository: VaccinationRepositoryProtocol,
+        repository _: VaccinationRepositoryProtocol,
         boosterLogic: BoosterLogicProtocol,
         userDefaults: UserDefaultsPersistence
     ) {
         self.token = token
         self.tokens = tokens
         self.onAction = onAction
-        self.holderNeedsMask = true
+        holderNeedsMask = true
         self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
         self.certificateHolderStatusModel = certificateHolderStatusModel
         updateCertificateHolderStatus().cauterize()
     }
-    
+
     func updateCertificateHolderStatus() -> Promise<Void> {
         guard certificateHolderStatusModel.maskRulesAvailable(for: userDefaults.stateSelection) else {
             maskRulesNotAvailable = true
@@ -109,7 +110,7 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
             return .onBackground40
         } else if holderNeedsMask {
             return .onBrandAccent70
-        } else  {
+        } else {
             return .brandAccent90
         }
     }
@@ -130,17 +131,15 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         }
         return "infschg_start_mask_optional".localized
     }()
-    
+
     lazy var subtitle: String = {
         if isInvalid {
             return "infschg_start_expired_revoked".localized
         }
         return ""
     }()
-    
-    lazy var headerSubtitle: String? = {
-        showNotification ? "infschg_start_notification".localized : nil
-    }()
+
+    lazy var headerSubtitle: String? = showNotification ? "infschg_start_notification".localized : nil
 
     var titleIcon: UIImage {
         if isInvalid {
@@ -149,14 +148,14 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
             return .statusMaskInvalidCircle
         } else if holderNeedsMask {
             return .statusMaskRequiredCircle
-        } else  {
+        } else {
             return .statusMaskOptionalCircle
         }
     }
-    
+
     var subtitleIcon: UIImage {
         if isInvalid {
-            return  showNotification ? .expiredDotNotification : .statusInvalidCircle
+            return showNotification ? .expiredDotNotification : .statusInvalidCircle
         }
         return .iconRed
     }
@@ -175,7 +174,7 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     }
 
     var tintColor: UIColor {
-        return textColor
+        textColor
     }
 
     // MARK: - Actions

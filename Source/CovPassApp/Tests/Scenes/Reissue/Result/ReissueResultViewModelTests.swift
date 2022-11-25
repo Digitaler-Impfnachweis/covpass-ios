@@ -50,11 +50,10 @@ class ReissueResultViewModelTests: XCTestCase {
         XCTAssertTrue(promise.isFulfilled)
     }
 
-
     func testDeleteOldTokens_error() {
         // Given
         repository.deleteError = NSError(domain: "TEST", code: 0, userInfo: nil)
-        
+
         // When
         sut.deleteOldTokens()
 

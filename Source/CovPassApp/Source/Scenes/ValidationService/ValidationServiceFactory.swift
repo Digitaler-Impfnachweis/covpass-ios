@@ -11,8 +11,8 @@ import PromiseKit
 import UIKit
 
 struct ValidationServiceFactory: SceneFactory {
-
     // MARK: - Properties
+
     let initialisationData: ValidationServiceInitialisation
     let router: ValidationServiceRouter
 

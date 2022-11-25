@@ -6,10 +6,10 @@
 //
 
 import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
 import UIKit
-import CovPassUI
 
 private enum Constants {
     enum Keys {
@@ -27,6 +27,7 @@ private enum Constants {
         static let loadingTitle = "settings_rules_list_loading_title".localized
         static let cancelTitle = "settings_rules_list_loading_cancel".localized
     }
+
     enum Accessibility {
         static let titleUpdate = "accessibility_app_information_title_update".localized
         static let closeView = "accessibility_app_information_title_update_closing_announce".localized
@@ -34,7 +35,6 @@ private enum Constants {
 }
 
 class TrustedListDetailsViewModel {
-    
     // MARK: - Properties
 
     private let repository: VaccinationRepositoryProtocol
@@ -51,39 +51,49 @@ class TrustedListDetailsViewModel {
     var downloadStateHintTitle: String {
         shouldSomethingBeUpdated ? Constants.Keys.statusUnavailable : Constants.Keys.statusAvailable
     }
+
     var downloadStateHintIcon: UIImage {
         shouldSomethingBeUpdated ? .warning : .check
     }
+
     var downloadStateHintColor: UIColor {
         shouldSomethingBeUpdated ? .warningAlternative : .resultGreen
     }
+
     var downloadStateTextColor: UIColor {
         shouldSomethingBeUpdated ? .neutralBlack : .neutralWhite
     }
+
     let entryRulesTitle: String = Constants.Keys.entryRulesTitle
     var entryRulesSubtitle: String {
         guard let date = userDefaults.lastUpdatedDCCRules else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
+
     let domesticRulesTitle: String = Constants.Keys.domesticRulesTitle
     var domesticRulesSubtitle: String {
         guard let date = userDefaults.lastUpdatedDCCRules else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
+
     let valueSetsTitle: String = Constants.Keys.valueSetsTitle
     var valueSetsSubtitle: String {
         guard let date = userDefaults.lastUpdatedValueSets else { return "" }
-        return DateUtils.displayDateTimeFormatter.string(from: date) }
+        return DateUtils.displayDateTimeFormatter.string(from: date)
+    }
+
     let certificateProviderTitle: String = Constants.Keys.certificateProviderTitle
     var certificateProviderSubtitle: String {
         guard let date = userDefaults.lastUpdatedTrustList else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
+
     let countryListTitle: String = Constants.Keys.countryListTitle
     var countryListSubtitle: String {
         guard let date = userDefaults.lastUpdatedDCCRules else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
+
     var accessibilityAnnounce = Constants.Accessibility.titleUpdate
     var accessibilityClose = Constants.Accessibility.closeView
     var isLoading = false {
@@ -91,11 +101,13 @@ class TrustedListDetailsViewModel {
             delegate?.viewModelDidUpdate()
         }
     }
+
     private var shouldSomethingBeUpdated: Bool {
         certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || repository.trustListShouldBeUpdated()
     }
+
     private var canceled: Bool = false
-    
+
     func refresh() {
         canceled = false
         isLoading = true
@@ -109,23 +121,23 @@ class TrustedListDetailsViewModel {
         .ensure { [weak self] in
             self?.isLoading = false
         }
-        .catch({ error in
+        .catch { error in
             switch (error as NSError).code {
-            case NSURLErrorNotConnectedToInternet:self.router?.showNoInternetErrorDialog(error)
+            case NSURLErrorNotConnectedToInternet: self.router?.showNoInternetErrorDialog(error)
             default: break
             }
-        })
+        }
     }
-    
+
     private func checkIfCancelled() -> Promise<Void> {
         canceled ? .init(error: TrustListDownloadError.cancelled) : .value
     }
-    
+
     func cancel() {
         isLoading = false
         canceled = true
     }
-    
+
     // MARK: - Lifecycle
 
     init(router: TrustedListDetailsRouterProtocol? = nil,

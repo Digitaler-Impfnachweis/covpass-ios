@@ -33,8 +33,7 @@ final class AcousticFeedbackSettingsViewModel: AcousticFeedbackSettingsViewModel
 
     init(audioPlayer: AudioPlayerProtocol,
          persistence: Persistence,
-         router: AcousticFeedbackSettingsRouterProtocol
-    ) {
+         router: AcousticFeedbackSettingsRouterProtocol) {
         self.audioPlayer = audioPlayer
         self.persistence = persistence
         self.router = router

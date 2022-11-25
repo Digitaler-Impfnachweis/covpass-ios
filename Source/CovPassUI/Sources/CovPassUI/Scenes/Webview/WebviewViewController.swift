@@ -14,7 +14,7 @@ open class WebviewViewController: UIViewController {
 
     let viewModel: WebviewViewModelProtocol
     @IBOutlet var webView: StaticWebView!
-    @IBOutlet weak var toolbar: CustomToolbarView!
+    @IBOutlet var toolbar: CustomToolbarView!
 
     // MARK: - Lifecycle
 
@@ -36,16 +36,16 @@ open class WebviewViewController: UIViewController {
         webView.load(viewModel.urlRequest)
     }
 
-    open override func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnounce)
     }
-    
-    open override func viewDidDisappear(_ animated: Bool) {
+
+    override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
     }
-    
+
     private func setupTitle() {
         if navigationController?.navigationBar.backItem != nil {
             title = viewModel.title
@@ -54,7 +54,7 @@ open class WebviewViewController: UIViewController {
         let label = UILabel()
         label.attributedText = viewModel.title?.styledAs(.header_3)
         label.accessibilityTraits = .header
-        navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)
     }
 
     private func setupNavigationBar() {
@@ -76,7 +76,7 @@ open class WebviewViewController: UIViewController {
             navigationController?.navigationBar.barTintColor = .neutralWhite
         } else {
             let backButton = UIBarButtonItem(image: .arrowBack, style: .done, target: self, action: #selector(backButtonTapped))
-            backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO change accessibility text when they are available
+            backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO: change accessibility text when they are available
             navigationItem.leftBarButtonItem = backButton
             navigationController?.navigationBar.tintColor = .onBackground100
         }
@@ -124,7 +124,7 @@ extension WebviewViewController: WKNavigationDelegate {
         }
     }
 
-    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
         if !webView.isLoading {
             self.webView.setDynamicFont()
         }

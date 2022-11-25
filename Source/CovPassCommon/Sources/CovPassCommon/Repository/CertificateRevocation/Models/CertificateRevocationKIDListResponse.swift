@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationKIDListResponse.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -17,7 +17,7 @@ public struct CertificateRevocationKIDListResponse {
         rawDictionary = dictionary
         self.lastModified = lastModified
         kIDs = try dictionary.kidDictionary()
-        self.allKIDs = kIDs.keys.map(\.hexToBytes)
+        allKIDs = kIDs.keys.map(\.hexToBytes)
     }
 
     public func contains(_ kid: KID) -> Bool {
@@ -35,7 +35,7 @@ public struct CertificateRevocationKIDListResponse {
             .map { hashType in
                 (hashType, count(kid, hashType: hashType))
             }
-            .filter { (_, count) in
+            .filter { _, count in
                 count > 0
             }
             .sorted { count1, count2 in
@@ -48,12 +48,12 @@ public struct CertificateRevocationKIDListResponse {
     }
 }
 
-public typealias KIDListValueType = Dictionary<CertificateRevocationHashType, Int>
+public typealias KIDListValueType = [CertificateRevocationHashType: Int]
 
 private extension NSDictionary {
-    func kidDictionary() throws -> Dictionary<String, KIDListValueType> {
+    func kidDictionary() throws -> [String: KIDListValueType] {
         var result: [String: KIDListValueType] = [:]
-        try forEach { (key, value) in
+        try forEach { key, value in
             guard let stringKey = key as? String,
                   let valueDictionary = value as? NSDictionary else {
                 throw CertificateRevocationDataSourceError.cbor
@@ -66,7 +66,7 @@ private extension NSDictionary {
 
     func hashTypeDictionary() throws -> KIDListValueType {
         var result: KIDListValueType = [:]
-        try forEach { (key, value) in
+        try forEach { key, value in
             guard let stringKey = key as? String,
                   let intKey = UInt8(stringKey, radix: 16),
                   let hashKey = CertificateRevocationHashType(rawValue: intKey),
@@ -87,8 +87,7 @@ private extension StringProtocol {
             guard startIndex < self.endIndex else { return nil }
             let endIndex = self.index(startIndex, offsetBy: 2, limitedBy: self.endIndex) ?? self.endIndex
             defer { startIndex = endIndex }
-            return UInt8(self[startIndex..<endIndex], radix: 16)
+            return UInt8(self[startIndex ..< endIndex], radix: 16)
         }
     }
 }
-

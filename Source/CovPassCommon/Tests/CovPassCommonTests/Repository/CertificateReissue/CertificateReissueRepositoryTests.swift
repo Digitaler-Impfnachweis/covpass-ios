@@ -1,6 +1,6 @@
 //
 //  CertificateReissueRepositoryTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -177,7 +177,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
 
         // When
         sut.renew([ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
-                                          vaccinationQRCodeData: qrCodeData)])
+                                        vaccinationQRCodeData: qrCodeData)])
             .done { webTokens in
                 guard let data = self.httpClient.receivedHTTPRequest?.httpBody,
                       let requestBody = try? JSONDecoder().decode(CertificateReissueRequestBody.self, from: data) else { return }
@@ -318,7 +318,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
 
         // When
         sut.extend([ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
-                                          vaccinationQRCodeData: qrCodeData)])
+                                         vaccinationQRCodeData: qrCodeData)])
             .done { webTokens in
                 guard let data = self.httpClient.receivedHTTPRequest?.httpBody,
                       let requestBody = try? JSONDecoder().decode(CertificateReissueRequestBody.self, from: data) else { return }

@@ -32,7 +32,7 @@ class CovPassAppInformationViewModel: AppInformationBaseViewModel {
             rightTitle: rightTitle
         )
     }
-    
+
     internal let persistence: Persistence
 
     init(

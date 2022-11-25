@@ -1,6 +1,6 @@
 //
 //  ButtonBox.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -12,7 +12,7 @@ public class ButtonBox: XibView {
     @IBOutlet public var paragraphView: ParagraphView!
     @IBOutlet public var button: MainButton!
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
 
         roundedCornerView.backgroundColor = .brandAccent10

@@ -1,5 +1,5 @@
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 import Foundation
 import UIKit
 

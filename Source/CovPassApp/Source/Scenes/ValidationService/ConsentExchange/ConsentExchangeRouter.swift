@@ -5,9 +5,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
 import CovPassUI
+import Foundation
 import PromiseKit
 import UIKit
 
@@ -33,10 +33,11 @@ struct ConsentExchangeRouter: ConsentExchangeRoutable {
         showDialog(title: "",
                    message: Constants.Text.Alert.message,
                    actions: [
-                    DialogAction(title: Constants.Text.Alert.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: nil),
-                    DialogAction(title: Constants.Text.Alert.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { _ in
-                        sceneCoordinator.dimiss(animated: true)
-                    })],
+                       DialogAction(title: Constants.Text.Alert.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: nil),
+                       DialogAction(title: Constants.Text.Alert.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { _ in
+                           sceneCoordinator.dimiss(animated: true)
+                       })
+                   ],
                    style: .alert)
     }
 

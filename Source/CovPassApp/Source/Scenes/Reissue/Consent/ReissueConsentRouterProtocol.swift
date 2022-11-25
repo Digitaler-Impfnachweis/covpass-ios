@@ -1,6 +1,6 @@
+import CovPassCommon
 import CovPassUI
 import Foundation
-import CovPassCommon
 import PromiseKit
 
 protocol ReissueConsentRouterProtocol: RouterProtocol {

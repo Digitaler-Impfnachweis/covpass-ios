@@ -19,7 +19,7 @@ public protocol DCCServiceProtocol {
 
     func loadBoosterRules() -> Promise<[RuleSimple]>
     func loadBoosterRule(hash: String) -> Promise<Rule>
-    
+
     func loadDomesticRules() -> Promise<[RuleSimple]>
     func loadDomesticRule(hash: String) -> Promise<Rule>
 
@@ -131,7 +131,7 @@ public struct DCCService: DCCServiceProtocol {
     }
 
     public func loadBoosterRule(hash: String) -> Promise<Rule> {
-        return customURLSession
+        customURLSession
             .request(boosterURL.appendingPathComponent(hash).urlRequest.GET)
             .map(on: .global()) { response in
                 guard let data = response.data(using: .utf8), let res = try? JSONDecoder().decode(Rule.self, from: data) else {
@@ -141,7 +141,7 @@ public struct DCCService: DCCServiceProtocol {
                 return res
             }
     }
-    
+
     public func loadDomesticRules() -> Promise<[RuleSimple]> {
         guard let requestUrl = URL(string: "\(domesticURL.absoluteString)") else {
             return Promise(error: APIError.invalidUrl)
@@ -155,9 +155,9 @@ public struct DCCService: DCCServiceProtocol {
                 return res
             }
     }
-    
+
     public func loadDomesticRule(hash: String) -> Promise<Rule> {
-        return customURLSession
+        customURLSession
             .request(domesticURL.appendingPathComponent(hash).urlRequest.GET)
             .map(on: .global()) { response in
                 guard let data = response.data(using: .utf8), let res = try? JSONDecoder().decode(Rule.self, from: data) else {
@@ -177,8 +177,8 @@ public struct DCCService: DCCServiceProtocol {
             .map(on: .global()) { response in
                 guard let data = response.data(using: .utf8),
                       let saveURL = Countries.downloadURL,
-                      let countries: [Country] = try? JSONDecoder().decode([String].self, from: data).map({.init($0)}) else {
-                          throw DCCServiceError.invalidResponse
+                      let countries: [Country] = try? JSONDecoder().decode([String].self, from: data).map({ .init($0) }) else {
+                    throw DCCServiceError.invalidResponse
                 }
                 try data.write(to: saveURL)
                 return countries

@@ -1,6 +1,6 @@
 //
 //  SVGToPDFConverterTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -28,7 +28,7 @@ class SVGToPDFConverterTests: XCTestCase {
 
         // When
         sut.convert(data)
-            .done { pdfDocument in
+            .done { _ in
                 expectation.fulfill()
             }
             .catch { _ in

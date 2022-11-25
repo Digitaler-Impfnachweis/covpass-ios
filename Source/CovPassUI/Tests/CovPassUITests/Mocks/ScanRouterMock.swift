@@ -1,6 +1,6 @@
 //
 //  ScanRouterMock.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -15,7 +15,7 @@ class ScanRouterMock: ScanRouterProtocol {
     let showCertificatePickerExpectation = XCTestExpectation(description: "showCertificatePickerExpectation")
     var choosenDocumentType = DocumentSheetResult.photo
     var receivedTokens: [ExtendedCBORWebToken] = []
-    
+
     func showDocumentPickerSheet() -> Promise<DocumentSheetResult> {
         showDocumentPickerExpectation.fulfill()
         return .value(choosenDocumentType)

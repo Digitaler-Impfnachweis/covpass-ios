@@ -20,13 +20,13 @@ public struct CBORWebToken: Codable {
 
     /// True if certificate is expired
     public var isExpired: Bool {
-        guard let exp = self.exp else { return false }
+        guard let exp = exp else { return false }
         return Date() >= exp
     }
 
     /// True if certificate expires soon
     public var expiresSoon: Bool {
-        guard let exp = self.exp,
+        guard let exp = exp,
               let expiresSoonDate = Calendar.current.date(byAdding: .day, value: -28, to: exp) else { return false }
         return Date() >= expiresSoonDate
     }

@@ -27,7 +27,7 @@ public class ParagraphView: XibView {
     @IBOutlet public var bottomBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet public var bottomBorderLeftConstraint: NSLayoutConstraint!
     @IBOutlet public var imageViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet public weak var imageContainerView: UIView!
+    @IBOutlet public var imageContainerView: UIView!
     @IBOutlet public var bottomBorder: UIView!
 
     // MARK: - Properties
@@ -42,7 +42,7 @@ public class ParagraphView: XibView {
         contentView?.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         horizontalContainerStackView.spacing = .space_24
         bottomBorder.backgroundColor = .onBackground20
-        bodyTextView.textableView.textContainer.lineFragmentPadding = 0;
+        bodyTextView.textableView.textContainer.lineFragmentPadding = 0
     }
 
     // MARK: - Methods
@@ -92,31 +92,31 @@ public class ParagraphView: XibView {
         imageView.image = image
         imageView.contentMode = contentMode
         imageContainerView.isHidden = image == nil
-        
+
         titleLabel.attributedText = title
         titleLabel.isHidden = title.isNilOrEmpty
-        
+
         subtitleLabel.attributedText = subtitle
         subtitleLabel.isHidden = subtitle.isNilOrEmpty
-        
+
         secondSubtitleLabel.attributedText = secondSubtitle
         secondSubtitleLabel.isHidden = secondSubtitle.isNilOrEmpty
-        
+
         bodyLabel.attributedText = body
         bodyLabel.isHidden = body.isNilOrEmpty
-        
+
         bodyTextView.attributedText = secondBody
         bodyTextView.isHidden = secondBody.isNilOrEmpty
-        
+
         footerHeadlineLabel.attributedText = footerHeadline
         footerHeadlineLabel.isHidden = footerHeadline.isNilOrEmpty
-        
+
         footerBodyLabel.attributedText = footerBody
         footerBodyLabel.isHidden = footerBody.isNilOrEmpty
-        
+
         footerButton.title = footerButtonTitle
         footerButton.isHidden = footerButtonTitle.isNilOrEmpty
-        
+
         footerStackView.isHidden = footerHeadline.isNilOrEmpty && footerBody.isNilOrEmpty && footerButtonTitle.isNilOrEmpty
 
         setupAccessibility()

@@ -48,5 +48,4 @@ class CovPassAppInformationViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(entries.last?.rightTitle, "Off")
     }
-
 }

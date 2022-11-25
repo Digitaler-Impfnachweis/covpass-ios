@@ -9,9 +9,9 @@ import CovPassUI
 import PromiseKit
 
 private enum Constants {
-        static var title = "certificate_renewal_confirmation_page_headline".localized
-        static var subTitle = "renewal_expiry_success_copy".localized
-        static var submitButton = "renewal_expiry_success_button".localized
+    static var title = "certificate_renewal_confirmation_page_headline".localized
+    static var subTitle = "renewal_expiry_success_copy".localized
+    static var submitButton = "renewal_expiry_success_button".localized
 }
 
 final class ReissueSuccessViewViewModel: ResultViewViewModel {

@@ -13,23 +13,22 @@ import PromiseKit
 import Scanner
 
 public struct ValidationResultRouter: ValidationResultRouterProtocol {
-    
     // MARK: - Properties
-    
+
     public let sceneCoordinator: SceneCoordinator
-    
+
     // MARK: - Lifecycle
-    
+
     public init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
     }
-    
+
     // MARK: - Methods
-    
+
     public func showStart() {
         sceneCoordinator.dimiss()
     }
-    
+
     public func scanQRCode() -> Promise<QRCodeImportResult> {
         sceneCoordinator.present(
             ScanSceneFactory(
@@ -39,7 +38,7 @@ public struct ValidationResultRouter: ValidationResultRouterProtocol {
             )
         )
     }
-    
+
     public func showRevocation(token: ExtendedCBORWebToken, keyFilename: String) -> Promise<Void> {
         sceneCoordinator.present(
             RevocationInfoSceneFactory(

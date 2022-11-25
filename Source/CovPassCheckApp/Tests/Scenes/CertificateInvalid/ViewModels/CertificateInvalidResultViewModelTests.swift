@@ -56,7 +56,7 @@ final class CertificateInvalidResultViewModelTests: XCTestCase {
     func testCancel() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { result in expectation.fulfill() }.cauterize()
+        promise.done { _ in expectation.fulfill() }.cauterize()
 
         // When
         sut.cancel()
@@ -68,7 +68,7 @@ final class CertificateInvalidResultViewModelTests: XCTestCase {
     func testRescan() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { result in
+        promise.done { _ in
             expectation.fulfill()
         }.cauterize()
 
@@ -85,7 +85,7 @@ final class CertificateInvalidResultViewModelTests: XCTestCase {
         let doneExpectation = XCTestExpectation(description: "doneExpectation")
         countdownTimerModel = .init(dismissAfterSeconds: 1.5, countdownDuration: 1)
         delegate.didUpdate = { didUpdateExpectation.fulfill() }
-        promise.done { result in doneExpectation.fulfill() }.cauterize()
+        promise.done { _ in doneExpectation.fulfill() }.cauterize()
 
         // When
         configureSut()
@@ -101,7 +101,7 @@ final class CertificateInvalidResultViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(isCancellable)
     }
-    
+
     func testTitle() {
         // Given
         configureSut()
@@ -112,7 +112,7 @@ final class CertificateInvalidResultViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(title, "Certificate not valid")
     }
-    
+
     func testSubtitle() {
         // Given
         configureSut()
@@ -123,7 +123,7 @@ final class CertificateInvalidResultViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(subtitle, "")
     }
-    
+
     func testDescription() {
         // Given
         configureSut()
@@ -167,7 +167,7 @@ final class CertificateInvalidResultViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(isHidden)
     }
-    
+
     func testAccessibilityCloseButton() {
         // WHEN
         let closeButtonAccessibilityText = sut.closeButtonAccessibilityText

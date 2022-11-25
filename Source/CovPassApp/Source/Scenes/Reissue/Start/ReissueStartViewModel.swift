@@ -1,7 +1,7 @@
+import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
-import CovPassUI
-import CovPassCommon
 
 private enum Constants {
     enum Keys {
@@ -12,6 +12,7 @@ private enum Constants {
             static var start = "certificate_renewal_startpage_main_button".localized
             static var later = "certificate_renewal_startpage_secondary_button".localized
         }
+
         enum ExpiryRenewal {
             static var title = "renewal_expiry_notification_title".localized
             static var description = "renewal_expiry_notification_copy_vaccination".localized
@@ -24,8 +25,8 @@ private enum Constants {
 }
 
 class ReissueStartViewModel: ReissueStartViewModelProtocol {
-    
     // MARK: - Properties
+
     weak var delegate: ViewModelDelegate?
     let certItem: CertificateItem
     lazy var titleText = context == .boosterRenewal ? Constants.Keys.boosterRenewal.title : Constants.Keys.ExpiryRenewal.title
@@ -37,9 +38,9 @@ class ReissueStartViewModel: ReissueStartViewModelProtocol {
     private let router: ReissueStartRouterProtocol
     private let tokens: [ExtendedCBORWebToken]
     private let context: ReissueContext
-    
+
     // MARK: - Lifecyle
-    
+
     init(router: ReissueStartRouterProtocol,
          resolver: Resolver<Void>,
          tokens: [ExtendedCBORWebToken],
@@ -57,13 +58,13 @@ class ReissueStartViewModel: ReissueStartViewModelProtocol {
         }
         certItem = reissuableTokens[0].certItem(active: true)
     }
-    
+
     // MARK: - Methods
-    
+
     func processStart() {
         router.showNext(tokens: tokens, resolver: resolver, context: context)
     }
-    
+
     func processLater() {
         resolver.fulfill_()
     }

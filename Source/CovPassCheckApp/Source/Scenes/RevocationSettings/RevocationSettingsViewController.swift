@@ -1,12 +1,12 @@
-import UIKit
 import CovPassUI
+import UIKit
 
 class RevocationSettingsViewController: UIViewController {
-
     // MARK: - Properties
+
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var labelSwitchView: LabeledSwitch!
-    
+
     private(set) var viewModel: RevocationSettingsViewModelProtocol
 
     // MARK: - Lifecycle
@@ -18,27 +18,27 @@ class RevocationSettingsViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         updateView()
         configureView()
     }
-    
+
     private func configureView() {
         view.backgroundColor = .backgroundPrimary
         labelSwitchView.switchChanged = viewModel.switchChanged
         labelSwitchView.uiSwitch.isOn = viewModel.switchState
 
         let backButton = UIBarButtonItem(image: .arrowBack, style: .done, target: self, action: #selector(backButtonTapped))
-        backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO change accessibility text when they are available
+        backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO: change accessibility text when they are available
         navigationItem.leftBarButtonItem = backButton
         navigationController?.navigationBar.tintColor = .onBackground100
     }
 
     // MARK: - Methods
-    
+
     func updateView() {
         title = viewModel.titleText
         descriptionLabel.attributedText = viewModel.descriptionText.styledAs(.body)

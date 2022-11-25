@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 public class ImmunityScanCardView: XibView {
-    
     // MARK: - Outlets
 
     @IBOutlet private var stackView: UIStackView!
@@ -19,17 +18,17 @@ public class ImmunityScanCardView: XibView {
     @IBOutlet private var descriptionLabel: PlainLabel!
     @IBOutlet private var infoLabel: PlainLabel!
     @IBOutlet private var actionButton: MainButton!
-    
+
     // MARK: - Public properties
 
-    public var action: (()->Void)? {
+    public var action: (() -> Void)? {
         didSet {
             actionButton.action = action
         }
     }
-    
-    
+
     // MARK: - Properties
+
     private let cornerRadius: CGFloat = 14
     private let shadowRadius: CGFloat = 16
     private let shadowOpacity: CGFloat = 0.2
@@ -48,7 +47,7 @@ public class ImmunityScanCardView: XibView {
         actionButton.style = .secondary
         actionButton.icon = .scan
     }
-    
+
     public func set(title: NSAttributedString,
                     titleAccessibility: String,
                     titleEdges: UIEdgeInsets,

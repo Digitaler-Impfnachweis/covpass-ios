@@ -42,14 +42,14 @@ class HowToScanViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
 
     var startButtonTitle: String { "certificate_add_popup_scan_button_title".localized }
-    
+
     var sceneOpeningAnnouncement: String = Constants.Accessibility.sceneOpeningAnnouncement
-    
+
     var sceneClosingAnnouncement: String = Constants.Accessibility.sceneClosingAnnouncement
 
     var showPasscodeHint: Bool {
         // check if device passcode is set
-        return !LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
+        !LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
     }
 
     // MARK: - Lifecycle

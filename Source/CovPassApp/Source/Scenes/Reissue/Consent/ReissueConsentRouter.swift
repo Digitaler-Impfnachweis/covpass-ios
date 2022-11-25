@@ -1,5 +1,5 @@
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 import PromiseKit
 import UIKit
 
@@ -16,7 +16,6 @@ private enum Constants {
 }
 
 class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
-
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -28,34 +27,35 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
     }
 
     // MARK: - Methods
-    
+
     func showReissueResultPage(newTokens: [ExtendedCBORWebToken],
                                oldTokens: [ExtendedCBORWebToken],
-                               resolver: Resolver<Void>){
+                               resolver: Resolver<Void>) {
         sceneCoordinator
             .push(ReissueResultSceneFactory(router: ReissueResultRouter(sceneCoordinator: sceneCoordinator),
                                             newTokens: newTokens,
                                             oldTokens: oldTokens,
                                             resolver: resolver))
     }
-    
+
     func showGenericResultPage(resolver: Resolver<Void>) {
         sceneCoordinator
             .push(ReissueSuccessViewSceneFactory(resolver: resolver))
     }
-    
+
     func cancel(resolver: Resolver<Void>) {
         showDialog(title: "",
                    message: Constants.Text.Alert.Cancellation.message,
                    actions: [
-                    DialogAction(title: Constants.Text.Alert.Cancellation.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: { _ in }),
-                    DialogAction(title: Constants.Text.Alert.Cancellation.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { [weak self] _ in
-                        resolver.fulfill_()
-                        self?.sceneCoordinator.dimiss(animated: true)
-                    })],
+                       DialogAction(title: Constants.Text.Alert.Cancellation.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: { _ in }),
+                       DialogAction(title: Constants.Text.Alert.Cancellation.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { [weak self] _ in
+                           resolver.fulfill_()
+                           self?.sceneCoordinator.dimiss(animated: true)
+                       })
+                   ],
                    style: .alert)
     }
-    
+
     func routeToPrivacyStatement() {
         sceneCoordinator
             .present(DataPrivacySceneFactory(router: DataPrivacyRouter(sceneCoordinator: sceneCoordinator)))
@@ -70,9 +70,10 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
         let faqAction = DialogAction(
             title: "certificate_renewal_error_button_secondary".localized,
             style: .none,
-            isEnabled: true) { [weak self] _ in
-                self?.showURL(faqURL)
-            }
+            isEnabled: true
+        ) { [weak self] _ in
+            self?.showURL(faqURL)
+        }
 
         showDialog(
             title: title,

@@ -28,4 +28,3 @@ struct AudioPlayerMock: AudioPlayerProtocol {
         return true
     }
 }
-

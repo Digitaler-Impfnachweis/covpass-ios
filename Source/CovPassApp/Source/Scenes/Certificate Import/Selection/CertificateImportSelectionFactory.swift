@@ -15,8 +15,7 @@ struct CertificateImportSelectionFactory: ResolvableSceneFactory {
     private let router: CertificateImportSelectionRouterProtocol
 
     init(importTokens: [ExtendedCBORWebToken],
-         router: CertificateImportSelectionRouterProtocol
-    ) {
+         router: CertificateImportSelectionRouterProtocol) {
         self.importTokens = importTokens
         self.router = router
     }

@@ -175,7 +175,6 @@ public class MainButton: XibView {
         innerButton.setAttributedTitle(attributedText?.colored(style.disabledTextColor), for: .disabled)
         innerButton.setAttributedTitle(attributedText?.colored(style.highlightedTextColor), for: .highlighted)
         enableAccessibility(label: title, traits: .button)
-        
     }
 
     private func updateAppearence() {
@@ -250,8 +249,8 @@ public class MainButton: XibView {
             break
         }
     }
-    
-    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+
+    override public func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         super.didUpdateFocus(in: context, with: coordinator)
         updateFocusBorderView()
     }

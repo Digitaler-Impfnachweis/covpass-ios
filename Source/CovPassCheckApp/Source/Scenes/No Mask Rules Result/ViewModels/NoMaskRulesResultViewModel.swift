@@ -49,11 +49,10 @@ final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
          resolver: Resolver<ValidatorDetailSceneResult>,
          router: NoMaskRulesResultRouterProtocol,
          persistence: Persistence,
-         revocationKeyFilename: String
-    ) {
+         revocationKeyFilename: String) {
         self.token = token
         self.countdownTimerModel = countdownTimerModel
-        self.subtitle = .init(
+        subtitle = .init(
             format: Constants.subtitleFormat,
             ("DE_" + persistence.stateSelection).localized
         )

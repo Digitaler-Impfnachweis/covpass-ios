@@ -24,6 +24,7 @@ private enum Constants {
             static let vaccinationExpiryButtonTitle = "renewal_expiry_notification_button_vaccination".localized
             static let recoveryExpiryButtonTitle = "renewal_expiry_notification_button_recovery".localized
         }
+
         enum PersonalData {
             static let title = "certificates_overview_personal_data_title".localized
             static let name = "certificates_overview_personal_data_name".localized
@@ -33,6 +34,7 @@ private enum Constants {
             static let header = "infschg_cert_overview_title".localized
         }
     }
+
     enum Accessibility {
         enum PersonalData {
             static let name = "accessibility_certificates_overview_personal_data_name".localized
@@ -40,6 +42,7 @@ private enum Constants {
             static let dateOfBirth = "accessibility_certificates_overview_personal_data_date_of_birth".localized
             static let certificatesTitle = "accessibility_certificates_overview_all_certificates_title".localized
         }
+
         enum General {
             static let backToStart = "accessibility_overview_certificates_label_back".localized
         }
@@ -47,8 +50,8 @@ private enum Constants {
 }
 
 class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
-
     // MARK: - Properties
+
     weak var delegate: ViewModelDelegate?
     var router: CertificateDetailRouterProtocol
     private let repository: VaccinationRepositoryProtocol
@@ -65,7 +68,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private var holderIsFullyImmunized = false
     private var selectedCertificate: ExtendedCBORWebToken? { certificates.sortLatest().first }
     private var selectedToken: CBORWebToken? { selectedCertificate?.vaccinationCertificate }
-    private var selectedDgc: DigitalGreenCertificate? { selectedToken?.hcert.dgc}
+    private var selectedDgc: DigitalGreenCertificate? { selectedToken?.hcert.dgc }
     private var selectedCertificateIsRevoked: Bool { selectedCertificate?.isRevoked ?? false }
     private var selectedCertificatetIsInvalid: Bool { selectedCertificate?.isInvalid ?? false }
     private var selectedCertificatetIsRecovery: Bool { selectedCertificate?.vaccinationCertificate.isRecovery ?? false }
@@ -77,15 +80,17 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         return token.expiresSoon && token.isGermanIssuer
     }
+
     private var selectedCertificateIsNonGermanExpiringSoon: Bool {
         guard let token = selectedToken else {
             return false
         }
         return token.expiresSoon && !token.isGermanIssuer
     }
+
     private var userDefaults: Persistence
     var accessibilityBackToStart = Constants.Accessibility.General.backToStart
-    var name: String { selectedDgc?.nam.fullName ?? ""}
+    var name: String { selectedDgc?.nam.fullName ?? "" }
     var nameReversed: String { selectedDgc?.nam.fullNameReverse ?? "" }
     var nameTransliterated: String { selectedDgc?.nam.fullNameTransliteratedReverse ?? "" }
     var title = Constants.Keys.PersonalData.title
@@ -103,16 +108,19 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         guard let dgc = selectedDgc else { return "" }
         return DateUtils.displayIsoDateOfBirth(dgc)
     }
+
     var immunizationButton: String {
         if selectedCertificatetIsInvalid || selectedCertificateIsRevoked || selectedTokenIsExpired {
             return "certificates_overview_expired_action_button_title".localized
         }
         return "recovery_certificate_overview_action_button_title".localized
     }
+
     var favoriteIcon: UIImage? {
         if !showFavorite { return nil }
         return isFavorite ? .starFull : .starPartial
     }
+
     var immunizationIcon: UIImage? {
         if isInvalid {
             return UIImage.statusExpiredCircle
@@ -129,7 +137,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         return fullImmunization ? UIImage.detailStatusFull : UIImage.detailStatusPartial
     }
 
-    var immunizationTitle: String {        
+    var immunizationTitle: String {
         if selectedTokenIsExpired {
             return "certificate_expired_detail_view_note_title".localized
         }
@@ -166,7 +174,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationBody: String {
-        if selectedTokenIsGermanIssuer && selectedCertificateIsRevoked  {
+        if selectedTokenIsGermanIssuer && selectedCertificateIsRevoked {
             return "revocation_detail_single_DE".localized
         }
         if !selectedTokenIsGermanIssuer && selectedCertificateIsRevoked {
@@ -205,7 +213,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         return !selectedCertificate.isRevoked
     }
-    
+
     var items: [CertificateItem] {
         certificates
             .reversed()
@@ -232,11 +240,11 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         guard !isInvalid else {
             return CertificateHolderInvalidMaskStatusViewModel()
         }
-        
+
         guard certificateHolderStatusModel.maskRulesAvailable(for: userDefaults.stateSelection) else {
             return CertificateHolderNoMaskRulesStatusViewModel(federalState: userDefaults.stateSelection)
         }
-        
+
         if holderNeedsMask {
             if let vaccination = certificates.latestVaccination, let recovery = certificates.latestRecovery,
                recovery.fr > vaccination.dt, !recovery.fr.isOlderThan29Days,
@@ -256,7 +264,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         } else {
             let certificatesUsed = certificateHolderStatusModel.validCertificates(certificates, logicType: .deAcceptenceAndInvalidationRules)
             guard let latestCertificate = certificatesUsed.sortedByDtFrAndSc.first,
-                    let dtOrFr = latestCertificate.dtFrOrSc.add(days: 90) else {
+                  let dtOrFr = latestCertificate.dtFrOrSc.add(days: 90) else {
                 return CertificateHolderMaskNotRequiredStatusViewModel(
                     userDefaults: userDefaults,
                     certificateHolderStatus: certificateHolderStatusModel,
@@ -271,7 +279,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             )
         }
     }
-    
+
     var immunizationStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol {
         if isInvalid {
             return CertificateHolderInvalidImmunizationStatusViewModel()
@@ -285,11 +293,11 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
                 return CertificateHolderImmunizationC2StatusViewModel(date: vaccination.dt.readableString)
             }
             if let recovery = certificates.latestRecovery {
-                if vaccination.dn == 2 && recovery.fr < vaccination.dt {
+                if vaccination.dn == 2, recovery.fr < vaccination.dt {
                     return CertificateHolderImmunizationE2StatusViewModel(date: vaccination.dt.readableString)
-                } else if vaccination.dn == 2 && recovery.fr > vaccination.dt, recovery.fr.isOlderThan29Days {
+                } else if vaccination.dn == 2, recovery.fr > vaccination.dt, recovery.fr.isOlderThan29Days {
                     return CertificateHolderImmunizationE2StatusViewModel(date: recovery.fr.readableStringAfter29Days)
-                } else if vaccination.dn == 2 && recovery.fr > vaccination.dt {
+                } else if vaccination.dn == 2, recovery.fr > vaccination.dt {
                     return CertificateHolderImmunizationE22StatusViewModel(days: recovery.fr.daysUntil29Days,
                                                                            date: recovery.fr.readableStringAfter29Days)
                 }
@@ -322,9 +330,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var boosterNotificationHighlightText = Constants.Keys.Reissue.newText
-    
+
     // MARK: Reissue
-    
+
     var showBoosterReissueNotification: Bool {
         certificates.qualifiedForReissue
     }
@@ -357,7 +365,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             return false
         }
         guard index < recoveryExpiryReissueCandidatesCount,
-              let alreadySeen = recoveryExpiryReissueTokens[index].first?.reissueProcessNewBadgeAlreadySeen  else {
+              let alreadySeen = recoveryExpiryReissueTokens[index].first?.reissueProcessNewBadgeAlreadySeen else {
             return true
         }
         return !alreadySeen
@@ -376,7 +384,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     var boosterReissueNotificationBody = Constants.Keys.Reissue.boosterDescription
 
     var reissueNotificationHighlightText = Constants.Keys.Reissue.newText
-   
+
     var boosterReissueButtonTitle = Constants.Keys.Reissue.boosterButtonTitle
 
     let expiryReissueNotificationTitle = Constants.Keys.Reissue.expiryHeadline
@@ -388,9 +396,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     let recoveryExpiryReissueNotificationBody = Constants.Keys.Reissue.recoveryExpiryDescription
 
     let recoveryExpiryReissueButtonTitle = Constants.Keys.Reissue.recoveryExpiryButtonTitle
-    
-    var immunizationDetailsHidden: Bool { !(isInvalid || selectedToken?.expiresSoon ?? false )}
-    
+
+    var immunizationDetailsHidden: Bool { !(isInvalid || selectedToken?.expiresSoon ?? false) }
+
     // MARK: - Lifecyle
 
     init?(
@@ -410,8 +418,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         self.certificates = certificates
         boosterCandidate = boosterLogic.checkCertificates(certificates)
         resolver = resolvable
-        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates, region: userDefaults.stateSelection)
-        self.holderIsFullyImmunized = certificateHolderStatusModel.holderIsFullyImmunized(self.certificates)
+        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates, region: userDefaults.stateSelection)
+        holderIsFullyImmunized = certificateHolderStatusModel.holderIsFullyImmunized(self.certificates)
         guard let digitalGreenCertificate = certificates.first?.vaccinationCertificate.hcert.dgc else {
             return nil
         }
@@ -458,21 +466,21 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             self?.router.showUnexpectedErrorDialog(error)
         }
     }
-    
+
     func updateReissueCandidate(to value: Bool) {
         if certificates.qualifiedForReissue {
-            self.repository.setReissueProcess(initialAlreadySeen: value,
-                                              newBadgeAlreadySeen: value,
-                                              tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()
+            repository.setReissueProcess(initialAlreadySeen: value,
+                                         newBadgeAlreadySeen: value,
+                                         tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()
         }
     }
-    
-    func updateBoosterCandiate() {        
+
+    func updateBoosterCandiate() {
         guard var candidate = boosterCandidate, candidate.state == .new else { return }
         candidate.state = .qualified
         boosterLogic.updateBoosterCandidate(candidate)
     }
-    
+
     func refreshCertsAndUpdateView() {
         firstly {
             self.repository.getCertificateList()
@@ -489,7 +497,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         .cauterize()
     }
-    
+
     func triggerBoosterReissue() {
         showReissue(
             for: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany,
@@ -507,7 +515,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             }
             .cauterize()
     }
-
 
     func triggerVaccinationExpiryReissue() {
         showReissue(
@@ -557,19 +564,19 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     // MARK: Private methods
-    
+
     private func removeReissueDataIfBoosterWasDeleted() {
         if certificates.filterBoosters.isEmpty {
-            self.repository.setReissueProcess(initialAlreadySeen: false,
-                                              newBadgeAlreadySeen: false,
-                                              tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()
+            repository.setReissueProcess(initialAlreadySeen: false,
+                                         newBadgeAlreadySeen: false,
+                                         tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()
         }
     }
-    
+
     private func certDetailDoneDidDeleteCertificate(_ cert: ExtendedCBORWebToken, _ result: CertificateDetailSceneResult) {
         certificates = certificates.filter { $0 != cert }
-        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates, region: nil)
-        holderIsFullyImmunized = certificateHolderStatusModel.holderIsFullyImmunized(self.certificates)
+        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: nil)
+        holderIsFullyImmunized = certificateHolderStatusModel.holderIsFullyImmunized(certificates)
         if certificates.count > 0 {
             delegate?.viewModelDidUpdate()
             router.showCertificateDidDeleteDialog()
@@ -578,24 +585,24 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             resolver.fulfill(result)
         }
     }
-    
+
     private func certetailDone(_ result: CertificateDetailSceneResult, cert: ExtendedCBORWebToken) {
-        switch result{
+        switch result {
         case .didDeleteCertificate:
             certDetailDoneDidDeleteCertificate(cert, result)
         default: break
         }
     }
-    
+
     private func certItem(_ vm: CertificateItemViewModel?,
                           _ cert: ReversedCollection<[ExtendedCBORWebToken]>.Element) -> CertificateItem? {
-        return CertificateItem(viewModel: vm!) {
+        CertificateItem(viewModel: vm!) {
             self.router.showDetail(for: cert).done { [weak self] in
                 self?.certetailDone($0, cert: cert)
             }.cauterize()
         }
     }
-    
+
     private func refreshFavoriteState() {
         firstly {
             repository.favoriteStateForCertificates(certificates)
@@ -644,16 +651,16 @@ private extension Date {
     var readableString: String {
         DateUtils.displayDateFormatter.string(from: self)
     }
-    
+
     var readableStringAfter29Days: String {
-        guard let dateAfter29Days = add(days: 29) else  {
+        guard let dateAfter29Days = add(days: 29) else {
             return ""
         }
         return dateAfter29Days.readableString
     }
-    
+
     var daysUntil29Days: Int {
-        guard let dateAfter29Days = add(days: 30) else  {
+        guard let dateAfter29Days = add(days: 30) else {
             return 0
         }
         return dateAfter29Days.daysSince(Date())

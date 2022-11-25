@@ -5,8 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import XCTest
 @testable import CovPassCommon
+import XCTest
 
 class RevokeUseCaseTests: XCTestCase {
     var token: ExtendedCBORWebToken!
@@ -19,13 +19,13 @@ class RevokeUseCaseTests: XCTestCase {
         sut = RevokeUseCase(token: token,
                             revocationRepository: revocationRepository)
     }
-    
+
     override func tearDownWithError() throws {
         revocationRepository = nil
         sut = nil
         token = nil
     }
-    
+
     func test_isNotRevoked() {
         // GIVEN
         let testExpectation = XCTestExpectation()
@@ -39,7 +39,7 @@ class RevokeUseCaseTests: XCTestCase {
             XCTAssertEqual(token.isInvalid, false)
             testExpectation.fulfill()
         }
-        .catch { error in
+        .catch { _ in
             XCTFail("Should not fail")
         }
         wait(for: [revocationRepository.isRevokedExpectation,
@@ -47,13 +47,13 @@ class RevokeUseCaseTests: XCTestCase {
              timeout: 0.1,
              enforceOrder: true)
     }
-    
+
     func test_isRevoked() {
         // GIVEN
         let testExpectation = XCTestExpectation()
         revocationRepository.isRevoked = true
         // WHEN
-        sut.execute().done { token in
+        sut.execute().done { _ in
             // THEN
             XCTFail("Should fail")
         }

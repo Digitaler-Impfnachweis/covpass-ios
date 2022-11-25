@@ -57,7 +57,7 @@ public class CustomToolbarView: XibView {
     @IBOutlet var leftButton: UIButton!
     @IBOutlet var leftButton2: UIButton!
     @IBOutlet var rightButton: UIButton!
-    let plainView =  UIView()
+    let plainView = UIView()
     public var primaryButton: MainButton!
     private var gradientLayer = CAGradientLayer()
 
@@ -87,7 +87,6 @@ public class CustomToolbarView: XibView {
                 setUpRightButton(rightButtonItem: .flashLight)
             case .plain:
                 setupPlainState()
-
             }
         }
     }
@@ -101,13 +100,13 @@ public class CustomToolbarView: XibView {
             }
         }
     }
-    
+
     public var leftButton2VoiceOverSettings: VoiceOverOptions.Settings? {
         didSet {
             leftButton2VoiceOverSettings.map {
                 leftButton2.enableAccessibility(label: $0.label,
-                                               hint: $0.hint,
-                                               traits: $0.traits)
+                                                hint: $0.hint,
+                                                traits: $0.traits)
             }
         }
     }
@@ -165,7 +164,7 @@ public class CustomToolbarView: XibView {
             resetSecondary(button: leftButton)
         }
     }
-    
+
     public func setUpLeftButton2(leftButtonItem: ButtonItemType?) {
         guard let leftButtonItem = leftButtonItem else {
             resetSecondary(button: leftButton2)
@@ -205,16 +204,16 @@ public class CustomToolbarView: XibView {
                 self.delegate?.customToolbarView(self, didTap: .flashLight)
             }
         } else if case .cancelButton = rightButtonItem {
-                rightButton.isHidden = false
-                enableRightButton(rightButtonItem: rightButtonItem)
-                rightButton.setImage(.closeAlternative, for: .normal)
-                rightButton.setImage(.closeAlternative, for: .selected)
+            rightButton.isHidden = false
+            enableRightButton(rightButtonItem: rightButtonItem)
+            rightButton.setImage(.closeAlternative, for: .normal)
+            rightButton.setImage(.closeAlternative, for: .selected)
 
-                rightButtonAction = { [weak self] in
-                    guard let self = self else { return }
-                    self.rightButton.isSelected.toggle()
-                    self.delegate?.customToolbarView(self, didTap: .cancelButton)
-                }
+            rightButtonAction = { [weak self] in
+                guard let self = self else { return }
+                self.rightButton.isSelected.toggle()
+                self.delegate?.customToolbarView(self, didTap: .cancelButton)
+            }
         }
     }
 
@@ -231,7 +230,7 @@ public class CustomToolbarView: XibView {
             rightButton.isEnabled = true
         }
     }
-    
+
     public func enableLeft2Button(rightButtonItem: ButtonItemType?) {
         if case .flashLight = rightButtonItem {
             leftButton2.isEnabled = true
@@ -247,7 +246,7 @@ public class CustomToolbarView: XibView {
         resetPrimaryButton()
         configureDisabledButton(button: disabledButtonWithText, title: text)
     }
-    
+
     public func setupPlainState() {
         resetPrimaryButton()
         addSubview(plainView)
@@ -410,26 +409,26 @@ public class CustomToolbarView: XibView {
     }
 
     // MARK: Action Methods
-    
-    public override func initView() {
+
+    override public func initView() {
         super.initView()
         gradientLayer.removeFromSuperlayer()
-        self.backgroundColor = .clear
+        backgroundColor = .clear
         gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.bounds
+        gradientLayer.frame = bounds
         gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor.backgroundPrimary.cgColor, UIColor.backgroundPrimary.cgColor]
-        self.layer.insertSublayer(gradientLayer, at: 0)
+        layer.insertSublayer(gradientLayer, at: 0)
     }
-    
-    public override func layoutSubviews() {
+
+    override public func layoutSubviews() {
         super.layoutSubviews()
-        gradientLayer.frame = self.bounds
+        gradientLayer.frame = bounds
     }
-    
+
     @IBAction func leftButtonPressed() {
         leftButtonAction?()
     }
-    
+
     @IBAction func leftButton2Pressed() {
         leftButton2Action?()
     }

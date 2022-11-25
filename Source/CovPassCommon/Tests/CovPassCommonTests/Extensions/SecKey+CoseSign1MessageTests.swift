@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -27,7 +27,6 @@ class SecKeyCoseSign1MessageTests: XCTestCase {
             payload: [],
             signature: [1, 2, 3]
         )
-
 
         // When & Then
         XCTAssertThrowsError(try sut.verify(message))

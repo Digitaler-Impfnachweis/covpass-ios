@@ -18,7 +18,7 @@ public extension UserDefaultsSettable where defaultKeys.RawValue == String {
     }
 
     static func bool(_ key: defaultKeys) -> Bool {
-        return UserDefaults.standard.bool(forKey: key.rawValue)
+        UserDefaults.standard.bool(forKey: key.rawValue)
     }
 
     static func remove(_ key: defaultKeys) {

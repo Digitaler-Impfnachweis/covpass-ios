@@ -17,7 +17,6 @@ public enum Property {
 }
 
 public struct ExtendedCBORWebToken: Codable, QRCodeScanable {
-
     /// CBOR web token vaccination certificate
     public var vaccinationCertificate: CBORWebToken
 
@@ -25,11 +24,11 @@ public struct ExtendedCBORWebToken: Codable, QRCodeScanable {
     public var vaccinationQRCodeData: String
 
     public var wasExpiryAlertShown: Bool?
-    
+
     public var reissueProcessInitialAlreadySeen: Bool?
-    
+
     public var reissueProcessNewBadgeAlreadySeen: Bool?
-    
+
     /// true if certificate is invalid
     public var invalid: Bool?
 
@@ -55,7 +54,7 @@ public struct ExtendedCBORWebToken: Codable, QRCodeScanable {
 
 extension ExtendedCBORWebToken: Equatable {
     public static func == (lhs: ExtendedCBORWebToken, rhs: ExtendedCBORWebToken) -> Bool {
-        return lhs.vaccinationQRCodeData == rhs.vaccinationQRCodeData
+        lhs.vaccinationQRCodeData == rhs.vaccinationQRCodeData
     }
 }
 

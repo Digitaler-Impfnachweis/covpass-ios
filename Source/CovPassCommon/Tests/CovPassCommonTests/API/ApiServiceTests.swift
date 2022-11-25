@@ -7,14 +7,14 @@
 //
 
 import Foundation
-import XCTest
 import PromiseKit
+import XCTest
 
 @testable import CovPassCommon
 
 class CustomURLSessionMock: CustomURLSessionProtocol {
     var requestResponse: Promise<String>?
-    func request(_ urlRequest: URLRequest) -> Promise<String> {
+    func request(_: URLRequest) -> Promise<String> {
         requestResponse ?? Promise(error: ApplicationError.unknownError)
     }
 }
@@ -42,7 +42,7 @@ class ApiServiceTests: XCTestCase {
         let res = try sut.fetchTrustList().wait()
         XCTAssertEqual(res, "foo")
     }
-    
+
     func testFetchTrustListFails() throws {
         sessionMock.requestResponse = Promise(error: APIError.invalidResponse)
         do {
@@ -52,7 +52,7 @@ class ApiServiceTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, APIError.invalidResponse.localizedDescription)
         }
     }
-    
+
     func testUserAgent() throws {
         XCTAssertNotNil(CustomURLSession.defaultHTTPHeaders)
         let headers = CustomURLSession.defaultHTTPHeaders
@@ -70,7 +70,7 @@ class ApiServiceTests: XCTestCase {
         XCTAssert(valueLanguage.contains("en"))
         XCTAssert(valueLanguage.contains("q=1.0"))
     }
-    
+
     func testUpdateEtagNil() throws {
         let urlString = "http://test.test"
         let url = URL(string: urlString)!
@@ -80,30 +80,29 @@ class ApiServiceTests: XCTestCase {
         let etag = APIService.eTagForURL(urlString: urlString)
         XCTAssertNil(etag)
     }
-    
+
     func testUpdateEtagSucessfull() throws {
         let url = URL(string: "http://test.test")!
         let eTagValue = "etagExample"
-        let urlResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: [CustomURLSession.apiHeaderETag : eTagValue])
+        let urlResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: [CustomURLSession.apiHeaderETag: eTagValue])
         let urlString = urlResponse!.url!.absoluteString
         CustomURLSession.updateETag(urlResponse: urlResponse)
         let etag = APIService.eTagForURL(urlString: urlString)
         XCTAssertEqual(etag, eTagValue)
     }
-    
+
     func testUpdateEtagSucessfullMultiple() throws {
-        
         let urls = ["http://test1.test", "http://test2.test", "http://test3.test"]
         let eTags = ["etagExample1", "etagExample2", "etagExample3"]
-        
-        for i in 0...urls.count-1 {
+
+        for i in 0 ... urls.count - 1 {
             let eTag = eTags[i]
             let url = URL(string: urls[i])!
-            let urlResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: [CustomURLSession.apiHeaderETag : eTag])
+            let urlResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: [CustomURLSession.apiHeaderETag: eTag])
             CustomURLSession.updateETag(urlResponse: urlResponse)
         }
-        
-        for i in 0...urls.count-1 {
+
+        for i in 0 ... urls.count - 1 {
             let eTag = eTags[i]
             let url = URL(string: urls[i])!
             let eTagPersistet = APIService.eTagForURL(urlString: url.absoluteString)

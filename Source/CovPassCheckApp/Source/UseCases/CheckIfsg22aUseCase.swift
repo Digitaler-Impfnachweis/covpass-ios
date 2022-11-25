@@ -5,12 +5,12 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassCommon
-import PromiseKit
-import Foundation
 import CertLogic
+import CovPassCommon
+import Foundation
+import PromiseKit
 
-enum CheckIfsg22aUseCaseError: Error, Equatable  {
+enum CheckIfsg22aUseCaseError: Error, Equatable {
     case showMaskCheckdifferentPersonalInformation(_ token1OfPerson: ExtendedCBORWebToken, _ token2OfPerson: ExtendedCBORWebToken)
     case vaccinationCycleIsNotComplete(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken?, _ thirdToken: ExtendedCBORWebToken?)
     case invalidToken(_ token: ExtendedCBORWebToken)
@@ -24,7 +24,7 @@ struct CheckIfsg22aUseCase {
     let thirdToken: ExtendedCBORWebToken?
 
     func execute() -> Promise<ExtendedCBORWebToken> {
-        return firstly {
+        firstly {
             isRevoked(token)
         }
         .then {
@@ -37,7 +37,7 @@ struct CheckIfsg22aUseCase {
             Promise.value(token)
         }
     }
-    
+
     private func tokensForIfsg22aCheck() -> [ExtendedCBORWebToken] {
         var tokens: [ExtendedCBORWebToken] = [token]
         if let secondToken = secondToken {
@@ -48,17 +48,17 @@ struct CheckIfsg22aUseCase {
         }
         return tokens
     }
-    
+
     private func checkIfsg22aRules() -> Promise<Void> {
         let tokens = tokensForIfsg22aCheck()
         if let secondToken = secondToken,
            secondToken.vaccinationCertificate.hcert.dgc.nam != token.vaccinationCertificate.hcert.dgc.nam ||
-            secondToken.vaccinationCertificate.hcert.dgc.dob != token.vaccinationCertificate.hcert.dgc.dob {
+           secondToken.vaccinationCertificate.hcert.dgc.dob != token.vaccinationCertificate.hcert.dgc.dob {
             return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(secondToken, token))
         }
         if let thirdToken = thirdToken, let secondToken = secondToken,
            thirdToken.vaccinationCertificate.hcert.dgc.nam != secondToken.vaccinationCertificate.hcert.dgc.nam ||
-            thirdToken.vaccinationCertificate.hcert.dgc.dob != secondToken.vaccinationCertificate.hcert.dgc.dob {
+           thirdToken.vaccinationCertificate.hcert.dgc.dob != secondToken.vaccinationCertificate.hcert.dgc.dob {
             return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(thirdToken, secondToken))
         }
         guard holderStatus.vaccinationCycleIsComplete(tokens) else {
@@ -78,7 +78,7 @@ struct CheckIfsg22aUseCase {
             return .value
         }
     }
-    
+
     private func checkDomesticRules() -> Promise<Void> {
         switch holderStatus.checkDomesticInvalidationRules([token]) {
         case .passed:

@@ -22,8 +22,8 @@ struct ValidationResultRouterMock: ValidationResultRouterProtocol {
     func scanQRCode() -> Promise<QRCodeImportResult> {
         .value(.scanResult(.success("")))
     }
-    
-    func showRevocation(token: ExtendedCBORWebToken, keyFilename: String) -> Promise<Void> {
+
+    func showRevocation(token _: ExtendedCBORWebToken, keyFilename _: String) -> Promise<Void> {
         showRevocationExpectation.fulfill()
         return .init(error: NSError(domain: "TEST", code: 0, userInfo: nil))
     }

@@ -6,10 +6,10 @@
 //
 
 @testable import CovPassCheckApp
-import XCTest
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 import PromiseKit
+import XCTest
 
 class VaccinationCycleIncompleteSnapshotTests: BaseSnapShotTests {
     func configureSut() -> VaccinationCycleIncompleteResultViewController {
@@ -23,7 +23,7 @@ class VaccinationCycleIncompleteSnapshotTests: BaseSnapShotTests {
     }
 
     func testDefault() {
-        let sut = self.configureSut()
+        let sut = configureSut()
         verifyView(view: sut.view, height: 1000)
     }
 }

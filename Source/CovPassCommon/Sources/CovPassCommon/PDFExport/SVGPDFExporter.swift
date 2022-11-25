@@ -107,7 +107,7 @@ public final class SVGPDFExporter: SVGPDFExportProtocol {
         }
 
         #if DEBUG
-        let pattern = #"\>\$\w+\<"#
+            let pattern = #"\>\$\w+\<"#
             let regex = try! NSRegularExpression(pattern: pattern)
             let range = NSRange(location: 0, length: svg.utf16.count)
             if let match = regex.firstMatch(in: svg, options: [], range: range) {

@@ -258,7 +258,7 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
 
     func testConfirm_too_many_certifcate_holders() {
         // Given
-        let tokens = (0...20).map { index in
+        let tokens = (0 ... 20).map { index in
             CBORWebToken.mockVaccinationCertificate.mockName(
                 .init(gn: nil, fn: nil, gnt: nil, fnt: "\(index)")
             ).extended()
@@ -279,7 +279,7 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
 
     func testConfirm_too_many_certifcate_holders_including_existing_tokens() {
         // Given
-        let tokens = (0...20).map { index in
+        let tokens = (0 ... 20).map { index in
             CBORWebToken.mockVaccinationCertificate.mockName(
                 .init(gn: nil, fn: nil, gnt: nil, fnt: "\(index)")
             ).extended()
@@ -304,7 +304,7 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
 
         // Then
         XCTAssertFalse(
-            sut.items.contains{ $0.selected == false }
+            sut.items.contains { $0.selected == false }
         )
     }
 
@@ -314,7 +314,7 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
 
         // Then
         XCTAssertFalse(
-            sut.items.contains{ $0.selected == true }
+            sut.items.contains { $0.selected == true }
         )
     }
 
@@ -328,7 +328,7 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
 
         // Then
         XCTAssertFalse(
-            sut.items.contains{ $0.selected == false }
+            sut.items.contains { $0.selected == false }
         )
     }
 

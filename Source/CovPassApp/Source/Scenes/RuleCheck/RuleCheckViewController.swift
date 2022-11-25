@@ -17,11 +17,13 @@ private enum Constants {
         static let country = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_country".localized)
         static let list = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_label_results".localized)
     }
+
     enum Config {
         enum RulesHintView {
             static let topOffset: CGFloat = 0.0
             static let bottomOffset: CGFloat = 12.0
         }
+
         enum FilteredCertsView {
             static let topOffset: CGFloat = 0.0
             static let bottomOffset: CGFloat = 12.0
@@ -73,12 +75,12 @@ class RuleCheckViewController: UIViewController {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.announce)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
     }
-    
+
     // MARK: - Private
 
     private func configureText() {
@@ -122,7 +124,7 @@ class RuleCheckViewController: UIViewController {
             subview.removeFromSuperview()
             stackView.removeArrangedSubview(subview)
         }
-        
+
         updateTimeHintView()
         setupDomesticRulesHintView()
         updateFilteredCertsView()
@@ -143,7 +145,7 @@ class RuleCheckViewController: UIViewController {
 
         configureAccessibility()
     }
-    
+
     private func setupTimeHintView() {
         rulesHintView.isHidden = viewModel.timeHintIsHidden
         rulesHintView.iconView.image = viewModel.timeHintIcon
@@ -156,7 +158,7 @@ class RuleCheckViewController: UIViewController {
         rulesHintView.enableAccessibility(label: "\(viewModel.timeHintTitle)\n\(viewModel.timeHintSubTitle)",
                                           traits: .staticText)
     }
-    
+
     private func setupDomesticRulesHintView() {
         domesticRulesHintView.isHidden = viewModel.domesticRulesHintIshidden
         domesticRulesHintView.style = .info
@@ -166,14 +168,14 @@ class RuleCheckViewController: UIViewController {
         domesticRulesHintView.titleLabel.attributedText = viewModel.germanInfoBoxText.styledAs(.body)
         domesticRulesHintView.containerTopConstraint.constant = 0
         domesticRulesHintView.containerBottomConstraint.constant = 24
-        domesticRulesHintView.enableAccessibility(label:  viewModel.germanInfoBoxText, traits: .staticText)
+        domesticRulesHintView.enableAccessibility(label: viewModel.germanInfoBoxText, traits: .staticText)
         domesticRulesHintView.subTitleLabel.isHidden = true
         domesticRulesHintView.bodyLabel.isHidden = true
         domesticRulesHintView.iconStackviewCenterYConstraint.isActive = false
         domesticRulesHintView.iconStackViewAlignToTopTile.isActive = true
         domesticRulesHintView.titleSuperViewBottomConstraint.isActive = true
     }
-    
+
     private func setupFilteredCertsView() {
         filteredCertsHintView.isHidden = viewModel.filteredCertsIsHidden
         filteredCertsHintView.iconView.image = viewModel.filteredCertsIcon
@@ -186,11 +188,11 @@ class RuleCheckViewController: UIViewController {
         filteredCertsHintView.enableAccessibility(label: "\(viewModel.filteredCertsTitle)\n\(viewModel.filteredCertsSubTitle)",
                                                   traits: .staticText)
     }
-    
+
     private func updateFilteredCertsView() {
         filteredCertsHintView.isHidden = viewModel.filteredCertsIsHidden
     }
-    
+
     private func updateTimeHintView() {
         rulesHintView.isHidden = viewModel.timeHintIsHidden
     }

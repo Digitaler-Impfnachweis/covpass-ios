@@ -149,6 +149,6 @@ public extension Test {
 
     /// UVCI without `URN:UVCI:` prefix
     var ciDisplayName: String {
-        return ci.stripUVCIPrefix()
+        ci.stripUVCIPrefix()
     }
 }

@@ -25,7 +25,7 @@ class ValidationOnboardingContainerViewModel: OnboardingContainerViewModel {
     let accessibilityPageIndicatorText = Constants.Accessibility.pageIndicatorText
     let accessibilityBackLabel = Constants.Accessibility.backText
     let accessibilityNextLabel = Constants.Accessibility.nextText
-    
+
     // MARK: - Lifecycle
 
     init(

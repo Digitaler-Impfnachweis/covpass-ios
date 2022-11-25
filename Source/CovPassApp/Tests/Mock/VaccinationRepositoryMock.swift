@@ -30,7 +30,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     var deleteError: Error?
     var qrCodeData: String?
     var updateError: Error?
-    var didUpdateTrustListHandler: (()->Void)?
+    var didUpdateTrustListHandler: (() -> Void)?
 
     public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
         var pairs = [CertificatePair]()
@@ -53,19 +53,19 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         }
         return pairs
     }
-    
+
     public func trustListShouldBeUpdated() -> Promise<Bool> {
         .value(trustListShouldBeUpdated())
     }
-    
+
     public func trustListShouldBeUpdated() -> Bool {
         shouldTrustListUpdate
     }
-    
+
     public func updateTrustListIfNeeded() -> Promise<Void> {
         Promise.value
     }
-    
+
     public func updateTrustList() -> Promise<Void> {
         didUpdateTrustListHandler?()
         return Promise.value
@@ -111,10 +111,10 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         setExpiryAlertExpectation.fulfill()
         return Promise.value
     }
-    
-    public func setReissueProcess(initialAlreadySeen: Bool,
-                                  newBadgeAlreadySeen: Bool,
-                                  tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+
+    public func setReissueProcess(initialAlreadySeen _: Bool,
+                                  newBadgeAlreadySeen _: Bool,
+                                  tokens _: [ExtendedCBORWebToken]) -> Promise<Void> {
         setReissueAlreadySeen.fulfill()
         return .value
     }
@@ -123,7 +123,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         .value(favoriteToggle)
     }
 
-    public func scanCertificate(_ qrCodeData: String, isCountRuleEnabled: Bool, expirationRuleIsActive: Bool) -> Promise<QRCodeScanable> {
+    public func scanCertificate(_ qrCodeData: String, isCountRuleEnabled _: Bool, expirationRuleIsActive _: Bool) -> Promise<QRCodeScanable> {
         self.qrCodeData = qrCodeData
         scanCertificateExpectation.fulfill()
         return .value(try! ExtendedCBORWebToken.mock())
@@ -133,16 +133,16 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         .init(error: ApplicationError.unknownError)
     }
 
-    public func validCertificate(_ data: String, checkSealCertificate _: Bool) -> Promise<ExtendedCBORWebToken> {
+    public func validCertificate(_: String, checkSealCertificate _: Bool) -> Promise<ExtendedCBORWebToken> {
         .init(error: ApplicationError.unknownError)
     }
 
-    public func replace(_ token: ExtendedCBORWebToken) -> Promise<Void> {
+    public func replace(_: ExtendedCBORWebToken) -> Promise<Void> {
         replaceExpectation.fulfill()
         return .init()
     }
 
-    public func update(_ tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+    public func update(_: [ExtendedCBORWebToken]) -> Promise<Void> {
         updateExpectation.fulfill()
         if let updateError = updateError {
             return .init(error: updateError)
@@ -150,4 +150,3 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return .init()
     }
 }
-

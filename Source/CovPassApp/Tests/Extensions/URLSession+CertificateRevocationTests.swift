@@ -21,4 +21,3 @@ class URLSession_CertificateRevocationTests: XCTestCase {
         XCTAssertEqual(configuration.requestCachePolicy, .useProtocolCachePolicy)
     }
 }
-

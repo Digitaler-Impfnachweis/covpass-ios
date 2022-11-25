@@ -32,7 +32,7 @@ public enum QRCodeError: Error, ErrorCode {
 
 enum QRCoder {
     static func parse(_ payload: String) -> Promise<CoseSign1Message> {
-        return Promise { seal in
+        Promise { seal in
             let payload = payload.stripPrefix()
             let base45Decoded = try Base45Coder.decode(payload)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {

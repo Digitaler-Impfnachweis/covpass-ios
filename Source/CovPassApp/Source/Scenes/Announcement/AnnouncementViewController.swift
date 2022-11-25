@@ -58,7 +58,7 @@ class AnnouncementViewController: UIViewController {
             .styledAs(.header_3)
         checkTitleLabel.accessibilityTraits = .staticText
         checkTitleLabel.accessibilityLabel = viewModel.checkboxTitle
-        
+
         checkDescriptionLabel.attributedText = viewModel.checkboxDescription
             .styledAs(.body)
         checkDescriptionLabel.accessibilityTraits = .staticText
@@ -78,13 +78,13 @@ class AnnouncementViewController: UIViewController {
         checkTitleLabel.accessibilityValue = viewModel.checkboxAccessibilityValue
     }
 
-    @objc private func checkButtonPressed(button: UIButton) {
+    @objc private func checkButtonPressed(button _: UIButton) {
         viewModel.disableWhatsNew.toggle()
         updateCheckButton()
     }
 
     private func configureOkButton() {
-        okButton.title =  viewModel.okButtonTitle
+        okButton.title = viewModel.okButtonTitle
         okButton.action = viewModel.done
     }
 }
@@ -96,7 +96,6 @@ extension AnnouncementViewController: ModalInteractiveDismissibleProtocol {
         viewModel.cancel()
     }
 }
-
 
 // MARK: - WKNavigationDelegate
 

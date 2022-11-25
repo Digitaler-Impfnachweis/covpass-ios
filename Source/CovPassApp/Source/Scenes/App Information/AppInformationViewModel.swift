@@ -56,7 +56,7 @@ class GermanAppInformationViewModel: CovPassAppInformationViewModel {
             .webEntry(title: Texts.accessibilityStatementTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpass-app-ios-barrierefreiheitserklaerung/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
-                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle),
+                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle)
         ]
     }
 
@@ -114,7 +114,7 @@ class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
             .webEntry(title: Texts.accessibilityStatementTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpass-app-ios-accessibility-statement/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
-                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle),
+                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle)
         ]
     }
 

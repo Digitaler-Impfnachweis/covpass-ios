@@ -36,7 +36,7 @@ final class TestImportSelectionItem: CertificateImportSelectionItem {
 private extension Test {
     var testType: String {
         isPCR ?
-        "certificates_overview_pcr_test_certificate_message".localized :
-        "certificates_overview_test_certificate_message".localized
+            "certificates_overview_pcr_test_certificate_message".localized :
+            "certificates_overview_test_certificate_message".localized
     }
 }

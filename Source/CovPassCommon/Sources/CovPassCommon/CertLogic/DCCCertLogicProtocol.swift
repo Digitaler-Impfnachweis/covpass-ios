@@ -1,13 +1,13 @@
 //
 //  File.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 import Foundation
 import PromiseKit
-import CertLogic
 
 public protocol DCCCertLogicProtocol {
     var countries: [Country] { get }

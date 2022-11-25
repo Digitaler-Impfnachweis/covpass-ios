@@ -45,7 +45,6 @@ class CertificateViewController: UIViewController {
         configureHeadline()
         configureToolbarView()
         UIAccessibility.post(notification: .layoutChanged, argument: imageView)
-        
     }
 
     // MARK: - Private

@@ -10,17 +10,16 @@ import CovPassUI
 import UIKit
 
 class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
-
     var maskRulesNotAvailable: Bool = true
-    
-    var regionText: String? = nil
-    
+
+    var regionText: String?
+
     let headerSubtitle: String? = nil
-    
+
     let showNotification = false
 
     let isInvalid: Bool = false
-        
+
     let reuseIdentifier: String = "\(CertificateCollectionViewCell.self)"
 
     let backgroundColor: UIColor = .onBrandAccent70
@@ -30,7 +29,7 @@ class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
     let subtitle: String = "subtitle"
 
     let titleIcon: UIImage = .card
-    
+
     let subtitleIcon: UIImage = .statusFullCircle
 
     let qrCode: UIImage? = .card
@@ -44,7 +43,7 @@ class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
     let iconTintColor: UIColor = .white
 
     let textColor: UIColor = .black
-    
+
     var delegate: ViewModelDelegate?
 
     func onClickAction() {}

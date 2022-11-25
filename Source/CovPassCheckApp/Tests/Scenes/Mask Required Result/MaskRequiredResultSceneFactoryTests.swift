@@ -26,7 +26,7 @@ final class MaskRequiredResultSceneFactoryTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
-    
+
     func testMake() {
         // Given
         var persistence = UserDefaultsPersistence()

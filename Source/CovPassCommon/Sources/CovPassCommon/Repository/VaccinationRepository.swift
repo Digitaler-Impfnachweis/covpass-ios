@@ -32,14 +32,12 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
     private var trustList: TrustList? {
         // Try to load trust list from keychain
         if let trustListData = try? keychain.fetch(KeychainPersistence.Keys.trustList.rawValue) as? Data,
-           let list = try? JSONDecoder().decode(TrustList.self, from: trustListData)
-        {
+           let list = try? JSONDecoder().decode(TrustList.self, from: trustListData) {
             return list
         }
         // Try to load local trust list
         if let localTrustList = try? Data(contentsOf: initialDataURL),
-           let list = try? JSONDecoder().decode(TrustList.self, from: localTrustList)
-        {
+           let list = try? JSONDecoder().decode(TrustList.self, from: localTrustList) {
             return list
         }
         return nil
@@ -52,8 +50,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
                 boosterLogic: BoosterLogicProtocol,
                 publicKeyURL: URL,
                 initialDataURL: URL,
-                queue: DispatchQueue
-    ) {
+                queue: DispatchQueue) {
         self.queue = queue
         self.revocationRepo = revocationRepo
         self.service = service
@@ -107,7 +104,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     public func saveCertificateList(_ certificateList: CertificateList) -> Promise<CertificateList> {
-        return Promise { seal in
+        Promise { seal in
             let data = try JSONEncoder().encode(certificateList)
             try keychain.store(KeychainPersistence.Keys.certificateList.rawValue, value: data)
             seal.fulfill(certificateList)
@@ -129,19 +126,18 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
     public func trustListShouldBeUpdated() -> Bool {
         if let lastUpdated = userDefaults.lastUpdatedTrustList,
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
+           Date() < date {
             return false
         }
         return true
     }
-    
+
     public func trustListShouldBeUpdated() -> Promise<Bool> {
-        return Promise { seal in
+        Promise { seal in
             seal.fulfill(trustListShouldBeUpdated())
         }
     }
-    
+
     public func updateTrustListIfNeeded() -> Promise<Void> {
         firstly {
             trustListShouldBeUpdated()
@@ -150,7 +146,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             trustListShouldBeUpdated ? self.updateTrustList() : .value
         }
     }
-    
+
     public func updateTrustList() -> Promise<Void> {
         let promise = firstly {
             service.fetchTrustList()
@@ -210,7 +206,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             try self.keychain.store(KeychainPersistence.Keys.trustList.rawValue, value: data)
             self.userDefaults.lastUpdatedTrustList = Date()
         }
-        
+
         promise.catch { error in
             if let error = error as? APIError, error == .notModified {
                 self.userDefaults.lastUpdatedTrustList = Date()
@@ -270,35 +266,31 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
                     if certList.certificates.contains(where: { $0.vaccinationQRCodeData == data }) {
                         throw QRCodeError.qrCodeExists
                     }
-                    
-                    let personsCountBeforeAddingNew: Int = {
-                        self.matchedCertificates(for: certList).count
-                    }()
-                    
+
+                    let personsCountBeforeAddingNew: Int = self.matchedCertificates(for: certList).count
+
                     certList.certificates.append(extendedCBORWebToken)
-                    
-                    let personsCount: Int = {
-                        self.matchedCertificates(for: certList).count
-                    }()
-                    
+
+                    let personsCount: Int = self.matchedCertificates(for: certList).count
+
                     var warnAddingPersonReachedIfNeeded: Bool {
                         let newCountMustBeTwoOrTen = personsCount == Constants.firstLimit || personsCount == Constants.secondLimit
                         let oldCountMustNotBeTwoOrTen = personsCountBeforeAddingNew != Constants.firstLimit && personsCountBeforeAddingNew != Constants.secondLimit
                         return newCountMustBeTwoOrTen && oldCountMustNotBeTwoOrTen && isCountRuleEnabled
                     }
-                    
+
                     if warnAddingPersonReachedIfNeeded {
                         throw QRCodeError.warningCountOfCertificates
                     }
-                    
+
                     var errorAddingPersonReachedIfNeeded: Bool {
                         personsCount > 20 && isCountRuleEnabled
                     }
-                    
+
                     if errorAddingPersonReachedIfNeeded {
                         throw QRCodeError.errorCountOfCertificatesReached
                     }
-                    
+
                     // Mark first certificate as favorite
                     if certList.certificates.count == 1 {
                         certList.favoriteCertificateId = extendedCBORWebToken.vaccinationCertificate.hcert.dgc.v?.first?.ci
@@ -321,7 +313,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
 
     public func validCertificate(_ data: String, checkSealCertificate: Bool = false) -> Promise<ExtendedCBORWebToken> {
         firstly {
-            return checkCertificate(data, checkSealCertificate: checkSealCertificate)
+            checkCertificate(data, checkSealCertificate: checkSealCertificate)
         }
         .then {
             Promise.value(ExtendedCBORWebToken(vaccinationCertificate: $0,
@@ -345,7 +337,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             list.favoriteCertificateId == id
         }
     }
-    
+
     public func setExpiryAlert(shown _: Bool, tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
         firstly {
             getCertificateList()
@@ -363,7 +355,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
         .asVoid()
     }
-    
+
     public func setReissueProcess(initialAlreadySeen: Bool,
                                   newBadgeAlreadySeen: Bool,
                                   tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
@@ -402,7 +394,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
 
     /// Parse certificate payload, verify signature, check expiration, check extended key usage, and validate blacklisted entities
     func parseCertificate(_ cosePayload: CoseSign1Message, expirationRuleIsActive: Bool, checkSealCertificate: Bool) throws -> CBORWebToken {
-        guard let trustList = self.trustList else {
+        guard let trustList = trustList else {
             throw ApplicationError.general("Missing TrustList")
         }
 
@@ -411,7 +403,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         let cosePayloadJsonData = try cosePayload.toJSON()
         let certificate = try JSONDecoder().decode(CBORWebToken.self, from: cosePayloadJsonData)
 
-        if let exp = certificate.exp, Date() > exp && expirationRuleIsActive {
+        if let exp = certificate.exp, Date() > exp, expirationRuleIsActive {
             throw CertificateError.expiredCertifcate
         }
 

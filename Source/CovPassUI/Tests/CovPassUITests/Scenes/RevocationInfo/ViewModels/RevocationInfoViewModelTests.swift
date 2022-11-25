@@ -5,8 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassUI
 import CovPassCommon
+@testable import CovPassUI
 import PromiseKit
 import XCTest
 
@@ -62,7 +62,6 @@ class RevocationInfoViewModelTests: XCTestCase {
         XCTAssertEqual(items[2].value, "DE")
         XCTAssertEqual(items[3].value, "2002-01-01")
         XCTAssertEqual(items[4].value, "2001-01-01")
-
     }
 
     func testCancel() {

@@ -5,7 +5,7 @@ protocol ChooseCheckSituationViewModelProtocol {
     var title: String { get }
     var subtitle: String { get }
     var withinGermanyTitle: String { get }
-    var withinGermanySubtitle : String { get }
+    var withinGermanySubtitle: String { get }
     var withinGermanyImage: UIImage { get }
     var enteringGermanyTitle: String { get }
     var enteringGermanySubtitle: String { get }

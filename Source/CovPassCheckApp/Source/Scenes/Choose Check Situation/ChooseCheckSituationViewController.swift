@@ -1,8 +1,7 @@
-import UIKit
 import CovPassUI
+import UIKit
 
 class ChooseCheckSituationViewController: UIViewController {
-
     // MARK: - Properties
 
     @IBOutlet var headerView: InfoHeaderView!
@@ -11,7 +10,7 @@ class ChooseCheckSituationViewController: UIViewController {
     @IBOutlet var enteringGermanyView: ImageTitleSubtitleView!
     @IBOutlet var hintView: ImageTitleSubtitleView!
     @IBOutlet var applyButton: MainButton!
-    
+
     private(set) var viewModel: ChooseCheckSituationViewModelProtocol
 
     // MARK: - Lifecycle
@@ -29,19 +28,19 @@ class ChooseCheckSituationViewController: UIViewController {
         viewModel.delegate = self
         updateView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openAnnounce)
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closeAnnounce)
     }
 
     // MARK: - Methods
-    
+
     func updateView() {
         headerView.attributedTitleText = viewModel.title.styledAs(.header_1)
         headerView.actionButton.isHidden = true
@@ -52,7 +51,7 @@ class ChooseCheckSituationViewController: UIViewController {
         updateWithinGermany()
         updateEnteringGermany()
     }
-    
+
     func updateWithinGermany() {
         let title = viewModel.withinGermanyTitle.styledAs(.header_3)
         let subtitle = viewModel.withinGermanySubtitle.styledAs(.body)
@@ -68,7 +67,7 @@ class ChooseCheckSituationViewController: UIViewController {
         }
         withinGermanyView.containerView?.accessibilityValue = viewModel.withinGermanyOptionAccessibiliyLabel
     }
-    
+
     func updateEnteringGermany() {
         let title = viewModel.enteringGermanyTitle.styledAs(.header_3)
         let subtitle = viewModel.enteringGermanySubtitle.styledAs(.body)
@@ -84,7 +83,7 @@ class ChooseCheckSituationViewController: UIViewController {
         }
         enteringGermanyView.containerView?.accessibilityValue = viewModel.enteringGermanyOptionAccessibiliyLabel
     }
-    
+
     func updateHint() {
         let title = viewModel.hintText.styledAs(.body)
         let image = viewModel.hintImage
@@ -95,13 +94,13 @@ class ChooseCheckSituationViewController: UIViewController {
                         edgeInstes: .init(top: 0, left: 0, bottom: 0, right: 0),
                         iconVerticalAlignmentActive: false)
     }
-    
+
     func updateButton() {
         applyButton.style = .primary
         applyButton.title = viewModel.buttonTitle
         applyButton.action = viewModel.applyChanges
     }
- }
+}
 
 extension ChooseCheckSituationViewController: ViewModelDelegate {
     func viewModelDidUpdate() {

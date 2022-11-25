@@ -12,8 +12,8 @@ import PromiseKit
 import UIKit
 
 struct CertificatesOverviewPersonSceneFactory: ResolvableSceneFactory {
-    
     // MARK: - Properties
+
     private let router: CertificatesOverviewPersonRouterProtocol
     private let certificates: [ExtendedCBORWebToken]
     private let vaccinationRepository: VaccinationRepositoryProtocol

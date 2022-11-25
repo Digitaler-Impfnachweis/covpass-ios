@@ -1,6 +1,6 @@
 //
 //  ResultViewModelDelegate.swift
-//  
+//
 //
 //  Created by Thomas Kuleßa on 26.07.22.
 //

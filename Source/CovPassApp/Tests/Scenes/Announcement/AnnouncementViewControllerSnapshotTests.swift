@@ -14,7 +14,7 @@ class AnnouncementViewControllerSnapshotTests: BaseSnapShotTests {
     private var sut: AnnouncementViewController!
     private var persistence: MockPersistence!
     private var router: AnnouncementRouter!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         let (_, resolver) = Promise<Void>.pending()
@@ -32,7 +32,7 @@ class AnnouncementViewControllerSnapshotTests: BaseSnapShotTests {
         sut = nil
         try super.tearDownWithError()
     }
-    
+
     func testDefault() {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()

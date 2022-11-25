@@ -55,7 +55,7 @@ class ConsentViewController: UIViewController {
         view.backgroundColor = UIColor.backgroundPrimary
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         configureImageView()
     }
@@ -120,7 +120,7 @@ class ConsentViewController: UIViewController {
         }
         usTermsOfUse.isHidden = !viewModel.showUSTerms
     }
-    
+
     private func configureAccessibilityRespondsToUserInteraction() {
         if #available(iOS 13.0, *) {
             headline.accessibilityRespondsToUserInteraction = true

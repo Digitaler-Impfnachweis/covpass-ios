@@ -57,7 +57,7 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
     func testCancel() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { result in expectation.fulfill() }.cauterize()
+        promise.done { _ in expectation.fulfill() }.cauterize()
 
         // When
         sut.cancel()
@@ -69,7 +69,7 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
     func testRescan() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { result in
+        promise.done { _ in
             expectation.fulfill()
         }.cauterize()
 
@@ -86,7 +86,7 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
         let doneExpectation = XCTestExpectation(description: "doneExpectation")
         countdownTimerModel = .init(dismissAfterSeconds: 1.5, countdownDuration: 1)
         delegate.didUpdate = { didUpdateExpectation.fulfill() }
-        promise.done { result in doneExpectation.fulfill() }.cauterize()
+        promise.done { _ in doneExpectation.fulfill() }.cauterize()
 
         // When
         configureSut()
@@ -105,7 +105,7 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
 
     func testSubtitle() {
         // Given
-        
+
         // When
         let subtitle = sut.subtitle
 
@@ -145,7 +145,7 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(isHidden)
     }
-    
+
     func testAccessibilityCloseButton() {
         // WHEN
         let closeButtonAccessibilityText = sut.closeButtonAccessibilityText

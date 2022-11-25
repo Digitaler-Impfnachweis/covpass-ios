@@ -8,10 +8,10 @@
 @testable import CovPassApp
 @testable import CovPassCommon
 @testable import CovPassUI
-import XCTest
 import PromiseKit
+import XCTest
 
-private let secondsPerYear: TimeInterval = 365*24*60*60
+private let secondsPerYear: TimeInterval = 365 * 24 * 60 * 60
 
 class CertificatesOverviewViewModelTests: XCTestCase {
     var delegate: MockCertificateViewModelDelegate!
@@ -37,7 +37,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         certificates: [ExtendedCBORWebToken] = [],
         locale: Locale = .current
     ) {
-        var certificateHolderStatusModel: CertificateHolderStatusModelMock = CertificateHolderStatusModelMock()
+        var certificateHolderStatusModel = CertificateHolderStatusModelMock()
         certificateHolderStatusModel.needsMask = true
         vaccinationRepository.certificates = certificates
         sut = CertificatesOverviewViewModel(
@@ -53,7 +53,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         )
         sut.delegate = delegate
     }
-    
+
     override func tearDownWithError() throws {
         delegate = nil
         sut = nil
@@ -65,7 +65,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         certLogic = nil
         super.tearDown()
     }
-    
+
     func testTestCertificate() throws {
         // Given
         let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
@@ -73,16 +73,16 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = try XCTUnwrap(Calendar.current.date(byAdding: .hour, value: -8995, to: Date()))
         let certs = [cert]
         vaccinationRepository.certificates = certs
-        
+
         // WHEN
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
-        
+
         guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        
+
         // THEN
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
@@ -94,7 +94,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
     }
-    
+
     func testTestCertificateNotPCR() throws {
         // Given
         let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
@@ -103,16 +103,16 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.t!.first!.tt = "LP217198-3"
         let certs = [cert]
         vaccinationRepository.certificates = certs
-        
+
         // WHEN
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
-        
+
         guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        
+
         // THEN
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
@@ -124,7 +124,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
     }
-    
+
     func testVaccinationCertificate() throws {
         // Given
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
@@ -132,7 +132,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = Date(timeIntervalSinceNow: -secondsPerYear)
         let certs = [cert]
         vaccinationRepository.certificates = certs
-        
+
         // WHEN
         _ = sut.refresh()
 
@@ -152,7 +152,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
     }
-    
+
     func testVaccinationCertificatePartly() throws {
         // Given
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
@@ -161,7 +161,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
         let certs = [cert]
         vaccinationRepository.certificates = certs
-        
+
         // WHEN
         _ = sut.refresh()
 
@@ -181,7 +181,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
     }
-    
+
     func testRecoveryCertificate() throws {
         // Given
         let cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
@@ -189,16 +189,16 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.r!.first!.fr = try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -3, to: Date()))!
         let certs = [cert]
         vaccinationRepository.certificates = certs
-        
+
         // WHEN
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
-        
+
         guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        
+
         // THEN
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
@@ -210,7 +210,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
     }
-    
+
     func testRecoveryCertificateInvalid() {
         // Given
         var cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
@@ -221,16 +221,16 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.reissueProcessNewBadgeAlreadySeen = true
         let certs = [cert]
         vaccinationRepository.certificates = certs
-        
+
         // WHEN
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
-        
+
         guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        
+
         // THEN
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
@@ -242,7 +242,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual("No valid certificate", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
     }
-    
+
     func testRecoveryCertificateInvalidNotShownOnce() {
         // Given
         var cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
@@ -252,16 +252,16 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.wasExpiryAlertShown = false
         let certs = [cert]
         vaccinationRepository.certificates = certs
-        
+
         // WHEN
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
-        
+
         guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        
+
         // THEN
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
@@ -273,7 +273,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual("No valid certificate", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
     }
-    
+
     func testRecoveryCertificateExpired() {
         // Given
         var cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
@@ -284,16 +284,16 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.reissueProcessNewBadgeAlreadySeen = true
         let certs = [cert]
         vaccinationRepository.certificates = certs
-        
+
         // WHEN
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
-        
+
         guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        
+
         // THEN
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
@@ -305,7 +305,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual("No valid certificate", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
     }
-    
+
     func testRecoveryCertificateExpiredNotShownOnce() {
         // Given
         var cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
@@ -315,16 +315,16 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.wasExpiryAlertShown = false
         let certs = [cert]
         vaccinationRepository.certificates = certs
-        
+
         // WHEN
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
-        
+
         guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        
+
         // THEN
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
@@ -377,7 +377,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             .doseNumber(2)
             .seriesOfDoses(2)
             .extended(vaccinationQRCodeData: "2")
-        
+
         // Given
         configureSut(
             certificates: [
@@ -411,7 +411,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             vaccinationRepository.setExpiryAlertExpectation
         ], timeout: 1)
     }
-    
+
     func testShowNotificationsIfNeeded_showRevocationWarning_token_revoked() throws {
         // Given
         var token = try ExtendedCBORWebToken.mock()
@@ -484,7 +484,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [router.showAnnouncementExpectation], timeout: 1)
     }
-    
+
     func testShowNotificationsIfNeeded_new_regulations_announcement_not_shown() {
         // Given
         userDefaults.newRegulationsOnboardingScreenWasShown = false
@@ -495,7 +495,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
     }
-    
+
     func test_showNotificationsIfNeeded_selectStateOnboarding_not_shown() {
         // Given
         userDefaults.selectStateOnboardingWasShown = false
@@ -687,7 +687,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         let url = router.receivedFaqURL
         XCTAssertEqual(url, expectedURL)
     }
-    
+
     func testScanCertificate_open_english_faq() throws {
         // Given
         let expectedURL = URL(string: "https://www.digitaler-impfnachweis-app.de/en/faq")
@@ -703,7 +703,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         let url = router.receivedFaqURL
         XCTAssertEqual(url, expectedURL)
     }
-    
+
     func testScanCertificate_withTrailingWhitespace() throws {
         // Given
         router.error = nil
@@ -792,7 +792,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [router.showCertificateModalExpectation], timeout: 2)
     }
-    
+
     func testScanCertificate_revokedCertificate() throws {
         // Given
         vaccinationRepository.certificates = [try ExtendedCBORWebToken.token1Of1()]
@@ -873,13 +873,13 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertTrue(handlesOpen)
         wait(for: [router.showCertificateImportErrorExpectation], timeout: 1)
     }
-    
+
     func test_update_domestic_rules() throws {
         // Given
         configureSut(certificates: [])
         certLogic.domesticRulesShouldBeUpdated = false
         certLogic.domesticRulesUpdateTestExpectation.isInverted = true
-        
+
         // When
         _ = sut.updateDomesticRules()
 
@@ -898,7 +898,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
 
     func testShowMultipleCertificateHolder_true() {
         // Given
-        let tokens  = [
+        let tokens = [
             CBORWebToken.mockVaccinationCertificate.extended(),
             CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
         ]
@@ -910,7 +910,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             }
             .cauterize()
         wait(for: [expectation], timeout: 1)
-        
+
         // When
         let showMultipleCertificateHolder = sut.showMultipleCertificateHolder
 

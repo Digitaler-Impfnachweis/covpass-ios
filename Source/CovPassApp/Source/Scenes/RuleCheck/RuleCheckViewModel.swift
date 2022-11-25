@@ -21,11 +21,13 @@ private enum Constants {
         static let filteredCertstDescription = "certificate_check_validity_not_all_certs_checkable_message".localized
         static let germanInfoBox = "certificate_check_german_infobox".localized
     }
+
     enum Config {
         static let dayToAdd = 1
         static let domesticDeCountryCode = "DE2"
         static let defaultDeCountryCode = "DE"
     }
+
     enum Accessibility {
         static let announce = "accessibility_certificate_check_validity_announce".localized
         static let closingAnnounce = "accessibility_certificate_check_validity_closing_announce".localized
@@ -47,8 +49,8 @@ struct CertificateResult {
 }
 
 class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
-    
     // MARK: - Properties
+
     weak var delegate: ViewModelDelegate?
     var country = "DE2"
     var date = Date()
@@ -64,7 +66,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     var domesticRulesHintIshidden: Bool { !country.contains(Constants.Config.defaultDeCountryCode) }
     let domesticRulesHintIcon = UIImage.infoSignal
     let germanInfoBoxText = Constants.Keys.germanInfoBox
-    var timeHintIsHidden: Bool {  !repository.trustListShouldBeUpdated() || !certLogic.rulesShouldBeUpdated || isLoading }
+    var timeHintIsHidden: Bool { !repository.trustListShouldBeUpdated() || !certLogic.rulesShouldBeUpdated || isLoading }
     let announce = Constants.Accessibility.announce
     let closingAnnounce = Constants.Accessibility.closingAnnounce
 
@@ -75,7 +77,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     private let certLogic: DCCCertLogicProtocol
 
     // MARK: - Lifecycle
-    
+
     init(router: RuleCheckRouterProtocol?,
          resolvable: Resolver<Void>?,
          repository: VaccinationRepositoryProtocol,
@@ -87,13 +89,13 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
 
     // MARK: - Functions
-    
+
     private func errorHandling(_ error: Error) {
-        self.isLoading = false
-        self.delegate?.viewModelDidUpdate()
+        isLoading = false
+        delegate?.viewModelDidUpdate()
         if (error as? APIError) != .notModified {
             router?.showInternetConnectionDialog()
-                .done{ [weak self] in
+                .done { [weak self] in
                     self?.updateRules()
                 }
                 .cancelled { [weak self] in
@@ -102,7 +104,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                 .cauterize()
         }
     }
-    
+
     func updateRules() {
         firstly {
             repository.getCertificateList()
@@ -161,7 +163,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
             }
         }
     }
-    
+
     private func createValidationViewModels(_ results: [[CertificateResult]]) {
         var items = [CertificateItemViewModel]()
         results.forEach { res in
@@ -177,11 +179,11 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
         isLoading = false
         delegate?.viewModelDidUpdate()
     }
-    
+
     func cancel() {
         resolver?.cancel()
     }
-    
+
     func showCountrySelection() {
         var countries: [Country] = certLogic.countries
         let domesticDeCountry = Country(Constants.Config.domesticDeCountryCode)
@@ -197,7 +199,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                 print(error)
             }
     }
-    
+
     func showDateSelection() {
         router?.showDateSelection(date: date)
             .done { newDate in
@@ -210,7 +212,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                 print(error)
             }
     }
-    
+
     func showDetail(_ result: CertificateResult) {
         router?.showResultDetail(result: result, country: country, date: date).cauterize()
     }

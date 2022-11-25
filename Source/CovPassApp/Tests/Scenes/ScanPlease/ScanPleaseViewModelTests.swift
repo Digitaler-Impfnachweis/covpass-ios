@@ -27,7 +27,6 @@ class ScanPleaseViewModelTests: XCTestCase {
         XCTAssertEqual(sut.linkDescription, "certificate_popup_checkapp_link_label".localized)
         XCTAssertEqual(sut.linkText, "certificates_start_screen_pop_up_app_reference_hyperlink".localized)
     }
-
 }
 
 struct ScanPleaseRouterMock: ScanPleaseRoutable {
@@ -38,7 +37,6 @@ struct ScanPleaseRouterMock: ScanPleaseRoutable {
 
 private extension String {
     var localized: String {
-        return Localizer.localized(self, bundle: .main)
+        Localizer.localized(self, bundle: .main)
     }
 }
-

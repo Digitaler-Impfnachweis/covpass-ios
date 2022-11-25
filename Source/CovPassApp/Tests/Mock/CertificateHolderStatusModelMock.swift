@@ -10,57 +10,57 @@ import Foundation
 import PromiseKit
 
 class CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
-
     var needsMask = false
     var holderIsFullyImmunized = false
     var areMaskRulesAvailable = false
     var isVaccinationCycleIsComplete = true
     var areIfsgRulesAvailable = true
-    var validCertificates: [ExtendedCBORWebToken]? = nil
+    var validCertificates: [ExtendedCBORWebToken]?
     var checkDomesticAcceptanceAndInvalidationRulesResult = CertificateHolderStatusResult.passed
     var checkDomesticInvalidationRulesResult = CertificateHolderStatusResult.passed
     var checkEuInvalidationRulesResult = CertificateHolderStatusResult.passed
-    var latestMaskRuleDate: Date? = nil
+    var latestMaskRuleDate: Date?
 
-    func checkDomesticAcceptanceAndInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+    func checkDomesticAcceptanceAndInvalidationRules(_: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
         checkDomesticAcceptanceAndInvalidationRulesResult
     }
-    
-    func checkDomesticInvalidationRules(_ certificates: [CovPassCommon.ExtendedCBORWebToken]) -> CovPassCommon.CertificateHolderStatusResult {
+
+    func checkDomesticInvalidationRules(_: [CovPassCommon.ExtendedCBORWebToken]) -> CovPassCommon.CertificateHolderStatusResult {
         checkDomesticInvalidationRulesResult
     }
-    
-    func checkEuInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+
+    func checkEuInvalidationRules(_: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
         checkEuInvalidationRulesResult
     }
-    
-    func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool {
+
+    func holderIsFullyImmunized(_: [ExtendedCBORWebToken]) -> Bool {
         holderIsFullyImmunized
     }
-    
-    func holderNeedsMask(_ certificates: [ExtendedCBORWebToken], region: String?) -> Bool {
+
+    func holderNeedsMask(_: [ExtendedCBORWebToken], region _: String?) -> Bool {
         needsMask
     }
-    
-    func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken], region: String?) -> Guarantee<Bool> {
+
+    func holderNeedsMaskAsync(_: [ExtendedCBORWebToken], region _: String?) -> Guarantee<Bool> {
         .value(needsMask)
     }
 
-    func maskRulesAvailable(for region: String?) -> Bool {
+    func maskRulesAvailable(for _: String?) -> Bool {
         areMaskRulesAvailable
     }
 
-    func latestMaskRuleDate(for region: String?) -> Date? {
+    func latestMaskRuleDate(for _: String?) -> Date? {
         latestMaskRuleDate
     }
-    
-    func validCertificates(_ certificates: [ExtendedCBORWebToken], logicType: DCCCertLogic.LogicType) -> [ExtendedCBORWebToken] {
+
+    func validCertificates(_ certificates: [ExtendedCBORWebToken], logicType _: DCCCertLogic.LogicType) -> [ExtendedCBORWebToken] {
         validCertificates ?? certificates
     }
-    func vaccinationCycleIsComplete(_ certificates: [CovPassCommon.ExtendedCBORWebToken]) -> Bool {
+
+    func vaccinationCycleIsComplete(_: [CovPassCommon.ExtendedCBORWebToken]) -> Bool {
         isVaccinationCycleIsComplete
     }
-    
+
     func ifsg22aRulesAvailable() -> Bool {
         areIfsgRulesAvailable
     }

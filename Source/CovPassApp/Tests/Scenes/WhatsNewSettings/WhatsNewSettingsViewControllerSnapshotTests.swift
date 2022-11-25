@@ -15,7 +15,7 @@ class WhatsNewSettingsViewControllerSnapshotTests: BaseSnapShotTests {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
+
         viewModel = .init(
             persistence: MockPersistence(),
             whatsNewURL: FileManager.default.temporaryDirectory

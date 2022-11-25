@@ -9,7 +9,6 @@ import CovPassCommon
 import CovPassUI
 import PromiseKit
 import UIKit
-import CovPassCommon
 
 private enum Constants {
     static let title = "infschg_result_mask_mandatory_title".localized
@@ -38,6 +37,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
         }
         return String(format: Constants.ruleDate, DateUtils.displayDateFormatter.string(from: date))
     }
+
     let revocationInfoHidden: Bool
     let revocationHeadline = Constants.revocationHeadline
     let revocationInfoText = Constants.revocationInfoText
@@ -46,9 +46,8 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     let secondCertificateHintHidden: Bool
     let reasonViewModels: [MaskRequiredReasonViewModelProtocol]
     let countdownTimerModel: CountdownTimerModel
-    lazy var secondCertificateReasonViewModel: MaskRequiredSecondCertificateReasonViewModelProtocol = {
-        MaskRequiredSecondCertificateReasonViewModel()
-    }()
+    lazy var secondCertificateReasonViewModel: MaskRequiredSecondCertificateReasonViewModelProtocol = MaskRequiredSecondCertificateReasonViewModel()
+
     var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
 
     private let resolver: Resolver<ValidatorDetailSceneResult>
@@ -65,23 +64,22 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
          secondCertificateHintHidden: Bool,
          persistence: Persistence,
          certificateHolderStatus: CertificateHolderStatusModelProtocol,
-         revocationKeyFilename: String
-    ) {
+         revocationKeyFilename: String) {
         self.countdownTimerModel = countdownTimerModel
-        self.subtitle = .init(
+        subtitle = .init(
             format: Constants.subtitleFormat,
             ("DE_" + persistence.stateSelection).localized
         )
         self.resolver = resolver
         self.token = token
         self.router = router
-        self.reasonViewModels = Self.reasonViewModels(reasonType)
+        reasonViewModels = Self.reasonViewModels(reasonType)
         self.secondCertificateHintHidden = secondCertificateHintHidden
         self.revocationKeyFilename = revocationKeyFilename
-        self.revocationInfoHidden = !persistence.revocationExpertMode || token == nil
+        revocationInfoHidden = !persistence.revocationExpertMode || token == nil
         self.persistence = persistence
         self.certificateHolderStatus = certificateHolderStatus
-        
+
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()
     }
@@ -126,9 +124,9 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
         guard let token = token else { return }
         resolver.fulfill(.secondScan(token))
     }
-    
+
     func revoke(_: Any) {
         guard let token = token else { return }
         router.revoke(token: token, revocationKeyFilename: revocationKeyFilename)
-     }
+    }
 }

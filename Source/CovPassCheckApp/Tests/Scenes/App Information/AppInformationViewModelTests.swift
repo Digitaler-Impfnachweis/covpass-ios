@@ -55,7 +55,7 @@ class CheckAppInformationBaseViewModelTests: XCTestCase {
         let entry = try XCTUnwrap(entries[1])
         XCTAssertEqual(entry.rightTitle, expectedTitle)
     }
-    
+
     func testEntries_expertMode_false() throws {
         // Given
         let expectedTitle = "app_information_authorities_function_state_off".localized
@@ -70,7 +70,7 @@ class CheckAppInformationBaseViewModelTests: XCTestCase {
         let entry = try XCTUnwrap(entries[1])
         XCTAssertEqual(entry.rightTitle, expectedTitle)
     }
-    
+
     func testEntries_expertMode_true() throws {
         // Given
         let expectedTitle = "app_information_authorities_function_state_on".localized

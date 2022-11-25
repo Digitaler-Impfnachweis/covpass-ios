@@ -12,7 +12,6 @@ import LocalAuthentication
 import PromiseKit
 import UIKit
 
-
 private enum Constants {
     enum Layout {
         static let cornerRadius: CGFloat = 12.0
@@ -44,7 +43,6 @@ class CountrySelectionViewModel: BaseViewModel, CancellableViewModelProtocol {
     let announce = Constants.Accessibility.announce
     let closingAnnounce = Constants.Accessibility.closingAnnounce
 
-
     // MARK: - Lifecycle
 
     init(
@@ -56,7 +54,7 @@ class CountrySelectionViewModel: BaseViewModel, CancellableViewModelProtocol {
         self.router = router
         resolver = resolvable
         self.countries = countries.sorted(by: { $0.code.localized < $1.code.localized })
-        self.selectedCountry = country
+        selectedCountry = country
     }
 
     func done() {

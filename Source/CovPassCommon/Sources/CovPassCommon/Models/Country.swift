@@ -9,23 +9,23 @@
 import Foundation
 
 public enum Countries {
-
     static let bundleURL = Bundle.commonBundle.url(forResource: "countries", withExtension: "json")
 
     static let downloadURL = try? FileManager.default.url(
         for: .documentDirectory,
-                in: .userDomainMask,
-                appropriateFor: nil,
-           create: false).appendingPathComponent("countries.json")
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: false
+    ).appendingPathComponent("countries.json")
 
     public static var hasDownloadedJson: Bool {
-        return FileManager.default.fileExists(atPath: Countries.downloadURL?.relativePath ?? "")
+        FileManager.default.fileExists(atPath: Countries.downloadURL?.relativePath ?? "")
     }
 
     static func loadDefaultCountries() -> [Country] {
         guard let url = hasDownloadedJson ? downloadURL : bundleURL,
               let data = try? Data(contentsOf: url),
-              let decoded: [Country] = try? JSONDecoder().decode([String].self, from: data).map({.init($0)})
+              let decoded: [Country] = try? JSONDecoder().decode([String].self, from: data).map({ .init($0) })
         else {
             return []
         }

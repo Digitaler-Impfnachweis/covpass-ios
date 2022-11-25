@@ -55,9 +55,9 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
             updateView()
         }
     }
-    
+
     // MARK: - Lifecycle
-    
+
     public func shadow(show: Bool) {
         clipsToBounds = !show
         contentView.clipsToBounds = !show
@@ -66,7 +66,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         contentView.layer.shadowOpacity = show ? Float(Constants.Layout.shadowOpacity) : 0.0
         contentView.layer.shadowOffset = show ? Constants.Layout.shadowOffset : .init(width: 0, height: 0)
     }
-    
+
     override public func awakeFromNib() {
         super.awakeFromNib()
         shadow(show: true)
@@ -104,7 +104,6 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
             accessibilityText.append(" \n \(Constants.qrInfoText)")
         }
         contentView.enableAccessibility(label: accessibilityText, traits: .button)
-
     }
 
     override public func viewModelDidUpdate() {
@@ -112,8 +111,8 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
             self.updateView()
         }
     }
-    
-    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+
+    override public func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         super.didUpdateFocus(in: context, with: coordinator)
         contentView.updateFocusBorderView()
     }

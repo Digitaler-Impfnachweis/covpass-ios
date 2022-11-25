@@ -5,19 +5,19 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 
 struct MaskRequiredResultRouter: MaskRequiredResultRouterProtocol, RouterProtocol {
     let sceneCoordinator: SceneCoordinator
 
     func revoke(token: ExtendedCBORWebToken, revocationKeyFilename: String) {
-         sceneCoordinator.present(
-             RevocationInfoSceneFactory(
-                 keyFilename: revocationKeyFilename,
-                 router: RevocationInfoRouter(sceneCoordinator: sceneCoordinator),
-                 token: token
-             )
-         ).cauterize()
-     }
+        sceneCoordinator.present(
+            RevocationInfoSceneFactory(
+                keyFilename: revocationKeyFilename,
+                router: RevocationInfoRouter(sceneCoordinator: sceneCoordinator),
+                token: token
+            )
+        ).cauterize()
+    }
 }

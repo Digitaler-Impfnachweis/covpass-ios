@@ -43,7 +43,7 @@ public class ParagraphResultView: XibView {
     // MARK: - Methods
 
     private func setupAccessibility() {
-        accessibilityElements =  [textStackView, infoStackView].compactMap { $0 }
+        accessibilityElements = [textStackView, infoStackView].compactMap { $0 }
         textStackView.accessibilityAttributedLabel = attributedTitleText
         textStackView.accessibilityAttributedValue = attributedBodyText
         textStackView.isAccessibilityElement = true

@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationHTTPDataSource.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -68,7 +68,7 @@ public class CertificateRevocationHTTPDataSource: CertificateRevocationHTTPDataS
 
     private func kidListGetRequest(httpHeaders: [String: String?]) -> URLRequest {
         var request = URLRequest(
-            url: self.baseURL.appendingPathComponent(Constants.kidListPath)
+            url: baseURL.appendingPathComponent(Constants.kidListPath)
         )
         request.httpMethod = Constants.httpGetMethod
         request.setHTTPHeaders(httpHeaders)
@@ -187,7 +187,7 @@ public class CertificateRevocationHTTPDataSource: CertificateRevocationHTTPDataS
             .then(failIfResponseIsNil)
     }
 
-    public func getChunkList(kid: KID, hashType: CertificateRevocationHashType, httpHeaders: [String : String?]) -> Promise<CertificateRevocationChunkListResponse?> {
+    public func getChunkList(kid: KID, hashType: CertificateRevocationHashType, httpHeaders: [String: String?]) -> Promise<CertificateRevocationChunkListResponse?> {
         httpClient
             .httpRequest(
                 chunkListRequest(
@@ -261,13 +261,13 @@ public class CertificateRevocationHTTPDataSource: CertificateRevocationHTTPDataS
     ) -> URLRequest {
         var byte2Path = ""
         if let byte2 = byte2 {
-            byte2Path = .init(format:"/%02x", byte2)
+            byte2Path = .init(format: "/%02x", byte2)
         }
         let path = String(
             format: Constants.chunkListPathForKID,
             kid.toHexString(),
             hashType.rawValue,
-            String(format:"/%02x", byte1),
+            String(format: "/%02x", byte1),
             byte2Path
         )
         var request = URLRequest(url: baseURL.appendingPathComponent(path))

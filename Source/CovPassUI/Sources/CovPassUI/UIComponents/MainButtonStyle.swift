@@ -35,7 +35,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var selectedTextColor: UIColor {
         switch self {
         case .primary:
@@ -52,7 +52,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var highlightedTextColor: UIColor {
         switch self {
         case .primary:
@@ -69,7 +69,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var disabledTextColor: UIColor {
         switch self {
         case .primary:
@@ -86,7 +86,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var backgroundColor: UIColor {
         switch self {
         case .primary:
@@ -103,7 +103,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var selectedBackgroundColor: UIColor {
         switch self {
         case .primary:
@@ -120,7 +120,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var highlightedBackgroundColor: UIColor {
         switch self {
         case .primary:
@@ -137,7 +137,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var disabledBackgroundColor: UIColor {
         switch self {
         case .primary:
@@ -154,7 +154,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var borderColor: UIColor? {
         switch self {
         case .primary:
@@ -171,7 +171,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var selectedBorderColor: UIColor? {
         switch self {
         case .primary:
@@ -188,7 +188,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var highlightedBorderColor: UIColor? {
         switch self {
         case .primary:
@@ -205,7 +205,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var disabledBorderColor: UIColor? {
         switch self {
         case .primary:
@@ -222,7 +222,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var shadowColor: UIColor? {
         switch self {
         case .primary:
@@ -239,7 +239,7 @@ public enum MainButtonStyle {
             return .clear
         }
     }
-    
+
     public var disabledShadowColor: UIColor? {
         .clear
     }

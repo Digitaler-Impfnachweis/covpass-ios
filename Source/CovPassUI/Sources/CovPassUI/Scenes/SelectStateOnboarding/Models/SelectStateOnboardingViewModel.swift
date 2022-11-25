@@ -9,8 +9,8 @@ import CovPassCommon
 import PromiseKit
 import UIKit
 
-extension SelectStateOnboardingViewModel {
-    public enum Texts {
+public extension SelectStateOnboardingViewModel {
+    enum Texts {
         public static let title = "infschg_popup_choose_federal_state_title".localized(bundle: .main)
         public static let copyText = "infschg_popup_choose_federal_state_copy_1".localized(bundle: .main)
         public static let inputTitle = "infschg_popup_choose_federal_state_tag".localized(bundle: .main)
@@ -18,7 +18,8 @@ extension SelectStateOnboardingViewModel {
         public static let copy2Text = "infschg_popup_choose_federal_state_copy_2".localized(bundle: .main)
         public static let copy3Text = "infschg_popup_choose_federal_state_copy_3".localized(bundle: .main)
     }
-    public enum Accessibility {
+
+    enum Accessibility {
         static let openingAnnounce = "accessibility_checkapp_popup_choose_federal_state_announce".localized(bundle: .main)
         static let choosenState = "accessibility_checkapp_popup_choose_federal_state_announce_when_chosen".localized(bundle: .main)
         static let closingAnnounce = "accessibility_checkapp_popup_choose_federal_state_announce".localized(bundle: .main)
@@ -40,6 +41,7 @@ open class SelectStateOnboardingViewModel: SelectStateOnboardingViewModelProtoco
         }
         return String(format: Texts.copy3Text, DateUtils.displayDateFormatter.string(from: date))
     }
+
     public let inputTitle: String = Texts.inputTitle
     public let image: UIImage = .illustrationImpfschutzgesetz
     public let openingAnnounce: String = Accessibility.openingAnnounce
@@ -61,9 +63,8 @@ open class SelectStateOnboardingViewModel: SelectStateOnboardingViewModelProtoco
     public func showFederalStateSelection() -> Promise<Void> {
         router.showFederalStateSelection()
     }
-    
+
     public func close() {
         resolver.fulfill_()
     }
 }
-

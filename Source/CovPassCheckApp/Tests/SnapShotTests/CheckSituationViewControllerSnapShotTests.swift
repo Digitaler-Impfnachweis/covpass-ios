@@ -6,8 +6,8 @@
 //
 
 @testable import CovPassCheckApp
-@testable import CovPassUI
 import CovPassCommon
+@testable import CovPassUI
 import Foundation
 
 class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
@@ -47,7 +47,7 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
         )
         sut = CheckSituationViewController(viewModel: viewModel)
     }
-    
+
     func testDefaultSettings() {
         // Given
         configureSut(context: .settings, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"), checkSituation: .enteringGermany)
@@ -56,7 +56,7 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
         // When & Then
         verifyView(view: sut.view, height: 1200)
     }
-    
+
     func testDefaultSettings_withinGermany() {
         // Given
         configureSut(context: .settings, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"), checkSituation: .withinGermany)

@@ -1,12 +1,12 @@
 //
 //  Persistence+NewRegulationsAnnouncementTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassUI
 import CovPassCommon
+@testable import CovPassUI
 import XCTest
 
 final class Persistence_NewRegulationsAnnouncementTests: XCTestCase {

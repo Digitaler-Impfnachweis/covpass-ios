@@ -11,6 +11,4 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-protocol ChooseCertificateRouterProtocol: DialogRouterProtocol {
-
-}
+protocol ChooseCertificateRouterProtocol: DialogRouterProtocol {}

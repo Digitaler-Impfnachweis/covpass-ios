@@ -1,6 +1,6 @@
 //
 //  Date+ExtensionTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -21,7 +21,7 @@ class Date_ExtensionTests: XCTestCase {
 
     func testMonthsSince_50_days_ago() {
         // Given
-        let pastDate = sut - 50*secondsPerDay
+        let pastDate = sut - 50 * secondsPerDay
 
         // When
         let months = sut.monthsSince(pastDate)
@@ -32,7 +32,7 @@ class Date_ExtensionTests: XCTestCase {
 
     func testMonthsSince_23_days_ago() {
         // Given
-        let pastDate = sut - 23*secondsPerDay
+        let pastDate = sut - 23 * secondsPerDay
 
         // When
         let months = sut.monthsSince(pastDate)
@@ -43,7 +43,7 @@ class Date_ExtensionTests: XCTestCase {
 
     func testDaysSince_31_days_ago() {
         // Given
-        let futureDate = sut - 31*secondsPerDay
+        let futureDate = sut - 31 * secondsPerDay
 
         // When
         let days = sut.daysSince(futureDate)
@@ -54,7 +54,7 @@ class Date_ExtensionTests: XCTestCase {
 
     func testDaysSince_in_5_days() {
         // Given
-        let futureDate = sut + 5*secondsPerDay
+        let futureDate = sut + 5 * secondsPerDay
 
         // When
         let days = sut.daysSince(futureDate)
@@ -65,7 +65,7 @@ class Date_ExtensionTests: XCTestCase {
 
     func testHoursSince_25_hours_ago() {
         // Given
-        let pastDate = sut - 25*secondsPerHour
+        let pastDate = sut - 25 * secondsPerHour
 
         // When
         let hours = sut.hoursSince(pastDate)
@@ -76,7 +76,7 @@ class Date_ExtensionTests: XCTestCase {
 
     func testHoursSince_59_min_ago() {
         // Given
-        let pastDate = sut - 59*60
+        let pastDate = sut - 59 * 60
 
         // When
         let hours = sut.hoursSince(pastDate)
@@ -126,13 +126,13 @@ class Date_ExtensionTests: XCTestCase {
         let endOfYear = try XCTUnwrap(sut.endOfYear)
 
         // Then
-        XCTAssertEqual(endOfYear, sut + 31532400)
+        XCTAssertEqual(endOfYear, sut + 31_532_400)
     }
 
     func testEndOfYear_other() throws {
         // Given
         let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
-        let sut = Date(timeIntervalSinceReferenceDate: 6535634442)
+        let sut = Date(timeIntervalSinceReferenceDate: 6_535_634_442)
 
         // When
         let endOfYear = try XCTUnwrap(sut.endOfYear)
@@ -166,7 +166,7 @@ class Date_ExtensionTests: XCTestCase {
 
     func testEndOfMonth_other() throws {
         let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
-        let sut = Date(timeIntervalSinceReferenceDate: 99999359)
+        let sut = Date(timeIntervalSinceReferenceDate: 99_999_359)
 
         // When
         let endOfMonth = try XCTUnwrap(sut.endOfMonth)
@@ -180,7 +180,7 @@ class Date_ExtensionTests: XCTestCase {
         XCTAssertEqual(dateComponents.minute, 0)
         XCTAssertEqual(dateComponents.second, 0)
     }
-    
+
     func test_passed24Hours_false() {
         // Given
         sut = Date()
@@ -191,7 +191,7 @@ class Date_ExtensionTests: XCTestCase {
         // Then
         XCTAssertFalse(passed24Hours)
     }
-    
+
     func test_passed24Hours_false_limit() {
         // Given
         sut = Date() - (60 * 60 * 24) + 1
@@ -202,7 +202,7 @@ class Date_ExtensionTests: XCTestCase {
         // Then
         XCTAssertFalse(passed24Hours)
     }
-    
+
     func test_passed24Hours_true() {
         // Given
         sut = Date() - (60 * 60 * 24)
@@ -213,7 +213,7 @@ class Date_ExtensionTests: XCTestCase {
         // Then
         XCTAssertTrue(passed24Hours)
     }
-    
+
     func test_isOlderThan28Days() {
         // Given
         sut = Date()
@@ -224,7 +224,7 @@ class Date_ExtensionTests: XCTestCase {
         // Then
         XCTAssertFalse(isOlderThan28Days)
     }
-    
+
     func test_isOlderThan28Days_before40Days() {
         // Given
         sut = Date().add(days: 40)
@@ -235,7 +235,7 @@ class Date_ExtensionTests: XCTestCase {
         // Then
         XCTAssertFalse(isOlderThan28Days)
     }
-    
+
     func test_isOlderThan28Days_After40Days() {
         // Given
         sut = Date().add(days: -40)
@@ -248,5 +248,5 @@ class Date_ExtensionTests: XCTestCase {
     }
 }
 
-private let secondsPerHour: TimeInterval = 60*60
-private let secondsPerDay: TimeInterval = 24*secondsPerHour
+private let secondsPerHour: TimeInterval = 60 * 60
+private let secondsPerDay: TimeInterval = 24 * secondsPerHour

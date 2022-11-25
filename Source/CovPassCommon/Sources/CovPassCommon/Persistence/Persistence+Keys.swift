@@ -1,6 +1,6 @@
 //
 //  Persistence+Keys.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -67,7 +67,7 @@ public extension Persistence {
             try? store(UserDefaults.keyLastUpdatedValueSets, value: newValue as Any)
         }
     }
-    
+
     var lastUpdatedDCCRules: Date? {
         get {
             let value = try? fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date
@@ -77,7 +77,7 @@ public extension Persistence {
             try? store(UserDefaults.keyLastUpdatedDCCRules, value: newValue as Any)
         }
     }
-    
+
     var lastUpdateDomesticRules: Date? {
         get {
             let value = try? fetch(UserDefaults.keyLastUpdateDomesticRuless) as? Date
@@ -128,4 +128,3 @@ public extension Persistence {
         }
     }
 }
-

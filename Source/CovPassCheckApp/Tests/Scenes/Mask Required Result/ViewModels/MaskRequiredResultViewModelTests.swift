@@ -6,8 +6,8 @@
 //
 
 @testable import CovPassCheckApp
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 import PromiseKit
 import XCTest
 
@@ -62,7 +62,7 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
     func testCancel() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { result in expectation.fulfill() }.cauterize()
+        promise.done { _ in expectation.fulfill() }.cauterize()
 
         // When
         sut.cancel()
@@ -74,7 +74,7 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
     func testRescan() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { result
+        promise.done { _
             in expectation.fulfill()
         }.cauterize()
 
@@ -91,7 +91,7 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
         let doneExpectation = XCTestExpectation(description: "doneExpectation")
         countdownTimerModel = .init(dismissAfterSeconds: 1.5, countdownDuration: 1)
         delegate.didUpdate = { didUpdateExpectation.fulfill() }
-        promise.done { result in doneExpectation.fulfill() }.cauterize()
+        promise.done { _ in doneExpectation.fulfill() }.cauterize()
 
         // When
         configureSut()
@@ -168,7 +168,7 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
     func testScanSecondCertificate() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { result in
+        promise.done { _ in
             expectation.fulfill()
         }.cauterize()
 
@@ -178,7 +178,7 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
         // Then
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func testAccessibilityCloseButton() {
         // WHEN
         let closeButtonAccessibilityText = sut.closeButtonAccessibilityText

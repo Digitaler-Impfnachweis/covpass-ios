@@ -5,8 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
+import Foundation
 
 extension CoseSign1MessageConverter {
     static func certificateReissueRepository() -> Self? {
@@ -16,7 +16,7 @@ extension CoseSign1MessageConverter {
     static func pdfCBORExtractor() -> Self? {
         .init(verifyExpiration: false)
     }
-    
+
     private init?(verifyExpiration: Bool) {
         let keychain = KeychainPersistence()
         let jsonDecoder = JSONDecoder()

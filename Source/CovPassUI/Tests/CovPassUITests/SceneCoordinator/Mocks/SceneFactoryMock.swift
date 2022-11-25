@@ -14,7 +14,7 @@ struct SceneFactoryMock: SceneFactory {
     var viewController: UIViewController?
 
     func make() -> UIViewController {
-        guard let viewController = self.viewController else {
+        guard let viewController = viewController else {
             fatalError("ViewController must not be nil")
         }
         return viewController

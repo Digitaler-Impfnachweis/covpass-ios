@@ -17,7 +17,7 @@ open class SelectStateOnboardingViewController: UIViewController {
     @IBOutlet var copy2Label: PlainLabel!
     @IBOutlet var copy3Label: PlainLabel!
     @IBOutlet var button: MainButton!
-    
+
     let viewModel: SelectStateOnboardingViewModelProtocol
 
     // MARK: - Lifecycle
@@ -37,18 +37,18 @@ open class SelectStateOnboardingViewController: UIViewController {
         configureView()
         configureInputView()
     }
-    
-    open override func viewDidAppear(_ animated: Bool) {
+
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnounce)
     }
-    
-    open override func viewDidDisappear(_ animated: Bool) {
+
+    override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         configureView()
     }
@@ -95,7 +95,7 @@ open class SelectStateOnboardingViewController: UIViewController {
                 .cauterize()
         }
     }
-    
+
     private func configureAccessibilityRespondsToUserInteraction() {
         if #available(iOS 13.0, *) {
             copyLabel.accessibilityRespondsToUserInteraction = true

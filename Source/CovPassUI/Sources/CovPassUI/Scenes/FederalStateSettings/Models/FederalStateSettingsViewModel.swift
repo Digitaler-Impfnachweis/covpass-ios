@@ -5,8 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
+import Foundation
 import PromiseKit
 
 open class FederalStateSettingsViewModel: FederalStateSettingsViewModelProtocol {
@@ -22,6 +22,7 @@ open class FederalStateSettingsViewModel: FederalStateSettingsViewModelProtocol 
         }
         return String(format: Texts.copy2Text, DateUtils.displayDateFormatter.string(from: date))
     }
+
     public let inputTitle: String = Texts.inputTitle
     public let openingAnnounce: String = Accessibility.openingAnnounce
     public let closingAnnounce: String = Accessibility.closingAnnounce
@@ -42,14 +43,15 @@ open class FederalStateSettingsViewModel: FederalStateSettingsViewModelProtocol 
     }
 }
 
-extension FederalStateSettingsViewModel {
-    public enum Texts {
+public extension FederalStateSettingsViewModel {
+    enum Texts {
         public static let title = "infschg_settings_federal_state_page_title".localized(bundle: .main)
         public static let copy1Text = "infschg_settings_federal_state_page_copy_1".localized(bundle: .main)
         public static let copy2Text = "infschg_settings_federal_state_page_copy_2".localized(bundle: .main)
         public static let inputTitle = "infschg_settings_federal_state_page_tag".localized(bundle: .main)
     }
-    public enum Accessibility {
+
+    enum Accessibility {
         static let openingAnnounce = "accessibility_checkapp_popup_choose_federal_state_announce".localized(bundle: .main)
         static let choosenState = "accessibility_checkapp_popup_choose_federal_state_announce_when_chosen".localized(bundle: .main)
         static let closingAnnounce = "accessibility_checkapp_popup_choose_federal_state_announce".localized(bundle: .main)

@@ -11,8 +11,8 @@ import PromiseKit
 import UIKit
 
 struct ConsentExchangeFactory: SceneFactory {
-
     // MARK: - Properties
+
     let initialisationData: ValidationServiceInitialisation
     let router: ValidationServiceRoutable
     let certificate: ExtendedCBORWebToken

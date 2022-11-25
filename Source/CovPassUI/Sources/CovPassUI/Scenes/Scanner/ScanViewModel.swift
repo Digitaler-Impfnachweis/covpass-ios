@@ -7,10 +7,10 @@
 //
 
 import AVFoundation
+import CovPassCommon
 import PromiseKit
 import Scanner
 import UIKit
-import CovPassCommon
 
 private enum Constants {
     enum Accessibility {
@@ -49,23 +49,23 @@ public class ScanViewModel: CancellableViewModelProtocol {
     var currentTorchWasTurnedVoiceOverOptions: VoiceOverOptions.Settings {
         isFlashlightOn ? Constants.Accessibility.torchWasTurnedOn : Constants.Accessibility.torchWasTurnedOff
     }
-    
+
     var currentTorchVoiceOverOptions: VoiceOverOptions.Settings {
         isFlashlightOn ? Constants.Accessibility.torchOn : Constants.Accessibility.torchOff
     }
-    
+
     var closeVoiceOverOptions: VoiceOverOptions.Settings {
         Constants.Accessibility.close
     }
-    
+
     var documentPickerVoiceOverOptions: VoiceOverOptions.Settings {
         Constants.Accessibility.documentPicker
     }
-    
+
     var openingAnnounce: String {
         Constants.Accessibility.openingAnnounce
     }
-    
+
     var closingAnnounce: String {
         Constants.Accessibility.closingAnnounce
     }
@@ -129,7 +129,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
     public func cancel() {
         resolver.cancel()
     }
-    
+
     func documentPicker() {
         mode = .selection
         router.showDocumentPickerSheet()
@@ -146,7 +146,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
     }
 
     func toggleFlashlight() {
-        guard let device = self.device, hasDeviceTorch else { return }
+        guard let device = device, hasDeviceTorch else { return }
         do {
             try device.lockForConfiguration()
             isFlashlightOn.toggle()
@@ -154,15 +154,15 @@ public class ScanViewModel: CancellableViewModelProtocol {
             device.unlockForConfiguration()
         } catch {}
     }
-    
-    func documentPicked(at url:[URL]) {
+
+    func documentPicked(at url: [URL]) {
         guard let firstURL = url.first,
               let pdfDocument = try? QRCodePDFDocument(with: firstURL) else {
             return
         }
         extractCertificates(from: pdfDocument)
     }
-    
+
     private func extractCertificates(from document: QRCodeDocumentProtocol) {
         guard let pdfCBORExtractor = certificateExtractor,
               let certificateRepository = certificateRepository else {
@@ -189,7 +189,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
         }
         .cauterize()
     }
-    
+
     func imagePicked(images: [UIImage]) {
         let document = QRCodeImagesDocument(images: images)
         extractCertificates(from: document)

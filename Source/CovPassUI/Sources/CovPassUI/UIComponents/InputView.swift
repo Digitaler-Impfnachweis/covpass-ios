@@ -32,8 +32,8 @@ public class InputView: XibView {
     @objc func onClick() {
         onClickAction?()
     }
-    
-    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+
+    override public func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         super.didUpdateFocus(in: context, with: coordinator)
         updateFocusBorderView()
     }

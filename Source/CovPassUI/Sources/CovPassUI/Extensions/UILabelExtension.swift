@@ -39,8 +39,7 @@ public extension UILabel {
     ///   - numberOfLines: Number of lines for `numberOfLines`
     func setupAdjustedFontWith(font: UIFont,
                                multiplier: CGFloat? = nil,
-                               numberOfLines: Int = 0)
-    {
+                               numberOfLines: Int = 0) {
         adjustsFontForContentSizeCategory = true
         self.numberOfLines = numberOfLines
         multiplier

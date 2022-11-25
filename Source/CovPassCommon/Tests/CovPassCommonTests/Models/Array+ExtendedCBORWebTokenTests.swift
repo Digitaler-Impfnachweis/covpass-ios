@@ -1,6 +1,6 @@
 //
 //  Array+ExtendedCBORWebTokenTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -9,7 +9,6 @@
 import XCTest
 
 class ArrayExtendedCBORWebTokenTests: XCTestCase {
-    
     var singleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
         .mockVaccinationUVCI("1")
         .medicalProduct(.johnsonjohnson)
@@ -49,18 +48,18 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         .doseNumber(2)
         .seriesOfDoses(1)
         .extended(vaccinationQRCodeData: "7")
-    
+
     func testPartitionedByOwner_empty() {
         // Given
         let sut: [ExtendedCBORWebToken] = []
-        
+
         // When
         let partitions = sut.partitionedByOwner
-        
+
         // Then
         XCTAssertTrue(partitions.isEmpty)
     }
-    
+
     func testPartitionedByOwner() {
         // Given
         var token1Owner1 = CBORWebToken.mockVaccinationCertificate
@@ -77,31 +76,31 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
             tokenOwner2.extended(),
             tokenOwner3.extended()
         ]
-        
+
         // When
         let partitions = sut.partitionedByOwner
-        
+
         // Then
         XCTAssertEqual(partitions.count, 3)
         if partitions.count > 2 {
             XCTAssertTrue(
                 (partitions[0].count == 2 && partitions[1].count == 1 && partitions[2].count == 1) ||
-                (partitions[0].count == 1 && partitions[1].count == 2 && partitions[2].count == 1) ||
-                (partitions[0].count == 1 && partitions[1].count == 1 && partitions[2].count == 2) 
+                    (partitions[0].count == 1 && partitions[1].count == 2 && partitions[2].count == 1) ||
+                    (partitions[0].count == 1 && partitions[1].count == 1 && partitions[2].count == 2)
             )
         }
     }
-    
+
     func testBosterAfterOneShotImmunization() {
         // GIVEN
         let certs = [someOtherCert2,
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
-        
+
         // THEN
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertTrue(candidateForReissue.count == 2)
@@ -110,17 +109,17 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
-    
+
     func testBoosteredWithJohnsonAlreadyButRecoveryIsFresherDateThanVaccinations() {
         // GIVEN
         let certs = [recoveryCert,
                      singleDoseImmunizationJohnsonCert,
                      doubleDoseImmunizationJohnsonCert,
                      someOtherCert1]
-        
+
         // WHEN
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
-        
+
         // THEN
         XCTAssertTrue(certs.qualifiedForReissue)
         XCTAssertFalse(candidateForReissue.isEmpty)
@@ -131,7 +130,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
-    
+
     func testBoosteredWithJohnsonAlreadyAndRecoveryIsOlderDateThanVaccinations() {
         // GIVEN
         let recoveryCertOlderDateThanVaccinations = recoveryCert
@@ -141,10 +140,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      doubleDoseImmunizationJohnsonCert,
                      someOtherCert1]
-        
+
         // WHEN
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
-        
+
         // THEN
         XCTAssertTrue(certs.qualifiedForReissue)
         XCTAssertFalse(candidateForReissue.isEmpty)
@@ -155,17 +154,17 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
-    
+
     func testBoosterAfterVaccinationAfterRecoveryWithoutRecovery() {
         // GIVEN
         let certs = [someOtherCert2,
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
-        
+
         // THEN
         XCTAssertTrue(certs.qualifiedForReissue)
         XCTAssertFalse(candidateForReissue.isEmpty)
@@ -175,7 +174,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
-    
+
     func testBoosterAfterVaccinationAfterRecoveryWithRecoveryDateOlderThanVaccinationDates() {
         let recoveryCertOlderDateThanVaccinations = recoveryCert
         let dateOfOneOfVaccinations = singleDoseImmunizationJohnsonCert.firstVaccination?.dt
@@ -186,10 +185,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
-        
+
         // THEN
         XCTAssertTrue(certs.qualifiedForReissue)
         XCTAssertFalse(candidateForReissue.isEmpty)
@@ -200,7 +199,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
-    
+
     func testBoosterAfterVaccinationAfterRecoveryWithRecoveryDateOlderThanVaccinationDatesWithOneCertIsNotDEIssuer() {
         let recoveryCertOlderDateThanVaccinations = recoveryCert
         let dateOfOneOfVaccinations = singleDoseImmunizationJohnsonCert.firstVaccination?.dt
@@ -213,10 +212,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
-        
+
         // THEN
         XCTAssertFalse(certs.qualifiedForReissue)
         XCTAssertTrue(candidateForReissue.isEmpty)
@@ -227,7 +226,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
-    
+
     func testBoosterAfterVaccinationAfterRecoveryWithRecoveryDateFresherThanVaccinationDates() {
         // GIVEN
         let certs = [someOtherCert2,
@@ -236,10 +235,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine,
                      recoveryCert]
-        
+
         // WHEN
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
-        
+
         // THEN
         XCTAssertTrue(certs.qualifiedForReissue)
         XCTAssertFalse(candidateForReissue.isEmpty)
@@ -250,7 +249,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
-    
+
     func testIsNotReIssueCandidate() {
         // GIVEN
         let certs = [someOtherCert2,
@@ -258,69 +257,69 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine,
                      recoveryCert]
-        
+
         // WHEN
         let candidateForReissue = certs.qualifiedForReissue
-        
+
         // THEN
         XCTAssertFalse(candidateForReissue)
     }
-    
+
     func testIsNotReIssueCandidate2() {
         // GIVEN
         let certs = [someOtherCert2,
                      someOtherCert1]
-        
+
         // WHEN
         let candidateForReissue = certs.qualifiedForReissue
-        
+
         // THEN
         XCTAssertFalse(candidateForReissue)
     }
-    
+
     func testIsNotReIssueCandidate3() {
         // GIVEN
         let certs = [recoveryCert,
                      singleDoseImmunizationJohnsonCert]
-        
+
         // WHEN
         let candidateForReissue = certs.qualifiedForReissue
-        
+
         // THEN
         XCTAssertFalse(candidateForReissue)
     }
-    
+
     func testIsNotReIssueCandidateBecauseReIssueAlmostDone() {
         // GIVEN
         var certs = [someOtherCert2,
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let candidateForReissue = certs.qualifiedForReissue
-        
+
         // THEN
         XCTAssertTrue(candidateForReissue)
-        
+
         // BUT WHEN
         certs.append(boosterCertificateAfterReIssue)
         let candidateForReissueAfterReissue = certs.qualifiedForReissue
-        
+
         // THEN
         XCTAssertFalse(candidateForReissueAfterReissue)
     }
-    
+
     func testAlreadySeen_Default() {
         // GIVEN
         let certs = [someOtherCert2,
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let reissueNewBadgeAlreadySeen = certs.reissueNewBadgeAlreadySeen
-        
+
         // THEN
         XCTAssertNil(someOtherCert2.reissueProcessNewBadgeAlreadySeen)
         XCTAssertNil(singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen)
@@ -328,7 +327,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertNil(vaccinationWithTwoShotsOfVaccine.reissueProcessNewBadgeAlreadySeen)
         XCTAssertFalse(reissueNewBadgeAlreadySeen)
     }
-    
+
     func testAlreadySeen_OneCertAlreadySeen() {
         // GIVEN
         someOtherCert2.reissueProcessNewBadgeAlreadySeen = true
@@ -336,10 +335,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let reissueNewBadgeAlreadySeen = certs.reissueNewBadgeAlreadySeen
-        
+
         // THEN
         XCTAssertNotNil(someOtherCert2.reissueProcessNewBadgeAlreadySeen)
         XCTAssertNil(singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen)
@@ -347,7 +346,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertNil(vaccinationWithTwoShotsOfVaccine.reissueProcessNewBadgeAlreadySeen)
         XCTAssertTrue(reissueNewBadgeAlreadySeen)
     }
-    
+
     func testAlreadySeen_AllCertAlreadySeen() {
         // GIVEN
         someOtherCert2.reissueProcessNewBadgeAlreadySeen = true
@@ -358,10 +357,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let reissueNewBadgeAlreadySeen = certs.reissueNewBadgeAlreadySeen
-        
+
         // THEN
         XCTAssertNotNil(someOtherCert2.reissueProcessNewBadgeAlreadySeen)
         XCTAssertNotNil(singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen)
@@ -369,7 +368,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertNotNil(vaccinationWithTwoShotsOfVaccine.reissueProcessNewBadgeAlreadySeen)
         XCTAssertTrue(reissueNewBadgeAlreadySeen)
     }
-    
+
     func testAlreadySeen_NoOfCertsAlreadySeen() {
         // GIVEN
         someOtherCert2.reissueProcessNewBadgeAlreadySeen = false
@@ -380,10 +379,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let reissueNewBadgeAlreadySeen = certs.reissueNewBadgeAlreadySeen
-        
+
         // THEN
         XCTAssertNotNil(someOtherCert2.reissueProcessNewBadgeAlreadySeen)
         XCTAssertNotNil(singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen)
@@ -391,7 +390,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertNotNil(vaccinationWithTwoShotsOfVaccine.reissueProcessNewBadgeAlreadySeen)
         XCTAssertFalse(reissueNewBadgeAlreadySeen)
     }
-    
+
     func testAlreadySeen_OneOfCertsAlreadySeenFalse() {
         // GIVEN
         someOtherCert2.reissueProcessNewBadgeAlreadySeen = false
@@ -399,10 +398,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let reissueNewBadgeAlreadySeen = certs.reissueNewBadgeAlreadySeen
-        
+
         // THEN
         XCTAssertNotNil(someOtherCert2.reissueProcessNewBadgeAlreadySeen)
         XCTAssertNil(singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen)
@@ -410,18 +409,18 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertNil(vaccinationWithTwoShotsOfVaccine.reissueProcessNewBadgeAlreadySeen)
         XCTAssertFalse(reissueNewBadgeAlreadySeen)
     }
-    
+
     func testReissueProcessInitialAlreadySeen_Default() {
         // GIVEN
         let certs = [someOtherCert2,
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let reissueProcessInitialAlreadySeen = certs.reissueProcessInitialAlreadySeen
         let reissueProcessInitialNotAlreadySeen = certs.reissueProcessInitialNotAlreadySeen
-        
+
         // THEN
         XCTAssertNil(someOtherCert2.reissueProcessInitialAlreadySeen)
         XCTAssertNil(singleDoseImmunizationJohnsonCert.reissueProcessInitialAlreadySeen)
@@ -430,7 +429,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(reissueProcessInitialAlreadySeen)
         XCTAssertTrue(reissueProcessInitialNotAlreadySeen)
     }
-    
+
     func testReissueProcessInitialAlreadySeen_OneCertAlreadySeen() {
         // GIVEN
         someOtherCert2.reissueProcessInitialAlreadySeen = true
@@ -438,11 +437,11 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let reissueProcessInitialAlreadySeen = certs.reissueProcessInitialAlreadySeen
         let reissueProcessInitialNotAlreadySeen = certs.reissueProcessInitialNotAlreadySeen
-        
+
         // THEN
         XCTAssertNotNil(someOtherCert2.reissueProcessInitialAlreadySeen)
         XCTAssertNil(singleDoseImmunizationJohnsonCert.reissueProcessInitialAlreadySeen)
@@ -451,7 +450,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertTrue(reissueProcessInitialAlreadySeen)
         XCTAssertFalse(reissueProcessInitialNotAlreadySeen)
     }
-    
+
     func testReissueProcessInitialAlreadySeen_AllCertAlreadySeen() {
         // GIVEN
         someOtherCert2.reissueProcessInitialAlreadySeen = true
@@ -462,11 +461,11 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let reissueProcessInitialAlreadySeen = certs.reissueProcessInitialAlreadySeen
         let reissueProcessInitialNotAlreadySeen = certs.reissueProcessInitialNotAlreadySeen
-        
+
         // THEN
         XCTAssertNotNil(someOtherCert2.reissueProcessInitialAlreadySeen)
         XCTAssertNotNil(singleDoseImmunizationJohnsonCert.reissueProcessInitialAlreadySeen)
@@ -475,7 +474,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertTrue(reissueProcessInitialAlreadySeen)
         XCTAssertFalse(reissueProcessInitialNotAlreadySeen)
     }
-    
+
     func testReissueProcessInitialAlreadySeen_NoOfCertsAlreadySeen() {
         // GIVEN
         someOtherCert2.reissueProcessInitialAlreadySeen = false
@@ -486,11 +485,11 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let reissueProcessInitialAlreadySeen = certs.reissueProcessInitialAlreadySeen
         let reissueProcessInitialNotAlreadySeen = certs.reissueProcessInitialNotAlreadySeen
-        
+
         // THEN
         XCTAssertNotNil(someOtherCert2.reissueProcessInitialAlreadySeen)
         XCTAssertNotNil(singleDoseImmunizationJohnsonCert.reissueProcessInitialAlreadySeen)
@@ -499,7 +498,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(reissueProcessInitialAlreadySeen)
         XCTAssertTrue(reissueProcessInitialNotAlreadySeen)
     }
-    
+
     func testReissueProcessInitialAlreadySeen_OneOfCertsAlreadySeenFalse() {
         // GIVEN
         someOtherCert2.reissueProcessInitialAlreadySeen = false
@@ -507,11 +506,11 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert,
                      someOtherCert1,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         let reissueProcessInitialAlreadySeen = certs.reissueProcessInitialAlreadySeen
         let reissueProcessInitialNotAlreadySeen = certs.reissueProcessInitialNotAlreadySeen
-        
+
         // THEN
         XCTAssertNotNil(someOtherCert2.reissueProcessInitialAlreadySeen)
         XCTAssertNil(singleDoseImmunizationJohnsonCert.reissueProcessInitialAlreadySeen)
@@ -520,7 +519,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(reissueProcessInitialAlreadySeen)
         XCTAssertTrue(reissueProcessInitialNotAlreadySeen)
     }
-    
+
     func testFilterCertificatesSamePerson() {
         // GIVEN
         let certOfJohnDoe = boosterCertificateAfterReIssue
@@ -532,10 +531,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                                        recoveryCert,
                                        recoveryCert2,
                                        certOfEllaKatami]
-        
+
         // WHEN
         let filteredCertsForJohn = certsOfJohnAndOneOfElla.filterMatching(certOfJohnDoe)
-        
+
         // THEN
         XCTAssertEqual(filteredCertsForJohn.count, 6)
         XCTAssertTrue(filteredCertsForJohn.contains(someOtherCert2))
@@ -546,7 +545,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertTrue(filteredCertsForJohn.contains(recoveryCert2))
         XCTAssertFalse(filteredCertsForJohn.contains(certOfEllaKatami))
     }
-    
+
     func testFilterCertificatesSamePersonAlternative() {
         // GIVEN
         let certOfEllaKatami = CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
@@ -557,10 +556,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                                        recoveryCert,
                                        recoveryCert2,
                                        certOfEllaKatami]
-        
+
         // WHEN
         let filteredCertsForElla = certsOfJohnAndOneOfElla.filterMatching(certOfEllaKatami)
-        
+
         // THEN
         XCTAssertEqual(filteredCertsForElla.count, 1)
         XCTAssertFalse(filteredCertsForElla.contains(someOtherCert2))
@@ -571,24 +570,24 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(filteredCertsForElla.contains(recoveryCert2))
         XCTAssertTrue(filteredCertsForElla.contains(certOfEllaKatami))
     }
-    
+
     func testSortedByDnVacinationRecoveryAndTestCertficateMixed() {
         // GIVEN
         var certs = [singleDoseImmunizationJohnsonCert,
                      recoveryCert,
                      recoveryCert2,
                      vaccinationWithTwoShotsOfVaccine]
-        
+
         // WHEN
         certs = certs.sortedByDn
-        
+
         // THEN
         XCTAssertEqual(certs[0], vaccinationWithTwoShotsOfVaccine)
         XCTAssertEqual(certs[1], singleDoseImmunizationJohnsonCert)
         XCTAssertEqual(certs[2], recoveryCert)
         XCTAssertEqual(certs[3], recoveryCert2)
     }
-    
+
     func testFilter2of1s() {
         // GIVEN
         var certs = [singleDoseImmunizationJohnsonCert,
@@ -597,15 +596,15 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      boosterCertificateAfterReIssue,
                      vaccinationWithTwoShotsOfVaccine,
                      doubleDoseImmunizationJohnsonCert]
-        
+
         // WHEN
         certs = certs.filter2Of1
-        
+
         // THEN
         XCTAssertEqual(certs.count, 1)
         XCTAssertEqual(certs[0], boosterCertificateAfterReIssue)
     }
-    
+
     func testFilterRecoveries() {
         // GIVEN
         let certs = [singleDoseImmunizationJohnsonCert,
@@ -614,7 +613,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      boosterCertificateAfterReIssue,
                      vaccinationWithTwoShotsOfVaccine,
                      doubleDoseImmunizationJohnsonCert]
-        
+
         // WHEN
         let certsOfRecoveries = certs.filterRecoveries
         let recoveries = certs.recoveries
@@ -643,7 +642,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertTrue(tokens.isEmpty)
     }
-    
+
     func testQualifiedCertificatesForVaccinationExpiryReissue_token_is_reissueable() {
         // Given
         var cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -671,7 +670,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(tokens.count, 6)
         XCTAssertEqual(tokens.first, token)
     }
-    
+
     func test_expired_have_least_priority() {
         // Given
         var cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -679,8 +678,8 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let tokenExpired = cborWebToken.extended(vaccinationQRCodeData: "1")
         let cborWebToken2 = CBORWebToken.mockVaccinationCertificate
         let tokenNotExpired = cborWebToken2.extended(vaccinationQRCodeData: "2")
-        let sut: [ExtendedCBORWebToken] = [tokenExpired,tokenNotExpired]
-        
+        let sut: [ExtendedCBORWebToken] = [tokenExpired, tokenNotExpired]
+
         // WHEN
         let tokens = sut.sortLatest()
 
@@ -689,7 +688,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(tokens.first, tokenNotExpired)
         XCTAssertEqual(tokens.last, tokenExpired)
     }
-    
+
     func test_revoked_have_least_priority() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -698,7 +697,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let cborWebToken2 = CBORWebToken.mockVaccinationCertificate
         let tokenNotRevoked = cborWebToken2.extended(vaccinationQRCodeData: "2")
         let sut: [ExtendedCBORWebToken] = [tokenRevoked, tokenNotRevoked]
-        
+
         // WHEN
         let tokens = sut.sortLatest()
 
@@ -707,7 +706,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(tokens.first, tokenNotRevoked)
         XCTAssertEqual(tokens.last, tokenRevoked)
     }
-    
+
     func test_invalid_have_least_priority() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -716,7 +715,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let cborWebToken2 = CBORWebToken.mockVaccinationCertificate
         let tokenNotInvalid = cborWebToken2.extended(vaccinationQRCodeData: "2")
         let sut: [ExtendedCBORWebToken] = [tokenInvalid, tokenNotInvalid]
-        
+
         // WHEN
         let tokens = sut.sortLatest()
 
@@ -725,7 +724,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(tokens.first, tokenNotInvalid)
         XCTAssertEqual(tokens.last, tokenInvalid)
     }
-    
+
     func test_all_invalids_have_least_priority_but_sorted_by_dtScFr() {
         // Given
         let vaccinationIdentifier = "vaccination"
@@ -743,13 +742,13 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         var tokenRecovery = CBORWebToken.mockRecoveryCertificate
             .mockRecoverySetDate(recoveryDate)
             .extended(vaccinationQRCodeData: recoveryIdentifier)
-        
+
         tokenVaccination.revoked = true
         tokenTest.vaccinationCertificate.exp = .init(timeIntervalSinceNow: -60)
         tokenRecovery.invalid = true
 
         let sut: [ExtendedCBORWebToken] = [tokenVaccination, tokenTest, tokenRecovery]
-        
+
         // WHEN
         let tokens = sut.sortLatest()
 
@@ -759,7 +758,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(tokens[1].vaccinationQRCodeData, vaccinationIdentifier)
         XCTAssertEqual(tokens[2].vaccinationQRCodeData, recoveryIdentifier)
     }
-    
+
     func testQualifiedCertificatesForVaccinationExpiryReissue_token_is_not_reissueable() {
         // Given
         var cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -788,11 +787,11 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Given
         let now = Date()
 
-        var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-3)
+        var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now - 3)
         vaccinationCborWebToken.exp = now - 1
         let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
 
-        var recoveryCborWebToken = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-4)
+        var recoveryCborWebToken = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now - 4)
         recoveryCborWebToken.exp = now - 2
         let recoveryToken = recoveryCborWebToken.extended(vaccinationQRCodeData: "recoveryToken")
 
@@ -818,12 +817,12 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let now = Date()
 
         var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate
-            .mockVaccinationSetDate(now-2)
+            .mockVaccinationSetDate(now - 2)
         vaccinationCborWebToken.exp = now
         let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
 
         var recoveryCborWebToken = CBORWebToken.mockRecoveryCertificate
-            .mockRecovery(fr: now-1)
+            .mockRecovery(fr: now - 1)
         recoveryCborWebToken.exp = now
         let recoveryToken = recoveryCborWebToken.extended(vaccinationQRCodeData: "recoveryToken")
 
@@ -852,23 +851,23 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         vaccinationCborWebToken.exp = now
         let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
 
-        var cborToken1 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-2)
-        cborToken1.exp = now-2
+        var cborToken1 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now - 2)
+        cborToken1.exp = now - 2
         var token1 = cborToken1.extended(vaccinationQRCodeData: "token1")
         token1.revoked = true
 
-        var cborToken2 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-3)
-        cborToken2.exp = now-3
+        var cborToken2 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now - 3)
+        cborToken2.exp = now - 3
         var token2 = cborToken2.extended(vaccinationQRCodeData: "token2")
         token2.invalid = true
 
         var cborToken3 = CBORWebToken.mockTestCertificate
-            .mockVaccinationSetDate(now-4)
-        cborToken3.exp = now-4
+            .mockVaccinationSetDate(now - 4)
+        cborToken3.exp = now - 4
         let token3 = cborToken3.extended(vaccinationQRCodeData: "token3")
 
-        var cborToken4 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-5)
-        cborToken4.exp = now-5
+        var cborToken4 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now - 5)
+        cborToken4.exp = now - 5
         let token4 = cborToken4.extended(vaccinationQRCodeData: "token4")
 
         let sut: [ExtendedCBORWebToken] = [
@@ -1030,7 +1029,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         recoveryCborWebToken.exp = now - 2
         let recoveryToken = recoveryCborWebToken.extended(vaccinationQRCodeData: "recoveryToken")
 
-        var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-1)
+        var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now - 1)
         vaccinationCborWebToken.exp = now - 1
         let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
 
@@ -1058,12 +1057,12 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let now = Date()
 
         var recoveryCborWebToken = CBORWebToken.mockRecoveryCertificate
-            .mockRecovery(fr: now-2)
+            .mockRecovery(fr: now - 2)
         recoveryCborWebToken.exp = now
         let recoveryToken = recoveryCborWebToken.extended(vaccinationQRCodeData: "recoveryToken")
 
         var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate
-            .mockVaccinationSetDate(now-1)
+            .mockVaccinationSetDate(now - 1)
         vaccinationCborWebToken.exp = now
         let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
 
@@ -1094,18 +1093,18 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         recoveryCborWebToken.exp = now
         let recoveryToken = recoveryCborWebToken.extended(vaccinationQRCodeData: "recoveryToken")
 
-        let cborToken1 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-2)
+        let cborToken1 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now - 2)
         var token1 = cborToken1.extended(vaccinationQRCodeData: "token1")
         token1.revoked = true
 
-        let cborToken2 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-3)
+        let cborToken2 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now - 3)
         var token2 = cborToken2.extended(vaccinationQRCodeData: "token2")
         token2.invalid = true
 
-        let cborToken3 = CBORWebToken.mockTestCertificate.mockVaccinationSetDate(now-4)
+        let cborToken3 = CBORWebToken.mockTestCertificate.mockVaccinationSetDate(now - 4)
         let token3 = cborToken3.extended(vaccinationQRCodeData: "token3")
 
-        let cborToken4 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-5)
+        let cborToken4 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now - 5)
         let token4 = cborToken4.extended(vaccinationQRCodeData: "token4")
 
         let sut: [ExtendedCBORWebToken] = [
@@ -1189,11 +1188,11 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         cborWebToken1.exp = .init(timeIntervalSinceNow: -60)
         let token1 = cborWebToken1.extended(vaccinationQRCodeData: "1")
         var cborWebToken2 = CBORWebToken.mockRecoveryCertificate
-            .mockRecovery(fr: now-1)
+            .mockRecovery(fr: now - 1)
         cborWebToken2.exp = .init(timeIntervalSinceNow: -60)
         let token2 = cborWebToken2.extended(vaccinationQRCodeData: "2")
         let token3 = CBORWebToken.mockVaccinationCertificate
-            .mockVaccinationSetDate(now-2)
+            .mockVaccinationSetDate(now - 2)
             .extended(vaccinationQRCodeData: "3")
         let sut: [ExtendedCBORWebToken] = [
             token2,
@@ -1239,7 +1238,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertTrue(alreadySeen)
     }
-    
+
     func testVaccinationExpiryReissueNewBadgeAlreadySeen_not_already_seen() {
         var cborWebToken = CBORWebToken.mockVaccinationCertificate
         cborWebToken.exp = .init(timeIntervalSinceNow: -60)
@@ -1252,9 +1251,8 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertFalse(alreadySeen)
     }
-    
+
     func testRemoveDuplicates() throws {
-        
         // GIVEN about Vaccination -> later should only stay vaccinationToken3 with latest issued at date and vaccinationToken4
         let vaccinationTokenDt = try XCTUnwrap(DateUtils.parseDate("2021-04-26T15:05:00"))
         let vaccinationTokenDt2 = try XCTUnwrap(DateUtils.parseDate("2021-05-26T15:05:00"))
@@ -1269,59 +1267,57 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         var vaccinationToken2 = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "2")
         vaccinationToken2.vaccinationCertificate.iat = vaccinationToken2Iat
         vaccinationToken2.vaccinationCertificate.hcert.dgc.v!.first!.dt = vaccinationTokenDt
-        
+
         var vaccinationToken3 = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "3")
         vaccinationToken3.vaccinationCertificate.iat = vaccinationToken3Iat
         vaccinationToken3.vaccinationCertificate.hcert.dgc.v!.first!.dt = vaccinationTokenDt
-        
+
         var vaccinationToken4 = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "4")
         vaccinationToken4.vaccinationCertificate.iat = vaccinationToken3Iat
         vaccinationToken4.vaccinationCertificate.hcert.dgc.v!.first!.dt = vaccinationTokenDt2
-        
-        
+
         // GIVEN about Recovery -> later should only stay recoveryToken3 with latest issued at date and recoveryToken4
         let recoveryTokenFr = try XCTUnwrap(DateUtils.parseDate("2022-05-01T15:05:00"))
         let recoveryTokenFr2 = try XCTUnwrap(DateUtils.parseDate("2022-05-02T15:05:00"))
         let recoveryToken1Iat = try XCTUnwrap(DateUtils.parseDate("2022-05-02T15:05:00"))
         let recoveryToken2Iat = try XCTUnwrap(DateUtils.parseDate("2022-05-03T15:05:00"))
         let recoveryToken3Iat = try XCTUnwrap(DateUtils.parseDate("2022-05-04T15:05:00"))
-        
+
         var recoveryToken1 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "5")
         recoveryToken1.vaccinationCertificate.iat = recoveryToken1Iat
         recoveryToken1.vaccinationCertificate.hcert.dgc.r!.first!.fr = recoveryTokenFr
-        
+
         var recoveryToken2 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "6")
         recoveryToken2.vaccinationCertificate.iat = recoveryToken2Iat
         recoveryToken2.vaccinationCertificate.hcert.dgc.r!.first!.fr = recoveryTokenFr
-        
+
         var recoveryToken3 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "7")
         recoveryToken3.vaccinationCertificate.iat = recoveryToken3Iat
         recoveryToken3.vaccinationCertificate.hcert.dgc.r!.first!.fr = recoveryTokenFr
-        
+
         var recoveryToken4 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "8")
         recoveryToken4.vaccinationCertificate.iat = recoveryToken3Iat
         recoveryToken4.vaccinationCertificate.hcert.dgc.r!.first!.fr = recoveryTokenFr2
-        
+
         var recoveryToken5 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "9")
         recoveryToken5.vaccinationCertificate.iat = vaccinationToken3Iat
         recoveryToken5.vaccinationCertificate.hcert.dgc.r!.first!.fr = vaccinationTokenDt2
-       
-         
-         // GIVEN about Test -> later all test should stay in array no rules
-         let testTokenSc = try XCTUnwrap(DateUtils.parseDate("2022-05-01T15:05:00"))
-         let testToken1Iat = try XCTUnwrap(DateUtils.parseDate("2022-07-02T15:05:00"))
-         
-         var testToken1 = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "10")
-         testToken1.vaccinationCertificate.iat = testToken1Iat
-         testToken1.vaccinationCertificate.hcert.dgc.t!.first!.sc = testTokenSc
 
-         var testToken2 = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "11")
-         testToken2.vaccinationCertificate.iat = testToken1Iat
-         testToken2.vaccinationCertificate.hcert.dgc.t!.first!.sc = testTokenSc
+        // GIVEN about Test -> later all test should stay in array no rules
+        let testTokenSc = try XCTUnwrap(DateUtils.parseDate("2022-05-01T15:05:00"))
+        let testToken1Iat = try XCTUnwrap(DateUtils.parseDate("2022-07-02T15:05:00"))
 
-         var testToken3 = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "12")
-         testToken3.vaccinationCertificate.iat = testToken1Iat
-         testToken3.vaccinationCertificate.hcert.dgc.t!.first!.sc = testTokenSc
+        var testToken1 = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "10")
+        testToken1.vaccinationCertificate.iat = testToken1Iat
+        testToken1.vaccinationCertificate.hcert.dgc.t!.first!.sc = testTokenSc
+
+        var testToken2 = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "11")
+        testToken2.vaccinationCertificate.iat = testToken1Iat
+        testToken2.vaccinationCertificate.hcert.dgc.t!.first!.sc = testTokenSc
+
+        var testToken3 = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "12")
+        testToken3.vaccinationCertificate.iat = testToken1Iat
+        testToken3.vaccinationCertificate.hcert.dgc.t!.first!.sc = testTokenSc
 
         let sut: [ExtendedCBORWebToken] = [vaccinationToken1,
                                            recoveryToken2,
@@ -1387,7 +1383,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertEqual(tokens.count, 1)
     }
-    
+
     func testFilterByNameDateOfBirth_dob_is_nil() {
         // Given
         var token1Owner1 = CBORWebToken.mockVaccinationCertificate
@@ -1412,7 +1408,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertEqual(tokens.count, 1)
     }
-    
+
     func test_sortLatestRecoveries() {
         // Given
         let token1r = CBORWebToken.mockRecoveryCertificate
@@ -1442,7 +1438,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(tokens.first?.vaccinationQRCodeData, "1r")
         XCTAssertEqual(tokens.last?.vaccinationQRCodeData, "2r")
     }
-    
+
     func test_latestRecovery() {
         // Given
         let token1r = CBORWebToken.mockRecoveryCertificate
@@ -1474,7 +1470,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertEqual(latestRecovery?.ci, "1r")
     }
-    
+
     func test_sortedByDtFrAndSc() {
         // GIVEN
         let token1r = CBORWebToken.mockRecoveryCertificate
@@ -1496,7 +1492,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         ]
         // WHEN
         let sortedByDtFrAndSc = sut.sortedByDtFrAndSc
-        
+
         // THEN
         XCTAssertEqual(sortedByDtFrAndSc[0], token1v)
         XCTAssertEqual(sortedByDtFrAndSc[1], token1r)
@@ -1514,6 +1510,7 @@ private extension Name {
     static func mustermann() -> Name {
         .init(gn: nil, fn: nil, gnt: nil, fnt: "MUSTERMANN")
     }
+
     static func yildirim() -> Name {
         .init(gn: nil, fn: nil, gnt: nil, fnt: "YILDIRIM")
     }

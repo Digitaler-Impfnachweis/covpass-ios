@@ -5,12 +5,12 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassCommon
-import PromiseKit
-import Foundation
 import CertLogic
+import CovPassCommon
+import Foundation
+import PromiseKit
 
-enum CheckMaskRulesUseCaseError: Error, Equatable  {
+enum CheckMaskRulesUseCaseError: Error, Equatable {
     case differentPersonalInformation(_ token1OfPerson: ExtendedCBORWebToken, _ token2OfPerson: ExtendedCBORWebToken)
     case secondScanSameTokenType(_ token: ExtendedCBORWebToken)
     case maskRulesNotAvailable(_ token: ExtendedCBORWebToken)
@@ -27,7 +27,7 @@ struct CheckMaskRulesUseCase {
     let additionalToken: ExtendedCBORWebToken?
 
     func execute() -> Promise<ExtendedCBORWebToken> {
-        return firstly {
+        firstly {
             checkMaskRulesAvailable()
         }
         .then {
@@ -46,7 +46,7 @@ struct CheckMaskRulesUseCase {
             Promise.value(token)
         }
     }
-    
+
     private func tokensForMaskRuleCheck() -> [ExtendedCBORWebToken] {
         var tokens: [ExtendedCBORWebToken] = [token]
         if let token = additionalToken {
@@ -54,14 +54,14 @@ struct CheckMaskRulesUseCase {
         }
         return tokens
     }
-    
+
     private func checkMaskRulesAvailable() -> Promise<Void> {
         guard holderStatus.maskRulesAvailable(for: region) else {
             return .init(error: CheckMaskRulesUseCaseError.maskRulesNotAvailable(token))
         }
         return .value
     }
-    
+
     private func checkMaskRules() -> Promise<Void> {
         if let additionalToken = additionalToken,
            additionalToken.vaccinationCertificate.certType == token.vaccinationCertificate.certType {
@@ -89,7 +89,7 @@ struct CheckMaskRulesUseCase {
             return .value
         }
     }
-    
+
     private func checkDomesticRules() -> Promise<Void> {
         switch holderStatus.checkDomesticAcceptanceAndInvalidationRules([token]) {
         case .passed:
@@ -100,7 +100,7 @@ struct CheckMaskRulesUseCase {
             return .init(error: CheckMaskRulesUseCaseError.invalidDueToRules(token))
         }
     }
-    
+
     private func checkEuRules() -> Promise<Void> {
         switch holderStatus.checkEuInvalidationRules([token]) {
         case .passed:

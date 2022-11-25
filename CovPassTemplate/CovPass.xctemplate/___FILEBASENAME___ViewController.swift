@@ -6,11 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassUI
+import UIKit
 
 class ___VARIABLE_moduleName___ViewController: UIViewController {
-
     // MARK: - Properties
 
     private(set) var viewModel: ___VARIABLE_moduleName___ViewModelProtocol
@@ -31,10 +30,9 @@ class ___VARIABLE_moduleName___ViewController: UIViewController {
     }
 
     // MARK: - Methods
-    
+
     func updateView() {}
-    
- }
+}
 
 extension ___VARIABLE_moduleName___ViewController: ViewModelDelegate {
     func viewModelDidUpdate() {

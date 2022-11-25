@@ -31,7 +31,7 @@ public enum Base45Coder {
     /// - parameter int8Array: the array to be encoded
     /// - returns: a String in base45
     public static func encode(_ int8Array: [UInt8]) -> String {
-        return sequence(state: int8Array.makeIterator(), next: { it in
+        sequence(state: int8Array.makeIterator(), next: { it in
             it.next().map { ($0, it.next()) }
         }).map { Base45Coder.mapToBase45Character(firstInt: $0, secondInt: $1) }.joined()
     }

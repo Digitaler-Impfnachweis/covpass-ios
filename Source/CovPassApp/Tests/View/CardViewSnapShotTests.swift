@@ -6,14 +6,13 @@
 //
 
 @testable import CovPassApp
-@testable import CovPassUI
 @testable import CovPassCommon
-import UIKit
+@testable import CovPassUI
 import PromiseKit
+import UIKit
 import XCTest
 
 class CardViewSnapShotTests: BaseSnapShotTests {
-    
     func configureSut(certificate: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended(),
                       asBooster: Bool = true) throws -> CertificateCollectionViewCell {
         certificate.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
@@ -37,17 +36,17 @@ class CardViewSnapShotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        
+
         return view
     }
 
-    func testBoosterNotification_test_certificate () throws {
+    func testBoosterNotification_test_certificate() throws {
         let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         let sut = try configureSut(certificate: cert, asBooster: true)
         verifyView(view: sut)
     }
-    
-    func testBoosterNotification_vaccination_partial_certificate () throws {
+
+    func testBoosterNotification_vaccination_partial_certificate() throws {
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
         cert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 2
@@ -55,8 +54,8 @@ class CardViewSnapShotTests: BaseSnapShotTests {
         let sut = try configureSut(certificate: cert)
         verifyView(view: sut)
     }
-    
-    func testBoosterNotification_vaccination_invalid () throws {
+
+    func testBoosterNotification_vaccination_invalid() throws {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert.invalid = true
         let sut = try configureSut(certificate: cert)

@@ -5,12 +5,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassCommon
 @testable import CovPassApp
+@testable import CovPassCommon
 import XCTest
 
 class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
-    
     func testWithoutLastUpdate() {
         let userDefaults = UserDefaultsPersistence()
         try? userDefaults.delete(UserDefaults.keyLastUpdatedTrustList)
@@ -23,8 +22,7 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
         let vc = TrustedListDetailsViewController(viewModel: sut)
         verifyView(vc: vc)
     }
-    
-    
+
     func testWithLastUpdate() {
         var userDefaults = UserDefaultsPersistence()
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
@@ -38,8 +36,7 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
         let vc = TrustedListDetailsViewController(viewModel: sut)
         verifyView(vc: vc)
     }
-    
-    
+
     func testWithLastUpdateFreshDate() {
         var userDefaults = UserDefaultsPersistence()
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
@@ -55,8 +52,7 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
         let vc = TrustedListDetailsViewController(viewModel: sut)
         verifyView(vc: vc)
     }
-    
-    
+
     func testWithLastUpdateTapOnRefresh() {
         var userDefaults = UserDefaultsPersistence()
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
@@ -71,7 +67,6 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
         vc.mainButton.innerButton.sendActions(for: .touchUpInside)
-        self.verifyView(vc: vc)
+        verifyView(vc: vc)
     }
-    
 }

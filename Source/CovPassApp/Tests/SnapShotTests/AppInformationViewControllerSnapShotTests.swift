@@ -29,7 +29,7 @@ class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
     func testDefault() {
         // Given
         persistence.disableWhatsNew = true
-        
+
         // When
         verifyView(view: sut.view)
     }

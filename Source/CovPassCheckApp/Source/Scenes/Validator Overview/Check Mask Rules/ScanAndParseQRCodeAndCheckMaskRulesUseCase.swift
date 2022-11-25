@@ -5,11 +5,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 import CovPassCommon
 import CovPassUI
-import PromiseKit
 import Foundation
-import CertLogic
+import PromiseKit
 
 struct ScanAndParseQRCodeAndCheckMaskRulesUseCase {
     let router: ScanQRCodeProtocol
@@ -19,13 +19,13 @@ struct ScanAndParseQRCodeAndCheckMaskRulesUseCase {
     var userDefaults: Persistence
     let certLogic: DCCCertLogicProtocol
     let additionalToken: ExtendedCBORWebToken?
-    
+
     func execute() -> Promise<ExtendedCBORWebToken> {
         firstly {
             router.scanQRCode()
         }
         .then { $0.mapOnScanResult() }
-        .get { result in
+        .get { _ in
             _ = self.audioPlayer.playCovPassCheckCertificateScannedIfEnabled()
         }
         .then {
@@ -33,11 +33,11 @@ struct ScanAndParseQRCodeAndCheckMaskRulesUseCase {
                                     vaccinationRepository: self.vaccinationRepository).execute()
         }
         .then { token -> Promise<ExtendedCBORWebToken> in
-            return CheckMaskRulesUseCase(token: token,
-                                         region: self.userDefaults.stateSelection,
-                                         revocationRepository: self.revocationRepository,
-                                         holderStatus: CertificateHolderStatusModel(dccCertLogic: self.certLogic),
-                                         additionalToken: additionalToken).execute()
+            CheckMaskRulesUseCase(token: token,
+                                  region: self.userDefaults.stateSelection,
+                                  revocationRepository: self.revocationRepository,
+                                  holderStatus: CertificateHolderStatusModel(dccCertLogic: self.certLogic),
+                                  additionalToken: additionalToken).execute()
         }
     }
 }

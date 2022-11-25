@@ -1,18 +1,16 @@
 //
 //  CheckSituationViewModel.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-
-@testable import CovPassUI
 import CovPassCommon
-import XCTest
+@testable import CovPassUI
 import PromiseKit
+import XCTest
 
 class CheckSituationViewModelTests: XCTestCase {
-    
     var offlineRevocationService: CertificateRevocationOfflineServiceMock!
     var repository: VaccinationRepositoryMock!
     var certLogic: DCCCertLogicMock!
@@ -20,7 +18,7 @@ class CheckSituationViewModelTests: XCTestCase {
     var router: CheckSituationRouterMock!
     var delegate: ViewModelDelegateMock!
     var sut: CheckSituationViewModel!
-    
+
     override func setUp() {
         super.setUp()
         persistence = .init()
@@ -45,7 +43,7 @@ class CheckSituationViewModelTests: XCTestCase {
                                       certLogic: certLogic)
         sut.delegate = delegate
     }
-    
+
     override func tearDown() {
         offlineRevocationService = nil
         certLogic = nil
@@ -56,12 +54,12 @@ class CheckSituationViewModelTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
-    
+
     func testSettingsContext() {
-        //WHEN
+        // WHEN
         sut.context = .settings
-        
-        //THEN
+
+        // THEN
         XCTAssertEqual(sut.pageTitle, "check_context_onboarding_title")
         XCTAssertEqual(sut.newBadgeText, "check_context_onboarding_tag")
         XCTAssertEqual(sut.pageImage, .illustration4)
@@ -78,10 +76,10 @@ class CheckSituationViewModelTests: XCTestCase {
     func testOfflineRevocationIsHidden_information_context() {
         // Given
         sut.context = .information
-        
+
         // When
         let isHidden = sut.offlineRevocationIsHidden
-        
+
         // Then
         XCTAssertTrue(isHidden)
     }
@@ -89,45 +87,45 @@ class CheckSituationViewModelTests: XCTestCase {
     func testOfflineRevocationIsEnabled_true() {
         // Given
         persistence.isCertificateRevocationOfflineServiceEnabled = true
-        
+
         // When
         let isEnabled = sut.offlineRevocationIsEnabled
-        
+
         // Then
         XCTAssertTrue(isEnabled)
     }
-    
+
     func testOfflineRevocationIsEnabled_false() {
         // Given
         persistence.isCertificateRevocationOfflineServiceEnabled = false
-        
+
         // When
         let isEnabled = sut.offlineRevocationIsEnabled
-        
+
         // Then
         XCTAssertFalse(isEnabled)
     }
-    
+
     func testToggleOfflineRevocation_enable() {
         // Given
         persistence.isCertificateRevocationOfflineServiceEnabled = false
-        
+
         // When
         sut.toggleOfflineRevocation()
-        
+
         // Then
         wait(for: [offlineRevocationService.updateExpectation], timeout: 1)
         XCTAssertTrue(persistence.isCertificateRevocationOfflineServiceEnabled)
     }
-    
+
     func testToggleOfflineRevocation_disable_user_confirmed() {
         // Given
         persistence.isCertificateRevocationOfflineServiceEnabled = true
         router.disableOfflineRevocation = true
-        
+
         // When
         sut.toggleOfflineRevocation()
-        
+
         // Then
         wait(for: [offlineRevocationService.resetExpectation], timeout: 1)
         XCTAssertFalse(persistence.isCertificateRevocationOfflineServiceEnabled)
@@ -148,14 +146,14 @@ class CheckSituationViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
         XCTAssertTrue(persistence.isCertificateRevocationOfflineServiceEnabled)
     }
-    
+
     func testPropertiesInitial() throws {
         let userDefaults = UserDefaultsPersistence()
         try userDefaults.delete(UserDefaults.keyLastUpdatedDCCRules)
         try userDefaults.delete(UserDefaults.keyLastUpdatedTrustList)
         XCTAssertFalse(sut.isLoading)
     }
-    
+
     func testPropertiesWithLastUpdate() {
         // Given
         var userDefaults = UserDefaultsPersistence()
@@ -187,7 +185,7 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.cancelButtonTitle, "settings_rules_list_loading_cancel")
         XCTAssertFalse(sut.isLoading)
     }
-    
+
     func testPropertiesWithLastUpdateWhileNothingToUpdate() {
         // Given
         var userDefaults = UserDefaultsPersistence()
@@ -220,7 +218,7 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.cancelButtonTitle, "settings_rules_list_loading_cancel")
         XCTAssertFalse(sut.isLoading)
     }
-    
+
     func testRefresh() {
         // Given
         let exp1 = expectation(description: "didUpdate viewModel before loading with isLoading false")
@@ -232,7 +230,7 @@ class CheckSituationViewModelTests: XCTestCase {
         certLogic.didUpdateRules = { exp2.fulfill() }
         certLogic.didUpdateValueSets = { exp3.fulfill() }
         repository.didUpdateTrustListHandler = { exp4.fulfill() }
-        
+
         // When
         sut.refresh()
         delegate.didUpdate = { exp5.fulfill() }
@@ -242,7 +240,7 @@ class CheckSituationViewModelTests: XCTestCase {
         wait(for: [exp1, exp2, exp3, offlineRevocationService.updateExpectation, exp4, exp5], timeout: 2, enforceOrder: true)
         XCTAssertFalse(sut.isLoading)
     }
-    
+
     func testCancel() {
         // Given
         let exp2 = expectation(description: "didRefresh didUpdateRules")
@@ -252,23 +250,20 @@ class CheckSituationViewModelTests: XCTestCase {
         certLogic.didUpdateRules = {
             print("1")
             exp2.fulfill()
-            
         }
         repository.didUpdateTrustListHandler = {
             exp3.fulfill()
         }
         sut.refresh()
 
-        
         // When
         sut.cancel()
-
 
         // Then
         XCTAssertFalse(sut.isLoading)
         wait(for: [exp2, exp3, offlineRevocationService.updateExpectation], timeout: 0.1, enforceOrder: true)
     }
-    
+
     func testSkipOfflineDownloadIfDisabled() {
         // Given
         let exp1 = expectation(description: "didUpdate viewModel before loading with isLoading false")
@@ -280,8 +275,7 @@ class CheckSituationViewModelTests: XCTestCase {
         delegate.didUpdate = { exp1.fulfill() }
         certLogic.didUpdateRules = { exp2.fulfill() }
         repository.didUpdateTrustListHandler = { exp3.fulfill() }
-        
-        
+
         // When
         sut.refresh()
         delegate.didUpdate = { exp4.fulfill() }
@@ -291,18 +285,18 @@ class CheckSituationViewModelTests: XCTestCase {
         wait(for: [exp1, exp2, offlineRevocationService.updateExpectation, exp3, exp4], timeout: 2, enforceOrder: true)
         XCTAssertFalse(sut.isLoading)
     }
-    
+
     func testErrorNoInternet() {
         // GIVEN
         certLogic.throwErrorOnUpdateRules = true
-        
+
         // WHEN
         sut.refresh()
 
         // THEN
         wait(for: [router.noInternetExpecation], timeout: 2)
     }
-    
+
     func testErroOtherCallsAreNotDisturbed() {
         // GIVEN
         certLogic.throwErrorOnUpdateRules = true
@@ -325,7 +319,7 @@ class CheckSituationViewModelTests: XCTestCase {
         repository.didUpdateTrustListHandler = {
             exp4.fulfill()
         }
-        
+
         // When
         sut.refresh()
         delegate.didUpdate = {
@@ -356,25 +350,25 @@ class CheckSituationViewModelTests: XCTestCase {
         // Then
         XCTAssertFalse(isHidden)
     }
-    
-    // MARK - Check situation related
-    
+
+    // MARK: - Check situation related
+
     func test_checkSituation_title() {
         // WHEN
         let sut = sut.checkSituationTitle
-        
+
         // THEN
         XCTAssertEqual(sut, "settings_rules_context_title")
     }
-    
+
     func test_checkSituation_subtitle() {
         // WHEN
         let sut = sut.checkSituationSubtitle
-        
+
         // THEN
         XCTAssertEqual(sut, "settings_rules_context_subtitle")
     }
-    
+
     func test_checkSituation_isHidden_context_settings() {
         // GIVEN
         sut.context = .settings
@@ -383,7 +377,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, false)
     }
-    
+
     func test_checkSituation_isHidden_context_information() {
         // GIVEN
         sut.context = .information
@@ -392,7 +386,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, true)
     }
-    
+
     func test_checkSituation_withinGermanyImage_unchecked() {
         // GIVEN
         configureSut(checkSituation: .enteringGermany)
@@ -401,7 +395,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, .checkboxUnchecked)
     }
-    
+
     func test_checkSituation_withinGermanyImage_checked() {
         // GIVEN
         configureSut(checkSituation: .withinGermany)
@@ -410,23 +404,23 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, .checkboxChecked)
     }
-    
+
     func test_checkSituation_withinGermanyTitle() {
         // WHEN
         let sut = sut.checkSituationWithinGermanyTitle
-        
+
         // THEN
         XCTAssertEqual(sut, "settings_rules_context_germany_title")
     }
-    
+
     func test_checkSituation_withinGermanySubtitle() {
         // WHEN
         let sut = sut.checkSituationWithinGermanySubtitle
-        
+
         // THEN
         XCTAssertEqual(sut, "settings_rules_context_germany_subtitle")
     }
-    
+
     func test_checkSituation_enteringGermanyImage_unchecked() {
         // GIVEN
         configureSut(checkSituation: .withinGermany)
@@ -435,7 +429,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, .checkboxUnchecked)
     }
-    
+
     func test_checkSituation_enteringGermanyImage_checked() {
         // GIVEN
         configureSut(checkSituation: .enteringGermany)
@@ -444,23 +438,23 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, .checkboxChecked)
     }
-    
+
     func test_checkSituation_enteringGermanyTitle() {
         // WHEN
         let sut = sut.checkSituationEnteringGermanyTitle
-        
+
         // THEN
         XCTAssertEqual(sut, "settings_rules_context_entry_title")
     }
-    
+
     func test_checkSituation_enteringGermanySubtitle() {
         // WHEN
         let sut = sut.checkSituationEnteringGermanySubtitle
-        
+
         // THEN
         XCTAssertEqual(sut, "settings_rules_context_entry_subtitle")
     }
-    
+
     func test_checkSituation_withinGermanyOptionAccessibiliyLabel_unselected() {
         // GIVEN
         configureSut(checkSituation: .enteringGermany)
@@ -469,7 +463,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, "accessibility_option_unselected")
     }
-    
+
     func test_checkSituation_withinGermanyOptionAccessibiliyLabel_selected() {
         // GIVEN
         configureSut(checkSituation: .withinGermany)
@@ -478,7 +472,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, "accessibility_option_selected")
     }
-    
+
     func test_checkSituation_enteringGermanyOptionAccessibiliyLabel_selected() {
         // GIVEN
         configureSut(checkSituation: .enteringGermany)
@@ -487,7 +481,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, "accessibility_option_selected")
     }
-    
+
     func test_checkSituation_enteringGermanyOptionAccessibiliyLabel_unselected() {
         // GIVEN
         configureSut(checkSituation: .withinGermany)
@@ -496,7 +490,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, "accessibility_option_unselected")
     }
-    
+
     func test_checkSituation_enteringGermanyViewIsChoosen() {
         // GIVEN
         configureSut(checkSituation: .withinGermany)
@@ -506,7 +500,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(sut, .checkboxChecked)
     }
-    
+
     func test_checkSituation_withinGermanyIsChoosen() {
         // GIVEN
         configureSut(checkSituation: .enteringGermany)

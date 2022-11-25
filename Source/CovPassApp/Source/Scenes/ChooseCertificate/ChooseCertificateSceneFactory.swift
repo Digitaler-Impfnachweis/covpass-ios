@@ -13,17 +13,17 @@ import UIKit
 
 struct ChooseCertificateSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
-    
+
     let router: ValidationServiceRoutable
     let ticket: ValidationServiceInitialisation
-    
+
     // MARK: - Lifecycle
-    
+
     init(router: ValidationServiceRoutable, ticket: ValidationServiceInitialisation) {
         self.router = router
         self.ticket = ticket
     }
-    
+
     func make(resolvable: Resolver<Void>) -> UIViewController {
         let apiService = APIService(
             customURLSession: CustomURLSession(sessionDelegate: APIServiceVAASDelegate(

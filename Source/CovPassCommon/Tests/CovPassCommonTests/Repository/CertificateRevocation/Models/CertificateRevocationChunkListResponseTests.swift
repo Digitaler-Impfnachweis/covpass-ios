@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationChunkListResponseTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -14,7 +14,7 @@ class CertificateRevocationChunkListResponseTests: XCTestCase {
     override func setUpWithError() throws {
         sut = .init(
             hashes: [
-                [0x0a, 0x0b, 0x0c],
+                [0x0A, 0x0B, 0x0C],
                 [0x01, 0x02, 0x03]
             ],
             lastModified: "XYZ"
@@ -33,7 +33,7 @@ class CertificateRevocationChunkListResponseTests: XCTestCase {
         XCTAssertEqual(
             hashes,
             [
-                [0x0a, 0x0b, 0x0c],
+                [0x0A, 0x0B, 0x0C],
                 [0x01, 0x02, 0x03]
             ]
         )
@@ -51,7 +51,7 @@ class CertificateRevocationChunkListResponseTests: XCTestCase {
         // Given
         sut = .init(
             hashes: [
-                [0x0a, 0x0b, 0x0c],
+                [0x0A, 0x0B, 0x0C],
                 [0x01, 0x02, 0x03]
             ]
         )

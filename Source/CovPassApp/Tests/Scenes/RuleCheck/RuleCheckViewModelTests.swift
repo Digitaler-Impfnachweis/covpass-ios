@@ -56,7 +56,7 @@ class RuleCheckViewModelTests: XCTestCase {
             router.showCountrySelectionExpectation,
             delegate.viewModelDidUpdateExpectation
         ], timeout: 3)
-        
+
         XCTAssertEqual(router.receivedCountry, expectedCountry)
         XCTAssertEqual(router.receivedCountries, expectedCountries)
         XCTAssertEqual(sut.country, expectedCountryToReturn)

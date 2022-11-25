@@ -6,10 +6,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+@testable import CovPassCommon
 import Foundation
 import XCTest
-@testable import CovPassCommon
-
 
 class MockPersistence: Persistence {
     private var store = [String: Any]()

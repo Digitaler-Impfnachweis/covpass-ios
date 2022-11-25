@@ -6,8 +6,8 @@
 //
 
 import CovPassCommon
-import PromiseKit
 import CovPassUI
+import PromiseKit
 import Scanner
 
 struct ParseCertificateUseCase {
@@ -18,11 +18,11 @@ struct ParseCertificateUseCase {
         firstly {
             payloadFromScannerResult(scanResult)
         }
-        .then{
+        .then {
             vaccinationRepository.validCertificate($0, checkSealCertificate: true)
         }
     }
-    
+
     private func payloadFromScannerResult(_ result: ScanResult) -> Promise<String> {
         switch result {
         case let .success(payload):

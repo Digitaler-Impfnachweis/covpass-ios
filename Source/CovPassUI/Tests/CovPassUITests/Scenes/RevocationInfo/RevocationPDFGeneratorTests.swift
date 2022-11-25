@@ -5,11 +5,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 @testable import CovPassUI
 import Foundation
-import XCTest
-import CovPassCommon
 import PDFKit
+import XCTest
 
 class RevocationPDFGeneratorTests: XCTestCase {
     private var converter: SVGToPDFConverterMock!
@@ -38,7 +38,7 @@ class RevocationPDFGeneratorTests: XCTestCase {
 
         // When
         sut.generate(with: .mock())
-            .done { pdfDocument in
+            .done { _ in
                 expectation.fulfill()
             }
             .catch { _ in
@@ -61,7 +61,7 @@ class RevocationPDFGeneratorTests: XCTestCase {
 
         // When
         sut.generate(with: .mock())
-            .done { pdfDocument in
+            .done { _ in
                 XCTFail("Must not succeed.")
             }
             .catch { _ in
@@ -71,7 +71,6 @@ class RevocationPDFGeneratorTests: XCTestCase {
         // Then
         wait(for: [expectation], timeout: 2)
     }
-
 }
 
 private extension RevocationInfo {
@@ -89,11 +88,11 @@ private extension RevocationInfo {
 private extension SecKey {
     static func mock() throws -> SecKey {
         let keyPEM = """
------BEGIN PUBLIC KEY-----
-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIxHvrv8jQx9OEzTZbsx1prQVQn/3
-ex0gMYf6GyaNBW0QKLMjrSDeN6HwSPM0QzhvhmyQUixl6l88A7Zpu5OWSw==
------END PUBLIC KEY-----
-"""
+        -----BEGIN PUBLIC KEY-----
+        MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIxHvrv8jQx9OEzTZbsx1prQVQn/3
+        ex0gMYf6GyaNBW0QKLMjrSDeN6HwSPM0QzhvhmyQUixl6l88A7Zpu5OWSw==
+        -----END PUBLIC KEY-----
+        """
         let key = try keyPEM.secKey()
         return key
     }

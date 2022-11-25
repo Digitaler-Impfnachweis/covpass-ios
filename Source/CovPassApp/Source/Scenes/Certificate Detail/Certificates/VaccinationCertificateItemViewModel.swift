@@ -111,7 +111,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var statusIcon: UIImage? { neutral ? nil : .validationCheckmark }
-    
+
     var statusIconHidden: Bool { statusIcon == nil }
 
     var statusIconAccessibilityLabel: String? { activeTitle }
@@ -124,7 +124,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
         }
         return active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }
-    
+
     var neutral: Bool
 
     init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {

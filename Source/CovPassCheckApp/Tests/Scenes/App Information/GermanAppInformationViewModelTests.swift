@@ -23,7 +23,7 @@ class GermanAppInformationViewModelTests: XCTestCase {
             AppInformationBaseViewModel.Texts.companyDetailsTitle,
             AppInformationBaseViewModel.Texts.openSourceLicenseTitle,
             AppInformationBaseViewModel.Texts.accessibilityStatementTitle,
-            "app_information_authorities_function_title".localized,
+            "app_information_authorities_function_title".localized
         ]
         let sut = GermanAppInformationViewModel(
             router: AppInformationRouterMock(),
@@ -35,7 +35,7 @@ class GermanAppInformationViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(entries.count, 10)
-        for index in 0..<min(entries.count, expectedTitles.count) {
+        for index in 0 ..< min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }
     }

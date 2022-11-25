@@ -1,12 +1,12 @@
 //
 //  Persistence+SelectStateOnboarding.swift
-//  
+//
 //
 //  Created by Fatih Karakurt on 14.10.22.
 //
 
-import Foundation
 import CovPassCommon
+import Foundation
 
 private enum Constants {
     static let selectStateOnboardingWasShown = "keyselectStateOnboardingWasShown"

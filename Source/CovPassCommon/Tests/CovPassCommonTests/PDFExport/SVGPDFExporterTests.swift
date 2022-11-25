@@ -21,7 +21,7 @@ class SVGPDFExporterTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
-    
+
     func testVaccinationPDFExport() throws {
         let template = try XCTUnwrap(Template(string: "", type: .vaccination))
         let cert = CBORWebToken.mockVaccinationCertificate.extended()
@@ -52,7 +52,7 @@ class SVGPDFExporterTests: XCTestCase {
         XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockVaccinationCertificate.hcert.dgc.template).type, .vaccination)
         XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockVaccinationCertificate.hcert.dgc.template).data.count, 25752)
         XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockRecoveryCertificate.hcert.dgc.template).type, .recovery)
-        XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockRecoveryCertificate.hcert.dgc.template).data.count, 159418)
+        XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockRecoveryCertificate.hcert.dgc.template).data.count, 159_418)
         XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockTestCertificate.hcert.dgc.template).type, .test)
         XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockTestCertificate.hcert.dgc.template).data.count, 96773)
 

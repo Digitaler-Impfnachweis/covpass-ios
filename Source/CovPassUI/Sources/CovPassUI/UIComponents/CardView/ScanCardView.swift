@@ -19,15 +19,15 @@ public class ScanCardView: XibView {
     @IBOutlet public var textLabel: UILabel!
     @IBOutlet public var actionButton: MainButton!
     @IBOutlet public var subtitle: UILabel!
-    @IBOutlet public weak var chooseButton: MainButton!
-    public var chooseAction: (()->Void)? {
+    @IBOutlet public var chooseButton: MainButton!
+    public var chooseAction: (() -> Void)? {
         didSet {
             chooseButton.action = chooseAction
         }
     }
-    
-    
+
     // MARK: - Properties
+
     private let cornerRadius: CGFloat = 14
     private let shadowRadius: CGFloat = 16
     private let shadowOpacity: CGFloat = 0.2

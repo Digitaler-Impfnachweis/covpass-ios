@@ -1,5 +1,5 @@
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 
 protocol ReissueResultViewModelProtocol {
     var delegate: ViewModelDelegate? { get set }

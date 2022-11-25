@@ -26,7 +26,7 @@ class RuleCheckDetailViewModelTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-       sut = nil
+        sut = nil
     }
 
     private func configureSut(token: ExtendedCBORWebToken) {
@@ -119,7 +119,7 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         let testFacilityItem = items.first { title, _, _, _ in
             title == Constants.testFacilityTitle
         }
-        let countryItem =  items.first { title, _, _, _ in
+        let countryItem = items.first { title, _, _, _ in
             title == Constants.countryRecoveryAndTestTitle
         }
         let fullnameTransliteratedItem = items.first { title, _, _, _ in
@@ -148,7 +148,7 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         let items = sut.items
 
         // Then
-        let countryItem =  items.first { title, _, _, _ in
+        let countryItem = items.first { title, _, _, _ in
             title == Constants.countryVacctionationTitle
         }
         XCTAssertEqual(countryItem?.1, "Israel")
@@ -164,7 +164,7 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         let items = sut.items
 
         // Then
-        let countryItem =  items.first { title, _, _, _ in
+        let countryItem = items.first { title, _, _, _ in
             title == Constants.countryRecoveryAndTestTitle
         }
         XCTAssertEqual(countryItem?.1, "Iceland")
@@ -180,10 +180,9 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         let items = sut.items
 
         // Then
-        let countryItem =  items.first { title, _, _, _ in
+        let countryItem = items.first { title, _, _, _ in
             title == Constants.countryRecoveryAndTestTitle
         }
         XCTAssertEqual(countryItem?.1, "Brazil")
     }
 }
-

@@ -120,16 +120,16 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
         toolbarView.state = state
         updateToolbarAccessibility()
     }
-    
+
     private func updateToolbarAccessibility() {
         let accessibilityPageIndicatorText: String = viewModel.accessibilityPageIndicatorText
         let countOfPages: Int = pages.count
         let previousPageIsAvailable: Bool = currentIndex > 0
-        let backButtonText: String? = previousPageIsAvailable ? String(format: accessibilityPageIndicatorText, currentIndex, countOfPages)  : nil
+        let backButtonText: String? = previousPageIsAvailable ? String(format: accessibilityPageIndicatorText, currentIndex, countOfPages) : nil
         let nextPageNumber: Int = currentIndex + 2
         let nextPageIsAvailable: Bool = nextPageNumber < countOfPages
         let nextButtonText: String? = nextPageIsAvailable ? String(format: accessibilityPageIndicatorText, nextPageNumber, countOfPages) : nil
-        
+
         toolbarView.leftButton.isAccessibilityElement = true
         toolbarView.leftButton.accessibilityValue = backButtonText
         toolbarView.leftButton.accessibilityTraits = .button

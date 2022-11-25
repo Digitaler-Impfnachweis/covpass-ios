@@ -13,7 +13,7 @@ import XCTest
 
 class NewRegulationsAnnouncementViewControllerSnapshotTests: BaseSnapShotTests {
     private var sut: NewRegulationsAnnouncementViewController!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         let (_, resolver) = Promise<Void>.pending()

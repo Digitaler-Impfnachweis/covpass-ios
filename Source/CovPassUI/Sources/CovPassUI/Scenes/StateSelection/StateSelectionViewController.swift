@@ -9,46 +9,45 @@
 import UIKit
 
 public class StateSelectionViewController: UIViewController {
-    
     // MARK: - IBOutlet
-    
-    @IBOutlet weak var headerView: InfoHeaderView!
-    @IBOutlet weak var contentStackView: UIStackView!
-    
+
+    @IBOutlet var headerView: InfoHeaderView!
+    @IBOutlet var contentStackView: UIStackView!
+
     // MARK: - Properties
-    
+
     private(set) var viewModel: StateSelectionViewModelProtocol
-    
+
     // MARK: - Lifecycle
-    
+
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
-    
+
     public init(viewModel: StateSelectionViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .uiBundle)
     }
-    
-    public override func viewDidLoad() {
+
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
-    
-    public override func viewDidAppear(_ animated: Bool) {
+
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnounce)
     }
-    
-    public override func viewDidDisappear(_ animated: Bool) {
+
+    override public func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
     }
-    
+
     // MARK: private methods
-    
+
     private func setupViews() {
         headerView.attributedTitleText = viewModel.pageTitle.styledAs(.header_2)
-        headerView.image =  .close
+        headerView.image = .close
         headerView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_14)
 
         headerView.action = { [weak self] in
@@ -65,8 +64,8 @@ public class StateSelectionViewController: UIViewController {
                 return
             }
             let view = CountryItemView()
-            view.leftIcon.image =  nil
-            view.leftIcon.isHidden =  true
+            view.leftIcon.image = nil
+            view.leftIcon.isHidden = true
             view.rightIcon.image = .chevronRight
             view.textLabel.attributedText = stateCodeWithPrefix.localized(bundle: .main).styledAs(.header_3)
             view.action = {
@@ -76,7 +75,7 @@ public class StateSelectionViewController: UIViewController {
             }
             view.enableAccessibility(label: stateCodeWithPrefix.localized(bundle: .main), traits: .button)
             contentStackView.addArrangedSubview(view)
-            
+
             let seperatorView: UIView = {
                 let view = UIView()
                 view.translatesAutoresizingMaskIntoConstraints = false

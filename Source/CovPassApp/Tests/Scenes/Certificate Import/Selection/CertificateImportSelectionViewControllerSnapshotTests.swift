@@ -29,7 +29,7 @@ class CertificateImportSelectionViewControllerSnapshotTests: BaseSnapShotTests {
         viewModel.items[4].selected = true
         viewModel.items[5].selected = true
         viewModel.itemSelectionState = .some
-        
+
         // Then
         verifyView(view: sut.view, height: 1300)
     }
@@ -58,7 +58,7 @@ class CertificateImportSelectionViewControllerSnapshotTests: BaseSnapShotTests {
         viewModel.hideSelection = true
         viewModel.title = "No valid certificate was found"
         viewModel.buttonTitle = "OK"
-        
+
         // Then
         verifyView(view: sut.view, height: 1300)
     }

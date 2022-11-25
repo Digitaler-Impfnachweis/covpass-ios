@@ -1,7 +1,7 @@
+import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
-import CovPassUI
-import CovPassCommon
 
 private enum Constants {
     enum Keys {
@@ -15,8 +15,8 @@ private enum Constants {
 }
 
 class ReissueResultViewModel: ReissueResultViewModelProtocol {
-        
     // MARK: - Properties
+
     weak var delegate: ViewModelDelegate?
     let title = Constants.Keys.title
     let subtitle = Constants.Keys.subTitle
@@ -31,9 +31,9 @@ class ReissueResultViewModel: ReissueResultViewModelProtocol {
     private let resolver: Resolver<Void>
     private let router: ReissueResultRouterProtocol
     private let repository: VaccinationRepositoryProtocol
-    
+
     // MARK: - Lifecyle
-    
+
     init(router: ReissueResultRouterProtocol,
          vaccinationRepository: VaccinationRepositoryProtocol,
          resolver: Resolver<Void>,
@@ -43,13 +43,13 @@ class ReissueResultViewModel: ReissueResultViewModelProtocol {
         self.resolver = resolver
         self.newTokens = newTokens
         self.oldTokens = oldTokens
-        self.newCertItem = newTokens[0].certItem(active: true)
-        self.oldCertItem = oldTokens.sortedByDn[0].certItem(active: false)
-        self.repository = vaccinationRepository
+        newCertItem = newTokens[0].certItem(active: true)
+        oldCertItem = oldTokens.sortedByDn[0].certItem(active: false)
+        repository = vaccinationRepository
     }
-    
+
     // MARK: - Methods
-    
+
     func deleteOldTokens() {
         firstly {
             repository.delete(oldTokens.sortedByDn[0])

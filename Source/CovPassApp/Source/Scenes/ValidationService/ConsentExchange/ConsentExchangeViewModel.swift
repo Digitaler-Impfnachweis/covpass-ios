@@ -5,27 +5,26 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
 import CovPassUI
-import PromiseKit
+import Foundation
 import JWTDecode
+import PromiseKit
 
 private enum Constants {
-    
     static let reuseIdentifier = "cell"
     static let reuseIdentifierHintCell = "hintCell"
     static let reuseIdentifierSubTitleCell = "subTitleCell"
-    
+
     static let numberOfSections = 1
-    
+
     enum Text {
         static let additionalInformation1 = "share_certificate_transmission_notes_first_list_item".localized
         static let additionalInformation2 = "share_certificate_transmission_notes_second_list_item".localized
         static let additionalInformation3 = "share_certificate_transmission_notes_third_list_item".localized
         static let additionalInformation4 = "share_certificate_transmission_notes_fourth_list_item".localized
         static let additionalInformation5 = "share_certificate_transmission_note_privacy_notice".localized
-        
+
         enum HintView {
             static let title = "share_certificate_transmission_consent_title".localized
             static let introText = "share_certificate_transmission_consent_message".localized
@@ -36,7 +35,7 @@ private enum Constants {
             static let bulletText5 = "share_certificate_transmission_consent_second_list_item_third_subitem".localized
             static let bulletText6 = "share_certificate_transmission_consent_second_list_item_fourth_subitem".localized
         }
-        
+
         enum Cell {
             static let providerTitle = "share_certificate_transmission_details_partner".localized
             static let subjectTitle = "share_certificate_transmission_details_provider".localized
@@ -45,16 +44,15 @@ private enum Constants {
 }
 
 class ConsentExchangeViewModel {
-    
     enum Accessibility {
         static let close = VoiceOverOptions.Settings(label: "accessibility_share_certificate_label_close".localized)
         static let openViewController = VoiceOverOptions.Settings(label: "accessibility_share_certificate_announce".localized)
         static let closeViewController = VoiceOverOptions.Settings(label: "accessibility_share_certificate_closing_announce".localized)
     }
-    
+
     enum Rows: Int, CaseIterable {
         case provider = 0, subject, consentHeader, hintView, additionalInformation, privacyLink
-        
+
         var cellTitle: String {
             switch self {
             case .provider:
@@ -67,7 +65,7 @@ class ConsentExchangeViewModel {
                 return ""
             }
         }
-        
+
         var reuseIdentifier: String {
             switch self {
             case .provider, .subject:
@@ -78,16 +76,15 @@ class ConsentExchangeViewModel {
                 return Constants.reuseIdentifier
             }
         }
-        
     }
-    
+
     weak var delegate: ViewModelDelegate?
     let router: ValidationServiceRoutable
     let initialisationData: ValidationServiceInitialisation
     let certificate: ExtendedCBORWebToken
     private let vaasRepository: VAASRepositoryProtocol
     private let userDefaults = UserDefaultsPersistence()
-    
+
     var additionalInformation: NSAttributedString {
         let bullets = NSAttributedString().appendBullets([Constants.Text.additionalInformation1.styledAs(.body),
                                                           Constants.Text.additionalInformation2.styledAs(.body),
@@ -95,13 +92,13 @@ class ConsentExchangeViewModel {
                                                           Constants.Text.additionalInformation4.styledAs(.body)],
                                                          spacing: nil)
         let attrString = NSMutableAttributedString(attributedString: bullets)
-        
+
         attrString.append(NSAttributedString(string: "\n\n"))
-        
+
         attrString.append(Constants.Text.additionalInformation5.styledAs(.body).colored(.onBackground70, in: nil))
         return attrString
     }
-    
+
     var hintViewText: NSAttributedString {
         String(format: Constants.Text.HintView.introText, vaasRepository.selectedValidationService?.name ?? "").styledAs(.body)
             .appendBullets([
@@ -113,29 +110,28 @@ class ConsentExchangeViewModel {
                 Constants.Text.HintView.bulletText6.styledAs(.body)
             ], spacing: 12)
     }
-    
+
     var numberOfSections: Int {
         Constants.numberOfSections
     }
-    
+
     var numberOfRows: Int {
         Rows.allCases.count
     }
-    
+
     var validationServiceName: String {
         vaasRepository.selectedValidationService?.name ?? ""
     }
-    
+
     var isLoading = false
-    
+
     internal init(router: ValidationServiceRoutable, vaasRepository: VAASRepositoryProtocol, initialisationData: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken) {
         self.router = router
         self.initialisationData = initialisationData
         self.certificate = certificate
         self.vaasRepository = vaasRepository
     }
-    
-    
+
     func cancel() {
         firstly {
             router.routeToWarning()
@@ -147,13 +143,13 @@ class ConsentExchangeViewModel {
         }
         .cauterize()
     }
-    
+
     func routeToPrivacyStatement() {
         router.routeToPrivacyStatement(url: initialisationData.privacyUrl)
     }
-    
+
     private func handleApiErrors(_ error: Error) {
-        self.router.showNoVerificationSubmissionPossible(error: error)
+        router.showNoVerificationSubmissionPossible(error: error)
             .done { canceled in
                 if canceled {
                     self.vaasRepository.cancellation()
@@ -161,9 +157,9 @@ class ConsentExchangeViewModel {
             }
             .cauterize()
     }
-    
+
     private func handleVaasErrors(_ error: Error) {
-        self.router.showNoVerificationPossible(error: error)
+        router.showNoVerificationPossible(error: error)
             .done { canceled in
                 if canceled {
                     self.vaasRepository.cancellation()
@@ -171,17 +167,17 @@ class ConsentExchangeViewModel {
             }
             .cauterize()
     }
-    
+
     private func errorHandling(_ error: Error) {
         if error is APIError {
             handleApiErrors(error)
         } else if error is VAASErrors {
             handleVaasErrors(error)
         } else {
-            self.router.showUnexpectedErrorDialog(error)
+            router.showUnexpectedErrorDialog(error)
         }
     }
-    
+
     func routeToValidation() {
         firstly {
             self.isLoading = true

@@ -14,8 +14,6 @@ import PromiseKit
 import UIKit
 
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
-    
-
     // MARK: - Test Variables
 
     var refreshedCalled = false
@@ -34,15 +32,13 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     var openingAnnouncment = "announcement"
     var closingAnnouncment: String = "closingannouncement"
     var showMultipleCertificateHolder = true
-    
-    func handleOpen(url: URL) -> Bool {
-        return true
+
+    func handleOpen(url _: URL) -> Bool {
+        true
     }
 
-    func updateBoosterRules() {
-        
-    }
-    
+    func updateBoosterRules() {}
+
     func refresh() -> Promise<Void> {
         refreshedCalled = true
         return .value
@@ -51,12 +47,12 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     func process(payload _: String, completion _: ((Error) -> Void)?) {
         processCalled = true
     }
-    
+
     func updateTrustList() {}
-    
+
     func updateValueSets() {}
-    
-    func reuseIdentifier(for indexPath: IndexPath) -> String {
+
+    func reuseIdentifier(for _: IndexPath) -> String {
         "reuseIdentifier"
     }
 
@@ -68,20 +64,18 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
         nil
     }
 
-    func loadCertificates() {
-
-    }
+    func loadCertificates() {}
 
     func process(payload _: String) -> Promise<ExtendedCBORWebToken> {
-        return Promise(error: ApplicationError.unknownError)
+        Promise(error: ApplicationError.unknownError)
     }
 
     func detailViewModel(_: ExtendedCBORWebToken) -> CertificateDetailViewModel? {
-        return nil
+        nil
     }
 
     func detailViewModel(_: IndexPath) -> CertificateDetailViewModel? {
-        return nil
+        nil
     }
 
     func showCertificate(at _: IndexPath) {
@@ -107,16 +101,14 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     func showRuleCheck() {}
 
     func showNotificationsIfNeeded() {}
-    
-    func viewModel(for row: Int) -> CardViewModel {
+
+    func viewModel(for _: Int) -> CardViewModel {
         NoCertificateCardViewModel()
     }
-    
+
     func countOfCells() -> Int {
         0
     }
-    
-    func revokeIfNeeded() {
-        
-    }
+
+    func revokeIfNeeded() {}
 }

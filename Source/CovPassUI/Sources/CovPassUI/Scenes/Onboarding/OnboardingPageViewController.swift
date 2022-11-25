@@ -48,7 +48,7 @@ public class OnboardingPageViewController: UIViewController {
         accessibilityLabel = headline.attributedText?.string
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         configureImageView()
     }
@@ -72,9 +72,8 @@ public class OnboardingPageViewController: UIViewController {
         descriptionText.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground70)
         descriptionText.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
         descriptionText.enableAccessibility(label: viewModel.info, traits: .staticText)
-
     }
-    
+
     private func configureAccessibilityRespondsToUserInteraction() {
         if #available(iOS 13.0, *) {
             headline.accessibilityRespondsToUserInteraction = true

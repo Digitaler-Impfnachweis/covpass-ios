@@ -22,28 +22,28 @@ final class MaskRequiredResultViewController: UIViewController {
     @IBOutlet var rescanButton: MainButton!
     @IBOutlet var counterLabel: UILabel!
     @IBOutlet var stackViewLeadingConstraint: NSLayoutConstraint!
-    
+
     private var viewModel: MaskRequiredResultViewModelProtocol
     private lazy var revocationLink: NSAttributedString = {
-         let linkText = (viewModel.revocationLinkTitle + " ⟩")
-             .styledAs(.header_3)
-             .colored(.brandAccent)
-         let string = NSMutableAttributedString(attributedString: linkText)
-         string.addAttribute(
-             .link,
-             value: "",
-             range: NSMakeRange(0, string.length)
-         )
-         return string
-     }()
-    
+        let linkText = (viewModel.revocationLinkTitle + " ⟩")
+            .styledAs(.header_3)
+            .colored(.brandAccent)
+        let string = NSMutableAttributedString(attributedString: linkText)
+        string.addAttribute(
+            .link,
+            value: "",
+            range: NSMakeRange(0, string.length)
+        )
+        return string
+    }()
+
     init(viewModel: MaskRequiredResultViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.viewModel.delegate = self
     }
 
-    required init?(coder: NSCoder) { nil }
+    required init?(coder _: NSCoder) { nil }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,22 +57,22 @@ final class MaskRequiredResultViewController: UIViewController {
         configureCounter()
         configureAccessibility()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: headerStackView)
     }
 
     private func configureRevocationInfoView() {
-         revocationInfoView.style = .info
-         revocationInfoContainerView.isHidden = viewModel.revocationInfoHidden
-         let bodyLabel = viewModel.revocationInfoText.styledAs(.body).colored(.onBackground70)
-         revocationInfoView.bodyLabel.attributedText = bodyLabel
-         revocationInfoView.bodyLabel.additionalAttributedText = revocationLink
-         revocationInfoView.bodyLabel.linkCallback = viewModel.revoke
-         revocationInfoView.titleLabel.attributedText = viewModel.revocationHeadline
-             .styledAs(.mainButton)
-     }
+        revocationInfoView.style = .info
+        revocationInfoContainerView.isHidden = viewModel.revocationInfoHidden
+        let bodyLabel = viewModel.revocationInfoText.styledAs(.body).colored(.onBackground70)
+        revocationInfoView.bodyLabel.attributedText = bodyLabel
+        revocationInfoView.bodyLabel.additionalAttributedText = revocationLink
+        revocationInfoView.bodyLabel.linkCallback = viewModel.revoke
+        revocationInfoView.titleLabel.attributedText = viewModel.revocationHeadline
+            .styledAs(.mainButton)
+    }
 
     private func configureInfoHeaderView() {
         infoHeaderView.attributedTitleText = nil
@@ -118,7 +118,7 @@ final class MaskRequiredResultViewController: UIViewController {
         if !viewModel.secondCertificateHintHidden {
             let viewModel = viewModel.secondCertificateReasonViewModel
             let view = ButtonBox()
-            
+
             view.paragraphView.setup(with: viewModel)
             view.button.title = viewModel.buttonText
             view.button.action = self.viewModel.scanSecondCertificate
@@ -142,7 +142,7 @@ final class MaskRequiredResultViewController: UIViewController {
         counterLabel.attributedText = counterInfo
         counterLabel.textAlignment = .center
     }
-    
+
     private func configureAccessibility() {
         if #available(iOS 13.0, *) {
             headerStackView.accessibilityRespondsToUserInteraction = true

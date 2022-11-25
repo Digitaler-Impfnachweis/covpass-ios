@@ -36,4 +36,3 @@ public struct DataPrivacySceneFactory: ResolvableSceneFactory {
         return DataPrivacyViewController(viewModel: viewModel)
     }
 }
-

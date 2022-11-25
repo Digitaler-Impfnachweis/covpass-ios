@@ -1,15 +1,16 @@
-import UIKit
 import CovPassCommon
+import UIKit
 
 public class ResultViewViewController: UIViewController {
-    
     // MARK: - IBOutlet
+
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var submitButton: MainButton!
 
     // MARK: - Properties
+
     private(set) var viewModel: ResultViewViewModelProtocol
 
     // MARK: - Lifecycle
@@ -22,7 +23,7 @@ public class ResultViewViewController: UIViewController {
         super.init(nibName: String(describing: Self.self), bundle: .module)
     }
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         configureView()
     }
@@ -32,9 +33,9 @@ public class ResultViewViewController: UIViewController {
         configureImageView()
         configureLabels()
     }
-    
+
     // MARK: Private methods
-    
+
     private func configureSaveButton() {
         submitButton.style = .primary
         submitButton.title = viewModel.buttonTitle
@@ -44,7 +45,7 @@ public class ResultViewViewController: UIViewController {
     private func configureImageView() {
         imageView.image = viewModel.image
     }
-    
+
     private func configureLabels() {
         titleLabel.attributedText = viewModel.title.styledAs(.header_1)
         descriptionLabel.attributedText = viewModel.description.styledAs(.body)

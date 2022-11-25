@@ -9,16 +9,16 @@
 import Foundation
 import UIKit
 
-extension UIFont {
+public extension UIFont {
     // MARK: - Supported fonts name
 
-    public static let sansBold = "OpenSans-Bold"
-    public static let sansSemiBold = "OpenSans-SemiBold"
-    public static let sansRegular = "OpenSans-Regular"
+    static let sansBold = "OpenSans-Bold"
+    static let sansSemiBold = "OpenSans-SemiBold"
+    static let sansRegular = "OpenSans-Regular"
 
     // MARK: - Load and unload fonts
 
-    public static func loadCustomFonts() {
+    static func loadCustomFonts() {
         do {
             try UIFont.register(with: sansBold, bundle: .module)
             try UIFont.register(with: sansSemiBold, bundle: .module)

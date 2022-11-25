@@ -10,7 +10,6 @@ import CovPassUI
 import UIKit
 
 struct NoCertificateCardViewModel: NoCertificateCardViewModelProtocol {
-    
     // MARK: - Internal Properties
 
     var delegate: ViewModelDelegate?
@@ -28,6 +27,6 @@ struct NoCertificateCardViewModel: NoCertificateCardViewModelProtocol {
     let iconTintColor: UIColor = .neutralWhite
 
     let textColor: UIColor = .neutralWhite
-    
+
     let showNotification: Bool = false
 }

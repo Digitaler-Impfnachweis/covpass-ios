@@ -11,7 +11,6 @@ import PromiseKit
 import UIKit
 
 struct TrustedListDetailsSceneFactory: SceneFactory {
-
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -21,7 +20,7 @@ struct TrustedListDetailsSceneFactory: SceneFactory {
     init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
     }
-    
+
     func make() -> UIViewController {
         let repository = VaccinationRepository.create()
         let router = TrustedListDetailsRouter(sceneCoordinator: sceneCoordinator)

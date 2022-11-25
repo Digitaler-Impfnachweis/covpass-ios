@@ -12,4 +12,3 @@ struct MaskRequiredInvalidSignatureReasonViewModel: MaskRequiredReasonViewModelP
     let title = "infschg_result_mask_mandatory_reason_4_title".localized
     let description = "infschg_result_mask_mandatory_reason_4_copy".localized
 }
-

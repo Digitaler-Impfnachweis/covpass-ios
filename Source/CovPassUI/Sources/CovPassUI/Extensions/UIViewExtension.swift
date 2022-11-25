@@ -84,8 +84,8 @@ public extension AutoLayoutContainer {
     }
 }
 
-extension UIView {
-    public func updateFocusBorderView(customFrame: CGRect? = nil) {
+public extension UIView {
+    func updateFocusBorderView(customFrame: CGRect? = nil) {
         FocusBorderManager.shared.updateFocusBorderView(customFrame: customFrame, view: self)
     }
 }

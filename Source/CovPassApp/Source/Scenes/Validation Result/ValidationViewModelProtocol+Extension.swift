@@ -12,7 +12,6 @@ import PromiseKit
 import UIKit
 
 extension ValidationViewModelProtocol {
-   
     var revocationInfoHidden: Bool { true }
     var revocationInfoText: String { "" }
     var revocationHeadline: String { "" }
@@ -20,11 +19,11 @@ extension ValidationViewModelProtocol {
     func revocationButtonTapped() {
         // not covered by CovPass
     }
-    
+
     var toolbarState: CustomToolbarState {
         .confirm("vaccination_certificate_detail_view_qrcode_screen_action_button_title".localized)
     }
-    
+
     func cancel() {
         router.showStart()
     }

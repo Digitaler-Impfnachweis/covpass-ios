@@ -6,8 +6,8 @@
 //
 
 @testable import CovPassApp
-@testable import CovPassUI
 @testable import CovPassCommon
+@testable import CovPassUI
 import PromiseKit
 import UIKit
 
@@ -31,11 +31,10 @@ class ScanViewSnapShotTests: BaseSnapShotTests {
         )
         return viewModel
     }
-    
+
     func testIsDocumentPickerEnabled() {
         let viewModel = viewModel(isDocumentPickerEnabled: true)
         let viewController = ScanViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 500)
     }
 }
-

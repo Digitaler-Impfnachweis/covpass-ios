@@ -1,6 +1,6 @@
 //
 //  DigitalGreenCertificateExtensionTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -58,7 +58,8 @@ class DigitalGreenCertificateExtensionTests: XCTestCase {
                 dt: Date(),
                 co: "",
                 is: "",
-                ci: "")
+                ci: ""
+            )
         ]
     }
 
@@ -147,7 +148,7 @@ class DigitalGreenCertificateExtensionTests: XCTestCase {
         // Then
         XCTAssertNotNil(dgc)
     }
-    
+
     func testJoinCertificates_multiple_certifcates() {
         // Given
         var dgc1 = CBORWebToken.mockRecoveryCertificate.hcert.dgc
@@ -179,21 +180,21 @@ class DigitalGreenCertificateExtensionTests: XCTestCase {
         XCTAssertNotEqual(dgc?.t?.first?.ci, testMiddle.ci)
         XCTAssertNotEqual(dgc?.t?.first?.ci, testOldest.ci)
     }
-    
+
     func test_joinCertificates_all_multiple_certifcates() {
         // Given
-        let token: CBORWebToken = CBORWebToken.mockRecoveryCertificate
+        let token = CBORWebToken.mockRecoveryCertificate
         token.hcert.dgc.r?.first?.fr = .init()
         var dgc1 = token.hcert.dgc
         dgc1.t = [testOldest, testMiddle]
 
-        let token2: CBORWebToken = CBORWebToken.mockVaccinationCertificate
+        let token2 = CBORWebToken.mockVaccinationCertificate
         token2.hcert.dgc.v?.first?.dt = .init()
         var dgc2 = token2.hcert.dgc
         dgc2.t = [testLatest]
         dgc2.r = [recoveryMiddle, recoveryLatest, recoveryOldest]
 
-        let token3: CBORWebToken = CBORWebToken.mockTestCertificate
+        let token3 = CBORWebToken.mockTestCertificate
         token3.hcert.dgc.t?.first?.sc = .init()
         var dgc3 = token3.hcert.dgc
         dgc3.v = [vaccinationMiddle, vaccinationLatest, vaccinationOldest]
@@ -224,7 +225,7 @@ private let recoveryMiddle = Recovery(tg: "", fr: .init() - 1, df: .init(), du: 
 private let recoveryOldest = Recovery(tg: "", fr: .init() - 1000, df: .init(), du: .init(), co: "", is: "", ci: "3")
 private let testLatest = Test(tg: "", tt: "", sc: .init() + 10000, tr: "", tc: nil, co: "", is: "", ci: "4")
 private let testMiddle = Test(tg: "", tt: "", sc: .init() + 100, tr: "", tc: nil, co: "", is: "", ci: "5")
-private let testOldest = Test(tg: "", tt: "", sc: .init() - 10000 , tr: "", tc: nil, co: "", is: "", ci: "6")
+private let testOldest = Test(tg: "", tt: "", sc: .init() - 10000, tr: "", tc: nil, co: "", is: "", ci: "6")
 
-private let secondsPerHour: TimeInterval = 60*60
-private let secondsPerDay: TimeInterval = 24*secondsPerHour
+private let secondsPerHour: TimeInterval = 60 * 60
+private let secondsPerDay: TimeInterval = 24 * secondsPerHour

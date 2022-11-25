@@ -86,7 +86,7 @@ class ParagraphViewTests: XCTestCase {
 
         // When
         sut.updateView(body: bodyText.styledAs(.body))
-        
+
         // Then
         XCTAssertTrue(sut.isAccessibilityElement)
         XCTAssertEqual(sut.accessibilityLabel, nil)

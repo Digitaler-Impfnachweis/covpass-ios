@@ -26,6 +26,7 @@ public enum Constant {
             static var image = UIImage.prevention
         }
     }
+
     enum Accessibility {
         static var labelClose = "accessibility_share_certificate_selection_label_close".localized
         static var labelBack = "accessibility_share_certificate_selection_label_back".localized
@@ -36,7 +37,7 @@ public enum Constant {
 
 class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     // MARK: - Properties
-    
+
     weak var delegate: ViewModelDelegate?
     var router: ValidationServiceRoutable?
     private let repository: VaccinationRepositoryProtocol
@@ -49,44 +50,43 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
               let givenNameFilter = givenNameFilter,
               let familyNameFilter = familyNameFilter,
               let dobFilter = dobFilter else {
-                  return []
-              }
+            return []
+        }
         return certificates?.filter(types: typeFilter,
                                     givenName: givenNameFilter,
                                     familyName: familyNameFilter,
                                     dob: dobFilter) ?? []
     }
-    
+
     var typeFilter: [CertType]?
-    
+
     var givenNameFilter: String?
-    
+
     var familyNameFilter: String?
     var dobFilter: String?
     var validationServiceName: String = ""
-    
-    
+
     var title: String {
-        return Constant.Keys.title
+        Constant.Keys.title
     }
-    
+
     var subtitle: String {
-        return Constant.Keys.subtitle
+        Constant.Keys.subtitle
     }
-    
+
     var dobLabel: String {
-        return Constant.Keys.dobLabel
+        Constant.Keys.dobLabel
     }
-    
+
     var certdetails: String {
         guard let givenNameFilter = givenNameFilter,
               let familyNameFilter = familyNameFilter,
               let dobFilter = dobFilter else {
-                  return ""
-              }
+            return ""
+        }
         return "\(givenNameFilter) \(familyNameFilter)\n\(dobLabel): \(dobFilter)\n\(availableCertTypes)"
     }
-    
+
     var availableCertTypes: String {
         guard let typeFilter = typeFilter else {
             return ""
@@ -100,23 +100,23 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
         }
         .joined(separator: ", ")
     }
-    
+
     var certificatesAvailable: Bool {
         !filteredCertificates.isEmpty
     }
-    
+
     var noMatchTitle: String {
         Constant.Keys.NoMatch.title
     }
-    
+
     var noMatchSubtitle: String {
         Constant.Keys.NoMatch.subtitle
     }
-    
+
     var noMatchImage: UIImage {
         Constant.Keys.NoMatch.image
     }
-    
+
     var items: [CertificateItem] {
         filteredCertificates
             .reversed()
@@ -139,26 +139,26 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
                 })
             }
     }
-    
+
     var isLoading = false
-    
+
     // MARK: - Lifecyle
-    
+
     init(router: ValidationServiceRoutable?,
          repository: VaccinationRepositoryProtocol,
          vaasRepository: VAASRepositoryProtocol,
          resolvable: Resolver<Void>?) {
         self.router = router
         self.repository = repository
-        self.resolver = resolvable
+        resolver = resolvable
         self.vaasRepository = vaasRepository
     }
-    
+
     // MARK: - Methods
-    
+
     func runMainProcess() {
         isLoading = true
-        self.delegate?.viewModelDidUpdate()
+        delegate?.viewModelDidUpdate()
         firstly {
             repository.getCertificateList()
         }
@@ -172,19 +172,19 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
             self.givenNameFilter = accessToken.vc?.gnt?.trimmingCharacters(in: .whitespaces) ?? ""
             self.familyNameFilter = accessToken.vc?.fnt?.trimmingCharacters(in: .whitespaces) ?? ""
             self.dobFilter = accessToken.vc?.dob ?? ""
-            self.typeFilter = accessToken.vc?.type?.compactMap{ CertType(rawValue: $0) } ?? []
+            self.typeFilter = accessToken.vc?.type?.compactMap { CertType(rawValue: $0) } ?? []
         }
         .done { () in
             self.isLoading = false
             self.delegate?.viewModelDidUpdate()
         }.catch { error in
-            
+
             switch self.vaasRepository.step {
             case .downloadIdentityDecorator:
                 if let error = error as? APIError {
                     if error == .trustList {
                         self.router?.showValidationFailed(ticket: self.vaasRepository.ticket)
-                            .done{ shouldContinue in
+                            .done { shouldContinue in
                                 if shouldContinue {
                                     self.vaasRepository.useUnsecureApi = true
                                     self.runMainProcess()
@@ -249,9 +249,8 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
             self.isLoading = false
             self.delegate?.viewModelDidUpdate()
         }
-        
     }
-    
+
     func cancel() {
         firstly {
             router?.routeToWarning() ?? .init(error: APIError.invalidResponse)
@@ -263,13 +262,13 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
         }
         .cauterize()
     }
-    
+
     func back() {
         resolver?.cancel()
         vaasRepository.cancellation()
     }
-    
+
     func chooseSert(cert: ExtendedCBORWebToken) {
-        router?.routeToCertificateConsent(ticket: vaasRepository.ticket, certificate: cert, vaasRepository: self.vaasRepository)
+        router?.routeToCertificateConsent(ticket: vaasRepository.ticket, certificate: cert, vaasRepository: vaasRepository)
     }
 }

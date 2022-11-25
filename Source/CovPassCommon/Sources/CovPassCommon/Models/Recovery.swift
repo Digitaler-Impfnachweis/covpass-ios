@@ -109,10 +109,10 @@ public extension Recovery {
 
     /// UVCI without `URN:UVCI:` prefix
     var ciDisplayName: String {
-        return ci.stripUVCIPrefix()
+        ci.stripUVCIPrefix()
     }
-    
+
     func isOlderThan(vaccination: Vaccination) -> Bool {
-        return fr < vaccination.dt
+        fr < vaccination.dt
     }
 }

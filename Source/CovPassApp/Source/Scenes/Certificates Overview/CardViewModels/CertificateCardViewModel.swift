@@ -11,7 +11,6 @@ import CovPassUI
 import UIKit
 
 class CertificateCardViewModel: CertificateCardViewModelProtocol {
-   
     // MARK: - Private Properties
 
     private var token: ExtendedCBORWebToken
@@ -28,14 +27,14 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     private lazy var isRapidAntigenTest = certificate.isTest && !isPCRTest && !isInvalid
     private lazy var isRevoked = token.isRevoked
     private lazy var tokenIsInvalid = token.isInvalid
-    private lazy var vaccination: Vaccination? = {
-        return dgc.v?.first
-    }()
+    private lazy var vaccination: Vaccination? = dgc.v?.first
+
     // Show notification to the user if he is qualified for a booster vaccination
     private var showBoosterAvailabilityNotification: Bool {
         guard let boosterCandidate = boosterLogic.checkCertificates([token]) else { return false }
         return boosterCandidate.state == .new
     }
+
     private var showNotificationForExpiryOrInvalid: Bool {
         guard token.vaccinationCertificate.isNotTest else {
             return false
@@ -48,12 +47,14 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         }
         return cert.expiresSoon || token.isInvalid || cert.isExpired
     }
+
     private var holderNeedsMask: Bool
     var showNotification: Bool {
         showBoosterAvailabilityNotification || showNotificationForExpiryOrInvalid
     }
+
     var maskRulesNotAvailable: Bool = true
-    var regionText: String? = nil
+    var regionText: String?
 
     // MARK: - Lifecycle
 
@@ -133,9 +134,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         }
         return subtitle
     }()
-    
-    
-    var headerSubtitle: String? = nil
+
+    var headerSubtitle: String?
 
     var titleIcon: UIImage {
         if isInvalid {
@@ -147,7 +147,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         }
         return holderNeedsMask ? .statusFullDetail : .statusFullGreen
     }
-    
+
     var subtitleIcon: UIImage = .init()
 
     lazy var isInvalid: Bool = isExpired || tokenIsInvalid || isRevoked
@@ -164,7 +164,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var tintColor: UIColor {
-        return textColor
+        textColor
     }
 
     // MARK: - Actions

@@ -13,7 +13,7 @@ final class VaccinationCycleCompleteResultRouterMock: VaccinationCycleCompleteRe
     let revokeExpectation = XCTestExpectation(description: "revokeExpectation")
     var receivedRevocationKeyFilename: String?
 
-    func revoke(token: ExtendedCBORWebToken, revocationKeyFilename: String) {
+    func revoke(token _: ExtendedCBORWebToken, revocationKeyFilename: String) {
         receivedRevocationKeyFilename = revocationKeyFilename
         revokeExpectation.fulfill()
     }

@@ -54,7 +54,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var title: String {
-        return neutral ? dgc.nam.fullName : "certificates_overview_recovery_certificate_title".localized
+        neutral ? dgc.nam.fullName : "certificates_overview_recovery_certificate_title".localized
     }
 
     var titleAccessibilityLabel: String? { title }
@@ -66,7 +66,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
-        neutral ?  "certificates_overview_recovery_certificate_message".localized : infoString(forAccessibility: false) ?? ""
+        neutral ? "certificates_overview_recovery_certificate_message".localized : infoString(forAccessibility: false) ?? ""
     }
 
     var infoAccessibilityLabel: String? {
@@ -80,7 +80,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         if certificate.vaccinationCertificate.expiresSoon {
             return "certificates_overview_expires_soon_certificate_note".localized
         }
-        if certificate.isInvalid  || certificate.isRevoked {
+        if certificate.isInvalid || certificate.isRevoked {
             return "certificates_overview_invalid_certificate_note".localized
         }
         return nil
@@ -93,7 +93,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var statusIcon: UIImage? { neutral ? nil : .validationCheckmark }
-    
+
     var statusIconHidden: Bool { statusIcon == nil }
 
     var statusIconAccessibilityLabel: String? { nil }
@@ -101,7 +101,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     var activeTitle: String? {
         neutral ? infoString(forAccessibility: false) ?? "" : active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }
-    
+
     var neutral: Bool
 
     init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {

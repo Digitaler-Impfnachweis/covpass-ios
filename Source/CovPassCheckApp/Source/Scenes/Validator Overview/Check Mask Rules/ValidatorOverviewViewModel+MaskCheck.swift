@@ -11,14 +11,14 @@ import PromiseKit
 extension ValidatorOverviewViewModel {
     func scanAction(additionalToken: ExtendedCBORWebToken? = nil) {
         isLoadingScan = true
-        firstly{
+        firstly {
             ScanAndParseQRCodeAndCheckMaskRulesUseCase(router: router,
-                                         audioPlayer: audioPlayer,
-                                         vaccinationRepository: vaccinationRepository,
-                                         revocationRepository: revocationRepository,
-                                         userDefaults: userDefaults,
-                                         certLogic: certLogic,
-                                         additionalToken: additionalToken).execute()
+                                                       audioPlayer: audioPlayer,
+                                                       vaccinationRepository: vaccinationRepository,
+                                                       revocationRepository: revocationRepository,
+                                                       userDefaults: userDefaults,
+                                                       certLogic: certLogic,
+                                                       additionalToken: additionalToken).execute()
         }
         .done { token in
             self.router.showMaskOptional(token: token)
@@ -35,7 +35,7 @@ extension ValidatorOverviewViewModel {
         }
     }
 
-    func errorHandlingMaskCheck(error: Error, token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+    func errorHandlingMaskCheck(error: Error, token _: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
         if case let CertificateError.revoked(token) = error {
             return router.showMaskRequiredTechnicalError(token: token)
         }
@@ -44,8 +44,8 @@ extension ValidatorOverviewViewModel {
             return showMaskCheckDifferentPerson(token1OfPerson: token1OfPerson, token2OfPerson: token2OfPerson)
         case let .maskRulesNotAvailable(token):
             return router.showNoMaskRules(token: token)
-        case .secondScanSameTokenType(_):
-             router.showMaskCheckSameCertType()
+        case .secondScanSameTokenType:
+            router.showMaskCheckSameCertType()
             return .value(.close)
         case let .holderNeedsMask(token):
             if token.vaccinationCertificate.isTest {
@@ -61,32 +61,32 @@ extension ValidatorOverviewViewModel {
             return router.showMaskRequiredTechnicalError(token: nil)
         }
     }
-    
+
     func checkMaskRulesResult(result: ValidatorDetailSceneResult) {
         switch result {
         case .startOver:
-            self.scanAction()
+            scanAction()
         case .close:
             break
         case let .secondScan(token):
-            self.scanAction(additionalToken: token)
-        case .thirdScan(_, _):
+            scanAction(additionalToken: token)
+        case .thirdScan:
             // Not relevant for Mask Check
             break
         }
     }
-    
+
     func showMaskCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken,
-                             token2OfPerson: ExtendedCBORWebToken) ->  Promise<ValidatorDetailSceneResult> {
+                                      token2OfPerson: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         router.showMaskCheckDifferentPerson(token1OfPerson: token1OfPerson,
-                                   token2OfPerson: token2OfPerson)
-        .then { result -> Promise<ValidatorDetailSceneResult> in
-            switch result {
-            case .ignore:
-                return self.router.showMaskOptional(token: token1OfPerson)
-            case .startover:
-                return .value(.startOver)
+                                            token2OfPerson: token2OfPerson)
+            .then { result -> Promise<ValidatorDetailSceneResult> in
+                switch result {
+                case .ignore:
+                    return self.router.showMaskOptional(token: token1OfPerson)
+                case .startover:
+                    return .value(.startOver)
+                }
             }
-        }
     }
 }

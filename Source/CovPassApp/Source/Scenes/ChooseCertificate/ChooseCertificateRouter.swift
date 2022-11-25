@@ -12,7 +12,6 @@ import PromiseKit
 import UIKit
 
 class ChooseCertificateRouter: ChooseCertificateRouterProtocol, DialogRouterProtocol {
-
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -24,5 +23,4 @@ class ChooseCertificateRouter: ChooseCertificateRouterProtocol, DialogRouterProt
     }
 
     // MARK: - Methods
-
 }

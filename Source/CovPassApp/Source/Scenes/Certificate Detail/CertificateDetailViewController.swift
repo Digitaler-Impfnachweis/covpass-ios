@@ -40,7 +40,7 @@ class CertificateDetailViewController: UIViewController {
     @IBOutlet var scanHintView: HintView!
     @IBOutlet var immunizationStatusView: ParagraphView!
     @IBOutlet var maskStatusView: ParagraphView!
-    
+
     // MARK: - Properties
 
     private(set) var viewModel: CertificateDetailViewModelProtocol
@@ -66,7 +66,7 @@ class CertificateDetailViewController: UIViewController {
     }
 
     // MARK: - Methods
-    
+
     private func setupView() {
         view.backgroundColor = .backgroundPrimary
         scrollView.contentInset = .init(top: .space_24, left: .zero, bottom: .space_70, right: .zero)
@@ -110,12 +110,12 @@ class CertificateDetailViewController: UIViewController {
             navigationItem.rightBarButtonItem = favoriteIcon
         }
     }
-    
+
     @objc
     private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-        
+
     private func setupHeadline() {
         nameHeadline.attributedText = viewModel.name.styledAs(.header_1).colored(.onBackground100)
         nameHeadline.textableView.accessibilityTraits = .header
@@ -157,7 +157,7 @@ class CertificateDetailViewController: UIViewController {
         }
         stackView.setCustomSpacing(.space_24, after: immunizationButtonContainerView)
     }
-    
+
     private func setupReissueStackView() {
         reissueStackView.removeAllArrangedSubviews()
         if viewModel.showBoosterReissueNotification {
@@ -230,7 +230,7 @@ class CertificateDetailViewController: UIViewController {
         nameView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
 
         nameTransliteratedView.updateView(title: viewModel.nameTitleStandard.styledAs(.header_3),
-                                      body: viewModel.nameTransliterated.styledAs(.body))
+                                          body: viewModel.nameTransliterated.styledAs(.body))
         nameTransliteratedView.accessibilityLabelValue = viewModel.accessibilityNameStandard
         nameTransliteratedView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
 
@@ -285,7 +285,6 @@ private extension ParagraphView {
                    footerHeadline: viewModel.notice?.styledAs(.header_3).colored(.onBackground110),
                    footerBody: viewModel.noticeText?.styledAs(.body).colored(.onBackground110),
                    footerButtonTitle: viewModel.selectFederalStateButtonTitle,
-                   contentMode: .center
-        )
+                   contentMode: .center)
     }
 }

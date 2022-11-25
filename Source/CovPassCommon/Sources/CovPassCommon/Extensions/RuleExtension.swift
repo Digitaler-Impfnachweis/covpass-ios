@@ -9,17 +9,16 @@
 import CertLogic
 import Foundation
 
-extension Rule {
-    public var isInvalidationRule: Bool { ruleType == .invalidation }
-    
-    public var isAcceptence: Bool { ruleType == .acceptence }
+public extension Rule {
+    var isInvalidationRule: Bool { ruleType == .invalidation }
 
-    public var isAcceptenceOrInvalidationRule: Bool { ruleType == .acceptence || ruleType == .invalidation }
+    var isAcceptence: Bool { ruleType == .acceptence }
 
-    public var isGStatusRule: Bool { ruleType == ._2G || ruleType == ._2GPlus || ruleType == ._3G || ruleType == ._3GPlus  }
-    
-    public var isMaskStatusRule: Bool { ruleType == .mask }
-   
-    public var isIfsg22aRule: Bool { ruleType == .impfstatusBZwei || ruleType == .impfstatusCZwei || ruleType == .impfstatusEZwei }
-    
+    var isAcceptenceOrInvalidationRule: Bool { ruleType == .acceptence || ruleType == .invalidation }
+
+    var isGStatusRule: Bool { ruleType == ._2G || ruleType == ._2GPlus || ruleType == ._3G || ruleType == ._3GPlus }
+
+    var isMaskStatusRule: Bool { ruleType == .mask }
+
+    var isIfsg22aRule: Bool { ruleType == .impfstatusBZwei || ruleType == .impfstatusCZwei || ruleType == .impfstatusEZwei }
 }

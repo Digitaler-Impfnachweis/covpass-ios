@@ -5,13 +5,13 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
-import UIKit
 import CovPassCommon
+import CovPassUI
 import PromiseKit
+import UIKit
 
-private struct Constant {
-    struct Keys {
+private enum Constant {
+    enum Keys {
         static let title = "functional_validation_check_popup_second_scan_title".localized
         static let subtitle = "functional_validation_check_popup_second_scan_subtitle".localized
         static let card1Title = "functional_validation_check_popup_second_scan_blue_card_1_title".localized
@@ -28,7 +28,6 @@ private struct Constant {
 }
 
 class SecondScanViewModel: SecondScanViewModelProtocol {
-    
     var title: String = Constant.Keys.title
     var subtitle: String = Constant.Keys.subtitle
     var thirdScanViewIsHidden: Bool { isThirdScan ? false : true }
@@ -60,12 +59,12 @@ class SecondScanViewModel: SecondScanViewModelProtocol {
         self.resolver = resolver
         self.token = token
         self.secondToken = secondToken
-        self.isThirdScan = secondToken != nil
+        isThirdScan = secondToken != nil
         self.countdownTimerModel = countdownTimerModel
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()
     }
-    
+
     private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {
         if countdownTimerModel.shouldDismiss {
             cancel()
@@ -73,19 +72,18 @@ class SecondScanViewModel: SecondScanViewModelProtocol {
             delegate?.viewModelDidUpdate()
         }
     }
-    
+
     func startOver() {
         resolver.fulfill(.startOver)
     }
 
     func scanNext() {
         isThirdScan ?
-        resolver.fulfill(.thirdScan(token, secondToken!)) :
-        resolver.fulfill(.secondScan(token))
+            resolver.fulfill(.thirdScan(token, secondToken!)) :
+            resolver.fulfill(.secondScan(token))
     }
-    
+
     func cancel() {
         resolver.fulfill(.close)
     }
-
 }

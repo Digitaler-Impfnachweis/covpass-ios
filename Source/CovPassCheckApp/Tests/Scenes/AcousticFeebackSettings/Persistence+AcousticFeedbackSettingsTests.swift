@@ -30,7 +30,7 @@ class Persistence_AcousticFeedbackSettingsTests: XCTestCase {
     func testEnableAcousticFeedback_set() {
         // Given
         sut.enableAcousticFeedback = true
-        
+
         // When
         let isEnabled = sut.enableAcousticFeedback
 

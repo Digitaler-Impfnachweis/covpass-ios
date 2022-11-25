@@ -10,9 +10,8 @@ import CovPassUI
 import UIKit
 
 class NoCertificateCardViewModelMock: NoCertificateCardViewModelProtocol {
-    
     let showNotification = false
-    
+
     let reuseIdentifier: String = "\(NoCertificateCollectionViewCell.self)"
 
     let backgroundColor: UIColor = .backgroundSecondary20
@@ -26,7 +25,6 @@ class NoCertificateCardViewModelMock: NoCertificateCardViewModelProtocol {
     let iconTintColor: UIColor = .white
 
     let textColor: UIColor = .black
-    
-    var delegate: ViewModelDelegate?
 
+    var delegate: ViewModelDelegate?
 }

@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationFilesystemDataSourceTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -31,7 +31,7 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
     func testDeleteAll_success() {
         // Given
         let expectation = XCTestExpectation()
-        let baseURL = self.fileManager.temporaryDirectory
+        let baseURL = fileManager.temporaryDirectory
             .appendingPathComponent("test", isDirectory: true)
         // When
         sut.deleteAll()
@@ -42,7 +42,7 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
 
         // Then
         wait(for: [expectation], timeout: 1)
-        XCTAssertEqual(self.fileManager.removeItemCalledWithURL, baseURL)
+        XCTAssertEqual(fileManager.removeItemCalledWithURL, baseURL)
     }
 
     func testDeleteAll_failure() {
@@ -330,7 +330,7 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
         )
 
         // When
-        sut.putIndexList(response, kid: [0x0aa, 0x0bb, 0xcc], hashType: .uci)
+        sut.putIndexList(response, kid: [0x0AA, 0x0BB, 0xCC], hashType: .uci)
             .catch { _ in
                 expectation.fulfill()
             }
@@ -348,7 +348,7 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
         )
 
         // When
-        sut.putIndexList(response, kid: [0x0aa, 0x0bb, 0xcc], hashType: .uci)
+        sut.putIndexList(response, kid: [0x0AA, 0x0BB, 0xCC], hashType: .uci)
             .catch { _ in
                 expectation.fulfill()
             }
@@ -604,7 +604,7 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
         )
 
         // When
-        sut.putChunkList(response, kid: [0x0aa, 0x0bb, 0xcc], hashType: .uci)
+        sut.putChunkList(response, kid: [0x0AA, 0x0BB, 0xCC], hashType: .uci)
             .catch { _ in
                 expectation.fulfill()
             }
@@ -622,7 +622,7 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
         )
 
         // When
-        sut.putChunkList(response, kid: [0x0aa, 0x0bb, 0xcc], hashType: .uci)
+        sut.putChunkList(response, kid: [0x0AA, 0x0BB, 0xCC], hashType: .uci)
             .catch { _ in
                 expectation.fulfill()
             }
@@ -641,12 +641,12 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
         let expectedLastModifiedData = try XCTUnwrap(lastModified.data(using: .utf8))
         let expectation = XCTestExpectation()
         let response = CertificateRevocationChunkListResponse(
-                hashes: [
-                    [0xaa, 0xaa, 0xaa],
-                    [0xbb, 0xbb, 0xbb],
-                    [0xcc, 0xcc, 0xcc],
-                ],
-                lastModified: lastModified
+            hashes: [
+                [0xAA, 0xAA, 0xAA],
+                [0xBB, 0xBB, 0xBB],
+                [0xCC, 0xCC, 0xCC]
+            ],
+            lastModified: lastModified
         )
         let expectedChunkListContents = try JSONSerialization.data(withJSONObject: response.hashes, options: [])
 
@@ -736,9 +736,9 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
         let expectedChunkListPath = baseURL.appendingPathComponent("/aabbcc0a/chunk.lst").path
         let expectation = XCTestExpectation()
         let expectedHashes: [CertificateRevocationHash] = [
-            [0xaa, 0xaa, 0xaa],
-            [0xbb, 0xbb, 0xbb],
-            [0xcc, 0xcc, 0xcc]
+            [0xAA, 0xAA, 0xAA],
+            [0xBB, 0xBB, 0xBB],
+            [0xCC, 0xCC, 0xCC]
         ]
         let response = CertificateRevocationChunkListResponse(hashes: expectedHashes)
         fileManager.contents = try JSONSerialization.data(withJSONObject: response.hashes, options: [])
@@ -796,7 +796,7 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
 
     func testGetChunkListByte1Byte2_error_request() {
         // Given
-        let kid: KID = [0xff, 0xff, 0xff, 0xff]
+        let kid: KID = [0xFF, 0xFF, 0xFF, 0xFF]
         let hashType = CertificateRevocationHashType.uci
         let expectation = XCTestExpectation()
 
@@ -812,13 +812,13 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
 
     func testGetChunkListByte1Byte2_error_byte1_wrong() throws {
         // Given
-        let kid: KID = [0xff, 0xff, 0xff, 0xff]
+        let kid: KID = [0xFF, 0xFF, 0xFF, 0xFF]
         let hashType = CertificateRevocationHashType.uci
         let expectation = XCTestExpectation()
         let hashes: [CertificateRevocationHash] = [
-            [0xaa, 0xaa, 0xaa],
-            [0xbb, 0xbb, 0xbb],
-            [0xcc, 0xcc, 0xcc]
+            [0xAA, 0xAA, 0xAA],
+            [0xBB, 0xBB, 0xBB],
+            [0xCC, 0xCC, 0xCC]
         ]
         fileManager.contents = try JSONSerialization.data(withJSONObject: hashes, options: [])
 
@@ -834,18 +834,18 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
 
     func testGetChunkListByte1Byte2_error_byte2_wrong() throws {
         // Given
-        let kid: KID = [0xff, 0xff, 0xff, 0xff]
+        let kid: KID = [0xFF, 0xFF, 0xFF, 0xFF]
         let hashType = CertificateRevocationHashType.uci
         let expectation = XCTestExpectation()
         let hashes: [CertificateRevocationHash] = [
-            [0xaa, 0xaa, 0xaa],
-            [0xbb, 0xbb, 0xbb],
-            [0xcc, 0xcc, 0xcc]
+            [0xAA, 0xAA, 0xAA],
+            [0xBB, 0xBB, 0xBB],
+            [0xCC, 0xCC, 0xCC]
         ]
         fileManager.contents = try JSONSerialization.data(withJSONObject: hashes, options: [])
 
         // When
-        sut.getChunkList(kid: kid, hashType: hashType, byte1: 0xbb, byte2: 0xcc)
+        sut.getChunkList(kid: kid, hashType: hashType, byte1: 0xBB, byte2: 0xCC)
             .catch { _ in
                 expectation.fulfill()
             }
@@ -856,21 +856,21 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
 
     func testGetChunkListByte1Byte2_success_byte1_correct() throws {
         // Given
-        let kid: KID = [0xff, 0xff, 0xff, 0xff]
+        let kid: KID = [0xFF, 0xFF, 0xFF, 0xFF]
         let hashType = CertificateRevocationHashType.uci
         let expectation = XCTestExpectation()
-        let hash1: CertificateRevocationHash = [0xbb, 0xbb, 0xbb]
-        let hash2: CertificateRevocationHash = [0xbb, 0xbb, 0xab]
+        let hash1: CertificateRevocationHash = [0xBB, 0xBB, 0xBB]
+        let hash2: CertificateRevocationHash = [0xBB, 0xBB, 0xAB]
         let hashes: [CertificateRevocationHash] = [
-            [0xaa, 0xaa, 0xaa],
+            [0xAA, 0xAA, 0xAA],
             hash1,
             hash2,
-            [0xcc, 0xcc, 0xcc]
+            [0xCC, 0xCC, 0xCC]
         ]
         fileManager.contents = try JSONSerialization.data(withJSONObject: hashes, options: [])
 
         // When
-        sut.getChunkList(kid: kid, hashType: hashType, byte1: 0xbb, byte2: nil)
+        sut.getChunkList(kid: kid, hashType: hashType, byte1: 0xBB, byte2: nil)
             .done { response in
                 XCTAssertEqual(response.hashes.count, 2)
                 XCTAssertTrue(response.hashes.contains(hash1))
@@ -885,22 +885,22 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
 
     func testGetChunkListByte1Byte2_success_byte1_and_2_correct() throws {
         // Given
-        let kid: KID = [0xff, 0xff, 0xff, 0xff]
+        let kid: KID = [0xFF, 0xFF, 0xFF, 0xFF]
         let hashType = CertificateRevocationHashType.uci
         let expectation = XCTestExpectation()
-        let hash1: CertificateRevocationHash = [0xbb, 0xbb, 0xbb]
-        let hash2: CertificateRevocationHash = [0xbb, 0xbb, 0xab]
+        let hash1: CertificateRevocationHash = [0xBB, 0xBB, 0xBB]
+        let hash2: CertificateRevocationHash = [0xBB, 0xBB, 0xAB]
         let hashes: [CertificateRevocationHash] = [
-            [0xaa, 0xaa, 0xaa],
+            [0xAA, 0xAA, 0xAA],
             hash1,
             hash2,
-            [0xbb, 0xab, 0xbb],
-            [0xcc, 0xcc, 0xcc]
+            [0xBB, 0xAB, 0xBB],
+            [0xCC, 0xCC, 0xCC]
         ]
         fileManager.contents = try JSONSerialization.data(withJSONObject: hashes, options: [])
 
         // When
-        sut.getChunkList(kid: kid, hashType: hashType, byte1: 0xbb, byte2: 0xbb)
+        sut.getChunkList(kid: kid, hashType: hashType, byte1: 0xBB, byte2: 0xBB)
             .done { response in
                 XCTAssertEqual(response.hashes.count, 2)
                 XCTAssertTrue(response.hashes.contains(hash1))
@@ -915,18 +915,18 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
 
     func testHeadChunkListByte1Byte2_byte_1_does_not_exist() throws {
         // Given
-        let kid: KID = [0xff, 0xff, 0xff, 0xff]
+        let kid: KID = [0xFF, 0xFF, 0xFF, 0xFF]
         let hashType = CertificateRevocationHashType.uci
         let expectation = XCTestExpectation()
         let hashes: [CertificateRevocationHash] = [
-            [0xaa, 0xaa, 0xaa],
-            [0xbb, 0xab, 0xbb],
-            [0xcc, 0xcc, 0xcc]
+            [0xAA, 0xAA, 0xAA],
+            [0xBB, 0xAB, 0xBB],
+            [0xCC, 0xCC, 0xCC]
         ]
         fileManager.contents = try JSONSerialization.data(withJSONObject: hashes, options: [])
 
         // When
-        sut.headChunkList(kid: kid, hashType: hashType, byte1: 0xfe, byte2: nil)
+        sut.headChunkList(kid: kid, hashType: hashType, byte1: 0xFE, byte2: nil)
             .catch { error in
                 let certificateRevocationDataSourceError = error as? CertificateRevocationDataSourceError
                 XCTAssertEqual(certificateRevocationDataSourceError, .notFound)
@@ -939,18 +939,18 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
 
     func testHeadChunkListByte1Byte2_byte_2_does_not_exist() throws {
         // Given
-        let kid: KID = [0xff, 0xff, 0xff, 0xff]
+        let kid: KID = [0xFF, 0xFF, 0xFF, 0xFF]
         let hashType = CertificateRevocationHashType.uci
         let expectation = XCTestExpectation()
         let hashes: [CertificateRevocationHash] = [
-            [0xaa, 0xaa, 0xaa],
-            [0xbb, 0xab, 0xbb],
-            [0xcc, 0xcc, 0xcc]
+            [0xAA, 0xAA, 0xAA],
+            [0xBB, 0xAB, 0xBB],
+            [0xCC, 0xCC, 0xCC]
         ]
         fileManager.contents = try JSONSerialization.data(withJSONObject: hashes, options: [])
 
         // When
-        sut.headChunkList(kid: kid, hashType: hashType, byte1: 0xbb, byte2: 0xde)
+        sut.headChunkList(kid: kid, hashType: hashType, byte1: 0xBB, byte2: 0xDE)
             .catch { error in
                 let certificateRevocationDataSourceError = error as? CertificateRevocationDataSourceError
                 XCTAssertEqual(certificateRevocationDataSourceError, .notFound)
@@ -963,18 +963,18 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
 
     func testHeadChunkListByte1Byte2_byte_1_exists() throws {
         // Given
-        let kid: KID = [0xff, 0xff, 0xff, 0xff]
+        let kid: KID = [0xFF, 0xFF, 0xFF, 0xFF]
         let hashType = CertificateRevocationHashType.uci
         let expectation = XCTestExpectation()
         let hashes: [CertificateRevocationHash] = [
-            [0xaa, 0xaa, 0xaa],
-            [0xbb, 0xab, 0xbb],
-            [0xcc, 0xcc, 0xcc]
+            [0xAA, 0xAA, 0xAA],
+            [0xBB, 0xAB, 0xBB],
+            [0xCC, 0xCC, 0xCC]
         ]
         fileManager.contents = try JSONSerialization.data(withJSONObject: hashes, options: [])
 
         // When
-        sut.headChunkList(kid: kid, hashType: hashType, byte1: 0xcc, byte2: nil)
+        sut.headChunkList(kid: kid, hashType: hashType, byte1: 0xCC, byte2: nil)
             .done { _ in
                 expectation.fulfill()
             }
@@ -986,18 +986,18 @@ class CertificateRevocationFilesystemDataSourceTests: XCTestCase {
 
     func testHeadChunkListByte1Byte2_byte_1_and_2_exists() throws {
         // Given
-        let kid: KID = [0xff, 0xff, 0xff, 0xff]
+        let kid: KID = [0xFF, 0xFF, 0xFF, 0xFF]
         let hashType = CertificateRevocationHashType.uci
         let expectation = XCTestExpectation()
         let hashes: [CertificateRevocationHash] = [
-            [0xaa, 0xaa, 0xaa],
-            [0xbb, 0xab, 0xbb],
-            [0xcc, 0xcc, 0xcc]
+            [0xAA, 0xAA, 0xAA],
+            [0xBB, 0xAB, 0xBB],
+            [0xCC, 0xCC, 0xCC]
         ]
         fileManager.contents = try JSONSerialization.data(withJSONObject: hashes, options: [])
 
         // When
-        sut.headChunkList(kid: kid, hashType: hashType, byte1: 0xcc, byte2: 0xcc)
+        sut.headChunkList(kid: kid, hashType: hashType, byte1: 0xCC, byte2: 0xCC)
             .done { _ in
                 expectation.fulfill()
             }

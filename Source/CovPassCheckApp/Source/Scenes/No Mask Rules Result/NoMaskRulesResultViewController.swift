@@ -34,14 +34,14 @@ final class NoMaskRulesResultViewController: UIViewController {
         )
         return string
     }()
-    
+
     init(viewModel: NoMaskRulesResultViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.viewModel.delegate = self
     }
 
-    required init?(coder: NSCoder) { nil }
+    required init?(coder _: NSCoder) { nil }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,7 @@ final class NoMaskRulesResultViewController: UIViewController {
         configureCounter()
         configureAccessibility()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: headerStackView)
@@ -112,7 +112,7 @@ final class NoMaskRulesResultViewController: UIViewController {
         counterLabel.attributedText = counterInfo
         counterLabel.textAlignment = .center
     }
-    
+
     private func configureAccessibility() {
         if #available(iOS 13.0, *) {
             headerStackView.accessibilityRespondsToUserInteraction = true

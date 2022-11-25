@@ -1,6 +1,6 @@
 //
 //  String+SVG.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -22,5 +22,4 @@ extension String {
     private func tspan(y: Int) -> Self {
         String(format: "<tspan x=\"0\" y=\"\(y)\">\(self)</tspan>", y, self)
     }
-
 }

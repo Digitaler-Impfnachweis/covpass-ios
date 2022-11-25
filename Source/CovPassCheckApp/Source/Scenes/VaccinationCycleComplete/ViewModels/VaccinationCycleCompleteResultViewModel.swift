@@ -51,14 +51,13 @@ final class VaccinationCycleCompleteResultViewModel: VaccinationCycleCompleteRes
     private let router: VaccinationCycleCompleteResultRouterProtocol
     private let revocationKeyFilename: String
     private let checkSituationType: CheckSituationType
-    
+
     init(token: ExtendedCBORWebToken,
          countdownTimerModel: CountdownTimerModel,
          resolver: Resolver<ValidatorDetailSceneResult>,
          router: VaccinationCycleCompleteResultRouterProtocol,
          persistence: Persistence,
-         revocationKeyFilename: String
-    ) {
+         revocationKeyFilename: String) {
         self.token = token
         self.countdownTimerModel = countdownTimerModel
         self.resolver = resolver
@@ -69,10 +68,10 @@ final class VaccinationCycleCompleteResultViewModel: VaccinationCycleCompleteRes
         holderName = dgc.nam.fullName
         holderNameTransliterated = dgc.nam.fullNameTransliterated
         holderBirthday = .init(format: Constants.birthday, DateUtils.displayDateOfBirth(dgc))
-        self.checkSituationType = .init(rawValue: persistence.checkSituation) ?? .withinGermany
-        self.travelRulesIsHidden = checkSituationType == .withinGermany
-        self.title = checkSituationType == .withinGermany ? Constants.title : Constants.entryCheckTitle
-        self.subtitle = checkSituationType == .withinGermany ? Constants.subtitleFormat : Constants.entryCheckSubtitle
+        checkSituationType = .init(rawValue: persistence.checkSituation) ?? .withinGermany
+        travelRulesIsHidden = checkSituationType == .withinGermany
+        title = checkSituationType == .withinGermany ? Constants.title : Constants.entryCheckTitle
+        subtitle = checkSituationType == .withinGermany ? Constants.subtitleFormat : Constants.entryCheckSubtitle
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()
     }

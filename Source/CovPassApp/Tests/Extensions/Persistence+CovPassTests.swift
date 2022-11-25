@@ -30,7 +30,7 @@ class Persistence_CovPass: XCTestCase {
 
     func testNewRegulationsOnboardingScreenWasShown_set() {
         // Given
-        sut .newRegulationsOnboardingScreenWasShown = true
+        sut.newRegulationsOnboardingScreenWasShown = true
 
         // When
         let wasShown = sut.newRegulationsOnboardingScreenWasShown

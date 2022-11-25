@@ -1,6 +1,6 @@
 //
 //  CountdownTimerModel.swift
-//  
+//
 //
 //  Created by Thomas Kuleßa on 25.07.22.
 //
@@ -25,11 +25,13 @@ open class CountdownTimerModel {
             onUpdate?(self)
         }
     }
+
     open private(set) var shouldDismiss: Bool = false {
         didSet {
             onUpdate?(self)
         }
     }
+
     open private(set) var hideCountdown: Bool = true {
         didSet {
             onUpdate?(self)

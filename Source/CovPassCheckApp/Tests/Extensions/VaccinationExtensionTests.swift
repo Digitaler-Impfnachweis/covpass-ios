@@ -10,12 +10,11 @@ import Foundation
 import XCTest
 
 class VaccinationTests: XCTestCase {
-    
     var sut: Vaccination!
     var dtDate: Date!
     var vac1Of1JJ: Vaccination!
     var vac2Of1SomeProduct: Vaccination!
-    
+
     override func setUpWithError() throws {
         dtDate = Date()
         sut = Vaccination(tg: "", vp: "", mp: "", ma: "", dn: 1, sd: 1, dt: dtDate, co: "", is: "", ci: "")
@@ -39,7 +38,7 @@ class VaccinationTests: XCTestCase {
                                          is: "",
                                          ci: "2")
     }
-    
+
     override func tearDownWithError() throws {
         dtDate = nil
         sut = nil
@@ -52,7 +51,7 @@ class VaccinationTests: XCTestCase {
         sut.mp = MedicalProduct.johnsonjohnson.rawValue
         sut.dn = 1
         sut.sd = 1
-        
+
         // THEN
         XCTAssertFalse(sut.fullImmunization)
         XCTAssertTrue(sut.fullImmunizationCheck)
@@ -61,13 +60,13 @@ class VaccinationTests: XCTestCase {
         XCTAssertFalse(sut.isBoosted())
         XCTAssertEqual(sut.fullImmunizationValidFrom, nil)
     }
-    
+
     func testJohnsonJohnson3OutOf1() {
         // WHEN
         sut.mp = MedicalProduct.johnsonjohnson.rawValue
         sut.dn = 3
         sut.sd = 1
-        
+
         // THEN
         XCTAssertTrue(sut.fullImmunization)
         XCTAssertTrue(sut.fullImmunizationCheck)
@@ -76,7 +75,7 @@ class VaccinationTests: XCTestCase {
         XCTAssertTrue(sut.isBoosted())
         XCTAssertEqual(sut.fullImmunizationValidFrom, dtDate)
     }
-    
+
     func testCheckApp_NotValidBecauseOfFresherThan14Days() throws {
         // GIVEN
         sut.dt = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -10, to: Date()))
@@ -88,7 +87,7 @@ class VaccinationTests: XCTestCase {
         // THEN
         XCTAssertFalse(result)
     }
-    
+
     func testCheckApp_ValidBecauseOfFresherOlder14Days() throws {
         // GIVEN
         sut.dt = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -15, to: Date()))
@@ -100,7 +99,7 @@ class VaccinationTests: XCTestCase {
         // THEN
         XCTAssertTrue(result)
     }
-    
+
     func testCheckApp_JJValidBecauseOfFresherOlder14Days() throws {
         // GIVEN
         sut.dt = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -15, to: Date()))
@@ -112,5 +111,4 @@ class VaccinationTests: XCTestCase {
         // THEN
         XCTAssertTrue(result)
     }
-    
 }

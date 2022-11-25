@@ -5,13 +5,14 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassUI
 import Foundation
 import Scanner
 import UIKit
-import CovPassUI
 
 class TrustedListDetailsViewController: UIViewController {
     // MARK: - IBOutlet
+
     @IBOutlet var headerView: PlainLabel!
     @IBOutlet var bodyTitleLabel: PlainLabel!
     @IBOutlet var downloadStateHintLabel: PlainLabel!
@@ -37,40 +38,40 @@ class TrustedListDetailsViewController: UIViewController {
     @IBOutlet var activityIndicatorWrapper: UIView!
     @IBOutlet public var mainButton: MainButton!
     private let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
-    
+
     // MARK: - Properties
-    
+
     private(set) var viewModel: TrustedListDetailsViewModel
-    
+
     // MARK: - Lifecycle
-    
+
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
-    
+
     public init(viewModel: TrustedListDetailsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         view.backgroundColor = .backgroundPrimary
         setupView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityAnnounce)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityClose)
     }
-    
+
     // MARK: - Private Methods
-    
+
     private func setupTitle() {
         if navigationController?.navigationBar.backItem != nil {
             title = viewModel.title
@@ -78,14 +79,14 @@ class TrustedListDetailsViewController: UIViewController {
         }
         let label = UILabel()
         label.attributedText = viewModel.title.styledAs(.header_3)
-        navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)
     }
-    
+
     private func setupButtonActions() {
         mainButton.action = viewModel.refresh
         cancelButton.action = viewModel.cancel
     }
-    
+
     private func setupStaticTexts() {
         headerView.attributedText = viewModel.oflineModusDescription.styledAs(.body)
         mainButton.title = viewModel.offlineModusButton
@@ -101,7 +102,7 @@ class TrustedListDetailsViewController: UIViewController {
         bodyTitleLabel.attributedText = viewModel.listTitle.styledAs(.header_2)
         bodyTitleLabel.accessibilityTraits = .header
     }
-    
+
     private func setupView() {
         setupTitle()
         setupActivityIndicator()
@@ -111,20 +112,20 @@ class TrustedListDetailsViewController: UIViewController {
         downloadStateWrapper.layer.cornerRadius = 12.0
 
         let backButton = UIBarButtonItem(image: .arrowBack, style: .done, target: self, action: #selector(backButtonTapped))
-        backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO change accessibility text when they are available
+        backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO: change accessibility text when they are available
         navigationItem.leftBarButtonItem = backButton
         navigationController?.navigationBar.tintColor = .onBackground100
     }
-    
+
     private func updateLoadingView(isLoading: Bool) {
         mainButton?.isHidden = isLoading
         downloadingHintLabel.isHidden = !isLoading
         cancelButton.isHidden = !isLoading
         isLoading ? UIAccessibility.post(notification: .layoutChanged, argument: downloadingHintLabel) :
-        UIAccessibility.post(notification: .layoutChanged, argument: downloadStateHintLabel)
+            UIAccessibility.post(notification: .layoutChanged, argument: downloadStateHintLabel)
         isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
-    
+
     private func setupActivityIndicator() {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorWrapper.translatesAutoresizingMaskIntoConstraints = false
@@ -134,7 +135,7 @@ class TrustedListDetailsViewController: UIViewController {
         activityIndicator.leftAnchor.constraint(equalTo: activityIndicatorWrapper.leftAnchor, constant: 40.0).isActive = true
         activityIndicator.rightAnchor.constraint(equalTo: activityIndicatorWrapper.rightAnchor, constant: -40.0).isActive = true
     }
-    
+
     private func updateView() {
         updateLoadingView(isLoading: viewModel.isLoading)
         downloadStateHintLabel.attributedText = viewModel.downloadStateHintTitle.styledAs(.label).colored(viewModel.downloadStateTextColor)
@@ -145,10 +146,10 @@ class TrustedListDetailsViewController: UIViewController {
         valueSetsSubtitleLabel.attributedText = viewModel.valueSetsSubtitle.styledAs(.body)
         certificateProviderSubtitleLabel.attributedText = viewModel.certificateProviderSubtitle.styledAs(.body)
         countryListSubtitleLabel.attributedText = viewModel.countryListSubtitle.styledAs(.body)
-        
+
         configureAccessibility()
     }
-    
+
     private func configureAccessibility() {
         domesticRulesContainer.enableAccessibility(label: viewModel.domesticRulesTitle,
                                                    value: viewModel.entryRulesSubtitle,
@@ -157,15 +158,15 @@ class TrustedListDetailsViewController: UIViewController {
                                                 value: viewModel.entryRulesSubtitle,
                                                 traits: .staticText)
         valueSetsContainer.enableAccessibility(label: viewModel.valueSetsTitle,
-                                                value: viewModel.valueSetsSubtitle,
-                                                traits: .staticText)
+                                               value: viewModel.valueSetsSubtitle,
+                                               traits: .staticText)
         certificateProviderContainer.enableAccessibility(label: viewModel.certificateProviderTitle,
-                                                value: viewModel.certificateProviderSubtitle,
-                                                traits: .staticText)
+                                                         value: viewModel.certificateProviderSubtitle,
+                                                         traits: .staticText)
         countryListContainer.enableAccessibility(label: viewModel.countryListTitle,
-                                                value: viewModel.countryListSubtitle,
-                                                traits: .staticText)
-        
+                                                 value: viewModel.countryListSubtitle,
+                                                 traits: .staticText)
+
         if #available(iOS 13.0, *) {
             headerView.accessibilityRespondsToUserInteraction = true
             entryRulesContainer.accessibilityRespondsToUserInteraction = true
@@ -185,6 +186,6 @@ extension TrustedListDetailsViewController: ViewModelDelegate {
     public func viewModelDidUpdate() {
         updateView()
     }
-    
+
     public func viewModelUpdateDidFailWithError(_: Error) {}
 }

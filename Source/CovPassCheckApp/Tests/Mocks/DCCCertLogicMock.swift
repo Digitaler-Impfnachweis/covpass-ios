@@ -5,48 +5,46 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassCommon
 import CertLogic
-import PromiseKit
+import CovPassCommon
 import Foundation
+import PromiseKit
 import XCTest
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
-
     var areRulesAvailable = true
-    
+
     var rulesShouldBeUpdated: Bool = true
-    
+
     var boosterRulesShouldBeUpdated: Bool = true
-    
+
     var valueSetsShouldBeUpdated: Bool = true
-    
+
     var domesticRulesShouldBeUpdated: Bool = true
-    
+
     var domesticRulesUpdateTestExpectation = XCTestExpectation()
-    
+
     var domesticRulesUpdateIfNeededTestExpectation = XCTestExpectation()
-    
+
     var lastUpdateDccrRules: Date?
     var rules: [Rule] = []
 
     func updateBoosterRulesIfNeeded() -> Promise<Void> {
         .value
     }
-    
+
     func updateValueSets() -> Promise<Void> {
         .value
     }
-    
+
     func updateValueSetsIfNeeded() -> Promise<Void> {
         .value
     }
-    
-    
+
     var countries: [Country] {
         [Country("DE")]
     }
-    
+
     func updateBoosterRules() -> Promise<Void> {
         .value
     }
@@ -54,12 +52,12 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func lastUpdatedDCCRules() -> Date? {
         lastUpdateDccrRules
     }
-    
-    func rulesAvailable(logicType: DCCCertLogic.LogicType, region: String?) -> Bool {
+
+    func rulesAvailable(logicType _: DCCCertLogic.LogicType, region _: String?) -> Bool {
         areRulesAvailable
     }
 
-    func rules(logicType: DCCCertLogic.LogicType, region: String?) -> [Rule] {
+    func rules(logicType _: DCCCertLogic.LogicType, region _: String?) -> [Rule] {
         rules
     }
 
@@ -79,19 +77,19 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateRulesIfNeeded() -> Promise<Void> {
         Promise.value
     }
-    
-    var didUpdateRules: (()->Void)?
+
+    var didUpdateRules: (() -> Void)?
 
     func updateRules() -> Promise<Void> {
         didUpdateRules?()
         return Promise.value
     }
-    
+
     func updateDomesticIfNeeded() -> Promise<Void> {
         domesticRulesUpdateIfNeededTestExpectation.fulfill()
         return .value
     }
-    
+
     func updateDomesticRules() -> Promise<Void> {
         domesticRulesUpdateTestExpectation.fulfill()
         return .value

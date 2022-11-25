@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -13,7 +13,7 @@ extension CoseSign1Message {
         do {
             let message = try CoseSign1Message(decompressedPayload: data)
             return .value(message)
-        } catch  {
+        } catch {
             return .init(error: error)
         }
     }

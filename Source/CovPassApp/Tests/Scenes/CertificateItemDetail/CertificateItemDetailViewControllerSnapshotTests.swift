@@ -43,7 +43,7 @@ class CertificateItemDetailViewControllerSnapshotTests: BaseSnapShotTests {
         // When & Then
         verifyView(view: sut.view, height: 1800)
     }
-    
+
     func testInvalidCertificate() throws {
         // Given
         var token = try ExtendedCBORWebToken.token1Of1()

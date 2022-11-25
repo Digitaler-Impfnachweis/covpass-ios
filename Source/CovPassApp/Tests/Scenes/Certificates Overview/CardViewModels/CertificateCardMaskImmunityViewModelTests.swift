@@ -40,7 +40,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
                      boosterLogic: boosterLogic,
                      userDefaults: userDefaults)
     }
-    
+
     func testIsShowNotification_false() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -53,7 +53,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertFalse(showNotification)
     }
-    
+
     func testIsShowNotification_booster_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -70,7 +70,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_expired_before_90Days_default() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -86,7 +86,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_expired_before_90Days_wasExpiryAlertShown_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -102,7 +102,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_expired_before_90Days_true_reissueProcessNewBadgeAlreadySeent_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -118,7 +118,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_expired_before_90Days_true_reissueProcessNewBadgeAlreadySeent_and_wasExpiryAlertShown_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -134,7 +134,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertFalse(showNotification)
     }
-    
+
     func testIsShowNotification_expired_before_100Days_default() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -150,7 +150,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_expired_before_100Days_wasExpiryAlertShown_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -159,14 +159,14 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         token.reissueProcessNewBadgeAlreadySeen = true
         token.wasExpiryAlertShown = true
         let sut = sut(token: token)
-        
+
         // When
         let showNotification = sut.showNotification
-        
+
         // Then
         XCTAssertFalse(showNotification)
     }
-    
+
     func testIsShowNotification_expired_before_100Days_reissueProcessNewBadgeAlreadySeen_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -175,14 +175,14 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         token.reissueProcessNewBadgeAlreadySeen = true
         token.wasExpiryAlertShown = false
         let sut = sut(token: token)
-        
+
         // When
         let showNotification = sut.showNotification
-        
+
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_expired_before_100Days_reissueProcessNewBadgeAlreadySeen_and_wasExpiryAlertShown_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -191,14 +191,14 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         token.reissueProcessNewBadgeAlreadySeen = true
         token.wasExpiryAlertShown = true
         let sut = sut(token: token)
-        
+
         // When
         let showNotification = sut.showNotification
-        
+
         // Then
         XCTAssertFalse(showNotification)
     }
-    
+
     func testIsShowNotification_aboutToExpire_default() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -214,7 +214,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_aboutToExpire_wasExpiryAlertShown_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -230,7 +230,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_aboutToExpire_reissueProcessNewBadgeAlreadySeen_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -246,7 +246,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_aboutToExpire_reissueProcessNewBadgeAlreadySeen_and_wasExpiryAlertShown_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -262,7 +262,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertFalse(showNotification)
     }
-    
+
     func testIsShowNotification_invalid_default() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -278,7 +278,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_invalid_wasExpiryAlertShown_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -294,7 +294,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertFalse(showNotification)
     }
-    
+
     func testIsShowNotification_invalid_reissueProcessNewBadgeAlreadySeen_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -310,7 +310,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsShowNotification_invalid_reissueProcessNewBadgeAlreadySeen_and_wasExpiryAlertShown_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -326,7 +326,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertFalse(showNotification)
     }
-    
+
     func testIsInvalid_false() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -472,7 +472,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(title, "No valid certificate")
     }
-    
+
     func testTitle_pcr_test_ruleNotAvailable() {
         // Given
         let token = ExtendedCBORWebToken.pcrTest()
@@ -485,7 +485,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(title, "No additional rules")
     }
-    
+
     func testTitle_pcr_test() {
         // Given
         let token = ExtendedCBORWebToken.pcrTest()
@@ -644,7 +644,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(iconTintColor, UIColor(hexString: "737373"))
     }
-    
+
     func testIconTintColor_not_invalid() throws {
         // Given
         let token = try ExtendedCBORWebToken.mock()
@@ -656,7 +656,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(iconTintColor, .onBrandAccent70)
     }
-    
+
     func test_headerSubtitle_no_notification_available() throws {
         // Given
         let token = try ExtendedCBORWebToken.mock()
@@ -668,7 +668,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(subtitleSubtitle, nil)
     }
-    
+
     func test_headerSubtitle_notification_available_invalid() throws {
         // Given
         var token = try ExtendedCBORWebToken.mock()
@@ -681,7 +681,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(headerSubtitle, "Check status")
     }
-    
+
     func test_headerSubtitle_notification_not_available_revoked() throws {
         // Given
         var token = try ExtendedCBORWebToken.mock()
@@ -694,7 +694,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(headerSubtitle, nil)
     }
-    
+
     func test_headerSubtitle_notification_available_expired() throws {
         // Given
         var token = try ExtendedCBORWebToken.mock()
@@ -707,7 +707,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(headerSubtitle, "Check status")
     }
-    
+
     func test_headerSubtitle_notification_available_booster_notification() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -732,7 +732,7 @@ private extension ExtendedCBORWebToken {
             vaccinationCertificate: CBORWebToken(
                 iss: "DE",
                 iat: Date(timeIntervalSinceReferenceDate: 0),
-                exp: .distantFuture+1000,
+                exp: .distantFuture + 1000,
                 hcert: HealthCertificateClaim(
                     dgc: DigitalGreenCertificate(
                         nam: Name(

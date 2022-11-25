@@ -33,11 +33,11 @@ public protocol CustomURLSessionProtocol {
 public struct CustomURLSession: CustomURLSessionProtocol {
     private let sessionDelegate: URLSessionDelegate?
     public static let apiHeaderETag: String = "Etag"
-    
+
     public init(sessionDelegate: URLSessionDelegate?) {
         self.sessionDelegate = sessionDelegate
     }
-    
+
     static func updateETag(urlResponse: URLResponse!) {
         guard let httpResponse = urlResponse as? HTTPURLResponse else {
             return
@@ -50,7 +50,7 @@ public struct CustomURLSession: CustomURLSessionProtocol {
         }
         UserDefaults.standard.setValue(etag, forKey: urlString)
     }
-    
+
     public func request(_ urlRequest: URLRequest) -> Promise<String> {
         Promise { seal in
             print(urlRequest.url?.absoluteString ?? "")
@@ -81,16 +81,16 @@ public struct CustomURLSession: CustomURLSessionProtocol {
                     seal.reject(APIError.invalidResponse)
                     return
                 }
-                if 304 == response.statusCode  {
+                if response.statusCode == 304 {
                     seal.reject(APIError.notModified)
                     return
                 }
-                
-                guard (200 ... 299).contains(response.statusCode)  else {
+
+                guard (200 ... 299).contains(response.statusCode) else {
                     seal.reject(APIError.invalidResponse)
                     return
                 }
-                
+
                 guard let data = data, let dataString = String(data: data, encoding: .utf8) else {
                     seal.reject(APIError.invalidResponse)
                     return
@@ -101,7 +101,7 @@ public struct CustomURLSession: CustomURLSessionProtocol {
     }
 
     public static let defaultHTTPHeaders: HTTPHeaders = {
-        let acceptEncoding: String = "gzip;q=1.0, compress;q=0.5"
+        let acceptEncoding = "gzip;q=1.0, compress;q=0.5"
         let acceptLanguage = Locale.preferredLanguages.prefix(6).enumerated().map { index, languageCode in
             let quality = 1.0 - (Double(index) * 0.1)
             return "\(languageCode);q=\(quality)"
@@ -115,7 +115,7 @@ public struct CustomURLSession: CustomURLSessionProtocol {
                 let osNameVersion: String = {
                     let version = ProcessInfo.processInfo.operatingSystemVersion
                     let versionString = "\(version.majorVersion).\(version.minorVersion).\(version.patchVersion)"
-                    let osName: String = "iOS"
+                    let osName = "iOS"
                     return "\(osName) \(versionString)"
                 }()
                 return "\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion))"
@@ -128,25 +128,23 @@ public struct CustomURLSession: CustomURLSessionProtocol {
             "User-Agent": userAgent
         ]
     }()
-    
 }
 
 public struct APIService: APIServiceProtocol {
-    
     private let url: String
     private let contentType: String = "application/cbor+base45"
     private let customURLSession: CustomURLSessionProtocol
     private let apiHeaderNoneMatch: String = "If-None-Match"
-    
+
     public init(customURLSession: CustomURLSessionProtocol, url: String) {
         self.customURLSession = customURLSession
         self.url = url
     }
-    
+
     static func eTagForURL(urlString: String) -> String? {
-        return UserDefaults.standard.value(forKey: urlString) as? String
+        UserDefaults.standard.value(forKey: urlString) as? String
     }
-    
+
     public func fetchTrustList() -> Promise<String> {
         guard let requestUrl = URL(string: url) else {
             return Promise(error: APIError.invalidUrl)
@@ -157,7 +155,7 @@ public struct APIService: APIServiceProtocol {
         }
         return customURLSession.request(request)
     }
-    
+
     public func vaasListOfServices(url: URL) -> Promise<String> {
         var request = url.urlRequest.GET
         if let etag = APIService.eTagForURL(urlString: request.url?.absoluteString ?? "") {
@@ -165,55 +163,55 @@ public struct APIService: APIServiceProtocol {
         }
         return customURLSession.request(request)
     }
-    
-    public func getAccessTokenFor(url : URL,
-                                  servicePath : String,
-                                  publicKey : String,
+
+    public func getAccessTokenFor(url: URL,
+                                  servicePath: String,
+                                  publicKey: String,
                                   ticketToken: String) -> Promise<String> {
         let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]
-        
-        let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted)
-        
+
+        let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = jsonData
-        
-        request.allHTTPHeaderFields  = ["Authorization" : "Bearer " + ticketToken,
-                                        "X-Version": "1.0.0",
-                                        "content-type": "application/json"]
-        
+
+        request.allHTTPHeaderFields = ["Authorization": "Bearer " + ticketToken,
+                                       "X-Version": "1.0.0",
+                                       "content-type": "application/json"]
+
         return customURLSession.request(request)
     }
-    
-    public func cancellTicket(url : URL,
-                              ticketToken: String) -> Promise<String> {        
+
+    public func cancellTicket(url: URL,
+                              ticketToken: String) -> Promise<String> {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
-        request.allHTTPHeaderFields  = ["Authorization" : "Bearer " + ticketToken,
-                                        "X-Version": "1.0.0",
-                                        "content-type": "application/json"]
-        
+
+        request.allHTTPHeaderFields = ["Authorization": "Bearer " + ticketToken,
+                                       "X-Version": "1.0.0",
+                                       "content-type": "application/json"]
+
         return customURLSession.request(request)
     }
-    
-    public func validateTicketing(url : URL,
-                                  parameters : [String: String]?,
+
+    public func validateTicketing(url: URL,
+                                  parameters: [String: String]?,
                                   accessToken: String) -> Promise<String> {
         let headers = ["Authorization": "Bearer " + accessToken,
                        "X-Version": "1.0.0",
                        "content-type": "application/json"]
-        
+
         let encoder = JSONEncoder()
         guard let parametersData = try? encoder.encode(parameters) else {
-            return Promise.init(error: APIError.invalidResponse)
+            return Promise(error: APIError.invalidResponse)
         }
-        
+
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = headers
         request.httpMethod = "POST"
         request.httpBody = parametersData
-        
+
         return customURLSession.request(request)
     }
 }

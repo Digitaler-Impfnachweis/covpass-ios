@@ -6,26 +6,25 @@
 //
 
 @testable import CovPassApp
-import XCTest
 import CovPassCommon
 import PromiseKit
+import XCTest
 
 class CountrySelectionViewModelTests: XCTestCase {
-
     private var sut: CountrySelectionViewModel!
 
     override func setUpWithError() throws {
         let (_, resolver) = Promise<String>.pending()
         sut = CountrySelectionViewModel(router: CountrySelectionRouterMock(),
                                         resolvable: resolver,
-                                        countries:  CountrySelectionMock.countries,
+                                        countries: CountrySelectionMock.countries,
                                         country: "DE")
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
-    
+
     func testOrder() {
         // WHEN
         let indexDE = sut.countries.firstIndex(of: Country("DE"))
@@ -35,5 +34,4 @@ class CountrySelectionViewModelTests: XCTestCase {
         XCTAssertEqual(indexDE2, 13)
         XCTAssertEqual(indexDE, 14)
     }
-    
 }

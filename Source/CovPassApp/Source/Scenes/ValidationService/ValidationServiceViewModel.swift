@@ -5,12 +5,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
 import CovPassUI
+import Foundation
 
 private enum Constants {
-
     static let reuseIdentifier = "cell"
     static let reuseIdentifierHintCell = "hintCell"
     static let reuseIdentifierSubTitleCell = "subTitleCell"
@@ -39,7 +38,6 @@ private enum Constants {
 }
 
 struct ValidationServiceViewModel {
-
     enum Accessibility {
         static let close = VoiceOverOptions.Settings(label: "accessibility_share_certificate_label_close".localized)
         static let openViewController = VoiceOverOptions.Settings(label: "accessibility_share_certificate_announce".localized)
@@ -72,7 +70,6 @@ struct ValidationServiceViewModel {
                 return Constants.reuseIdentifier
             }
         }
-
     }
 
     let router: ValidationServiceRoutable

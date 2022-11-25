@@ -27,12 +27,14 @@ class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
         )
         return AppInformationEntry(title: LocalText.rulesTitle, scene: scene)
     }
+
     internal var revocationSettingsEntry: AppInformationEntry {
         let rightTitle = userDefaults.revocationExpertMode ? LocalText.revocationHintOn : LocalText.revocationHintOff
-        let revocationSettingsRouter: RevocationSettingsRouter = RevocationSettingsRouter(sceneCoordinator: router.sceneCoordinator)
+        let revocationSettingsRouter = RevocationSettingsRouter(sceneCoordinator: router.sceneCoordinator)
         let scene = RevocationSettingsSceneFactory(router: revocationSettingsRouter, userDefaults: userDefaults)
         return AppInformationEntry(title: LocalText.revocationTitle, scene: scene, rightTitle: rightTitle)
     }
+
     internal var acousticFeedbackSettingsEntry: AppInformationEntry {
         let rightTitle = userDefaults.enableAcousticFeedback ?
             LocalText.acousticFeedbackOn : LocalText.acousticFeedbackOff
@@ -49,7 +51,7 @@ class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
         )
     }
 
-    init(router:AppInformationRouterProtocol, userDefaults: Persistence) {
+    init(router: AppInformationRouterProtocol, userDefaults: Persistence) {
         self.userDefaults = userDefaults
         super.init(router: router)
     }
@@ -86,7 +88,7 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
                       openingAnnounce: Accessibility.Opening.companyDetailsTitle,
                       closingAnnounce: Accessibility.Closing.companyDetailsTitle),
             .webEntry(title: Texts.openSourceLicenseTitle,
-                      url: licenseBundle.url(forResource: "license_de" , withExtension: "html")!,
+                      url: licenseBundle.url(forResource: "license_de", withExtension: "html")!,
                       enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.openSourceLicenseTitle,
                       closingAnnounce: Accessibility.Closing.openSourceLicenseTitle),
@@ -94,7 +96,7 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpasscheck-app-ios-barrierefreiheitserklaerung/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
                       closingAnnounce: Accessibility.Closing.accessibilityStatementTitle),
-            revocationSettingsEntry,
+            revocationSettingsEntry
         ]
     }
 
@@ -137,7 +139,7 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
                       openingAnnounce: Accessibility.Opening.companyDetailsTitle,
                       closingAnnounce: Accessibility.Closing.companyDetailsTitle),
             .webEntry(title: Texts.openSourceLicenseTitle,
-                      url: licenseBundle.url(forResource: "license_en" , withExtension: "html")!,
+                      url: licenseBundle.url(forResource: "license_en", withExtension: "html")!,
                       enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.openSourceLicenseTitle,
                       closingAnnounce: Accessibility.Closing.openSourceLicenseTitle),
@@ -145,7 +147,7 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpasscheck-app-ios-accessibility-statement/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
                       closingAnnounce: Accessibility.Closing.accessibilityStatementTitle),
-            revocationSettingsEntry,
+            revocationSettingsEntry
         ]
     }
 
@@ -174,7 +176,7 @@ private enum LocalText {
 private extension AppInformationEntry {
     static func webEntry(title: String,
                          url: URL,
-                         enableDynamicFonts: Bool = false,
+                         enableDynamicFonts _: Bool = false,
                          openingAnnounce: String,
                          closingAnnounce: String) -> AppInformationEntry {
         .init(

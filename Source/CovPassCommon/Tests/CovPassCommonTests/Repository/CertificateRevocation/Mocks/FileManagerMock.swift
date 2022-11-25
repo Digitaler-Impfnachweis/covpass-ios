@@ -1,6 +1,6 @@
 //
 //  FileManagerMock.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -31,12 +31,12 @@ class FileManagerMock: FileManager {
         return contents
     }
 
-    override func createFile(atPath path: String, contents data: Data?, attributes attr: [FileAttributeKey : Any]? = nil) -> Bool {
+    override func createFile(atPath path: String, contents data: Data?, attributes _: [FileAttributeKey: Any]? = nil) -> Bool {
         createFileCalledWithParameters.append((path, data))
         return createFileSuccess
     }
 
-    override func createDirectory(at url: URL, withIntermediateDirectories createIntermediates: Bool, attributes: [FileAttributeKey : Any]? = nil) throws {
+    override func createDirectory(at url: URL, withIntermediateDirectories _: Bool, attributes _: [FileAttributeKey: Any]? = nil) throws {
         createDirectoryCalledWithURL = url
         if let error = error {
             throw error

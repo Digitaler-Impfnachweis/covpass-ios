@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct ValidationService : Codable {
-  public var id               : String
-  public var type             : String
-  public var name             : String
-  public var serviceEndpoint  : String
-  public var isSelected       : Bool? = false
+public struct ValidationService: Codable {
+    public var id: String
+    public var type: String
+    public var name: String
+    public var serviceEndpoint: String
+    public var isSelected: Bool? = false
 }

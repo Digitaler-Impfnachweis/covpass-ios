@@ -1,16 +1,16 @@
 //
 //  CheckSituationViewController.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassCommon
+import UIKit
 
 public class CheckSituationViewController: UIViewController {
-    
     // MARK: - IBOutlet
+
     @IBOutlet var stackview: UIStackView!
     @IBOutlet var hStackView: UIStackView!
     @IBOutlet var titleLabel: PlainLabel!
@@ -60,41 +60,42 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var checkSituationSubtitle: PlainLabel!
     @IBOutlet var checkSituationWithinGermany: ImageTitleSubtitleView!
     @IBOutlet var checkSituationEnteringGermany: ImageTitleSubtitleView!
-    
+
     @IBOutlet public var mainButton: MainButton!
     private let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
 
     // MARK: - Properties
+
     private(set) var viewModel: CheckSituationViewModelProtocol
 
     // MARK: - Lifecycle
 
     @available(*, unavailable)
-    required public init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+    public required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
     public init(viewModel: CheckSituationViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .uiBundle)
     }
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         configureView()
         configureAccessibilityRespondsToUserInteraction()
     }
-    
-    public override func viewDidAppear(_ animated: Bool) {
+
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .announcement, argument: viewModel.onboardingOpen)
     }
-    
-    public override func viewWillDisappear(_ animated: Bool) {
+
+    override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIAccessibility.post(notification: .announcement, argument: viewModel.onboardingClose)
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         configureHidden()
     }
@@ -104,7 +105,7 @@ public class CheckSituationViewController: UIViewController {
         saveButton.title = viewModel.doneButtonTitle
         saveButton.action = viewModel.doneIsTapped
     }
-    
+
     private func configureHidden() {
         descriptionContainerView.isHidden = viewModel.descriptionIsHidden
         saveButton.isHidden = viewModel.buttonIsHidden
@@ -114,13 +115,13 @@ public class CheckSituationViewController: UIViewController {
         pageImageView.isHidden = viewModel.pageImageIsHidden || UIScreen.isLandscape
         titleLabel.isHidden = viewModel.pageTitleIsHidden
     }
-    
+
     private func configureImageView() {
         pageImageView.image = viewModel.pageImage
         pageImageView.isAccessibilityElement = false
         pageImageView.enableAccessibility(label: viewModel.onboardingImageDescription, traits: .image)
     }
-    
+
     private func configureSpacings() {
         if viewModel.descriptionTextIsTop {
             stackview.removeArrangedSubview(descriptionTextWrapper)
@@ -130,7 +131,7 @@ public class CheckSituationViewController: UIViewController {
         stackview.setCustomSpacing(28, after: hStackView)
         stackview.setCustomSpacing(44, after: pageImageView)
     }
-    
+
     private func configureUpdateEntriesStackViews() {
         entryRulesStackView.isAccessibilityElement = true
         domesticRulesStackView.isAccessibilityElement = true
@@ -139,13 +140,13 @@ public class CheckSituationViewController: UIViewController {
         countryListStackView.isAccessibilityElement = true
         authorityListStackView.isAccessibilityElement = true
     }
-    
+
     func configureView() {
         title = viewModel.navBarTitle
         view.backgroundColor = .backgroundPrimary
 
         let backButton = UIBarButtonItem(image: .arrowBack, style: .done, target: self, action: #selector(backButtonTapped))
-        backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO change accessibility text when they are available
+        backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO: change accessibility text when they are available
         navigationItem.leftBarButtonItem = backButton
         navigationController?.navigationBar.tintColor = .onBackground100
 
@@ -180,7 +181,7 @@ public class CheckSituationViewController: UIViewController {
         offlineRevocationSwitch.uiSwitch.isOn = viewModel.offlineRevocationIsEnabled
         offlineRevocationSwitch.updateAccessibility()
     }
-    
+
     private func configureAccessibilityRespondsToUserInteraction() {
         if #available(iOS 13.0, *) {
             titleLabel.accessibilityRespondsToUserInteraction = true
@@ -207,12 +208,12 @@ public class CheckSituationViewController: UIViewController {
 
 extension CheckSituationViewController {
     // MARK: - Private Methods for Update Context
-    
+
     private func setupButtonActions() {
         mainButton.action = viewModel.refresh
         cancelButton.action = viewModel.cancel
     }
-    
+
     private func setupStaticTexts() {
         mainButton.title = viewModel.offlineModusButton
         mainButton.style = .primary
@@ -234,7 +235,7 @@ extension CheckSituationViewController {
         bodyTitleLabel.attributedText = viewModel.listTitle.styledAs(.header_2)
         bodyTitleLabel.enableAccessibility(label: viewModel.listTitle, traits: .header)
     }
-    
+
     private func configureUpdateView() {
         setupActivityIndicator()
         setupButtonActions()
@@ -242,14 +243,14 @@ extension CheckSituationViewController {
         setupStaticTexts()
         downloadStateWrapper.layer.cornerRadius = 12.0
     }
-    
+
     private func updateLoadingView(isLoading: Bool) {
         mainButton?.isHidden = isLoading
         downloadingHintLabel.isHidden = !isLoading
         cancelButton.isHidden = !isLoading
         isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
-    
+
     private func setupActivityIndicator() {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorWrapper.translatesAutoresizingMaskIntoConstraints = false
@@ -259,7 +260,7 @@ extension CheckSituationViewController {
         activityIndicator.leftAnchor.constraint(equalTo: activityIndicatorWrapper.leftAnchor, constant: 40.0).isActive = true
         activityIndicator.rightAnchor.constraint(equalTo: activityIndicatorWrapper.rightAnchor, constant: -40.0).isActive = true
     }
-    
+
     private func updateUpdateRelatedViews() {
         updateStackview.isHidden = viewModel.updateContextHidden
         updateLoadingView(isLoading: viewModel.isLoading)
@@ -281,7 +282,7 @@ extension CheckSituationViewController {
         authorityListView.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
         authorityListDivider.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
     }
-    
+
     private func configureCheckSituation() {
         guard !viewModel.checkSituationIsHidden else {
             checkSituationContainer.isHidden = true
@@ -295,7 +296,7 @@ extension CheckSituationViewController {
         updateWithinGermany()
         updateEnteringGermany()
     }
-    
+
     func updateWithinGermany() {
         let title = viewModel.checkSituationWithinGermanyTitle.styledAs(.header_3)
         let subtitle = viewModel.checkSituationWithinGermanySubtitle.styledAs(.body)
@@ -311,7 +312,7 @@ extension CheckSituationViewController {
         }
         checkSituationWithinGermany.containerView?.accessibilityValue = viewModel.checkSituationWithinGermanyOptionAccessibiliyLabel
     }
-    
+
     func updateEnteringGermany() {
         let title = viewModel.checkSituationEnteringGermanyTitle.styledAs(.header_3)
         let subtitle = viewModel.checkSituationEnteringGermanySubtitle.styledAs(.body)
@@ -329,7 +330,6 @@ extension CheckSituationViewController {
     }
 }
 
-
 extension CheckSituationViewController: ViewModelDelegate {
     public func viewModelDidUpdate() {
         updateUpdateRelatedViews()
@@ -342,6 +342,6 @@ extension CheckSituationViewController: ViewModelDelegate {
             configureOfflineRevocationView()
         }
     }
-    
-    public func viewModelUpdateDidFailWithError(_ error: Error) {}
+
+    public func viewModelUpdateDidFailWithError(_: Error) {}
 }

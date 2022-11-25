@@ -29,7 +29,7 @@ struct AcousticFeedbackSettingsSceneFactory: SceneFactory {
         let viewController = AcousticFeedbackSettingsViewController(
             viewModel: viewModel
         )
-        
+
         return viewController
     }
 }

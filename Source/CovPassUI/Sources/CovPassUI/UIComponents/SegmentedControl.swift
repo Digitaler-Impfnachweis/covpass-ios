@@ -9,7 +9,7 @@
 import UIKit
 
 public class SegmentedControl: UISegmentedControl {
-    public override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
 
         // Set scaled font

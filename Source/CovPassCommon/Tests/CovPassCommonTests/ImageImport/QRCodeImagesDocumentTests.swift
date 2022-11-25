@@ -1,6 +1,6 @@
 //
 //  QRCodeImageDocumentTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -32,7 +32,7 @@ class QRCodeImagesDocumentTests: XCTestCase {
                 compatibleWith: nil
             )
         )
-        let sut = QRCodeImagesDocument(images: [image1, image2,  image3])
+        let sut = QRCodeImagesDocument(images: [image1, image2, image3])
 
         // When
         let numberOfPages = sut.numberOfPages

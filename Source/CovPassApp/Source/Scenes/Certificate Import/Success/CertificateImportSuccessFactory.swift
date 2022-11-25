@@ -5,9 +5,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassUI
 import PromiseKit
 import UIKit
-import CovPassUI
 
 public struct CertificateImportSuccessFactory: ResolvableSceneFactory {
     public func make(resolvable: Resolver<Void>) -> UIViewController {
@@ -16,4 +16,3 @@ public struct CertificateImportSuccessFactory: ResolvableSceneFactory {
         return viewController
     }
 }
-

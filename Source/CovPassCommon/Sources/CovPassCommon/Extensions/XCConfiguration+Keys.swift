@@ -1,6 +1,6 @@
 //
 //  XCConfiguration+Keys.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -15,7 +15,7 @@ public extension XCConfiguration {
     static var certificateRevocationTrustKey: String {
         Self.value(String.self, forKey: "CERTIFICATE_REVOCATION_TRUST_KEY")
     }
-    
+
     static var certificateRevocationPinningHashes: [String] {
         value([String].self, forKey: "CERTIFICATE_REVOCATION_PINNING_HASHES")
     }

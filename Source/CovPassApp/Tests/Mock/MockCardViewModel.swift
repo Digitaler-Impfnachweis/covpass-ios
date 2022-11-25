@@ -11,7 +11,7 @@ import UIKit
 
 struct MockCardViewModel: CardViewModel {
     let showNotification: Bool = false
-    
+
     let reuseIdentifier: String = "\(MockCardViewModel.self)"
 
     let backgroundColor: UIColor = .black
@@ -19,6 +19,6 @@ struct MockCardViewModel: CardViewModel {
     let iconTintColor: UIColor = .white
 
     let textColor: UIColor = .black
-    
+
     var delegate: ViewModelDelegate?
 }

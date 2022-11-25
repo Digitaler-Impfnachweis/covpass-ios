@@ -1,7 +1,7 @@
+import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
-import CovPassUI
-import CovPassCommon
 import UIKit
 
 private enum Constants {
@@ -22,10 +22,10 @@ private enum Constants {
 }
 
 class ChooseCheckSituationViewModel: ChooseCheckSituationViewModelProtocol {
-    
     // MARK: - Properties
+
     weak var delegate: ViewModelDelegate?
-    
+
     let title = Constants.Keys.title
     let subtitle = Constants.Keys.subtitle
     let withinGermanyTitle = Constants.Keys.withinGermanyTitle
@@ -47,30 +47,30 @@ class ChooseCheckSituationViewModel: ChooseCheckSituationViewModelProtocol {
     private var persistence: Persistence
     private var selectedCheckSituation: CheckSituationType { didSet { delegate?.viewModelDidUpdate() } }
     private var withinGermanyIsSelected: Bool { selectedCheckSituation == .withinGermany }
+
     // MARK: - Lifecyle
-    
+
     init(router: ChooseCheckSituationRouterProtocol,
          resolver: Resolver<Void>,
          persistence: Persistence) {
         self.router = router
         self.resolver = resolver
         self.persistence = persistence
-        self.selectedCheckSituation = .init(rawValue: persistence.checkSituation) ?? .withinGermany
+        selectedCheckSituation = .init(rawValue: persistence.checkSituation) ?? .withinGermany
     }
-    
+
     // MARK: - Methods
-    
+
     func withinGermanyIsChoosen() {
         selectedCheckSituation = .withinGermany
     }
-    
+
     func enteringGermanyViewIsChoosen() {
         selectedCheckSituation = .enteringGermany
     }
-    
+
     func applyChanges() {
         persistence.checkSituation = selectedCheckSituation.rawValue
         resolver?.fulfill_()
     }
-    
 }

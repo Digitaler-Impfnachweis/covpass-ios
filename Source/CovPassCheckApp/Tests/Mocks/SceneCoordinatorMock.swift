@@ -5,12 +5,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 @testable import CovPassCheckApp
 import CovPassCommon
-import XCTest
 import CovPassUI
 import PromiseKit
-import CertLogic
 import SwiftyJSON
 import XCTest
 
@@ -18,10 +17,9 @@ class SceneCoordinatorMock: SceneCoordinator {
     let dismissExpectation = XCTestExpectation(description: "dismissExpectation")
     var sceneDissmissed = false
 
-    func asRoot(_ factory: SceneFactory) {
-    }
-    
-    func dimiss(animated: Bool = true) {
+    func asRoot(_: SceneFactory) {}
+
+    func dimiss(animated _: Bool = true) {
         sceneDissmissed = true
         dismissExpectation.fulfill()
     }
@@ -56,5 +54,3 @@ extension Rule {
         return self
     }
 }
-
-

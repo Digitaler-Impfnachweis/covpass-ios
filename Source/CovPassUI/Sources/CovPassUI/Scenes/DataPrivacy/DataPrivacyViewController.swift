@@ -31,7 +31,7 @@ public class DataPrivacyViewController: UIViewController {
 
     // MARK: - Lifecycle
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         configureWebView()
         configureToolbarView()

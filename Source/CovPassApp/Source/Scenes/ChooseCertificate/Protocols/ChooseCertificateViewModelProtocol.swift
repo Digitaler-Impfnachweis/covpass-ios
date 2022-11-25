@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
-import UIKit
-import PromiseKit
 import CovPassCommon
+import CovPassUI
+import PromiseKit
+import UIKit
 
 protocol ChooseCertificateViewModelProtocol {
     var router: ValidationServiceRoutable? { get set }
@@ -18,7 +18,7 @@ protocol ChooseCertificateViewModelProtocol {
     var typeFilter: [CertType]? { get set }
     var givenNameFilter: String? { get set }
     var familyNameFilter: String? { get set }
-    var dobFilter: String? { get set}
+    var dobFilter: String? { get set }
     var title: String { get }
     var subtitle: String { get }
     var certdetails: String { get }

@@ -12,19 +12,18 @@ import XCTest
 @testable import CovPassCommon
 
 class UserDefaultsPersistenceTests: XCTestCase {
-    
     var sut: UserDefaultsPersistence!
 
     override func setUp() {
         super.setUp()
         sut = UserDefaultsPersistence()
     }
-    
+
     override func tearDown() {
         sut = nil
         super.tearDown()
     }
-    
+
     func testUserDefaultsPersistence() {
         let randomKey = "\(Date().timeIntervalSince1970.rounded())"
         XCTAssertNil(try sut.fetch(randomKey))
@@ -33,7 +32,7 @@ class UserDefaultsPersistenceTests: XCTestCase {
         XCTAssertNoThrow(try sut.delete(randomKey))
         XCTAssertNil(try sut.fetch(randomKey))
     }
-    
+
     func testSetRevocationExpertMode_True() {
         // GIVEN
         sut.revocationExpertMode = true
@@ -42,7 +41,7 @@ class UserDefaultsPersistenceTests: XCTestCase {
         // THEN
         XCTAssertEqual(revocationExpertMode, true)
     }
-    
+
     func testSetRevocationExpertMode_False() {
         // GIVEN
         sut.revocationExpertMode = false
@@ -51,7 +50,7 @@ class UserDefaultsPersistenceTests: XCTestCase {
         // THEN
         XCTAssertEqual(revocationExpertMode, false)
     }
-        
+
     func testSetRevocationExpertMode_Nil() throws {
         // GIVEN
         try sut.delete(UserDefaults.keyRevocationExpertMode)
@@ -60,7 +59,7 @@ class UserDefaultsPersistenceTests: XCTestCase {
         // THEN
         XCTAssertEqual(revocationExpertMode, false)
     }
-    
+
     func testLastUpdateDomesticRules_Nil() throws {
         // GIVEN
         try sut.delete(UserDefaults.keyLastUpdateDomesticRuless)
@@ -69,7 +68,7 @@ class UserDefaultsPersistenceTests: XCTestCase {
         // THEN
         XCTAssertNil(lastUpdateDomesticRules)
     }
-    
+
     func testLastUpdateDomesticRules_Date_over_store() throws {
         // GIVEN
         let date = Date()
@@ -79,7 +78,7 @@ class UserDefaultsPersistenceTests: XCTestCase {
         // THEN
         XCTAssertEqual(date, lastUpdateDomesticRules)
     }
-    
+
     func testLastUpdateDomesticRules_Date() throws {
         // GIVEN
         let date = Date()

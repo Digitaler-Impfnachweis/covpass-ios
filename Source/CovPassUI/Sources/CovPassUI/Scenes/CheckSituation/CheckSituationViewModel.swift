@@ -1,14 +1,14 @@
 //
 //  CheckSituationViewModel.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
-import UIKit
 import CovPassCommon
+import Foundation
 import PromiseKit
+import UIKit
 
 private enum Constants {
     enum Keys {
@@ -19,6 +19,7 @@ private enum Constants {
             static let footerText = "check_context_onboarding_footnote".localized(bundle: .main)
             static let doneButtonTitle = "check_context_onboarding_button".localized(bundle: .main)
         }
+
         enum Information {
             static let navBarTitle = "accessibility_dialog_local_rulecheck_title_announce".localized(bundle: .main)
             static let pageTitle = "dialog_local_rulecheck_title".localized(bundle: .main)
@@ -27,12 +28,14 @@ private enum Constants {
             static let doneButtonTitle = "dialog_local_rulecheck_button".localized(bundle: .main)
             static let subTitleText = "dialog_local_rulecheck_subtitle".localized(bundle: .main)
         }
+
         enum OfflineRevocation {
             static let title = "app_information_offline_revocation_title".localized(bundle: .main)
             static let description = "app_information_offline_revocation_copy_1".localized(bundle: .main)
             static let description2 = "app_information_offline_revocation_copy_2".localized(bundle: .main)
             static let switchTitle = "app_information_offline_revocation_title".localized(bundle: .main)
         }
+
         enum Update {
             static let title = "app_information_title_update".localized(bundle: .main)
             static let listTitle = "app_information_title_checkrules".localized(bundle: .main)
@@ -48,9 +51,11 @@ private enum Constants {
             static let loadingTitle = "settings_rules_list_loading_title".localized(bundle: .main)
             static let cancelTitle = "settings_rules_list_loading_cancel".localized(bundle: .main)
         }
+
         enum Settings {
             static let description = "app_information_message_update".localized(bundle: .main)
         }
+
         enum CheckSituation {
             static let title = "settings_rules_context_title".localized(bundle: .main)
             static let subtitle = "settings_rules_context_subtitle".localized(bundle: .main)
@@ -62,15 +67,18 @@ private enum Constants {
             static let optionUnselected = "accessibility_option_unselected".localized(bundle: .main)
         }
     }
+
     enum Images {
         static let pageImage = UIImage.illustration4
     }
+
     enum Accessibility {
         enum General {
             static let onboardingOpen = "accessibility_check_context_onboarding_announce_open".localized(bundle: .main)
             static let onboardingClose = "accessibility_check_context_onboarding_announce_close".localized(bundle: .main)
             static let onboardingImageDescription = "check_context_onboarding_image".localized(bundle: .main)
         }
+
         enum Information {
             static let onboardingOpen = "accessibility_dialog_local_rulecheck_title_announce".localized(bundle: .main)
             static let onboardingClose = "accessibility_check_context_onboarding_announce_close".localized(bundle: .main)
@@ -80,8 +88,8 @@ private enum Constants {
 }
 
 public class CheckSituationViewModel: CheckSituationViewModelProtocol {
-        
     // MARK: - Public/Protocol properties
+
     public var navBarTitle: String = Constants.Keys.General.navBarTitle
     public var pageTitle: String = Constants.Keys.General.pageTitle
     public var newBadgeText: String = Constants.Keys.General.newBadgeText
@@ -95,7 +103,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public let offlineRevocationTitle = Constants.Keys.OfflineRevocation.title
     public let offlineRevocationDescription = Constants.Keys.OfflineRevocation.description
     public let offlineRevocationDescription2 = Constants.Keys.OfflineRevocation.description2
-    public let offlineRevocationSwitchTitle =  Constants.Keys.OfflineRevocation.switchTitle
+    public let offlineRevocationSwitchTitle = Constants.Keys.OfflineRevocation.switchTitle
     public var hStackViewIsHidden: Bool = false
     public var pageTitleIsHidden: Bool = false
     public var newBadgeIconIsHidden: Bool = false
@@ -104,8 +112,8 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public var descriptionTextIsTop: Bool = false
     public var buttonIsHidden: Bool = false
     public var offlineRevocationIsHidden = true
-    private(set) public var descriptionIsHidden = false
-    private(set) public var offlineRevocationIsEnabled: Bool {
+    public private(set) var descriptionIsHidden = false
+    public private(set) var offlineRevocationIsEnabled: Bool {
         get {
             userDefaults.isCertificateRevocationOfflineServiceEnabled
         }
@@ -113,15 +121,16 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             userDefaults.isCertificateRevocationOfflineServiceEnabled = newValue
         }
     }
+
     public var delegate: ViewModelDelegate?
     public var context: CheckSituationViewModelContextType {
         didSet {
             changeContext()
         }
     }
-    
+
     // MARK: - properties of update context
-    
+
     public var updateContextHidden: Bool = true
     public let offlineModusButton: String = Constants.Keys.Update.loadTitle
     public let loadingHintTitle: String = Constants.Keys.Update.loadingTitle
@@ -130,53 +139,64 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public var downloadStateHintTitle: String {
         shouldSomethingBeUpdated ? Constants.Keys.Update.statusUnavailable : Constants.Keys.Update.statusAvailable
     }
+
     public var downloadStateHintIcon: UIImage {
         shouldSomethingBeUpdated ? .warning : .check
     }
+
     public var downloadStateHintColor: UIColor {
         shouldSomethingBeUpdated ? .warningAlternative : .resultGreen
     }
+
     public var downloadStateTextColor: UIColor {
         shouldSomethingBeUpdated ? .neutralBlack : .neutralWhite
     }
+
     public let entryRulesTitle: String = Constants.Keys.Update.entryRulesTitle
     public var entryRulesSubtitle: String {
         guard let date = userDefaults.lastUpdatedDCCRules else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
+
     public let domesticRulesUpdateTitle: String = Constants.Keys.Update.domesticRulesTitle
-    
+
     public var domesticRulesUpdateSubtitle: String {
         guard let date = userDefaults.lastUpdatedDCCRules else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
+
     public let valueSetsTitle: String = Constants.Keys.Update.valueSetsTitle
     public var valueSetsSubtitle: String {
         guard let date = userDefaults.lastUpdatedValueSets else { return "" }
-        return DateUtils.displayDateTimeFormatter.string(from: date) }
+        return DateUtils.displayDateTimeFormatter.string(from: date)
+    }
+
     public let certificateProviderTitle: String = Constants.Keys.Update.certificateProviderTitle
     public var certificateProviderSubtitle: String {
         guard let date = userDefaults.lastUpdatedTrustList else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
+
     public let countryListTitle: String = Constants.Keys.Update.countryListTitle
     public var countryListSubtitle: String {
         guard let date = userDefaults.lastUpdatedDCCRules else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
+
     public let authorityListTitle: String = Constants.Keys.Update.authorityListTitle
     public var authorityListSubtitle: String {
         guard let date = offlineRevocationService?.lastSuccessfulUpdate else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
+
     public var isLoading = false {
         didSet {
             delegate?.viewModelDidUpdate()
         }
     }
-    
+
     // MARK: - properties of check situation
-    
+
     public let checkSituationTitle = Constants.Keys.CheckSituation.title
     public let checkSituationSubtitle = Constants.Keys.CheckSituation.subtitle
     public let checkSituationWithinGermanyTitle = Constants.Keys.CheckSituation.withinGermanyTitle
@@ -190,16 +210,17 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public var checkSituationIsHidden: Bool = true
     private var selectedCheckSituation: CheckSituationType { didSet { delegate?.viewModelDidUpdate() } }
     private var withinGermanyIsSelected: Bool { selectedCheckSituation == .withinGermany }
-    
+
     // MARK: - Private properties
-    
+
     private var canceled: Bool = false
     private var shouldSomethingBeUpdated: Bool {
         certLogic.rulesShouldBeUpdated ||
-        certLogic.valueSetsShouldBeUpdated ||
-        repository.trustListShouldBeUpdated() ||
-        (offlineRevocationIsEnabled ? offlineRevocationService?.updateNeeded() ?? false : false)
+            certLogic.valueSetsShouldBeUpdated ||
+            repository.trustListShouldBeUpdated() ||
+            (offlineRevocationIsEnabled ? offlineRevocationService?.updateNeeded() ?? false : false)
     }
+
     private let resolver: Resolver<Void>?
     private var userDefaults: Persistence
     private let offlineRevocationService: CertificateRevocationOfflineServiceProtocol?
@@ -221,14 +242,14 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
         self.repository = repository
         self.certLogic = certLogic
         self.router = router
-        self.selectedCheckSituation = .init(rawValue: userDefaults.checkSituation) ?? .withinGermany
-        self.changeContext()
+        selectedCheckSituation = .init(rawValue: userDefaults.checkSituation) ?? .withinGermany
+        changeContext()
     }
-    
+
     public func doneIsTapped() {
         resolver?.fulfill_()
     }
-    
+
     public func toggleOfflineRevocation() {
         offlineRevocationIsEnabled.toggle()
         if offlineRevocationIsEnabled, let offlineRevocationService = offlineRevocationService {
@@ -236,9 +257,9 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
         } else {
             disableOfflineRevocationIfReallyWanted()
         }
-        self.delegate?.viewModelDidUpdate()
+        delegate?.viewModelDidUpdate()
     }
-    
+
     // MARK: - Private methods
 
     private func enableOfflineRevocation(
@@ -267,7 +288,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
                 }
             }
     }
-    
+
     private func changeContext() {
         switch context {
         case .settings:
@@ -310,79 +331,75 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
 
 // MARK: - Methods of Check Situation
 
-extension CheckSituationViewModel {
-    
-    public func enteringGermanyViewIsChoosen() {
+public extension CheckSituationViewModel {
+    func enteringGermanyViewIsChoosen() {
         userDefaults.checkSituation = CheckSituationType.enteringGermany.rawValue
         selectedCheckSituation = .enteringGermany
         delegate?.viewModelDidUpdate()
     }
-    
-    public func withinGermanyIsChoosen() {
+
+    func withinGermanyIsChoosen() {
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         selectedCheckSituation = .withinGermany
         delegate?.viewModelDidUpdate()
     }
-    
 }
-
 
 // MARK: - Methods of Update Context
 
 extension CheckSituationViewModel {
-    
     func loadRulesAndCountryList() -> Guarantee<Void> {
         Guarantee { seal in
             certLogic.updateRules()
                 .done {
                     seal(())
                 }
-            .catch{ [weak self] error in
-                self?.errorHandling(error)
-                seal(())
-            }
+                .catch { [weak self] error in
+                    self?.errorHandling(error)
+                    seal(())
+                }
         }
     }
-    
+
     func loadValueSets() -> Guarantee<Void> {
         Guarantee { seal in
             certLogic.updateValueSets()
                 .done {
                     seal(())
                 }
-            .catch{ [weak self] error in
-                self?.errorHandling(error)
-                seal(())
-            }
+                .catch { [weak self] error in
+                    self?.errorHandling(error)
+                    seal(())
+                }
         }
     }
-    
+
     func loadRevocationData() -> Guarantee<Void> {
         Guarantee { seal in
             downloadOfflineRevocationIfIsEnabled()
                 .done {
                     seal(())
                 }
-            .catch{ [weak self] error in
-                self?.errorHandling(error)
-                seal(())
-            }
+                .catch { [weak self] error in
+                    self?.errorHandling(error)
+                    seal(())
+                }
         }
     }
-    
+
     func loadTrustLists() -> Guarantee<Void> {
         Guarantee { seal in
             repository.updateTrustList()
                 .done {
                     seal(())
                 }
-            .catch{ [weak self] error in
-                self?.errorHandling(error)
-                seal(())
-            }
+                .catch { [weak self] error in
+                    self?.errorHandling(error)
+                    seal(())
+                }
         }
     }
-    
+
     public func refresh() {
         canceled = false
         isLoading = true
@@ -402,22 +419,22 @@ extension CheckSituationViewModel {
             self.errorHandling(error)
         }
     }
-    
+
     private func errorHandling(_ error: Error) {
         switch (error as NSError).code {
-        case NSURLErrorNotConnectedToInternet: self.router?.showNoInternetErrorDialog(error)
+        case NSURLErrorNotConnectedToInternet: router?.showNoInternetErrorDialog(error)
         default: break
         }
     }
-    
+
     private func downloadOfflineRevocationIfIsEnabled() -> Promise<Void> {
         offlineRevocationIsEnabled ? (offlineRevocationService?.update() ?? .value) : .value
     }
-    
+
     private func checkIfCancelled() -> Promise<Void> {
         canceled ? .init(error: TrustListDownloadError.cancelled) : .value(())
     }
-    
+
     public func cancel() {
         isLoading = false
         canceled = true

@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationService.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -18,12 +18,12 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
             persistence.certificateRevocationOfflineServiceLastUpdate = newValue
         }
     }
-    
+
     private let dateProvider: DateProviding
     private var persistence: Persistence
     private let localDataSource: CertificateRevocationFilessystemDataSourceProtocol
     private let remoteDataSource: CertificateRevocationHTTPDataSourceProtocol
-    
+
     public init(
         localDataSource: CertificateRevocationFilessystemDataSourceProtocol,
         remoteDataSource: CertificateRevocationHTTPDataSourceProtocol,
@@ -35,9 +35,9 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
         self.localDataSource = localDataSource
         self.remoteDataSource = remoteDataSource
     }
-    
+
     public func update() -> Promise<Void> {
-        guard state != .updating, state != .cancelling  else { return .value }
+        guard state != .updating, state != .cancelling else { return .value }
         state = .updating
         let promise = updateKIDList()
             .then(updateIndexLists)
@@ -45,7 +45,7 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
             .done { _ in
                 self.handleSuccess()
             }
-        
+
         promise.catch { error in
             self.handle(error: error)
         }
@@ -65,13 +65,13 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
             }
             .then(checkIfCancelled)
     }
-    
+
     private func kidListHTTPHeaders(ifModifiedSince: String?) -> [String: String?] {
         [
             HTTPHeader.ifModifiedSince: ifModifiedSince
         ]
     }
-    
+
     private func updateIndexLists() -> Promise<Void> {
         localDataSource
             .getKIDList()
@@ -93,7 +93,7 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
                 ).asVoid()
             }
     }
-    
+
     private func updateIndexLists(kids: [KID], hashType: CertificateRevocationHashType) -> Promise<Void> {
         var kidsIterator = kids.makeIterator()
         let iterator = AnyIterator<Promise<Void>> {
@@ -104,7 +104,7 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
         }
         return when(fulfilled: iterator, concurrently: 4).asVoid()
     }
-    
+
     private func updateIndexList(kid: KID, hashType: CertificateRevocationHashType) -> Promise<Void> {
         localDataSource
             .getIndexListLastModified(kid: kid, hashType: hashType)
@@ -128,13 +128,13 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
             }
             .then(checkIfCancelled)
     }
-    
+
     private func indexListHTTPHeaders(ifModifiedSince: String?) -> [String: String?] {
         [
             HTTPHeader.ifModifiedSince: ifModifiedSince
         ]
     }
-    
+
     private func updateChunkLists() -> Promise<Void> {
         localDataSource
             .getKIDList()
@@ -156,7 +156,7 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
                 ).asVoid()
             }
     }
-    
+
     private func updateChunkLists(kids: [KID], hashType: CertificateRevocationHashType) -> Promise<Void> {
         var kidsIterator = kids.makeIterator()
         let iterator = AnyIterator<Promise<Void>> {
@@ -167,7 +167,7 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
         }
         return when(fulfilled: iterator, concurrently: 4).asVoid()
     }
-    
+
     private func updateChunkList(kid: KID, hashType: CertificateRevocationHashType) -> Promise<Void> {
         localDataSource
             .getChunkListLastModified(kid: kid, hashType: hashType)
@@ -191,18 +191,18 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
             }
             .then(checkIfCancelled)
     }
-    
+
     private func chunkListHTTPHeaders(ifModifiedSince: String?) -> [String: String?] {
         [
             HTTPHeader.ifModifiedSince: ifModifiedSince
         ]
     }
-    
+
     private func handleSuccess() {
         lastSuccessfulUpdate = dateProvider.now()
         state = .completed
     }
-    
+
     private func handle(error: Error) {
         if let error = error as? CertificateRevocationOfflineServiceError, case .cancelled = error {
             deleteAllLocalData()
@@ -210,13 +210,13 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
         }
         state = .error
     }
-    
+
     private func checkIfCancelled() -> Promise<Void> {
         state == .cancelling ?
             .init(error: CertificateRevocationOfflineServiceError.cancelled) :
             .value
     }
-    
+
     public func reset() {
         if state == .updating {
             state = .cancelling
@@ -224,7 +224,7 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
             deleteAllLocalData()
         }
     }
-    
+
     private func deleteAllLocalData() {
         localDataSource.deleteAll()
             .ensure {
@@ -237,7 +237,7 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
                 self.state = .error
             }
     }
-    
+
     public func updateNeeded() -> Bool {
         if let lastSuccessfulUpdate = lastSuccessfulUpdate,
            dateProvider.now().hoursSince(lastSuccessfulUpdate) < 24 {
@@ -245,7 +245,7 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
         }
         return true
     }
-    
+
     public func updateIfNeeded() {
         if updateNeeded() {
             update().cauterize()

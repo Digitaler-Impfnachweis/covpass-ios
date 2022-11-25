@@ -48,8 +48,7 @@ public struct CoseSign1Message {
     var signatureAlgorithm: CoseSignatureAlgorithm {
         if let protectedCbor = try? CBOR.decode(protected),
            let alg = protectedCbor[1],
-           alg == CBOR(integerLiteral: CoseSignatureAlgorithm.ps256.rawValue)
-        {
+           alg == CBOR(integerLiteral: CoseSignatureAlgorithm.ps256.rawValue) {
             return .ps256
         }
         return .es256
@@ -99,7 +98,7 @@ public struct CoseSign1Message {
     /// - parameter completion: a fallback in case an error occurs
     /// - returns a constructed object of type `CoseSign1Message`
     public init(decompressedPayload: Data) throws {
-        let cbor = try CBOR.decode(([UInt8])(decompressedPayload))
+        let cbor = try CBOR.decode([UInt8](decompressedPayload))
         var array = [CBOR]()
         if case let .tagged(_, tcbor) = cbor, case let .array(cborArray) = tcbor {
             array = cborArray
@@ -280,7 +279,7 @@ public struct CoseSign1Message {
         }
 
         guard let cborValue = decode(value: value) else {
-            //assertionFailure("CBOR value type not implemented, yet")
+            // assertionFailure("CBOR value type not implemented, yet")
             return nil
         }
 

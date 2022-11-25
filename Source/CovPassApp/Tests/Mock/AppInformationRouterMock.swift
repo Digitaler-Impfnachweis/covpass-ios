@@ -8,10 +8,7 @@
 import CovPassUI
 
 class AppInformationRouterMock: AppInformationRouterProtocol {
-    
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
-    func showScene(_ scene: SceneFactory) {
-        
-    }
+    func showScene(_: SceneFactory) {}
 }

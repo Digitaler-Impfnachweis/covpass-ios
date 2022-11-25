@@ -5,9 +5,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import AVFAudio
 @testable import CovPassCommon
 import XCTest
-import AVFAudio
 
 class AudioPlayerTests: XCTestCase {
     private var audioSession: AVAudioSession!
@@ -16,7 +16,7 @@ class AudioPlayerTests: XCTestCase {
 
     override func setUpWithError() throws {
         let url = try XCTUnwrap(
-            Bundle.module.url(forResource:"sample.wav", withExtension: nil)
+            Bundle.module.url(forResource: "sample.wav", withExtension: nil)
         )
         audioSession = .sharedInstance()
         try audioSession.setCategory(.playback, options: .duckOthers)

@@ -1,4 +1,4 @@
-/*-
+/* -
  * ---license-start
  * eu-digital-green-certificates / dgca-app-core-ios
  * ---
@@ -24,18 +24,17 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import ASN1Decoder
+import Foundation
 
-public class X509 {
-    
+public enum X509 {
     static let OID_TEST = "1.3.6.1.4.1.1847.2021.1.1"
     static let OID_ALT_TEST = "1.3.6.1.4.1.0.1847.2021.1.1"
     static let OID_VACCINATION = "1.3.6.1.4.1.1847.2021.1.2"
     static let OID_ALT_VACCINATION = "1.3.6.1.4.1.0.1847.2021.1.2"
     static let OID_RECOVERY = "1.3.6.1.4.1.1847.2021.1.3"
     static let OID_ALT_RECOVERY = "1.3.6.1.4.1.0.1847.2021.1.3"
-    
+
     public static func pubKey(from b64EncodedCert: String) -> SecKey? {
         guard
             let encodedCertData = Data(base64Encoded: b64EncodedCert),
@@ -46,7 +45,7 @@ public class X509 {
         }
         return publicKey
     }
-    
+
     public static func derPubKey(for secKey: SecKey) -> Data? {
         guard
             let pubKey = SecKeyCopyPublicKey(secKey)
@@ -55,7 +54,7 @@ public class X509 {
         }
         return derKey(for: pubKey)
     }
-    
+
     public static func derKey(for secKey: SecKey) -> Data? {
         var error: Unmanaged<CFError>?
         guard
@@ -65,8 +64,8 @@ public class X509 {
         }
         return exportECPublicKeyToDER(publicKeyData as Data, keyType: kSecAttrKeyTypeEC as String, keySize: 384)
     }
-    
-    static func exportECPublicKeyToDER(_ rawPublicKeyBytes: Data, keyType: String, keySize: Int) -> Data {
+
+    static func exportECPublicKeyToDER(_ rawPublicKeyBytes: Data, keyType _: String, keySize _: Int) -> Data {
         let curveOIDHeader: [UInt8] = [
             0x30,
             0x59,
@@ -99,13 +98,13 @@ public class X509 {
         data.append(rawPublicKeyBytes)
         return data
     }
-    
-    static func checkisSuitable(cert: String, certType: CertType) -> Bool{
-        return isSuitable(cert: Data(base64Encoded:  cert)!, for: certType)
+
+    static func checkisSuitable(cert: String, certType: CertType) -> Bool {
+        isSuitable(cert: Data(base64Encoded: cert)!, for: certType)
     }
-    
+
     static func isCertificateValid(cert: String) -> Bool {
-        guard let data = Data(base64Encoded:  cert) else { return true }
+        guard let data = Data(base64Encoded: cert) else { return true }
         guard let certificate = try? X509Certificate(data: data) else {
             return false
         }
@@ -115,32 +114,30 @@ public class X509 {
             return false
         }
     }
-    
-    static func isSuitable(cert: Data,for certType: CertType) -> Bool {
+
+    static func isSuitable(cert: Data, for certType: CertType) -> Bool {
         guard let certificate = try? X509Certificate(data: cert) else {
             return false
         }
         if isType(in: certificate) {
             switch certType {
             case .test:
-                return nil != certificate.extensionObject(oid: OID_TEST) || nil != certificate.extensionObject(oid: OID_ALT_TEST)
+                return certificate.extensionObject(oid: OID_TEST) != nil || certificate.extensionObject(oid: OID_ALT_TEST) != nil
             case .vaccination:
-                return nil != certificate.extensionObject(oid: OID_VACCINATION) || nil != certificate.extensionObject(oid: OID_ALT_VACCINATION)
+                return certificate.extensionObject(oid: OID_VACCINATION) != nil || certificate.extensionObject(oid: OID_ALT_VACCINATION) != nil
             case .recovery:
-                return nil != certificate.extensionObject(oid: OID_RECOVERY) || nil != certificate.extensionObject(oid: OID_ALT_RECOVERY)
+                return certificate.extensionObject(oid: OID_RECOVERY) != nil || certificate.extensionObject(oid: OID_ALT_RECOVERY) != nil
             }
         }
         return true
     }
-    
+
     static func isType(in certificate: X509Certificate) -> Bool {
-        return nil != certificate.extensionObject(oid: OID_TEST)
-        || nil != certificate.extensionObject(oid: OID_VACCINATION)
-        || nil != certificate.extensionObject(oid: OID_RECOVERY)
-        || nil != certificate.extensionObject(oid: OID_ALT_TEST)
-        || nil != certificate.extensionObject(oid: OID_ALT_VACCINATION)
-        || nil != certificate.extensionObject(oid: OID_ALT_RECOVERY)
+        certificate.extensionObject(oid: OID_TEST) != nil
+            || certificate.extensionObject(oid: OID_VACCINATION) != nil
+            || certificate.extensionObject(oid: OID_RECOVERY) != nil
+            || certificate.extensionObject(oid: OID_ALT_TEST) != nil
+            || certificate.extensionObject(oid: OID_ALT_VACCINATION) != nil
+            || certificate.extensionObject(oid: OID_ALT_RECOVERY) != nil
     }
 }
-
-

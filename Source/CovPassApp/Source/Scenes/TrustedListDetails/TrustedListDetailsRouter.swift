@@ -13,7 +13,6 @@ import Scanner
 import UIKit
 
 class TrustedListDetailsRouter: TrustedListDetailsRouterProtocol {
-
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -26,7 +25,7 @@ class TrustedListDetailsRouter: TrustedListDetailsRouterProtocol {
 
     // MARK: - Methods
 
-    func showError(error: Error) {
+    func showError(error _: Error) {
         sceneCoordinator.present(
             TrustedListDetailsSceneFactory(sceneCoordinator: sceneCoordinator)
         )

@@ -1,8 +1,7 @@
-import UIKit
 import CovPassUI
+import UIKit
 
 class ReissueStartViewController: UIViewController {
-
     // MARK: - Properties
 
     @IBOutlet var titleLabel: UILabel!
@@ -12,7 +11,7 @@ class ReissueStartViewController: UIViewController {
     @IBOutlet var hintView: HintView!
     @IBOutlet var startButton: MainButton!
     @IBOutlet var laterButton: MainButton!
-    
+
     private(set) var viewModel: ReissueStartViewModelProtocol
 
     // MARK: - Lifecycle
@@ -30,11 +29,11 @@ class ReissueStartViewController: UIViewController {
         viewModel.delegate = self
         updateView()
         configureActions()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     // MARK: - Methods
-    
+
     private func configureActions() {
         startButton.action = viewModel.processStart
         laterButton.action = viewModel.processLater
@@ -45,7 +44,7 @@ class ReissueStartViewController: UIViewController {
         hintView.style = .info
         hintView.iconLabel.text = ""
         hintView.iconLabel.isHidden = true
-        hintView.titleLabel.attributedText = viewModel.hintText.styledAs(.body) .colored(.onBackground70)
+        hintView.titleLabel.attributedText = viewModel.hintText.styledAs(.body).colored(.onBackground70)
         hintView.enableAccessibility(label: " ", traits: .staticText)
         hintView.subTitleLabel.isHidden = true
         hintView.bodyLabel.isHidden = true
@@ -56,7 +55,7 @@ class ReissueStartViewController: UIViewController {
         hintView.accessibilityLabel = viewModel.hintText
         hintView.accessibilityTraits = .staticText
     }
-    
+
     func updateView() {
         titleLabel.attributedText = viewModel.titleText.styledAs(.header_2)
         titleLabel.accessibilityTraits = .header
@@ -70,8 +69,7 @@ class ReissueStartViewController: UIViewController {
         laterButton.style = .plain
         viewModel.certItem.setupAccessibility()
     }
-    
- }
+}
 
 extension ReissueStartViewController: ViewModelDelegate {
     func viewModelDidUpdate() {

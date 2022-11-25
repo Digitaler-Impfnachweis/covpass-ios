@@ -38,5 +38,4 @@ class Persistence_ValidatorOverviewTests: XCTestCase {
         // Then
         XCTAssertEqual(scanType, CheckType.immunity.rawValue)
     }
-
 }

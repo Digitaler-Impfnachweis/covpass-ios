@@ -5,21 +5,22 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import CovPassCommon
-import UIKit
+import CovPassUI
 import PromiseKit
+import UIKit
 
 struct ScanCountWarningFactory: ResolvableSceneFactory {
-    
     // MARK: - Properties
+
     let router: ScanCountRouterProtocol
 
     // MARK: - Lifecycle
+
     init(router: ScanCountRouterProtocol) {
         self.router = router
     }
-    
+
     func make(resolvable: Resolver<Bool>) -> UIViewController {
         let viewModel = ScanCountWarningViewModel(router: router,
                                                   resolvable: resolvable)

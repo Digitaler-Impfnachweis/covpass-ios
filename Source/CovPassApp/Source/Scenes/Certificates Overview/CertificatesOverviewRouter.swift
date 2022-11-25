@@ -25,19 +25,18 @@ private enum Constants {
 }
 
 class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRouterProtocol {
-
     // MARK: - Properties
-    
+
     let sceneCoordinator: SceneCoordinator
-    
+
     // MARK: - Lifecycle
-    
+
     init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
     }
-    
+
     // MARK: - Methods
-    
+
     func showAnnouncement() -> Promise<Void> {
         sceneCoordinator.present(
             AnnouncementSceneFactory(
@@ -53,13 +52,12 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             NewRegulationsAnnouncementSceneFactory()
         )
     }
-    
-    
+
     func showStateSelectionOnboarding() -> Promise<Void> {
         let scene = SelectStateOnboardingSceneFactory(sceneCoordinator: sceneCoordinator)
         return sceneCoordinator.present(scene, animated: true)
     }
-    
+
     func showDataPrivacy() -> Promise<Void> {
         sceneCoordinator.present(
             DataPrivacySceneFactory(
@@ -69,7 +67,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-    
+
     func showScanPleaseHint() -> Promise<Void> {
         sceneCoordinator.present(
             ScanPleaseSceneFactory(
@@ -79,7 +77,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-    
+
     func showCertificates(certificates: [ExtendedCBORWebToken],
                           vaccinationRepository: VaccinationRepositoryProtocol,
                           boosterLogic: BoosterLogicProtocol) -> Promise<CertificateDetailSceneResult> {
@@ -90,7 +88,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
                                                                   boosterLogic: boosterLogic)
         return sceneCoordinator.present(sceneFactory, animated: true)
     }
-    
+
     func showCertificatesDetail(certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
         sceneCoordinator.push(
             CertificateDetailSceneFactory(
@@ -99,7 +97,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-    
+
     func showHowToScan() -> Promise<Void> {
         sceneCoordinator.present(
             HowToScanSceneFactory(
@@ -107,53 +105,53 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-    
+
     func showScanCountWarning() -> Promise<Bool> {
         sceneCoordinator.present(
             ScanCountWarningFactory(router: ScanCountRouter(sceneCoordinator: sceneCoordinator))
         )
     }
-    
+
     func showScanCountError() -> Promise<ScanCountErrorResponse> {
         Promise { resolver in
             showDialog(title: "certificate_add_error_maximum_title".localized,
                        message: "certificate_add_error_maximum_copy".localized,
                        actions: [
-                        DialogAction(title: "certificate_add_error_maximum_button_1".localized,
-                                     style: UIAlertAction.Style.default,
-                                     isEnabled: true,
-                                     completion: { _ in
-                                         resolver.fulfill(.download)
-                                     }),
-                        DialogAction(title: "certificate_add_error_maximum_button_2".localized,
-                                     style: UIAlertAction.Style.default,
-                                     isEnabled: true,
-                                     completion: { _ in
-                                         resolver.fulfill(.faq)
-                                     }),
-                        DialogAction(title: "certificate_add_error_maximum_button_3".localized,
-                                     style: UIAlertAction.Style.default,
-                                     isEnabled: true,
-                                     completion: { _ in
-                                         resolver.fulfill(.ok)
-                                     })
+                           DialogAction(title: "certificate_add_error_maximum_button_1".localized,
+                                        style: UIAlertAction.Style.default,
+                                        isEnabled: true,
+                                        completion: { _ in
+                                            resolver.fulfill(.download)
+                                        }),
+                           DialogAction(title: "certificate_add_error_maximum_button_2".localized,
+                                        style: UIAlertAction.Style.default,
+                                        isEnabled: true,
+                                        completion: { _ in
+                                            resolver.fulfill(.faq)
+                                        }),
+                           DialogAction(title: "certificate_add_error_maximum_button_3".localized,
+                                        style: UIAlertAction.Style.default,
+                                        isEnabled: true,
+                                        completion: { _ in
+                                            resolver.fulfill(.ok)
+                                        })
                        ],
                        style: .alert)
         }
     }
-    
+
     func toAppstoreCheckApp() {
         if let url = Constants.Config.covpassCheckAppStoreURL, UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         }
     }
-    
+
     func toFaqWebsite(_ url: URL) {
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         }
     }
-    
+
     func showRuleCheck() -> Promise<Void> {
         sceneCoordinator.present(
             RuleCheckSceneFactory(
@@ -161,7 +159,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-    
+
     func showQRCodeScanAndSelectionView() -> Promise<QRCodeImportResult> {
         sceneCoordinator.present(
             ScanSceneFactory(
@@ -171,7 +169,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-    
+
     func showAppInformation() {
         sceneCoordinator.push(
             AppInformationSceneFactory(
@@ -179,24 +177,24 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-    
+
     func showBoosterNotification() -> Promise<Void> {
         sceneCoordinator.present(BoosterNotificationSceneFactory())
     }
-    
+
     func startValidationAsAService(with data: ValidationServiceInitialisation) {
         sceneCoordinator.present(
             ValidationServiceFactory(router: ValidationServiceRouter(sceneCoordinator: sceneCoordinator),
                                      initialisationData: data))
     }
-    
+
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
         sceneCoordinator.present(
             CheckSituationResolvableSceneFactory(contextType: .information,
                                                  userDefaults: userDefaults)
         )
     }
-    
+
     func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken],
                                  context: ReissueContext) -> Promise<Void> {
         sceneCoordinator.present(

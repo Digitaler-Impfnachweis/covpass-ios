@@ -10,7 +10,7 @@ import UIKit
 
 public struct WebviewSceneFactory: SceneFactory {
     // MARK: - Properties
-    
+
     private let title: String
     private let url: URL
     private let closeButtonShown: Bool
@@ -21,7 +21,7 @@ public struct WebviewSceneFactory: SceneFactory {
     private let closingAnnounce: String
 
     // MARK: - Lifecycle
-    
+
     public init(title: String,
                 url: URL,
                 closeButtonShown: Bool = false,
@@ -39,7 +39,7 @@ public struct WebviewSceneFactory: SceneFactory {
         self.embedInNavigationController = embedInNavigationController
         self.enableDynamicFonts = enableDynamicFonts
     }
-    
+
     public func make() -> UIViewController {
         let viewModel = WebviewViewModel(title: title,
                                          url: url,

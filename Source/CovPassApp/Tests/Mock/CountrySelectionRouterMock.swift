@@ -7,6 +7,4 @@
 
 @testable import CovPassApp
 
-class CountrySelectionRouterMock: CountrySelectionRouterProtocol {
-    
-}
+class CountrySelectionRouterMock: CountrySelectionRouterProtocol {}

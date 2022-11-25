@@ -1,6 +1,6 @@
 //
 //  QRCodePDFDocumentMock.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -12,6 +12,7 @@ struct QRCodePDFDocumentMock: QRCodeDocumentProtocol {
     var numberOfPages: Int {
         qrCodes.count
     }
+
     var qrCodes = [Set<String>]()
     var error: Error?
 
@@ -22,6 +23,6 @@ struct QRCodePDFDocumentMock: QRCodeDocumentProtocol {
         if page > numberOfPages {
             throw NSError(domain: "TEST", code: 1)
         }
-        return qrCodes[page-1]
+        return qrCodes[page - 1]
     }
 }

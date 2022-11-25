@@ -5,8 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassUI
+import UIKit
 
 private enum Constants {
     enum Text {
@@ -26,8 +26,7 @@ private enum Constants {
 }
 
 class ValidationServiceViewController: UIViewController {
-
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
 
     private let viewModel: ValidationServiceViewModel
 
@@ -35,8 +34,8 @@ class ValidationServiceViewController: UIViewController {
         let button = MainButton()
         button.setConstant(size: Constants.Layout.mainButtonSize)
         button.innerButton.setAttributedTitle(Constants.Text.confirmButton
-                                                .styledAs(.header_3)
-                                                .colored(.neutralWhite, in: nil), for: .normal)
+            .styledAs(.header_3)
+            .colored(.neutralWhite, in: nil), for: .normal)
         button.action = { [weak self] in
             self?.accept()
         }
@@ -47,8 +46,8 @@ class ValidationServiceViewController: UIViewController {
         let button = MainButton()
         button.setConstant(size: Constants.Layout.mainButtonSize)
         button.innerButton.setAttributedTitle(Constants.Text.cancelButton
-                                    .styledAs(.header_3)
-                                                .colored(.neutralWhite, in: nil), for: .normal)
+            .styledAs(.header_3)
+            .colored(.neutralWhite, in: nil), for: .normal)
         button.action = { [weak self] in
             self?.cancel()
         }
@@ -96,7 +95,7 @@ class ValidationServiceViewController: UIViewController {
 
     init(viewModel: ValidationServiceViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .main)        
+        super.init(nibName: String(describing: Self.self), bundle: .main)
     }
 
     override func viewDidLoad() {
@@ -119,9 +118,10 @@ class ValidationServiceViewController: UIViewController {
             mainButton.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 40),
             mainButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
             cancelButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
-            cancelButton.topAnchor.constraint(equalTo: mainButton.bottomAnchor, constant: 24)])
+            cancelButton.topAnchor.constraint(equalTo: mainButton.bottomAnchor, constant: 24)
+        ])
 
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -144,7 +144,7 @@ class ValidationServiceViewController: UIViewController {
             .routeToWarning()
             .cauterize()
     }
-    
+
     @objc func accept() {
         viewModel.router.routeToSelectCertificate(ticket: viewModel.initialisationData)
     }
@@ -158,14 +158,12 @@ extension ValidationServiceViewController: UITableViewDelegate {
         }
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
 }
 
-
 extension ValidationServiceViewController: UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let reuseIdentifier = ValidationServiceViewModel.Rows(rawValue: indexPath.row)?.reuseIdentifier else {
             fatalError("There's something wrong with the tableview - we don't have a reuseidentifier")
@@ -214,11 +212,11 @@ extension ValidationServiceViewController: UITableViewDataSource {
         return cell
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections
+    func numberOfSections(in _: UITableView) -> Int {
+        viewModel.numberOfSections
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        viewModel.numberOfRows
     }
 }

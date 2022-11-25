@@ -23,7 +23,7 @@ extension CertificateRevocationFilesystemDataSource {
         let baseURL = applicationSupportURL
             .appendingPathComponent(bundleID, isDirectory: true)
             .appendingPathComponent(Constants.path, isDirectory: true)
-        
+
         self.init(
             baseURL: baseURL,
             fileManager: fileManager

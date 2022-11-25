@@ -20,6 +20,7 @@ private enum Constants {
         static let openingAnnouncment = "accessibility_start_screen_info_announce".localized
         static let closingAnnouncment = "accessibility_start_screen_info_closing_announce".localized
     }
+
     enum Config {
         static let privacySrcDe = "privacy-covpass-de"
         static let privacySrcExt = "html"
@@ -29,9 +30,8 @@ private enum Constants {
 }
 
 class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
-
     // MARK: - Properties
-    
+
     weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
@@ -48,12 +48,13 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private let pdfExtractor: CertificateExtractorProtocol
     private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
     private var privacyFileUrl: URL? {
-        guard let url =  Bundle.main.url(forResource: Constants.Config.privacySrcDe,
-                                         withExtension: Constants.Config.privacySrcExt) else {
+        guard let url = Bundle.main.url(forResource: Constants.Config.privacySrcDe,
+                                        withExtension: Constants.Config.privacySrcExt) else {
             return nil
         }
         return url
     }
+
     private var currentDataPrivacyHash: String? {
         guard let url = privacyFileUrl else {
             return nil
@@ -63,9 +64,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
         return dataPrivacyHash
     }
+
     var certificatePairsSorted: [CertificatePair] {
         repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite })
     }
+
     var hasCertificates: Bool { certificateList.certificates.count > 0 }
     var accessibilityAddCertificate = Constants.Accessibility.addCertificate
     var accessibilityMoreInformation = Constants.Accessibility.moreInformation
@@ -76,12 +79,13 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             delegate?.viewModelDidUpdate()
         }
     }
+
     var showMultipleCertificateHolder: Bool {
         countOfCells() > 1
     }
-    
+
     // MARK: - Lifecycle
-    
+
     init(
         router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol,
@@ -102,11 +106,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
         self.locale = locale
-        self.certificateList = CertificateList(certificates: [])
+        certificateList = CertificateList(certificates: [])
     }
-    
+
     // MARK: - Methods
-    
+
     func handleOpen(url: URL) -> Bool {
         when(fulfilled: pdfDocument(from: url), repository.getCertificateList())
             .then { document, certificateList in
@@ -141,7 +145,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             return .init(error: error)
         }
     }
-    
+
     func updateTrustList() {
         repository.updateTrustListIfNeeded()
             .done {
@@ -153,40 +157,40 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 }
             }
     }
-    
+
     func updateDomesticRules() -> Promise<Void> {
         certLogic.updateDomesticIfNeeded()
     }
-    
+
     func updateBoosterRules() {
         certLogic.updateBoosterRulesIfNeeded().cauterize()
     }
-    
+
     func updateValueSets() {
         certLogic.updateValueSetsIfNeeded().cauterize()
     }
-    
+
     func revokeIfNeeded() {
         firstly {
-            return repository.getCertificateList()
+            repository.getCertificateList()
         }
         .then { list in
-            return InvalidationUseCase(certificateList: list,
-                                       revocationRepository: self.revocationRepository,
-                                       vaccinationRepository: self.repository,
-                                       date: Date(),
-                                       userDefaults: self.userDefaults)
-            .execute()
+            InvalidationUseCase(certificateList: list,
+                                revocationRepository: self.revocationRepository,
+                                vaccinationRepository: self.repository,
+                                date: Date(),
+                                userDefaults: self.userDefaults)
+                .execute()
         }
         .get {
-            return self.certificateList = $0
+            self.certificateList = $0
         }
         .then { _ in
             self.refresh()
         }
         .cauterize()
     }
-    
+
     func refresh() -> Promise<Void> {
         firstly {
             repository.getCertificateList()
@@ -212,9 +216,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.showExpiryAlertIfNeeded()
         }
     }
-    
+
     private var lastPlayload: String = ""
-    
+
     private func afterScannedCertFinalFlow(_ certificate: ExtendedCBORWebToken) {
         certificateList.certificates.append(certificate)
         refresh().done { [weak self] in
@@ -223,9 +227,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.showCertificates(self.certificateList.certificates.certificatePair(for: certificate), forceToDetailsPage: true)
         }.cauterize()
     }
-    
+
     private func continueScanning() -> PMKFinalizer {
-        return repository.scanCertificate(lastPlayload, isCountRuleEnabled: false, expirationRuleIsActive: false)
+        repository.scanCertificate(lastPlayload, isCountRuleEnabled: false, expirationRuleIsActive: false)
             .done { certificate in
                 guard let token = certificate as? ExtendedCBORWebToken else {
                     return
@@ -241,7 +245,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 }
             }
     }
-    
+
     private func scanCountWarningFlow() {
         router.showScanCountWarning()
             .done { shouldContinue in
@@ -251,7 +255,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             }
             .cauterize()
     }
-    
+
     private func scanCountErrorFlow() {
         router.showScanCountError()
             .done { response in
@@ -266,7 +270,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             }
             .cauterize()
     }
-    
+
     private func errorHandling(_ error: Error) {
         if (error as? QRCodeError) == .warningCountOfCertificates {
             scanCountWarningFlow()
@@ -278,7 +282,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             }
         }
     }
-    
+
     func scanCertificate(withIntroduction: Bool) {
         isLoading = true
         firstly {
@@ -325,8 +329,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.payloadFromScannerResult(result)
         }
         .then { payload -> Promise<QRCodeScanable> in
-            if  let data = payload.data(using: .utf8),
-                let ticket = try? self.jsonDecoder.decode(ValidationServiceInitialisation.self, from: data) {
+            if let data = payload.data(using: .utf8),
+               let ticket = try? self.jsonDecoder.decode(ValidationServiceInitialisation.self, from: data) {
                 return .value(ticket)
             }
             self.lastPlayload = payload.trimmingCharacters(in: .whitespaces)
@@ -341,7 +345,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             default:
                 throw CertificateError.invalidEntity
             }
-
         }
         .ensure {
             self.isLoading = false
@@ -350,19 +353,19 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.errorHandling(error)
         }
     }
-    
+
     func showRuleCheck() {
-        if self.certificateList.certificates.filterValidAndNotExpiredCertsWhichArenNotFraud.isEmpty {
-            self.router.showFilteredCertsErrorDialog()
+        if certificateList.certificates.filterValidAndNotExpiredCertsWhichArenNotFraud.isEmpty {
+            router.showFilteredCertsErrorDialog()
         } else {
             router.showRuleCheck().cauterize()
         }
     }
-    
+
     func showAppInformation() {
         router.showAppInformation()
     }
-    
+
     /// Show notifications like announcements and booster notifications one after another
     func showNotificationsIfNeeded() {
         firstly {
@@ -380,7 +383,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .then {
             self.showStateSelectionOnboarding()
         }
-        .then{
+        .then {
             self.showCheckSituationIfNeeded()
         }
         .then {
@@ -403,7 +406,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             print("\(#file):\(#function) Error: \(error.localizedDescription)")
         }
     }
-    
+
     private func showCheckSituationIfNeeded() -> Promise<Void> {
         if userDefaults.onboardingSelectedLogicTypeAlreadySeen ?? false {
             return .value
@@ -411,7 +414,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         userDefaults.onboardingSelectedLogicTypeAlreadySeen = true
         return router.showCheckSituation(userDefaults: userDefaults)
     }
-    
+
     private func showCertificatesReissueIfNeeded() -> Guarantee<Void> {
         let partitions = certificateList.certificates.partitionedByOwner
         let showCertificatesReissuePromises = partitions
@@ -421,16 +424,16 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         let guarantee = when(
             fulfilled: showCertificatesReissuePromises.makeIterator(),
             concurrently: 1
-        ).recover { errors in
+        ).recover { _ in
             .value([])
         }.asVoid()
-        
+
         return guarantee
     }
-    
+
     private func showCertificatesReissue(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
         repository.setReissueProcess(initialAlreadySeen: true, newBadgeAlreadySeen: false, tokens: tokens).cauterize()
-        return router.showCertificatesReissue(for:tokens, context: .boosterRenewal)
+        return router.showCertificatesReissue(for: tokens, context: .boosterRenewal)
     }
 
     private func payloadFromScannerResult(_ result: ScanResult) -> Promise<String> {
@@ -441,20 +444,20 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             return .init(error: error)
         }
     }
-    
+
     func onActionCardView(_ certificate: ExtendedCBORWebToken) {
         showCertificates(certificateList.certificates.certificatePair(for: certificate), forceToDetailsPage: false)
     }
-    
+
     private func showCertificate(certificates: [ExtendedCBORWebToken], forceToDetailsPage: Bool) -> Promise<CertificateDetailSceneResult> {
-        if certificates.filterFirstOfAllTypes.count > 0 && !forceToDetailsPage {
+        if certificates.filterFirstOfAllTypes.count > 0, !forceToDetailsPage {
             return router.showCertificates(certificates: certificates,
                                            vaccinationRepository: repository,
                                            boosterLogic: boosterLogic)
         }
         return router.showCertificatesDetail(certificates: certificates)
     }
-    
+
     private func showCertificates(_ certificates: [ExtendedCBORWebToken], forceToDetailsPage: Bool) {
         guard !certificates.isEmpty else {
             return
@@ -478,17 +481,17 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self?.router.showUnexpectedErrorDialog(error)
         }
     }
-    
+
     private func handleCertificateDetailSceneResult(_ result: CertificateDetailSceneResult) {
         switch result {
         case .didDeleteCertificate:
             router.showCertificateDidDeleteDialog()
             delegate?.viewModelNeedsFirstCertificateVisible()
-            
+
         case let .showCertificatesOnOverview(certificate):
             guard let index = certificatePairsSorted.firstIndex(where: { $0.certificates.elementsEqual([certificate]) }) else { return }
             delegate?.viewModelNeedsCertificateVisible(at: index)
-            
+
         case .addNewCertificate:
             scanCertificate(withIntroduction: true)
         }
@@ -511,11 +514,12 @@ extension CertificatesOverviewViewModel {
         userDefaults.announcementVersion = bundleVersion
         return router.showAnnouncement()
     }
-    
-    private func storeUserDefaults(_ currentDataPrivacyHash: String) -> ()? {
-        return userDefaults.privacyHash = currentDataPrivacyHash
+
+    private func storeUserDefaults(_ currentDataPrivacyHash: String) -> Void? {
+        userDefaults.privacyHash = currentDataPrivacyHash
+        return nil
     }
-    
+
     /// Shows the dataprivacy view if user downloaded a new version from the app store
     private func showDataPrivacyIfNeeded() -> Promise<Void> {
         guard let currentDataPrivacyHash = currentDataPrivacyHash else {
@@ -547,7 +551,7 @@ extension CertificatesOverviewViewModel {
             }
             .recover { _ in () }
     }
-    
+
     private func showStateSelectionOnboarding() -> Promise<Void> {
         if userDefaults.selectStateOnboardingWasShown {
             return .value
@@ -588,14 +592,14 @@ extension CertificatesOverviewViewModel {
             if !showBoosterNotification { return Promise.value }
             return self.refresh()
                 .then {
-                    self.router.showBoosterNotification() 
+                    self.router.showBoosterNotification()
                 }
         }
         .recover { error in
             print("\(#file):\(#function) Error: \(error).")
         }
     }
-    
+
     private func showExpiryAlertIfNeeded() -> Guarantee<Void> {
         let tokens = tokensToShowExpirationAlertFor()
         for var token in tokens {
@@ -616,7 +620,6 @@ extension CertificatesOverviewViewModel {
                     self.refresh()
                 }
                 .cauterize()
-
         }
         return .value
     }
@@ -642,7 +645,8 @@ extension CertificatesOverviewViewModel {
             title: "certificate_check_invalidity_error_title".localized,
             message: "error_validity_check_certificates_message".localized,
             actions: [action],
-            style: .alert)
+            style: .alert
+        )
     }
 
     private func showRevocationWarningIfNeeded() -> Guarantee<Void> {
@@ -668,12 +672,12 @@ extension CertificatesOverviewViewModel {
             title: "certificate_check_invalidity_error_title".localized,
             message: "revocation_dialog_single".localized,
             actions: [action],
-            style: .alert)
+            style: .alert
+        )
     }
 }
 
 extension CertificatesOverviewViewModel {
-    
     func countOfCells() -> Int {
         if cellViewModels.count == 0 {
             // NoCertificateCardViewModel
@@ -681,19 +685,19 @@ extension CertificatesOverviewViewModel {
         }
         return cellViewModels.count
     }
-    
+
     func viewModel(for row: Int) -> CardViewModel {
         if cellViewModels.isEmpty {
             return NoCertificateCardViewModel()
         }
         return cellViewModels[row]
     }
-    
+
     private func createCellViewModels() -> Promise<Void> {
         let cellViewModelPromises = certificateList
             .certificates
             .partitionedByOwner
-            .compactMap { (certificates: Array<ExtendedCBORWebToken>) -> Promise<CertificateCardMaskImmunityViewModel>? in
+            .compactMap { (certificates: [ExtendedCBORWebToken]) -> Promise<CertificateCardMaskImmunityViewModel>? in
                 let sortedCertificates = certificates.sortLatest()
                 guard let cert = sortedCertificates.first else { return nil }
                 return Promise { seal in

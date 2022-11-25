@@ -31,7 +31,7 @@ final class CertificateImportSelectionViewModel: CertificateImportSelectionViewM
     let hintTextBulletPoints = Constants.hintBulletPoints
     let items: [CertificateImportSelectionItem]
     var delegate: ViewModelDelegate?
-    
+
     private let vaccinationRepository: VaccinationRepositoryProtocol
     private let resolver: Resolver<Void>
     private let router: CertificateImportSelectionRouterProtocol
@@ -66,7 +66,7 @@ final class CertificateImportSelectionViewModel: CertificateImportSelectionViewM
         switch selectedItems.count {
         case 0:
             return .none
-        case 1..<items.count:
+        case 1 ..< items.count:
             return .some
         default:
             return .all
@@ -80,8 +80,7 @@ final class CertificateImportSelectionViewModel: CertificateImportSelectionViewM
     init(tokens: [ExtendedCBORWebToken],
          vaccinationRepository: VaccinationRepositoryProtocol,
          resolver: Resolver<Void>,
-         router: CertificateImportSelectionRouterProtocol
-    ) {
+         router: CertificateImportSelectionRouterProtocol) {
         self.router = router
         self.vaccinationRepository = vaccinationRepository
         items = tokens
@@ -90,7 +89,7 @@ final class CertificateImportSelectionViewModel: CertificateImportSelectionViewM
         title = items.isEmpty ? Constants.emptyTitle : Constants.title
         hideSelection = items.isEmpty
         self.resolver = resolver
-        self.items.selectAll()
+        items.selectAll()
     }
 
     func confirm() {

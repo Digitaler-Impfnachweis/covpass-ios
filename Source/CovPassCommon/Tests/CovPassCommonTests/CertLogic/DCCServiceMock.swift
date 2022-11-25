@@ -16,14 +16,13 @@ public enum DCCServiceMockError: Error {
 }
 
 class DCCServiceMock: DCCServiceProtocol {
-    
     var loadDomesticDCCRulesResult: Promise<[RuleSimple]>?
     func loadDomesticRules() -> Promise<[RuleSimple]> {
         loadDomesticDCCRulesResult ?? Promise.value([])
     }
-    
+
     var loadDomesticDCCRuleResult: Promise<Rule>?
-    func loadDomesticRule(hash: String) -> Promise<Rule> {
+    func loadDomesticRule(hash _: String) -> Promise<Rule> {
         loadDomesticDCCRuleResult ?? Promise(error: DCCServiceMockError.invalidURL)
     }
 
@@ -59,10 +58,10 @@ class DCCServiceMock: DCCServiceProtocol {
 
     func loadCountryList() -> Promise<[Country]> {
         let json =
-"""
-        ["IT","LT","DK","GR","CZ","HR","IS","PT","PL","BE","BG","DE","LU","EE","CY","ES","NL","AT","LV","LI","FI","SE","SI","RO","NO","SK","FR","MT","HU","IE","CH","VA","SM","UA","TR","MK","AD","MC","FO","MA","AL","IL","PA"]
-"""
-        let countries: [Country] = try! JSONDecoder().decode([String].self, from: json.data(using: .utf8)!).map({.init($0)})
+            """
+                    ["IT","LT","DK","GR","CZ","HR","IS","PT","PL","BE","BG","DE","LU","EE","CY","ES","NL","AT","LV","LI","FI","SE","SI","RO","NO","SK","FR","MT","HU","IE","CH","VA","SM","UA","TR","MK","AD","MC","FO","MA","AL","IL","PA"]
+            """
+        let countries: [Country] = try! JSONDecoder().decode([String].self, from: json.data(using: .utf8)!).map { .init($0) }
         return Promise.value(countries)
     }
 }

@@ -5,11 +5,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import XCTest
 @testable import CovPassCommon
+import XCTest
 
 class InvalidatonUseCaseTests: XCTestCase {
-    
     var sut: InvalidationUseCase!
     var vaccinationRepository: VaccinationRepositoryMock!
     var revocationRepository: CertificateRevocationRepositoryMock!
@@ -29,7 +28,7 @@ class InvalidatonUseCaseTests: XCTestCase {
                                   date: date,
                                   userDefaults: persistence)
     }
-    
+
     override func tearDownWithError() throws {
         revocationRepository = nil
         vaccinationRepository = nil
@@ -37,7 +36,7 @@ class InvalidatonUseCaseTests: XCTestCase {
         date = nil
         sut = nil
     }
-    
+
     func test_isNotRevoked_ShouldQuery() {
         // GIVEN
         let testExpectation = XCTestExpectation()
@@ -52,7 +51,7 @@ class InvalidatonUseCaseTests: XCTestCase {
             XCTAssertEqual(token.certificates.first!.isRevoked, false)
             testExpectation.fulfill()
         }
-        .catch { error in
+        .catch { _ in
             XCTFail("Should not fail")
         }
         wait(for: [revocationRepository.isRevokedExpectation,
@@ -61,7 +60,7 @@ class InvalidatonUseCaseTests: XCTestCase {
              timeout: 0.1,
              enforceOrder: true)
     }
-    
+
     func test_isRevoked_ShouldQuery() {
         // GIVEN
         let testExpectation = XCTestExpectation()
@@ -76,7 +75,7 @@ class InvalidatonUseCaseTests: XCTestCase {
             XCTAssertEqual(token.certificates.first!.isRevoked, true)
             testExpectation.fulfill()
         }
-        .catch { error in
+        .catch { _ in
             XCTFail("Should not fail")
         }
         wait(for: [revocationRepository.isRevokedExpectation,
@@ -85,7 +84,7 @@ class InvalidatonUseCaseTests: XCTestCase {
              timeout: 0.1,
              enforceOrder: true)
     }
-    
+
     func test_shouldNotQuery() {
         // GIVEN
         let testExpectation = XCTestExpectation()
@@ -99,14 +98,14 @@ class InvalidatonUseCaseTests: XCTestCase {
             XCTAssertEqual(token.certificates.first!.isRevoked, false)
             testExpectation.fulfill()
         }
-        .catch { error in
+        .catch { _ in
             XCTFail("Should not fail")
         }
         wait(for: [testExpectation],
              timeout: 0.1,
              enforceOrder: true)
     }
-    
+
     func test_isDeRevoked_ShouldQuery() {
         // GIVEN
         let testExpectation = XCTestExpectation()
@@ -119,13 +118,13 @@ class InvalidatonUseCaseTests: XCTestCase {
         let revocationRepository = CertificateRevocationRepositoryMock()
         let vaccinationRepository = VaccinationRepositoryMock()
         let sut = InvalidationUseCase(certificateList: certList,
-                                  revocationRepository: revocationRepository,
-                                  vaccinationRepository: vaccinationRepository,
-                                  date: date,
-                                  userDefaults: persistence)
+                                      revocationRepository: revocationRepository,
+                                      vaccinationRepository: vaccinationRepository,
+                                      date: date,
+                                      userDefaults: persistence)
         persistence.lastQueriedRevocation = Calendar.current.date(byAdding: .day, value: -2, to: date)
         revocationRepository.isRevoked = false
-        
+
         // WHEN
         sut.execute().done { token in
             // THEN
@@ -135,7 +134,7 @@ class InvalidatonUseCaseTests: XCTestCase {
             XCTAssertEqual(token.certificates.first!.isRevoked, false)
             testExpectation.fulfill()
         }
-        .catch { error in
+        .catch { _ in
             XCTFail("Should not fail")
         }
         wait(for: [revocationRepository.isRevokedExpectation,

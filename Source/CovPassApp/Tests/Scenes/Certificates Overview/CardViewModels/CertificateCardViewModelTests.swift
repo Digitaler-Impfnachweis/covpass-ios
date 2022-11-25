@@ -26,7 +26,7 @@ class CertificateCardViewModelTests: XCTestCase {
 
     private func sut(token: ExtendedCBORWebToken,
                      boosterLogic: BoosterLogicMock = BoosterLogicMock()) -> CertificateCardViewModel {
-        return .init(
+        .init(
             token: token,
             holderNeedsMask: true,
             onAction: { _ in },
@@ -35,7 +35,7 @@ class CertificateCardViewModelTests: XCTestCase {
             currentDate: .distantFuture
         )
     }
-    
+
     func testIsShowNotification_false() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -48,7 +48,7 @@ class CertificateCardViewModelTests: XCTestCase {
         // Then
         XCTAssertFalse(showNotification)
     }
-    
+
     func testIsShowNotification_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -65,7 +65,7 @@ class CertificateCardViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showNotification)
     }
-    
+
     func testIsInvalid_false() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
@@ -354,7 +354,7 @@ private extension ExtendedCBORWebToken {
             vaccinationCertificate: CBORWebToken(
                 iss: "DE",
                 iat: Date(timeIntervalSinceReferenceDate: 0),
-                exp: .distantFuture+1000,
+                exp: .distantFuture + 1000,
                 hcert: HealthCertificateClaim(
                     dgc: DigitalGreenCertificate(
                         nam: Name(

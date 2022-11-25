@@ -18,4 +18,3 @@ class CertificateRevocationHTTPClient_FactoryTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
 }
-

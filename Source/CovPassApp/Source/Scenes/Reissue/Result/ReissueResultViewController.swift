@@ -1,9 +1,9 @@
-import UIKit
 import CovPassUI
+import UIKit
 
 class ReissueResultViewController: UIViewController {
-
     // MARK: - Properties
+
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subTitleLabel: UILabel!
     @IBOutlet var newCertTitle: UILabel!
@@ -12,7 +12,7 @@ class ReissueResultViewController: UIViewController {
     @IBOutlet var oldCertStack: UIStackView!
     @IBOutlet var deleteOldCertButton: MainButton!
     @IBOutlet var deleterOldCertLaterButton: MainButton!
-    
+
     private(set) var viewModel: ReissueResultViewModelProtocol
 
     // MARK: - Lifecycle
@@ -33,14 +33,13 @@ class ReissueResultViewController: UIViewController {
     }
 
     // MARK: - Methods
-    
-    
+
     private func configureButtons() {
         deleteOldCertButton.action = viewModel.deleteOldTokens
         deleterOldCertLaterButton.action = viewModel.deleteOldTokensLater
         deleterOldCertLaterButton.style = .plain
     }
-    
+
     func updateView() {
         titleLabel.attributedText = viewModel.title.styledAs(.header_2)
         subTitleLabel.attributedText = viewModel.subtitle.styledAs(.body)
@@ -51,8 +50,7 @@ class ReissueResultViewController: UIViewController {
         newCertStack.addArrangedSubview(viewModel.newCertItem)
         oldCertStack.addArrangedSubview(viewModel.oldCertItem)
     }
-    
- }
+}
 
 extension ReissueResultViewController: ViewModelDelegate {
     func viewModelDidUpdate() {

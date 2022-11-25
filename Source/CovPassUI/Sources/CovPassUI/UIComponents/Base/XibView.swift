@@ -21,7 +21,7 @@ open class XibView: UIView {
 
     // name of the xib file
     @objc dynamic var nibName: String? {
-        return NSStringFromClass(type(of: self)).components(separatedBy: ".").last
+        NSStringFromClass(type(of: self)).components(separatedBy: ".").last
     }
 
     // MARK: - Lifecycle

@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationIndexListByKIDResponseTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -35,12 +35,12 @@ class CertificateRevocationIndexListByKIDResponseTests: XCTestCase {
         let sut = try CertificateRevocationIndexListByKIDResponse(with: dictionary)
 
         // When & Then
-        XCTAssertTrue(sut.contains(0xa6))
-        XCTAssertTrue(sut.contains(0xbc))
+        XCTAssertTrue(sut.contains(0xA6))
+        XCTAssertTrue(sut.contains(0xBC))
         XCTAssertTrue(sut.contains(0x97))
         XCTAssertFalse(sut.contains(0))
         XCTAssertFalse(sut.contains(255))
-        XCTAssertFalse(sut.contains(0xee))
+        XCTAssertFalse(sut.contains(0xEE))
     }
 
     func testContainsByte1Byte2() throws {
@@ -49,12 +49,12 @@ class CertificateRevocationIndexListByKIDResponseTests: XCTestCase {
         let sut = try CertificateRevocationIndexListByKIDResponse(with: dictionary)
 
         // When & Then
-        XCTAssertTrue(sut.contains(0xa6, 0xb8))
-        XCTAssertTrue(sut.contains(0xbc, 0x54))
+        XCTAssertTrue(sut.contains(0xA6, 0xB8))
+        XCTAssertTrue(sut.contains(0xBC, 0x54))
         XCTAssertTrue(sut.contains(0x97, 0x22))
         XCTAssertFalse(sut.contains(97, 22))
-        XCTAssertFalse(sut.contains(0xa6, 0x54))
-        XCTAssertFalse(sut.contains(0xbd, 0x54))
+        XCTAssertFalse(sut.contains(0xA6, 0x54))
+        XCTAssertFalse(sut.contains(0xBD, 0x54))
     }
 
     func testRawDictionary() throws {

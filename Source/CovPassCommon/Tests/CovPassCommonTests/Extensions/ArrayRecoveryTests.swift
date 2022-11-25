@@ -11,7 +11,6 @@ import Foundation
 import XCTest
 
 class ArrayRecoveryTests: XCTestCase {
-    
     func testFetchLatesRecovery() throws {
         let recovery2020 = Recovery(tg: "",
                                     fr: try XCTUnwrap(DateUtils.isoDateFormatter.date(from: "2020-01-10")),
@@ -34,9 +33,9 @@ class ArrayRecoveryTests: XCTestCase {
                                     co: "",
                                     is: "",
                                     ci: "3")
-        
+
         let recoveries = [recovery2020, recovery2022, recovery2021]
-        
+
         XCTAssertEqual(recoveries.latestRecovery?.ci, recovery2022.ci)
     }
 }

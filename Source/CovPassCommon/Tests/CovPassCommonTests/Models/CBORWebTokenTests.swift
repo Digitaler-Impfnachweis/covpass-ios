@@ -31,7 +31,7 @@ class CBORWebTokenTests: XCTestCase {
         XCTAssertEqual(sut.exp?.timeIntervalSince1970, 1_682_239_131)
         XCTAssertEqual(sut.hcert.dgc.ver, "1.0.0")
     }
-    
+
     func testIsVaccination() {
         let certificate = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "")
         XCTAssertTrue(certificate.vaccinationCertificate.isVaccination)
@@ -39,7 +39,7 @@ class CBORWebTokenTests: XCTestCase {
         XCTAssertFalse(certificate.vaccinationCertificate.isRecovery)
         XCTAssertFalse(certificate.vaccinationCertificate.isTest)
     }
-    
+
     func testIsTest() {
         let certificate = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "")
         XCTAssertFalse(certificate.vaccinationCertificate.isVaccination)
@@ -47,7 +47,7 @@ class CBORWebTokenTests: XCTestCase {
         XCTAssertFalse(certificate.vaccinationCertificate.isNotTest)
         XCTAssertTrue(certificate.vaccinationCertificate.isTest)
     }
-    
+
     func testIsRecovery() {
         let certificate = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "")
         XCTAssertFalse(certificate.vaccinationCertificate.isVaccination)
@@ -55,32 +55,32 @@ class CBORWebTokenTests: XCTestCase {
         XCTAssertFalse(certificate.vaccinationCertificate.isNotRecovery)
         XCTAssertTrue(certificate.vaccinationCertificate.isRecovery)
     }
-    
+
     func testIsNotFraud() {
         let certificate = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "")
         XCTAssertFalse(certificate.vaccinationCertificate.isFraud)
     }
-    
+
     func testIssIsDE() {
         // GIVEN
         var certificate = CBORWebToken.mockVaccinationCertificate
         certificate.iss = "DE"
-        
+
         // WHEN
         let isGermanCert = certificate.isGermanIssuer
-        
+
         // THEN
         XCTAssertEqual(isGermanCert, true)
     }
-    
+
     func testIssIsNotDE() {
         // GIVEN
         var certificate = CBORWebToken.mockVaccinationCertificate
         certificate.iss = "FOO"
-        
+
         // WHEN
         let isGermanCert = certificate.isGermanIssuer
-        
+
         // THEN
         XCTAssertEqual(isGermanCert, false)
     }
@@ -142,7 +142,7 @@ class CBORWebTokenTests: XCTestCase {
 
     func testWillExpireInLessOrEqual28Days_will_expire() {
         // Given
-        sut.exp = Date(timeIntervalSinceNow: 28*secondsPerDay)
+        sut.exp = Date(timeIntervalSinceNow: 28 * secondsPerDay)
 
         // When
         let willExpire = sut.willExpireInLessOrEqual28Days
@@ -153,7 +153,7 @@ class CBORWebTokenTests: XCTestCase {
 
     func testWillExpireInLessOrEqual28Days_will_expire_after_28_days() {
         // Given
-        sut.exp = Date(timeIntervalSinceNow: 30*secondsPerDay)
+        sut.exp = Date(timeIntervalSinceNow: 30 * secondsPerDay)
 
         // When
         let willExpire = sut.willExpireInLessOrEqual28Days
@@ -174,5 +174,5 @@ class CBORWebTokenTests: XCTestCase {
     }
 }
 
-private let secondsPerHour: TimeInterval = 60*60
-private let secondsPerDay: TimeInterval = 24*secondsPerHour
+private let secondsPerHour: TimeInterval = 60 * 60
+private let secondsPerDay: TimeInterval = 24 * secondsPerHour

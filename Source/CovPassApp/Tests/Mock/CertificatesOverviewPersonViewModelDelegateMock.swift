@@ -1,20 +1,14 @@
 @testable import CovPassApp
 import XCTest
 
-class CertificatesOverviewPersonViewModelDelegateMock : CertificatesOverviewPersonViewModelDelegate {
+class CertificatesOverviewPersonViewModelDelegateMock: CertificatesOverviewPersonViewModelDelegate {
     let viewModelNeedsCertificateVisibleExpectation = XCTestExpectation()
-    
-    func viewModelDidUpdate() {
-        
-    }
-    
-    func viewModelNeedsFirstCertificateVisible() {
-        
-    }
-    
-    func viewModelNeedsCertificateVisible(at index: Int) {
+
+    func viewModelDidUpdate() {}
+
+    func viewModelNeedsFirstCertificateVisible() {}
+
+    func viewModelNeedsCertificateVisible(at _: Int) {
         viewModelNeedsCertificateVisibleExpectation.fulfill()
     }
-    
-    
 }

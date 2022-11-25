@@ -12,7 +12,6 @@ import XCTest
 @testable import CovPassCommon
 
 class KeychainPersistenceTests: XCTestCase {
-
     var keychain = MockPersistence()
     func testErrorCode() {
         XCTAssertEqual(KeychainError.valueNotData.errorCode, 501)

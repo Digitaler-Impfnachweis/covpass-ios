@@ -5,14 +5,12 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-
-import PromiseKit
-import Foundation
 @testable import CovPassApp
+import Foundation
+import PromiseKit
 
 class CountrySelectionViewControllerSnapShotTests: BaseSnapShotTests {
-
-    func testDefault() {     
+    func testDefault() {
         let (_, resolver) = Promise<String>.pending()
         let vm = CountrySelectionViewModel(router: CountrySelectionRouterMock(),
                                            resolvable: resolver,

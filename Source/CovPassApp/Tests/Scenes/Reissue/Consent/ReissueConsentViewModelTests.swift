@@ -6,10 +6,10 @@
 //
 
 @testable import CovPassApp
-import CovPassUI
-import XCTest
-import PromiseKit
 import CovPassCommon
+import CovPassUI
+import PromiseKit
+import XCTest
 
 class ReissueConsentViewModelTests: XCTestCase {
     private var delegate: MockViewModelDelegate!
@@ -17,7 +17,7 @@ class ReissueConsentViewModelTests: XCTestCase {
     private var mockRouter: ReissueConsentRouterMock!
     private var reissueRepository: CertificateReissueRepositoryMock!
     private var vaccinationRepository: VaccinationRepositoryMock!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         mockRouter = ReissueConsentRouterMock()
@@ -44,7 +44,7 @@ class ReissueConsentViewModelTests: XCTestCase {
         )
         sut.delegate = delegate
     }
-    
+
     override func tearDownWithError() throws {
         delegate = nil
         vaccinationRepository = nil
@@ -52,7 +52,7 @@ class ReissueConsentViewModelTests: XCTestCase {
         sut = nil
         reissueRepository = nil
     }
-    
+
     func testProcessAgree_boosterRenewal() {
         // Given
         let tokensToRenew = [CBORWebToken.mockVaccinationCertificate3Of2.extended()]
@@ -134,7 +134,7 @@ class ReissueConsentViewModelTests: XCTestCase {
         let message = try XCTUnwrap(mockRouter.receivedErrorMessage)
         XCTAssertTrue(message.contains("ERRORCODE XYZ"))
     }
-    
+
     func testProcessAgree_error_german_locale() throws {
         // Given
         let expectedFaqURL = try XCTUnwrap(
@@ -161,14 +161,14 @@ class ReissueConsentViewModelTests: XCTestCase {
         wait(for: [mockRouter.showErrorExpectation], timeout: 1)
         XCTAssertEqual(mockRouter.receivedErrorFaqURL, expectedFaqURL)
     }
-    
+
     func testProcessDisagree() {
         // WHEN
         sut.processDisagree()
         // THEN
         wait(for: [mockRouter.cancelExpectation], timeout: 0.1)
     }
-    
+
     func testProcessPrivacyStatement() {
         // WHEN
         sut.processPrivacyStatement()

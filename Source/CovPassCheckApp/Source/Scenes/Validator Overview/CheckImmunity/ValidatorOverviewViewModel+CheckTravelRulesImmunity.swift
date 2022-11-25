@@ -5,14 +5,13 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import PromiseKit
 import CovPassCommon
+import PromiseKit
 
 extension ValidatorOverviewViewModel {
-    
     func checkImmunityStatusEnteringGermany() {
         isLoadingScan = true
-        firstly{
+        firstly {
             ScanAndParseQRCodeAndCheckTravelRulesUseCase(router: router,
                                                          audioPlayer: audioPlayer,
                                                          vaccinationRepository: vaccinationRepository,
@@ -33,7 +32,7 @@ extension ValidatorOverviewViewModel {
                 .cauterize()
         }
     }
-    
+
     func errorHandlingTravelRules(error: Error) -> Promise<ValidatorDetailSceneResult> {
         if case let CertificateError.revoked(token) = error {
             return router.showTravelRulesInvalid(token: token)

@@ -5,17 +5,16 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import XCTest
-import CovPassCommon
 @testable import CovPassCheckApp
+import CovPassCommon
+import XCTest
 
 class CheckIfsg22aUseCaseTests: XCTestCase {
-    
     var sut: CheckIfsg22aUseCase!
     var certificateHolderStatusModel: CertificateHolderStatusModelMock!
     var revocationRepository: CertificateRevocationRepositoryMock!
     var token: ExtendedCBORWebToken!
-    
+
     override func setUpWithError() throws {
         token = CBORWebToken.mockRecoveryCertificate.mockRecoveryUVCI("FOO").extended()
         revocationRepository = CertificateRevocationRepositoryMock()
@@ -26,14 +25,14 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
                                   secondToken: nil,
                                   thirdToken: nil)
     }
-    
+
     override func tearDownWithError() throws {
         revocationRepository = nil
         certificateHolderStatusModel = nil
         token = nil
         sut = nil
     }
-    
+
     func test_certificate_is_revoked() {
         // GIVEN
         let expectation = XCTestExpectation(description: "test should fail because certificate is revoked")
@@ -41,7 +40,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         revocationRepository.isRevoked = true
         // WHEN
         sut.execute()
-            .done { token in
+            .done { _ in
                 XCTFail("Should not successful")
             }
             .catch { error in
@@ -51,7 +50,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
             }
         wait(for: [expectation], timeout: 1.0)
     }
-    
+
     func test_checkIfsg22aRule() {
         // GIVEN
         let expectation = XCTestExpectation(description: "test should fail because holders vaccination cycle is not complete")
@@ -61,7 +60,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         certificateHolderStatusModel.isVaccinationCycleComplete = false
         // WHEN
         sut.execute()
-            .done { token in
+            .done { _ in
                 XCTFail("Should not successful")
             }
             .catch { error in
@@ -71,7 +70,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
             }
         wait(for: [expectation], timeout: 1.0)
     }
-    
+
     func test_checkIfsg22a_rules_passed() {
         // GIVEN
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
@@ -86,14 +85,14 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
                 XCTAssertEqual(token, self.token)
                 expectation.fulfill()
             }
-            .catch { error in
+            .catch { _ in
                 // THEN
 
                 XCTFail("Should not Fail")
             }
         wait(for: [expectation], timeout: 1.0)
     }
-    
+
     func test_checkIfsg22aRule_withAdditional_token_of_different_person_failed() {
         // GIVEN
         let differentPersonToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended(vaccinationQRCodeData: "1")
@@ -109,7 +108,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         certificateHolderStatusModel.isVaccinationCycleComplete = true
         // WHEN
         sut.execute()
-            .done { token in
+            .done { _ in
                 XCTFail("Should not successful")
             }
             .catch { error in
@@ -119,5 +118,4 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
             }
         wait(for: [expectation], timeout: 1.0)
     }
-    
 }

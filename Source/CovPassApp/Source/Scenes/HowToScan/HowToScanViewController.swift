@@ -15,7 +15,6 @@ private enum Constants {
         static let close = VoiceOverOptions.Settings(label: "accessibility_certificate_add_dialog_camera_access_label_close".localized)
     }
 
-
     enum Layout {
         static let actionLineHeight: CGFloat = 17
     }
@@ -56,19 +55,19 @@ class HowToScanViewController: UIViewController {
         configureToolbarView()
         configureActionView()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.sceneOpeningAnnouncement)
         UIAccessibility.post(notification: .layoutChanged, argument: headline.textLabel)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.sceneClosingAnnouncement)
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         configureImageView()
     }

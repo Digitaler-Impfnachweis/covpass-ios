@@ -5,18 +5,18 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import PromiseKit
 import CovPassCommon
 import Foundation
 import PDFKit
+import PromiseKit
 
 public class RevocationInfoViewModel: RevocationInfoViewModelProtocol {
     public var delegate: ViewModelDelegate?
     public let buttonTitle = "revocation_detail_page_button_text".localized(bundle: .main)
-    private(set) public var isGeneratingPDF = false
+    public private(set) var isGeneratingPDF = false
     public let title = "revocation_detail_page_title".localized(bundle: .main)
     public let enableCreatePDF: Bool
-    lazy public var infoItems: [ListContentItem] = [
+    public lazy var infoItems: [ListContentItem] = [
         .init(transactionNumberTitle, transactionNumber),
         .init(keyIDTitle, keyID),
         .init(countryTitle, country),
@@ -50,24 +50,23 @@ public class RevocationInfoViewModel: RevocationInfoViewModelProtocol {
     private let router: RevocationInfoRouterProtocol
 
     public init(router: RevocationInfoRouterProtocol,
-         resolver: Resolver<Void>,
-         pdfGenerator: RevocationPDFGeneratorProtocol,
-         fileManager: FileManager,
-         token: ExtendedCBORWebToken,
-         coseSign1Message: CoseSign1Message,
-         timestamp: Date)
-    {
+                resolver: Resolver<Void>,
+                pdfGenerator: RevocationPDFGeneratorProtocol,
+                fileManager: FileManager,
+                token: ExtendedCBORWebToken,
+                coseSign1Message: CoseSign1Message,
+                timestamp: Date) {
         let cborWebToken = token.vaccinationCertificate
         let dgc = cborWebToken.hcert.dgc
         let timestampSeconds = String(timestamp.timeIntervalSince1970)
-        self.timestampDate = timestamp
-        self.country = dgc.country
-        self.enableCreatePDF = country.uppercased() == "DE"
-        self.expiryDate = DateUtils.dateString(from: cborWebToken.exp)
-        self.issuingDate = DateUtils.dateString(from: cborWebToken.iat)
-        self.keyID = coseSign1Message.keyIdentifier.toBase64()
-        self.rValueSignature = coseSign1Message.rValueSignature.toHexString()
-        self.transactionNumber = (keyID + rValueSignature + timestampSeconds).sha256()
+        timestampDate = timestamp
+        country = dgc.country
+        enableCreatePDF = country.uppercased() == "DE"
+        expiryDate = DateUtils.dateString(from: cborWebToken.exp)
+        issuingDate = DateUtils.dateString(from: cborWebToken.iat)
+        keyID = coseSign1Message.keyIdentifier.toBase64()
+        rValueSignature = coseSign1Message.rValueSignature.toHexString()
+        transactionNumber = (keyID + rValueSignature + timestampSeconds).sha256()
         self.pdfGenerator = pdfGenerator
         self.router = router
         self.resolver = resolver

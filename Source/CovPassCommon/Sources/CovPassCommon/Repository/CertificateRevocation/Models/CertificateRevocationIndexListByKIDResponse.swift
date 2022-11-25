@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationIndexListResponse.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -28,8 +28,8 @@ public struct CertificateRevocationIndexListByKIDResponse {
     }
 }
 
-private typealias Byte1ValueDictionary = Dictionary<UInt8, Byte1ValueType>
-private typealias Byte2ValueDictionary = Dictionary<UInt8, Byte2ValueType>
+private typealias Byte1ValueDictionary = [UInt8: Byte1ValueType]
+private typealias Byte2ValueDictionary = [UInt8: Byte2ValueType]
 
 private struct Byte1ValueType {
     let timestamp: TimeInterval
@@ -45,10 +45,10 @@ private struct Byte2ValueType {
 private extension NSDictionary {
     func hashDictionary() throws -> Byte1ValueDictionary {
         var result: Byte1ValueDictionary = [:]
-        try forEach { (key, value) in
+        try forEach { key, value in
             guard let stringKey = key as? String,
                   let byteKey = UInt8(stringKey, radix: 16),
-                  let value = value as? Array<Any>,
+                  let value = value as? [Any],
                   value.count > 2,
                   let dictionary = value[2] as? NSDictionary
             else {
@@ -64,10 +64,10 @@ private extension NSDictionary {
 
     func valueDictionary() throws -> Byte2ValueDictionary {
         var result: Byte2ValueDictionary = [:]
-        try forEach { (key, value) in
+        try forEach { key, value in
             guard let stringKey = key as? String,
                   let byteKey = UInt8(stringKey, radix: 16),
-                  let value = value as? Array<Any>,
+                  let value = value as? [Any],
                   value.count > 1
             else {
                 throw CertificateRevocationDataSourceError.cbor

@@ -10,13 +10,13 @@ import CovPassUI
 import UIKit
 
 class CertificatesOverviewPersonViewController: UIViewController {
-    
     // MARK: - IBOutlet
+
     @IBOutlet var headerView: OverviewHeaderView!
     @IBOutlet var gotoDetailsButton: MainButton!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var dotPageIndicator: DotPageIndicator!
-    @IBOutlet weak var subtTitleLabel: UILabel!
+    @IBOutlet var subtTitleLabel: UILabel!
     private(set) var viewModel: CertificatesOverviewPersonViewModelProtocol
     private(set) var cellWidthMargin: CGFloat = 100
     private(set) var layout: CardFlowLayout
@@ -44,7 +44,7 @@ class CertificatesOverviewPersonViewController: UIViewController {
         viewModelNeedsFirstCertificateVisible()
         collectionView.contentInsetAdjustmentBehavior = .always
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModelDidUpdate()
@@ -146,7 +146,7 @@ extension CertificatesOverviewPersonViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension CertificatesOverviewPersonViewController: UICollectionViewDelegateFlowLayout {
-    public func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         CGSize(width: collectionView.bounds.width - cellWidthMargin, height: collectionView.bounds.height)
     }
 }

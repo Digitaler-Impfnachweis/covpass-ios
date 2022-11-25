@@ -1,6 +1,6 @@
 //
 //  CertificateItemViewModelMock.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -9,20 +9,20 @@
 import UIKit
 
 struct CertificateItemViewModelMock: CertificateItemViewModel {
-    var icon: UIImage = UIImage()
+    var icon: UIImage = .init()
     var iconColor: UIColor = .purple
     var iconBackgroundColor: UIColor = .yellow
     var title = ""
-    var titleAccessibilityLabel: String? = nil
+    var titleAccessibilityLabel: String?
     var subtitle = ""
-    var subtitleAccessibilityLabel: String? = nil
+    var subtitleAccessibilityLabel: String?
     var info = ""
-    var infoAccessibilityLabel: String? = nil
-    var info2: String? = nil
-    var info2AccessibilityLabel: String? = nil
-    var statusIcon: UIImage? = nil
-    var statusIconAccessibilityLabel: String? = nil
+    var infoAccessibilityLabel: String?
+    var info2: String?
+    var info2AccessibilityLabel: String?
+    var statusIcon: UIImage?
+    var statusIconAccessibilityLabel: String?
     var statusIconHidden = false
-    var activeTitle: String? = nil
+    var activeTitle: String?
     var certificateItemIsSelectableAccessibilityLabel = ""
 }

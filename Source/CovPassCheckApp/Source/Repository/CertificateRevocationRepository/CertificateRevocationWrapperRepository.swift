@@ -17,10 +17,9 @@ struct CertificateRevocationWrapperRepository: CertificateRevocationRepositoryPr
 
     init(localRepository: CertificateRevocationRepositoryProtocol,
          remoteRepostory: CertificateRevocationRepositoryProtocol,
-         persistence: Persistence
-    ) {
+         persistence: Persistence) {
         self.localRepository = localRepository
-        self.remoteRepository = remoteRepostory
+        remoteRepository = remoteRepostory
         self.persistence = persistence
     }
 

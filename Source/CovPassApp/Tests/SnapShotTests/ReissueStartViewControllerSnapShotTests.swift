@@ -5,13 +5,12 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import PromiseKit
-import Foundation
 @testable import CovPassApp
 import CovPassCommon
+import Foundation
+import PromiseKit
 
 class ReissueStartViewControllerSnapShotTests: BaseSnapShotTests {
-
     func testDefault() {
         let token = CBORWebToken.mockVaccinationCertificate.extended()
         let (_, resolver) = Promise<Void>.pending()
@@ -22,7 +21,7 @@ class ReissueStartViewControllerSnapShotTests: BaseSnapShotTests {
         let vc = ReissueStartViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1000)
     }
-    
+
     func testDefaultExpiryContext() {
         let token = CBORWebToken.mockVaccinationCertificate.extended()
         let (_, resolver) = Promise<Void>.pending()

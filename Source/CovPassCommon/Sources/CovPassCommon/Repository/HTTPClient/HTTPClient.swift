@@ -1,6 +1,6 @@
 //
 //  HTTPClient.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -33,7 +33,7 @@ public class HTTPClient: HTTPClientProtocol {
     }
 
     private func handleResponse(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> Promise<HTTPClientResponse> {
-        self.checkForNoError(error)
+        checkForNoError(error)
             .then { _ in self.httpURLResponse(from: urlResponse) }
             .then { self.checkHTTPStatusCode(data, response: $0) }
     }
@@ -70,6 +70,6 @@ public class HTTPClient: HTTPClientProtocol {
 private extension HTTPURLResponse {
     var isOk: Bool {
         200 ..< 300 ~= statusCode ||
-        HTTPStatusCode.notModified == statusCode
+            HTTPStatusCode.notModified == statusCode
     }
 }

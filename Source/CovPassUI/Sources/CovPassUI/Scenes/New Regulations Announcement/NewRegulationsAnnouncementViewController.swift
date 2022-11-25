@@ -8,7 +8,6 @@
 import UIKit
 
 public class NewRegulationsAnnouncementViewController: UIViewController {
-
     @IBOutlet var infoHeaderView: InfoHeaderView!
     @IBOutlet var illustrationImageView: UIImageView!
     @IBOutlet var imageViewConstraint: NSLayoutConstraint!
@@ -23,9 +22,9 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
         super.init(nibName: nil, bundle: .uiBundle)
     }
 
-    required init?(coder: NSCoder) { nil }
+    required init?(coder _: NSCoder) { nil }
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setupInfoHeaderView()
         setupIllustration()
@@ -34,21 +33,21 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
         configureAccessibilityRespondsToUserInteraction()
     }
 
-    public override func viewDidAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnounce)
     }
 
-    public override func viewDidDisappear(_ animated: Bool) {
+    override public func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         setupIllustration()
     }
-    
+
     private func setupInfoHeaderView() {
         infoHeaderView.attributedTitleText = viewModel.header
             .styledAs(.header_2)
@@ -87,7 +86,7 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
         button.title = viewModel.buttonTitle
         button.action = viewModel.close
     }
-    
+
     private func configureAccessibilityRespondsToUserInteraction() {
         if #available(iOS 13.0, *) {
             copyText1Label.accessibilityRespondsToUserInteraction = true

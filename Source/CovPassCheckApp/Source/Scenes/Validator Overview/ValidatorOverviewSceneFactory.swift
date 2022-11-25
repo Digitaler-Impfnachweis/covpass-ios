@@ -26,7 +26,7 @@ struct ValidatorOverviewSceneFactory: SceneFactory {
         let bundle = Bundle.main
         let filename = (
             Locale.current.isGerman() ?
-            "privacy-covpasscheck-de" : "privacy-covpasscheck-en"
+                "privacy-covpasscheck-de" : "privacy-covpasscheck-en"
         ) + ".html"
         guard let privacyFile = try? bundle.loadString(resource: filename, encoding: .utf8) else {
             fatalError("Failed to load privacy file.")

@@ -11,6 +11,6 @@ import UIKit
 
 extension String {
     var localized: String {
-        return Localizer.localized(self, bundle: .main)
+        Localizer.localized(self, bundle: .main)
     }
 }

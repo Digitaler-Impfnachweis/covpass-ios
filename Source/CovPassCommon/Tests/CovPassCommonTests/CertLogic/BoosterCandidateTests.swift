@@ -1,12 +1,12 @@
 //
 //  BoosterCandidateTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import XCTest
 import CovPassCommon
+import XCTest
 
 class BoosterCandidateTests: XCTestCase {
     private var extendedCBORWebToken: ExtendedCBORWebToken!

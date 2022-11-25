@@ -30,17 +30,17 @@ public class QRContainerMaskImmunityView: XibView {
     @IBOutlet private var qrContainerView: UIView!
 
     // MARK: - Properties
-    
+
     public var maskStatusIsHidden: Bool = true
-    
+
     public var image: UIImage?
-    
+
     public var maskStatusImage: UIImage?
 
     public var immunityStatusImage: UIImage?
-    
+
     public var maskStatusText: String?
-    
+
     public var regionText: String?
 
     public var qrInfoText: String?

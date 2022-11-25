@@ -8,14 +8,13 @@
 import CovPassUI
 
 class ViewModelDelegateMock: ViewModelDelegate {
-    
-    var didUpdate: (()->Void)?
-    var didFail: ((Error)->Void)?
+    var didUpdate: (() -> Void)?
+    var didFail: ((Error) -> Void)?
 
     func viewModelDidUpdate() {
         didUpdate?()
     }
-    
+
     func viewModelUpdateDidFailWithError(_ error: Error) {
         didFail?(error)
     }

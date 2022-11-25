@@ -7,18 +7,18 @@
 //
 
 import AVFoundation
+import MobileCoreServices
+import PhotosUI
 import Scanner
 import UIKit
-import MobileCoreServices
 import UniformTypeIdentifiers
-import PhotosUI
 
 public final class ScanViewController: UIViewController, UINavigationControllerDelegate {
     // MARK: - IBOutlet
 
     @IBOutlet var toolbarView: CustomToolbarView!
     @IBOutlet var container: UIView!
-    @IBOutlet weak var activityIndicatorView: DotPulseActivityIndicator!
+    @IBOutlet var activityIndicatorView: DotPulseActivityIndicator!
 
     // MARK: - Properties
 
@@ -29,13 +29,13 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
-    
+
     public init(viewModel: ScanViewModel) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .module)
     }
-    
-    public override func viewDidLoad() {
+
+    override public func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         view.backgroundColor = .backgroundPrimary
@@ -47,13 +47,13 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
         }
         viewModel.requestCameraAccess()
     }
-    
-    public override func viewDidAppear(_ animated: Bool) {
+
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnounce)
     }
-    
-    public override func viewDidDisappear(_ animated: Bool) {
+
+    override public func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
     }
@@ -74,14 +74,14 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
             toolbarView.state = .plain
             toolbarView.setUpRightButton(rightButtonItem: .cancelButton)
             toolbarView.setUpLeftButton(leftButtonItem: .documentPicker)
-#if targetEnvironment(simulator)
-            toolbarView.setUpLeftButton2(leftButtonItem: .flashLight)
-            
-#else
-            if viewModel.hasDeviceTorch {
+            #if targetEnvironment(simulator)
                 toolbarView.setUpLeftButton2(leftButtonItem: .flashLight)
-            }
-#endif
+
+            #else
+                if viewModel.hasDeviceTorch {
+                    toolbarView.setUpLeftButton2(leftButtonItem: .flashLight)
+                }
+            #endif
             toolbarView.layoutMargins.top = .space_24
             toolbarView.delegate = self
             toolbarView.rightButtonVoiceOverSettings = viewModel.closeVoiceOverOptions
@@ -91,21 +91,21 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
         } else {
             toolbarView.state = .cancel
             toolbarView.leftButton.isHidden = true
-#if targetEnvironment(simulator)
-            toolbarView.setUpRightButton(rightButtonItem: .flashLight)
-            
-#else
-            if viewModel.hasDeviceTorch {
+            #if targetEnvironment(simulator)
                 toolbarView.setUpRightButton(rightButtonItem: .flashLight)
-            }
-#endif
+
+            #else
+                if viewModel.hasDeviceTorch {
+                    toolbarView.setUpRightButton(rightButtonItem: .flashLight)
+                }
+            #endif
             toolbarView.layoutMargins.top = .space_24
             toolbarView.delegate = self
             toolbarView.primaryButtonVoiceOverSettings = viewModel.closeVoiceOverOptions
             toolbarView.rightButtonVoiceOverSettings = viewModel.currentTorchVoiceOverOptions
         }
     }
-    
+
     private func removeScanView() {
         scanViewController?.view.removeFromSuperview()
         scanViewController = nil
@@ -129,14 +129,13 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
 }
 
 extension ScanViewController: ScanViewModelDelegate {
-    
     func selectFiles() {
         let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)], in: UIDocumentPickerMode.import)
         documentPicker.delegate = self
         documentPicker.allowsMultipleSelection = true
         present(documentPicker, animated: true)
     }
-    
+
     func selectImages() {
         if #available(iOS 14.0, *) {
             var configuration = PHPickerConfiguration()
@@ -199,12 +198,12 @@ extension ScanViewController: ModalInteractiveDismissibleProtocol {
     public func canDismissModalViewController() -> Bool {
         viewModel.isCancellable()
     }
-    
+
     public func modalViewControllerDidDismiss() {
         viewModel.cancel()
     }
 
-    public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+    public func documentPickerWasCancelled(_: UIDocumentPickerViewController) {
         pickingWasCancelled()
     }
 }
@@ -212,12 +211,11 @@ extension ScanViewController: ModalInteractiveDismissibleProtocol {
 // MARK: - UIDocumentPickerDelegate
 
 extension ScanViewController: UIDocumentPickerDelegate {
-    
-    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    public func documentPicker(_: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         viewModel.documentPicked(at: urls)
     }
-    
-    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+
+    public func documentPicker(_: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         viewModel.documentPicked(at: [url])
     }
 }
@@ -226,7 +224,7 @@ extension ScanViewController: UIDocumentPickerDelegate {
 
 @available(iOS 14, *)
 extension ScanViewController: PHPickerViewControllerDelegate {
-    public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+    public func picker(_: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         if results.isEmpty {
             pickingWasCancelled()
             return
@@ -234,12 +232,12 @@ extension ScanViewController: PHPickerViewControllerDelegate {
 
         dismiss(animated: true) {
             results
-                 .map(\.itemProvider)
-                 .loadImages()
-                 .done(on: DispatchQueue.main) { [weak self] images in
-                     self?.viewModel.imagePicked(images: images)
-                 }
-                 .cauterize()
+                .map(\.itemProvider)
+                .loadImages()
+                .done(on: DispatchQueue.main) { [weak self] images in
+                    self?.viewModel.imagePicked(images: images)
+                }
+                .cauterize()
         }
     }
 }
@@ -247,7 +245,6 @@ extension ScanViewController: PHPickerViewControllerDelegate {
 // MARK: - UIImagePickerControllerDelegate
 
 extension ScanViewController: UIImagePickerControllerDelegate {
-    
     public func imagePickerController(_ picker: UIImagePickerController,
                                       didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true)
@@ -255,13 +252,13 @@ extension ScanViewController: UIImagePickerControllerDelegate {
         viewModel.imagePicked(images: [image])
     }
 
-    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    public func imagePickerControllerDidCancel(_: UIImagePickerController) {
         pickingWasCancelled()
     }
 }
 
 private extension UIViewController {
-    func dismissPresented(animated flag: Bool, completion: (() -> Void)? = nil) {
+    func dismissPresented(animated _: Bool, completion: (() -> Void)? = nil) {
         if presentedViewController != nil {
             dismiss(animated: true, completion: completion)
         }

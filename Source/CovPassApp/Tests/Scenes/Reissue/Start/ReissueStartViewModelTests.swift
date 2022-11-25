@@ -6,17 +6,16 @@
 //
 
 @testable import CovPassApp
-import CovPassUI
-import XCTest
-import PromiseKit
 import CovPassCommon
+import CovPassUI
+import PromiseKit
+import XCTest
 
 class ReissueStartViewModelTests: XCTestCase {
-    
     private var sut: ReissueStartViewModel!
     private var mockRouter: ReissueStartRouterMock!
     private var promise: Promise<Void>!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         configureSut()
@@ -36,20 +35,20 @@ class ReissueStartViewModelTests: XCTestCase {
             context: context
         )
     }
-    
+
     override func tearDownWithError() throws {
         mockRouter = nil
         sut = nil
         promise = nil
     }
-    
+
     func testShowNext() {
         // WHEN
         sut.processStart()
         // THEN
         wait(for: [mockRouter.showNextExpectation], timeout: 0.1)
     }
-    
+
     func testProcessLater() {
         // GIVEN
         let expectation = XCTestExpectation()

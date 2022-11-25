@@ -9,8 +9,6 @@ import CovPassCommon
 private let keyValidatorOverviewSelectedCheckType = "keyValidatorOverviewSelectedCheckType"
 
 extension Persistence {
-
-    
     var selectedCheckType: Int {
         get {
             let value = try? fetch(keyValidatorOverviewSelectedCheckType) as? Int

@@ -65,7 +65,7 @@ class CertificateImportSelectionItemTests: XCTestCase {
     func testSelected_changed() {
         // Given
         sut.selected = true
-        
+
         // When
         let selected = sut.selected
 

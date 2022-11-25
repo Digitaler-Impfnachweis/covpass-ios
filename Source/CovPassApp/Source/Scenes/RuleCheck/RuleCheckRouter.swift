@@ -11,8 +11,7 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-class RuleCheckRouter: RuleCheckRouterProtocol {    
-
+class RuleCheckRouter: RuleCheckRouterProtocol {
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -41,7 +40,7 @@ class RuleCheckRouter: RuleCheckRouterProtocol {
             )
         )
     }
-    
+
     func showResultDetail(result: CertificateResult, country: String, date: Date) -> Promise<Void> {
         sceneCoordinator.present(
             RuleCheckDetailSceneFactory(
@@ -52,7 +51,7 @@ class RuleCheckRouter: RuleCheckRouterProtocol {
             )
         )
     }
-    
+
     func showInternetConnectionDialog() -> Promise<Void> {
         .init { resolver in
             showDialog(

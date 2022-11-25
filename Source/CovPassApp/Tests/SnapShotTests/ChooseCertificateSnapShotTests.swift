@@ -5,12 +5,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import XCTest
 @testable import CovPassApp
 @testable import CovPassCommon
+import XCTest
 
 class ChooseCertificateSnapShotTests: BaseSnapShotTests {
-    
     func testNoMatch() {
         let vm = ChooseCertificateViewModel(router: nil,
                                             repository: VaccinationRepositoryMock(), vaasRepository: VAASRepositoryMock(step: .downloadIdentityService),
@@ -20,9 +19,9 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         RunLoop.current.run(for: 0.1)
         verifyView(vc: vc)
     }
-    
+
     func testMatchFive() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         var cert1: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert1.vaccinationCertificate.hcert.dgc.nam.fn = "Schneider"
         cert1.vaccinationCertificate.hcert.dgc.nam.gn = "Andrea"
@@ -57,7 +56,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         cert5.vaccinationCertificate.hcert.dgc.dobString = "1990-07-12"
         cert5.vaccinationCertificate.hcert.dgc.t!.first!.tt = "LP217198-3"
         cert5.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.isoDateFormatter.date(from: "2020-01-01")!
-        
+
         let certs = [cert1,
                      cert2,
                      cert3,
@@ -73,16 +72,16 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         RunLoop.current.run(for: 0.1)
         verifyView(vc: vc)
     }
-    
+
     func testMatchOne() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         var cert1: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert1.vaccinationCertificate.hcert.dgc.nam.fn = "Schneider"
         cert1.vaccinationCertificate.hcert.dgc.nam.gn = "Andrea"
         cert1.vaccinationCertificate.hcert.dgc.nam.fnt = "Schneider"
         cert1.vaccinationCertificate.hcert.dgc.nam.gnt = "Andrea"
         cert1.vaccinationCertificate.hcert.dgc.dobString = "1990-07-12"
-        
+
         let certs = [cert1]
         vacinationRepoMock.certificates = certs
         let vm = ChooseCertificateViewModel(router: nil,
@@ -94,10 +93,9 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         RunLoop.current.run(for: 0.1)
         verifyView(vc: vc)
     }
-    
-    
+
     func testMatchFour() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         var cert1: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert1.vaccinationCertificate.hcert.dgc.nam.fn = "Schneider"
         cert1.vaccinationCertificate.hcert.dgc.nam.gn = "Andrea"
@@ -124,7 +122,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         cert4.vaccinationCertificate.hcert.dgc.nam.gnt = "Andrea"
         cert4.vaccinationCertificate.hcert.dgc.dobString = "1990-07-12"
         cert4.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
-        
+
         let certs = [cert1,
                      cert2,
                      cert3,
@@ -139,5 +137,4 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         RunLoop.current.run(for: 0.1)
         verifyView(vc: vc)
     }
-
 }

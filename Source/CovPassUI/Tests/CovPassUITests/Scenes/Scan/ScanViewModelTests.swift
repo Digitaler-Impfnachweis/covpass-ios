@@ -1,14 +1,14 @@
 //
 //  ScanViewModelTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassUI
 import CovPassCommon
-import XCTest
+@testable import CovPassUI
 import PromiseKit
+import XCTest
 
 class ScanViewModelTests: XCTestCase {
     var certificateRepository: VaccinationRepositoryMock!
@@ -36,7 +36,7 @@ class ScanViewModelTests: XCTestCase {
         )
         sut.delegate = delegate
     }
-    
+
     override func tearDown() {
         delegate = nil
         promise = nil
@@ -46,25 +46,25 @@ class ScanViewModelTests: XCTestCase {
         pdfCBORExtractor = nil
         super.tearDown()
     }
-    
+
     func testDocumentPickerActionSheetDocument() {
         // GIVEN
         router.choosenDocumentType = .document
-        
+
         // WHEN
         sut.documentPicker()
-        
+
         // THEN
         wait(for: [router.showDocumentPickerExpectation], timeout: 1.0)
     }
-    
+
     func testDocumentPickerActionSheetPhoto() {
         // GIVEN
         router.choosenDocumentType = .photo
-        
+
         // WHEN
         sut.documentPicker()
-        
+
         // THEN
         wait(for: [router.showDocumentPickerExpectation], timeout: 1.0)
     }
@@ -98,7 +98,7 @@ class ScanViewModelTests: XCTestCase {
         let url = try XCTUnwrap(
             Bundle.module.url(forResource: "Test QR Codes", withExtension: "pdf")
         )
-        let token = ExtendedCBORWebToken.init(
+        let token = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
             vaccinationQRCodeData: "1"
         )
@@ -140,7 +140,7 @@ class ScanViewModelTests: XCTestCase {
     func testImagePicked() throws {
         // Given
         let image = UIImage()
-        let token = ExtendedCBORWebToken.init(
+        let token = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
             vaccinationQRCodeData: "1"
         )

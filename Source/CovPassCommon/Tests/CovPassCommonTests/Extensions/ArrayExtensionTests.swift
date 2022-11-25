@@ -12,7 +12,7 @@ import XCTest
 @testable import CovPassCommon
 
 class ArrayExtensionTests: XCTestCase {
-    private var sut: Array<Int>!
+    private var sut: [Int]!
 
     override func setUpWithError() throws {
         sut = [72, 101, 108, 108, 111, 33, 33]

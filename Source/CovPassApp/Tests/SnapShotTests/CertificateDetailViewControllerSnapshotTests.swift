@@ -8,19 +8,17 @@
 @testable import CovPassApp
 @testable import CovPassCommon
 @testable import CovPassUI
-import XCTest
 import PromiseKit
-
+import XCTest
 
 class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
-    
     private var cert1OutOf1JohnsonJohnson: ExtendedCBORWebToken!
     private var cert2OutOf1Vaccinatio: ExtendedCBORWebToken!
     private var certRecoveryOldestInChain: ExtendedCBORWebToken!
     private var certificateHolderStatusModel: CertificateHolderStatusModelMock!
     private let (_, resolver) = Promise<CertificateDetailSceneResult>.pending()
     private var persistence: UserDefaultsPersistence!
-    
+
     override func setUpWithError() throws {
         persistence = UserDefaultsPersistence()
         cert1OutOf1JohnsonJohnson = CBORWebToken
@@ -46,7 +44,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
             .extended(vaccinationQRCodeData: "3")
         certificateHolderStatusModel = .init()
     }
-    
+
     override func tearDownWithError() throws {
         persistence = nil
         cert1OutOf1JohnsonJohnson = nil
@@ -54,7 +52,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         certRecoveryOldestInChain = nil
         certificateHolderStatusModel = nil
     }
-    
+
     func configureSut(certs: [ExtendedCBORWebToken],
                       bl: BoosterLogicProtocol = BoosterLogic(certLogic: DCCCertLogicMock(),
                                                               userDefaults: MockPersistence())) -> CertificateDetailViewModel {
@@ -69,16 +67,16 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
                                             userDefaults: persistence)
         return vm!
     }
-    
+
     func testCertificateDetailViewController() {
         let certs: [ExtendedCBORWebToken] = [try! ExtendedCBORWebToken.mock()]
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_Vaccination() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
             .doseNumber(4)
@@ -92,7 +90,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
     }
 
     func testCertificateDetail_Vaccination_From() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = DateUtils.isoDateFormatter.date(from: "2022-01-01")!
@@ -102,9 +100,9 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_Partly() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
@@ -115,9 +113,9 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_Recovery() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         let certs = [cert]
@@ -126,21 +124,21 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_Recovery_From() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.hcert.dgc.r!.first!.df =  DateUtils.parseDate("2025-04-26T15:05:00")!
+        cert.vaccinationCertificate.hcert.dgc.r!.first!.df = DateUtils.parseDate("2025-04-26T15:05:00")!
         let certs = [cert]
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_test() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
@@ -150,9 +148,9 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_IsExpired() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
@@ -163,9 +161,9 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_IsInvalid() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
@@ -176,10 +174,10 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_AllTypes_Selected_Vaccination() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
-        
+        let vacinationRepoMock = VaccinationRepositoryMock()
+
         // Invalid
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
@@ -222,10 +220,10 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1800)
     }
-    
+
     func testCertificateDetail_AllTypes_Selected_Vaccination_with_Bosster() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
-        
+        let vacinationRepoMock = VaccinationRepositoryMock()
+
         // Invalid
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
@@ -264,16 +262,16 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
 
         let certs = [cert, cert2, cert3, cert4, cert5, cert6]
         vacinationRepoMock.certificates = certs
-        _ = BoosterLogic.init(certLogic: DCCCertLogicMock(),
-                                   userDefaults: MockPersistence())
+        _ = BoosterLogic(certLogic: DCCCertLogicMock(),
+                         userDefaults: MockPersistence())
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1800)
     }
-    
+
     func testCertificateDetail_AllTypes_Selected_Recovery() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
-        
+        let vacinationRepoMock = VaccinationRepositoryMock()
+
         // Invalid
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
@@ -308,16 +306,16 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
 
         let certs = [cert, cert2, cert3, cert4, cert5]
         vacinationRepoMock.certificates = certs
-        _ = BoosterLogic.init(certLogic: DCCCertLogicMock(),
-                                   userDefaults: MockPersistence())
+        _ = BoosterLogic(certLogic: DCCCertLogicMock(),
+                         userDefaults: MockPersistence())
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1800)
     }
-    
+
     func testCertificateDetail_AllTypes_Selected_Vaccination_Partly() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
-        
+        let vacinationRepoMock = VaccinationRepositoryMock()
+
         // Invalid
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
@@ -350,10 +348,10 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_AllTypes_Selected_Invalid() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
-        
+        let vacinationRepoMock = VaccinationRepositoryMock()
+
         // Invalid
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
@@ -374,16 +372,15 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         cert3.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
         cert3.vaccinationQRCodeData = "3"
 
-        
         let certs = [cert, cert2, cert3]
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_Booster() {
-        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 2
@@ -395,7 +392,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
     }
-    
+
     var singleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
         .mockVaccinationUVCI("1")
         .medicalProduct(.johnsonjohnson)
@@ -408,7 +405,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         .doseNumber(2)
         .seriesOfDoses(2)
         .extended(vaccinationQRCodeData: "2")
-    
+
     func testCertificateDetail_ShowReissueNotification() {
         var singleDoseImmunizationJohnsonCert = singleDoseImmunizationJohnsonCert
         singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen = false
@@ -417,7 +414,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1800)
     }
-    
+
     func testCertificateDetail_ShowReissueNotification_NewBadgeAlreadySeen() {
         singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen = true
         let certs = [singleDoseImmunizationJohnsonCert, vaccinationWithTwoShotsOfVaccine]
@@ -425,7 +422,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1800)
     }
-    
+
     func testCertificateIsRevoked() throws {
         var token = try ExtendedCBORWebToken.token1Of1()
         token.revoked = true
@@ -434,7 +431,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let viewController = CertificateDetailViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 1600)
     }
-    
+
     func testCertificateIsRevokedAndIsExpired() throws {
         var token = try ExtendedCBORWebToken.token1Of1()
         token.vaccinationCertificate.exp = Date() - 100
@@ -454,7 +451,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let viewController = CertificateDetailViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 1600)
     }
-    
+
     func testReissueNotifications_new_badge_for_only_one_recovery() {
         let viewModel = CertificateDetailViewModelMock()
         viewModel.showVaccinationExpiryReissueNotification = true
@@ -462,7 +459,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let viewController = CertificateDetailViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 1600)
     }
-    
+
     func test_maskRuleAvailable_and_notNeedMask_() throws {
         let date = try XCTUnwrap(DateUtils.parseDate("2021-01-26T15:05:00"))
         let token = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(date).extended()
@@ -474,7 +471,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let viewController = CertificateDetailViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 1600)
     }
-    
+
     func test_maskRuleAvailable_and_needMask_() throws {
         let date = try XCTUnwrap(DateUtils.parseDate("2021-01-26T15:05:00"))
         let token = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(date).extended()

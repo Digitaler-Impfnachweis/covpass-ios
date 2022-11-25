@@ -5,9 +5,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import AVFAudio
 import CovPassCommon
 import Foundation
-import AVFAudio
 
 private enum Constants {
     static let audioFeedbackActivatedResource = "CovpassCheck-Activated.wav"

@@ -10,7 +10,7 @@ import UIKit
 
 public class LinkLabel: XibView {
     @IBOutlet public var textableView: LinkTextView!
-    @IBOutlet weak var additionalTextableView: LinkTextView!
+    @IBOutlet var additionalTextableView: LinkTextView!
     public var linkCallback: ((URL) -> Void)?
 
     override public func initView() {
@@ -21,7 +21,7 @@ public class LinkLabel: XibView {
         additionalTextableView.isScrollEnabled = false
         additionalTextableView.isHidden = true
     }
-    
+
     public var attributedText: NSAttributedString? {
         get {
             textableView.attributedText
@@ -34,7 +34,7 @@ public class LinkLabel: XibView {
             textableView.attributedText = NSMutableAttributedString(attributedString: nv).replaceLink().replaceLink()
         }
     }
-    
+
     public var additionalAttributedText: NSAttributedString? {
         get {
             additionalTextableView.attributedText

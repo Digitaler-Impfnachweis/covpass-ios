@@ -9,5 +9,5 @@
 import CovPassUI
 
 class ChooseCheckSituationRouterMock: ChooseCheckSituationRouterProtocol {
-    var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()    
+    var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 }

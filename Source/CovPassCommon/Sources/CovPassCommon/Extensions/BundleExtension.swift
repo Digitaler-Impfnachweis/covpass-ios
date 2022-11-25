@@ -13,7 +13,7 @@ public extension Bundle {
         Bundle.module
     }
 
-    func loadString(resource: String, encoding: String.Encoding) throws -> String {
+    func loadString(resource: String, encoding _: String.Encoding) throws -> String {
         guard let path = path(forResource: resource, ofType: nil) else {
             throw BundleError.url(resource)
         }
@@ -32,26 +32,26 @@ public enum BundleError: Error {
 }
 
 #if !SPM
-extension Foundation.Bundle {
-    /// Returns the resource bundle associated with the current Swift module.
-    static let module: Bundle = {
-        let bundleName = "Frameworks/CovPassCommon.framework"
+    extension Foundation.Bundle {
+        /// Returns the resource bundle associated with the current Swift module.
+        static let module: Bundle = {
+            let bundleName = "Frameworks/CovPassCommon.framework"
 
-        let candidates = [
-            // Bundle should be present here when the package is linked into an App.
-            Bundle.main.resourceURL,
+            let candidates = [
+                // Bundle should be present here when the package is linked into an App.
+                Bundle.main.resourceURL,
 
-            // For command-line tools.
-            Bundle.main.bundleURL,
-        ]
+                // For command-line tools.
+                Bundle.main.bundleURL
+            ]
 
-        for candidate in candidates {
-            let bundlePath = candidate?.appendingPathComponent(bundleName)
-            if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
-                return bundle
+            for candidate in candidates {
+                let bundlePath = candidate?.appendingPathComponent(bundleName)
+                if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
+                    return bundle
+                }
             }
-        }
-        fatalError("unable to find bundle named CovPassCommon_CovPassCommon")
-    }()
-}
+            fatalError("unable to find bundle named CovPassCommon_CovPassCommon")
+        }()
+    }
 #endif

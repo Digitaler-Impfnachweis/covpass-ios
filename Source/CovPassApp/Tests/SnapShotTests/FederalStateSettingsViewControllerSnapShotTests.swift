@@ -5,8 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassCommon
 @testable import CovPassApp
+import CovPassCommon
 @testable import CovPassUI
 
 class FederalStateSettingsViewControllerSnapShotTests: BaseSnapShotTests {

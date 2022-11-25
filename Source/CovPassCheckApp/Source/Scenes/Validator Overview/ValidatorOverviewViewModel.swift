@@ -6,13 +6,13 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 import CovPassCommon
 import CovPassUI
 import Foundation
+import Kronos
 import PromiseKit
 import UIKit
-import Kronos
-import CertLogic
 
 private enum Constants {
     enum Keys {
@@ -21,12 +21,14 @@ private enum Constants {
             static let syncTitle = "validation_start_screen_scan_sync_message_title".localized
             static let syncMessage = "validation_start_screen_scan_sync_message_text".localized
         }
+
         enum ScanCard {
             static let actionTitle = "validation_start_screen_scan_action_button_title".localized
             static let dropDownTitle = "infschg_start_screen_dropdown_title".localized
             static let maskRuleDateUnavailable = "state_ruleset_date_unavailable".localized
             static let maskRuleDateAvailable = "state_ruleset_date_available_long".localized
         }
+
         enum OfflineInformation {
             static let title = "start_offline_title".localized
             static let status_unavailable = "start_offline_status_unavailable".localized
@@ -36,6 +38,7 @@ private enum Constants {
             static let subtitle_unavailable = "start_offline_subtitle_unavailable".localized
             static let link_subtitle_available = "start_offline_link_subtitle_available".localized
         }
+
         enum ImmunityScanCard {
             enum WithinGermany {
                 static let immunityCheckTitle = "start_screen_vaccination_status_title".localized
@@ -44,21 +47,25 @@ private enum Constants {
                 static let immunityCheckActionTitle = "validation_start_screen_scan_action_button_title".localized
                 static let immunityCheckInfoText = "start_screen_vaccination_status_hint".localized
             }
+
             enum EnterginGermany {
                 static let immunityCheckTitle = "start_vaccination_status_entry_title".localized
                 static let immunityCheckDescription = "start_vaccination_status_entry_subtitle".localized
                 static let immunityCheckActionTitle = "validation_start_screen_scan_action_button_title".localized
             }
         }
+
         enum Segment {
             static let maskTitle = "start_screen_toggle_mask".localized
             static let immunityTitle = "start_screen_toggle_vaccination".localized
         }
+
         enum CheckSituation {
             static let withinGermanyTitle = "startscreen_rules_tag_local".localized
             static let enteringGermanyTitle = "startscreen_rules_tag_europe".localized
         }
     }
+
     enum Config {
         static let twoHoursAsSeconds = 7200.0
         static let ntpOffsetInit = 0.0
@@ -68,9 +75,9 @@ private enum Constants {
 
 class ValidatorOverviewViewModel {
     // MARK: - Properties
-    
+
     private var currentDataPrivacyHash: String
-   
+
     let vaccinationRepository: VaccinationRepositoryProtocol
     let revocationRepository: CertificateRevocationRepositoryProtocol
     let certificateHolderStatus: CertificateHolderStatusModelProtocol
@@ -86,16 +93,17 @@ class ValidatorOverviewViewModel {
     let segmentMaskTitle = Constants.Keys.Segment.maskTitle
     let segmentImmunityTitle = Constants.Keys.Segment.immunityTitle
     let timeHintTitle = Constants.Keys.TimeHint.syncTitle
-    
+
     var delegate: ViewModelDelegate?
     var userDefaults: Persistence
     var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || vaccinationRepository.trustListShouldBeUpdated() }
-    
+
     var isLoadingScan = false {
         didSet {
             delegate?.viewModelDidUpdate()
         }
     }
+
     var scanDropDownValue: String { "DE_\(userDefaults.stateSelection)".localized }
     var maskRuleDateCopy: String? {
         guard let date = certificateHolderStatus.latestMaskRuleDate(for: userDefaults.stateSelection) else {
@@ -103,25 +111,28 @@ class ValidatorOverviewViewModel {
         }
         return String(format: Constants.Keys.ScanCard.maskRuleDateAvailable, DateUtils.displayDateFormatter.string(from: date))
     }
+
     var timeHintSubTitle: String {
         String(format: Constants.Keys.TimeHint.syncMessage, ntpDateFormatted)
     }
+
     var ntpDateFormatted: String {
         DateUtils.displayDateTimeFormatter.string(from: ntpDate)
     }
+
     var timeHintIcon = UIImage.warning
-    var ntpDate: Date = Date() {
+    var ntpDate: Date = .init() {
         didSet {
-            self.delegate?.viewModelDidUpdate()
+            delegate?.viewModelDidUpdate()
         }
     }
+
     var ntpOffset = Constants.Config.ntpOffsetInit
     var schedulerIntervall: TimeInterval
     var timeHintIsHidden: Bool {
-        get {
-            return abs(ntpOffset) < Constants.Config.twoHoursAsSeconds
-        }
+        abs(ntpOffset) < Constants.Config.twoHoursAsSeconds
     }
+
     var offlineInformationTitle: String = Constants.Keys.OfflineInformation.title
     var offlineInformationStateIcon: UIImage { shouldSomethingBeUpdated ? .warning : .check }
     var offlineInformationStateTextColor: UIColor { shouldSomethingBeUpdated ? .neutralBlack : .neutralWhite }
@@ -130,44 +141,51 @@ class ValidatorOverviewViewModel {
     var offlineInformationUpdateCellSubtitle: String { shouldSomethingBeUpdated ? Constants.Keys.OfflineInformation.subtitle_unavailable : Constants.Keys.OfflineInformation.link_subtitle_available }
     var immunityCheckTitle: String {
         withinGermanyIsSelected ?
-        Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckTitle :
-        Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckTitle
+            Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckTitle :
+            Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckTitle
     }
+
     var immunityCheckTitleAccessibility: String {
         withinGermanyIsSelected ?
-        Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckTitleAccessibility : Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckTitle
+            Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckTitleAccessibility : Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckTitle
     }
+
     var immunityCheckDescription: String {
         withinGermanyIsSelected ?
-        Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckDescription :
-        Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckDescription
+            Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckDescription :
+            Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckDescription
     }
+
     var immunityCheckInfoText: String? {
         withinGermanyIsSelected ?
-        Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckInfoText : nil
+            Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckInfoText : nil
     }
+
     var immunityCheckActionTitle: String {
         withinGermanyIsSelected ?
-        Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckActionTitle :
-        Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckActionTitle
+            Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckActionTitle :
+            Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckActionTitle
     }
+
     public var selectedCheckType: CheckType {
         didSet {
             postSetSelectedCheckType()
         }
     }
+
     var checkSituation: CheckSituationType { .init(rawValue: userDefaults.checkSituation) ?? .withinGermany }
     var checkSituationTitle: String {
-        return withinGermanyIsSelected ? Constants.Keys.CheckSituation.withinGermanyTitle : Constants.Keys.CheckSituation.enteringGermanyTitle
+        withinGermanyIsSelected ? Constants.Keys.CheckSituation.withinGermanyTitle : Constants.Keys.CheckSituation.enteringGermanyTitle
     }
+
     var checkSituationImage: UIImage {
-        return withinGermanyIsSelected ? .flagDE : .flagWorld
+        withinGermanyIsSelected ? .flagDE : .flagWorld
     }
+
     var withinGermanyIsSelected: Bool { checkSituation == .withinGermany }
 
-    
     // MARK: - Lifecycle
-    
+
     init(router: ValidatorOverviewRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          revocationRepository: CertificateRevocationRepositoryProtocol,
@@ -176,24 +194,23 @@ class ValidatorOverviewViewModel {
          userDefaults: Persistence,
          privacyFile: String,
          schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall,
-         audioPlayer: AudioPlayerProtocol
-    ) {
+         audioPlayer: AudioPlayerProtocol) {
         self.audioPlayer = audioPlayer
         self.router = router
-        self.vaccinationRepository = repository
+        vaccinationRepository = repository
         self.revocationRepository = revocationRepository
         self.certificateHolderStatus = certificateHolderStatus
         self.certLogic = certLogic
         self.userDefaults = userDefaults
         self.schedulerIntervall = schedulerIntervall
-        self.currentDataPrivacyHash = privacyFile.sha256()
-        self.selectedCheckType = CheckType(rawValue: userDefaults.selectedCheckType) ?? .mask
-        self.setupTimer()
-        self.setupProperties()
+        currentDataPrivacyHash = privacyFile.sha256()
+        selectedCheckType = CheckType(rawValue: userDefaults.selectedCheckType) ?? .mask
+        setupTimer()
+        setupProperties()
     }
-    
+
     // MARK: - Methods
-    
+
     private func showDataPrivacyIfNeeded() -> Guarantee<Void> {
         guard let privacyHash = userDefaults.privacyHash else {
             userDefaults.privacyHash = currentDataPrivacyHash
@@ -218,40 +235,39 @@ class ValidatorOverviewViewModel {
             }
             .recover { _ in () }
     }
-    
-    
+
     private func resetCheckTypeIfCheckSituationWasNotChoosenBefore() {
         if UserDefaults.standard.object(forKey: UserDefaults.keyCheckSituation) == nil {
             selectedCheckType = .mask
         }
     }
-    
+
     private func setupProperties() {
         resetCheckTypeIfCheckSituationWasNotChoosenBefore()
     }
-    
+
     private func routeToChooseCheckSituation() -> PMKFinalizer {
-        return router.routeToChooseCheckSituation().cauterize()
+        router.routeToChooseCheckSituation().cauterize()
     }
-    
+
     private func postSetSelectedCheckType() {
         userDefaults.selectedCheckType = selectedCheckType.rawValue
-        if selectedCheckType == .immunity && UserDefaults.standard.object(forKey: UserDefaults.keyCheckSituation) == nil {
+        if selectedCheckType == .immunity, UserDefaults.standard.object(forKey: UserDefaults.keyCheckSituation) == nil {
             routeToChooseCheckSituation().finally {
                 self.delegate?.viewModelDidUpdate()
             }
         }
         delegate?.viewModelDidUpdate()
     }
-    
+
     private func setupTimer() {
-        self.tick()
+        tick()
         Timer.scheduledTimer(withTimeInterval: schedulerIntervall,
                              repeats: true) { [weak self] _ in
             self?.tick()
         }
     }
-    
+
     func updateTrustList() {
         vaccinationRepository
             .updateTrustListIfNeeded()
@@ -264,7 +280,7 @@ class ValidatorOverviewViewModel {
                 }
             }
     }
-    
+
     func updateDCCRules() {
         certLogic
             .updateRulesIfNeeded()
@@ -273,15 +289,15 @@ class ValidatorOverviewViewModel {
             }
             .cauterize()
     }
-    
+
     func updateValueSets() {
         certLogic.updateValueSetsIfNeeded().cauterize()
     }
-    
+
     func showAppInformation() {
         router.showAppInformation(userDefaults: userDefaults)
     }
-    
+
     func showNotificationsIfNeeded() {
         firstly {
             showDataPrivacyIfNeeded()
@@ -294,7 +310,7 @@ class ValidatorOverviewViewModel {
             print(error.localizedDescription)
         }
     }
-    
+
     func chooseAction() {
         router.routeToStateSelection()
             .done {
@@ -304,20 +320,20 @@ class ValidatorOverviewViewModel {
     }
 
     func routeToRulesUpdate() {
-         router.routeToRulesUpdate(userDefaults: userDefaults)
-             .done { self.delegate?.viewModelDidUpdate() }
-             .cauterize()
-     }
-    
+        router.routeToRulesUpdate(userDefaults: userDefaults)
+            .done { self.delegate?.viewModelDidUpdate() }
+            .cauterize()
+    }
+
     // MARK: Kronos Usage
-    
-    @objc func tick(completion: (()->Void)? = nil) {
+
+    @objc func tick(completion: (() -> Void)? = nil) {
         let complete: ((Date?, TimeInterval?) -> Void) = { [weak self] date, offset in
             guard let self = self,
                   let date = date,
                   let offset = offset else {
-                      return
-                  }
+                return
+            }
             self.ntpDate = date
             self.ntpOffset = offset
             completion?()

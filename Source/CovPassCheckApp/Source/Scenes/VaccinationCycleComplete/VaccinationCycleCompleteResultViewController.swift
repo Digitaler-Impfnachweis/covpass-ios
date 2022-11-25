@@ -22,7 +22,7 @@ final class VaccinationCycleCompleteResultViewController: UIViewController {
     @IBOutlet var rescanButton: MainButton!
     @IBOutlet var counterLabel: UILabel!
     @IBOutlet var travelRulesLinkLabel: LinkLabel!
-    
+
     private var viewModel: VaccinationCycleCompleteResultViewModelProtocol
     private lazy var revocationLink: NSAttributedString = {
         let linkText = (viewModel.revocationLinkTitle + " ⟩")
@@ -43,7 +43,7 @@ final class VaccinationCycleCompleteResultViewController: UIViewController {
         self.viewModel.delegate = self
     }
 
-    required init?(coder: NSCoder) { nil }
+    required init?(coder _: NSCoder) { nil }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ final class VaccinationCycleCompleteResultViewController: UIViewController {
         configureCounter()
         configureAccessibility()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: headerStackView)
@@ -126,7 +126,7 @@ final class VaccinationCycleCompleteResultViewController: UIViewController {
         counterLabel.attributedText = counterInfo
         counterLabel.textAlignment = .center
     }
-    
+
     private func configureAccessibility() {
         if #available(iOS 13.0, *) {
             headerStackView.accessibilityRespondsToUserInteraction = true

@@ -17,7 +17,6 @@ public class HintButton: XibView {
     @IBOutlet public var containerView: UIView!
     @IBOutlet public var button: MainButton!
 
-    
     // MARK: - Lifecycle
 
     override public func initView() {

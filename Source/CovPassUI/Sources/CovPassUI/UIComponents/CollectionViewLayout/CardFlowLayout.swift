@@ -19,7 +19,7 @@ open class CardFlowLayout: UICollectionViewFlowLayout {
         var size: CGSize
         var direction: UICollectionView.ScrollDirection
         func isEqual(_ otherState: LayoutState) -> Bool {
-            return size.equalTo(otherState.size) && direction == otherState.direction
+            size.equalTo(otherState.size) && direction == otherState.direction
         }
     }
 
@@ -30,17 +30,18 @@ open class CardFlowLayout: UICollectionViewFlowLayout {
     public var spacingMode: CardFlowLayoutSpacingMode
 
     fileprivate var state = LayoutState(size: CGSize.zero, direction: .horizontal)
-    
+
     public init(spacing: CGFloat, leftSectionInset: CGFloat) {
-        self.spacingMode = .fixed(spacing: spacing)
+        spacingMode = .fixed(spacing: spacing)
         self.leftSectionInset = leftSectionInset
         super.init()
     }
-    
-    required public init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override open func prepare() {
         super.prepare()
         let currentState = LayoutState(size: collectionView!.bounds.size, direction: scrollDirection)
@@ -53,14 +54,14 @@ open class CardFlowLayout: UICollectionViewFlowLayout {
     }
 
     fileprivate func setupCollectionView() {
-        guard let collectionView = self.collectionView else { return }
+        guard let collectionView = collectionView else { return }
         if collectionView.decelerationRate != UIScrollView.DecelerationRate.fast {
             collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         }
     }
 
     fileprivate func updateLayout() {
-        guard let collectionView = self.collectionView else { return }
+        guard let collectionView = collectionView else { return }
 
         let collectionSize = collectionView.bounds.size
         let isHorizontal = (scrollDirection == .horizontal)
@@ -91,7 +92,7 @@ open class CardFlowLayout: UICollectionViewFlowLayout {
     }
 
     fileprivate func transformLayoutAttributes(_ attributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        guard let collectionView = self.collectionView else { return attributes }
+        guard let collectionView = collectionView else { return attributes }
         let isHorizontal = (scrollDirection == .horizontal)
 
         let collectionCenter = isHorizontal ? collectionView.frame.size.width / 2 : collectionView.frame.size.height / 2

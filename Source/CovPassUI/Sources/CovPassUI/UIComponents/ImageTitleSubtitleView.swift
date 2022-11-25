@@ -9,7 +9,6 @@
 import UIKit
 
 public class ImageTitleSubtitleView: XibView {
-    
     @IBOutlet public var containerView: UIView!
     @IBOutlet private var leftImageContainer: UIView!
     @IBOutlet private var leftImageView: UIImageView!
@@ -24,28 +23,28 @@ public class ImageTitleSubtitleView: XibView {
     @IBOutlet private var leadingConstraint: NSLayoutConstraint!
     @IBOutlet private var button: UIButton!
     @IBOutlet private var iconVerticalAlignmentConstraints: NSLayoutConstraint!
-    
-    public var onTap: (()->Void)? {
+
+    public var onTap: (() -> Void)? {
         didSet {
             configureButton()
         }
     }
-    
+
     override public func initView() {
         super.initView()
         containerView?.layer.cornerRadius = 12.0
         containerView.backgroundColor = .brandAccent20
     }
-    
+
     public func update(title: NSAttributedString,
-                subtitle: NSAttributedString? = nil,
-                leftImage: UIImage? = nil,
-                rightImage: UIImage? = nil,
-                backGroundColor: UIColor = .brandAccent20,
-                imageWidth: CGFloat = 32,
-                edgeInstes: UIEdgeInsets = .init(top: 20, left: 20, bottom: 20, right: 20),
-                backgroundColor: UIColor = .brandAccent20,
-                iconVerticalAlignmentActive: Bool = true) {
+                       subtitle: NSAttributedString? = nil,
+                       leftImage: UIImage? = nil,
+                       rightImage: UIImage? = nil,
+                       backGroundColor: UIColor = .brandAccent20,
+                       imageWidth: CGFloat = 32,
+                       edgeInstes: UIEdgeInsets = .init(top: 20, left: 20, bottom: 20, right: 20),
+                       backgroundColor _: UIColor = .brandAccent20,
+                       iconVerticalAlignmentActive: Bool = true) {
         titleLabel.attributedText = title
         subtitleLabel.attributedText = subtitle
         subtitleLabel.isHidden = subtitle.isNilOrEmpty
@@ -64,12 +63,12 @@ public class ImageTitleSubtitleView: XibView {
         iconVerticalAlignmentConstraints.isActive = iconVerticalAlignmentActive
         setupAccessibility()
     }
-    
+
     private func configureButton() {
         button.isHidden = onTap == nil
         setupAccessibility()
     }
-    
+
     private func setupAccessibility() {
         var accessibilityText = ""
         accessibilityText = titleLabel.attributedText?.string ?? ""
@@ -81,10 +80,8 @@ public class ImageTitleSubtitleView: XibView {
             containerView.accessibilityRespondsToUserInteraction = true
         }
     }
-    
-    
-    @IBAction func buttonTapped(_ sender: Any) {
+
+    @IBAction func buttonTapped(_: Any) {
         onTap?()
     }
-
 }

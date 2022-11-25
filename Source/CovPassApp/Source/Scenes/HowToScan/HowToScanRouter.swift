@@ -25,7 +25,7 @@ class HowToScanRouter: HowToScanRouterProtocol {
     // MARK: - Methods
 
     func showMoreInformation() {
-        let title: String = "app_information_title_faq".localized
+        let title = "app_information_title_faq".localized
         let germanUrl = "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/"
         let englishUrl = "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/"
         let url = URL(string: Locale.current.isGerman() ? germanUrl : englishUrl)!

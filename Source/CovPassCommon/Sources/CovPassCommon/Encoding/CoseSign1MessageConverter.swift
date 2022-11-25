@@ -1,6 +1,6 @@
 //
 //  CoseSign1MessageConverter.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -36,11 +36,10 @@ public struct CoseSign1MessageConverter: CoseSign1MessageConverterProtocol {
 
     private func verifiedCBORWebToken(_ coseSign1Message: CoseSign1Message) -> Promise<CBORWebToken> {
         when(fulfilled: cborWebToken(from: coseSign1Message),
-             HCert.verifyPromise(message: coseSign1Message, trustList: trustList)
-        )
-        .then(checkExtendedKeyUsage)
-        .then(\.noFraud)
-        .then(skipExpiryVerificationOrNotExpired)
+             HCert.verifyPromise(message: coseSign1Message, trustList: trustList))
+            .then(checkExtendedKeyUsage)
+            .then(\.noFraud)
+            .then(skipExpiryVerificationOrNotExpired)
     }
 
     private func cborWebToken(from coseSign1Message: CoseSign1Message) -> Promise<CBORWebToken> {

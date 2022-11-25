@@ -1,19 +1,18 @@
-import UIKit
-import PromiseKit
-import CovPassUI
 import CovPassCommon
+import CovPassUI
+import PromiseKit
+import UIKit
 
 struct ReissueConsentSceneFactory: SceneFactory {
-    
     // MARK: - Properties
-    
+
     private let router: ReissueConsentRouterProtocol
     private let tokens: [ExtendedCBORWebToken]
     private let resolver: Resolver<Void>
     private let context: ReissueContext
-    
+
     // MARK: - Lifecycle
-    
+
     init(router: ReissueConsentRouterProtocol,
          tokens: [ExtendedCBORWebToken],
          resolver: Resolver<Void>,
@@ -23,7 +22,7 @@ struct ReissueConsentSceneFactory: SceneFactory {
         self.resolver = resolver
         self.context = context
     }
-    
+
     func make() -> UIViewController {
         guard let reissueRepository = CertificateReissueRepository() else {
             fatalError("Failed to instantiate repository.")
@@ -36,8 +35,7 @@ struct ReissueConsentSceneFactory: SceneFactory {
                                                 vaccinationRepository: vaccinationRepository,
                                                 decoder: JSONDecoder(),
                                                 locale: .current,
-                                                context: context
-        )
+                                                context: context)
         let viewController = ReissueConsentViewController(viewModel: viewModel)
         return viewController
     }

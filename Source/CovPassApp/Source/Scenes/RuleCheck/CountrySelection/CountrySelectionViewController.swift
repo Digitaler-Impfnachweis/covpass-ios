@@ -50,12 +50,12 @@ class CountrySelectionViewController: UIViewController {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.announce)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
     }
-    
+
     // MARK: - Private
 
     private func configureHeadline() {
@@ -106,7 +106,7 @@ class CountrySelectionViewController: UIViewController {
             }
             stackView.addArrangedSubview(countryView)
         }
-        
+
         toolbarView.state = .confirm(viewModel.select)
         toolbarView.delegate = self
         toolbarView.disableLeftButton()

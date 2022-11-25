@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationOfflineServiceTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -87,7 +87,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         remoteDataSource.getIndexListLastModifiedExpectation.isInverted = true
         localDataSource.kidListLastModifiedResponseDelay = 1.0
         sut.update().cauterize()
-        
+
         // When
         sut.reset()
 
@@ -105,7 +105,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         // Given
         remoteDataSource.getKIDListExpectation.expectedFulfillmentCount = 1
         sut.update().cauterize()
-        
+
         // When
         sut.update().cauterize()
 
@@ -361,12 +361,12 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         wait(for: [persistence.storeExpectation], timeout: 1)
         XCTAssertEqual(sut.lastSuccessfulUpdate, .init(timeIntervalSinceReferenceDate: 0))
     }
-    
+
     func testUpdateIfNeeded_update_24h_ago() {
         // Given
         persistence.certificateRevocationOfflineServiceLastUpdate = .init(timeIntervalSinceReferenceDate: 0)
         persistence.storeExpectation = .init()
-        dateProvider.date = .init(timeIntervalSinceReferenceDate: 3600*25)
+        dateProvider.date = .init(timeIntervalSinceReferenceDate: 3600 * 25)
         configureSut()
 
         // When
@@ -376,7 +376,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         wait(for: [persistence.storeExpectation], timeout: 10)
         XCTAssertNotNil(sut.lastSuccessfulUpdate)
     }
-    
+
     func testUpdateNeeded_update_not_24h_ago() {
         // Given
         persistence.certificateRevocationOfflineServiceLastUpdate = .init(timeIntervalSinceReferenceDate: 0)
@@ -388,11 +388,11 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         // Then
         XCTAssertFalse(updateNeeded)
     }
-    
+
     func testUpdateNeeded_update_24h_ago() {
         // Given
         persistence.certificateRevocationOfflineServiceLastUpdate = .init(timeIntervalSinceReferenceDate: 0)
-        dateProvider.date = .init(timeIntervalSinceReferenceDate: 3600*25)
+        dateProvider.date = .init(timeIntervalSinceReferenceDate: 3600 * 25)
         configureSut()
 
         // When

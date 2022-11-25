@@ -22,12 +22,13 @@ class ScanPleaseViewController: UIViewController {
     @IBOutlet var toolbarView: CustomToolbarView!
     @IBOutlet var headerImageView: UIImageView!
 
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var textView: ParagraphView!
-    @IBOutlet weak var linkDescriptionView: ParagraphView!
-    @IBOutlet weak var actionView: ListItemView!
+    @IBOutlet var stackView: UIStackView!
+    @IBOutlet var textView: ParagraphView!
+    @IBOutlet var linkDescriptionView: ParagraphView!
+    @IBOutlet var actionView: ListItemView!
 
-    @IBOutlet weak var contentStackView: UIStackView!
+    @IBOutlet var contentStackView: UIStackView!
+
     // MARK: - Properties
 
     private(set) var viewModel: ScanPleaseViewModel
@@ -41,7 +42,7 @@ class ScanPleaseViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityOpeningAnnounce)
@@ -58,7 +59,7 @@ class ScanPleaseViewController: UIViewController {
         configureAccessiblity()
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         configureContentView()
     }
@@ -103,7 +104,6 @@ class ScanPleaseViewController: UIViewController {
     private func configureAccessiblity() {
         headline.actionButton.enableAccessibility(label: viewModel.accessibilityClose)
     }
-
 }
 
 // MARK: - CustomToolbarViewDelegate

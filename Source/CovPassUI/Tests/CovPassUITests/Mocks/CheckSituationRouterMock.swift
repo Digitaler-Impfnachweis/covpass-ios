@@ -6,22 +6,21 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassUI
 import Foundation
 import PromiseKit
 import XCTest
-import CovPassUI
 
 class CheckSituationRouterMock: CheckSituationRouterProtocol {
-    
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var noInternetExpecation = XCTestExpectation()
     var disableOfflineRevocation = false
-    
-    func showNoInternetErrorDialog(_ error: Error) {
+
+    func showNoInternetErrorDialog(_: Error) {
         noInternetExpecation.fulfill()
     }
 
     func showOfflineRevocationDisableConfirmation() -> Guarantee<Bool> {
-        return .value(disableOfflineRevocation)
+        .value(disableOfflineRevocation)
     }
 }

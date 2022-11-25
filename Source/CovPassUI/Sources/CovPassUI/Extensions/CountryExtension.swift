@@ -12,7 +12,7 @@ extension Country: Comparable {
     public static func == (lhs: Country, rhs: Country) -> Bool {
         lhs.code == rhs.code
     }
-    
+
     public static func < (lhs: Country, rhs: Country) -> Bool {
         lhs.code.localized(bundle: .main) < rhs.code.localized(bundle: .main)
     }

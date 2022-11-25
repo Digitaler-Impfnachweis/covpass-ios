@@ -42,6 +42,7 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
         }
         return String(format: Constants.ruleDate, DateUtils.displayDateFormatter.string(from: date))
     }
+
     let revocationInfoHidden: Bool
     let revocationHeadline = Constants.revocationHeadline
     let revocationInfoText = Constants.revocationInfoText
@@ -61,11 +62,10 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
          router: MaskOptionalResultRouterProtocol,
          persistence: Persistence,
          certificateHolderStatus: CertificateHolderStatusModelProtocol,
-         revocationKeyFilename: String
-    ) {
+         revocationKeyFilename: String) {
         self.token = token
         self.countdownTimerModel = countdownTimerModel
-        self.subtitle = .init(
+        subtitle = .init(
             format: Constants.subtitleFormat,
             ("DE_" + persistence.stateSelection).localized
         )

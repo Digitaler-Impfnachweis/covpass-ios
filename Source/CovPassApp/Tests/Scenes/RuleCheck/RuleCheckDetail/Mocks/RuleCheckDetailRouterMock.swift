@@ -17,7 +17,7 @@ struct RuleCheckDetailRouterMock: RuleCheckDetailRouterProtocol {
         sceneCoordinator = SceneCoordinatorMock()
     }
 
-    func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
+    func showCertificate(for _: ExtendedCBORWebToken) -> Promise<Void> {
         .value
     }
 }

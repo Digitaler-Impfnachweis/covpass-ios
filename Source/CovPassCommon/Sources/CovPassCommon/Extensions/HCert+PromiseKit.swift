@@ -1,6 +1,6 @@
 //
 //  HCert+PromiseKit.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -13,7 +13,7 @@ extension HCert {
         do {
             let trustCertificate = try verify(message: message, trustList: trustList, checkSealCertificate: false)
             return .value(trustCertificate)
-        } catch  {
+        } catch {
             return .init(error: error)
         }
     }

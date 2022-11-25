@@ -21,4 +21,3 @@ class CertificateImportSelectionItem {
         self.token = token
     }
 }
-

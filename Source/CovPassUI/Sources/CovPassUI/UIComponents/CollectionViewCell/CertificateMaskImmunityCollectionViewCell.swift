@@ -15,6 +15,7 @@ private enum Constants {
     enum Accessibility {
         static let actionHint = "accessibility_button".localized
     }
+
     enum Layout {
         static let cornerRadius: CGFloat = 26
         static let shadowRadius: CGFloat = 16
@@ -33,11 +34,11 @@ public class CertificateMaskImmunityCollectionViewCell: CardCollectionViewCell {
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var qrContainerView: QRContainerMaskImmunityView!
     @IBOutlet public var gotoDetailButton: UIButton!
-    @IBOutlet weak var redDotWrapper: UIView!
-    @IBOutlet weak var redDotView: UIView!
-    @IBOutlet weak var statusLabelWrapper: UIView!
-    @IBOutlet weak var statusLabel: UILabel!
-    
+    @IBOutlet var redDotWrapper: UIView!
+    @IBOutlet var redDotView: UIView!
+    @IBOutlet var statusLabelWrapper: UIView!
+    @IBOutlet var statusLabel: UILabel!
+
     // MARK: - Public Properties
 
     override public var viewModel: CardViewModel? {
@@ -45,9 +46,9 @@ public class CertificateMaskImmunityCollectionViewCell: CardCollectionViewCell {
             updateView()
         }
     }
-    
+
     // MARK: - Lifecycle
-    
+
     public func shadow(show: Bool) {
         clipsToBounds = !show
         contentView.clipsToBounds = !show
@@ -56,7 +57,7 @@ public class CertificateMaskImmunityCollectionViewCell: CardCollectionViewCell {
         contentView.layer.shadowOpacity = show ? Float(Constants.Layout.shadowOpacity) : 0.0
         contentView.layer.shadowOffset = show ? Constants.Layout.shadowOffset : .init(width: 0, height: 0)
     }
-    
+
     override public func awakeFromNib() {
         super.awakeFromNib()
         shadow(show: true)
@@ -104,16 +105,16 @@ public class CertificateMaskImmunityCollectionViewCell: CardCollectionViewCell {
     }
 
     override public func viewModelDidUpdate() {
-        self.updateView()
+        updateView()
     }
 
     // MARK: - Actions
 
-    @IBAction @objc public func onPressAction() {
+    @IBAction public func onPressAction() {
         (viewModel as? CertificateCardViewModelProtocol)?.onClickAction()
     }
-    
-    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+
+    override public func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         super.didUpdateFocus(in: context, with: coordinator)
         contentView.updateFocusBorderView()
     }

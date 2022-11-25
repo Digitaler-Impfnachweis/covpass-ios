@@ -100,7 +100,8 @@ class TestTests: XCTestCase {
         // Given
         sut = .init(
             tg: "tg", tt: "tt", nm: "nm", ma: "ma", sc: Date(),
-            tr: "tr", tc: nil, co: "co", is: "is", ci: "ci")
+            tr: "tr", tc: nil, co: "co", is: "is", ci: "ci"
+        )
         // When
         let tc = sut.tc
 

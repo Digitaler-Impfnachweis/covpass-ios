@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 import Foundation
 import Scanner
 import UIKit
@@ -39,7 +39,7 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var offlineModusTopContainer: UIView!
     @IBOutlet var checkSituationContainerStackView: UIStackView!
     @IBOutlet var checkSituationView: ImageTitleSubtitleView!
-    
+
     // MARK: - Properties
 
     private(set) var viewModel: ValidatorOverviewViewModel
@@ -96,11 +96,11 @@ class ValidatorOverviewViewController: UIViewController {
             scanCard.actionButton.stopAnimating()
         }
     }
-    
+
     private func setupCardView() {
-        setScanButtonLoadingState()        
+        setScanButtonLoadingState()
         setupTimeHintView()
-        
+
         scanCard.actionButton.title = viewModel.scanActionTitle
         scanCard.actionButton.action = {
             self.viewModel.scanAction(additionalToken: nil)
@@ -115,9 +115,9 @@ class ValidatorOverviewViewController: UIViewController {
         scanCard.chooseAction = viewModel.chooseAction
         scanCard.chooseButton.innerButton.titleLabel?.text = nil
         scanCard.chooseButton.enableAccessibility(label: viewModel.scanDropDownTitle,
-                                                          hint: viewModel.scanDropDownValue,
-                                                          traits: .selected)
-        
+                                                  hint: viewModel.scanDropDownValue,
+                                                  traits: .selected)
+
         let immunityCheckTitleAccessibility = viewModel.immunityCheckTitleAccessibility
         let immunityCheckTitle = viewModel.immunityCheckTitle
             .styledAs(.header_2)
@@ -141,21 +141,21 @@ class ValidatorOverviewViewController: UIViewController {
         immunityCheckView.action = {
             self.viewModel.checkImmunityStatus(secondToken: nil, thirdToken: nil)
         }
-        
+
         configureSegmentControl()
     }
-    
-    func configureSegmentControl(){
+
+    func configureSegmentControl() {
         checkTypeSegment.setTitle(viewModel.segmentMaskTitle, forSegmentAt: CheckType.mask.rawValue)
         checkTypeSegment.setTitle(viewModel.segmentImmunityTitle, forSegmentAt: CheckType.immunity.rawValue)
         let font = UIFont(name: UIFont.sansBold, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0, weight: .bold)
-        let boldTextAttributes: [NSAttributedString.Key : AnyObject] = [.font : font]
+        let boldTextAttributes: [NSAttributedString.Key: AnyObject] = [.font: font]
         checkTypeSegment.setTitleTextAttributes(boldTextAttributes, for: .selected)
         checkTypeSegment.selectedSegmentIndex = viewModel.selectedCheckType.rawValue
         immunityCheckView.isHidden = viewModel.selectedCheckType == .mask
         scanCard.isHidden = viewModel.selectedCheckType == .immunity
     }
-    
+
     private func setupCheckSituationView() {
         let title = viewModel.checkSituationTitle.styledAs(.body).colored(.onBackground80)
         let image = viewModel.checkSituationImage
@@ -166,7 +166,7 @@ class ValidatorOverviewViewController: UIViewController {
                                   edgeInstes: .init(top: 0, left: 0, bottom: 0, right: 0))
         checkSituationContainerStackView.isHidden = viewModel.selectedCheckType == .mask
     }
-    
+
     private func setupTimeHintView() {
         timeHintContainerStackView.isHidden = viewModel.timeHintIsHidden
         timeHintView.iconView.image = viewModel.timeHintIcon
@@ -176,7 +176,7 @@ class ValidatorOverviewViewController: UIViewController {
         timeHintView.bodyLabel.attributedText = viewModel.timeHintSubTitle.styledAs(.body)
         timeHintView.setConstraintsToEdge()
     }
-    
+
     private func setupOfflineInformationView() {
         offlineInformationView.layer.cornerRadius = 8
         offlineInformationTitleLabel.attributedText = viewModel.offlineInformationTitle.styledAs(.header_3)
@@ -184,7 +184,7 @@ class ValidatorOverviewViewController: UIViewController {
         offlineInformationStateWrapperView.backgroundColor = viewModel.offlineInformationStateBackgroundColor
         offlineInformationStateWrapperView.layer.cornerRadius = 12
         offlineInformationStateImageView.image = viewModel.offlineInformationStateIcon
-        offlineInformationStateTextLabel.attributedText  = viewModel.offlineInformationStateText.styledAs(.label).colored(viewModel.offlineInformationStateTextColor)
+        offlineInformationStateTextLabel.attributedText = viewModel.offlineInformationStateText.styledAs(.label).colored(viewModel.offlineInformationStateTextColor)
         offlineInformationDescriptionLabel.attributedText = viewModel.offlineInformationDescription.styledAs(.body)
         offlineInformationUpdateCellTitleLabel.attributedText = viewModel.offlineInformationUpdateCellTitle.styledAs(.header_3)
         offlineInformationUpdateCellSubtitleLabel.attributedText = viewModel.offlineInformationUpdateCellSubtitle.styledAs(.body)
@@ -206,10 +206,10 @@ class ValidatorOverviewViewController: UIViewController {
         }
         viewModel.selectedCheckType = selectedCheckType
     }
-    
-    @IBAction func routeToUpdateTapped(_ sender: Any) {
-         viewModel.routeToRulesUpdate()
-     }
+
+    @IBAction func routeToUpdateTapped(_: Any) {
+        viewModel.routeToRulesUpdate()
+    }
 }
 
 extension ValidatorOverviewViewController: ViewModelDelegate {

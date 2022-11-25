@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 import UIKit
 
 struct AppInformationSceneFactory: SceneFactory {

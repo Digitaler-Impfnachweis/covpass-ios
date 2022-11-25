@@ -5,21 +5,20 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import XCTest
-import iOSSnapshotTestCaseCore
 import iOSSnapshotTestCase
+import iOSSnapshotTestCaseCore
+import XCTest
 
 class BaseSnapShotTests: FBSnapshotTestCase {
-    
     override func setUp() {
         super.setUp()
         fileNameOptions = .screenSize
     }
-    
+
     func verifyView(vc: UIViewController, record: Bool = false) {
         recordMode = record
         FBSnapshotVerifyViewController(vc,
-                                       identifier: Locale.preferredLanguages[0] ,
+                                       identifier: Locale.preferredLanguages[0],
                                        suffixes: NSOrderedSet(arrayLiteral: "_64"),
                                        perPixelTolerance: 0.1)
     }
@@ -33,14 +32,14 @@ class BaseSnapShotTests: FBSnapshotTestCase {
         view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: height)
         RunLoop.current.run(for: waitAfter)
         FBSnapshotVerifyView(view,
-                             identifier: Locale.preferredLanguages[0] ,
+                             identifier: Locale.preferredLanguages[0],
                              suffixes: NSOrderedSet(arrayLiteral: "_64"),
                              perPixelTolerance: perPixelTolerance)
     }
 
     func verifyAsync(vc: UIViewController,
-                    wait: TimeInterval = 0.1,
-                    record: Bool = false) {
+                     wait: TimeInterval = 0.1,
+                     record: Bool = false) {
         recordMode = record
         let expectationHere = expectation(description: "Some Expectation")
         vc.view.bounds = UIScreen.main.bounds
@@ -48,6 +47,6 @@ class BaseSnapShotTests: FBSnapshotTestCase {
             self.verifyView(vc: vc, record: record)
             expectationHere.fulfill()
         }
-        self.waitForExpectations(timeout: 1.0 + wait, handler: nil)
+        waitForExpectations(timeout: 1.0 + wait, handler: nil)
     }
 }

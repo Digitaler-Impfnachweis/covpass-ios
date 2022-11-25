@@ -11,10 +11,10 @@ struct CertificateHolderCompleteImmunizationB2StatusViewModel: CertificateHolder
     let icon: UIImage = .statusFullCircle
     let title = "infschg_start_immune_complete".localized
     let description: String = "infschg_cert_overview_immunisation_complete_B2".localized
-    var subtitle: String? = nil
+    var subtitle: String?
     var date: String?
-    var federalState: String? = nil
-    var federalStateText: String? = nil
+    var federalState: String?
+    var federalStateText: String?
     let linkLabel: String? = nil
     let notice: String? = nil
     let noticeText: String? = nil
@@ -25,10 +25,10 @@ struct CertificateHolderImmunizationC2StatusViewModel: CertificateHolderImmuniza
     let icon: UIImage = .statusFullCircle
     let title = "infschg_start_immune_complete".localized
     let description = "infschg_cert_overview_immunisation_third_vacc_C2".localized
-    var subtitle: String? = nil
+    var subtitle: String?
     var date: String?
-    var federalState: String? = nil
-    var federalStateText: String? = nil
+    var federalState: String?
+    var federalStateText: String?
     let linkLabel: String? = nil
     let notice: String? = nil
     let noticeText: String? = nil
@@ -39,10 +39,10 @@ struct CertificateHolderImmunizationE2StatusViewModel: CertificateHolderImmuniza
     let icon: UIImage = .statusFullCircle
     let title = "infschg_start_immune_complete".localized
     let description = "infschg_cert_overview_immunisation_E2".localized
-    var subtitle: String? = nil
+    var subtitle: String?
     var date: String?
-    var federalState: String? = nil
-    var federalStateText: String? = nil
+    var federalState: String?
+    var federalStateText: String?
     let linkLabel: String? = nil
     let notice: String? = nil
     let noticeText: String? = nil

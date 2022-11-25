@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 class SubTitleCell: UITableViewCell {
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
 
@@ -20,5 +19,4 @@ class SubTitleCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
     }
-
 }

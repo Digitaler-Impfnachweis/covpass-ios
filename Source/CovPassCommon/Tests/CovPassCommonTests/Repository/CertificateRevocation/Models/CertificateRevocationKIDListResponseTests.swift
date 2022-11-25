@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationKIDListResponseTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -51,9 +51,9 @@ class CertificateRevocationKIDListResponseTests: XCTestCase {
 
     func testContains() {
         // Given
-        let kid1: KID = [0xf5,0xc5,0x97,0x0c,0x30,0x39,0xd8,0x54]
-        let kid2: KID = [0xab, 0xcd]
-        let kid3: KID = [0xef, 0xef]
+        let kid1: KID = [0xF5, 0xC5, 0x97, 0x0C, 0x30, 0x39, 0xD8, 0x54]
+        let kid2: KID = [0xAB, 0xCD]
+        let kid3: KID = [0xEF, 0xEF]
 
         // When & Then
         XCTAssertTrue(sut.contains(kid1))
@@ -63,9 +63,9 @@ class CertificateRevocationKIDListResponseTests: XCTestCase {
 
     func testCount() {
         // Given
-        let kid1: KID = [0xf5,0xc5,0x97,0x0c,0x30,0x39,0xd8,0x54]
-        let kid2: KID = [0xab, 0xcd]
-        let kid3: KID = [0xef, 0xef]
+        let kid1: KID = [0xF5, 0xC5, 0x97, 0x0C, 0x30, 0x39, 0xD8, 0x54]
+        let kid2: KID = [0xAB, 0xCD]
+        let kid3: KID = [0xEF, 0xEF]
 
         // When & Then
         XCTAssertEqual(sut.count(kid1, hashType: .signature), 3)
@@ -81,7 +81,7 @@ class CertificateRevocationKIDListResponseTests: XCTestCase {
 
     func testHashTypeCounts() {
         // Given
-        let kid: KID = [0xab,0xcd]
+        let kid: KID = [0xAB, 0xCD]
 
         // When
         let hasTypeCounts = sut.hashTypeCounts(kid)
@@ -150,7 +150,7 @@ class CertificateRevocationKIDListResponseTests: XCTestCase {
         XCTAssertEqual(kids.count, 2)
     }
 
-    func testKidsWithHashTypeUCI() {//0b
+    func testKidsWithHashTypeUCI() { // 0b
         // When
         let kids = sut.kids(with: .uci)
 
@@ -158,7 +158,7 @@ class CertificateRevocationKIDListResponseTests: XCTestCase {
         XCTAssertEqual(kids.count, 2)
     }
 
-    func testKidsWithHashTypeCountryCodeUCI() { //0c
+    func testKidsWithHashTypeCountryCodeUCI() { // 0c
         // When
         let kids = sut.kids(with: .countryCodeUCI)
 

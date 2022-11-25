@@ -140,14 +140,12 @@ public struct KeychainPersistence: Persistence {
     }
 }
 
-
-extension KeychainPersistence {
-
+public extension KeychainPersistence {
     /// Updates `kSecAttrAccessible` for `KeychainPersistence.Keys`.
     /// This fixes potential loss of data for old versions where `kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly` was used
     /// - Throws: KeychainError
-    public static func migrateKeyAttributes(from oldSecAttrAccessible: CFString = kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
-                                            to newSecAttrAccessible: CFString = kSecAttrAccessibleWhenUnlocked) throws {
+    static func migrateKeyAttributes(from oldSecAttrAccessible: CFString = kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+                                     to newSecAttrAccessible: CFString = kSecAttrAccessibleWhenUnlocked) throws {
         let query: NSDictionary = [
             kSecClass as String: kSecClassGenericPassword,
             kSecMatchLimit as String: kSecMatchLimitAll,
@@ -163,11 +161,11 @@ extension KeychainPersistence {
 
         // we found something
         guard status == errSecSuccess,
-              let items = itemsRef as? Array<Dictionary<String, Any>>
+              let items = itemsRef as? [[String: Any]]
         else {
-#if DEBUG
-            debugPrint("\(String(describing: SecCopyErrorMessageString(status, nil))) \(status)")
-#endif
+            #if DEBUG
+                debugPrint("\(String(describing: SecCopyErrorMessageString(status, nil))) \(status)")
+            #endif
             throw KeychainError.migrationFailed
         }
 
@@ -178,9 +176,9 @@ extension KeychainPersistence {
 
             let status = SecItemUpdate(dict as CFDictionary, [kSecAttrAccessible as String: newSecAttrAccessible] as NSDictionary)
             if status != noErr {
-#if DEBUG
-                debugPrint("\(String(describing: SecCopyErrorMessageString(status, nil))) \(status)")
-#endif
+                #if DEBUG
+                    debugPrint("\(String(describing: SecCopyErrorMessageString(status, nil))) \(status)")
+                #endif
                 throw KeychainError.migrationFailed
             }
         }

@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationFilesystemDataSource.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -41,7 +41,7 @@ public final class CertificateRevocationFilesystemDataSource: CertificateRevocat
         let indexListDirectoryURL = baseURL
             .appendingPathComponent(Constants.indexListDirectory, isDirectory: true)
         indexListPath = indexListDirectoryURL
-            .appendingPathComponent(Constants.indexListFilename,  isDirectory: false)
+            .appendingPathComponent(Constants.indexListFilename, isDirectory: false)
             .path
         indexListLastModifiedPath = indexListDirectoryURL
             .appendingPathComponent(Constants.indexListFilename, isDirectory: false)
@@ -51,7 +51,7 @@ public final class CertificateRevocationFilesystemDataSource: CertificateRevocat
         let chunkListDirectoryURL = baseURL
             .appendingPathComponent(Constants.chunkListDirectory, isDirectory: true)
         chunkListPath = chunkListDirectoryURL
-            .appendingPathComponent(Constants.chunkListFilename,  isDirectory: false)
+            .appendingPathComponent(Constants.chunkListFilename, isDirectory: false)
             .path
         chunkListLastModifiedPath = chunkListDirectoryURL
             .appendingPathComponent(Constants.chunkListFilename, isDirectory: false)
@@ -96,7 +96,7 @@ public final class CertificateRevocationFilesystemDataSource: CertificateRevocat
                 format: .xml,
                 options: 0
             )
-            return self.fileManager.createFilePromise(
+            return fileManager.createFilePromise(
                 atPath: atPath,
                 contents: contents
             )
@@ -130,7 +130,8 @@ public final class CertificateRevocationFilesystemDataSource: CertificateRevocat
                 self.fileManager.createFilePromise(
                     atPath: String(
                         format: self.indexListLastModifiedPath,
-                        kid.toHexString(), hashType.rawValue),
+                        kid.toHexString(), hashType.rawValue
+                    ),
                     contents: indexList.lastModified?.data(using: .utf8)
                 )
             }
@@ -161,7 +162,8 @@ public final class CertificateRevocationFilesystemDataSource: CertificateRevocat
                 self.fileManager.createFilePromise(
                     atPath: String(
                         format: self.chunkListLastModifiedPath,
-                        kid.toHexString(), hashType.rawValue),
+                        kid.toHexString(), hashType.rawValue
+                    ),
                     contents: chunkList.lastModified?.data(using: .utf8)
                 )
             }
@@ -170,7 +172,7 @@ public final class CertificateRevocationFilesystemDataSource: CertificateRevocat
     private func writeArray(_ array: [Any], atPath: String) -> Promise<Void> {
         do {
             let contents = try JSONSerialization.data(withJSONObject: array, options: [])
-            return self.fileManager.createFilePromise(
+            return fileManager.createFilePromise(
                 atPath: atPath,
                 contents: contents
             )
@@ -270,7 +272,8 @@ extension CertificateRevocationFilesystemDataSource: CertificateRevocationDataSo
                 return .value(
                     .init(
                         hashes: hashesWithByte1And2Only,
-                        lastModified: response.lastModified)
+                        lastModified: response.lastModified
+                    )
                 )
             }
     }

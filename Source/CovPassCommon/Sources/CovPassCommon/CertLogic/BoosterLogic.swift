@@ -34,8 +34,7 @@ public struct BoosterLogic: BoosterLogicProtocol {
             Promise { seal in
                 if let lastUpdated = try userDefaults.fetch(UserDefaults.keyLastCheckedBooster) as? Date,
                    let date = Calendar.current.date(byAdding: .hour, value: 1, to: lastUpdated),
-                   Date() < date
-                {
+                   Date() < date {
                     // Only check once a day
                     seal.reject(PromiseCancelledError())
                     return
@@ -77,7 +76,7 @@ public struct BoosterLogic: BoosterLogicProtocol {
                         certificate: vaccinationCertificate.vaccinationCertificate
                     )
                     var boosterCandidate = boosterCandidateForUser(certificate: vaccinationCertificate)
-                    let passedRules = result.filter { $0.result == .passed }.compactMap { $0.rule }
+                    let passedRules = result.filter { $0.result == .passed }.compactMap(\.rule)
                     let rulesChanged = boosterCandidate.validationRules != passedRules
                     if !passedRules.isEmpty, rulesChanged {
                         // user is qualified for a booster vaccination

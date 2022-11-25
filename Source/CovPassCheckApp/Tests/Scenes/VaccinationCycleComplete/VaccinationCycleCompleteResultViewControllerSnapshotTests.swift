@@ -34,7 +34,7 @@ final class VaccinationCycleCompleteResultViewControllerSnapshotTests: BaseSnapS
         )
         sut = .init(viewModel: viewModel)
     }
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         configureSut(checkSituation: .withinGermany)
@@ -44,12 +44,12 @@ final class VaccinationCycleCompleteResultViewControllerSnapshotTests: BaseSnapS
         sut = nil
         try super.tearDownWithError()
     }
-    
+
     func testDefault() throws {
         configureSut(checkSituation: .withinGermany)
         verifyView(view: sut.view, height: 1000)
     }
-    
+
     func testDefault_enteringGermany() throws {
         configureSut(checkSituation: .enteringGermany)
         verifyView(view: sut.view, height: 1000)

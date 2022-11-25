@@ -6,8 +6,8 @@
 //
 
 import CovPassCommon
-import PromiseKit
 import Foundation
+import PromiseKit
 
 private enum Constants {
     enum Keys {
@@ -35,14 +35,13 @@ protocol ValidationFailedViewModelProtocol {
 }
 
 struct ValidationFailedViewModel: ValidationFailedViewModelProtocol {
-    
     private let resolvable: Resolver<Bool>
     private let ticket: ValidationServiceInitialisation
-    var title: String { return Constants.Keys.title }
-    var description: String { return String(format: Constants.Keys.description, ticket.serviceProvider) }
-    var acceptButtonText: String { return Constants.Keys.accept }
-    var cancelButtonText: String { return Constants.Keys.cancel }
-    var hintTitle: String { return Constants.Keys.hintTitle }
+    var title: String { Constants.Keys.title }
+    var description: String { String(format: Constants.Keys.description, ticket.serviceProvider) }
+    var acceptButtonText: String { Constants.Keys.accept }
+    var cancelButtonText: String { Constants.Keys.cancel }
+    var hintTitle: String { Constants.Keys.hintTitle }
     var hintText: NSAttributedString {
         let bulletOne = Constants.Keys.bulletOne.styledAs(.body)
         let bulletTwo = Constants.Keys.bulletTwo.styledAs(.body)
@@ -53,18 +52,17 @@ struct ValidationFailedViewModel: ValidationFailedViewModelProtocol {
                                              bulletThree,
                                              bulletFour])
     }
-    
+
     internal init(resolvable: Resolver<Bool>, ticket: ValidationServiceInitialisation) {
         self.resolvable = resolvable
         self.ticket = ticket
     }
-    
+
     func continueProcess() {
         resolvable.fulfill(true)
     }
-    
+
     func cancelProcess() {
         resolvable.fulfill(false)
     }
-    
 }

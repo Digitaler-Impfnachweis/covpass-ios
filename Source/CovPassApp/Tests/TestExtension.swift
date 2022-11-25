@@ -8,7 +8,7 @@
 import XCTest
 
 extension RunLoop {
-  func run(for seconds: TimeInterval) {
-    run(until: Date().addingTimeInterval(seconds))
-  }
+    func run(for seconds: TimeInterval) {
+        run(until: Date().addingTimeInterval(seconds))
+    }
 }

@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationDataSource.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -67,8 +67,7 @@ public protocol CertificateRevocationDataSourceProtocol {
 }
 
 public enum CertificateRevocationHashType: UInt8, CaseIterable {
-    case signature = 0x0a
-    case uci = 0x0b
-    case countryCodeUCI = 0x0c
+    case signature = 0x0A
+    case uci = 0x0B
+    case countryCodeUCI = 0x0C
 }
-

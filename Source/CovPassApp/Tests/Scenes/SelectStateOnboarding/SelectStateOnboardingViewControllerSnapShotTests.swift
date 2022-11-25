@@ -5,18 +5,18 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
+import CovPassCommon
 import CovPassUI
+import Foundation
 import PromiseKit
 import UIKit
-import CovPassCommon
 
 class SelectStateOnboardingViewControllerSnapShotTests: BaseSnapShotTests {
     private var sut: SelectStateOnboardingViewController!
     private var persistence: MockPersistence!
     private var certificateHolderStatus: CertificateHolderStatusModelMock!
     private var router: SelectStateOnboardingViewRouter!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         let (_, resolver) = Promise<Void>.pending()

@@ -13,8 +13,8 @@ struct CertificateHolderInvalidImmunizationStatusViewModel: CertificateHolderImm
     let subtitle: String? = nil
     let description = "infschg_cert_overview_immunisation_invalid".localized
     var date: String?
-    var federalState: String? = nil
-    var federalStateText: String? = nil
+    var federalState: String?
+    var federalStateText: String?
     let linkLabel: String? = nil
     let notice: String? = nil
     let noticeText: String? = nil

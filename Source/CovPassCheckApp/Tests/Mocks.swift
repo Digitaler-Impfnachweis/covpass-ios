@@ -5,21 +5,19 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 @testable import CovPassCheckApp
 import CovPassCommon
-import XCTest
 import CovPassUI
 import PromiseKit
-import CertLogic
 import SwiftyJSON
+import XCTest
 
 struct SceneCoordinatorMock: SceneCoordinator {
-    func asRoot(_ factory: SceneFactory) {
-    }
+    func asRoot(_: SceneFactory) {}
 }
 
 struct ValidationResultRouterMock: ValidationResultRouterProtocol {
-
     func showStart() {}
 
     func scanQRCode() -> Promise<ScanResult> {
@@ -29,33 +27,30 @@ struct ValidationResultRouterMock: ValidationResultRouterProtocol {
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 }
 
-
 class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateBoosterRules() -> Promise<Void> {
         .value
     }
-    
+
     func rulesShouldBeUpdated() -> Promise<Bool> {
         .value(rulesShouldBeUpdated())
     }
-    
+
     public func rulesShouldBeUpdated() -> Bool {
-        if let lastUpdated = self.lastUpdatedDCCRules(),
+        if let lastUpdated = lastUpdatedDCCRules(),
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
+           Date() < date {
             return false
         }
         return true
     }
-    
-        
+
     var lastUpdateDccrRules: Date?
-    
+
     var countries: [Country] {
         [Country("DE")]
     }
-    
+
     func updateBoosterRules() -> Promise<Void> {
         .value
     }
@@ -65,10 +60,9 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     }
 
     public func rulesShouldBeUpdated() -> Bool {
-        if let lastUpdated = self.lastUpdatedDCCRules(),
+        if let lastUpdated = lastUpdatedDCCRules(),
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
+           Date() < date {
             return false
         }
         return true
@@ -90,8 +84,8 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateRulesIfNeeded() -> Promise<Void> {
         Promise.value
     }
-    
-    var didUpdateRules: (()->Void)?
+
+    var didUpdateRules: (() -> Void)?
 
     func updateRules() -> Promise<Void> {
         didUpdateRules?()
@@ -99,55 +93,51 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     }
 }
 
-
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
-    
     var lastUpdateTrustList: Date?
 
     public func trustListShouldBeUpdated() -> Promise<Bool> {
         .value(trustListShouldBeUpdated())
     }
-    
+
     public func trustListShouldBeUpdated() -> Bool {
-        if let lastUpdated = self.getLastUpdatedTrustList(),
+        if let lastUpdated = getLastUpdatedTrustList(),
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
+           Date() < date {
             return false
         }
         return true
     }
-    
+
     public func updateTrustListIfNeeded() -> Promise<Void> {
         Promise.value
     }
-    
+
     public func matchedCertificates(for _: CertificateList) -> [CertificatePair] {
         []
     }
-    
+
     public func trustListShouldBeUpdated() -> Promise<Bool> {
         .value(trustListShouldBeUpdated())
     }
-    
+
     var currentDate = Date()
-    
+
     public func trustListShouldBeUpdated() -> Bool {
-        if let lastUpdated = self.getLastUpdatedTrustList(),
+        if let lastUpdated = getLastUpdatedTrustList(),
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           currentDate < date
-        {
+           currentDate < date {
             return false
         }
         return true
     }
-    
+
     public func getLastUpdatedTrustList() -> Date? {
         lastUpdateTrustList
     }
-    
-    var didUpdateTrustListHandler: (()->Void)?
-    
+
+    var didUpdateTrustListHandler: (() -> Void)?
+
     public func updateTrustList() -> Promise<Void> {
         didUpdateTrustListHandler?()
         return Promise.value
@@ -179,21 +169,20 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         .value(favoriteToggle)
     }
 
-    public func scanCertificate(_ data: String, isCountRuleEnabled: Bool) -> Promise<QRCodeScanable> {
-        return Promise { seal in
+    public func scanCertificate(_: String, isCountRuleEnabled _: Bool) -> Promise<QRCodeScanable> {
+        Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }
     }
 
-    var checkedCert: CBORWebToken? = nil
+    var checkedCert: CBORWebToken?
 
     public func checkCertificate(_: String) -> Promise<CBORWebToken> {
-        return Promise { seal in
+        Promise { seal in
             checkedCert != nil ? seal.fulfill(checkedCert!) : seal.reject(ApplicationError.unknownError)
         }
     }
 }
-
 
 extension Rule {
     static var mock: Rule {
@@ -226,21 +215,19 @@ extension Rule {
 }
 
 class ViewModelDelegateMock: ViewModelDelegate {
-    
-    var didUpdate: (()->Void)?
-    var didFail: ((Error)->Void)?
+    var didUpdate: (() -> Void)?
+    var didFail: ((Error) -> Void)?
 
     func viewModelDidUpdate() {
         didUpdate?()
     }
-    
+
     func viewModelUpdateDidFailWithError(_ error: Error) {
         didFail?(error)
     }
 }
 
 class GProofMockRouter: GProofRouterProtocol {
-
     var errorShown = false
     var certificateShown = false
     var showDifferentPersonShown = false
@@ -249,48 +236,35 @@ class GProofMockRouter: GProofRouterProtocol {
     func scanQRCode() -> Promise<ScanResult> {
         .value(.success(""))
     }
-    
-    func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool) {
+
+    func showCertificate(_: CBORWebToken?, _2GContext _: Bool) {
         certificateShown = true
     }
-    
-    func showError(error: Error) {
+
+    func showError(error _: Error) {
         errorShown = true
     }
-    
-    func showDifferentPerson(gProofToken: CBORWebToken, testProofToken: CBORWebToken) -> Promise<GProofResult> {
+
+    func showDifferentPerson(gProofToken _: CBORWebToken, testProofToken _: CBORWebToken) -> Promise<GProofResult> {
         showDifferentPersonShown = true
         return .value(.cancel)
     }
-    
-    func showStart() {
-        
-    }
+
+    func showStart() {}
 }
 
 class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
-    
-    func showGproof(initialToken: CBORWebToken, repository: VaccinationRepositoryProtocol, certLogic: DCCCertLogicProtocol, boosterAsTest: Bool) {
-        
-    }
-    
+    func showGproof(initialToken _: CBORWebToken, repository _: VaccinationRepositoryProtocol, certLogic _: DCCCertLogicProtocol, boosterAsTest _: Bool) {}
+
     func scanQRCode() -> Promise<ScanResult> {
         .value(.success(""))
     }
-    
-    func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool) {
 
-    }
-    
-    func showError(error: Error, _2GContext: Bool) {
-        
-    }
-    
-    func showAppInformation() {
-        
-    }
-    
+    func showCertificate(_: CBORWebToken?, _2GContext _: Bool) {}
+
+    func showError(error _: Error, _2GContext _: Bool) {}
+
+    func showAppInformation() {}
+
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
-    
-    
 }

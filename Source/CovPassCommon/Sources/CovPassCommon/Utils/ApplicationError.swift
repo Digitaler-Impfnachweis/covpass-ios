@@ -48,6 +48,6 @@ extension ApplicationError: Equatable {
 
 class PromiseCancelledError: CancellableError {
     var isCancelled: Bool {
-        return true
+        true
     }
 }

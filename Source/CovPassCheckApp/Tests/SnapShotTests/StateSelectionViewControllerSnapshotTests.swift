@@ -6,8 +6,8 @@
 //
 
 @testable import CovPassCheckApp
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 import PromiseKit
 
 class StateSelectionViewControllerSnapshotTests: BaseSnapShotTests {
@@ -22,13 +22,13 @@ class StateSelectionViewControllerSnapshotTests: BaseSnapShotTests {
         let vm = StateSelectionViewModel(persistence: persistence, resolver: resolver)
         sut = .init(viewModel: vm)
     }
-    
+
     override func tearDownWithError() throws {
         promise = nil
         persistence = nil
         sut = nil
     }
-    
+
     func test_default() {
         verifyView(view: sut.view)
     }

@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 class HintTableViewCell: UITableViewCell {
-
     private lazy var hintView: HintView = {
         let view = HintView()
         view.iconView.image = .infoSignal
         view.containerView.backgroundColor = .brandAccent10
-        view.containerView?.layer.borderColor = UIColor.brandAccent20.cgColor        
+        view.containerView?.layer.borderColor = UIColor.brandAccent20.cgColor
         return view
     }()
 
@@ -31,7 +30,7 @@ class HintTableViewCell: UITableViewCell {
         }
     }
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(hintView)
         hintView.pinEdges(to: contentView)
@@ -43,5 +42,4 @@ class HintTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
     }
-
 }

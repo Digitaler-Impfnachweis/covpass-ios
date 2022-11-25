@@ -1,6 +1,6 @@
 //
 //  CoseSign1MessageConverterTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -101,7 +101,7 @@ class CoseSign1MessageConverterTests: XCTestCase {
 
         // When
         sut.convert(message: message)
-            .done { token in
+            .done { _ in
                 expectation.fulfill()
             }
             .catch { _ in

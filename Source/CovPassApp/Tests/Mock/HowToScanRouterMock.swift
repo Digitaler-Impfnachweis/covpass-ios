@@ -10,7 +10,5 @@ import CovPassUI
 class HowToScanRouterMock: HowToScanRouterProtocol {
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
-    func showMoreInformation() {
-        
-    }
+    func showMoreInformation() {}
 }

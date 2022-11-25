@@ -11,7 +11,7 @@ import UIKit
 class DotLayer: CAShapeLayer {
     convenience init(at origin: CGPoint, width: CGFloat, color: UIColor) {
         self.init()
-        let path = self.path(with: width)
+        let path = path(with: width)
         fillColor = color.cgColor
         backgroundColor = nil
         self.path = path.cgPath

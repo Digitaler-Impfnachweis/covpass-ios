@@ -97,7 +97,7 @@ class RuleCheckDetailViewModel {
         if result.state == .passed {
             let acceptanceRules = result.result.filterAcceptanceRules
             let ruleInfo = acceptanceRules.isEmpty ? "certificate_check_validity_detail_view_result_valid_info_no_rules".localized :
-            String(format: "certificate_check_validity_detail_view_result_valid_info".localized, acceptanceRules.count)
+                String(format: "certificate_check_validity_detail_view_result_valid_info".localized, acceptanceRules.count)
             return "\(subtitle)\n\n\(ruleInfo)"
         }
         return subtitle
@@ -157,9 +157,8 @@ class RuleCheckDetailViewModel {
                 ("recovery_certificate_detail_view_data_identifier".localized, r.ciDisplayName, results(for: .fail, and: "r.0.ci"), results(for: .open, and: "r.0.ci")),
                 ("recovery_certificate_detail_view_data_expiry_date".localized,
                  String(format: "recovery_certificate_detail_view_data_expiry_date_message".localized, expiryDate) + "\n" +
-                 "recovery_certificate_detail_view_data_expiry_date_note".localized,
-                 [], []
-                )
+                     "recovery_certificate_detail_view_data_expiry_date_note".localized,
+                 [], [])
             ]
         }
         if let t = dgc.t?.first {
@@ -179,9 +178,8 @@ class RuleCheckDetailViewModel {
                 ("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName, results(for: .fail, and: "t.0.ci"), results(for: .open, and: "t.0.ci")),
                 ("test_certificate_detail_view_data_expiry_date".localized,
                  String(format: "test_certificate_detail_view_data_expiry_date_message".localized, expiryDate) + "\n" +
-                 "test_certificate_detail_view_data_expiry_date_note".localized,
-                 [], []
-                )
+                     "test_certificate_detail_view_data_expiry_date_note".localized,
+                 [], [])
             ]
         }
         if let v = dgc.v?.first {
@@ -200,9 +198,8 @@ class RuleCheckDetailViewModel {
                 ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName, results(for: .fail, and: "v.0.ci"), results(for: .open, and: "v.0.ci")),
                 ("vaccination_certificate_detail_view_data_expiry_date".localized,
                  String(format: "vaccination_certificate_detail_view_data_expiry_date_message".localized, expiryDate) + "\n" +
-                 "vaccination_certificate_detail_view_data_expiry_date_note".localized,
-                 [], []
-                )
+                     "vaccination_certificate_detail_view_data_expiry_date_note".localized,
+                 [], [])
             ]
         }
         return []

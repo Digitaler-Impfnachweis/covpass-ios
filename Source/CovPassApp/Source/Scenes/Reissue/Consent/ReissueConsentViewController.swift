@@ -1,12 +1,11 @@
-import UIKit
 import CovPassUI
+import UIKit
 
 private enum Constants {
     static var customSpacingAfterDescription: CGFloat = 12
 }
 
 class ReissueConsentViewController: UIViewController {
-
     // MARK: - Properties
 
     @IBOutlet var titleLabel: UILabel!
@@ -43,7 +42,7 @@ class ReissueConsentViewController: UIViewController {
     }
 
     // MARK: - Methods
-    
+
     private func configureActions() {
         agreeButton.action = viewModel.processAgree
         disagreeButton.action = viewModel.processDisagree
@@ -59,7 +58,7 @@ class ReissueConsentViewController: UIViewController {
         hintView.bodyLabel.accessibilityTraits = .staticText
         hintView.setConstraintsToEdge()
     }
-    
+
     func updateView() {
         titleLabel.attributedText = viewModel.titleText.styledAs(.header_2)
         titleLabel.accessibilityTraits = .header
@@ -98,7 +97,7 @@ class ReissueConsentViewController: UIViewController {
         activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainerView.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainerView.centerYAnchor).isActive = true
     }
- }
+}
 
 extension ReissueConsentViewController: ViewModelDelegate {
     func viewModelDidUpdate() {

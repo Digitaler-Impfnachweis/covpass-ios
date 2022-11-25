@@ -1,5 +1,5 @@
 //
-/*-
+/* -
  * ---license-start
  * eu-digital-green-certificates / dgca-app-core-ios
  * ---
@@ -28,28 +28,26 @@
 import Foundation
 import PromiseKit
 
-
-
-public class Enclave {
+public enum Enclave {
     static let encryptAlg = SecKeyAlgorithm.eciesEncryptionCofactorVariableIVX963SHA256AESGCM
     static let signAlg = SecKeyAlgorithm.ecdsaSignatureMessageX962SHA512
-    
+
     static func tag(for name: String) -> Data {
         "\(Bundle.main.bundleIdentifier ?? "app").\(name)".data(using: .utf8)!
     }
-    
+
     static func generateKey(with name: String? = nil) -> (SecKey?, String?) {
         let name = name ?? UUID().uuidString
         let tag = Enclave.tag(for: name)
         var error: Unmanaged<CFError>?
         guard
             let access =
-                SecAccessControlCreateWithFlags(
-                    kCFAllocatorDefault,
-                    kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
-                    [.privateKeyUsage],
-                    &error
-                )
+            SecAccessControlCreateWithFlags(
+                kCFAllocatorDefault,
+                kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
+                [.privateKeyUsage],
+                &error
+            )
         else {
             return (nil, error?.takeRetainedValue().localizedDescription)
         }
@@ -62,9 +60,9 @@ public class Enclave {
                 kSecAttrAccessControl as String: access
             ]
         ]
-#if !targetEnvironment(simulator)
-        attributes[kSecAttrTokenID as String] = kSecAttrTokenIDSecureEnclave
-#endif
+        #if !targetEnvironment(simulator)
+            attributes[kSecAttrTokenID as String] = kSecAttrTokenIDSecureEnclave
+        #endif
         guard
             let privateKey = SecKeyCreateRandomKey(
                 attributes as CFDictionary,
@@ -75,7 +73,7 @@ public class Enclave {
         }
         return (privateKey, nil)
     }
-    
+
     static func loadKey(with name: String) -> SecKey? {
         let tag = Enclave.tag(for: name)
         let query: [String: Any] = [
@@ -84,7 +82,7 @@ public class Enclave {
             kSecAttrApplicationTag as String: tag,
             kSecReturnRef as String: true
         ]
-        
+
         var item: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &item)
         guard
@@ -95,14 +93,14 @@ public class Enclave {
         }
         return result
     }
-    
+
     public static func loadOrGenerateKey(with name: String) -> SecKey? {
         if let key = loadKey(with: name) {
             return key
         }
         return generateKey(with: name).0
     }
-    
+
     static func encrypt(data: Data, with key: SecKey) -> (Data?, String?) {
         guard let publicKey = SecKeyCopyPublicKey(key) else {
             return (nil, "Cannot retrieve public key.")
@@ -120,14 +118,14 @@ public class Enclave {
         let err = error?.takeRetainedValue().localizedDescription
         return (cipherData, err)
     }
-    
+
     static func decrypt(data: Data, with key: SecKey, completion: @escaping (Data?, String?) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let (result, error) = syncDecrypt(data: data, with: key)
             completion(result, error)
         }
     }
-    
+
     static func syncDecrypt(data: Data, with key: SecKey) -> (Data?, String?) {
         guard SecKeyIsAlgorithmSupported(key, .decrypt, encryptAlg) else {
             return (nil, "Algorithm not supported.")
@@ -142,7 +140,7 @@ public class Enclave {
         let err = error?.takeRetainedValue().localizedDescription
         return (clearData, err)
     }
-    
+
     static func verify(data: Data, signature: Data, with key: SecKey) -> (Bool, String?) {
         guard let publicKey = SecKeyCopyPublicKey(key) else {
             return (false, "Cannot retrieve public key.")
@@ -161,21 +159,20 @@ public class Enclave {
         let err = error?.takeRetainedValue().localizedDescription
         return (isValid, err)
     }
-    
+
     public static func sign(
         data: Data,
         with key: SecKey,
-        using algorithm: SecKeyAlgorithm? = nil) -> Promise<(Data?, String?)>
-    {
+        using algorithm: SecKeyAlgorithm? = nil
+    ) -> Promise<(Data?, String?)> {
         Promise { seal in
             DispatchQueue.global(qos: .userInitiated).async {
                 let (result, error) = syncSign(data: data, with: key, using: algorithm)
                 seal.fulfill((result, error))
             }
         }
-        
     }
-    
+
     static func syncSign(
         data: Data,
         with key: SecKey,

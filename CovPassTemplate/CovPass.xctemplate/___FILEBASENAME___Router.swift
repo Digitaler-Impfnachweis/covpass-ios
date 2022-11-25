@@ -9,7 +9,6 @@
 import CovPassUI
 
 class ___VARIABLE_moduleName___Router: ___VARIABLE_moduleName___RouterProtocol {
-
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -21,5 +20,4 @@ class ___VARIABLE_moduleName___Router: ___VARIABLE_moduleName___RouterProtocol {
     }
 
     // MARK: - Methods
-
 }

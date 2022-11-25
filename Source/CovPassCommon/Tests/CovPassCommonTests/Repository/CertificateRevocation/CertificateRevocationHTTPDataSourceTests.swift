@@ -1,6 +1,6 @@
 //
 //  CertificateRevocationHTTPDataSourceTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -53,7 +53,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
 
     func testGetKIDList_response_not_cose() {
         // Given
-        client.response = .mock(data: Data([1,2,3]))
+        client.response = .mock(data: Data([1, 2, 3]))
         let expectation = XCTestExpectation()
 
         // When
@@ -196,7 +196,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
 
     func testIndexList_response_not_cose() {
         // Given
-        client.response = .mock(data: Data([1,2,3]))
+        client.response = .mock(data: Data([1, 2, 3]))
         let expectation = XCTestExpectation()
 
         // When
@@ -236,7 +236,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
 
     func testGetIndexListKIDHashType_response_not_cose() {
         // Given
-        client.response = .mock(data: Data([1,2,3]))
+        client.response = .mock(data: Data([1, 2, 3]))
         let expectation = XCTestExpectation()
 
         // When
@@ -265,7 +265,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
         client.response = .mock(httpURLResponse: response, data: data)
 
         // When
-        sut.getIndexList(kid: [0xab, 0xcd], hashType: .countryCodeUCI)
+        sut.getIndexList(kid: [0xAB, 0xCD], hashType: .countryCodeUCI)
             .done { response in
                 XCTAssertEqual(response.lastModified, "ABC")
                 expectation.fulfill()
@@ -296,7 +296,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
         let expectation = XCTestExpectation()
 
         // When
-        sut.headIndexList(kid: [0xab, 0xcd], hashType: .uci)
+        sut.headIndexList(kid: [0xAB, 0xCD], hashType: .uci)
             .done { _ in expectation.fulfill() }
             .cauterize()
 
@@ -320,7 +320,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
 
     func testGetChunkListKIDHashType_response_not_cose() {
         // Given
-        client.response = .mock(data: Data([1,2,3]))
+        client.response = .mock(data: Data([1, 2, 3]))
         let expectation = XCTestExpectation()
 
         // When
@@ -337,7 +337,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
         try prepareHTTPClientForChunkListRequest()
 
         // When
-        sut.getChunkList(kid: [0xab, 0xcd], hashType: .signature)
+        sut.getChunkList(kid: [0xAB, 0xCD], hashType: .signature)
             .done { response in
                 XCTAssertEqual(response.lastModified, "ABC")
                 expectation.fulfill()
@@ -385,7 +385,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
         try prepareHTTPClientForChunkListRequest()
 
         // When
-        sut.headChunkList(kid: [0xab, 0xcd], hashType: .uci)
+        sut.headChunkList(kid: [0xAB, 0xCD], hashType: .uci)
             .done { _ in expectation.fulfill() }
             .cauterize()
 
@@ -410,7 +410,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
 
     func testGetChunkListKIDHashTypeBytes_response_not_cose() {
         // Given
-        client.response = .mock(data: Data([1,2,3]))
+        client.response = .mock(data: Data([1, 2, 3]))
         let expectation = XCTestExpectation()
 
         // When
@@ -445,7 +445,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
         try prepareHTTPClientForChunkListRequest()
 
         // When
-        sut.getChunkList(kid: [0xab, 0xcd], hashType: .signature, byte1: 0xAF, byte2: nil)
+        sut.getChunkList(kid: [0xAB, 0xCD], hashType: .signature, byte1: 0xAF, byte2: nil)
             .done { _ in expectation.fulfill() }
             .cauterize()
 
@@ -533,7 +533,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
         try prepareHTTPClientForChunkListRequest()
 
         // When
-        sut.headChunkList(kid: [0xab, 0xcd], hashType: .uci, byte1: 0xAF, byte2: 0xA0)
+        sut.headChunkList(kid: [0xAB, 0xCD], hashType: .uci, byte1: 0xAF, byte2: 0xA0)
             .done { _ in expectation.fulfill() }
             .cauterize()
 
@@ -550,7 +550,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
         try prepareHTTPClientForChunkListRequest()
 
         // When
-        sut.headChunkList(kid: [0xab, 0xcd], hashType: .uci, byte1: 0xAF, byte2: nil)
+        sut.headChunkList(kid: [0xAB, 0xCD], hashType: .uci, byte1: 0xAF, byte2: nil)
             .done { _ in expectation.fulfill() }
             .cauterize()
 
@@ -576,7 +576,7 @@ class CertificateRevocationHTTPDataSourceTests: XCTestCase {
         XCTAssertEqual(client.receivedHTTPRequest?.url, expectedURL)
         XCTAssertEqual(client.receivedHTTPRequest?.httpMethod?.uppercased(), "GET")
     }
-    
+
     func testGetKIDListHttpHeaders_not_modified() throws {
         // Given
         let httpURLResponse = try XCTUnwrap(

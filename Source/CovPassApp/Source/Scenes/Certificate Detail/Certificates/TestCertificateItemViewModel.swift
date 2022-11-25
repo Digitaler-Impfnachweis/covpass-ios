@@ -95,7 +95,7 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
         if certificate.vaccinationCertificate.expiresSoon {
             return "certificates_overview_expires_soon_certificate_note".localized
         }
-        if certificate.isInvalid  || certificate.isRevoked {
+        if certificate.isInvalid || certificate.isRevoked {
             return "certificates_overview_invalid_certificate_note".localized
         }
         return nil
@@ -107,9 +107,9 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
         "accessibility_overview_certificates_label_display_certificate".localized
     }
 
-    var statusIcon: UIImage? { neutral ? nil :  .validationCheckmark }
-    
-    var statusIconHidden: Bool {  statusIcon == nil }
+    var statusIcon: UIImage? { neutral ? nil : .validationCheckmark }
+
+    var statusIconHidden: Bool { statusIcon == nil }
 
     var statusIconAccessibilityLabel: String? { nil }
 

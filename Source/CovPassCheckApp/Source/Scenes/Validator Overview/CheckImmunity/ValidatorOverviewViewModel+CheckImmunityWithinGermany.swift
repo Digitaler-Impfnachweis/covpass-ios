@@ -9,7 +9,6 @@ import CovPassCommon
 import PromiseKit
 
 extension ValidatorOverviewViewModel {
-    
     func checkImmunityStatus(secondToken: ExtendedCBORWebToken? = nil, thirdToken: ExtendedCBORWebToken? = nil) {
         if withinGermanyIsSelected {
             checkImmunityStatusWithinGermany(secondToken, thirdToken)
@@ -17,10 +16,10 @@ extension ValidatorOverviewViewModel {
             checkImmunityStatusEnteringGermany()
         }
     }
-    
+
     private func checkImmunityStatusWithinGermany(_ secondToken: ExtendedCBORWebToken?, _ thirdToken: ExtendedCBORWebToken?) {
         isLoadingScan = true
-        firstly{
+        firstly {
             ScanAndParseQRCodeAndCheckIfsg22aUseCase(router: router,
                                                      audioPlayer: audioPlayer,
                                                      vaccinationRepository: vaccinationRepository,
@@ -43,7 +42,7 @@ extension ValidatorOverviewViewModel {
                 .cauterize()
         }
     }
-    
+
     func errorHandlingIfsg22aCheck(error: Error, token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
         if case let CertificateError.revoked(token) = error {
             return router.showIfsg22aCheckError(token: token)
@@ -57,23 +56,23 @@ extension ValidatorOverviewViewModel {
             } else {
                 return router.showIfsg22aNotComplete(token: firstToken, secondToken: secondToken)
             }
-        case .none, .invalidToken(_):
+        case .none, .invalidToken:
             return router.showIfsg22aCheckError(token: nil)
         case .invalidToken(token):
             return router.showIfsg22aCheckError(token: token)
         }
     }
-    
+
     func checkImmunityStatusResult(result: ValidatorDetailSceneResult) {
         switch result {
         case .startOver:
-            self.checkImmunityStatus(secondToken: nil, thirdToken: nil)
+            checkImmunityStatus(secondToken: nil, thirdToken: nil)
         case .close:
             break
         case let .secondScan(secondToken):
-            self.checkImmunityStatus(secondToken: secondToken, thirdToken: nil)
+            checkImmunityStatus(secondToken: secondToken, thirdToken: nil)
         case let .thirdScan(secondToken, thirdToken):
-            self.checkImmunityStatus(secondToken: secondToken, thirdToken: thirdToken)
+            checkImmunityStatus(secondToken: secondToken, thirdToken: thirdToken)
         }
     }
 }

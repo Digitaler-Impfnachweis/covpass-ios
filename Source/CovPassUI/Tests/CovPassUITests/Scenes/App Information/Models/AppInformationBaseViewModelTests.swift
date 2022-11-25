@@ -1,6 +1,6 @@
 //
 //  AppInformationBaseViewModelTests.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -79,5 +79,3 @@ class AppInformationBaseViewModelTests: XCTestCase {
         wait(for: [router.showSceneExpectation], timeout: 2)
     }
 }
-
-

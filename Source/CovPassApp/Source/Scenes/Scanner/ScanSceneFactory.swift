@@ -13,11 +13,11 @@ import UIKit
 
 public struct ScanSceneFactory: ResolvableSceneFactory {
     // MARK: - Lifecycle
-    
+
     private let cameraAccessProvider: CameraAccessProviderProtocol
     private let router: ScanRouterProtocol
     private let isDocumentPickerEnabled: Bool
-    
+
     public init(cameraAccessProvider: CameraAccessProviderProtocol,
                 router: ScanRouterProtocol,
                 isDocumentPickerEnabled: Bool) {
@@ -25,9 +25,9 @@ public struct ScanSceneFactory: ResolvableSceneFactory {
         self.router = router
         self.isDocumentPickerEnabled = isDocumentPickerEnabled
     }
-    
+
     // MARK: - Methods
-    
+
     public func make(resolvable: Resolver<QRCodeImportResult>) -> UIViewController {
         guard let pdfCBORExtractor = PDFCBORExtractor() else {
             fatalError()

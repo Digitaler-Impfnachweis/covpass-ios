@@ -12,33 +12,32 @@ import Foundation
 import PromiseKit
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
-
     var areRulesAvailable = true
 
     var countries: [Country] = [Country("DE")]
-    
+
     var rulesShouldBeUpdated: Bool = true
-    
+
     var boosterRulesShouldBeUpdated: Bool = true
-    
+
     var valueSetsShouldBeUpdated: Bool = true
-    
+
     var domesticRulesShouldBeUpdated: Bool = true
 
     var rules: [Rule] = []
-    
+
     func updateDomesticIfNeeded() -> Promise<Void> {
         .value
     }
-    
+
     func updateBoosterRulesIfNeeded() -> Promise<Void> {
         .value
     }
-    
+
     func updateValueSets() -> Promise<Void> {
         .value
     }
-    
+
     func updateValueSetsIfNeeded() -> Promise<Void> {
         .value
     }
@@ -50,12 +49,12 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func lastUpdatedDCCRules() -> Date? {
         nil
     }
-    
-    func rulesAvailable(logicType: DCCCertLogic.LogicType, region: String?) -> Bool {
+
+    func rulesAvailable(logicType _: DCCCertLogic.LogicType, region _: String?) -> Bool {
         areRulesAvailable
     }
 
-    func rules(logicType: DCCCertLogic.LogicType, region: String?) -> [Rule] {
+    func rules(logicType _: DCCCertLogic.LogicType, region _: String?) -> [Rule] {
         rules
     }
 
@@ -79,7 +78,7 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateRules() -> Promise<Void> {
         Promise.value
     }
-    
+
     func updateDomesticRules() -> Promise<Void> {
         Promise.value
     }

@@ -1,14 +1,13 @@
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
 
 class ReissueStartRouter: ReissueStartRouterProtocol {
-
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
-    
+
     // MARK: - Lifecycle
 
     init(sceneCoordinator: SceneCoordinator) {

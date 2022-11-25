@@ -38,7 +38,7 @@ class VaccinationRepositoryTests: XCTestCase {
             queue: .global()
         )
     }
-    
+
     func configureSut(revoked: Bool) -> VaccinationRepository {
         service = APIServiceMock()
         keychain = MockPersistence()
@@ -67,6 +67,7 @@ class VaccinationRepositoryTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
+
     func testErrorCode() {
         XCTAssertEqual(CertificateError.positiveResult.errorCode, 421)
         XCTAssertEqual(CertificateError.expiredCertifcate.errorCode, 422)
@@ -120,10 +121,10 @@ class VaccinationRepositoryTests: XCTestCase {
             }
             .cauterize()
 
-        //Then
+        // Then
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func testValidateEntityValidCertificateNoPrefix() {
         // Given
         let token = CertificateMock.validCertificateNoPrefix
@@ -137,10 +138,10 @@ class VaccinationRepositoryTests: XCTestCase {
             }
             .cauterize()
 
-        //Then
+        // Then
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func testValidateEntityValidExtendedKeyUsageGreece() {
         // Given
         let token = CertificateMock.validExtendedKeyUsageGreece
@@ -154,10 +155,10 @@ class VaccinationRepositoryTests: XCTestCase {
             }
             .cauterize()
 
-        //Then
+        // Then
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func testCheckCertificateInvalidEntity() {
         do {
             let res = try sut.checkCertificate(CertificateMock.validCertificate2).wait()
@@ -179,7 +180,7 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, CertificateError.expiredCertifcate.localizedDescription)
         }
     }
-    
+
     func testValidateEntityInvalidCertificate() {
         do {
             let res = try sut.checkCertificate(CertificateMock.invalidCertificate).wait()
@@ -189,7 +190,7 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, CoseParsingError.wrongType.localizedDescription)
         }
     }
-    
+
     func testValidateEntityInvalidCertificateOldFormat() {
         do {
             let res = try sut.checkCertificate(CertificateMock.invalidCertificateOldFormat).wait()
@@ -199,7 +200,7 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, "The data couldn’t be read because it is missing.")
         }
     }
-    
+
     func testValidateEntityInvalidExtendedKeyUsagePoland() {
         do {
             let res = try sut.checkCertificate(CertificateMock.invalidExtendedKeyUsagePoland).wait()
@@ -209,7 +210,7 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, HCertError.illegalKeyUsage.localizedDescription)
         }
     }
-    
+
     func testValidateEntityValidCertifcateRSA() {
         do {
             let res = try sut.checkCertificate(CertificateMock.validCertifcateRSA).wait()
@@ -227,7 +228,8 @@ class VaccinationRepositoryTests: XCTestCase {
                 certificates: [
                     ExtendedCBORWebToken(
                         vaccinationCertificate: try JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-                        vaccinationQRCodeData: CertificateMock.validCertificate2)
+                        vaccinationQRCodeData: CertificateMock.validCertificate2
+                    )
                 ],
                 favoriteCertificateId: "1"
             )
@@ -247,7 +249,8 @@ class VaccinationRepositoryTests: XCTestCase {
                 certificates: [
                     ExtendedCBORWebToken(
                         vaccinationCertificate: try JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-                        vaccinationQRCodeData: CertificateMock.invalidCertificateInvalidSignature)
+                        vaccinationQRCodeData: CertificateMock.invalidCertificateInvalidSignature
+                    )
                 ],
                 favoriteCertificateId: "1"
             )
@@ -312,7 +315,7 @@ class VaccinationRepositoryTests: XCTestCase {
                 XCTAssertEqual(tokens.count, 6)
                 expectation.fulfill()
             }
-            .catch { error in
+            .catch { _ in
                 XCTFail("Must not fail.")
             }
 
@@ -335,7 +338,7 @@ class VaccinationRepositoryTests: XCTestCase {
             .done { _ in
                 XCTFail("Must not succeed.")
             }
-            .catch { error in
+            .catch { _ in
                 expectation.fulfill()
             }
 
@@ -347,7 +350,7 @@ class VaccinationRepositoryTests: XCTestCase {
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
         let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken,
                                         vaccinationQRCodeData: "")
-        
+
         _ = try sut.saveCertificateList(CertificateList(certificates: [cert], favoriteCertificateId: cborWebToken.hcert.dgc.uvci)).wait()
 
         var list = try sut.getCertificateList().wait()
@@ -428,7 +431,7 @@ class VaccinationRepositoryTests: XCTestCase {
         list = try sut.getCertificateList().wait()
         XCTAssertEqual(list.favoriteCertificateId, "01DE/00100/1119349007/F4G7014KQQ2XD0NY8FJHSTDXZ#S")
     }
-    
+
     func testSetExpiryAlert() throws {
         let cborWebToken = try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
         let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken,
@@ -458,14 +461,14 @@ class VaccinationRepositoryTests: XCTestCase {
         XCTAssertTrue(try XCTUnwrap(token1.wasExpiryAlertShown))
         XCTAssertTrue(try XCTUnwrap(token2.wasExpiryAlertShown))
     }
-    
+
     func testSetReissueAlreadySeenInitialAndNewBadgeAlreadySeen() throws {
         // GIVEN
         let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         _ = try sut.saveCertificateList(CertificateList(certificates: [cborWebToken])).wait()
         var list = try sut.getCertificateList().wait()
         var token = try XCTUnwrap(list.certificates.first)
-        
+
         // WHEN
         _ = try sut.setReissueProcess(initialAlreadySeen: true, newBadgeAlreadySeen: false, tokens: [cborWebToken]).wait()
 
@@ -475,7 +478,7 @@ class VaccinationRepositoryTests: XCTestCase {
         XCTAssertTrue(try XCTUnwrap(token.reissueProcessInitialAlreadySeen))
         XCTAssertFalse(try XCTUnwrap(token.reissueProcessNewBadgeAlreadySeen))
     }
-    
+
     func testSetReissueAlreadySeenInitialAndNewBadgeAlreadySeenAlternative() throws {
         // GIVEN
         let expectationTest = XCTestExpectation()
@@ -483,12 +486,12 @@ class VaccinationRepositoryTests: XCTestCase {
         _ = try sut.saveCertificateList(CertificateList(certificates: [cborWebToken])).wait()
         sut.getCertificateList().done { list in
             var token = try XCTUnwrap(list.certificates.first)
-            
+
             // WHEN
             _ = try self.sut.setReissueProcess(initialAlreadySeen: false, newBadgeAlreadySeen: true, tokens: [cborWebToken]).wait()
 
             // THEN
-            self.sut.getCertificateList().done{ list in
+            self.sut.getCertificateList().done { list in
                 token = try XCTUnwrap(list.certificates.first)
                 XCTAssertFalse(try XCTUnwrap(token.reissueProcessInitialAlreadySeen))
                 XCTAssertTrue(try XCTUnwrap(token.reissueProcessNewBadgeAlreadySeen))
@@ -517,10 +520,12 @@ class VaccinationRepositoryTests: XCTestCase {
     func testMatchedCertificates() throws {
         let cert1 = ExtendedCBORWebToken(
             vaccinationCertificate: try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-            vaccinationQRCodeData: "")
+            vaccinationQRCodeData: ""
+        )
         let cert2 = ExtendedCBORWebToken(
             vaccinationCertificate: try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-            vaccinationQRCodeData: "")
+            vaccinationQRCodeData: ""
+        )
         let list = CertificateList(certificates: [cert1, cert2])
 
         let res = sut.matchedCertificates(for: list)
@@ -531,12 +536,14 @@ class VaccinationRepositoryTests: XCTestCase {
     func testMatchedCertificatesDifferentPeople() throws {
         let cert1 = ExtendedCBORWebToken(
             vaccinationCertificate: try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-            vaccinationQRCodeData: "")
+            vaccinationQRCodeData: ""
+        )
         var token = try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
         token.hcert.dgc.dob = Date()
         let cert2 = ExtendedCBORWebToken(
             vaccinationCertificate: token,
-            vaccinationQRCodeData: "")
+            vaccinationQRCodeData: ""
+        )
         let list = CertificateList(certificates: [cert1, cert2])
 
         let res = sut.matchedCertificates(for: list)
@@ -583,9 +590,8 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, HCertError.verifyError.localizedDescription)
         }
     }
-    
+
     func testCountRule_Enabled_WithDifferentPersons2() {
-        
         let validCert1 = CertificateMock.validCertificate2
         let validCert2 = CertificateMock.validRecoveryCertificate
 
@@ -597,14 +603,14 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, QRCodeError.warningCountOfCertificates.localizedDescription)
         }
     }
-    
+
     func testCountRule_Disabled_WithDifferentPersons2() throws {
         let validCert1 = CertificateMock.validCertificate2
         let validCert2 = CertificateMock.validRecoveryCertificate
         _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
         _ = try sut.scanCertificate(validCert2, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
     }
-    
+
     func testCountRule_Enabled_10TimesSamePerson() {
         let validCert1 = CertificateMock.validCertificate2
         let validCert2 = CertificateMock.validCertificate2.appending("B")
@@ -633,7 +639,7 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTFail("Should fail")
         }
     }
-    
+
     func testCountRule_Disabled_10TimesSamePerson() {
         let validCert1 = CertificateMock.validCertificate2
         let validCert2 = CertificateMock.validCertificate2.appending("B")
@@ -662,9 +668,8 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTFail("Should fail")
         }
     }
-    
+
     func testCountRule_Enabled_addingThirdCertWhichIsOfAnAlreadyAvailablePerson() {
-        
         let person1Cert1 = CertificateMock.validCertificate2
         let person2Cert1 = CertificateMock.validCertificate3
         let person2Cert2 = CertificateMock.validCertificate3.appending("A")
@@ -679,9 +684,8 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTFail("Should fail")
         }
     }
-    
+
     func testCountRule_Enabled_addingFourthCertWhichIsANewPerson() {
-        
         let person1Cert1 = CertificateMock.validCertificate2
         let person2Cert1 = CertificateMock.validCertificate3
         let person2Cert2 = CertificateMock.validCertificate3.appending("A")
@@ -698,14 +702,14 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTFail("Should fail")
         }
     }
-    
+
     func testScanExpiredCertificate_expirationRuleIsActive() {
         // GIVEN
         let expiredCert = CertificateMock.expiredCertificate
         let expecation = XCTestExpectation()
         // WHEN
         sut.scanCertificate(expiredCert, isCountRuleEnabled: false, expirationRuleIsActive: true)
-            .catch{ error in
+            .catch { error in
                 // THEN
                 if (error as? CertificateError) == .expiredCertifcate {
                     expecation.fulfill()
@@ -713,7 +717,7 @@ class VaccinationRepositoryTests: XCTestCase {
             }
         wait(for: [expecation], timeout: 1.0)
     }
-    
+
     func testScanExpiredCertificate_expirationRuleIsDeActive() {
         // GIVEN
         let expiredCert = CertificateMock.expiredCertificate
@@ -729,7 +733,7 @@ class VaccinationRepositoryTests: XCTestCase {
             }.cauterize()
         wait(for: [expecation], timeout: 1.0)
     }
-    
+
     func testScanNotExpiredCertificate_expirationRuleIsActive() {
         // GIVEN
         let expiredCert = CertificateMock.validCertificate2
@@ -745,7 +749,7 @@ class VaccinationRepositoryTests: XCTestCase {
             }.cauterize()
         wait(for: [expecation], timeout: 1.0)
     }
-    
+
     func testScanNotExpiredCertificate_expirationRuleIsDeActive() {
         // GIVEN
         let expiredCert = CertificateMock.validCertificate2

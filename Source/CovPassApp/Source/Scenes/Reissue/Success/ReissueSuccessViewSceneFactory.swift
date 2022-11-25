@@ -1,9 +1,8 @@
+import CovPassUI
 import PromiseKit
 import UIKit
-import CovPassUI
 
 public struct ReissueSuccessViewSceneFactory: SceneFactory {
-
     private let resolver: Resolver<Void>
 
     // MARK: - Lifecycle

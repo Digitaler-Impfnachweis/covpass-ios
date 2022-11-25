@@ -13,7 +13,7 @@ public extension String {
         let pattern = #"[^\p{L}|\d|\.|_|-]"#
         // Allow all letters, any digits, ., _, - and remove everything else
         guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else { return self }
-        let range = NSMakeRange(0, self.count)
+        let range = NSMakeRange(0, count)
         return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: "")
     }
 

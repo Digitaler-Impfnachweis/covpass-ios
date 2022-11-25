@@ -5,10 +5,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassUI
 import CovPassCommon
-import XCTest
+@testable import CovPassUI
 import PromiseKit
+import XCTest
 
 class StateSelectionViewModelTests: XCTestCase {
     private var sut: StateSelectionViewModel!
@@ -18,23 +18,23 @@ class StateSelectionViewModelTests: XCTestCase {
     override func setUp() {
         let (promise, resolver) = Promise<Void>.pending()
         self.promise = promise
-        self.persistence = UserDefaultsPersistence()
-        self.sut = .init(persistence: persistence, resolver: resolver)
+        persistence = UserDefaultsPersistence()
+        sut = .init(persistence: persistence, resolver: resolver)
     }
-    
+
     override func tearDown() {
         promise = nil
         persistence = nil
         sut = nil
     }
-    
+
     func testStatesIsNotEmpty() {
         // WHEN
         let states = sut.states
         // THEN
         XCTAssertEqual(states.isEmpty, false)
     }
-    
+
     func testStatesOrder() {
         // WHEN
         let states = sut.states
@@ -42,21 +42,21 @@ class StateSelectionViewModelTests: XCTestCase {
         XCTAssertEqual(states.first?.code, "BB")
         XCTAssertEqual(states.last?.code, "TH")
     }
-    
+
     func testStatesCount() {
         // WHEN
         let states = sut.states
         // THEN
         XCTAssertEqual(states.count, 16)
     }
-    
+
     func testPageTitle() {
         // WHEN
         let pageTitle = sut.pageTitle
         // THEN
         XCTAssertEqual(pageTitle, "infschg_module_choose_federal_state_title")
     }
-    
+
     func testChooseSL() {
         // GIVEN
         persistence.stateSelection = ""
@@ -65,7 +65,7 @@ class StateSelectionViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(persistence.stateSelection, "SL")
     }
-    
+
     func testChooseRandom() {
         // GIVEN
         persistence.stateSelection = ""
@@ -74,16 +74,16 @@ class StateSelectionViewModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(persistence.stateSelection, "Foo")
     }
-    
+
     func testChooseFulfill() {
         // GIVEN
         let expectation = XCTestExpectation(description: "Wait to fullfill resolver")
         promise
             .done { _ in
-            expectation.fulfill()
-        }.catch { error in
-            XCTFail("Should not fail")
-        }
+                expectation.fulfill()
+            }.catch { _ in
+                XCTFail("Should not fail")
+            }
         // WHEN
         sut.choose(state: "Foo")
 

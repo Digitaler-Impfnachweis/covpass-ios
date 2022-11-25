@@ -1,6 +1,6 @@
 //
 //  FileManager+PromiseKit.swift
-//  
+//
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
@@ -14,7 +14,7 @@ public extension FileManager {
     func createDirectoryPromise(
         at url: URL,
         withIntermediateDirectories createIntermediates: Bool,
-        attributes: [FileAttributeKey : Any]? = nil
+        attributes: [FileAttributeKey: Any]? = nil
     ) -> Promise<Void> {
         do {
             try createDirectory(
@@ -22,7 +22,7 @@ public extension FileManager {
                 withIntermediateDirectories: createIntermediates,
                 attributes: attributes
             )
-        } catch  {
+        } catch {
             return .init(error: error)
         }
         return .value
@@ -31,7 +31,7 @@ public extension FileManager {
     func createFilePromise(
         atPath path: String,
         contents data: Data?,
-        attributes attr: [FileAttributeKey : Any]? = nil
+        attributes attr: [FileAttributeKey: Any]? = nil
     ) -> Promise<Void> {
         guard createFile(atPath: path, contents: data, attributes: attr) else {
             return .init(error: FileManagerError())
