@@ -74,6 +74,7 @@ open class FederalStateSettingsViewController: UIViewController {
                 .done {
                     UIAccessibility.post(notification: .layoutChanged, argument: self?.viewModel.choosenState)
                     self?.stateSelection.valueLabel.text = self?.viewModel.inputValue
+                    self?.configureCopy()
                 }
                 .cauterize()
         }
