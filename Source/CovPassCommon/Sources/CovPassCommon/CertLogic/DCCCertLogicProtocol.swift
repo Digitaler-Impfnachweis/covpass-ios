@@ -16,7 +16,7 @@ public protocol DCCCertLogicProtocol {
     var valueSetsShouldBeUpdated: Bool { get }
     var domesticRulesShouldBeUpdated: Bool { get }
     func rulesAvailable(logicType: DCCCertLogic.LogicType, region: String?) -> Bool
-    func rules(logicType: DCCCertLogic.LogicType, region: String?) -> [Rule]
+    func rules(logicType: DCCCertLogic.LogicType, country: String?, region: String?) -> [Rule]
     func validate(type: DCCCertLogic.LogicType,
                   countryCode: String,
                   region: String?,

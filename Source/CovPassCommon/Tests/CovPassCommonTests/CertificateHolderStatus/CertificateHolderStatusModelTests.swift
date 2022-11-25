@@ -437,4 +437,31 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, false)
     }
+
+    func test_areTravelRulesAvailableForGermany_true() {
+        // GIVEN
+        certLogic.rules = [.init(countryCode: "DE")]
+        // WHEN
+        let areTravelRulesAvailableForGermany = sut.areTravelRulesAvailableForGermany()
+        // THEN
+        XCTAssertTrue(areTravelRulesAvailableForGermany)
+    }
+
+    func test_areTravelRulesAvailableForGermany_false() {
+        // GIVEN
+        certLogic.rules = []
+        // WHEN
+        let areTravelRulesAvailableForGermany = sut.areTravelRulesAvailableForGermany()
+        // THEN
+        XCTAssertFalse(areTravelRulesAvailableForGermany)
+    }
+
+    func test_areTravelRulesAvailableForGermany_containsRuleToSkip_false() {
+        // GIVEN
+        certLogic.rules = [.init(identifier: "GR-DE-0001")]
+        // WHEN
+        let areTravelRulesAvailableForGermany = sut.areTravelRulesAvailableForGermany()
+        // THEN
+        XCTAssertFalse(areTravelRulesAvailableForGermany)
+    }
 }

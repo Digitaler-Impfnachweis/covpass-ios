@@ -50,7 +50,7 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
         areRulesAvailable
     }
 
-    func rules(logicType _: DCCCertLogic.LogicType, region _: String?) -> [Rule] {
+    func rules(logicType _: DCCCertLogic.LogicType, country _: String?, region _: String?) -> [Rule] {
         rules
     }
 

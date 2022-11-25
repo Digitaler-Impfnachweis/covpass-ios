@@ -466,11 +466,18 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertThrowsError(try sut.validate(type: .maskStatus, countryCode: "DE", validationClock: Date(), certificate: token))
     }
 
-    func test_rules_regionAT_rulesEU() {
+    func test_rules_countryNil_regionAT_rulesEU() {
         // WHEN
-        let rules = sut.rules(logicType: .eu, region: "AT")
+        let rules = sut.rules(logicType: .eu, country: nil, region: "AT")
         // THEN
         XCTAssertEqual(rules.count, 14)
+    }
+
+    func test_rules_countryDE_regionNil_rulesEUAcceptence() {
+        // WHEN
+        let rules = sut.rules(logicType: .euAcceptence, country: "DE", region: nil)
+        // THEN
+        XCTAssertEqual(rules.count, 1)
     }
 
     func test_rulesAvailable_regionAT_rulesEU() {
@@ -519,7 +526,7 @@ class DCCCertLogicTests: XCTestCase {
         // WHEN
         let rulesAvailable = sut.rulesAvailable(logicType: .ifsg22a, region: nil)
         // THEN
-        XCTAssert(rulesAvailable)
+        XCTAssertTrue(rulesAvailable)
     }
 
     func test_ifsg22a_ImpfstatusCZwei_pass() throws {

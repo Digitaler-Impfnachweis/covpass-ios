@@ -57,7 +57,7 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
         rulesAreAvailable
     }
 
-    func rules(logicType _: CovPassCommon.DCCCertLogic.LogicType, region _: String?) -> [Rule] {
+    func rules(logicType _: DCCCertLogic.LogicType, country _: String?, region _: String?) -> [Rule] {
         rules
     }
 

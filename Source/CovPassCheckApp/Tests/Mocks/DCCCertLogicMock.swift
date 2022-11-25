@@ -13,19 +13,12 @@ import XCTest
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
     var areRulesAvailable = true
-
     var rulesShouldBeUpdated: Bool = true
-
     var boosterRulesShouldBeUpdated: Bool = true
-
     var valueSetsShouldBeUpdated: Bool = true
-
     var domesticRulesShouldBeUpdated: Bool = true
-
     var domesticRulesUpdateTestExpectation = XCTestExpectation()
-
     var domesticRulesUpdateIfNeededTestExpectation = XCTestExpectation()
-
     var lastUpdateDccrRules: Date?
     var rules: [Rule] = []
 
@@ -57,7 +50,7 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
         areRulesAvailable
     }
 
-    func rules(logicType _: DCCCertLogic.LogicType, region _: String?) -> [Rule] {
+    func rules(logicType _: DCCCertLogic.LogicType, country _: String?, region _: String?) -> [Rule] {
         rules
     }
 

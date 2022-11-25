@@ -27,6 +27,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     private var sut: ValidatorOverviewViewModel!
     private var certLogic: DCCCertLogicMock!
     private var repository: VaccinationRepositoryMock!
+    private var certificateHolderStatus: CertificateHolderStatusModelMock!
     private var revocationRepository: CertificateRevocationRepositoryMock!
     private let invalidationRule = Rule(type: "Invalidation")
     private let maskRule = Rule(type: "Mask")
@@ -38,6 +39,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         revocationRepository = CertificateRevocationRepositoryMock()
         repository = VaccinationRepositoryMock()
         certLogic = DCCCertLogicMock()
+        certificateHolderStatus = .init()
         audioPlayer = .init()
         router = .init()
         userDefaults = .init()
@@ -48,6 +50,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         revocationRepository = nil
         repository = nil
         certLogic = nil
+        certificateHolderStatus = nil
         audioPlayer = nil
         router = nil
         userDefaults = nil
@@ -66,7 +69,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router: router,
             repository: repository,
             revocationRepository: revocationRepository,
-            certificateHolderStatus: CertificateHolderStatusModelMock(),
+            certificateHolderStatus: certificateHolderStatus,
             certLogic: certLogic,
             userDefaults: userDefaults,
             privacyFile: Constants.Keys.privacyFile,
@@ -537,6 +540,18 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [
             router.showTravelRulesInvalidExpectation
+        ], timeout: 1)
+    }
+
+    func test_checkImmunityStatus_entering_germany_see_no_rules_available_popup() {
+        // GIVEN
+        userDefaults.checkSituation = CheckSituationType.enteringGermany.rawValue
+        certificateHolderStatus.areTravelRulesAvailableForGermanyResponse = false
+        // When
+        sut.checkImmunityStatus()
+        // Then
+        wait(for: [
+            router.showTravelRulesNotAvailableExpectation
         ], timeout: 1)
     }
 

@@ -9,14 +9,25 @@ import CovPassCommon
 import PromiseKit
 
 extension ValidatorOverviewViewModel {
+    private func showPopUpIfNeeded() -> Promise<Void> {
+        if certificateHolderStatus.areTravelRulesAvailableForGermany() {
+            return .value
+        } else {
+            return router.showTravelRulesNotAvailable()
+        }
+    }
+
     func checkImmunityStatusEnteringGermany() {
         isLoadingScan = true
         firstly {
-            ScanAndParseQRCodeAndCheckTravelRulesUseCase(router: router,
-                                                         audioPlayer: audioPlayer,
-                                                         vaccinationRepository: vaccinationRepository,
-                                                         revocationRepository: revocationRepository,
-                                                         certLogic: certLogic).execute()
+            showPopUpIfNeeded()
+        }
+        .then {
+            ScanAndParseQRCodeAndCheckTravelRulesUseCase(router: self.router,
+                                                         audioPlayer: self.audioPlayer,
+                                                         vaccinationRepository: self.vaccinationRepository,
+                                                         revocationRepository: self.revocationRepository,
+                                                         certLogic: self.certLogic).execute()
         }
         .done { token in
             self.router.showTravelRulesValid(token: token)
@@ -34,7 +45,9 @@ extension ValidatorOverviewViewModel {
     }
 
     func errorHandlingTravelRules(error: Error) -> Promise<ValidatorDetailSceneResult> {
-        if case let CertificateError.revoked(token) = error {
+        if (error as? TravelRulesError) == .cancel {
+            return .value(.close)
+        } else if case let CertificateError.revoked(token) = error {
             return router.showTravelRulesInvalid(token: token)
         } else {
             return router.showTravelRulesInvalid(token: nil)

@@ -69,6 +69,8 @@ public class DCCCertLogic: DCCCertLogicProtocol {
     public enum LogicType: String {
         // validate against EU rules
         case eu
+        // validate against EU rules
+        case euAcceptence
         // validate against EU rules (only invalidations)
         case euInvalidation
         // validate against DE (acceptence and invalidation rules) domestic rules
@@ -210,6 +212,8 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         switch logicType {
         case .eu:
             rules = dccRules
+        case .euAcceptence:
+            rules = dccRules.acceptanceRules
         case .euInvalidation:
             rules = dccRules.invalidationRules
         case .booster:
@@ -232,8 +236,11 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         rulesFor(logicType: logicType).filter { $0.region == region }.isEmpty == false
     }
 
-    public func rules(logicType: DCCCertLogic.LogicType, region: String?) -> [Rule] {
-        rulesFor(logicType: logicType).filter { $0.region == region }
+    public func rules(logicType: DCCCertLogic.LogicType, country: String?, region: String?) -> [Rule] {
+        if country != nil {
+            return rulesFor(logicType: logicType).filter { $0.countryCode == country }.filter { $0.region == region }
+        }
+        return rulesFor(logicType: logicType).filter { $0.region == region }
     }
 
     public func validate(type: LogicType = .eu,

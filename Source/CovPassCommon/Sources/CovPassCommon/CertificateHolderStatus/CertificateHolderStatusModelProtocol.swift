@@ -63,6 +63,11 @@ public protocol CertificateHolderStatusModelProtocol {
     /// - Returns: `Date`, if rules available for region. `nil`, if no rules are available
     func latestMaskRuleDate(for region: String?) -> Date?
 
+    /// Queries if travel rules available. Travel rules means: EU Enpoint, Country = DE and Region = nil
+    /// - Parameters:
+    /// - Returns: `Bool`, if rules available for traveling to germany. `nil`, if no rules are available
+    func areTravelRulesAvailableForGermany() -> Bool
+
     /// Queries the internal rules, if a certificate passed the §22a IfSG rules.
     /// - Parameters:
     ///   - certifiates: The certificates of one Person

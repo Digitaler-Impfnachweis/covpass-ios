@@ -34,6 +34,13 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var routeToChooseCheckSituationExpectation = XCTestExpectation(description: "routeToChooseCheckSituationExpectation")
     var showTravelRulesValidExpectation = XCTestExpectation(description: "showTravelRulesValidExpectation")
     var showTravelRulesInvalidExpectation = XCTestExpectation(description: "showTravelRulesInvalidExpectation")
+    var showTravelRulesNotAvailableExpectation = XCTestExpectation(description: "showTravelRulesNotAvailableExpectation")
+    var showTravelRulesNotAvailableResponse: Promise<Void> = .value
+
+    func showTravelRulesNotAvailable() -> Promise<Void> {
+        showTravelRulesNotAvailableExpectation.fulfill()
+        return showTravelRulesNotAvailableResponse
+    }
 
     func showTravelRulesValid(token _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         showTravelRulesValidExpectation.fulfill()

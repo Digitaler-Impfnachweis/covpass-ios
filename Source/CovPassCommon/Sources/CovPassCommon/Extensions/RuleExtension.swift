@@ -21,4 +21,6 @@ public extension Rule {
     var isMaskStatusRule: Bool { ruleType == .mask }
 
     var isIfsg22aRule: Bool { ruleType == .impfstatusBZwei || ruleType == .impfstatusCZwei || ruleType == .impfstatusEZwei }
+
+    var isNoRuleIdentifier: Bool { identifier == "GR-DE-0001" }
 }

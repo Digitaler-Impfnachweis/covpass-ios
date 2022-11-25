@@ -361,4 +361,22 @@ class RuleTests: XCTestCase {
         // THEN
         XCTAssertEqual(maskStatusRules.count, 3)
     }
+
+    func test_isNoRuleIdentifier_true() {
+        // GIVEN
+        let sut = Rule(identifier: "GR-DE-0001")
+        // WHEN
+        let isNoRuleIdentifier = sut.isNoRuleIdentifier
+        // THEN
+        XCTAssertTrue(isNoRuleIdentifier)
+    }
+
+    func test_isNoRuleIdentifier_false() {
+        // GIVEN
+        let sut = Rule(identifier: "FOO")
+        // WHEN
+        let isNoRuleIdentifier = sut.isNoRuleIdentifier
+        // THEN
+        XCTAssertFalse(isNoRuleIdentifier)
+    }
 }

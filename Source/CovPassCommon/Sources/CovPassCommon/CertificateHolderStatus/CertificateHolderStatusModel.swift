@@ -104,7 +104,13 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
 
     public func latestMaskRuleDate(for region: String?) -> Date? {
         if region == nil { return nil }
-        return dccCertLogic.rules(logicType: .maskStatus, region: region).map(\.validFromDate).latestDate
+        return dccCertLogic.rules(logicType: .maskStatus, country: "DE", region: region).map(\.validFromDate).latestDate
+    }
+
+    public func areTravelRulesAvailableForGermany() -> Bool {
+        var euAcceptenceRulesForGermany = dccCertLogic.rules(logicType: .euAcceptence, country: "DE", region: nil)
+        euAcceptenceRulesForGermany.removeAll(where: \.isNoRuleIdentifier)
+        return !euAcceptenceRulesForGermany.isEmpty
     }
 
     public func ifsg22aRulesAvailable() -> Bool {

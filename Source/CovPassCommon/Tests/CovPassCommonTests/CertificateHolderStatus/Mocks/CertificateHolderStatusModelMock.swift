@@ -15,11 +15,16 @@ struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     var fullyImmunized = false
     var isVaccinationCycleComplete = true
     var areIfsg22aRulesAvailable = true
+    var areTravelRulesAvailableForGermanyResponse = true
     var checkDomesticAcceptanceAndInvalidationRulesResult = CertificateHolderStatusResult.passed
     var checkDomesticInvalidationRulesResult = CertificateHolderStatusResult.passed
     var checkEuInvalidationRulesResult = CertificateHolderStatusResult.passed
     var validCertificates: [ExtendedCBORWebToken]?
     var latestMaskRuleDate: Date?
+
+    func areTravelRulesAvailableForGermany() -> Bool {
+        areTravelRulesAvailableForGermanyResponse
+    }
 
     func checkDomesticAcceptanceAndInvalidationRules(_: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
         checkDomesticAcceptanceAndInvalidationRulesResult

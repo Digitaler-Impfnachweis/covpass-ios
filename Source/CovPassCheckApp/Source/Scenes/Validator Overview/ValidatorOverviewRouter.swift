@@ -12,6 +12,10 @@ import PromiseKit
 import Scanner
 import UIKit
 
+enum TravelRulesError: Error {
+    case cancel
+}
+
 enum ValidatorDetailSceneResult: Equatable {
     case close
     case secondScan(ExtendedCBORWebToken)
@@ -29,6 +33,11 @@ private enum Constants {
         static let infschg_name_matching_error_copy = "infschg_name_matching_error_copy".localized
         static let infschg_name_matching_error_retry = "infschg_name_matching_error_retry".localized
         static let infschg_name_matching_error_cancel = "infschg_name_matching_error_cancel".localized
+
+        static let noTravelRules_title = "dialog_no_entry_rules_available_title".localized
+        static let noTravelRules_subtitle = "dialog_no_entry_rules_available_subtitle".localized
+        static let noTravelRules_continue = "dialog_no_entry_rules_available_button1".localized
+        static let noTravelRules_cancel = "dialog_no_entry_rules_available_button2".localized
     }
 }
 
@@ -231,5 +240,33 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         let view = VaccinationCycleCompleteResultSceneFactory(router: router,
                                                               token: token)
         return sceneCoordinator.present(view, animated: true)
+    }
+
+    func showTravelRulesNotAvailable() -> Promise<Void> {
+        Promise { seal in
+            showDialog(
+                title: Constants.Keys.noTravelRules_title,
+                message: Constants.Keys.noTravelRules_subtitle,
+                actions: [
+                    DialogAction(
+                        title: Constants.Keys.noTravelRules_continue,
+                        style: UIAlertAction.Style.default,
+                        isEnabled: true,
+                        completion: { _ in
+                            seal.fulfill_()
+                        }
+                    ),
+                    DialogAction(
+                        title: Constants.Keys.noTravelRules_cancel,
+                        style: UIAlertAction.Style.default,
+                        isEnabled: true,
+                        completion: { _ in
+                            seal.reject(TravelRulesError.cancel)
+                        }
+                    )
+                ],
+                style: .alert
+            )
+        }
     }
 }
