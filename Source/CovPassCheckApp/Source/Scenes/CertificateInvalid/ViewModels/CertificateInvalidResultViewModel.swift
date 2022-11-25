@@ -51,6 +51,7 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
     private let router: CertificateInvalidResultRouterProtocol
     private let revocationKeyFilename: String
     private let checkSituationType: CheckSituationType
+    private let checkType: CheckType
 
     init(token: ExtendedCBORWebToken?,
          countdownTimerModel: CountdownTimerModel,
@@ -78,7 +79,8 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
         }
         reasonViewModels = Self.reasonViewModels()
         checkSituationType = .init(rawValue: persistence.checkSituation) ?? .withinGermany
-        travelRulesIsHidden = checkSituationType == .withinGermany
+        checkType = .init(rawValue: persistence.selectedCheckType) ?? .mask
+        travelRulesIsHidden = checkSituationType == .withinGermany || checkType == .mask
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()
     }

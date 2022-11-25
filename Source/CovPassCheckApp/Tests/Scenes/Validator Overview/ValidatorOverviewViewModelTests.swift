@@ -282,7 +282,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
 
         // Then
         wait(for: [
-            router.showMaskRequiredTechnicalErrorExpectation
+            router.showMaskRulesInvalidExpectation
         ], timeout: 1)
     }
 
@@ -360,7 +360,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
 
         // Then
         wait(for: [
-            router.showMaskRequiredTechnicalErrorExpectation
+            router.showMaskRulesInvalidExpectation
         ], timeout: 1)
     }
 

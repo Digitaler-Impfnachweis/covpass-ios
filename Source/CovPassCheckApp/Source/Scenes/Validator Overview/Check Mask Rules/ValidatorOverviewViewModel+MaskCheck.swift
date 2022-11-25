@@ -37,7 +37,7 @@ extension ValidatorOverviewViewModel {
 
     func errorHandlingMaskCheck(error: Error, token _: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
         if case let CertificateError.revoked(token) = error {
-            return router.showMaskRequiredTechnicalError(token: token)
+            return router.showMaskRulesInvalid(token: token)
         }
         switch error as? CheckMaskRulesUseCaseError {
         case let .differentPersonalInformation(token1OfPerson, token2OfPerson):
@@ -56,9 +56,9 @@ extension ValidatorOverviewViewModel {
         case let .invalidDueToRules(token):
             return router.showMaskRequiredBusinessRules(token: token)
         case let .invalidDueToTechnicalReason(token):
-            return router.showMaskRequiredTechnicalError(token: token)
+            return router.showMaskRulesInvalid(token: token)
         case .none:
-            return router.showMaskRequiredTechnicalError(token: nil)
+            return router.showMaskRulesInvalid(token: nil)
         }
     }
 

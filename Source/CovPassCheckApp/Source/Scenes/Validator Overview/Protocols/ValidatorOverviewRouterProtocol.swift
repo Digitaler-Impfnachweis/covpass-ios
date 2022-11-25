@@ -31,6 +31,7 @@ protocol MaskCheckRouterProtocol {
     func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showMaskCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<DifferentPersonResult>
     func showMaskCheckSameCertType()
+    func showMaskRulesInvalid(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
 }
 
 protocol CheckImmunityRouterProtocol {

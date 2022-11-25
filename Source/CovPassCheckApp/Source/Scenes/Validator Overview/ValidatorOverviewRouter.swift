@@ -173,6 +173,13 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
 
+    func showMaskRulesInvalid(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+        let router = CertificateInvalidResultRouter(sceneCoordinator: sceneCoordinator)
+        let view = CertificateInvalidResultSceneFactory(router: router,
+                                                        token: token)
+        return sceneCoordinator.present(view, animated: true)
+    }
+
     // MARK: Ifsg22a Check
 
     func showVaccinationCycleComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
