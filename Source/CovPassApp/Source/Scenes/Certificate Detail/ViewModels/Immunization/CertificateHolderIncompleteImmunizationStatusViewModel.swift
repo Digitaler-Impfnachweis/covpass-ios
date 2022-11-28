@@ -28,7 +28,7 @@ struct CertificateHolderImmunizationE22StatusViewModel: CertificateHolderImmuniz
     var description: String { String(format: "infschg_cert_overview_immunisation_E22".localized, days) }
     var subtitle: String? {
         guard let date = date else { return nil }
-        return String(format: "infschg_cert_overview_mask_time_from".localized, date)
+        return String(format: "infschg_cert_overview_immunisation_time_from".localized, date)
     }
 
     var date: String?

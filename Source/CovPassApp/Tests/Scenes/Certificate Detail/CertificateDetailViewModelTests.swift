@@ -983,7 +983,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         let viewModel = sut.maskStatusViewModel
 
         // Then
-        let formattedDate = DateUtils.displayDateFormatter.string(from: dateOfRecovery.add(days: 28)!)
+        let formattedDate = DateUtils.displayDateFormatter.string(from: dateOfRecovery.add(days: 29)!)
         XCTAssertTrue(viewModel is CertificateHolderMaskRequiredStatusViewModel)
         XCTAssertEqual(viewModel.subtitle, "Exempt from \(formattedDate)")
     }
@@ -1130,6 +1130,8 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderImmunizationE22StatusViewModel)
         XCTAssertEqual(viewModel.description, "You are considered fully vaccinated based on your vaccination and the infection you have had. However, your immune protection is only effective in 1 days. Please bear in mind that you can still be contagious, but also inform yourself about recommended booster vaccinations")
+        let subtitle = try XCTUnwrap(viewModel.subtitle)
+        XCTAssertEqual(subtitle, "Complete from Nov 28, 2022")
     }
 
     func testImmunizationStatusViewModel_complete_E22_recovery_fresher_than_vaccination_and_revovery_just_done() throws {
@@ -1152,6 +1154,8 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderImmunizationE22StatusViewModel)
         XCTAssertEqual(viewModel.description, "You are considered fully vaccinated based on your vaccination and the infection you have had. However, your immune protection is only effective in 29 days. Please bear in mind that you can still be contagious, but also inform yourself about recommended booster vaccinations")
+        let subtitle = try XCTUnwrap(viewModel.subtitle)
+        XCTAssertEqual(subtitle, "Complete from Dec 27, 2022")
     }
 
     func testImmunizationStatusViewModel_complete_E2_recovery_fresher_than_vaccination_and_revovery_older_than_29_days() throws {

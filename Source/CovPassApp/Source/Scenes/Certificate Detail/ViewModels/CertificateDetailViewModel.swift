@@ -248,7 +248,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if holderNeedsMask {
             if let vaccination = certificates.latestVaccination, let recovery = certificates.latestRecovery,
                recovery.fr > vaccination.dt, !recovery.fr.isOlderThan29Days,
-               let fr = recovery.fr.add(days: 28) {
+               let fr = recovery.fr.add(days: 29) {
                 return CertificateHolderMaskRequiredStatusViewModel(
                     userDefaults: userDefaults,
                     certificateHolderStatus: certificateHolderStatusModel,
