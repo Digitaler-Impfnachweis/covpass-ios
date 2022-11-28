@@ -1863,7 +1863,7 @@
 
 "infschg_detail_page_mask_status_uncertain_title" = "Mask mandatory";
 
-"infschg_detail_page_mask_status_uncertain_federal_state" = "in %@*";
+"infschg_detail_page_mask_status_uncertain_federal_state" = "in %@";
 
 "infschg_detail_page_mask_status_uncertain_copy_1" = "For this federal state the RKI has not received federal state-specifc rules. Therefore, only the uniform federal rules on mandatory masks apply.";
 

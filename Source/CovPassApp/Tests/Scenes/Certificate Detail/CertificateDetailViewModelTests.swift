@@ -930,7 +930,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(viewModel is CertificateHolderNoMaskRulesStatusViewModel)
         XCTAssertEqual(viewModel.subtitle, nil)
-        XCTAssertEqual(viewModel.federalStateText, "in Schleswig-Holstein*")
+        XCTAssertEqual(viewModel.federalStateText, "in Schleswig-Holstein")
     }
 
     func testMaskStatusViewModel_optional() throws {

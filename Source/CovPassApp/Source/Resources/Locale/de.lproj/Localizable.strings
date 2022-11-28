@@ -1863,7 +1863,7 @@
 
 "infschg_detail_page_mask_status_uncertain_title" = "Maskenpflicht";
 
-"infschg_detail_page_mask_status_uncertain_federal_state" = "in %@*";
+"infschg_detail_page_mask_status_uncertain_federal_state" = "in %@";
 
 "infschg_detail_page_mask_status_uncertain_copy_1" = "Für dieses Bundesland liegen dem RKI aktuell keine bundeslandspezifischen Regeln vor. Es gelten daher nur die bundeseinheitlichen Regeln zur Maskenpflicht.";
 
