@@ -1040,7 +1040,7 @@
 
 "start_vaccination_status_entry_title" = "Impfschutz nach Coronavirus-Einreiseverordnung";
 
-"start_vaccination_status_entry_subtitle" = "Derzeit gibt es keine Beschränkungen für die Einreise nach Deutschland. Um den Impfschutz innerhalb Deutschlands nach Infektionsschutzgesetz § 22a zu prüfen, ändern Sie den Prüfkontext in den Einstellungen.";
+"start_vaccination_status_entry_subtitle" = "Derzeit gibt es keine Beschränkungen für die Einreise nach Deutschland. Um den Impfschutz innerhalb Deutschlands nach Infektionsschutzgesetz § 22a zu prüfen, ändern Sie den Prüfkontext in den #Einstellungen.::$0#";
 
 
 /********** Entry Check: Initial setup **********/

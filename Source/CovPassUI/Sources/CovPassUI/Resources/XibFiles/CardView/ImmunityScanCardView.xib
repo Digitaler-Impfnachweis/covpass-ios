@@ -31,7 +31,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="237" height="78"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
-                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="237" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="1I9-q2-M5B" userLabel="descriptionLabelView" customClass="PlainLabel" customModule="CovPassUI">
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="237" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="1I9-q2-M5B" userLabel="descriptionLabelView" customClass="LinkLabel" customModule="CovPassUI">
                             <rect key="frame" x="0.0" y="78" width="237" height="50"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>

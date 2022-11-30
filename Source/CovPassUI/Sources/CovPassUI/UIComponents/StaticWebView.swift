@@ -8,20 +8,6 @@
 
 import WebKit
 
-extension UIFont {
-    static var scaledHeadline: UIFont {
-        let font = UIFont(name: UIFont.sansBold, size: 18.0) ?? UIFont.systemFont(ofSize: 18.0)
-        let fontMetrics = UIFontMetrics(forTextStyle: .body)
-        return fontMetrics.scaledFont(for: font, maximumPointSize: 36.0, compatibleWith: nil)
-    }
-
-    static var scaledBody: UIFont {
-        let font = UIFont(name: UIFont.sansRegular, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)
-        let fontMetrics = UIFontMetrics(forTextStyle: .body)
-        return fontMetrics.scaledFont(for: font, maximumPointSize: 28.0, compatibleWith: nil)
-    }
-}
-
 public class StaticWebView: WKWebView, WKNavigationDelegate {
     public var onScrollHeight: ((_ height: CGFloat) -> Void)?
 

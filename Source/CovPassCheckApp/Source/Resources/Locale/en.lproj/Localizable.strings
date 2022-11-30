@@ -1040,7 +1040,7 @@
 
 "start_vaccination_status_entry_title" = "Vaccination status according to the Coronavirus Entry Regulations";
 
-"start_vaccination_status_entry_subtitle" = "There are currently no restrictions on entering Germany. To check the vaccination status within Germany according to Infection Protection Act § 22a, change the check context in the settings.";
+"start_vaccination_status_entry_subtitle" = "There are currently no restrictions on entering Germany. To check the vaccination status within Germany according to Infection Protection Act § 22a, change the check context in the #settings.::$0#";
 
 
 /********** Entry Check: Initial setup **********/

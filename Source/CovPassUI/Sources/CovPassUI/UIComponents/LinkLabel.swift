@@ -11,6 +11,7 @@ import UIKit
 public class LinkLabel: XibView {
     @IBOutlet public var textableView: LinkTextView!
     @IBOutlet var additionalTextableView: LinkTextView!
+    public var linkFont: UIFont?
     public var linkCallback: ((URL) -> Void)?
 
     override public func initView() {
@@ -31,7 +32,7 @@ public class LinkLabel: XibView {
                 textableView.attributedText = nil
                 return
             }
-            textableView.attributedText = NSMutableAttributedString(attributedString: nv).replaceLink().replaceLink()
+            textableView.attributedText = NSMutableAttributedString(attributedString: nv).replaceLink(linkFont: linkFont).replaceLink(linkFont: linkFont)
         }
     }
 
@@ -46,7 +47,7 @@ public class LinkLabel: XibView {
                 return
             }
             additionalTextableView.isHidden = false
-            additionalTextableView.attributedText = NSMutableAttributedString(attributedString: nv).replaceLink().replaceLink()
+            additionalTextableView.attributedText = NSMutableAttributedString(attributedString: nv).replaceLink(linkFont: linkFont).replaceLink(linkFont: linkFont)
         }
     }
 }

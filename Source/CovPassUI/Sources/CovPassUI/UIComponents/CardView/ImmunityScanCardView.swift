@@ -15,7 +15,7 @@ public class ImmunityScanCardView: XibView {
     @IBOutlet private var stackView: UIStackView!
     @IBOutlet private var titleLabel: PlainLabel!
     @IBOutlet private var infoView: UIView!
-    @IBOutlet private var descriptionLabel: PlainLabel!
+    @IBOutlet private var descriptionLabel: LinkLabel!
     @IBOutlet private var infoLabel: PlainLabel!
     @IBOutlet private var actionButton: MainButton!
 
@@ -24,6 +24,12 @@ public class ImmunityScanCardView: XibView {
     public var action: (() -> Void)? {
         didSet {
             actionButton.action = action
+        }
+    }
+
+    public var linkAction: ((URL) -> Void)? {
+        didSet {
+            descriptionLabel.linkCallback = linkAction
         }
     }
 
@@ -53,6 +59,7 @@ public class ImmunityScanCardView: XibView {
                     titleEdges: UIEdgeInsets,
                     description: NSAttributedString,
                     descriptionEdges: UIEdgeInsets,
+                    descriptionLinkColor: UIColor = .brandAccent,
                     infoText: NSAttributedString?,
                     infoTextEdges: UIEdgeInsets,
                     actionTitle: String) {
@@ -60,7 +67,10 @@ public class ImmunityScanCardView: XibView {
         titleLabel.contentView?.layoutMargins = titleEdges
         titleLabel.enableAccessibility(value: titleAccessibility)
         descriptionLabel.attributedText = description
-        descriptionLabel.contentView?.layoutMargins = descriptionEdges
+        descriptionLabel?.layoutMargins = descriptionEdges
+        descriptionLabel.linkFont = UIFont.scaledBoldBody
+        descriptionLabel.textableView.linkTextAttributes = [.foregroundColor: descriptionLinkColor,
+                                                            .underlineStyle: 1]
         infoLabel.attributedText = infoText
         infoLabel.contentView?.layoutMargins = infoTextEdges
         actionButton.title = actionTitle

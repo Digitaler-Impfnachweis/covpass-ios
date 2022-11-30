@@ -129,17 +129,22 @@ class ValidatorOverviewViewController: UIViewController {
             .styledAs(.header_3)
             .colored(.neutralWhite)
         let immunityCheckActionTitle = viewModel.immunityCheckActionTitle
-        let descriptionTextBottomEdge = viewModel.immunityCheckInfoText == nil ? 24.0 : 12.0
+        let descriptionTextBottomEdge = viewModel.immunityCheckInfoText == nil ? 16.0 : 4.0
         immunityCheckView.set(title: immunityCheckTitle,
                               titleAccessibility: immunityCheckTitleAccessibility,
                               titleEdges: .init(top: 24, left: 24, bottom: 8, right: 24),
                               description: immunityCheckDescription,
-                              descriptionEdges: .init(top: 8, left: 24, bottom: descriptionTextBottomEdge, right: 24),
+                              descriptionEdges: .init(top: 0, left: 19, bottom: descriptionTextBottomEdge, right: 19),
+                              descriptionLinkColor: .white,
                               infoText: immunityCheckInfoText,
                               infoTextEdges: .init(top: 0, left: 0, bottom: 0, right: 0),
                               actionTitle: immunityCheckActionTitle)
         immunityCheckView.action = {
             self.viewModel.checkImmunityStatus(secondToken: nil, thirdToken: nil)
+        }
+
+        immunityCheckView.linkAction = { _ in
+            self.viewModel.routeToRulesUpdate()
         }
 
         configureSegmentControl()

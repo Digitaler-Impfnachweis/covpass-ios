@@ -36,6 +36,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showTravelRulesInvalidExpectation = XCTestExpectation(description: "showTravelRulesInvalidExpectation")
     var showTravelRulesNotAvailableExpectation = XCTestExpectation(description: "showTravelRulesNotAvailableExpectation")
     var showMaskRulesInvalidExpectation = XCTestExpectation(description: "showMaskRulesInvalidExpectation")
+    var routeToRulesUpdateExpectation = XCTestExpectation(description: "routeToRulesUpdateExpectation")
     var showTravelRulesNotAvailableResponse: Promise<Void> = .value
 
     func showMaskRulesInvalid(token _: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
@@ -84,7 +85,8 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     }
 
     func routeToRulesUpdate(userDefaults _: Persistence) -> Promise<Void> {
-        .value
+        routeToRulesUpdateExpectation.fulfill()
+        return .value
     }
 
     func showNewRegulationsAnnouncement() -> Promise<Void> {

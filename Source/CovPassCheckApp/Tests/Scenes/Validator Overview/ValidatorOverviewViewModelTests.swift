@@ -591,4 +591,14 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.routeToChooseCheckSituationExpectation
         ], timeout: 1)
     }
+
+    func test_routeToRulesUpdate() {
+        // When
+        sut.routeToRulesUpdate()
+
+        // Then
+        wait(for: [
+            router.routeToRulesUpdateExpectation
+        ], timeout: 1)
+    }
 }

@@ -33,7 +33,7 @@ public extension NSMutableAttributedString {
     }
 
     @discardableResult
-    func replaceLink() -> NSMutableAttributedString {
+    func replaceLink(linkFont: UIFont? = nil) -> NSMutableAttributedString {
         let regex = try! NSRegularExpression(pattern: "#(.*)::(.*)#", options: NSRegularExpression.Options.caseInsensitive)
         let range = NSMakeRange(0, string.count)
         if let match = regex.firstMatch(in: string, options: .withTransparentBounds, range: range),
@@ -43,6 +43,9 @@ public extension NSMutableAttributedString {
             let subString = string[subRangeLink.lowerBound ..< subRangeLink.upperBound]
             replaceCharacters(in: match.range(at: 0), with: String(string[subRange.lowerBound ..< subRange.upperBound]))
             addAttribute(.link, value: subString, range: NSMakeRange(match.range(at: 0).lowerBound, match.range(at: 1).length))
+            if let linkFont = linkFont {
+                addAttribute(.font, value: linkFont, range: NSMakeRange(match.range(at: 0).lowerBound, match.range(at: 1).length))
+            }
         }
         return self
     }
