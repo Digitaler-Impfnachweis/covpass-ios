@@ -13,7 +13,7 @@ extension DefaultSceneCoordinator: SceneDismissing {
         popViewController(animated: animated)
     }
 
-    public func dimiss(animated: Bool) {
+    public func dismiss(animated: Bool) {
         dismissViewController(animated)
     }
 }

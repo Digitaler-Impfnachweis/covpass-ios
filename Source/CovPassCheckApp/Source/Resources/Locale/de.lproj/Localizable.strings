@@ -114,6 +114,15 @@
 "check_context_onboarding_button" = "OK";
 
 
+/********** what is new: popup **********/
+
+"whats_new_screen_title" = "Neue Funktionen";
+
+"whats_new_screen_update_notifications_checkbox_headline" = "Diese Art von Benachrichtigungen nicht mehr anzeigen";
+
+"whats_new_screen_update_notifications_checkbox_copy" = "Sie können diese Entscheidung jederzeit in den Einstellungen ändern.";
+
+
 /********** start screen **********/
 
 "accessibility_validation_start_screen_label_information" = "Einstellungen";
@@ -231,7 +240,7 @@
 
 "dialog_second_scan_message" = "Sie haben dieses Zertifikat bereits gescannt. Scannen Sie bitte einen anderen Nachweis.";
 
-"dialog_second_scan_button_repeat" = "Wiederholen";
+"dialog_second_scan_button_repeat" = "Neuer Scan";
 
 "dialog_second_scan_button_update" = "Abbrechen";
 
@@ -618,6 +627,25 @@
 "app_information_version_label" = "Version %@";
 
 
+/********** what is new: settings **********/
+
+"accessibility_app_information_title_update_notifications_announce" = "Die Ansicht \"Update-Benachrichtigungen\" wurde geöffnet";
+
+"accessibility_app_information_title_update_notifications_closing_announce" = "Die Ansicht \"Update-Benachrichtigungen\" wurde geschlossen";
+
+"app_information_title_update_notifications" = "Update-Benachrichtigungen";
+
+"app_information_copy_update_notifications" = "Sie können ab jetzt die Update-Benachrichtigungen deaktivieren. Mit dem Regler können Sie jederzeit die Updates deaktivieren oder wieder aktivieren. Wenn sie den Update-Benachrichtigungen deaktivieren, bekommen Sie keine Updates mehr über die neuesten Software-Entwicklungen in der App.";
+
+"app_information_update_notifications_toggle" = "Update-Benachrichtigungen anzeigen";
+
+"app_information_update_notifications_new_version_copy" = "Neue Funktionen (Version %@)";
+
+"settings_list_status_on" = "An";
+
+"settings_list_status_off" = "Aus";
+
+
 /********** error handling **********/
 
 "error_standard_unexpected_title" = "Entschuldigung";
@@ -761,7 +789,7 @@
 
 "infschg_result_mask_mandatory_deviating_data_link" = "Abweichung ignorieren";
 
-"infschg_result_no_mask_rules_title" = "Keine vorliegenden Regeln";
+"infschg_result_no_mask_rules_title" = "Keine zusätzlichen Regeln";
 
 "infschg_result_no_mask_rules_subtitle" = "in %@";
 

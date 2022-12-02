@@ -14,7 +14,7 @@ open class SelectStateOnboardingViewController: UIViewController {
     @IBOutlet var decorativeImageView: UIImageView!
     @IBOutlet var copyLabel: PlainLabel!
     @IBOutlet var stateSelection: InputView!
-    @IBOutlet var copy2Label: PlainLabel!
+    @IBOutlet var copy2Label: LinkLabel!
     @IBOutlet var copy3Label: PlainLabel!
     @IBOutlet var button: MainButton!
 
@@ -70,7 +70,11 @@ open class SelectStateOnboardingViewController: UIViewController {
         copyLabel.attributedText = viewModel.copyText.styledAs(.body)
         copyLabel.contentView?.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .space_12, right: .space_24)
         copy2Label.attributedText = viewModel.copy2Text.styledAs(.body)
-        copy2Label.contentView?.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .space_24, right: .space_24)
+        copy2Label.linkFont = UIFont.scaledBoldBody
+        copy2Label.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .space_24, right: .space_24)
+        copy2Label.linkCallback = { _ in
+            self.viewModel.showFAQ()
+        }
         copy3Label.attributedText = viewModel.copy3Text?.styledAs(.body).colored(.darkGray)
         copy3Label.contentView?.layoutMargins = .init(top: .space_8, left: .space_24, bottom: .space_24, right: .space_24)
         copy3Label.isHidden = viewModel.copy3Text == nil

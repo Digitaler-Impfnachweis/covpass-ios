@@ -20,7 +20,7 @@ class CertificatesOverviewPersonViewControllerSnapShotTests: BaseSnapShotTests {
                            boosterLogicMock: BoosterLogicMock = BoosterLogicMock(),
                            needsMask: Bool = true) -> CertificatesOverviewPersonViewModelProtocol {
         repository.certificates = certificates
-        var certificateHolderStatusModel = CertificateHolderStatusModelMock()
+        let certificateHolderStatusModel = CertificateHolderStatusModelMock()
         certificateHolderStatusModel.needsMask = needsMask
         return CertificatesOverviewPersonViewModel(router: CertificatesOverviewPersonRouterMock(),
                                                    persistence: MockPersistence(),

@@ -37,7 +37,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         certificates: [ExtendedCBORWebToken] = [],
         locale: Locale = .current
     ) {
-        var certificateHolderStatusModel = CertificateHolderStatusModelMock()
+        let certificateHolderStatusModel = CertificateHolderStatusModelMock()
         certificateHolderStatusModel.needsMask = true
         vaccinationRepository.certificates = certificates
         sut = CertificatesOverviewViewModel(

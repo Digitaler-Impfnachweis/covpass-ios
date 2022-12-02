@@ -26,7 +26,7 @@ public struct ValidationResultRouter: ValidationResultRouterProtocol {
     // MARK: - Methods
 
     public func showStart() {
-        sceneCoordinator.dimiss()
+        sceneCoordinator.dismiss()
     }
 
     public func scanQRCode() -> Promise<QRCodeImportResult> {

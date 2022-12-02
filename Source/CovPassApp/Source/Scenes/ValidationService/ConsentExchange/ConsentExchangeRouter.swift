@@ -35,7 +35,7 @@ struct ConsentExchangeRouter: ConsentExchangeRoutable {
                    actions: [
                        DialogAction(title: Constants.Text.Alert.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: nil),
                        DialogAction(title: Constants.Text.Alert.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { _ in
-                           sceneCoordinator.dimiss(animated: true)
+                           sceneCoordinator.dismiss(animated: true)
                        })
                    ],
                    style: .alert)

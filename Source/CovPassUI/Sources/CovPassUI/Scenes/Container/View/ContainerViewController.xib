@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContainerViewController" customModule="CovPassUI">
+            <connections>
+                <outlet property="containerView" destination="b6O-n0-Hkl" id="dbW-5h-Hph"/>
+                <outlet property="headerView" destination="h7s-cG-VWO" id="Mv2-i4-oUs"/>
+                <outlet property="view" destination="xYK-sf-bd8" id="aN9-Q0-28g"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYK-sf-bd8">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <subviews>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="118" translatesAutoresizingMaskIntoConstraints="NO" id="h7s-cG-VWO" customClass="InfoHeaderView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="68" width="414" height="118"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6O-n0-Hkl">
+                    <rect key="frame" x="0.0" y="186" width="414" height="676"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Ij5-fs-Fs2"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="h7s-cG-VWO" firstAttribute="top" secondItem="Ij5-fs-Fs2" secondAttribute="top" constant="24" id="FgR-lG-046"/>
+                <constraint firstItem="Ij5-fs-Fs2" firstAttribute="trailing" secondItem="h7s-cG-VWO" secondAttribute="trailing" id="Iv8-pt-ydK"/>
+                <constraint firstItem="b6O-n0-Hkl" firstAttribute="leading" secondItem="Ij5-fs-Fs2" secondAttribute="leading" id="ZCL-Kd-qPl"/>
+                <constraint firstItem="Ij5-fs-Fs2" firstAttribute="trailing" secondItem="b6O-n0-Hkl" secondAttribute="trailing" id="hnr-Y9-c99"/>
+                <constraint firstItem="Ij5-fs-Fs2" firstAttribute="bottom" secondItem="b6O-n0-Hkl" secondAttribute="bottom" id="s3u-U2-Xi0"/>
+                <constraint firstItem="b6O-n0-Hkl" firstAttribute="top" secondItem="h7s-cG-VWO" secondAttribute="bottom" id="ufd-0A-xyz"/>
+                <constraint firstItem="h7s-cG-VWO" firstAttribute="leading" secondItem="Ij5-fs-Fs2" secondAttribute="leading" id="wkw-ZQ-M90"/>
+            </constraints>
+            <point key="canvasLocation" x="-1513.0434782608697" y="-52.232142857142854"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="h7s-cG-VWO">
+            <size key="intrinsicContentSize" width="414" height="118"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

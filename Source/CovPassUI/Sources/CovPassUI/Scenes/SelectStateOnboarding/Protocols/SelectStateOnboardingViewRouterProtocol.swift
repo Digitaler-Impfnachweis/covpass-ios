@@ -10,4 +10,5 @@ import PromiseKit
 
 public protocol SelectStateOnboardingViewRouterProtocol: RouterProtocol {
     func showFederalStateSelection() -> Promise<Void>
+    func showFAQ()
 }

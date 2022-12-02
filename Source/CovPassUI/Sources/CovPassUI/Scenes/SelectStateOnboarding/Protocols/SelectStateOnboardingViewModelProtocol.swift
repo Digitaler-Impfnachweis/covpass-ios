@@ -20,5 +20,6 @@ public protocol SelectStateOnboardingViewModelProtocol {
     var closingAnnounce: String { get }
     var choosenState: String { get }
     func showFederalStateSelection() -> Promise<Void>
+    func showFAQ()
     func close()
 }

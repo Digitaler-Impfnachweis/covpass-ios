@@ -114,6 +114,15 @@
 "check_context_onboarding_button" = "OK";
 
 
+/********** what is new: popup **********/
+
+"whats_new_screen_title" = "New features";
+
+"whats_new_screen_update_notifications_checkbox_headline" = "Do not show this type of notifications anymore";
+
+"whats_new_screen_update_notifications_checkbox_copy" = "You can change this option anytime in the settings.";
+
+
 /********** start screen **********/
 
 "accessibility_validation_start_screen_label_information" = "Settings";
@@ -231,7 +240,7 @@
 
 "dialog_second_scan_message" = "You have already scanned this certificate. Please scan another certificate.";
 
-"dialog_second_scan_button_repeat" = "Repeat";
+"dialog_second_scan_button_repeat" = "New scan";
 
 "dialog_second_scan_button_update" = "Cancel";
 
@@ -618,6 +627,25 @@
 "app_information_version_label" = "Version %@";
 
 
+/********** what is new: settings **********/
+
+"accessibility_app_information_title_update_notifications_announce" = "Update notifications has been opened";
+
+"accessibility_app_information_title_update_notifications_closing_announce" = "Update notifications has been closed";
+
+"app_information_title_update_notifications" = "Update notifications";
+
+"app_information_copy_update_notifications" = "You can now disable the update notifications. You can use the toggle to disable or re-enable the updates at any time. If you disable the update screen, you will no longer receive updates about the latest software developments in the app.";
+
+"app_information_update_notifications_toggle" = "Show update notifications";
+
+"app_information_update_notifications_new_version_copy" = "New functions (Version %@)";
+
+"settings_list_status_on" = "On";
+
+"settings_list_status_off" = "Off";
+
+
 /********** error handling **********/
 
 "error_standard_unexpected_title" = "Sorry";
@@ -761,7 +789,7 @@
 
 "infschg_result_mask_mandatory_deviating_data_link" = "Ignore deviation";
 
-"infschg_result_no_mask_rules_title" = "No present rules";
+"infschg_result_no_mask_rules_title" = "No additional rules";
 
 "infschg_result_no_mask_rules_subtitle" = "in %@";
 

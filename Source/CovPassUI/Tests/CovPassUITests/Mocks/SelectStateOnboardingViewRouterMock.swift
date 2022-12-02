@@ -13,9 +13,14 @@ import XCTest
 class SelectStateOnboardingViewRouterMock: SelectStateOnboardingViewRouterProtocol {
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     let showFederalStateSelectionExpectation = XCTestExpectation()
+    let showFAQExpectation = XCTestExpectation()
 
     func showFederalStateSelection() -> Promise<Void> {
         showFederalStateSelectionExpectation.fulfill()
         return .value
+    }
+
+    func showFAQ() {
+        showFAQExpectation.fulfill()
     }
 }

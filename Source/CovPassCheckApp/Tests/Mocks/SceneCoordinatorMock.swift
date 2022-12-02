@@ -19,7 +19,7 @@ class SceneCoordinatorMock: SceneCoordinator {
 
     func asRoot(_: SceneFactory) {}
 
-    func dimiss(animated _: Bool = true) {
+    func dismiss(animated _: Bool = true) {
         sceneDissmissed = true
         dismissExpectation.fulfill()
     }

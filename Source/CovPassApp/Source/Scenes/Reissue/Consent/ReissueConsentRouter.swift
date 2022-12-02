@@ -50,7 +50,7 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
                        DialogAction(title: Constants.Text.Alert.Cancellation.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: { _ in }),
                        DialogAction(title: Constants.Text.Alert.Cancellation.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { [weak self] _ in
                            resolver.fulfill_()
-                           self?.sceneCoordinator.dimiss(animated: true)
+                           self?.sceneCoordinator.dismiss(animated: true)
                        })
                    ],
                    style: .alert)

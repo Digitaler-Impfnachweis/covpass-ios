@@ -42,7 +42,7 @@
 
 "vaccination_second_onboarding_page_title" = "Step two: open the QR code in the CovPass app";
 
-"vaccination_second_onboarding_page_message" = "Using the QR code, you can show evidence of a Covid-19 vaccination or recovery from a Covid-19 infection. The QR code is displayed directly in the CovPass app after scanning it. Please be aware that a vaccination only becomes sufficiently effective about 14 days after the final dose. For this reason, the QR code for full vaccination only becomes valid after 14 days have passed.";
+"vaccination_second_onboarding_page_message" = "You can use the QR code to track Corona vaccinations and recoveries from Corona infection. Likewise, the app shows whether or not you need to wear a mask on public transportation in certain states and in indoor spaces open to the public, such as restaurants or recreational events.";
 
 "vaccination_third_onboarding_page_title" = "Step three: show your QR code when needed";
 
@@ -951,7 +951,7 @@
 
 "vaccination_certificate_detail_view_qrcode_action_button_title" = "Display QR code";
 
-"vaccination_certificate_detail_view_pdf_action_button_title" = "Create EU printout";
+"vaccination_certificate_detail_view_pdf_action_button_title" = "Create PDF";
 
 "vaccination_certificate_detail_view_pdf_action_button_note" = "You can only download German certificates as PDF files.";
 
@@ -1103,7 +1103,7 @@
 
 "recovery_certificate_detail_view_qrcode_action_button_title" = "Display QR code";
 
-"recovery_certificate_detail_view_create_pdf_action_button_title" = "Create EU printout";
+"recovery_certificate_detail_view_create_pdf_action_button_title" = "Create PDF";
 
 "recovery_certificate_detail_view_pdf_action_button_note" = "You can only download German vaccination and recovery certificates as PDF files.";
 
@@ -1132,11 +1132,11 @@
 
 /********** print certificate **********/
 
-"accessibility_vaccination_certificate_detail_view_pdf_announce" = "The view \"Create EU printout\" has been opened";
+"accessibility_vaccination_certificate_detail_view_pdf_announce" = "The view \"Create PDF\" has been opened";
 
 "accessibility_certificate_create_pdf_label_close" = "Close";
 
-"certificate_create_pdf_headline" = "Create EU printout";
+"certificate_create_pdf_headline" = "Create PDF";
 
 "certificate_create_pdf_first_list_item" = "You can save the certificate as a PDF document. Saving is voluntary. Initially, only you have access to the PDF document.";
 
@@ -1795,13 +1795,13 @@
 
 "accessibility_start_screen_arrow_card" = "Open all certificates of this person";
 
-"infschg_popup_choose_federal_state_copy_1" = "Mask requirement rules may vary by federal state. Select your federal state to see your current mask status.*";
+"infschg_popup_choose_federal_state_copy_1" = "Beginning October 1, 2022, states may mandate a mask requirement in indoor spaces open to the public. Select your state to see your current mask status.*";
 
 "infschg_popup_choose_federal_state_tag" = "Federal state";
 
 "infschg_popup_choose_federal_state_box_content" = "%@";
 
-"infschg_popup_choose_federal_state_copy_2" = "*You can change the federal state from the corresponding selection in the settings at any time.";
+"infschg_popup_choose_federal_state_copy_2" = "*You can change the state in the settings at any time. For more information about the mask requirement, see the #frequently asked questions::$0#.";
 
 "infschg_popup_choose_federal_state_copy_3" = "Rules from %@ (start of validity)";
 

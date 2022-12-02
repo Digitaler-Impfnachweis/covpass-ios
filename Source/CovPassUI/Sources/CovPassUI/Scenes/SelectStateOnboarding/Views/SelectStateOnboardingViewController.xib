@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,14 +25,14 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <subviews>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="118" translatesAutoresizingMaskIntoConstraints="NO" id="h7s-cG-VWO" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="72" width="414" height="118"/>
+                    <rect key="frame" x="0.0" y="68" width="414" height="118"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOK-tl-rDY">
-                    <rect key="frame" x="0.0" y="190" width="414" height="528"/>
+                    <rect key="frame" x="0.0" y="186" width="414" height="532"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPB-pJ-YNe">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="528"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="532"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="X0R-nC-XtI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="723.5"/>
@@ -54,7 +53,7 @@
                                             <rect key="frame" x="0.0" y="602.5" width="414" height="60.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60.5" translatesAutoresizingMaskIntoConstraints="NO" id="qB0-tj-ODZ" customClass="PlainLabel" customModule="CovPassUI">
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60.5" translatesAutoresizingMaskIntoConstraints="NO" id="qB0-tj-ODZ" customClass="LinkLabel" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="663" width="414" height="60.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
@@ -114,26 +113,6 @@
             <point key="canvasLocation" x="-1513.0434782608697" y="-52.232142857142854"/>
         </view>
     </objects>
-    <designables>
-        <designable name="JqW-rC-xD4">
-            <size key="intrinsicContentSize" width="180" height="60"/>
-        </designable>
-        <designable name="R1r-lY-wLt">
-            <size key="intrinsicContentSize" width="414" height="60.5"/>
-        </designable>
-        <designable name="cZR-uN-pgR">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
-        <designable name="fyN-Gw-OcI">
-            <size key="intrinsicContentSize" width="414" height="60.5"/>
-        </designable>
-        <designable name="h7s-cG-VWO">
-            <size key="intrinsicContentSize" width="414" height="118"/>
-        </designable>
-        <designable name="qB0-tj-ODZ">
-            <size key="intrinsicContentSize" width="414" height="60.5"/>
-        </designable>
-    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

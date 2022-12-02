@@ -32,7 +32,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         holderNeedsMask: Bool,
         maskRulesAvailable: Bool = false
     ) -> CertificatesOverviewViewModelProtocol {
-        var certificateHolderStatusModel = CertificateHolderStatusModelMock()
+        let certificateHolderStatusModel = CertificateHolderStatusModelMock()
         certificateHolderStatusModel.areMaskRulesAvailable = maskRulesAvailable
         certificateHolderStatusModel.needsMask = holderNeedsMask
         return CertificatesOverviewViewModel(

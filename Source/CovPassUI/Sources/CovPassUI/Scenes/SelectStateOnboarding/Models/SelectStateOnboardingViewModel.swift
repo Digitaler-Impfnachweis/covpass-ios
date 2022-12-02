@@ -64,6 +64,10 @@ open class SelectStateOnboardingViewModel: SelectStateOnboardingViewModelProtoco
         router.showFederalStateSelection()
     }
 
+    public func showFAQ() {
+        router.showFAQ()
+    }
+
     public func close() {
         resolver.fulfill_()
     }

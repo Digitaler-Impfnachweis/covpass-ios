@@ -259,7 +259,7 @@ class DefaultSceneCoordinatorTests: XCTestCase {
         sut.present(SceneFactoryMock(viewController: viewController))
 
         // when
-        sut.dimiss()
+        sut.dismiss()
 
         // then
         wait(for: [exp], timeout: 2)
@@ -274,7 +274,7 @@ class DefaultSceneCoordinatorTests: XCTestCase {
         sut.present(SceneFactoryMock(viewController: viewController))
 
         // when
-        sut.dimiss()
+        sut.dismiss()
 
         // then
         wait(for: [exp], timeout: 2)

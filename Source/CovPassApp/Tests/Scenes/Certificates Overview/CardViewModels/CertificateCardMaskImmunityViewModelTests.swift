@@ -28,7 +28,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
                      boosterLogic: BoosterLogicMock = BoosterLogicMock(),
                      needsMask: Bool = true,
                      maskRuleAvailable: Bool = true) -> CertificateCardMaskImmunityViewModel {
-        var certificateHolder = CertificateHolderStatusModelMock()
+        let certificateHolder = CertificateHolderStatusModelMock()
         certificateHolder.needsMask = needsMask
         certificateHolder.areMaskRulesAvailable = maskRuleAvailable
         let userDefaults = UserDefaultsPersistence()

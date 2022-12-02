@@ -11,6 +11,8 @@ import PromiseKit
 import UIKit
 
 public class SceneCoordinatorMock: SceneCoordinator {
+    var didDismissScene = false
+
     public init() {}
 
     public var didSetAsRoot: ((SceneFactory) -> Void)?
@@ -41,5 +43,9 @@ public class SceneCoordinatorMock: SceneCoordinator {
             return .value(someResult)
         }
         fatalError("Missing result")
+    }
+
+    public func dismiss(animated _: Bool) {
+        didDismissScene = true
     }
 }

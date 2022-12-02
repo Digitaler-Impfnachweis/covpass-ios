@@ -13,7 +13,7 @@ public protocol SceneDismissing {
     func pop(animated: Bool)
 
     /// dismiss the presented top viewcontroller
-    func dimiss(animated: Bool)
+    func dismiss(animated: Bool)
 }
 
 // MARK: - Optionals
@@ -23,7 +23,7 @@ public extension SceneDismissing {
         pop(animated: animated)
     }
 
-    func dimiss(animated: Bool = true) {
-        dimiss(animated: animated)
+    func dismiss(animated: Bool = true) {
+        dismiss(animated: animated)
     }
 }

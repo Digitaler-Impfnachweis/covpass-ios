@@ -42,7 +42,7 @@
 
 "vaccination_second_onboarding_page_title" = "Zweiter Schritt: Rufen Sie den QR-Code in der CovPass-App auf";
 
-"vaccination_second_onboarding_page_message" = "Mit dem QR-Code können Sie eine Corona-Impfung oder eine Genesung von einer Corona-Infektion nachweisen. Nach dem Scannen wird der QR-Code direkt in der CovPass-App angezeigt. Bitte beachten Sie, dass eine ausreichende Wirksamkeit des Impfschutzes erst etwa 14 Tage nach der letzten Impfung eintritt. Der QR-Code für den vollständigen Impfschutz ist deshalb erst nach Ablauf der 14 Tage gültig.";
+"vaccination_second_onboarding_page_message" = "Mit dem QR-Code können Sie Corona-Impfungen und Genesungen von einer Corona-Infektion nachweisen. Ebenso zeigt die App an, ob Sie in bestimmten Bundesländern im öffentlichen Personennahverkehr und in öffentlich zugänglichen Innenräumen wie beispielsweise Restaurants oder Freizeitveranstaltungen eine Maske tragen müssen oder nicht.";
 
 "vaccination_third_onboarding_page_title" = "Dritter Schritt: Zeigen Sie den QR-Code bei Bedarf vor";
 
@@ -951,7 +951,7 @@
 
 "vaccination_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
-"vaccination_certificate_detail_view_pdf_action_button_title" = "EU-Ausdruck erstellen";
+"vaccination_certificate_detail_view_pdf_action_button_title" = "PDF erstellen";
 
 "vaccination_certificate_detail_view_pdf_action_button_note" = "Sie können nur deutsche Zertifikate als PDF herunterladen.";
 
@@ -1103,7 +1103,7 @@
 
 "recovery_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
-"recovery_certificate_detail_view_create_pdf_action_button_title" = "EU-Ausdruck erstellen";
+"recovery_certificate_detail_view_create_pdf_action_button_title" = "PDF erstellen";
 
 "recovery_certificate_detail_view_pdf_action_button_note" = "Sie können nur deutsche Impf- und Genesenenzertifikate als PDF herunterladen.";
 
@@ -1132,11 +1132,11 @@
 
 /********** print certificate **********/
 
-"accessibility_vaccination_certificate_detail_view_pdf_announce" = "Die Ansicht für \"EU-Ausdruck erstellen\" wurde geöffnet";
+"accessibility_vaccination_certificate_detail_view_pdf_announce" = "Die Ansicht für \"PDF erstellen\" wurde geöffnet";
 
 "accessibility_certificate_create_pdf_label_close" = "Schließen";
 
-"certificate_create_pdf_headline" = "EU-Ausdruck erstellen";
+"certificate_create_pdf_headline" = "PDF erstellen";
 
 "certificate_create_pdf_first_list_item" = "Sie können das Zertifikat als PDF-Dokument speichern. Die Speicherung ist freiwillig. Auf das PDF-Dokument haben zunächst nur Sie Zugriff.";
 
@@ -1795,13 +1795,13 @@
 
 "accessibility_start_screen_arrow_card" = "Alle Zertifikate von dieser Person öffnen";
 
-"infschg_popup_choose_federal_state_copy_1" = "Die Regeln zur Maskenpflicht können je nach Bundesland variieren. Wählen Sie Ihr Bundesland aus, um Ihren aktuellen Maskenstatus sehen zu können.*";
+"infschg_popup_choose_federal_state_copy_1" = "Seit dem 1. Oktober 2022 können die Bundesländer eine Maskenpflicht in öffentlich zugänglichen Innenräumen anordnen. Wählen Sie Ihr Bundesland aus, um Ihren aktuellen Maskenstatus sehen zu können.*";
 
 "infschg_popup_choose_federal_state_tag" = "Bundesland";
 
 "infschg_popup_choose_federal_state_box_content" = "%@";
 
-"infschg_popup_choose_federal_state_copy_2" = "*Sie können jederzeit das Bundesland von der entsprechenden Auswahl in den Einstellungen ändern.";
+"infschg_popup_choose_federal_state_copy_2" = "*Sie können jederzeit das Bundesland in den Einstellungen ändern. Weitere Informationen zur Maskenpflicht finden Sie #in den häufigen Fragen::$0#.";
 
 "infschg_popup_choose_federal_state_copy_3" = "Regeln vom %@ (Gültigkeitsbeginn)";
 

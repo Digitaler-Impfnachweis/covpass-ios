@@ -73,7 +73,7 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
                                resolver.fulfill(false)
                            }),
                            DialogAction(title: Constants.Text.Alert.Cancellation.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { _ in
-                               sceneCoordinator.dimiss(animated: true)
+                               sceneCoordinator.dismiss(animated: true)
                                return resolver.fulfill(true)
                            })
                        ],
