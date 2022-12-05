@@ -21,11 +21,10 @@ struct CertificateHolderIncompleteImmunizationStatusViewModel: CertificateHolder
     let selectFederalStateButtonTitle: String? = nil
 }
 
-struct CertificateHolderImmunizationE22StatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol {
+struct CertificateHolderImmunizationE1StatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol {
     let icon: UIImage = .statusPartialCircle
     let title = "infschg_start_immune_incomplete".localized
-    let days: Int
-    var description: String { String(format: "infschg_cert_overview_immunisation_E22".localized, days) }
+    var description: String
     var subtitle: String? {
         guard let date = date else { return nil }
         return String(format: "infschg_cert_overview_immunisation_time_from".localized, date)

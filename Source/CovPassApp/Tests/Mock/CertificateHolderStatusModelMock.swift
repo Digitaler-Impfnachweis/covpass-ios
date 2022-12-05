@@ -11,9 +11,8 @@ import PromiseKit
 
 class CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     var needsMask = false
-    var holderIsFullyImmunized = false
     var areMaskRulesAvailable = false
-    var isVaccinationCycleIsComplete = true
+    var isVaccinationCycleIsComplete: HolderStatusResponse = .init(passed: true, results: nil)
     var areIfsgRulesAvailable = true
     var areTravelRulesAvailableForGermanyResponse = true
     var validCertificates: [ExtendedCBORWebToken]?
@@ -38,10 +37,6 @@ class CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
         checkEuInvalidationRulesResult
     }
 
-    func holderIsFullyImmunized(_: [ExtendedCBORWebToken]) -> Bool {
-        holderIsFullyImmunized
-    }
-
     func holderNeedsMask(_: [ExtendedCBORWebToken], region _: String?) -> Bool {
         needsMask
     }
@@ -62,7 +57,7 @@ class CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
         validCertificates ?? certificates
     }
 
-    func vaccinationCycleIsComplete(_: [CovPassCommon.ExtendedCBORWebToken]) -> Bool {
+    func vaccinationCycleIsComplete(_: [ExtendedCBORWebToken]) -> HolderStatusResponse {
         isVaccinationCycleIsComplete
     }
 

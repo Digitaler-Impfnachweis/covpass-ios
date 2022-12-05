@@ -65,21 +65,20 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        userDefaults.stateSelection = "SH"
         verifyView(view: viewController.view, waitAfter: 0.3)
     }
 
-    func test_anyToken_holder_maskNeeded_isFullyImmunized() {
+    func test_maskNeeded() {
         let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: true)
+        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: true, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         verifyView(view: viewController.view, waitAfter: 0.3)
     }
 
-    func test_booster_notification_holder_maskNeeded_isFullyImmunized() {
+    func test_booster_notification_maskNeeded() {
         let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         let certs = [cert]
@@ -88,40 +87,28 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         boosterCandidate.state = .new
         boosterLogicMock.boosterCandidates = [boosterCandidate]
         vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(boosterLogic: boosterLogicMock, repository: vacinationRepoMock, holderNeedsMask: true)
+        let viewModel = viewModel(boosterLogic: boosterLogicMock, repository: vacinationRepoMock, holderNeedsMask: true, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         verifyView(view: viewController.view, waitAfter: 0.1)
     }
 
-    func test_anyToken_holder_maskNotNeeded_isFullyImmunized() {
+    func test_maskNotNeeded() {
         let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let certs = [cert]
         vacinationRepoMock.certificates = certs
         let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        userDefaults.stateSelection = "SH"
         verifyView(view: viewController.view, waitAfter: 0.1)
     }
 
-    func test_anyToken_holder_maskNeeded_isNotFullyImmunized() {
+    func test_maskRulesNotAvailable() {
         let vacinationRepoMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: true)
+        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: false)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 0.1)
-    }
-
-    func test_anyToken_holder_maskNotNeeded_isNotFullyImmunized() {
-        let vacinationRepoMock = VaccinationRepositoryMock()
-        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
-        let certs = [cert]
-        vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
-        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        userDefaults.stateSelection = "SH"
         verifyView(view: viewController.view, waitAfter: 0.1)
     }
 
@@ -194,7 +181,6 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        userDefaults.stateSelection = "SH"
         verifyView(view: viewController.view, waitAfter: 1.3)
     }
 }

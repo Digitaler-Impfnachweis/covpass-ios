@@ -5,6 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 @testable import CovPassApp
 import CovPassCommon
 import CovPassUI
@@ -21,8 +22,16 @@ class CertificateDetailViewModelTests: XCTestCase {
     private var sut: CertificateDetailViewModel!
     private var vaccinationRepo: VaccinationRepositoryMock!
     private var persistence: MockPersistence!
+    private var descriptionText: String!
+    private var rule1: Rule!
+    private var result1: ValidationResult!
+    private var results: [RuleType?: [ValidationResult]]?
 
     override func setUpWithError() throws {
+        descriptionText = "This is a description"
+        rule1 = Rule(identifier: "FOO", description: [.init(lang: "en", desc: descriptionText)])
+        result1 = .init(rule: rule1)
+        results = [.impfstatusBZwei: [result1]]
         let certificates: [ExtendedCBORWebToken] = try [
             .token1Of2(),
             .token2Of2(),
@@ -37,14 +46,19 @@ class CertificateDetailViewModelTests: XCTestCase {
         configureCustomSut(certificates: certificates)
     }
 
-    private func configureCustomSut(certificates: [ExtendedCBORWebToken],
+    private func configureCustomSut(certificates: [ExtendedCBORWebToken] = [CBORWebToken.mockVaccinationCertificate.extended()],
                                     maskRulesAvailable: Bool = false,
-                                    needsMask: Bool = false) {
+                                    needsMask: Bool = false,
+                                    isVaccinationCycleComplete: Bool = false,
+                                    vaccinatsionCycleCompleteByRule: RuleType? = .impfstatusEEins) {
         boosterLogic = BoosterLogicMock()
         vaccinationRepo = VaccinationRepositoryMock()
         delegate = .init()
         certificateHolderStatusModel.areMaskRulesAvailable = maskRulesAvailable
         certificateHolderStatusModel.needsMask = needsMask
+        rule1.description.first?.desc = descriptionText + " " + (vaccinatsionCycleCompleteByRule?.rawValue ?? "")
+        results = [vaccinatsionCycleCompleteByRule: [.init(rule: rule1)]]
+        certificateHolderStatusModel.isVaccinationCycleIsComplete = .init(passed: isVaccinationCycleComplete, results: results)
         persistence.stateSelection = "SH"
         sut = CertificateDetailViewModel(
             router: router,
@@ -80,6 +94,10 @@ class CertificateDetailViewModelTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
+        descriptionText = nil
+        rule1 = nil
+        result1 = nil
+        results = nil
         persistence = nil
         vaccinationRepo = nil
         boosterLogic = nil
@@ -1001,180 +1019,130 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel is CertificateHolderInvalidMaskStatusViewModel)
     }
 
-    func testImmunizationStatusViewModel_incomplete() {
+    func testImmunizationStatusViewModel_incomplete() throws {
+        // Given
+        configureCustomSut(isVaccinationCycleComplete: false, vaccinatsionCycleCompleteByRule: nil)
         // When
         let viewModel = sut.immunizationStatusViewModel
-
         // Then
         XCTAssertTrue(viewModel is CertificateHolderIncompleteImmunizationStatusViewModel)
+        XCTAssertEqual(viewModel.title, "Incomplete vaccination protection")
+        XCTAssertEqual(viewModel.subtitle, nil)
+        XCTAssertEqual(viewModel.description, "You have not yet received all currently recommended vaccinations. Your vaccination protection is not yet complete. Please note that the vaccination status displayed in the app is determined in accordance with the Infection Protection Act. For children under 12 and all other persons, there are currently no restrictions under federal law that are linked to the \"fully vaccinated\" vaccination status that can be viewed in the app. Please note, on the one hand, the recommendations of the Permanent Vaccination Commission and, on the other hand, possibly deviating rules in your federal state.")
+        XCTAssertEqual(viewModel.icon, .statusPartialCircle)
+        XCTAssertEqual(viewModel.date, nil)
+        XCTAssertEqual(viewModel.federalState, nil)
+        XCTAssertEqual(viewModel.federalStateText, nil)
+        XCTAssertEqual(viewModel.linkLabel, nil)
+        XCTAssertEqual(viewModel.notice, nil)
+        XCTAssertEqual(viewModel.noticeText, nil)
+        XCTAssertEqual(viewModel.selectFederalStateButtonTitle, nil)
     }
 
-    func testImmunizationStatusViewModel_incomplete_because_of_missing_vaccination() throws {
+    func testImmunizationStatusViewModel_incomplete_alternative() throws {
         // Given
-        let recovery = CBORWebToken
-            .mockRecoveryCertificate
-            .recoveryTestDate(Date() - 3)
-            .extended()
-        certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [recovery])
-
+        configureCustomSut(isVaccinationCycleComplete: true, vaccinatsionCycleCompleteByRule: nil)
         // When
         let viewModel = sut.immunizationStatusViewModel
-
         // Then
         XCTAssertTrue(viewModel is CertificateHolderIncompleteImmunizationStatusViewModel)
+        XCTAssertEqual(viewModel.title, "Incomplete vaccination protection")
+        XCTAssertEqual(viewModel.subtitle, nil)
+        XCTAssertEqual(viewModel.description, "You have not yet received all currently recommended vaccinations. Your vaccination protection is not yet complete. Please note that the vaccination status displayed in the app is determined in accordance with the Infection Protection Act. For children under 12 and all other persons, there are currently no restrictions under federal law that are linked to the \"fully vaccinated\" vaccination status that can be viewed in the app. Please note, on the one hand, the recommendations of the Permanent Vaccination Commission and, on the other hand, possibly deviating rules in your federal state.")
+        XCTAssertEqual(viewModel.icon, .statusPartialCircle)
+        XCTAssertEqual(viewModel.date, nil)
+        XCTAssertEqual(viewModel.federalState, nil)
+        XCTAssertEqual(viewModel.federalStateText, nil)
+        XCTAssertEqual(viewModel.linkLabel, nil)
+        XCTAssertEqual(viewModel.notice, nil)
+        XCTAssertEqual(viewModel.noticeText, nil)
+        XCTAssertEqual(viewModel.selectFederalStateButtonTitle, nil)
     }
 
-    func testImmunizationStatusViewModel_incomplete_because_to_low_doseNumber() throws {
+    func testImmunizationStatusViewModel_complete_E1() throws {
         // Given
-        let vaccination = CBORWebToken
-            .mockVaccinationCertificate
-            .doseNumber(1)
+        let recoveryTestDate = try XCTUnwrap(DateUtils.parseDate("2021-01-26T15:05:00"))
+        let recoveryCertificate = CBORWebToken.mockRecoveryCertificate
+            .recoveryTestDate(recoveryTestDate)
             .extended()
-        certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination])
-
+        configureCustomSut(certificates: [recoveryCertificate],
+                           isVaccinationCycleComplete: true,
+                           vaccinatsionCycleCompleteByRule: .impfstatusEEins)
         // When
         let viewModel = sut.immunizationStatusViewModel
-
         // Then
-        XCTAssertTrue(viewModel is CertificateHolderIncompleteImmunizationStatusViewModel)
-    }
-
-    func testImmunizationStatusViewModel_incomplete_because_of_missing_recovery() throws {
-        // Given
-        let vaccination = CBORWebToken
-            .mockVaccinationCertificate
-            .doseNumber(2)
-            .extended()
-        certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination])
-
-        // When
-        let viewModel = sut.immunizationStatusViewModel
-
-        // Then
-        XCTAssertTrue(viewModel is CertificateHolderIncompleteImmunizationStatusViewModel)
+        XCTAssertTrue(viewModel is CertificateHolderImmunizationE1StatusViewModel)
+        XCTAssertEqual(viewModel.title, "Incomplete vaccination protection")
+        XCTAssertEqual(viewModel.subtitle, "Complete from Feb 24, 2021")
+        XCTAssertEqual(viewModel.description, "This is a description ImpfstatusEEins")
+        XCTAssertEqual(viewModel.icon, .statusPartialCircle)
+        XCTAssertEqual(viewModel.date, "Feb 24, 2021")
+        XCTAssertEqual(viewModel.federalState, nil)
+        XCTAssertEqual(viewModel.federalStateText, nil)
+        XCTAssertEqual(viewModel.linkLabel, nil)
+        XCTAssertEqual(viewModel.notice, nil)
+        XCTAssertEqual(viewModel.noticeText, nil)
+        XCTAssertEqual(viewModel.selectFederalStateButtonTitle, nil)
     }
 
     func testImmunizationStatusViewModel_complete_B2() throws {
         // Given
-        let vaccination = CBORWebToken
-            .mockVaccinationCertificate
-            .doseNumber(4)
-            .extended()
-        certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination])
-
+        configureCustomSut(isVaccinationCycleComplete: true, vaccinatsionCycleCompleteByRule: .impfstatusBZwei)
         // When
         let viewModel = sut.immunizationStatusViewModel
-
         // Then
-        XCTAssertTrue(viewModel is CertificateHolderCompleteImmunizationB2StatusViewModel)
+        XCTAssertTrue(viewModel is CertificateHolderCompleteVaccinationCycleStatusViewModel)
+        XCTAssertEqual(viewModel.title, "Complete vaccination protection")
+        XCTAssertEqual(viewModel.subtitle, nil)
+        XCTAssertEqual(viewModel.description, "This is a description ImpfstatusBZwei")
+        XCTAssertEqual(viewModel.icon, .statusFullCircle)
+        XCTAssertEqual(viewModel.date, nil)
+        XCTAssertEqual(viewModel.federalState, nil)
+        XCTAssertEqual(viewModel.federalStateText, nil)
+        XCTAssertEqual(viewModel.linkLabel, nil)
+        XCTAssertEqual(viewModel.notice, nil)
+        XCTAssertEqual(viewModel.noticeText, nil)
+        XCTAssertEqual(viewModel.selectFederalStateButtonTitle, nil)
     }
 
     func testImmunizationStatusViewModel_complete_C2() throws {
         // Given
-        let vaccination = CBORWebToken
-            .mockVaccinationCertificate
-            .doseNumber(3)
-            .extended()
-        certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination])
-
+        configureCustomSut(isVaccinationCycleComplete: true, vaccinatsionCycleCompleteByRule: .impfstatusCZwei)
         // When
         let viewModel = sut.immunizationStatusViewModel
-
         // Then
-        XCTAssertTrue(viewModel is CertificateHolderImmunizationC2StatusViewModel)
+        XCTAssertTrue(viewModel is CertificateHolderCompleteVaccinationCycleStatusViewModel)
+        XCTAssertEqual(viewModel.title, "Complete vaccination protection")
+        XCTAssertEqual(viewModel.subtitle, nil)
+        XCTAssertEqual(viewModel.description, "This is a description ImpfstatusCZwei")
+        XCTAssertEqual(viewModel.icon, .statusFullCircle)
+        XCTAssertEqual(viewModel.date, nil)
+        XCTAssertEqual(viewModel.federalState, nil)
+        XCTAssertEqual(viewModel.federalStateText, nil)
+        XCTAssertEqual(viewModel.linkLabel, nil)
+        XCTAssertEqual(viewModel.notice, nil)
+        XCTAssertEqual(viewModel.noticeText, nil)
+        XCTAssertEqual(viewModel.selectFederalStateButtonTitle, nil)
     }
 
-    func testImmunizationStatusViewModel_complete_E2_recovery_older_than_vaccination() throws {
+    func testImmunizationStatusViewModel_complete_E2() throws {
         // Given
-        let vaccination = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationSetDate(Date() - 2)
-            .doseNumber(2)
-            .extended()
-        let recovery = CBORWebToken
-            .mockRecoveryCertificate
-            .recoveryTestDate(Date() - 3)
-            .extended()
-        certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination, recovery])
-
+        configureCustomSut(isVaccinationCycleComplete: true, vaccinatsionCycleCompleteByRule: .impfstatusEZwei)
         // When
         let viewModel = sut.immunizationStatusViewModel
-
         // Then
-        XCTAssertTrue(viewModel is CertificateHolderImmunizationE2StatusViewModel)
-    }
-
-    func testImmunizationStatusViewModel_complete_E22_recovery_fresher_than_vaccination_and_revovery_frehser_than_29_days() throws {
-        // Given
-        let vaccination = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationSetDate(Date().add(days: -100)!)
-            .doseNumber(2)
-            .extended()
-        let recovery = CBORWebToken
-            .mockRecoveryCertificate
-            .recoveryTestDate(Date().add(days: -29)! + 1)
-            .extended()
-        certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination, recovery])
-
-        // When
-        let viewModel = sut.immunizationStatusViewModel
-
-        // Then
-        XCTAssertTrue(viewModel is CertificateHolderImmunizationE22StatusViewModel)
-        XCTAssertEqual(viewModel.description, "You are considered fully vaccinated based on your vaccination and the infection you have had. However, your immune protection is only effective in 1 days. Please bear in mind that you can still be contagious, but also inform yourself about recommended booster vaccinations")
-    }
-
-    func testImmunizationStatusViewModel_complete_E22_recovery_fresher_than_vaccination_and_revovery_just_done() throws {
-        // Given
-        let vaccination = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationSetDate(Date().add(days: -100)!)
-            .doseNumber(2)
-            .extended()
-        let recovery = CBORWebToken
-            .mockRecoveryCertificate
-            .recoveryTestDate(Date() - 1)
-            .extended()
-        certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination, recovery])
-
-        // When
-        let viewModel = sut.immunizationStatusViewModel
-
-        // Then
-        XCTAssertTrue(viewModel is CertificateHolderImmunizationE22StatusViewModel)
-        XCTAssertEqual(viewModel.description, "You are considered fully vaccinated based on your vaccination and the infection you have had. However, your immune protection is only effective in 29 days. Please bear in mind that you can still be contagious, but also inform yourself about recommended booster vaccinations")
-    }
-
-    func testImmunizationStatusViewModel_complete_E2_recovery_fresher_than_vaccination_and_revovery_older_than_29_days() throws {
-        // Given
-        let vaccinationDate = try XCTUnwrap(Date().add(days: -45))
-        let recoveryDate = try XCTUnwrap(Date().add(days: -30))
-        let vaccination = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationSetDate(vaccinationDate)
-            .doseNumber(2)
-            .extended()
-        let recovery = CBORWebToken
-            .mockRecoveryCertificate
-            .recoveryTestDate(recoveryDate)
-            .extended()
-        certificateHolderStatusModel.holderIsFullyImmunized = true
-        configureCustomSut(certificates: [vaccination, recovery])
-
-        // When
-        let viewModel = sut.immunizationStatusViewModel
-
-        // Then
-        XCTAssertTrue(viewModel is CertificateHolderImmunizationE2StatusViewModel)
+        XCTAssertTrue(viewModel is CertificateHolderCompleteVaccinationCycleStatusViewModel)
+        XCTAssertEqual(viewModel.title, "Complete vaccination protection")
+        XCTAssertEqual(viewModel.subtitle, nil)
+        XCTAssertEqual(viewModel.description, "This is a description ImpfstatusEZwei")
+        XCTAssertEqual(viewModel.icon, .statusFullCircle)
+        XCTAssertEqual(viewModel.date, nil)
+        XCTAssertEqual(viewModel.federalState, nil)
+        XCTAssertEqual(viewModel.federalStateText, nil)
+        XCTAssertEqual(viewModel.linkLabel, nil)
+        XCTAssertEqual(viewModel.notice, nil)
+        XCTAssertEqual(viewModel.noticeText, nil)
+        XCTAssertEqual(viewModel.selectFederalStateButtonTitle, nil)
     }
 
     func testImmunizationStatusViewModel_invalid() throws {
@@ -1182,12 +1150,21 @@ class CertificateDetailViewModelTests: XCTestCase {
         var token: ExtendedCBORWebToken = try .token2Of2Mustermann()
         token.invalid = true
         configureCustomSut(certificates: [token])
-
         // When
         let viewModel = sut.immunizationStatusViewModel
-
         // Then
         XCTAssertTrue(viewModel is CertificateHolderInvalidImmunizationStatusViewModel)
+        XCTAssertEqual(viewModel.title, "No valid certificate")
+        XCTAssertEqual(viewModel.subtitle, nil)
+        XCTAssertEqual(viewModel.description, "Add a valid certificate or renew your latest certificate to get information about your vaccination status.")
+        XCTAssertEqual(viewModel.icon, .statusExpiredCircle)
+        XCTAssertEqual(viewModel.date, nil)
+        XCTAssertEqual(viewModel.federalState, nil)
+        XCTAssertEqual(viewModel.federalStateText, nil)
+        XCTAssertEqual(viewModel.linkLabel, nil)
+        XCTAssertEqual(viewModel.notice, nil)
+        XCTAssertEqual(viewModel.noticeText, nil)
+        XCTAssertEqual(viewModel.selectFederalStateButtonTitle, nil)
     }
 }
 

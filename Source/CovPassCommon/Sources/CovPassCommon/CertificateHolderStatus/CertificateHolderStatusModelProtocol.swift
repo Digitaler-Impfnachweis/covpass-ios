@@ -72,19 +72,12 @@ public protocol CertificateHolderStatusModelProtocol {
     /// - Parameters:
     ///   - certifiates: The certificates of one Person
     /// - Returns: `true`, if holders vaccination cycle is complete `false`, if the user doesn't complete the vaccination cycle
-    func vaccinationCycleIsComplete(_ certificates: [ExtendedCBORWebToken]) -> Bool
+    func vaccinationCycleIsComplete(_ certificates: [ExtendedCBORWebToken]) -> HolderStatusResponse
 
     /// Queries the internal rules, if rules for given parameter is available. Can be helpfull to prevent requests to CertLogic where it is clear that no rules are available
     /// - Parameters:
     /// - Returns: `true`, if rules available. `false`, if no rules are available
     func ifsg22aRulesAvailable() -> Bool
-
-    /// Queries the internal rules,  if a certificate (owner) is fully immunized.
-    /// - Parameters:
-    ///   - certifiates: The certificates of one Person
-    /// - Returns: `true`, if holder is fully immunzed. `false`, if the user is not fully immunized,
-    /// is unkown, or on any internal error.
-    func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool
 
     /// Queries the internal rules,  if a certificate is not passing rules.
     /// - Parameters:

@@ -107,6 +107,7 @@ public class ParagraphView: XibView {
 
         bodyTextView.attributedText = secondBody
         bodyTextView.isHidden = secondBody.isNilOrEmpty
+        verticalContainerStackView.setCustomSpacing(48, after: bodyTextView)
 
         footerHeadlineLabel.attributedText = footerHeadline
         footerHeadlineLabel.isHidden = footerHeadline.isNilOrEmpty

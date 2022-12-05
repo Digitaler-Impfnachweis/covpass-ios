@@ -20,7 +20,11 @@ public extension Rule {
 
     var isMaskStatusRule: Bool { ruleType == .mask }
 
-    var isIfsg22aRule: Bool { ruleType == .impfstatusBZwei || ruleType == .impfstatusCZwei || ruleType == .impfstatusEZwei }
+    var isIfsg22aRule: Bool { ruleType == .impfstatusBZwei || ruleType == .impfstatusCZwei || ruleType == .impfstatusEZwei || ruleType == .impfstatusEEins }
 
     var isNoRuleIdentifier: Bool { identifier == "GR-DE-0001" }
+
+    func localizedDescription(for languageCode: String?) -> String? {
+        description.first(where: { $0.lang.lowercased() == languageCode })?.desc
+    }
 }

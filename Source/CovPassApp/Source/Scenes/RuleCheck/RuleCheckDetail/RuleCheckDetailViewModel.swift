@@ -132,8 +132,8 @@ class RuleCheckDetailViewModel {
             .result
             .filter { $0.result == result && $0.rule?.affectedString.contains(pattern) ?? false }
             .compactMap { res in
-                if let trans = res.rule?.description.first(where: { $0.lang.lowercased() == Locale.current.languageCode }) {
-                    return trans.desc
+                if let localizedDescription = res.rule?.localizedDescription(for: Locale.current.languageCode) {
+                    return localizedDescription
                 }
                 return res.rule?.description.first?.desc ?? nil
             }

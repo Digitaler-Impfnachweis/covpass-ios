@@ -9,7 +9,23 @@ import CertLogic
 import SwiftyJSON
 
 extension Rule {
-    convenience init(identifier: String = "", type: String = "", countryCode: String = "") {
-        self.init(identifier: identifier, type: type, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: countryCode, region: "")
+    convenience init(identifier: String = "",
+                     type: String = "",
+                     countryCode: String = "",
+                     description: [Description] = []) {
+        self.init(identifier: identifier,
+                  type: type,
+                  version: "",
+                  schemaVersion: "",
+                  engine: "",
+                  engineVersion: "",
+                  certificateType: "",
+                  description: description,
+                  validFrom: "",
+                  validTo: "",
+                  affectedString: [],
+                  logic: JSON(),
+                  countryCode: countryCode,
+                  region: "")
     }
 }

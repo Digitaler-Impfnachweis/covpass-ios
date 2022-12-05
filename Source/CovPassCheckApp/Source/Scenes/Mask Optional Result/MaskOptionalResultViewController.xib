@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -34,17 +34,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asq-Je-taX" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="64" width="414" height="60"/>
+                    <rect key="frame" x="0.0" y="68" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" placeholder="YES" id="epB-oE-mB6"/>
                     </constraints>
                 </view>
                 <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-Ut-n76">
-                    <rect key="frame" x="0.0" y="124" width="414" height="633.5"/>
+                    <rect key="frame" x="0.0" y="128" width="414" height="629.5"/>
                     <subviews>
                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="642"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="629.5"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status-mask-optional-circle-large" translatesAutoresizingMaskIntoConstraints="NO" id="KNC-XD-YtE">
                                     <rect key="frame" x="137" y="0.0" width="140" height="140"/>
@@ -135,7 +135,6 @@
                                 <constraint firstItem="wh7-Jt-Csz" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="605-8Z-Xw3"/>
                                 <constraint firstItem="CaI-1f-Rt7" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="6ta-gY-rUT"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DoA-3w-hHw" secondAttribute="trailing" constant="24" id="B9N-wX-QsQ"/>
-                                <constraint firstAttribute="bottom" secondItem="Gjq-nP-y9t" secondAttribute="bottom" constant="20" id="C1R-ht-d1c"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="top" secondItem="CaI-1f-Rt7" secondAttribute="bottom" constant="20" id="F2u-Ll-Grh"/>
                                 <constraint firstItem="Gjq-nP-y9t" firstAttribute="top" secondItem="Eeq-g4-Z8w" secondAttribute="bottom" constant="24" id="L9M-hg-fbz"/>
                                 <constraint firstItem="Eeq-g4-Z8w" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="MbQ-yx-DRe"/>

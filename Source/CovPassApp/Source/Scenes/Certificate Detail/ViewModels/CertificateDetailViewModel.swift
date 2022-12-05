@@ -65,7 +65,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private var isFavorite = false
     private var showFavorite = false
     private var holderNeedsMask = true
-    private var holderIsFullyImmunized = false
+    private var vaccinationCycleCompleteResponse: HolderStatusResponse
+    private var vaccinationCycleIsComplete: Bool { vaccinationCycleCompleteResponse.passed }
     private var selectedCertificate: ExtendedCBORWebToken? { certificates.sortLatest().first }
     private var selectedToken: CBORWebToken? { selectedCertificate?.vaccinationCertificate }
     private var selectedDgc: DigitalGreenCertificate? { selectedToken?.hcert.dgc }
@@ -280,27 +281,27 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
     }
 
+    var vaccinationCycleCompleteDescription: String {
+        if let localizedDescription = vaccinationCycleCompleteResponse.results?.values.first?.first?.rule?.localizedDescription(for: Locale.current.languageCode) {
+            return localizedDescription
+        }
+        return vaccinationCycleCompleteResponse.results?.values.first?.first?.rule?.description.first?.desc ?? ""
+    }
+
     var immunizationStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol {
         if isInvalid {
             return CertificateHolderInvalidImmunizationStatusViewModel()
-        } else if holderIsFullyImmunized {
-            guard let vaccination = certificates.latestVaccination else {
+        } else if vaccinationCycleIsComplete {
+            guard let ruleType = vaccinationCycleCompleteResponse.results?.first?.key else {
                 return CertificateHolderIncompleteImmunizationStatusViewModel()
             }
-            if vaccination.dn > 3 {
-                return CertificateHolderCompleteImmunizationB2StatusViewModel(date: vaccination.dt.readableString)
-            } else if vaccination.dn == 3 {
-                return CertificateHolderImmunizationC2StatusViewModel(date: vaccination.dt.readableString)
-            }
-            if let recovery = certificates.latestRecovery {
-                if vaccination.dn == 2, recovery.fr < vaccination.dt {
-                    return CertificateHolderImmunizationE2StatusViewModel(date: vaccination.dt.readableString)
-                } else if vaccination.dn == 2, recovery.fr > vaccination.dt, recovery.fr.isOlderThan29Days {
-                    return CertificateHolderImmunizationE2StatusViewModel(date: recovery.fr.readableStringAfter29Days)
-                } else if vaccination.dn == 2, recovery.fr > vaccination.dt {
-                    return CertificateHolderImmunizationE22StatusViewModel(days: recovery.fr.daysUntil29Days,
-                                                                           date: recovery.fr.readableStringAfter29Days)
-                }
+            switch ruleType {
+            case .impfstatusBZwei, .impfstatusCZwei, .impfstatusEZwei:
+                return CertificateHolderCompleteVaccinationCycleStatusViewModel(description: vaccinationCycleCompleteDescription)
+            case .impfstatusEEins:
+                return CertificateHolderImmunizationE1StatusViewModel(description: vaccinationCycleCompleteDescription, date: certificates.latestRecovery?.fr.readableStringAfter29Days)
+            default:
+                break
             }
         }
         return CertificateHolderIncompleteImmunizationStatusViewModel()
@@ -419,7 +420,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         boosterCandidate = boosterLogic.checkCertificates(certificates)
         resolver = resolvable
         holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates, region: userDefaults.stateSelection)
-        holderIsFullyImmunized = certificateHolderStatusModel.holderIsFullyImmunized(self.certificates)
+        vaccinationCycleCompleteResponse = certificateHolderStatusModel.vaccinationCycleIsComplete(certificates)
         guard let digitalGreenCertificate = certificates.first?.vaccinationCertificate.hcert.dgc else {
             return nil
         }
@@ -489,7 +490,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             if let selectedCertificate = self.selectedCertificate {
                 self.certificates = $0.certificates.filterMatching(selectedCertificate)
                 self.holderNeedsMask = self.certificateHolderStatusModel.holderNeedsMask(self.certificates, region: self.userDefaults.stateSelection)
-                self.holderIsFullyImmunized = self.certificateHolderStatusModel.holderIsFullyImmunized(self.certificates)
+                self.vaccinationCycleCompleteResponse = self.certificateHolderStatusModel.vaccinationCycleIsComplete(self.certificates)
             }
         }
         .done {
@@ -576,7 +577,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private func certDetailDoneDidDeleteCertificate(_ cert: ExtendedCBORWebToken, _ result: CertificateDetailSceneResult) {
         certificates = certificates.filter { $0 != cert }
         holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: userDefaults.stateSelection)
-        holderIsFullyImmunized = certificateHolderStatusModel.holderIsFullyImmunized(certificates)
+        vaccinationCycleCompleteResponse = certificateHolderStatusModel.vaccinationCycleIsComplete(certificates)
         if certificates.count > 0 {
             delegate?.viewModelDidUpdate()
             router.showCertificateDidDeleteDialog()
@@ -657,12 +658,5 @@ private extension Date {
             return ""
         }
         return dateAfter29Days.readableString
-    }
-
-    var daysUntil29Days: Int {
-        guard let dateAfter29Days = add(days: 30) else {
-            return 0
-        }
-        return dateAfter29Days.daysSince(Date())
     }
 }

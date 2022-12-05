@@ -57,7 +57,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
         certificateHolderStatusModel.domesticInvalidationRulesPassedResult = .passed
-        certificateHolderStatusModel.isVaccinationCycleComplete = false
+        certificateHolderStatusModel.isVaccinationCycleComplete.passed = false
         // WHEN
         sut.execute()
             .done { _ in
@@ -77,7 +77,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
         certificateHolderStatusModel.domesticInvalidationRulesPassedResult = .passed
-        certificateHolderStatusModel.isVaccinationCycleComplete = true
+        certificateHolderStatusModel.isVaccinationCycleComplete.passed = true
         // WHEN
         sut.execute()
             .done { token in
@@ -105,7 +105,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
         certificateHolderStatusModel.domesticInvalidationRulesPassedResult = .passed
-        certificateHolderStatusModel.isVaccinationCycleComplete = true
+        certificateHolderStatusModel.isVaccinationCycleComplete.passed = true
         // WHEN
         sut.execute()
             .done { _ in

@@ -13,6 +13,16 @@ public enum CertificateHolderStatusResult {
     case passed, failedTechnical, failedFunctional
 }
 
+public struct HolderStatusResponse {
+    public var passed: Bool
+    public var results: [RuleType?: [ValidationResult]]?
+
+    public init(passed: Bool, results: [RuleType?: [ValidationResult]]?) {
+        self.passed = passed
+        self.results = results
+    }
+}
+
 public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol {
     private let dccCertLogic: DCCCertLogicProtocol
     public init(dccCertLogic: DCCCertLogicProtocol) {
@@ -52,20 +62,6 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         return passed ? .passed : .failedFunctional
     }
 
-    public func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool {
-        let validCertificates = validCertificates(certificates, logicType: .deAcceptenceAndInvalidationRules)
-        guard let joinedTokens = validCertificates.joinedTokens else {
-            return false
-        }
-        guard let validationResults = try? validate(certificate: joinedTokens, type: .gStatus) else {
-            return false
-        }
-        guard !validationResults.filterAcceptanceAndInvalidationRules.isEmpty else {
-            return false
-        }
-        return validationResults.filterAcceptanceAndInvalidationRules.failedAndOpenResults.isEmpty
-    }
-
     public func holderNeedsMask(_ certificates: [ExtendedCBORWebToken],
                                 region: String?) -> Bool {
         let validCertificates = validCertificates(certificates, logicType: .deAcceptenceAndInvalidationRules)
@@ -87,15 +83,15 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         }
     }
 
-    public func vaccinationCycleIsComplete(_ certificates: [ExtendedCBORWebToken]) -> Bool {
+    public func vaccinationCycleIsComplete(_ certificates: [ExtendedCBORWebToken]) -> HolderStatusResponse {
         let validCertificates = validCertificates(certificates, logicType: .deInvalidationRules)
         guard let joinedTokens = validCertificates.joinedAllTokens else {
-            return false
+            return .init(passed: false, results: nil)
         }
         guard let validationResults = try? validate(certificate: joinedTokens, type: .ifsg22a) else {
-            return false
+            return .init(passed: false, results: nil)
         }
-        return validationResults.vaccinationCycleIsComplete
+        return .init(passed: validationResults.vaccinationCycleIsComplete, results: validationResults.vaccinationCyclePassedResults)
     }
 
     public func maskRulesAvailable(for region: String?) -> Bool {
@@ -166,15 +162,14 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
 }
 
 private extension Array where Element == ValidationResult {
-    var holderIsFullyImmunized: Bool {
-        contains { validationResult in
-            validationResult.rule?.ruleType == ._2GPlus || validationResult.rule?.ruleType == ._2G
-        }
-    }
-
     var vaccinationCycleIsComplete: Bool {
         let dict = Dictionary(grouping: self, by: { $0.rule?.ruleType })
         return dict.contains(where: \.value.failedAndOpenResults.isEmpty)
+    }
+
+    var vaccinationCyclePassedResults: [RuleType?: [ValidationResult]]? {
+        let dict = Dictionary(grouping: self, by: { $0.rule?.ruleType })
+        return dict.filter { $0.value.failedAndOpenResults.isEmpty == true }
     }
 
     var holderNeedsMask: Bool {

@@ -61,7 +61,7 @@ struct CheckIfsg22aUseCase {
            thirdToken.vaccinationCertificate.hcert.dgc.dob != secondToken.vaccinationCertificate.hcert.dgc.dob {
             return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(thirdToken, secondToken))
         }
-        guard holderStatus.vaccinationCycleIsComplete(tokens) else {
+        guard holderStatus.vaccinationCycleIsComplete(tokens).passed else {
             return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete(token, secondToken, thirdToken))
         }
         return .value

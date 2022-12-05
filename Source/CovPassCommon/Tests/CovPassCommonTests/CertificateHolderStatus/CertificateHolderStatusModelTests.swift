@@ -187,95 +187,6 @@ class CertificateHolderStatusModelTests: XCTestCase {
         XCTAssertEqual(result, .passed)
     }
 
-    // MARK: holderIsFullyImmunized
-
-    func test_holderIsFullyImmunized_emptyToken() {
-        // GIVEN
-        // WHEN
-        let result = sut.holderIsFullyImmunized([])
-        // THEN
-        XCTAssertEqual(result, false)
-    }
-
-    func test_holderIsFullyImmunized_someError() {
-        // GIVEN
-        certLogic.validationError = NSError(domain: "some error", code: 1)
-        // WHEN
-        let result = sut.holderIsFullyImmunized([token])
-        // THEN
-        XCTAssertEqual(result, false)
-    }
-
-    func test_holderIsFullyImmunized_noAcceptanceOrInvalidationRulesAvailable_inResult() {
-        // GIVEN
-        rule.type = "Mask"
-        certLogic.validateResult = [.init(rule: rule, result: .passed)]
-        // WHEN
-        let result = sut.holderIsFullyImmunized([token])
-        // THEN
-        XCTAssertEqual(result, false)
-    }
-
-    func test_holderIsFullyImmunized_Failed_AcceptanceRuleAvailable_inResult() {
-        // GIVEN
-        rule.type = "Acceptance"
-        certLogic.validateResult = [.init(rule: rule, result: .fail)]
-        // WHEN
-        let result = sut.holderIsFullyImmunized([token])
-        // THEN
-        XCTAssertEqual(result, false)
-    }
-
-    func test_holderIsFullyImmunized_Open_AcceptanceRuleAvailable_inResult() {
-        // GIVEN
-        rule.type = "Acceptance"
-        certLogic.validateResult = [.init(rule: rule, result: .open)]
-        // WHEN
-        let result = sut.holderIsFullyImmunized([token])
-        // THEN
-        XCTAssertEqual(result, false)
-    }
-
-    func test_holderIsFullyImmunized_Failed_InvalidationRuleAvailable_inResult() {
-        // GIVEN
-        rule.type = "Invalidation"
-        certLogic.validateResult = [.init(rule: rule, result: .fail)]
-        // WHEN
-        let result = sut.holderIsFullyImmunized([token])
-        // THEN
-        XCTAssertEqual(result, false)
-    }
-
-    func test_holderIsFullyImmunized_Open_InvalidationRuleAvailable_inResult() {
-        // GIVEN
-        rule.type = "Invalidation"
-        certLogic.validateResult = [.init(rule: rule, result: .open)]
-        // WHEN
-        let result = sut.holderIsFullyImmunized([token])
-        // THEN
-        XCTAssertEqual(result, false)
-    }
-
-    func test_holderIsFullyImmunized_Passed_AcceptanceRuleAvailable_inResult() {
-        // GIVEN
-        rule.type = "Acceptance"
-        certLogic.validateResult = [.init(rule: rule, result: .passed)]
-        // WHEN
-        let result = sut.holderIsFullyImmunized([token])
-        // THEN
-        XCTAssertEqual(result, true)
-    }
-
-    func test_holderIsFullyImmunized_Passed_InvalidationRuleAvailable_inResult() {
-        // GIVEN
-        rule.type = "Invalidation"
-        certLogic.validateResult = [.init(rule: rule, result: .passed)]
-        // WHEN
-        let result = sut.holderIsFullyImmunized([token])
-        // THEN
-        XCTAssertEqual(result, true)
-    }
-
     // MARK: holderNeedsMask
 
     func test_holderNeedsMask_emptyToken() {
@@ -417,7 +328,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // WHEN
         let result = sut.vaccinationCycleIsComplete([token])
         // THEN
-        XCTAssertTrue(result)
+        XCTAssertTrue(result.passed)
     }
 
     func test_ifsg22a_invalidation_rule_fails() {
@@ -426,7 +337,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // WHEN
         let result = sut.vaccinationCycleIsComplete([token])
         // THEN
-        XCTAssertFalse(result)
+        XCTAssertFalse(result.passed)
     }
 
     func test_ifsg22a_invalidation_someError() {
@@ -435,7 +346,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // WHEN
         let result = sut.vaccinationCycleIsComplete([token])
         // THEN
-        XCTAssertEqual(result, false)
+        XCTAssertEqual(result.passed, false)
     }
 
     func test_areTravelRulesAvailableForGermany_true() {

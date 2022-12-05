@@ -108,12 +108,13 @@
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9M-Nk-piY" customClass="ParagraphView" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="24" width="366" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" placeholder="YES" id="P3T-sw-kcR"/>
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="n9M-Nk-piY" firstAttribute="top" secondItem="wh7-Jt-Csz" secondAttribute="top" constant="24" id="4Hg-HI-pXI"/>
                                         <constraint firstAttribute="bottom" secondItem="n9M-Nk-piY" secondAttribute="bottom" constant="24" id="ORJ-cN-WXX"/>
@@ -224,9 +225,6 @@
         </systemColor>
         <systemColor name="systemBrownColor">
             <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

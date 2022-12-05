@@ -355,11 +355,12 @@ class RuleTests: XCTestCase {
         let rule5 = Rule(identifier: "MA-DE-0100", type: RuleType.mask.rawValue)
         let rule6 = Rule(identifier: "1", type: RuleType._2G.rawValue)
         let rule7 = Rule(identifier: "1", type: RuleType._3G.rawValue)
-        let sut = [rule1, rule2, rule3, rule4, rule5, rule6, rule7]
+        let rule8 = Rule(identifier: "1", type: "ImpfstatusEEins")
+        let sut = [rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8]
         // WHEN
         let maskStatusRules = sut.ifsg22aRules
         // THEN
-        XCTAssertEqual(maskStatusRules.count, 3)
+        XCTAssertEqual(maskStatusRules.count, 4)
     }
 
     func test_isNoRuleIdentifier_true() {
@@ -378,5 +379,50 @@ class RuleTests: XCTestCase {
         let isNoRuleIdentifier = sut.isNoRuleIdentifier
         // THEN
         XCTAssertFalse(isNoRuleIdentifier)
+    }
+
+    func test_localizedDescription_de() {
+        // GIVEN
+        let description: [Description] = [.init(lang: "en", desc: "This is a description"),
+                                          .init(lang: "de", desc: "Das ist eine Beschreibung"),
+                                          .init(lang: "tr", desc: "Bu bir açıklama"),
+                                          .init(lang: "sp", desc: "esta es una descripcion"),
+                                          .init(lang: "fr", desc: "Ceci est un descriptif"),
+                                          .init(lang: "it", desc: "Questa è una descrizione")]
+        let sut = Rule(identifier: "FOO", description: description)
+        // WHEN
+        let localizedDescription = sut.localizedDescription(for: "de")
+        // THEN
+        XCTAssertEqual(localizedDescription, "Das ist eine Beschreibung")
+    }
+
+    func test_localizedDescription_it() {
+        // GIVEN
+        let description: [Description] = [.init(lang: "en", desc: "This is a description"),
+                                          .init(lang: "de", desc: "Das ist eine Beschreibung"),
+                                          .init(lang: "tr", desc: "Bu bir açıklama"),
+                                          .init(lang: "sp", desc: "esta es una descripcion"),
+                                          .init(lang: "fr", desc: "Ceci est un descriptif"),
+                                          .init(lang: "it", desc: "Questa è una descrizione")]
+        let sut = Rule(identifier: "FOO", description: description)
+        // WHEN
+        let localizedDescription = sut.localizedDescription(for: "it")
+        // THEN
+        XCTAssertEqual(localizedDescription, "Questa è una descrizione")
+    }
+
+    func test_localizedDescription_none() {
+        // GIVEN
+        let description: [Description] = [.init(lang: "en", desc: "This is a description"),
+                                          .init(lang: "de", desc: "Das ist eine Beschreibung"),
+                                          .init(lang: "tr", desc: "Bu bir açıklama"),
+                                          .init(lang: "sp", desc: "esta es una descripcion"),
+                                          .init(lang: "fr", desc: "Ceci est un descriptif"),
+                                          .init(lang: "it", desc: "Questa è una descrizione")]
+        let sut = Rule(identifier: "FOO", description: description)
+        // WHEN
+        let localizedDescription = sut.localizedDescription(for: "pl")
+        // THEN
+        XCTAssertEqual(localizedDescription, nil)
     }
 }

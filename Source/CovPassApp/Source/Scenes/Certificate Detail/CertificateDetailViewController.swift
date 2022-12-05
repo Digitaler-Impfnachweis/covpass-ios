@@ -275,7 +275,6 @@ private extension ParagraphView {
     func setup(with viewModel: CertificateHolderImmunizationStatusViewModelProtocol) {
         layoutMargins.top = .space_24
         layoutMargins.left = .space_7
-        verticalContainerStackView.spacing = .space_14
         updateView(image: viewModel.icon,
                    title: viewModel.title.styledAs(.header_3),
                    subtitle: viewModel.subtitle?.styledAs(.header_3).colored(.onBackground80),

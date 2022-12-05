@@ -5,6 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 @testable import CovPassApp
 @testable import CovPassCommon
 @testable import CovPassUI
@@ -83,7 +84,6 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
             .extended()
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        certificateHolderStatusModel.holderIsFullyImmunized = true
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1600)
@@ -479,6 +479,19 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         certificateHolderStatusModel.areMaskRulesAvailable = true
         certificateHolderStatusModel.needsMask = true
         certificateHolderStatusModel.latestMaskRuleDate = DateUtils.parseDate("2021-01-26T15:05:00")
+        let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
+        let viewController = CertificateDetailViewController(viewModel: viewModel)
+        verifyView(view: viewController.view, height: 1600)
+    }
+
+    func test_vaccinationCycleIsComplete() throws {
+        let descriptionText = "This is a description"
+        let rule1 = Rule(identifier: "FOO", description: [.init(lang: "en", desc: descriptionText)])
+        let result1: ValidationResult = .init(rule: rule1)
+        let results: [RuleType?: [ValidationResult]]? = [.impfstatusBZwei: [result1]]
+        let token = CBORWebToken.mockVaccinationCertificate.extended()
+        let certs = [token]
+        certificateHolderStatusModel.isVaccinationCycleIsComplete = .init(passed: true, results: results)
         let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
         let viewController = CertificateDetailViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 1600)

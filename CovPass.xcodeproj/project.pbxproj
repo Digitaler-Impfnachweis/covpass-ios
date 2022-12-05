@@ -208,6 +208,7 @@
 		09C54F0B291D017800707210 /* CertificateInvalidInvalidSignatureReasonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C54F09291D017800707210 /* CertificateInvalidInvalidSignatureReasonViewModel.swift */; };
 		09C54F0C291D017800707210 /* CertificateInvalidQRCodeReasonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C54F0A291D017800707210 /* CertificateInvalidQRCodeReasonViewModel.swift */; };
 		09C54F16291D5E9700707210 /* RuleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C54F15291D5E9700707210 /* RuleExtension.swift */; };
+		09C6E1E42938C19800BA169F /* RuleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6E1E32938C19800BA169F /* RuleExtension.swift */; };
 		09C7FEFA28F9ACF5001854B2 /* SelectStateOnboardingViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7FEF828F9ACCB001854B2 /* SelectStateOnboardingViewControllerSnapShotTests.swift */; };
 		09CE6C9227AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9127AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift */; };
 		09CE6C9427AB31D50048BDA4 /* CountrySelectionRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9327AB31D50048BDA4 /* CountrySelectionRouterMock.swift */; };
@@ -424,7 +425,7 @@
 		E70393B428C2636A0079572C /* CertificateHolderIncompleteImmunizationStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70393B028C2636A0079572C /* CertificateHolderIncompleteImmunizationStatusViewModel.swift */; };
 		E70393B528C2636A0079572C /* CertificateHolderMaskRequiredStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70393B128C2636A0079572C /* CertificateHolderMaskRequiredStatusViewModel.swift */; };
 		E70393B628C2636A0079572C /* CertificateHolderMaskNotRequiredStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70393B228C2636A0079572C /* CertificateHolderMaskNotRequiredStatusViewModel.swift */; };
-		E70393B728C2636A0079572C /* CertificateHolderCompleteImmunizationStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70393B328C2636A0079572C /* CertificateHolderCompleteImmunizationStatusViewModel.swift */; };
+		E70393B728C2636A0079572C /* CertificateHolderCompleteVaccinationCycleStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70393B328C2636A0079572C /* CertificateHolderCompleteVaccinationCycleStatusViewModel.swift */; };
 		E70393B928C26DC50079572C /* CertificateHolderImmunizationStatusViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70393B828C26DC50079572C /* CertificateHolderImmunizationStatusViewModelMock.swift */; };
 		E7066136283262DA00B2C5B3 /* CertificateDetailViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7066135283262DA00B2C5B3 /* CertificateDetailViewModelMock.swift */; };
 		E70C3E9A27A95523001F07FF /* RuleCheckViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3E9927A95523001F07FF /* RuleCheckViewModelTests.swift */; };
@@ -842,6 +843,7 @@
 		09C54F0F291D555A00707210 /* ValidatorOverviewViewModel+MaskCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidatorOverviewViewModel+MaskCheck.swift"; sourceTree = "<group>"; };
 		09C54F15291D5E9700707210 /* RuleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleExtension.swift; sourceTree = "<group>"; };
 		09C54F18291D618B00707210 /* SecondScanViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondScanViewController.xib; sourceTree = "<group>"; };
+		09C6E1E32938C19800BA169F /* RuleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleExtension.swift; sourceTree = "<group>"; };
 		09C7FEF828F9ACCB001854B2 /* SelectStateOnboardingViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStateOnboardingViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		09CE6C9127AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		09CE6C9327AB31D50048BDA4 /* CountrySelectionRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionRouterMock.swift; sourceTree = "<group>"; };
@@ -1091,7 +1093,7 @@
 		E70393B028C2636A0079572C /* CertificateHolderIncompleteImmunizationStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateHolderIncompleteImmunizationStatusViewModel.swift; sourceTree = "<group>"; };
 		E70393B128C2636A0079572C /* CertificateHolderMaskRequiredStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateHolderMaskRequiredStatusViewModel.swift; sourceTree = "<group>"; };
 		E70393B228C2636A0079572C /* CertificateHolderMaskNotRequiredStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateHolderMaskNotRequiredStatusViewModel.swift; sourceTree = "<group>"; };
-		E70393B328C2636A0079572C /* CertificateHolderCompleteImmunizationStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateHolderCompleteImmunizationStatusViewModel.swift; sourceTree = "<group>"; };
+		E70393B328C2636A0079572C /* CertificateHolderCompleteVaccinationCycleStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateHolderCompleteVaccinationCycleStatusViewModel.swift; sourceTree = "<group>"; };
 		E70393B828C26DC50079572C /* CertificateHolderImmunizationStatusViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateHolderImmunizationStatusViewModelMock.swift; sourceTree = "<group>"; };
 		E7066135283262DA00B2C5B3 /* CertificateDetailViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelMock.swift; sourceTree = "<group>"; };
 		E70C3E9927A95523001F07FF /* RuleCheckViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckViewModelTests.swift; sourceTree = "<group>"; };
@@ -1405,7 +1407,7 @@
 		093949AD28F70132005C4C43 /* Immunization */ = {
 			isa = PBXGroup;
 			children = (
-				E70393B328C2636A0079572C /* CertificateHolderCompleteImmunizationStatusViewModel.swift */,
+				E70393B328C2636A0079572C /* CertificateHolderCompleteVaccinationCycleStatusViewModel.swift */,
 				E70393B028C2636A0079572C /* CertificateHolderIncompleteImmunizationStatusViewModel.swift */,
 				E7998F6828C635F700EC6394 /* CertificateHolderInvalidImmunizationStatusViewModel.swift */,
 			);
@@ -3633,6 +3635,7 @@
 		E7F7817B27C40090009AC907 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				09C6E1E32938C19800BA169F /* RuleExtension.swift */,
 				E7BA19D128BFB09100751DE8 /* CertificateHolderStatusModel+FactoryTests.swift */,
 				E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */,
 				E7101B582872F18D0026584A /* CertificateRevocationHTTPClient+FactoryTests.swift */,
@@ -4037,7 +4040,7 @@
 				385FC18E269EB6A800D19AF8 /* CountrySelectionRouter.swift in Sources */,
 				65E0DB0B2657F31C004C660F /* CertificateViewController.swift in Sources */,
 				096897AD27C3E3C1009E2886 /* ReissueResultRouterProtocol.swift in Sources */,
-				E70393B728C2636A0079572C /* CertificateHolderCompleteImmunizationStatusViewModel.swift in Sources */,
+				E70393B728C2636A0079572C /* CertificateHolderCompleteVaccinationCycleStatusViewModel.swift in Sources */,
 				E738566B2864E01B0070C1B0 /* CertificateImportSuccessFactory.swift in Sources */,
 				099C1B9228C205F50068C6BB /* CertificateCardMaskImmunityViewModel.swift in Sources */,
 				09D6E81C276CE56700134FBA /* ValidationServiceRoutableProtocol.swift in Sources */,
@@ -4299,6 +4302,7 @@
 				E70393B928C26DC50079572C /* CertificateHolderImmunizationStatusViewModelMock.swift in Sources */,
 				E7BA19D228BFB09100751DE8 /* CertificateHolderStatusModel+FactoryTests.swift in Sources */,
 				09E85435279992DC0051AEEE /* AppInformationRouterMock.swift in Sources */,
+				09C6E1E42938C19800BA169F /* RuleExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
