@@ -378,16 +378,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.showAnnouncementIfNeeded()
         }
         .then {
-            self.showNewRegulationsAnnouncementIfNeeded()
-        }
-        .then {
             self.showStateSelectionOnboarding()
-        }
-        .then {
-            self.showCheckSituationIfNeeded()
-        }
-        .then {
-            self.showScanPleaseHint()
         }
         .then {
             self.showBoosterNotificationIfNeeded()
@@ -405,14 +396,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .catch { error in
             print("\(#file):\(#function) Error: \(error.localizedDescription)")
         }
-    }
-
-    private func showCheckSituationIfNeeded() -> Promise<Void> {
-        if userDefaults.onboardingSelectedLogicTypeAlreadySeen ?? false {
-            return .value
-        }
-        userDefaults.onboardingSelectedLogicTypeAlreadySeen = true
-        return router.showCheckSituation(userDefaults: userDefaults)
     }
 
     private func showCertificatesReissueIfNeeded() -> Guarantee<Void> {
@@ -540,18 +523,6 @@ extension CertificatesOverviewViewModel {
         return router.showDataPrivacy()
     }
 
-    private func showNewRegulationsAnnouncementIfNeeded() -> Guarantee<Void> {
-        if userDefaults.newRegulationsOnboardingScreenWasShown {
-            return .value
-        }
-        return router
-            .showNewRegulationsAnnouncement()
-            .ensure {
-                self.userDefaults.newRegulationsOnboardingScreenWasShown = true
-            }
-            .recover { _ in () }
-    }
-
     private func showStateSelectionOnboarding() -> Promise<Void> {
         if userDefaults.selectStateOnboardingWasShown {
             return .value
@@ -562,18 +533,6 @@ extension CertificatesOverviewViewModel {
                 self.userDefaults.selectStateOnboardingWasShown = true
             }
             .recover { _ in () }
-    }
-}
-
-// MARK: Show Scan Please Hint
-
-private extension CertificatesOverviewViewModel {
-    func showScanPleaseHint() -> Promise<Void> {
-        guard !UserDefaults.StartupInfo.bool(.scanPleaseShown) else {
-            return .value
-        }
-        UserDefaults.StartupInfo.set(true, forKey: .scanPleaseShown)
-        return router.showScanPleaseHint()
     }
 }
 

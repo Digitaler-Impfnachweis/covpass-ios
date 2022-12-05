@@ -337,19 +337,6 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(true, model.isInvalid)
     }
 
-    func testShowNotificationsIfNeeded_showCheckSituationIfNeeded_shown() {
-        // Given
-        userDefaults.onboardingSelectedLogicTypeAlreadySeen = false
-        configureSut()
-
-        // When
-        sut.showNotificationsIfNeeded()
-
-        // Then
-        wait(for: [router.showCheckSituationExpectation], timeout: 2)
-        XCTAssertEqual(userDefaults.onboardingSelectedLogicTypeAlreadySeen, true)
-    }
-
     func testShowNotificationsIfNeeded_showCertificatesReissueIfNeeded_shown() throws {
         let singleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
             .mockVaccinationUVCI("1")
@@ -483,17 +470,6 @@ class CertificatesOverviewViewModelTests: XCTestCase {
 
         // Then
         wait(for: [router.showAnnouncementExpectation], timeout: 1)
-    }
-
-    func testShowNotificationsIfNeeded_new_regulations_announcement_not_shown() {
-        // Given
-        userDefaults.newRegulationsOnboardingScreenWasShown = false
-
-        // When
-        sut.showNotificationsIfNeeded()
-
-        // Then
-        wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
     }
 
     func test_showNotificationsIfNeeded_selectStateOnboarding_not_shown() {

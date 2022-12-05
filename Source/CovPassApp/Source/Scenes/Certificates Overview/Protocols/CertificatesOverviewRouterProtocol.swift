@@ -19,7 +19,6 @@ enum ScanCountErrorResponse {
 
 protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
     func showAnnouncement() -> Promise<Void>
-    func showNewRegulationsAnnouncement() -> Promise<Void>
     func showCertificates(certificates: [ExtendedCBORWebToken],
                           vaccinationRepository: VaccinationRepositoryProtocol,
                           boosterLogic: BoosterLogicProtocol) -> Promise<CertificateDetailSceneResult>
@@ -31,12 +30,10 @@ protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
     func showQRCodeScanAndSelectionView() -> Promise<QRCodeImportResult>
     func showAppInformation()
     func showBoosterNotification() -> Promise<Void>
-    func showScanPleaseHint() -> Promise<Void>
     func showDataPrivacy() -> Promise<Void>
     func toAppstoreCheckApp()
     func toFaqWebsite(_ url: URL)
     func startValidationAsAService(with data: ValidationServiceInitialisation)
-    func showCheckSituation(userDefaults: Persistence) -> Promise<Void>
     func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken],
                                  context: ReissueContext) -> Promise<Void>
     func showCertificatePicker(tokens: [ExtendedCBORWebToken]) -> Promise<Void>

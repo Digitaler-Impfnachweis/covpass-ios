@@ -47,12 +47,6 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
         )
     }
 
-    func showNewRegulationsAnnouncement() -> Promise<Void> {
-        sceneCoordinator.present(
-            NewRegulationsAnnouncementSceneFactory()
-        )
-    }
-
     func showStateSelectionOnboarding() -> Promise<Void> {
         let scene = SelectStateOnboardingSceneFactory(sceneCoordinator: sceneCoordinator)
         return sceneCoordinator.present(scene, animated: true)
@@ -62,16 +56,6 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
         sceneCoordinator.present(
             DataPrivacySceneFactory(
                 router: DataPrivacyRouter(
-                    sceneCoordinator: sceneCoordinator
-                )
-            )
-        )
-    }
-
-    func showScanPleaseHint() -> Promise<Void> {
-        sceneCoordinator.present(
-            ScanPleaseSceneFactory(
-                router: ScanPleaseRouter(
                     sceneCoordinator: sceneCoordinator
                 )
             )
@@ -186,13 +170,6 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
         sceneCoordinator.present(
             ValidationServiceFactory(router: ValidationServiceRouter(sceneCoordinator: sceneCoordinator),
                                      initialisationData: data))
-    }
-
-    func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
-        sceneCoordinator.present(
-            CheckSituationResolvableSceneFactory(contextType: .information,
-                                                 userDefaults: userDefaults)
-        )
     }
 
     func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken],
