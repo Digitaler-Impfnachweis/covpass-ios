@@ -15,6 +15,7 @@ import UIKit
 protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanQRCodeProtocol, MaskCheckRouterProtocol, CheckImmunityRouterProtocol {
     func showAppInformation(userDefaults: Persistence)
     func showDataPrivacy() -> Promise<Void>
+    func showAnnouncement() -> Promise<Void>
     func showNewRegulationsAnnouncement() -> Promise<Void>
     func routeToStateSelection() -> Promise<Void>
     func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void>

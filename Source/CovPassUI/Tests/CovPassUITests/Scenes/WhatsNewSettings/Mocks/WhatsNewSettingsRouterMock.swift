@@ -5,6 +5,6 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassApp
+@testable import CovPassUI
 
 struct WhatsNewSettingsRouterMock: WhatsNewSettingsRouterProtocol {}

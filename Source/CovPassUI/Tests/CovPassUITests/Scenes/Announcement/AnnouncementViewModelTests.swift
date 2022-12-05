@@ -5,7 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassApp
+import CovPassCommon
 @testable import CovPassUI
 import PromiseKit
 import XCTest
@@ -90,7 +90,7 @@ class AnnouncementViewModelTests: XCTestCase {
         let value = sut.checkboxAccessibilityValue
 
         // Then
-        XCTAssertEqual(value, "Off")
+        XCTAssertEqual(value, "settings_list_status_off")
     }
 
     func testCheckboxAccessibilityValue_true() {
@@ -101,6 +101,6 @@ class AnnouncementViewModelTests: XCTestCase {
         let value = sut.checkboxAccessibilityValue
 
         // Then
-        XCTAssertEqual(value, "On")
+        XCTAssertEqual(value, "settings_list_status_on")
     }
 }

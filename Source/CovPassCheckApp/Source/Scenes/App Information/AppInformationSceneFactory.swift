@@ -26,8 +26,8 @@ struct AppInformationSceneFactory: SceneFactory {
 
     func make() -> UIViewController {
         let viewModel = Locale.current.isGerman() ?
-            GermanAppInformationViewModel(router: router, userDefaults: userDefaults) :
-            EnglishAppInformationViewModel(router: router, userDefaults: userDefaults)
+            GermanAppInformationViewModel(router: router, persistence: userDefaults) :
+            EnglishAppInformationViewModel(router: router, persistence: userDefaults)
         let viewController = AppInformationViewController(viewModel: viewModel)
         return viewController
     }

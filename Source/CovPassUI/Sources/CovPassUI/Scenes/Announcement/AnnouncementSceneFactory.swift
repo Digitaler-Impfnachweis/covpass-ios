@@ -1,35 +1,39 @@
 //
-//  WhatsNewSettingsSceneFactory.swift
+//  AnnouncementSceneFactory.swift
+//
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
 import CovPassCommon
-import CovPassUI
-import Foundation
+import PromiseKit
 import UIKit
 
-struct WhatsNewSettingsSceneFactory: SceneFactory {
-    private let router: WhatsNewSettingsRouterProtocol
+public struct AnnouncementSceneFactory: ResolvableSceneFactory {
+    // MARK: - Properties
 
-    init(router: WhatsNewSettingsRouterProtocol) {
+    let router: AnnouncementRouter
+
+    // MARK: - Lifecycle
+
+    public init(router: AnnouncementRouter) {
         self.router = router
     }
 
-    func make() -> UIViewController {
+    public func make(resolvable: Resolver<Void>) -> UIViewController {
         let bundle = Bundle.commonBundle
         guard let url = Locale.current.isGerman() ? bundle.germanAnnouncementsURL : bundle.englishAnnouncementsURL
         else {
             fatalError("Invalid resource URL.")
         }
         let persistence = UserDefaultsPersistence()
-        let viewModel = WhatsNewSettingsViewModel(
+        let viewModel = AnnouncementViewModel(
+            router: router,
+            resolvable: resolvable,
             persistence: persistence,
             whatsNewURL: url
         )
-        let viewController = WhatsNewSettingsViewController(viewModel: viewModel)
-
-        return viewController
+        return AnnouncementViewController(viewModel: viewModel)
     }
 }

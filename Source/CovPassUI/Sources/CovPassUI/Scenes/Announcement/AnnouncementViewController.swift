@@ -6,11 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import UIKit
 import WebKit
 
-class AnnouncementViewController: UIViewController {
+public class AnnouncementViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet var webView: StaticWebView!
@@ -31,12 +30,12 @@ class AnnouncementViewController: UIViewController {
 
     init(viewModel: AnnouncementViewModelProtocol) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .main)
+        super.init(nibName: String(describing: Self.self), bundle: .uiBundle)
     }
 
     // MARK: - Lifecycle
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         configureWebView()
         configureCheckBox()
@@ -92,7 +91,7 @@ class AnnouncementViewController: UIViewController {
 // MARK: - ModalInteractiveDismissibleProtocol
 
 extension AnnouncementViewController: ModalInteractiveDismissibleProtocol {
-    func modalViewControllerDidDismiss() {
+    public func modalViewControllerDidDismiss() {
         viewModel.cancel()
     }
 }

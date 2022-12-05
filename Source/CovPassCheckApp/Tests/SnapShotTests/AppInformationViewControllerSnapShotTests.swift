@@ -6,7 +6,6 @@
 //
 
 @testable import CovPassCheckApp
-import CovPassCommon
 @testable import CovPassUI
 
 class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
@@ -18,7 +17,7 @@ class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
         persistence = .init()
         let viewModel = EnglishAppInformationViewModel(
             router: AppInformationRouterMock(),
-            userDefaults: persistence
+            persistence: persistence
         )
         sut = .init(viewModel: viewModel)
     }

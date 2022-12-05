@@ -6,7 +6,7 @@
 //
 
 @testable import CovPassApp
-import CovPassCommon
+@testable import CovPassUI
 import XCTest
 
 class WhatsNewSettingsViewControllerSnapshotTests: BaseSnapShotTests {

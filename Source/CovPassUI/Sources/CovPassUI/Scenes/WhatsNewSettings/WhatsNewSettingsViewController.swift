@@ -5,11 +5,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import UIKit
 import WebKit
 
-class WhatsNewSettingsViewController: UIViewController {
+public class WhatsNewSettingsViewController: UIViewController {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var whatsNewSwitch: LabeledSwitch!
     @IBOutlet var webView: StaticWebView!
@@ -18,27 +17,26 @@ class WhatsNewSettingsViewController: UIViewController {
 
     init(viewModel: WhatsNewSettingsViewModelProtocol) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: String(describing: Self.self), bundle: .uiBundle)
         title = viewModel.header
     }
 
     required init?(coder _: NSCoder) { nil }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
-
         setupView()
         setupDescriptionLabel()
         setupWhatsNewSwitch()
         setupWebView()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityAnnouncementOpen)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
+    override public func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityAnnouncementClose)
     }

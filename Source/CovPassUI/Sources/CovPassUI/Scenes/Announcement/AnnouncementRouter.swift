@@ -6,16 +6,14 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
-
-class AnnouncementRouter: RouterProtocol {
+public class AnnouncementRouter: RouterProtocol {
     // MARK: - Properties
 
-    let sceneCoordinator: SceneCoordinator
+    public let sceneCoordinator: SceneCoordinator
 
     // MARK: - Lifecycle
 
-    init(sceneCoordinator: SceneCoordinator) {
+    public init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
     }
 }

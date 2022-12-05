@@ -19,24 +19,23 @@ class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
         ]
     }
 
-    private let userDefaults: Persistence
     internal var checkSituationEntry: AppInformationEntry {
         let scene = CheckSituationSceneFactory(
             router: CheckSituationRouter(sceneCoordinator: router.sceneCoordinator),
-            userDefaults: userDefaults
+            userDefaults: persistence
         )
         return AppInformationEntry(title: LocalText.rulesTitle, scene: scene)
     }
 
     internal var revocationSettingsEntry: AppInformationEntry {
-        let rightTitle = userDefaults.revocationExpertMode ? LocalText.revocationHintOn : LocalText.revocationHintOff
+        let rightTitle = persistence.revocationExpertMode ? LocalText.revocationHintOn : LocalText.revocationHintOff
         let revocationSettingsRouter = RevocationSettingsRouter(sceneCoordinator: router.sceneCoordinator)
-        let scene = RevocationSettingsSceneFactory(router: revocationSettingsRouter, userDefaults: userDefaults)
+        let scene = RevocationSettingsSceneFactory(router: revocationSettingsRouter, userDefaults: persistence)
         return AppInformationEntry(title: LocalText.revocationTitle, scene: scene, rightTitle: rightTitle)
     }
 
     internal var acousticFeedbackSettingsEntry: AppInformationEntry {
-        let rightTitle = userDefaults.enableAcousticFeedback ?
+        let rightTitle = persistence.enableAcousticFeedback ?
             LocalText.acousticFeedbackOn : LocalText.acousticFeedbackOff
         let acousticFeedbackSettingsRouter = AcousticFeedbackSettingsRouter(
             sceneCoordinator: router.sceneCoordinator
@@ -50,20 +49,13 @@ class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
             rightTitle: rightTitle
         )
     }
-
-    init(router: AppInformationRouterProtocol, userDefaults: Persistence) {
-        self.userDefaults = userDefaults
-        super.init(router: router)
-    }
 }
 
 class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
-    private var mainBundle: Bundle
-    private var licenseBundle: Bundle
-
     override var entries: [AppInformationEntry] {
         [
             checkSituationEntry,
+            whatsNewEntry,
             .webEntry(title: Texts.faqTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!,
                       openingAnnounce: Accessibility.Opening.faqTitle,
@@ -99,26 +91,13 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
             revocationSettingsEntry
         ]
     }
-
-    init(
-        router: AppInformationRouterProtocol,
-        userDefaults: Persistence,
-        mainBundle: Bundle = .main,
-        licenseBundle: Bundle = .commonBundle
-    ) {
-        self.mainBundle = mainBundle
-        self.licenseBundle = licenseBundle
-        super.init(router: router, userDefaults: userDefaults)
-    }
 }
 
 class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
-    private var mainBundle: Bundle
-    private var licenseBundle: Bundle
-
     override var entries: [AppInformationEntry] {
         [
             checkSituationEntry,
+            whatsNewEntry,
             .webEntry(title: Texts.faqTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!,
                       openingAnnounce: Accessibility.Opening.faqTitle,
@@ -150,17 +129,6 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
             revocationSettingsEntry
         ]
     }
-
-    init(
-        router: AppInformationRouterProtocol,
-        userDefaults: Persistence,
-        mainBundle: Bundle = .main,
-        licenseBundle: Bundle = .commonBundle
-    ) {
-        self.mainBundle = mainBundle
-        self.licenseBundle = licenseBundle
-        super.init(router: router, userDefaults: userDefaults)
-    }
 }
 
 private enum LocalText {
@@ -171,20 +139,4 @@ private enum LocalText {
     static let acousticFeedbackTitle = "app_information_beep_when_checking_title".localized
     static let acousticFeedbackOn = "app_information_authorities_function_state_on".localized
     static let acousticFeedbackOff = "app_information_authorities_function_state_off".localized
-}
-
-private extension AppInformationEntry {
-    static func webEntry(title: String,
-                         url: URL,
-                         enableDynamicFonts _: Bool = false,
-                         openingAnnounce: String,
-                         closingAnnounce: String) -> AppInformationEntry {
-        .init(
-            title: title,
-            scene: WebviewSceneFactory(title: title,
-                                       url: url,
-                                       openingAnnounce: openingAnnounce,
-                                       closingAnnounce: closingAnnounce)
-        )
-    }
 }

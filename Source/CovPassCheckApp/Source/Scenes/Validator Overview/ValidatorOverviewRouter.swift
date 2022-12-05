@@ -85,6 +85,16 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
 
+    func showAnnouncement() -> Promise<Void> {
+        sceneCoordinator.present(
+            AnnouncementSceneFactory(
+                router: AnnouncementRouter(
+                    sceneCoordinator: sceneCoordinator
+                )
+            )
+        )
+    }
+
     func showNewRegulationsAnnouncement() -> Promise<Void> {
         sceneCoordinator.present(NewRegulationsAnnouncementSceneFactory())
     }

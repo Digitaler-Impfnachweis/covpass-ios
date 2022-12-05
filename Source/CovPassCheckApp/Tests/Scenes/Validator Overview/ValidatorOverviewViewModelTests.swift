@@ -601,4 +601,42 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.routeToRulesUpdateExpectation
         ], timeout: 1)
     }
+
+    func test_showNotificationsIfNeeded_announcement_already_shown() throws {
+        // Given
+        userDefaults.disableWhatsNew = false
+        userDefaults.announcementVersion = Bundle.main.shortVersionString ?? ""
+        router.showAnnouncementExpectation.isInverted = true
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showAnnouncementExpectation], timeout: 1)
+    }
+
+    func test_showNotificationsIfNeeded_announcement_not_shown() throws {
+        // Given
+        userDefaults.disableWhatsNew = false
+        userDefaults.announcementVersion = ""
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showAnnouncementExpectation], timeout: 1)
+    }
+
+    func test_showNotificationsIfNeeded_announcement_disabled() throws {
+        // Given
+        userDefaults.disableWhatsNew = true
+        userDefaults.announcementVersion = ""
+        router.showAnnouncementExpectation.isInverted = true
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showAnnouncementExpectation], timeout: 1)
+    }
 }

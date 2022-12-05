@@ -5,7 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassApp
+import CovPassUI
 import XCTest
 
 class WhatsNewSettingsSceneFactoryTests: XCTestCase {

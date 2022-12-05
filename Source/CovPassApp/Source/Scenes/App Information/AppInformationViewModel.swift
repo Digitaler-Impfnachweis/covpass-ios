@@ -10,10 +10,7 @@ import CovPassCommon
 import CovPassUI
 import Foundation
 
-class GermanAppInformationViewModel: CovPassAppInformationViewModel {
-    private let mainBundle: Bundle
-    private let licenseBundle: Bundle
-
+class GermanAppInformationViewModel: AppInformationBaseViewModel {
     override var entries: [AppInformationEntry] {
         [
             AppInformationEntry(
@@ -59,23 +56,9 @@ class GermanAppInformationViewModel: CovPassAppInformationViewModel {
                       closingAnnounce: Accessibility.Closing.accessibilityStatementTitle)
         ]
     }
-
-    init(
-        router: AppInformationRouterProtocol,
-        mainBundle: Bundle = .main,
-        licenseBundle: Bundle = .commonBundle,
-        persistence: Persistence
-    ) {
-        self.mainBundle = mainBundle
-        self.licenseBundle = licenseBundle
-        super.init(router: router, persistence: persistence)
-    }
 }
 
-class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
-    private let mainBundle: Bundle
-    private let licenseBundle: Bundle
-
+class EnglishAppInformationViewModel: AppInformationBaseViewModel {
     override var entries: [AppInformationEntry] {
         [
             AppInformationEntry(
@@ -116,33 +99,5 @@ class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
                       closingAnnounce: Accessibility.Closing.accessibilityStatementTitle)
         ]
-    }
-
-    init(
-        router: AppInformationRouterProtocol,
-        mainBundle: Bundle = .main,
-        licenseBundle: Bundle = .commonBundle,
-        persistence: Persistence
-    ) {
-        self.mainBundle = mainBundle
-        self.licenseBundle = licenseBundle
-        super.init(router: router, persistence: persistence)
-    }
-}
-
-private extension AppInformationEntry {
-    static func webEntry(title: String,
-                         url: URL,
-                         enableDynamicFonts: Bool = false,
-                         openingAnnounce: String,
-                         closingAnnounce: String) -> AppInformationEntry {
-        .init(
-            title: title,
-            scene: WebviewSceneFactory(title: title,
-                                       url: url,
-                                       enableDynamicFonts: enableDynamicFonts,
-                                       openingAnnounce: openingAnnounce,
-                                       closingAnnounce: closingAnnounce)
-        )
     }
 }

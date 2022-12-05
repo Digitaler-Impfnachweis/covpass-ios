@@ -10,14 +10,19 @@ import XCTest
 
 class AppInformationBaseViewModelTests: XCTestCase {
     private var router: AppInformationRouterMock!
+    private var persistence: MockPersistence!
     private var sut: AppInformationBaseViewModel!
 
     override func setUpWithError() throws {
+        persistence = .init()
         router = .init()
-        sut = AppInformationBaseViewModel(router: router)
+        sut = AppInformationBaseViewModel(router: router,
+                                          persistence: persistence)
     }
 
     override func tearDownWithError() throws {
+        persistence = nil
+        router = nil
         sut = nil
     }
 
@@ -54,7 +59,8 @@ class AppInformationBaseViewModelTests: XCTestCase {
             router: router,
             title: title,
             descriptionText: description,
-            appVersionText: version
+            appVersionText: version,
+            persistence: persistence
         )
 
         // When & Then

@@ -6,8 +6,8 @@
 //
 
 @testable import CovPassApp
+@testable import CovPassUI
 import PromiseKit
-import UIKit
 import XCTest
 
 class AnnouncementViewControllerSnapshotTests: BaseSnapShotTests {

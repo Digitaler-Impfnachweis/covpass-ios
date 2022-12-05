@@ -7,16 +7,15 @@
 //
 
 import CovPassCommon
-import CovPassUI
 import Foundation
 import PromiseKit
 
 private enum Constants {
-    static let checkboxTitle = "whats_new_screen_update_notifications_checkbox_headline".localized
-    static let checkboxDescription = "whats_new_screen_update_notifications_checkbox_copy".localized
-    static let okButtonTitle = "dialog_update_info_notification_action_button".localized
-    static let switchOn = "settings_list_status_on".localized
-    static let switchOff = "settings_list_status_off".localized
+    static let checkboxTitle = "whats_new_screen_update_notifications_checkbox_headline".localized(bundle: .main)
+    static let checkboxDescription = "whats_new_screen_update_notifications_checkbox_copy".localized.localized(bundle: .main)
+    static let okButtonTitle = "dialog_update_info_notification_action_button".localized.localized(bundle: .main)
+    static let switchOn = "settings_list_status_on".localized.localized(bundle: .main)
+    static let switchOff = "settings_list_status_off".localized.localized(bundle: .main)
 }
 
 final class AnnouncementViewModel: AnnouncementViewModelProtocol {

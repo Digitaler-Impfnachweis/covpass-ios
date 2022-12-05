@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol WhatsNewSettingsViewModelProtocol {
+public protocol WhatsNewSettingsViewModelProtocol {
     var accessibilityAnnouncementOpen: String { get }
     var accessibilityAnnouncementClose: String { get }
     var header: String { get }

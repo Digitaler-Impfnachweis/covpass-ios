@@ -15,6 +15,7 @@ class EnglishAppInformationViewModelTests: XCTestCase {
         // Given
         let expectedTitles = [
             "settings_rules_list_title".localized,
+            AppInformationBaseViewModel.Texts.whatsNewTitle,
             AppInformationBaseViewModel.Texts.faqTitle,
             "app_information_beep_when_checking_title".localized,
             AppInformationBaseViewModel.Texts.contactTitle,
@@ -26,14 +27,14 @@ class EnglishAppInformationViewModelTests: XCTestCase {
         ]
         let sut = EnglishAppInformationViewModel(
             router: AppInformationRouterMock(),
-            userDefaults: MockPersistence()
+            persistence: MockPersistence()
         )
 
         // When
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 9)
+        XCTAssertEqual(entries.count, 10)
         for index in 0 ..< min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }

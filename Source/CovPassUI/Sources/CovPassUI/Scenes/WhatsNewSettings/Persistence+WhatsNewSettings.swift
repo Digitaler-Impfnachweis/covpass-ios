@@ -9,7 +9,7 @@ import CovPassCommon
 
 private let keyWhatsNew = "keyWhatsNew"
 
-extension Persistence {
+public extension Persistence {
     var disableWhatsNew: Bool {
         get {
             let value = try? fetch(keyWhatsNew) as? Bool

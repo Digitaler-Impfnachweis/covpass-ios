@@ -224,6 +224,19 @@ class ValidatorOverviewViewModel {
         return router.showDataPrivacy().recover { _ in }
     }
 
+    private func showAnnouncementIfNeeded() -> Promise<Void> {
+        let bundleVersion = Bundle.main.shortVersionString ?? ""
+        guard let announcementVersion = userDefaults.announcementVersion else {
+            userDefaults.announcementVersion = bundleVersion
+            return Promise.value
+        }
+        if userDefaults.disableWhatsNew || announcementVersion == bundleVersion {
+            return Promise.value
+        }
+        userDefaults.announcementVersion = bundleVersion
+        return router.showAnnouncement()
+    }
+
     private func showNewRegulationsAnnouncementIfNeeded() -> Guarantee<Void> {
         if userDefaults.newRegulationsOnboardingScreenWasShown {
             return .value
@@ -301,6 +314,9 @@ class ValidatorOverviewViewModel {
     func showNotificationsIfNeeded() {
         firstly {
             showDataPrivacyIfNeeded()
+        }
+        .then {
+            self.showAnnouncementIfNeeded()
         }
         .then(showNewRegulationsAnnouncementIfNeeded)
         .done {
