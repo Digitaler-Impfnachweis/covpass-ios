@@ -39,6 +39,19 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var routeToRulesUpdateExpectation = XCTestExpectation(description: "routeToRulesUpdateExpectation")
     var showAnnouncementExpectation = XCTestExpectation(description: "showAnnouncementExpectation")
     var showTravelRulesNotAvailableResponse: Promise<Void> = .value
+    var secondScanSameTokenExpectation = XCTestExpectation(description: "secondScanSameTokenTypeExpectation")
+    var thirdScanSameTokenExpectation = XCTestExpectation(description: "secondScanSameTokenTypeExpectation")
+    var scanQRCodeResponse: String = ""
+
+    func thirdScanSameToken(secondToken: ExtendedCBORWebToken, firstToken: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+        thirdScanSameTokenExpectation.fulfill()
+        return .value(.thirdScan(secondToken, firstToken))
+    }
+
+    func secondScanSameToken(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+        secondScanSameTokenExpectation.fulfill()
+        return .value(.secondScan(token))
+    }
 
     func showAnnouncement() -> PromiseKit.Promise<Void> {
         showAnnouncementExpectation.fulfill()
@@ -82,7 +95,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
 
     func scanQRCode() -> Promise<QRCodeImportResult> {
         scanQRCodeExpectation.fulfill()
-        return .value(.scanResult(.success("")))
+        return .value(.scanResult(.success(scanQRCodeResponse)))
     }
 
     func showDataPrivacy() -> Promise<Void> {
@@ -159,7 +172,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         return .value(.close)
     }
 
-    func showIfsg22aIncompleteResult(token _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+    func showIfsg22aIncompleteResult() -> Promise<ValidatorDetailSceneResult> {
         showIfsg22aIncompleteResultExpectation.fulfill()
         return .value(.close)
     }

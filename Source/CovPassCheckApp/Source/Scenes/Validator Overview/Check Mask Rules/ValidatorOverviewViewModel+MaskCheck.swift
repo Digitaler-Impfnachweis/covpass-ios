@@ -44,6 +44,8 @@ extension ValidatorOverviewViewModel {
             return showMaskCheckDifferentPerson(token1OfPerson: token1OfPerson, token2OfPerson: token2OfPerson)
         case let .maskRulesNotAvailable(token):
             return router.showNoMaskRules(token: token)
+        case let .secondScanSameToken(token):
+            return router.secondScanSameToken(token: token)
         case .secondScanSameTokenType:
             router.showMaskCheckSameCertType()
             return .value(.close)

@@ -17,8 +17,8 @@ struct ScanAndParseQRCodeAndCheckIfsg22aUseCase {
     let vaccinationRepository: VaccinationRepositoryProtocol
     let revocationRepository: CertificateRevocationRepositoryProtocol
     let certLogic: DCCCertLogicProtocol
-    let secondToken: ExtendedCBORWebToken?
-    let thirdToken: ExtendedCBORWebToken?
+    let secondScannedToken: ExtendedCBORWebToken?
+    let firstScannedToken: ExtendedCBORWebToken?
 
     func execute() -> Promise<ExtendedCBORWebToken> {
         firstly {
@@ -33,11 +33,11 @@ struct ScanAndParseQRCodeAndCheckIfsg22aUseCase {
                                     vaccinationRepository: self.vaccinationRepository).execute()
         }
         .then { token -> Promise<ExtendedCBORWebToken> in
-            CheckIfsg22aUseCase(token: token,
+            CheckIfsg22aUseCase(currentToken: token,
                                 revocationRepository: self.revocationRepository,
                                 holderStatus: CertificateHolderStatusModel(dccCertLogic: self.certLogic),
-                                secondToken: secondToken,
-                                thirdToken: thirdToken).execute()
+                                secondScannedToken: secondScannedToken,
+                                firstScannedToken: firstScannedToken).execute()
         }
     }
 }

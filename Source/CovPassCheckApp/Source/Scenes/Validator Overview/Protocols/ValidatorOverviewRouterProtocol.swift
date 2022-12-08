@@ -20,6 +20,8 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanQRCodeProtoc
     func routeToStateSelection() -> Promise<Void>
     func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void>
     func routeToChooseCheckSituation() -> Promise<Void>
+    func secondScanSameToken(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func thirdScanSameToken(secondToken: ExtendedCBORWebToken, firstToken: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
 }
 
 protocol MaskCheckRouterProtocol {
@@ -41,7 +43,7 @@ protocol CheckImmunityRouterProtocol {
     func showVaccinationCycleComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aNotComplete(token: ExtendedCBORWebToken, secondToken: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
-    func showIfsg22aIncompleteResult(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showIfsg22aIncompleteResult() -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aCheckError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
     func showTravelRulesValid(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showTravelRulesInvalid(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>

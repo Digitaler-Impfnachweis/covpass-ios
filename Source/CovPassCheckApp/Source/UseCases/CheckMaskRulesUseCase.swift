@@ -13,6 +13,7 @@ import PromiseKit
 enum CheckMaskRulesUseCaseError: Error, Equatable {
     case differentPersonalInformation(_ token1OfPerson: ExtendedCBORWebToken, _ token2OfPerson: ExtendedCBORWebToken)
     case secondScanSameTokenType(_ token: ExtendedCBORWebToken)
+    case secondScanSameToken(_ token: ExtendedCBORWebToken)
     case maskRulesNotAvailable(_ token: ExtendedCBORWebToken)
     case holderNeedsMask(_ token: ExtendedCBORWebToken)
     case invalidDueToRules(_ token: ExtendedCBORWebToken)
@@ -62,7 +63,20 @@ struct CheckMaskRulesUseCase {
         return .value
     }
 
+    private func additionalTokenIsNotSameLikeBefore() -> Bool {
+        guard let additionalToken = additionalToken else {
+            return true
+        }
+        guard additionalToken != token else {
+            return false
+        }
+        return true
+    }
+
     private func checkMaskRules() -> Promise<Void> {
+        guard additionalTokenIsNotSameLikeBefore() else {
+            return .init(error: CheckMaskRulesUseCaseError.secondScanSameToken(token))
+        }
         if let additionalToken = additionalToken,
            additionalToken.vaccinationCertificate.certType == token.vaccinationCertificate.certType {
             return .init(error: CheckMaskRulesUseCaseError.secondScanSameTokenType(token))

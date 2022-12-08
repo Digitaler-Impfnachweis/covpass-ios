@@ -19,11 +19,11 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         token = CBORWebToken.mockRecoveryCertificate.mockRecoveryUVCI("FOO").extended()
         revocationRepository = CertificateRevocationRepositoryMock()
         certificateHolderStatusModel = CertificateHolderStatusModelMock()
-        sut = CheckIfsg22aUseCase(token: token,
+        sut = CheckIfsg22aUseCase(currentToken: token,
                                   revocationRepository: revocationRepository,
                                   holderStatus: certificateHolderStatusModel,
-                                  secondToken: nil,
-                                  thirdToken: nil)
+                                  secondScannedToken: nil,
+                                  firstScannedToken: nil)
     }
 
     override func tearDownWithError() throws {
@@ -96,11 +96,11 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
     func test_checkIfsg22aRule_withAdditional_token_of_different_person_failed() {
         // GIVEN
         let differentPersonToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended(vaccinationQRCodeData: "1")
-        let sut = CheckIfsg22aUseCase(token: token,
+        let sut = CheckIfsg22aUseCase(currentToken: token,
                                       revocationRepository: revocationRepository,
                                       holderStatus: certificateHolderStatusModel,
-                                      secondToken: differentPersonToken,
-                                      thirdToken: nil)
+                                      secondScannedToken: differentPersonToken,
+                                      firstScannedToken: nil)
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
@@ -114,6 +114,57 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
             .catch { error in
                 // THEN
                 XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .showMaskCheckdifferentPersonalInformation(differentPersonToken, self.token))
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
+    }
+
+    func test_checkIfsg22aRule_withAdditional_but_same_token_second_scan() {
+        // GIVEN
+        let sut = CheckIfsg22aUseCase(currentToken: token,
+                                      revocationRepository: revocationRepository,
+                                      holderStatus: certificateHolderStatusModel,
+                                      secondScannedToken: token,
+                                      firstScannedToken: nil)
+        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        certificateHolderStatusModel.areIfsg22aRulesAvailable = true
+        revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticInvalidationRulesPassedResult = .passed
+        certificateHolderStatusModel.isVaccinationCycleComplete.passed = true
+        // WHEN
+        sut.execute()
+            .done { _ in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .secondScanSameToken(self.token))
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
+    }
+
+    func test_checkIfsg22aRule_withAdditional_but_same_token_third_scan() {
+        // GIVEN
+        let firstScannedToken: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+        let sut = CheckIfsg22aUseCase(currentToken: token,
+                                      revocationRepository: revocationRepository,
+                                      holderStatus: certificateHolderStatusModel,
+                                      secondScannedToken: token,
+                                      firstScannedToken: firstScannedToken)
+        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        certificateHolderStatusModel.areIfsg22aRulesAvailable = true
+        revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticInvalidationRulesPassedResult = .passed
+        certificateHolderStatusModel.isVaccinationCycleComplete.passed = true
+        // WHEN
+        sut.execute()
+            .done { _ in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .thirdScanSameToken(self.token, firstScannedToken))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)

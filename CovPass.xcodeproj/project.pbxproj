@@ -1310,7 +1310,6 @@
 			isa = PBXGroup;
 			children = (
 				09C54F0F291D555A00707210 /* ValidatorOverviewViewModel+MaskCheck.swift */,
-				09AE255728E72D2E006AB2A8 /* ScanAndParseQRCodeAndCheckMaskRulesUseCase.swift */,
 			);
 			path = "Check Mask Rules";
 			sourceTree = "<group>";
@@ -1522,6 +1521,7 @@
 			children = (
 				09279969291AAB2B00296B68 /* ScanAndParseQRCodeAndCheckIfsg22aUseCase.swift */,
 				09318D70292CD7B80073D07F /* ScanAndParseQRCodeAndCheckTravelRulesUseCase.swift */,
+				09AE255728E72D2E006AB2A8 /* ScanAndParseQRCodeAndCheckMaskRulesUseCase.swift */,
 				0927996D291AAD9C00296B68 /* CheckIfsg22aUseCase.swift */,
 				098748AF27FB24ED00A28414 /* CheckMaskRulesUseCase.swift */,
 				09ABDAC727FC3D7C0078EB11 /* ParseCertificateUseCase.swift */,

@@ -11,58 +11,93 @@ import Foundation
 import PromiseKit
 
 enum CheckIfsg22aUseCaseError: Error, Equatable {
+    case secondScanSameToken(_ token: ExtendedCBORWebToken)
+    case thirdScanSameToken(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken)
     case showMaskCheckdifferentPersonalInformation(_ token1OfPerson: ExtendedCBORWebToken, _ token2OfPerson: ExtendedCBORWebToken)
     case vaccinationCycleIsNotComplete(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken?, _ thirdToken: ExtendedCBORWebToken?)
     case invalidToken(_ token: ExtendedCBORWebToken)
 }
 
 struct CheckIfsg22aUseCase {
-    let token: ExtendedCBORWebToken
+    let currentToken: ExtendedCBORWebToken
     let revocationRepository: CertificateRevocationRepositoryProtocol
     public let holderStatus: CertificateHolderStatusModelProtocol
-    let secondToken: ExtendedCBORWebToken?
-    let thirdToken: ExtendedCBORWebToken?
+    let secondScannedToken: ExtendedCBORWebToken?
+    let firstScannedToken: ExtendedCBORWebToken?
+
+    private var isScanNumber: Int {
+        if firstScannedToken != nil {
+            return 3
+        } else if secondScannedToken != nil {
+            return 2
+        } else {
+            return 1
+        }
+    }
 
     func execute() -> Promise<ExtendedCBORWebToken> {
         firstly {
-            isRevoked(token)
+            isRevoked(currentToken)
         }
         .then {
             checkDomesticRules()
         }
         .then {
+            additionalTokenIsNotSameLikeBefore()
+        }
+        .then {
+            additionalTokenIsSamePerson()
+        }
+        .then {
             checkIfsg22aRules()
         }
         .then {
-            Promise.value(token)
+            Promise.value(currentToken)
         }
     }
 
     private func tokensForIfsg22aCheck() -> [ExtendedCBORWebToken] {
-        var tokens: [ExtendedCBORWebToken] = [token]
-        if let secondToken = secondToken {
+        var tokens: [ExtendedCBORWebToken] = [currentToken]
+        if let secondToken = secondScannedToken {
             tokens.append(secondToken)
         }
-        if let thirdToken = thirdToken {
-            tokens.append(thirdToken)
+        if let firstToken = firstScannedToken {
+            tokens.append(firstToken)
         }
         return tokens
     }
 
+    private func additionalTokenIsNotSameLikeBefore() -> Promise<Void> {
+        let tokens = [firstScannedToken, secondScannedToken]
+        let qrCodes = tokens.map(\.?.vaccinationQRCodeData)
+        if qrCodes.contains(currentToken.vaccinationQRCodeData), let secondScannedToken = secondScannedToken {
+            if isScanNumber == 2 {
+                return .init(error: CheckIfsg22aUseCaseError.secondScanSameToken(secondScannedToken))
+            } else if isScanNumber == 3, let firstScannedToken = firstScannedToken {
+                return .init(error: CheckIfsg22aUseCaseError.thirdScanSameToken(firstScannedToken, secondScannedToken))
+            }
+        }
+        return .value
+    }
+
+    private func additionalTokenIsSamePerson() -> Promise<Void> {
+        if let secondToken = secondScannedToken,
+           secondToken.vaccinationCertificate.hcert.dgc.nam != currentToken.vaccinationCertificate.hcert.dgc.nam ||
+           secondToken.vaccinationCertificate.hcert.dgc.dob != currentToken.vaccinationCertificate.hcert.dgc.dob {
+            return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(secondToken, currentToken))
+        }
+        if let firstToken = firstScannedToken, let secondToken = secondScannedToken,
+           firstToken.vaccinationCertificate.hcert.dgc.nam != secondToken.vaccinationCertificate.hcert.dgc.nam ||
+           firstToken.vaccinationCertificate.hcert.dgc.dob != secondToken.vaccinationCertificate.hcert.dgc.dob {
+            return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(firstToken, secondToken))
+        }
+        return .value
+    }
+
     private func checkIfsg22aRules() -> Promise<Void> {
         let tokens = tokensForIfsg22aCheck()
-        if let secondToken = secondToken,
-           secondToken.vaccinationCertificate.hcert.dgc.nam != token.vaccinationCertificate.hcert.dgc.nam ||
-           secondToken.vaccinationCertificate.hcert.dgc.dob != token.vaccinationCertificate.hcert.dgc.dob {
-            return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(secondToken, token))
-        }
-        if let thirdToken = thirdToken, let secondToken = secondToken,
-           thirdToken.vaccinationCertificate.hcert.dgc.nam != secondToken.vaccinationCertificate.hcert.dgc.nam ||
-           thirdToken.vaccinationCertificate.hcert.dgc.dob != secondToken.vaccinationCertificate.hcert.dgc.dob {
-            return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(thirdToken, secondToken))
-        }
         guard holderStatus.vaccinationCycleIsComplete(tokens).passed else {
-            return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete(token, secondToken, thirdToken))
+            return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete(currentToken, secondScannedToken, firstScannedToken))
         }
         return .value
     }
@@ -80,11 +115,11 @@ struct CheckIfsg22aUseCase {
     }
 
     private func checkDomesticRules() -> Promise<Void> {
-        switch holderStatus.checkDomesticInvalidationRules([token]) {
+        switch holderStatus.checkDomesticInvalidationRules([currentToken]) {
         case .passed:
             return .value
         case .failedTechnical, .failedFunctional:
-            return .init(error: CheckIfsg22aUseCaseError.invalidToken(token))
+            return .init(error: CheckIfsg22aUseCaseError.invalidToken(currentToken))
         }
     }
 }

@@ -140,7 +140,7 @@ class ValidatorOverviewViewController: UIViewController {
                               infoTextEdges: .init(top: 0, left: 0, bottom: 0, right: 0),
                               actionTitle: immunityCheckActionTitle)
         immunityCheckView.action = {
-            self.viewModel.checkImmunityStatus(secondToken: nil, thirdToken: nil)
+            self.viewModel.checkImmunityStatus(secondToken: nil, firstToken: nil)
         }
 
         immunityCheckView.linkAction = { _ in

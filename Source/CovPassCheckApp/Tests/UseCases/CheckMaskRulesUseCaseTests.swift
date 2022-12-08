@@ -192,7 +192,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
 
     func test_checkMaskRule_withAdditional_token_of_different_person_failed() {
         // GIVEN
-        let differentPersonToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
+        let differentPersonToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended(vaccinationQRCodeData: "3")
         let sut = CheckMaskRulesUseCase(token: token,
                                         region: nil,
                                         revocationRepository: revocationRepository,
@@ -219,7 +219,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
 
     func test_checkMaskRule_withAdditional_token_of_same_type_failed() {
         // GIVEN
-        let differentPersonToken = CBORWebToken.mockRecoveryCertificate.extended()
+        let differentPersonToken = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "3")
         let sut = CheckMaskRulesUseCase(token: token,
                                         region: nil,
                                         revocationRepository: revocationRepository,
@@ -238,7 +238,33 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .secondScanSameTokenType(differentPersonToken))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .secondScanSameTokenType(self.token))
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
+    }
+
+    func test_checkMaskRule_withAdditional_same_token_of() {
+        // GIVEN
+        let sut = CheckMaskRulesUseCase(token: token,
+                                        region: nil,
+                                        revocationRepository: revocationRepository,
+                                        holderStatus: certificateHolderStatusModel,
+                                        additionalToken: token)
+        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticAcceptanceAndInvalidationRulesPassedResult = .passed
+        certificateHolderStatusModel.euInvalidationRulesPassedResult = .passed
+        certificateHolderStatusModel.needsMask = false
+        // WHEN
+        sut.execute()
+            .done { _ in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .secondScanSameToken(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)

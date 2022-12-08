@@ -38,6 +38,11 @@ private enum Constants {
         static let noTravelRules_subtitle = "dialog_no_entry_rules_available_subtitle".localized
         static let noTravelRules_continue = "dialog_no_entry_rules_available_button1".localized
         static let noTravelRules_cancel = "dialog_no_entry_rules_available_button2".localized
+
+        static let ifsg_second_scan_alreadyScanner_title = "dialog_second_scan_title".localized
+        static let ifsg_second_scan_alreadyScanner_subtitle = "dialog_second_scan_message".localized
+        static let ifsg_second_scan_alreadyScanner_rescan = "dialog_second_scan_button_repeat".localized
+        static let ifsg_second_scan_alreadyScanner_cancel = "dialog_second_scan_button_update".localized
     }
 }
 
@@ -240,7 +245,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         return sceneCoordinator.present(view, animated: true)
     }
 
-    func showIfsg22aIncompleteResult(token _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+    func showIfsg22aIncompleteResult() -> Promise<ValidatorDetailSceneResult> {
         let view = VaccinationCycleIncompleteResultSceneFactory(router: VaccinationCycleIncompleteResultRouter(sceneCoordinator: sceneCoordinator))
         return sceneCoordinator.present(view, animated: true)
     }
@@ -279,6 +284,62 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                         isEnabled: true,
                         completion: { _ in
                             seal.reject(TravelRulesError.cancel)
+                        }
+                    )
+                ],
+                style: .alert
+            )
+        }
+    }
+
+    func secondScanSameToken(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+        Promise { seal in
+            showDialog(
+                title: Constants.Keys.ifsg_second_scan_alreadyScanner_title,
+                message: Constants.Keys.ifsg_second_scan_alreadyScanner_subtitle,
+                actions: [
+                    DialogAction(
+                        title: Constants.Keys.ifsg_second_scan_alreadyScanner_rescan,
+                        style: UIAlertAction.Style.default,
+                        isEnabled: true,
+                        completion: { _ in
+                            seal.fulfill(.secondScan(token))
+                        }
+                    ),
+                    DialogAction(
+                        title: Constants.Keys.ifsg_second_scan_alreadyScanner_cancel,
+                        style: UIAlertAction.Style.default,
+                        isEnabled: true,
+                        completion: { _ in
+                            seal.fulfill(.close)
+                        }
+                    )
+                ],
+                style: .alert
+            )
+        }
+    }
+
+    func thirdScanSameToken(secondToken: ExtendedCBORWebToken, firstToken: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+        Promise { seal in
+            showDialog(
+                title: Constants.Keys.ifsg_second_scan_alreadyScanner_title,
+                message: Constants.Keys.ifsg_second_scan_alreadyScanner_subtitle,
+                actions: [
+                    DialogAction(
+                        title: Constants.Keys.ifsg_second_scan_alreadyScanner_rescan,
+                        style: UIAlertAction.Style.default,
+                        isEnabled: true,
+                        completion: { _ in
+                            seal.fulfill(.thirdScan(secondToken, firstToken))
+                        }
+                    ),
+                    DialogAction(
+                        title: Constants.Keys.ifsg_second_scan_alreadyScanner_cancel,
+                        style: UIAlertAction.Style.default,
+                        isEnabled: true,
+                        completion: { _ in
+                            seal.fulfill(.close)
                         }
                     )
                 ],
