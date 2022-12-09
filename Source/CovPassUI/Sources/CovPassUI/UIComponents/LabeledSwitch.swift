@@ -15,7 +15,7 @@ public class LabeledSwitch: XibView {
     override public func initView() {
         super.initView()
         contentView?.backgroundColor = .white
-        uiSwitch.onTintColor = .brandBase
+        uiSwitch.onTintColor = .switchGreen
         uiSwitch.tintColor = .greyDark
         uiSwitch.layer.cornerRadius = uiSwitch.frame.height / 2.0
         uiSwitch.backgroundColor = .greyDark

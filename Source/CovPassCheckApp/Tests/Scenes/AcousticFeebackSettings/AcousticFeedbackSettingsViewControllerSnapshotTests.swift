@@ -33,7 +33,7 @@ class AcousticFeedbackSettingsViewControllerSnapshotTests: BaseSnapShotTests {
         viewModel.enableAcousticFeedback = true
 
         // Then
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
 
     func testExample_enableAcousticFeedback_off() {
@@ -41,6 +41,6 @@ class AcousticFeedbackSettingsViewControllerSnapshotTests: BaseSnapShotTests {
         viewModel.enableAcousticFeedback = false
 
         // Then
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
 }

@@ -10,31 +10,31 @@ import CovPassCommon
 import UIKit
 
 class RevocationSettingsViewControllerSnapShotTests: BaseSnapShotTests {
-    var vc: UIViewController!
+    var sut: UIViewController!
     var persistence: UserDefaultsPersistence!
 
     override func setUpWithError() throws {
         persistence = UserDefaultsPersistence()
-        vc = RevocationSettingsSceneFactory(router: RevocationSettingsRouterMock(), userDefaults: persistence).make()
+        sut = RevocationSettingsSceneFactory(router: RevocationSettingsRouterMock(), userDefaults: persistence).make()
     }
 
     override func tearDown() {
         persistence = nil
-        vc = nil
+        sut = nil
     }
 
     func testDefaultOnboarding() {
         try? persistence.delete(UserDefaults.keyRevocationExpertMode)
-        verifyView(vc: vc)
+        verifyView(view: sut.view)
     }
 
     func testDefaultOnboarding_True() {
         persistence.revocationExpertMode = true
-        verifyView(vc: vc)
+        verifyView(view: sut.view)
     }
 
     func testDefaultOnboarding_False() {
         persistence.revocationExpertMode = false
-        verifyView(vc: vc)
+        verifyView(view: sut.view)
     }
 }

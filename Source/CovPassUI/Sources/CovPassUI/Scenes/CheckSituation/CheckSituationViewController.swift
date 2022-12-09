@@ -174,7 +174,6 @@ public class CheckSituationViewController: UIViewController {
         offlineRevocationSwitch.label.attributedText = viewModel.offlineRevocationSwitchTitle
             .styledAs(.header_3)
             .colored(.onBackground110)
-        offlineRevocationSwitch.uiSwitch.onTintColor = .brandAccent
         offlineRevocationSwitch.switchChanged = { [weak self] _ in
             self?.viewModel.toggleOfflineRevocation()
         }

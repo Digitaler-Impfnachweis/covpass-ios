@@ -35,11 +35,11 @@ class WhatsNewSettingsViewControllerSnapshotTests: BaseSnapShotTests {
         viewModel.disableWhatsNew = true
 
         // Then
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
 
     func testSwitchOn() {
         // Then
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
 }
