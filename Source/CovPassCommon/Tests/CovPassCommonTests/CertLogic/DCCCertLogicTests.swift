@@ -120,7 +120,7 @@ class DCCCertLogicTests: XCTestCase {
         }.catch { error in
             XCTFail("Should not fail \(error)")
         }
-        wait(for: [expectation], timeout: 0.1)
+        wait(for: [expectation], timeout: 1.0)
     }
 
     func testUpdateDomesticRulesIfNeededFalse() {

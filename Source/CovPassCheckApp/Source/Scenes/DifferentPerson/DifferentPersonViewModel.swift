@@ -82,7 +82,12 @@ class DifferentPersonViewModel: DifferentPersonViewModelProtocol {
         self.thirdToken = thirdToken
         self.resolver = resolver
         self.countdownTimerModel = countdownTimerModel
-        sameBirthdate = firstToken.vaccinationCertificate.hcert.dgc.dob == secondToken.vaccinationCertificate.hcert.dgc.dob
+        let firstAndSecondTokenSameDate = firstToken.vaccinationCertificate.hcert.dgc.dob == secondToken.vaccinationCertificate.hcert.dgc.dob
+        var secondAndThirdTokenSameDat = true
+        if let thirdToken = thirdToken {
+            secondAndThirdTokenSameDat = secondToken.vaccinationCertificate.hcert.dgc.dob == thirdToken.vaccinationCertificate.hcert.dgc.dob
+        }
+        sameBirthdate = firstAndSecondTokenSameDate && secondAndThirdTokenSameDat
         ignoringIsHidden = !sameBirthdate
         isThirdScan = thirdToken != nil
         thirdCardIsHidden = thirdToken == nil

@@ -37,7 +37,8 @@ extension ValidatorOverviewViewModel {
                                           secondToken: ExtendedCBORWebToken? = nil,
                                           ignoringPiCheck: Bool = false) -> Promise<ExtendedCBORWebToken> {
         if ignoringPiCheck, let secondToken = secondToken {
-            return justCheckMaskStatus(secondToken: secondToken)
+            return justCheckMaskStatus(firstToken: firstToken,
+                                       secondToken: secondToken)
         } else {
             return scanAndCheckMaskStatus(firstToken: firstToken)
         }
