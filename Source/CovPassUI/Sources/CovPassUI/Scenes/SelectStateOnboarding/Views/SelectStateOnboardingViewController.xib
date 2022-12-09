@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectStateOnboardingViewController" customModule="CovPassUI">
             <connections>
+                <outlet property="bottomView" destination="Fwl-vo-MSo" id="VSd-kK-LZM"/>
                 <outlet property="button" destination="JqW-rC-xD4" id="YLz-ap-dyg"/>
                 <outlet property="copy2Label" destination="qB0-tj-ODZ" id="9Zz-bX-8zD"/>
                 <outlet property="copy3Label" destination="R1r-lY-wLt" id="zqn-A7-G7m"/>
@@ -27,14 +28,14 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="118" translatesAutoresizingMaskIntoConstraints="NO" id="h7s-cG-VWO" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="72" width="414" height="118"/>
+                    <rect key="frame" x="0.0" y="68" width="414" height="118"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOK-tl-rDY">
-                    <rect key="frame" x="0.0" y="190" width="414" height="528"/>
+                    <rect key="frame" x="0.0" y="186" width="414" height="676"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPB-pJ-YNe">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="528"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="676"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="X0R-nC-XtI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="723.5"/>
@@ -65,7 +66,7 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="X0R-nC-XtI" secondAttribute="bottom" id="Cfz-ec-bE9"/>
+                                <constraint firstAttribute="bottom" secondItem="X0R-nC-XtI" secondAttribute="bottom" constant="64" id="Cfz-ec-bE9"/>
                                 <constraint firstItem="X0R-nC-XtI" firstAttribute="width" secondItem="KPB-pJ-YNe" secondAttribute="width" id="Ndm-JE-0aq"/>
                                 <constraint firstAttribute="trailing" secondItem="X0R-nC-XtI" secondAttribute="trailing" id="Rr9-cK-jeh"/>
                                 <constraint firstItem="X0R-nC-XtI" firstAttribute="leading" secondItem="KPB-pJ-YNe" secondAttribute="leading" id="rrs-dT-AEg"/>
@@ -82,39 +83,59 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="Fwl-vo-MSo" userLabel="Footer View">
-                    <rect key="frame" x="24" y="718" width="366" height="120"/>
+                    <rect key="frame" x="0.0" y="742" width="414" height="120"/>
                     <subviews>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="180" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="JqW-rC-xD4" customClass="MainButton" customModule="CovPassUI">
-                            <rect key="frame" x="93" y="0.0" width="180" height="120"/>
+                            <rect key="frame" x="117" y="24" width="180" height="72"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="JqW-rC-xD4" firstAttribute="centerX" secondItem="Fwl-vo-MSo" secondAttribute="centerX" id="BJ4-oC-hp7"/>
-                        <constraint firstItem="JqW-rC-xD4" firstAttribute="top" secondItem="Fwl-vo-MSo" secondAttribute="top" id="QpK-LB-BJ9"/>
+                        <constraint firstItem="JqW-rC-xD4" firstAttribute="top" secondItem="Fwl-vo-MSo" secondAttribute="top" constant="24" id="QpK-LB-BJ9"/>
                         <constraint firstItem="JqW-rC-xD4" firstAttribute="centerY" secondItem="Fwl-vo-MSo" secondAttribute="centerY" id="nQc-iQ-lap"/>
-                        <constraint firstAttribute="bottom" secondItem="JqW-rC-xD4" secondAttribute="bottom" id="zta-fh-Dfz"/>
+                        <constraint firstAttribute="bottom" secondItem="JqW-rC-xD4" secondAttribute="bottom" constant="24" id="zta-fh-Dfz"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="Ij5-fs-Fs2"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Fwl-vo-MSo" firstAttribute="leading" secondItem="Ij5-fs-Fs2" secondAttribute="leading" constant="24" id="5X3-yO-KcJ"/>
+                <constraint firstItem="Fwl-vo-MSo" firstAttribute="leading" secondItem="Ij5-fs-Fs2" secondAttribute="leading" id="5X3-yO-KcJ"/>
                 <constraint firstItem="h7s-cG-VWO" firstAttribute="top" secondItem="Ij5-fs-Fs2" secondAttribute="top" constant="24" id="FgR-lG-046"/>
                 <constraint firstItem="Ij5-fs-Fs2" firstAttribute="trailing" secondItem="h7s-cG-VWO" secondAttribute="trailing" id="Iv8-pt-ydK"/>
-                <constraint firstItem="Ij5-fs-Fs2" firstAttribute="bottom" secondItem="Fwl-vo-MSo" secondAttribute="bottom" constant="24" id="RBM-ew-Jzt"/>
-                <constraint firstItem="Ij5-fs-Fs2" firstAttribute="trailing" secondItem="Fwl-vo-MSo" secondAttribute="trailing" constant="24" id="nbv-HS-ROn"/>
+                <constraint firstItem="Ij5-fs-Fs2" firstAttribute="bottom" secondItem="Fwl-vo-MSo" secondAttribute="bottom" id="RBM-ew-Jzt"/>
+                <constraint firstItem="Ij5-fs-Fs2" firstAttribute="bottom" secondItem="NOK-tl-rDY" secondAttribute="bottom" id="UHe-Vq-pDH"/>
+                <constraint firstItem="Ij5-fs-Fs2" firstAttribute="trailing" secondItem="Fwl-vo-MSo" secondAttribute="trailing" id="nbv-HS-ROn"/>
                 <constraint firstItem="NOK-tl-rDY" firstAttribute="leading" secondItem="Ij5-fs-Fs2" secondAttribute="leading" id="qCa-Ls-Lbl"/>
                 <constraint firstItem="NOK-tl-rDY" firstAttribute="top" secondItem="h7s-cG-VWO" secondAttribute="bottom" id="rwN-gF-GTr"/>
-                <constraint firstItem="Fwl-vo-MSo" firstAttribute="top" secondItem="NOK-tl-rDY" secondAttribute="bottom" id="tBy-xz-H3D"/>
                 <constraint firstItem="h7s-cG-VWO" firstAttribute="leading" secondItem="Ij5-fs-Fs2" secondAttribute="leading" id="wkw-ZQ-M90"/>
                 <constraint firstItem="Ij5-fs-Fs2" firstAttribute="trailing" secondItem="NOK-tl-rDY" secondAttribute="trailing" id="ymm-Uu-CWg"/>
             </constraints>
             <point key="canvasLocation" x="-1513.0434782608697" y="-52.232142857142854"/>
         </view>
     </objects>
+    <designables>
+        <designable name="JqW-rC-xD4">
+            <size key="intrinsicContentSize" width="180" height="60"/>
+        </designable>
+        <designable name="R1r-lY-wLt">
+            <size key="intrinsicContentSize" width="414" height="60.5"/>
+        </designable>
+        <designable name="cZR-uN-pgR">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="fyN-Gw-OcI">
+            <size key="intrinsicContentSize" width="414" height="60.5"/>
+        </designable>
+        <designable name="h7s-cG-VWO">
+            <size key="intrinsicContentSize" width="414" height="118"/>
+        </designable>
+        <designable name="qB0-tj-ODZ">
+            <size key="intrinsicContentSize" width="414" height="60.5"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

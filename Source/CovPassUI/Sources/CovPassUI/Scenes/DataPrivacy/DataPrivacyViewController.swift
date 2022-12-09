@@ -33,6 +33,7 @@ public class DataPrivacyViewController: UIViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.backgroundPrimary
         configureWebView()
         configureToolbarView()
     }

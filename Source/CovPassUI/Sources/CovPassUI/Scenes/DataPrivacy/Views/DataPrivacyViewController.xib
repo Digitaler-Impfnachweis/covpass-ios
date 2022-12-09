@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,26 +20,26 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="Ym0-Wl-H3l" customClass="CustomToolbarView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="794" width="414" height="56"/>
-                </view>
                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NwZ-r6-xTP" customClass="StaticWebView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="44" width="414" height="742"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="806"/>
                     <wkWebViewConfiguration key="configuration">
                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                         <wkPreferences key="preferences"/>
                     </wkWebViewConfiguration>
                 </wkWebView>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="Ym0-Wl-H3l" customClass="CustomToolbarView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="794" width="414" height="56"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="aye-B2-vjU"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="NwZ-r6-xTP" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" id="7Nl-BQ-Y9f"/>
+                <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="NwZ-r6-xTP" secondAttribute="bottom" constant="12" id="Kb6-jM-Onz"/>
                 <constraint firstItem="aye-B2-vjU" firstAttribute="trailing" secondItem="NwZ-r6-xTP" secondAttribute="trailing" id="Vc9-r6-D6a"/>
                 <constraint firstItem="aye-B2-vjU" firstAttribute="trailing" secondItem="Ym0-Wl-H3l" secondAttribute="trailing" id="X8j-XK-hJc"/>
                 <constraint firstItem="NwZ-r6-xTP" firstAttribute="top" secondItem="aye-B2-vjU" secondAttribute="top" id="XOT-5x-2g9"/>
                 <constraint firstItem="Ym0-Wl-H3l" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" id="hVe-jH-RPM"/>
-                <constraint firstItem="Ym0-Wl-H3l" firstAttribute="top" secondItem="NwZ-r6-xTP" secondAttribute="bottom" constant="8" symbolic="YES" id="qS7-GC-U2M"/>
                 <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Ym0-Wl-H3l" secondAttribute="bottom" constant="12" id="ygL-2E-Kkx"/>
             </constraints>
             <point key="canvasLocation" x="-1513.0434782608697" y="-52.232142857142854"/>

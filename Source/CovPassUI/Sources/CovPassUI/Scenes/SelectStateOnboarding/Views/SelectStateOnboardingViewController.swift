@@ -17,6 +17,7 @@ open class SelectStateOnboardingViewController: UIViewController {
     @IBOutlet var copy2Label: LinkLabel!
     @IBOutlet var copy3Label: PlainLabel!
     @IBOutlet var button: MainButton!
+    @IBOutlet var bottomView: UIView!
 
     let viewModel: SelectStateOnboardingViewModelProtocol
 
@@ -36,6 +37,7 @@ open class SelectStateOnboardingViewController: UIViewController {
         view.backgroundColor = .neutralWhite
         configureView()
         configureInputView()
+        configureBottomView()
     }
 
     override open func viewDidAppear(_ animated: Bool) {
@@ -99,6 +101,13 @@ open class SelectStateOnboardingViewController: UIViewController {
                 }
                 .cauterize()
         }
+    }
+
+    private func configureBottomView() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bottomView.bounds
+        gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor.backgroundPrimary.cgColor, UIColor.backgroundPrimary.cgColor]
+        bottomView.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     private func configureAccessibilityRespondsToUserInteraction() {
