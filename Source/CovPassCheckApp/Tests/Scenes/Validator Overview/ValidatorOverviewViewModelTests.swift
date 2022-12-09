@@ -775,22 +775,35 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         userDefaults.disableWhatsNew = false
         userDefaults.announcementVersion = Bundle.main.shortVersionString ?? ""
         router.showAnnouncementExpectation.isInverted = true
-
+        userDefaults.privacyHash = "FOO"
+        prepareSut()
         // When
         sut.showNotificationsIfNeeded()
-
         // Then
         wait(for: [router.showAnnouncementExpectation], timeout: 1)
     }
 
-    func test_showNotificationsIfNeeded_announcement_not_shown() throws {
+    func test_showNotificationsIfNeeded_announcement_not_shown_coming_from_update() throws {
         // Given
         userDefaults.disableWhatsNew = false
-        userDefaults.announcementVersion = ""
-
+        userDefaults.announcementVersion = nil
+        userDefaults.privacyHash = "FOO"
+        prepareSut()
         // When
         sut.showNotificationsIfNeeded()
+        // Then
+        wait(for: [router.showAnnouncementExpectation], timeout: 1)
+    }
 
+    func test_showNotificationsIfNeeded_announcement_not_shown_coming_from_fresh_installation() throws {
+        // Given
+        userDefaults.disableWhatsNew = false
+        userDefaults.announcementVersion = nil
+        userDefaults.privacyHash = nil
+        router.showAnnouncementExpectation.isInverted = true
+        prepareSut()
+        // When
+        sut.showNotificationsIfNeeded()
         // Then
         wait(for: [router.showAnnouncementExpectation], timeout: 1)
     }
@@ -800,10 +813,22 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         userDefaults.disableWhatsNew = true
         userDefaults.announcementVersion = ""
         router.showAnnouncementExpectation.isInverted = true
-
+        userDefaults.privacyHash = "FOO"
+        prepareSut()
         // When
         sut.showNotificationsIfNeeded()
+        // Then
+        wait(for: [router.showAnnouncementExpectation], timeout: 1)
+    }
 
+    func test_showNotificationsIfNeeded_show_announcement() throws {
+        // Given
+        userDefaults.disableWhatsNew = false
+        userDefaults.announcementVersion = "BAR"
+        userDefaults.privacyHash = "FOO"
+        prepareSut()
+        // When
+        sut.showNotificationsIfNeeded()
         // Then
         wait(for: [router.showAnnouncementExpectation], timeout: 1)
     }

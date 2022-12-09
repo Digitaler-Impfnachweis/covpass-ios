@@ -184,6 +184,8 @@ class ValidatorOverviewViewModel {
 
     var withinGermanyIsSelected: Bool { checkSituation == .withinGermany }
 
+    private var isFreshInstallation: Bool
+
     // MARK: - Lifecycle
 
     init(router: ValidatorOverviewRouterProtocol,
@@ -203,6 +205,7 @@ class ValidatorOverviewViewModel {
         self.certLogic = certLogic
         self.userDefaults = userDefaults
         self.schedulerIntervall = schedulerIntervall
+        isFreshInstallation = userDefaults.privacyHash == nil
         currentDataPrivacyHash = privacyFile.sha256()
         selectedCheckType = CheckType(rawValue: userDefaults.selectedCheckType) ?? .mask
         setupTimer()
@@ -226,9 +229,14 @@ class ValidatorOverviewViewModel {
 
     private func showAnnouncementIfNeeded() -> Promise<Void> {
         let bundleVersion = Bundle.main.shortVersionString ?? ""
-        guard let announcementVersion = userDefaults.announcementVersion else {
+        let isUpdate: Bool = !isFreshInstallation
+        guard isUpdate else {
             userDefaults.announcementVersion = bundleVersion
             return Promise.value
+        }
+        guard let announcementVersion = userDefaults.announcementVersion else {
+            userDefaults.announcementVersion = bundleVersion
+            return router.showAnnouncement()
         }
         if userDefaults.disableWhatsNew || announcementVersion == bundleVersion {
             return Promise.value

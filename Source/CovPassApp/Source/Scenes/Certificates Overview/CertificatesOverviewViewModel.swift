@@ -498,28 +498,23 @@ extension CertificatesOverviewViewModel {
         return router.showAnnouncement()
     }
 
-    private func storeUserDefaults(_ currentDataPrivacyHash: String) -> Void? {
-        userDefaults.privacyHash = currentDataPrivacyHash
-        return nil
-    }
-
     /// Shows the dataprivacy view if user downloaded a new version from the app store
     private func showDataPrivacyIfNeeded() -> Promise<Void> {
         guard let currentDataPrivacyHash = currentDataPrivacyHash else {
             return .value
         }
         guard let dataPrivacyShownWhileOnboarding = userDefaults.announcementVersion?.isEmpty, !dataPrivacyShownWhileOnboarding else {
-            storeUserDefaults(currentDataPrivacyHash)
+            userDefaults.privacyHash = currentDataPrivacyHash
             return .value
         }
         guard let lastDataPrivacyHash = userDefaults.privacyHash, !lastDataPrivacyHash.isEmpty else {
-            storeUserDefaults(currentDataPrivacyHash)
+            userDefaults.privacyHash = currentDataPrivacyHash
             return .value
         }
         guard currentDataPrivacyHash != lastDataPrivacyHash else {
             return .value
         }
-        storeUserDefaults(currentDataPrivacyHash)
+        userDefaults.privacyHash = currentDataPrivacyHash
         return router.showDataPrivacy()
     }
 
