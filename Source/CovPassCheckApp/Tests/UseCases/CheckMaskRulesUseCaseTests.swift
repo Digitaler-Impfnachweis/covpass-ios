@@ -23,7 +23,8 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
                                     region: nil,
                                     revocationRepository: revocationRepository,
                                     holderStatus: certificateHolderStatusModel,
-                                    additionalToken: nil)
+                                    additionalToken: nil,
+                                    ignoringPiCheck: false)
     }
 
     override func tearDownWithError() throws {
@@ -197,7 +198,8 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
                                         region: nil,
                                         revocationRepository: revocationRepository,
                                         holderStatus: certificateHolderStatusModel,
-                                        additionalToken: differentPersonToken)
+                                        additionalToken: differentPersonToken,
+                                        ignoringPiCheck: false)
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
@@ -217,40 +219,14 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
 
-    func test_checkMaskRule_withAdditional_token_of_same_type_failed() {
-        // GIVEN
-        let differentPersonToken = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "3")
-        let sut = CheckMaskRulesUseCase(token: token,
-                                        region: nil,
-                                        revocationRepository: revocationRepository,
-                                        holderStatus: certificateHolderStatusModel,
-                                        additionalToken: differentPersonToken)
-        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
-        certificateHolderStatusModel.areMaskRulesAvailable = true
-        revocationRepository.isRevoked = false
-        certificateHolderStatusModel.domesticAcceptanceAndInvalidationRulesPassedResult = .passed
-        certificateHolderStatusModel.euInvalidationRulesPassedResult = .passed
-        certificateHolderStatusModel.needsMask = false
-        // WHEN
-        sut.execute()
-            .done { _ in
-                XCTFail("Should not successful")
-            }
-            .catch { error in
-                // THEN
-                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .secondScanSameTokenType(self.token))
-                expectation.fulfill()
-            }
-        wait(for: [expectation], timeout: 1.0)
-    }
-
     func test_checkMaskRule_withAdditional_same_token_of() {
         // GIVEN
         let sut = CheckMaskRulesUseCase(token: token,
                                         region: nil,
                                         revocationRepository: revocationRepository,
                                         holderStatus: certificateHolderStatusModel,
-                                        additionalToken: token)
+                                        additionalToken: token,
+                                        ignoringPiCheck: false)
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false

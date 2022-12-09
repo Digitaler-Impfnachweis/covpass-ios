@@ -6,6 +6,7 @@
 //
 
 @testable import CovPassCheckApp
+import CovPassCommon
 import PromiseKit
 import XCTest
 
@@ -14,11 +15,12 @@ class DifferentPersonViewModelTests: XCTestCase {
     private var sut: DifferentPersonViewModel!
 
     override func setUpWithError() throws {
-        let (_, resolver) = Promise<DifferentPersonResult>.pending()
+        let (_, resolver) = Promise<ValidatorDetailSceneResult>.pending()
         delegate = .init()
         sut = .init(
-            firstResultCert: .mockVaccinationCertificate,
-            secondResultCert: .mockTestCertificate,
+            firstToken: CBORWebToken.mockVaccinationCertificate.extended(),
+            secondToken: CBORWebToken.mockTestCertificate.extended(),
+            thirdToken: nil,
             resolver: resolver,
             countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0)
         )

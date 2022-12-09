@@ -32,8 +32,7 @@ protocol MaskCheckRouterProtocol {
     func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
     func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
-    func showMaskCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<DifferentPersonResult>
-    func showMaskCheckSameCertType()
+    func showMaskCheckDifferentPerson(firstToken: ExtendedCBORWebToken, secondToken: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showMaskRulesInvalid(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
 }
 
@@ -41,7 +40,9 @@ protocol CheckImmunityRouterProtocol {
     // MARK: Ifsg22a Check
 
     func showVaccinationCycleComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
-    func showIfsg22aCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showIfsg22aCheckDifferentPerson(firstToken: ExtendedCBORWebToken,
+                                         secondToken: ExtendedCBORWebToken,
+                                         thirdToken: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aNotComplete(token: ExtendedCBORWebToken, secondToken: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aIncompleteResult() -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aCheckError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>

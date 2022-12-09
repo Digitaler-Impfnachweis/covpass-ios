@@ -23,7 +23,8 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
                                   revocationRepository: revocationRepository,
                                   holderStatus: certificateHolderStatusModel,
                                   secondScannedToken: nil,
-                                  firstScannedToken: nil)
+                                  firstScannedToken: nil,
+                                  ignoringPiCheck: false)
     }
 
     override func tearDownWithError() throws {
@@ -100,7 +101,8 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
                                       revocationRepository: revocationRepository,
                                       holderStatus: certificateHolderStatusModel,
                                       secondScannedToken: differentPersonToken,
-                                      firstScannedToken: nil)
+                                      firstScannedToken: nil,
+                                      ignoringPiCheck: false)
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
@@ -113,7 +115,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .showMaskCheckdifferentPersonalInformation(differentPersonToken, self.token))
+                XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .differentPersonalInformation(differentPersonToken, self.token, nil))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -125,7 +127,8 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
                                       revocationRepository: revocationRepository,
                                       holderStatus: certificateHolderStatusModel,
                                       secondScannedToken: token,
-                                      firstScannedToken: nil)
+                                      firstScannedToken: nil,
+                                      ignoringPiCheck: false)
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
@@ -151,7 +154,8 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
                                       revocationRepository: revocationRepository,
                                       holderStatus: certificateHolderStatusModel,
                                       secondScannedToken: token,
-                                      firstScannedToken: firstScannedToken)
+                                      firstScannedToken: firstScannedToken,
+                                      ignoringPiCheck: false)
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false

@@ -13,7 +13,7 @@ import PromiseKit
 enum CheckIfsg22aUseCaseError: Error, Equatable {
     case secondScanSameToken(_ token: ExtendedCBORWebToken)
     case thirdScanSameToken(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken)
-    case showMaskCheckdifferentPersonalInformation(_ token1OfPerson: ExtendedCBORWebToken, _ token2OfPerson: ExtendedCBORWebToken)
+    case differentPersonalInformation(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken, _ thirdToken: ExtendedCBORWebToken?)
     case vaccinationCycleIsNotComplete(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken?, _ thirdToken: ExtendedCBORWebToken?)
     case invalidToken(_ token: ExtendedCBORWebToken)
 }
@@ -24,6 +24,7 @@ struct CheckIfsg22aUseCase {
     public let holderStatus: CertificateHolderStatusModelProtocol
     let secondScannedToken: ExtendedCBORWebToken?
     let firstScannedToken: ExtendedCBORWebToken?
+    var ignoringPiCheck: Bool
 
     private var isScanNumber: Int {
         if firstScannedToken != nil {
@@ -81,16 +82,22 @@ struct CheckIfsg22aUseCase {
     }
 
     private func additionalTokenIsSamePerson() -> Promise<Void> {
-        if let secondToken = secondScannedToken,
-           secondToken.vaccinationCertificate.hcert.dgc.nam != currentToken.vaccinationCertificate.hcert.dgc.nam ||
-           secondToken.vaccinationCertificate.hcert.dgc.dob != currentToken.vaccinationCertificate.hcert.dgc.dob {
-            return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(secondToken, currentToken))
+        guard !ignoringPiCheck else {
+            return .value
         }
-        if let firstToken = firstScannedToken, let secondToken = secondScannedToken,
-           firstToken.vaccinationCertificate.hcert.dgc.nam != secondToken.vaccinationCertificate.hcert.dgc.nam ||
-           firstToken.vaccinationCertificate.hcert.dgc.dob != secondToken.vaccinationCertificate.hcert.dgc.dob {
-            return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(firstToken, secondToken))
+        let personalInformations = [firstScannedToken?.personalInformation, secondScannedToken?.personalInformation]
+        let allPersonalInformationsSame = personalInformations.contains(where: { $0 == currentToken.personalInformation })
+
+        if !allPersonalInformationsSame {
+            if let secondScannedToken = secondScannedToken, let firstScannedToken = firstScannedToken {
+                return .init(error: CheckIfsg22aUseCaseError.differentPersonalInformation(firstScannedToken, secondScannedToken, currentToken))
+            }
+
+            if let secondScannedToken = secondScannedToken {
+                return .init(error: CheckIfsg22aUseCaseError.differentPersonalInformation(secondScannedToken, currentToken, nil))
+            }
         }
+
         return .value
     }
 
@@ -121,5 +128,11 @@ struct CheckIfsg22aUseCase {
         case .failedTechnical, .failedFunctional:
             return .init(error: CheckIfsg22aUseCaseError.invalidToken(currentToken))
         }
+    }
+}
+
+private extension ExtendedCBORWebToken {
+    var personalInformation: DigitalGreenCertificate {
+        vaccinationCertificate.hcert.dgc
     }
 }

@@ -17,6 +17,7 @@ enum TravelRulesError: Error {
 }
 
 enum ValidatorDetailSceneResult: Equatable {
+    case ignore(_ token1: ExtendedCBORWebToken, _ token2: ExtendedCBORWebToken, _ token3: ExtendedCBORWebToken?)
     case close
     case secondScan(ExtendedCBORWebToken)
     case thirdScan(ExtendedCBORWebToken, ExtendedCBORWebToken)
@@ -167,25 +168,12 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                                         animated: true)
     }
 
-    func showMaskCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken,
-                                      token2OfPerson: ExtendedCBORWebToken) -> Promise<DifferentPersonResult> {
-        let view = DifferentPersonSceneFactory(firstResultCert: token1OfPerson.vaccinationCertificate,
-                                               secondResultCert: token2OfPerson.vaccinationCertificate)
+    func showMaskCheckDifferentPerson(firstToken: ExtendedCBORWebToken,
+                                      secondToken: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+        let view = DifferentPersonSceneFactory(firstToken: firstToken,
+                                               secondToken: secondToken,
+                                               thirdToken: nil)
         return sceneCoordinator.present(view, animated: true)
-    }
-
-    func showMaskCheckSameCertType() {
-        showDialog(
-            title: Constants.Keys.error_2G_unexpected_type_title,
-            message: Constants.Keys.error_2G_unexpected_type_copy,
-            actions: [
-                DialogAction(title: Constants.Keys.error_2G_unexpected_type_button,
-                             style: UIAlertAction.Style.default,
-                             isEnabled: true,
-                             completion: nil)
-            ],
-            style: .alert
-        )
     }
 
     func showMaskRulesInvalid(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
@@ -204,32 +192,13 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         return sceneCoordinator.present(view, animated: true)
     }
 
-    func showIfsg22aCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        Promise { seal in
-            showDialog(
-                title: Constants.Keys.infschg_name_matching_error_title,
-                message: Constants.Keys.infschg_name_matching_error_copy,
-                actions: [
-                    DialogAction(
-                        title: Constants.Keys.infschg_name_matching_error_retry,
-                        style: UIAlertAction.Style.default,
-                        isEnabled: true,
-                        completion: { _ in
-                            seal.fulfill(.secondScan(token1OfPerson))
-                        }
-                    ),
-                    DialogAction(
-                        title: Constants.Keys.infschg_name_matching_error_cancel,
-                        style: UIAlertAction.Style.default,
-                        isEnabled: true,
-                        completion: { _ in
-                            seal.fulfill(.close)
-                        }
-                    )
-                ],
-                style: .alert
-            )
-        }
+    func showIfsg22aCheckDifferentPerson(firstToken: ExtendedCBORWebToken,
+                                         secondToken: ExtendedCBORWebToken,
+                                         thirdToken: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+        let view = DifferentPersonSceneFactory(firstToken: firstToken,
+                                               secondToken: secondToken,
+                                               thirdToken: thirdToken)
+        return sceneCoordinator.present(view, animated: true)
     }
 
     func showIfsg22aNotComplete(token: ExtendedCBORWebToken, secondToken: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {

@@ -10,32 +10,31 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-enum DifferentPersonResult {
-    case ignore
-    case startover
-}
-
 struct DifferentPersonSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
 
-    var firstResultCert: CBORWebToken
-    var secondResultCert: CBORWebToken
+    var firstToken: ExtendedCBORWebToken
+    var secondToken: ExtendedCBORWebToken
+    var thirdToken: ExtendedCBORWebToken?
 
     // MARK: - Lifecycle
 
-    init(firstResultCert: CBORWebToken,
-         secondResultCert: CBORWebToken) {
-        self.firstResultCert = firstResultCert
-        self.secondResultCert = secondResultCert
+    init(firstToken: ExtendedCBORWebToken,
+         secondToken: ExtendedCBORWebToken,
+         thirdToken: ExtendedCBORWebToken?) {
+        self.firstToken = firstToken
+        self.secondToken = secondToken
+        self.thirdToken = thirdToken
     }
 
-    func make(resolvable: Resolver<DifferentPersonResult>) -> UIViewController {
+    func make(resolvable: Resolver<ValidatorDetailSceneResult>) -> UIViewController {
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60
         )
-        let viewModel = DifferentPersonViewModel(firstResultCert: firstResultCert,
-                                                 secondResultCert: secondResultCert,
+        let viewModel = DifferentPersonViewModel(firstToken: firstToken,
+                                                 secondToken: secondToken,
+                                                 thirdToken: thirdToken,
                                                  resolver: resolvable,
                                                  countdownTimerModel: countdownTimerModel)
         let viewController = DifferentPersonViewController(viewModel: viewModel)

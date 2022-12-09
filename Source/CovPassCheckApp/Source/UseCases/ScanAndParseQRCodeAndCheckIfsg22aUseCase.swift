@@ -37,7 +37,8 @@ struct ScanAndParseQRCodeAndCheckIfsg22aUseCase {
                                 revocationRepository: self.revocationRepository,
                                 holderStatus: CertificateHolderStatusModel(dccCertLogic: self.certLogic),
                                 secondScannedToken: secondScannedToken,
-                                firstScannedToken: firstScannedToken).execute()
+                                firstScannedToken: firstScannedToken,
+                                ignoringPiCheck: false).execute()
         }
     }
 }

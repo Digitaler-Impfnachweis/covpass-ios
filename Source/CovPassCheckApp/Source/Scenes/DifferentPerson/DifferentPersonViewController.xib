@@ -9,182 +9,256 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GProofDifferentPersonViewController" customModule="CovPassCheckApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DifferentPersonViewController" customModule="CovPassCheckApp" customModuleProvider="target">
             <connections>
-                <outlet property="counterLabel" destination="4bP-hc-Re0" id="MaM-jR-Yq3"/>
-                <outlet property="firstResultCard" destination="54t-Rn-hAg" id="d3r-vt-mLb"/>
-                <outlet property="firstResultHeadlineLabel" destination="Bg1-cI-nHB" id="7i4-f1-JcF"/>
-                <outlet property="footerHeadline" destination="qTo-Nw-26Q" id="dhw-2u-efZ"/>
-                <outlet property="footerLink" destination="WnI-om-6IF" id="8n9-ez-MXc"/>
-                <outlet property="footerStack" destination="Pze-tc-qnF" id="Q3Y-w9-bdg"/>
-                <outlet property="footerText" destination="bBG-PZ-D9T" id="qnC-T5-KOL"/>
-                <outlet property="headline" destination="rPT-fc-LXq" id="nfZ-U2-3Yh"/>
-                <outlet property="secondResultCard" destination="Sxb-44-nxk" id="j9e-Kb-fPh"/>
-                <outlet property="secondResultHeadlineLabel" destination="twY-Xp-giH" id="Z9M-Qi-ieH"/>
-                <outlet property="startOverButton" destination="zKZ-k3-xca" id="5RD-Jq-LiN"/>
-                <outlet property="subtitleLabel" destination="4lc-e8-VRv" id="0QN-Pm-aGE"/>
-                <outlet property="view" destination="tsk-8d-S15" id="PvJ-We-xGu"/>
+                <outlet property="bottomStackView" destination="0iA-GH-w0u" id="7nb-wn-Occ"/>
+                <outlet property="cancelButton" destination="Hd6-rV-gUs" id="FEB-wc-lx1"/>
+                <outlet property="counterLabel" destination="Ki2-e0-9DS" id="WSW-N1-8hv"/>
+                <outlet property="firstResultCard" destination="H8H-rn-rzt" id="5wj-oO-nYR"/>
+                <outlet property="firstResultHeadlineLabel" destination="9O8-fL-NAA" id="9Pj-YB-XlU"/>
+                <outlet property="headline" destination="asq-Je-taX" id="UQC-rw-ZqZ"/>
+                <outlet property="ignoreStackView" destination="Gjq-nP-y9t" id="WfU-4S-2EN"/>
+                <outlet property="ignoreView" destination="Nnw-nD-UOI" id="6Lc-1J-p8h"/>
+                <outlet property="rescanButton" destination="Zw9-2k-H61" id="Kq1-4N-LS1"/>
+                <outlet property="scrollView" destination="cg9-Ut-n76" id="gfw-vM-KAE"/>
+                <outlet property="secondResultCard" destination="8nB-lQ-nFx" id="V0y-bm-6Je"/>
+                <outlet property="secondResultHeadlineLabel" destination="EeC-Lp-PbD" id="fnv-n5-rmH"/>
+                <outlet property="subtitleLabel" destination="HSg-Kh-hx8" id="Qt4-ph-zlD"/>
+                <outlet property="thirdResultCard" destination="x05-vI-NU9" id="BuJ-9Z-t1g"/>
+                <outlet property="thirdResultHeadlineLabel" destination="0DB-bx-XW6" id="0Yq-AZ-ySw"/>
+                <outlet property="thirdResultStackView" destination="DLO-7u-8Be" id="Gzz-zY-zPc"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tsk-8d-S15">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXD-qd-waD">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asq-Je-taX" customClass="InfoHeaderView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="68" width="414" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" placeholder="YES" id="epB-oE-mB6"/>
+                    </constraints>
+                </view>
+                <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-Ut-n76">
+                    <rect key="frame" x="0.0" y="128" width="414" height="734"/>
                     <subviews>
-                        <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="rPT-fc-LXq" customClass="InfoHeaderView" customModule="CovPassUI">
-                            <rect key="frame" x="0.0" y="24" width="414" height="60"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZD-w6-Gf1" userLabel="Body View">
-                            <rect key="frame" x="24" y="84" width="366" height="752.5"/>
+                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="929"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="548-bM-NWY">
-                                    <rect key="frame" x="0.0" y="0.0" width="366" height="752.5"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CaI-1f-Rt7">
+                                    <rect key="frame" x="24" y="14" width="345" height="33.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lc-e8-VRv" userLabel="Subtitle">
-                                            <rect key="frame" x="0.0" y="0.0" width="366" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="200" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="iop-wP-EcF" userLabel="First Person Stack">
-                                            <rect key="frame" x="0.0" y="44.5" width="366" height="200"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bg1-cI-nHB" userLabel="First Person Headline">
-                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="86"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="110" translatesAutoresizingMaskIntoConstraints="NO" id="54t-Rn-hAg" userLabel="First Person Detail" customClass="CertResultCard" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="90" width="366" height="110"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                </view>
-                                            </subviews>
-                                        </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="200" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="AtC-d2-xnR" userLabel="Secon Person Stack">
-                                            <rect key="frame" x="0.0" y="268.5" width="366" height="200"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twY-Xp-giH" userLabel="Second Person Headline">
-                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="90"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="106" translatesAutoresizingMaskIntoConstraints="NO" id="Sxb-44-nxk" userLabel="Secon Person Detail" customClass="CertResultCard" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="94" width="366" height="106"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                </view>
-                                            </subviews>
-                                        </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Pze-tc-qnF" userLabel="Footer Stack">
-                                            <rect key="frame" x="0.0" y="492.5" width="366" height="63.5"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTo-Nw-26Q" userLabel="Footer Headline">
-                                                    <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBG-PZ-D9T" userLabel="Footer Text">
-                                                    <rect key="frame" x="0.0" y="20.5" width="41.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWo-T7-2Pm">
-                                                    <rect key="frame" x="0.0" y="41" width="240" height="2"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="2" id="ue0-0p-mbk"/>
-                                                    </constraints>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnI-om-6IF" userLabel="Footer Link">
-                                                    <rect key="frame" x="0.0" y="43" width="41.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <gestureRecognizers/>
-                                            <connections>
-                                                <outletCollection property="gestureRecognizers" destination="kNv-a0-0xg" appends="YES" id="IVs-D3-oI9"/>
-                                            </connections>
-                                        </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="wVO-nl-3RC" userLabel="Button Stack">
-                                            <rect key="frame" x="0.0" y="580" width="366" height="128"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="zKZ-k3-xca" userLabel="StartOver Button" customClass="MainButton" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="128"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                </view>
-                                            </subviews>
-                                        </stackView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diese Ansicht schliesst sich in 59 Sekunden." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bP-hc-Re0">
-                                            <rect key="frame" x="0.0" y="732" width="366" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Die persönlichen Daten der gescannten Nachweise stimmen nicht überein:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-Kh-hx8">
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="33.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="O7A-Cj-s0p">
+                                    <rect key="frame" x="24" y="69.5" width="366" height="459"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="h0N-xg-y9e">
+                                            <rect key="frame" x="0.0" y="0.0" width="366" height="125"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zertifikat" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9O8-fL-NAA" userLabel="titel">
+                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="H8H-rn-rzt" userLabel="1.Scann" customClass="CertResultCard" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="25" width="366" height="100"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5fA-3D-XQN">
+                                            <rect key="frame" x="0.0" y="167" width="366" height="125"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zertifikat" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeC-Lp-PbD" userLabel="titel">
+                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="8nB-lQ-nFx" userLabel="2.Scann" customClass="CertResultCard" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="25" width="366" height="100"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DLO-7u-8Be">
+                                            <rect key="frame" x="0.0" y="334" width="366" height="125"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zertifikat" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DB-bx-XW6" userLabel="titel">
+                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="x05-vI-NU9" userLabel="3.Scann" customClass="CertResultCard" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="25" width="366" height="100"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
+                                    <rect key="frame" x="0.0" y="528.5" width="414" height="368.5"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0Z-i5-Me7">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="368.5"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nnw-nD-UOI" customClass="ParagraphView" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="20" width="414" height="348.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <gestureRecognizers/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="f2k-gT-SMi" appends="YES" id="ADD-UK-Y9I"/>
+                                                    </connections>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Nnw-nD-UOI" secondAttribute="trailing" id="38R-m3-crB"/>
+                                                <constraint firstItem="Nnw-nD-UOI" firstAttribute="leading" secondItem="H0Z-i5-Me7" secondAttribute="leading" id="AcE-Cr-8jE"/>
+                                                <constraint firstItem="Nnw-nD-UOI" firstAttribute="top" secondItem="H0Z-i5-Me7" secondAttribute="top" constant="20" id="heZ-3N-Co0"/>
+                                                <constraint firstAttribute="bottom" secondItem="Nnw-nD-UOI" secondAttribute="bottom" id="mYd-du-nKN"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="548-bM-NWY" secondAttribute="bottom" id="CbY-C0-5MX"/>
-                                <constraint firstAttribute="trailing" secondItem="548-bM-NWY" secondAttribute="trailing" id="UdB-hb-Saa"/>
-                                <constraint firstItem="548-bM-NWY" firstAttribute="top" secondItem="YZD-w6-Gf1" secondAttribute="top" id="YaM-18-ybj"/>
-                                <constraint firstItem="548-bM-NWY" firstAttribute="leading" secondItem="YZD-w6-Gf1" secondAttribute="leading" id="u03-Nw-KK0"/>
+                                <constraint firstItem="O7A-Cj-s0p" firstAttribute="top" secondItem="CaI-1f-Rt7" secondAttribute="bottom" constant="22" id="6RY-0K-K3J"/>
+                                <constraint firstItem="CaI-1f-Rt7" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="6ta-gY-rUT"/>
+                                <constraint firstItem="O7A-Cj-s0p" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="8xT-eZ-bEX"/>
+                                <constraint firstAttribute="trailing" secondItem="O7A-Cj-s0p" secondAttribute="trailing" constant="24" id="IdP-fX-oZw"/>
+                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" id="Rfz-wG-RKb"/>
+                                <constraint firstAttribute="trailing" secondItem="Gjq-nP-y9t" secondAttribute="trailing" id="YXM-eC-DQa"/>
+                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="top" secondItem="O7A-Cj-s0p" secondAttribute="bottom" id="a9j-cw-CdY"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CaI-1f-Rt7" secondAttribute="trailing" constant="24" id="had-DF-jv5"/>
+                                <constraint firstItem="CaI-1f-Rt7" firstAttribute="top" secondItem="dfv-wP-L03" secondAttribute="top" constant="14" id="m3y-lh-XzJ"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Gjq-nP-y9t" secondAttribute="bottom" constant="32" id="rr1-Jq-hth"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <viewLayoutGuide key="safeArea" id="Zgl-nf-vaQ"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="YZD-w6-Gf1" firstAttribute="leading" secondItem="PXD-qd-waD" secondAttribute="leading" constant="24" id="Jjp-32-fIX"/>
-                        <constraint firstAttribute="trailing" secondItem="YZD-w6-Gf1" secondAttribute="trailing" constant="24" id="Jor-at-NgJ"/>
-                        <constraint firstItem="YZD-w6-Gf1" firstAttribute="top" secondItem="rPT-fc-LXq" secondAttribute="bottom" id="MJd-J1-3dg"/>
-                        <constraint firstItem="rPT-fc-LXq" firstAttribute="top" secondItem="PXD-qd-waD" secondAttribute="top" constant="24" id="Rqw-sf-Qvd"/>
-                        <constraint firstAttribute="trailing" secondItem="rPT-fc-LXq" secondAttribute="trailing" id="jcm-iY-8Zn"/>
-                        <constraint firstItem="rPT-fc-LXq" firstAttribute="leading" secondItem="PXD-qd-waD" secondAttribute="leading" id="qe4-vr-lJE"/>
-                        <constraint firstAttribute="bottom" secondItem="YZD-w6-Gf1" secondAttribute="bottom" constant="322.5" id="tyJ-5M-U4r"/>
-                        <constraint firstItem="YZD-w6-Gf1" firstAttribute="width" secondItem="PXD-qd-waD" secondAttribute="width" constant="-48" id="vUC-41-hV2"/>
+                        <constraint firstItem="dfv-wP-L03" firstAttribute="width" secondItem="b4q-5D-z1n" secondAttribute="width" id="MjG-ID-BXp"/>
+                        <constraint firstItem="dfv-wP-L03" firstAttribute="trailing" secondItem="Qvk-cf-3Rd" secondAttribute="trailing" id="TR8-AH-28k"/>
+                        <constraint firstItem="dfv-wP-L03" firstAttribute="bottom" secondItem="Qvk-cf-3Rd" secondAttribute="bottom" id="ci2-Kf-iFw"/>
+                        <constraint firstItem="dfv-wP-L03" firstAttribute="top" secondItem="Qvk-cf-3Rd" secondAttribute="top" id="cyG-55-Qd3"/>
+                        <constraint firstItem="dfv-wP-L03" firstAttribute="leading" secondItem="Qvk-cf-3Rd" secondAttribute="leading" id="jah-LH-144"/>
+                        <constraint firstItem="dfv-wP-L03" firstAttribute="height" secondItem="b4q-5D-z1n" secondAttribute="height" priority="250" id="m2i-F6-t0t"/>
                     </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="Qvk-cf-3Rd"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="b4q-5D-z1n"/>
                 </scrollView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="0iA-GH-w0u">
+                    <rect key="frame" x="0.0" y="665.5" width="414" height="230.5"/>
+                    <subviews>
+                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlL-Ce-pHn">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zw9-2k-H61" userLabel="ReScan" customClass="MainButton" customModule="CovPassUI">
+                                    <rect key="frame" x="147" y="0.0" width="120" height="53"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="120" placeholder="YES" id="AMj-Ae-vHb"/>
+                                        <constraint firstAttribute="height" constant="53" id="h4M-WN-7Rk"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="Zw9-2k-H61" firstAttribute="centerX" secondItem="XlL-Ce-pHn" secondAttribute="centerX" id="CMR-HL-IV9"/>
+                                <constraint firstAttribute="bottom" secondItem="Zw9-2k-H61" secondAttribute="bottom" id="iFV-WO-LMh"/>
+                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Zw9-2k-H61" secondAttribute="trailing" id="kbw-PO-iUV"/>
+                                <constraint firstItem="Zw9-2k-H61" firstAttribute="top" secondItem="XlL-Ce-pHn" secondAttribute="top" id="rn1-hs-ZA2"/>
+                                <constraint firstItem="Zw9-2k-H61" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XlL-Ce-pHn" secondAttribute="leadingMargin" id="sb5-0c-zTE"/>
+                            </constraints>
+                        </view>
+                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddl-QK-Tqe">
+                            <rect key="frame" x="0.0" y="77" width="414" height="53"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hd6-rV-gUs" userLabel="Cancel" customClass="MainButton" customModule="CovPassUI">
+                                    <rect key="frame" x="147" y="0.0" width="120" height="53"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="53" id="GKV-YL-Mcm"/>
+                                        <constraint firstAttribute="width" constant="120" placeholder="YES" id="WBY-u2-hBU"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Hd6-rV-gUs" secondAttribute="trailing" id="0vB-vY-7e4"/>
+                                <constraint firstAttribute="bottom" secondItem="Hd6-rV-gUs" secondAttribute="bottom" id="4i9-YP-bRq"/>
+                                <constraint firstItem="Hd6-rV-gUs" firstAttribute="top" secondItem="ddl-QK-Tqe" secondAttribute="top" id="aYO-k8-StZ"/>
+                                <constraint firstItem="Hd6-rV-gUs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ddl-QK-Tqe" secondAttribute="leadingMargin" id="jsO-76-FIa"/>
+                                <constraint firstItem="Hd6-rV-gUs" firstAttribute="centerX" secondItem="ddl-QK-Tqe" secondAttribute="centerX" id="mjh-Xd-Ofa"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diese Ansicht schliesst sich in 59 Sekunden." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki2-e0-9DS">
+                            <rect key="frame" x="0.0" y="154" width="414" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TlC-kB-ixd">
+                            <rect key="frame" x="0.0" y="198.5" width="414" height="32"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="Arg-XL-2Ls"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </stackView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="cfX-N3-2mH"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="PXD-qd-waD" firstAttribute="top" secondItem="tsk-8d-S15" secondAttribute="top" id="24a-ct-Lb6"/>
-                <constraint firstAttribute="trailing" secondItem="PXD-qd-waD" secondAttribute="trailing" id="PeB-q9-NA4"/>
-                <constraint firstItem="PXD-qd-waD" firstAttribute="width" secondItem="tsk-8d-S15" secondAttribute="width" id="dY2-yG-ELF"/>
-                <constraint firstItem="PXD-qd-waD" firstAttribute="leading" secondItem="tsk-8d-S15" secondAttribute="leading" id="okG-Lv-9Wr"/>
-                <constraint firstAttribute="bottom" secondItem="PXD-qd-waD" secondAttribute="bottom" constant="34" id="tl9-j6-Kvd"/>
+                <constraint firstAttribute="bottom" secondItem="0iA-GH-w0u" secondAttribute="bottom" id="8GC-NV-oWA"/>
+                <constraint firstItem="asq-Je-taX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ESv-qQ-0gp"/>
+                <constraint firstItem="cg9-Ut-n76" firstAttribute="top" secondItem="asq-Je-taX" secondAttribute="bottom" id="R0j-ZG-yRW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="asq-Je-taX" secondAttribute="trailing" id="Txb-aR-OgY"/>
+                <constraint firstItem="0iA-GH-w0u" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="USQ-6p-tbP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cg9-Ut-n76" secondAttribute="bottom" id="Wrz-Qi-XYc"/>
+                <constraint firstItem="asq-Je-taX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="aj8-4F-zR4"/>
+                <constraint firstItem="cg9-Ut-n76" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cOs-E6-gDl"/>
+                <constraint firstAttribute="trailing" secondItem="0iA-GH-w0u" secondAttribute="trailing" id="mgn-Xr-KwT"/>
+                <constraint firstAttribute="trailing" secondItem="cg9-Ut-n76" secondAttribute="trailing" id="xpb-ke-RdD"/>
             </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="142.02898550724638" y="-11.383928571428571"/>
+            <point key="canvasLocation" x="139.13043478260872" y="41.517857142857139"/>
         </view>
-        <tapGestureRecognizer id="kNv-a0-0xg">
+        <tapGestureRecognizer id="f2k-gT-SMi">
             <connections>
-                <action selector="footerLinkTapped:" destination="-1" id="USO-4Q-94Z"/>
-                <outlet property="delegate" destination="WnI-om-6IF" id="Cnb-bO-Kyb"/>
+                <action selector="footerLinkTapped:" destination="-1" id="cb2-oM-dCe"/>
+                <outlet property="delegate" destination="Nnw-nD-UOI" id="Rcd-5y-Ko9"/>
             </connections>
         </tapGestureRecognizer>
     </objects>
     <designables>
-        <designable name="54t-Rn-hAg">
-            <size key="intrinsicContentSize" width="414" height="110"/>
+        <designable name="8nB-lQ-nFx">
+            <size key="intrinsicContentSize" width="414" height="100"/>
         </designable>
-        <designable name="Sxb-44-nxk">
-            <size key="intrinsicContentSize" width="414" height="106"/>
+        <designable name="H8H-rn-rzt">
+            <size key="intrinsicContentSize" width="414" height="100"/>
         </designable>
-        <designable name="rPT-fc-LXq">
-            <size key="intrinsicContentSize" width="414" height="60"/>
-        </designable>
-        <designable name="zKZ-k3-xca">
-            <size key="intrinsicContentSize" width="414" height="128"/>
+        <designable name="x05-vI-NU9">
+            <size key="intrinsicContentSize" width="414" height="100"/>
         </designable>
     </designables>
     <resources>

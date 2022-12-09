@@ -24,10 +24,10 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showMaskOptionalExpectation = XCTestExpectation(description: "showMaskOptional")
     var showNoMaskRulesExpectation = XCTestExpectation(description: "showNoMaskRulesE")
     var showDifferentPersonExpectation = XCTestExpectation(description: "showDifferentPersonExpectation")
-    var showSameCertTypeExpectation = XCTestExpectation(description: "showSameCertTypeExpectation")
-    var showDifferentPersonResult = DifferentPersonResult.startover
+    var showDifferentPersonResult = ValidatorDetailSceneResult.startOver
     var showVaccinationCycleCompleteExpectation = XCTestExpectation(description: "showVaccinationCycleCompleteExpectation")
     var showIfsg22aCheckDifferentPersonExpectation = XCTestExpectation(description: "showIfsg22aCheckDifferentPersonExpectation")
+    var showIfsg22aCheckDifferentPersonResponse: Promise<ValidatorDetailSceneResult> = .value(.close)
     var showIfsg22aNotCompleteExpectation = XCTestExpectation(description: "showIfsg22aCheckSecondScanAllowedExpectation")
     var showIfsg22aCheckErrorExpectation = XCTestExpectation(description: "showIfsg22aCheckTechnicalErrorExpectation")
     var showIfsg22aIncompleteResultExpectation = XCTestExpectation(description: "showIfsg22aIncompleteResultExpectation")
@@ -143,13 +143,9 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         return .value(.close)
     }
 
-    func showMaskCheckDifferentPerson(token1OfPerson _: ExtendedCBORWebToken, token2OfPerson _: ExtendedCBORWebToken) -> Promise<DifferentPersonResult> {
+    func showMaskCheckDifferentPerson(firstToken _: ExtendedCBORWebToken, secondToken _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         showDifferentPersonExpectation.fulfill()
         return .value(showDifferentPersonResult)
-    }
-
-    func showMaskCheckSameCertType() {
-        showSameCertTypeExpectation.fulfill()
     }
 
     func showVaccinationCycleComplete(token _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
@@ -157,9 +153,9 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         return .value(.close)
     }
 
-    func showIfsg22aCheckDifferentPerson(token1OfPerson _: ExtendedCBORWebToken, token2OfPerson _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+    func showIfsg22aCheckDifferentPerson(firstToken _: ExtendedCBORWebToken, secondToken _: ExtendedCBORWebToken, thirdToken _: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
         showIfsg22aCheckDifferentPersonExpectation.fulfill()
-        return .value(.close)
+        return showIfsg22aCheckDifferentPersonResponse
     }
 
     func showIfsg22aNotComplete(token _: ExtendedCBORWebToken, secondToken _: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {

@@ -103,7 +103,7 @@ class ValidatorOverviewViewController: UIViewController {
 
         scanCard.actionButton.title = viewModel.scanActionTitle
         scanCard.actionButton.action = {
-            self.viewModel.scanAction(additionalToken: nil)
+            self.viewModel.checkMaskStatus()
         }
         scanCard.titleLabel.attributedText = viewModel.scanDropDownTitle
             .styledAs(.header_3)
@@ -140,7 +140,7 @@ class ValidatorOverviewViewController: UIViewController {
                               infoTextEdges: .init(top: 0, left: 0, bottom: 0, right: 0),
                               actionTitle: immunityCheckActionTitle)
         immunityCheckView.action = {
-            self.viewModel.checkImmunityStatus(secondToken: nil, firstToken: nil)
+            self.viewModel.checkImmunityStatus()
         }
 
         immunityCheckView.linkAction = { _ in

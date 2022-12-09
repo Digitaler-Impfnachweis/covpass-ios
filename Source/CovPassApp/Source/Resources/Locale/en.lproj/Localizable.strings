@@ -46,7 +46,7 @@
 
 "vaccination_third_onboarding_page_title" = "Step three: show your QR code when needed";
 
-"vaccination_third_onboarding_page_message" = "You can show your QR code from the CovPass app when you need it. The person checking the QR code will then scan it. You will also need to have an ID document at hand for this. Your QR code is stored only on your smartphone, so you can display it at any time even without an internet connection.";
+"vaccination_third_onboarding_page_message" = "You can show your QR code from the CovPass app when you need it. The person checking the QR code then scans it with the CovPassCheck app. You will also need to have an ID document at hand for this. Your QR code is stored only on your smartphone, so you can display it at any time even without an internet connection.";
 
 "vaccination_fourth_onboarding_page_title" = "Data protection and security";
 

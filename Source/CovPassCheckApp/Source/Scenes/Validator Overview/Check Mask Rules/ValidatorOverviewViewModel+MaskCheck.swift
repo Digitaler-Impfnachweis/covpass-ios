@@ -9,16 +9,14 @@ import CovPassCommon
 import PromiseKit
 
 extension ValidatorOverviewViewModel {
-    func scanAction(additionalToken: ExtendedCBORWebToken? = nil) {
+    func checkMaskStatus(firstToken: ExtendedCBORWebToken? = nil,
+                         secondToken: ExtendedCBORWebToken? = nil,
+                         ignoringPiCheck: Bool = false) {
         isLoadingScan = true
         firstly {
-            ScanAndParseQRCodeAndCheckMaskRulesUseCase(router: router,
-                                                       audioPlayer: audioPlayer,
-                                                       vaccinationRepository: vaccinationRepository,
-                                                       revocationRepository: revocationRepository,
-                                                       userDefaults: userDefaults,
-                                                       certLogic: certLogic,
-                                                       additionalToken: additionalToken).execute()
+            firstStepCheckMaskStatus(firstToken: firstToken,
+                                     secondToken: secondToken,
+                                     ignoringPiCheck: ignoringPiCheck)
         }
         .done { token in
             self.router.showMaskOptional(token: token)
@@ -29,26 +27,55 @@ extension ValidatorOverviewViewModel {
             self.isLoadingScan = false
         }
         .catch { error in
-            self.errorHandlingMaskCheck(error: error, token: nil)
+            self.errorHandlingMaskCheck(error: error)
                 .done(self.checkMaskRulesResult(result:))
                 .cauterize()
         }
     }
 
-    func errorHandlingMaskCheck(error: Error, token _: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+    private func firstStepCheckMaskStatus(firstToken: ExtendedCBORWebToken? = nil,
+                                          secondToken: ExtendedCBORWebToken? = nil,
+                                          ignoringPiCheck: Bool = false) -> Promise<ExtendedCBORWebToken> {
+        if ignoringPiCheck, let secondToken = secondToken {
+            return justCheckMaskStatus(secondToken: secondToken)
+        } else {
+            return scanAndCheckMaskStatus(firstToken: firstToken)
+        }
+    }
+
+    private func justCheckMaskStatus(firstToken: ExtendedCBORWebToken? = nil,
+                                     secondToken: ExtendedCBORWebToken,
+                                     ignoringPiCheck: Bool = true) -> Promise<ExtendedCBORWebToken> {
+        CheckMaskRulesUseCase(token: secondToken,
+                              region: userDefaults.stateSelection,
+                              revocationRepository: revocationRepository,
+                              holderStatus: CertificateHolderStatusModel(dccCertLogic: certLogic),
+                              additionalToken: firstToken,
+                              ignoringPiCheck: ignoringPiCheck).execute()
+    }
+
+    private func scanAndCheckMaskStatus(firstToken: ExtendedCBORWebToken?) -> Promise<ExtendedCBORWebToken> {
+        ScanAndParseQRCodeAndCheckMaskRulesUseCase(router: router,
+                                                   audioPlayer: audioPlayer,
+                                                   vaccinationRepository: vaccinationRepository,
+                                                   revocationRepository: revocationRepository,
+                                                   userDefaults: userDefaults,
+                                                   certLogic: certLogic,
+                                                   additionalToken: firstToken).execute()
+    }
+
+    func errorHandlingMaskCheck(error: Error) -> Promise<ValidatorDetailSceneResult> {
         if case let CertificateError.revoked(token) = error {
             return router.showMaskRulesInvalid(token: token)
         }
         switch error as? CheckMaskRulesUseCaseError {
-        case let .differentPersonalInformation(token1OfPerson, token2OfPerson):
-            return showMaskCheckDifferentPerson(token1OfPerson: token1OfPerson, token2OfPerson: token2OfPerson)
+        case let .differentPersonalInformation(firstToken, secondToken):
+            return router.showMaskCheckDifferentPerson(firstToken: firstToken,
+                                                       secondToken: secondToken)
         case let .maskRulesNotAvailable(token):
             return router.showNoMaskRules(token: token)
         case let .secondScanSameToken(token):
             return router.secondScanSameToken(token: token)
-        case .secondScanSameTokenType:
-            router.showMaskCheckSameCertType()
-            return .value(.close)
         case let .holderNeedsMask(token):
             if token.vaccinationCertificate.isTest {
                 return router.showMaskRequiredBusinessRules(token: token)
@@ -67,28 +94,16 @@ extension ValidatorOverviewViewModel {
     func checkMaskRulesResult(result: ValidatorDetailSceneResult) {
         switch result {
         case .startOver:
-            scanAction()
+            checkMaskStatus(firstToken: nil, secondToken: nil, ignoringPiCheck: false)
         case .close:
             break
         case let .secondScan(token):
-            scanAction(additionalToken: token)
+            checkMaskStatus(firstToken: token, secondToken: nil, ignoringPiCheck: false)
         case .thirdScan:
             // Not relevant for Mask Check
             break
+        case let .ignore(firstToken, secondToken, _):
+            checkMaskStatus(firstToken: firstToken, secondToken: secondToken, ignoringPiCheck: true)
         }
-    }
-
-    func showMaskCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken,
-                                      token2OfPerson: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        router.showMaskCheckDifferentPerson(token1OfPerson: token1OfPerson,
-                                            token2OfPerson: token2OfPerson)
-            .then { result -> Promise<ValidatorDetailSceneResult> in
-                switch result {
-                case .ignore:
-                    return self.router.showMaskOptional(token: token1OfPerson)
-                case .startover:
-                    return .value(.startOver)
-                }
-            }
     }
 }

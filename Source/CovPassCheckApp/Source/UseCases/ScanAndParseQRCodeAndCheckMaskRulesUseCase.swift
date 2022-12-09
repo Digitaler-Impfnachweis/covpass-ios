@@ -37,7 +37,8 @@ struct ScanAndParseQRCodeAndCheckMaskRulesUseCase {
                                   region: self.userDefaults.stateSelection,
                                   revocationRepository: self.revocationRepository,
                                   holderStatus: CertificateHolderStatusModel(dccCertLogic: self.certLogic),
-                                  additionalToken: additionalToken).execute()
+                                  additionalToken: additionalToken,
+                                  ignoringPiCheck: false).execute()
         }
     }
 }

@@ -11,8 +11,7 @@ import Foundation
 import PromiseKit
 
 enum CheckMaskRulesUseCaseError: Error, Equatable {
-    case differentPersonalInformation(_ token1OfPerson: ExtendedCBORWebToken, _ token2OfPerson: ExtendedCBORWebToken)
-    case secondScanSameTokenType(_ token: ExtendedCBORWebToken)
+    case differentPersonalInformation(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken)
     case secondScanSameToken(_ token: ExtendedCBORWebToken)
     case maskRulesNotAvailable(_ token: ExtendedCBORWebToken)
     case holderNeedsMask(_ token: ExtendedCBORWebToken)
@@ -26,6 +25,7 @@ struct CheckMaskRulesUseCase {
     let revocationRepository: CertificateRevocationRepositoryProtocol
     public let holderStatus: CertificateHolderStatusModelProtocol
     let additionalToken: ExtendedCBORWebToken?
+    let ignoringPiCheck: Bool
 
     func execute() -> Promise<ExtendedCBORWebToken> {
         firstly {
@@ -39,6 +39,12 @@ struct CheckMaskRulesUseCase {
         }
         .then {
             checkEuRules()
+        }
+        .then {
+            additionalTokenIsNotSameLikeBefore()
+        }
+        .then {
+            checkNoDifferentPersonalinformation()
         }
         .then {
             checkMaskRules()
@@ -63,31 +69,30 @@ struct CheckMaskRulesUseCase {
         return .value
     }
 
-    private func additionalTokenIsNotSameLikeBefore() -> Bool {
+    private func additionalTokenIsNotSameLikeBefore() -> Promise<Void> {
         guard let additionalToken = additionalToken else {
-            return true
+            return .value
         }
-        guard additionalToken != token else {
-            return false
+        guard additionalToken == token else {
+            return .value
         }
-        return true
+        return .init(error: CheckMaskRulesUseCaseError.secondScanSameToken(token))
+    }
+
+    private func checkNoDifferentPersonalinformation() -> Promise<Void> {
+        guard !ignoringPiCheck else {
+            return .value
+        }
+        if let additionalToken = additionalToken,
+           additionalToken.vaccinationCertificate.hcert.dgc != token.vaccinationCertificate.hcert.dgc {
+            return .init(error: CheckMaskRulesUseCaseError.differentPersonalInformation(token, additionalToken))
+        }
+        return .value
     }
 
     private func checkMaskRules() -> Promise<Void> {
-        guard additionalTokenIsNotSameLikeBefore() else {
-            return .init(error: CheckMaskRulesUseCaseError.secondScanSameToken(token))
-        }
-        if let additionalToken = additionalToken,
-           additionalToken.vaccinationCertificate.certType == token.vaccinationCertificate.certType {
-            return .init(error: CheckMaskRulesUseCaseError.secondScanSameTokenType(token))
-        }
         if holderStatus.holderNeedsMask(tokensForMaskRuleCheck(), region: region) {
             return .init(error: CheckMaskRulesUseCaseError.holderNeedsMask(token))
-        }
-        if let additionalToken = additionalToken,
-           additionalToken.vaccinationCertificate.hcert.dgc.nam != token.vaccinationCertificate.hcert.dgc.nam ||
-           additionalToken.vaccinationCertificate.hcert.dgc.dob != token.vaccinationCertificate.hcert.dgc.dob {
-            return .init(error: CheckMaskRulesUseCaseError.differentPersonalInformation(token, additionalToken))
         }
         return .value
     }

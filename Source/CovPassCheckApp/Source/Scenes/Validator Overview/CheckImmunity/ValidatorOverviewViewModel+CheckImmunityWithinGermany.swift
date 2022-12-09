@@ -9,24 +9,24 @@ import CovPassCommon
 import PromiseKit
 
 extension ValidatorOverviewViewModel {
-    func checkImmunityStatus(secondToken: ExtendedCBORWebToken? = nil, firstToken: ExtendedCBORWebToken? = nil) {
+    func checkImmunityStatus() {
         if withinGermanyIsSelected {
-            checkImmunityStatusWithinGermany(secondToken, firstToken)
+            checkImmunityStatusWithinGermany()
         } else {
             checkImmunityStatusEnteringGermany()
         }
     }
 
-    private func checkImmunityStatusWithinGermany(_ secondToken: ExtendedCBORWebToken?, _ firstToken: ExtendedCBORWebToken?) {
+    func checkImmunityStatusWithinGermany(firstToken: ExtendedCBORWebToken? = nil,
+                                          secondToken: ExtendedCBORWebToken? = nil,
+                                          thirdToken: ExtendedCBORWebToken? = nil,
+                                          ignoringPiCheck: Bool = false) {
         isLoadingScan = true
         firstly {
-            ScanAndParseQRCodeAndCheckIfsg22aUseCase(router: router,
-                                                     audioPlayer: audioPlayer,
-                                                     vaccinationRepository: vaccinationRepository,
-                                                     revocationRepository: revocationRepository,
-                                                     certLogic: certLogic,
-                                                     secondScannedToken: secondToken,
-                                                     firstScannedToken: firstToken).execute()
+            firstStepCheckingImmunityStatusWithinGermany(firstToken: firstToken,
+                                                         secondToken: secondToken,
+                                                         thirdToken: thirdToken,
+                                                         ignoringPiCheck: ignoringPiCheck)
         }
         .done { token in
             self.router.showVaccinationCycleComplete(token: token)
@@ -37,19 +37,76 @@ extension ValidatorOverviewViewModel {
             self.isLoadingScan = false
         }
         .catch { error in
-            self.errorHandlingIfsg22aCheck(error: error, token: nil)
+            self.errorHandlingIfsg22aCheck(error: error)
                 .done(self.checkImmunityStatusResult(result:))
                 .cauterize()
         }
     }
 
-    func errorHandlingIfsg22aCheck(error: Error, token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+    private func firstStepCheckingImmunityStatusWithinGermany(firstToken: ExtendedCBORWebToken?,
+                                                              secondToken: ExtendedCBORWebToken?,
+                                                              thirdToken: ExtendedCBORWebToken?,
+                                                              ignoringPiCheck: Bool) -> Promise<ExtendedCBORWebToken> {
+        if ignoringPiCheck {
+            if let thirdToken = thirdToken {
+                return justcheckImmunityStatusWithinGermany(for: firstToken,
+                                                            and: secondToken,
+                                                            and: thirdToken,
+                                                            with: ignoringPiCheck)
+            } else if let secondToken = secondToken {
+                return justCheckImmunityStatusWithingGermany(for: firstToken,
+                                                             and: secondToken,
+                                                             with: ignoringPiCheck)
+            } else {
+                return .init(error: ApplicationError.unknownError)
+            }
+        } else {
+            return ScanAndCheckImmunityStatusWithinGermany(with: firstToken,
+                                                           and: secondToken)
+        }
+    }
+
+    private func justcheckImmunityStatusWithinGermany(for firstToken: ExtendedCBORWebToken?,
+                                                      and secondToken: ExtendedCBORWebToken?,
+                                                      and thirdToken: ExtendedCBORWebToken,
+                                                      with ignorePICheck: Bool) -> Promise<ExtendedCBORWebToken> {
+        CheckIfsg22aUseCase(currentToken: thirdToken,
+                            revocationRepository: revocationRepository,
+                            holderStatus: CertificateHolderStatusModel(dccCertLogic: certLogic),
+                            secondScannedToken: secondToken,
+                            firstScannedToken: firstToken,
+                            ignoringPiCheck: ignorePICheck).execute()
+    }
+
+    private func justCheckImmunityStatusWithingGermany(for firstToken: ExtendedCBORWebToken?,
+                                                       and secondToken: ExtendedCBORWebToken,
+                                                       with ignoringPiCheck: Bool) -> Promise<ExtendedCBORWebToken> {
+        CheckIfsg22aUseCase(currentToken: secondToken,
+                            revocationRepository: revocationRepository,
+                            holderStatus: CertificateHolderStatusModel(dccCertLogic: certLogic),
+                            secondScannedToken: firstToken,
+                            firstScannedToken: nil,
+                            ignoringPiCheck: ignoringPiCheck).execute()
+    }
+
+    private func ScanAndCheckImmunityStatusWithinGermany(with firstToken: ExtendedCBORWebToken?,
+                                                         and secondToken: ExtendedCBORWebToken?) -> Promise<ExtendedCBORWebToken> {
+        ScanAndParseQRCodeAndCheckIfsg22aUseCase(router: router,
+                                                 audioPlayer: audioPlayer,
+                                                 vaccinationRepository: vaccinationRepository,
+                                                 revocationRepository: revocationRepository,
+                                                 certLogic: certLogic,
+                                                 secondScannedToken: secondToken,
+                                                 firstScannedToken: firstToken).execute()
+    }
+
+    func errorHandlingIfsg22aCheck(error: Error) -> Promise<ValidatorDetailSceneResult> {
         if case let CertificateError.revoked(token) = error {
             return router.showIfsg22aCheckError(token: token)
         }
         switch error as? CheckIfsg22aUseCaseError {
-        case let .showMaskCheckdifferentPersonalInformation(token1OfPerson, token2OfPerson):
-            return router.showIfsg22aCheckDifferentPerson(token1OfPerson: token1OfPerson, token2OfPerson: token2OfPerson)
+        case let .differentPersonalInformation(token1, token2, token3):
+            return router.showIfsg22aCheckDifferentPerson(firstToken: token1, secondToken: token2, thirdToken: token3)
         case let .vaccinationCycleIsNotComplete(firstToken, secondToken, thirdToken):
             if secondToken != nil, thirdToken != nil {
                 return router.showIfsg22aIncompleteResult()
@@ -60,23 +117,25 @@ extension ValidatorOverviewViewModel {
             return router.secondScanSameToken(token: token)
         case let .thirdScanSameToken(secondToken, firstToken):
             return router.thirdScanSameToken(secondToken: secondToken, firstToken: firstToken)
-        case .none, .invalidToken:
-            return router.showIfsg22aCheckError(token: nil)
-        case .invalidToken(token):
+        case let .invalidToken(token):
             return router.showIfsg22aCheckError(token: token)
+        case .none:
+            return router.showIfsg22aCheckError(token: nil)
         }
     }
 
     func checkImmunityStatusResult(result: ValidatorDetailSceneResult) {
         switch result {
         case .startOver:
-            checkImmunityStatus(secondToken: nil, firstToken: nil)
+            checkImmunityStatusWithinGermany()
         case .close:
             break
         case let .secondScan(secondToken):
-            checkImmunityStatus(secondToken: secondToken, firstToken: nil)
+            checkImmunityStatusWithinGermany(secondToken: secondToken)
         case let .thirdScan(secondToken, firstToken):
-            checkImmunityStatus(secondToken: secondToken, firstToken: firstToken)
+            checkImmunityStatusWithinGermany(firstToken: firstToken, secondToken: secondToken)
+        case let .ignore(token1, token2, token3):
+            checkImmunityStatusWithinGermany(firstToken: token1, secondToken: token2, thirdToken: token3, ignoringPiCheck: true)
         }
     }
 }

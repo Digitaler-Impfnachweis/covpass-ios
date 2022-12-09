@@ -35,7 +35,7 @@ class SecondScanViewModel: SecondScanViewModelProtocol {
     var firstScanSubtitle: String = Constant.Keys.card1Subtitle
     var firstScanIcon: UIImage = .statusPartialCircle
     var secondScanTitle: String = Constant.Keys.card2Title
-    var secondScanSubtitle: String = Constant.Keys.card2Subtitle
+    var secondScanSubtitle: String { isThirdScan ? Constant.Keys.card1Subtitle : Constant.Keys.card2Subtitle }
     var secondScanIcon: UIImage { isThirdScan ? .statusPartialCircle : .cardEmpty }
     var thirdScanTitle: String = Constant.Keys.card3Title
     var thirdScanSubtitle: String = Constant.Keys.card3Subtitle
