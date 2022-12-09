@@ -71,7 +71,7 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertEqual(sut.valueSets["disease-agent-targeted"]?.count, 1)
         XCTAssertEqual(sut.valueSets["sct-vaccines-covid-19"]?.count, 6)
         XCTAssertEqual(sut.valueSets["vaccines-covid-19-auth-holders"]?.count, 30)
-        XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 37)
+        XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 38)
     }
 
     func testRemoteValueSets() throws {
@@ -139,7 +139,7 @@ class DCCCertLogicTests: XCTestCase {
 
     func testSavedAndLocalRules() throws {
         // Check local rules (no saved rules)
-        XCTAssertEqual(sut.dccRules.count, 300)
+        XCTAssertEqual(sut.dccRules.count, 284)
 
         // Save one rule
         let rule = Rule(identifier: "", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "")
