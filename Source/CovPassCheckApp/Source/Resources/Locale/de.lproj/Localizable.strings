@@ -687,7 +687,7 @@
 
 "revocation_detail_page_title" = "Technische Details zum Zertifikat";
 
-"revocation_detail_page_button_text" = "PDF erstellen";
+"revocation_detail_page_button_text" = "EU-Ausdruck erstellen";
 
 "revocation_detail_page_transaction_number" = "Transaktionsnummer";
 
@@ -785,7 +785,7 @@
 
 "infschg_result_mask_mandatory_deviating_data_subtitle_3" = "Kein Fehler?";
 
-"infschg_result_mask_mandatory_deviating_data_copy_2" = "Sollte es sich Ihrer Ansicht zum Beispiel um einen Tippfehler handeln, können Sie diese Abweichung ignorieren und die Prüfung fortsetzen.";
+"infschg_result_mask_mandatory_deviating_data_copy_2" = "Sollte es sich Ihrer Ansicht nach zum Beispiel um einen Tippfehler handeln, können Sie diese Abweichung ignorieren und die Prüfung fortsetzen.";
 
 "infschg_result_mask_mandatory_deviating_data_link" = "Abweichung ignorieren";
 

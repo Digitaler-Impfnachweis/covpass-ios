@@ -687,7 +687,7 @@
 
 "revocation_detail_page_title" = "Technical details of the certificate";
 
-"revocation_detail_page_button_text" = "Create PDF";
+"revocation_detail_page_button_text" = "Create EU printout";
 
 "revocation_detail_page_transaction_number" = "Transaction number";
 

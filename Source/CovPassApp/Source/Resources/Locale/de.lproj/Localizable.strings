@@ -50,19 +50,19 @@
 
 "vaccination_fourth_onboarding_page_title" = "Datenschutz und Datensicherheit";
 
-"vaccination_fourth_onboarding_page_first_list_item" = "Die Nutzung der CovPass-App ist freiwillig. Sie können Ihre digitalen COVID-Zertifikate der EU auch in Papierform verwenden.";
+"vaccination_fourth_onboarding_page_first_list_item" = "Die Nutzung der CovPass-App ist freiwillig. Sie können Ihre digitalen COVID-Zertifikate auch in Papierform verwenden.";
 
-"vaccination_fourth_onboarding_page_second_list_item" = "Zum Schutz vor Fälschungen oder Manipulationen werden die digitalen COVID-Zertifikate der EU durch das RKI elektronisch signiert. Hierzu werden die notwendigen Daten einmalig verschlüsselt an das RKI übermittelt. Nach der Erstellung des digitalen COVID-Zertifikats werden Ihre Daten vom RKI sofort unwiderruflich gelöscht. Der QR-Code enthält in kodierter Form die auf dem digitalen COVID-Zertifikat enthaltenen Informationen und die elektronische Signatur des RKI.";
+"vaccination_fourth_onboarding_page_second_list_item" = "Zum Schutz vor Fälschungen oder Manipulationen werden die digitalen COVID-Zertifikate durch das RKI bei der Erstellung elektronisch signiert. Hierzu werden die notwendigen Daten einmalig verschlüsselt an das RKI übermittelt. Nach der Erstellung des digitalen COVID-Zertifikats werden Ihre Daten vom RKI sofort unwiderruflich gelöscht. Der QR-Code enthält in kodierter Form die auf dem digitalen COVID-Zertifikat enthaltenen Informationen und die elektronische Signatur des RKI.";
 
-"vaccination_fourth_onboarding_page_third_list_item" = "Wenn Sie den QR-Code eines digitalen COVID-Zertifikats der EU einer anderen Person zur Prüfung vorlegen, werden dem Prüfer der Name und das Geburtsdatum des Zertifikatsinhabers angezeigt. Bei der Prüfung ist gegebenenfalls ergänzend ein Ausweisdokument vorzulegen.";
+"vaccination_fourth_onboarding_page_third_list_item" = "Wenn Sie den QR-Code eines digitalen COVID-Zertifikats zur Prüfung vorlegen, werden der prüfenden Person der Name und das Geburtsdatum des Zertifikatsinhabers angezeigt und ggf. ob eine Befreiung von der Pflicht zum Tragen einer Maske besteht. Bei der Prüfung ist gegebenenfalls ergänzend ein Ausweisdokument vorzulegen.";
 
-"vaccination_fourth_onboarding_page_fourth_list_item" = "Die digitalen COVID-Zertifikate der EU werden ausschließlich auf Ihrem Smartphone gespeichert. Sie haben jederzeit die Möglichkeit, die digitalen COVID-Zertifikate der EU wieder zu entfernen.";
+"vaccination_fourth_onboarding_page_fourth_list_item" = "Die digitalen COVID-Zertifikate werden ausschließlich auf Ihrem Smartphone gespeichert. Sie haben jederzeit die Möglichkeit, die digitalen COVID-Zertifikate wieder zu entfernen.";
 
-"vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
+"vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung.";
 
 "vaccination_fourth_onboarding_page_message_for_us_citizens_title" = "Nutzungsbedingungen für US-Bürgerinnen und Bürger";
 
-"vaccination_fourth_onboarding_page_message_for_us_citizens_copy" = "Wenn Sie US-Bürgerin oder US-Bürger sind, gelten diese Nutzungsbedingungen für die App:";
+"vaccination_fourth_onboarding_page_message_for_us_citizens_copy" = "Wenn Sie US-Bürgerin oder US-Bürger sind, gelten diese Nutzungsbedingungen für die App.";
 
 "vaccination_fourth_onboarding_page_button_title" = "Alles klar";
 
