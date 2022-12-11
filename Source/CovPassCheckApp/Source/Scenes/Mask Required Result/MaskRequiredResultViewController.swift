@@ -167,7 +167,7 @@ private extension ParagraphView {
         layoutMargins.bottom = 0
         updateView(image: viewModel.icon,
                    title: viewModel.title.styledAs(.header_3),
-                   body: viewModel.description.styledAs(.body).colored(.onBackground80))
+                   body: viewModel.description.styledAs(.body).colored(.onBackground110))
         bottomBorder.isHidden = true
     }
 }
