@@ -16,7 +16,6 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showDataPrivacyExpectation = XCTestExpectation(description: "showDataPrivacyExpectation")
     var showGproofExpectation = XCTestExpectation(description: "showGproofExpectation")
     var scanQRCodeExpectation = XCTestExpectation(description: "scanQRCodeExpectation")
-    var showNewRegulationsAnnouncementExpectation = XCTestExpectation(description: "showNewRegulationsAnnouncementExpectation")
     var routeToStateSelectionExpectation = XCTestExpectation(description: "routeToStateSelection")
     var showMaskRequiredBusinessRulesExpectation = XCTestExpectation(description: "showMaskRequiredBusinessRules")
     var showMaskRequiredBusinessRulesSecondScanAllowedExpectation = XCTestExpectation(description: "showMaskRequiredBusinessRulesSecondScanAllowed")
@@ -105,11 +104,6 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
 
     func routeToRulesUpdate(userDefaults _: Persistence) -> Promise<Void> {
         routeToRulesUpdateExpectation.fulfill()
-        return .value
-    }
-
-    func showNewRegulationsAnnouncement() -> Promise<Void> {
-        showNewRegulationsAnnouncementExpectation.fulfill()
         return .value
     }
 

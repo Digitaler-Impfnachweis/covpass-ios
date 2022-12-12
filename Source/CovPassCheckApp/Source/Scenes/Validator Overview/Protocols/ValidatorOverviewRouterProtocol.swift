@@ -16,7 +16,6 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanQRCodeProtoc
     func showAppInformation(userDefaults: Persistence)
     func showDataPrivacy() -> Promise<Void>
     func showAnnouncement() -> Promise<Void>
-    func showNewRegulationsAnnouncement() -> Promise<Void>
     func routeToStateSelection() -> Promise<Void>
     func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void>
     func routeToChooseCheckSituation() -> Promise<Void>

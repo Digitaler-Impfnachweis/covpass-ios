@@ -101,10 +101,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
 
-    func showNewRegulationsAnnouncement() -> Promise<Void> {
-        sceneCoordinator.present(NewRegulationsAnnouncementSceneFactory())
-    }
-
     func routeToStateSelection() -> Promise<Void> {
         sceneCoordinator.present(StateSelectionSceneFactory(),
                                  animated: true)

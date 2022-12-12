@@ -245,18 +245,6 @@ class ValidatorOverviewViewModel {
         return router.showAnnouncement()
     }
 
-    private func showNewRegulationsAnnouncementIfNeeded() -> Guarantee<Void> {
-        if userDefaults.newRegulationsOnboardingScreenWasShown {
-            return .value
-        }
-        return router
-            .showNewRegulationsAnnouncement()
-            .ensure {
-                self.userDefaults.newRegulationsOnboardingScreenWasShown = true
-            }
-            .recover { _ in () }
-    }
-
     private func resetCheckTypeIfCheckSituationWasNotChoosenBefore() {
         if UserDefaults.standard.object(forKey: UserDefaults.keyCheckSituation) == nil {
             selectedCheckType = .mask
@@ -326,7 +314,6 @@ class ValidatorOverviewViewModel {
         .then {
             self.showAnnouncementIfNeeded()
         }
-        .then(showNewRegulationsAnnouncementIfNeeded)
         .done {
             self.delegate?.viewModelDidUpdate()
         }
