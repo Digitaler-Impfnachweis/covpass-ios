@@ -264,18 +264,13 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             )
         } else {
             let certificatesUsed = certificateHolderStatusModel.validCertificates(certificates, logicType: .deAcceptenceAndInvalidationRules)
-            guard let latestCertificate = certificatesUsed.sortedByDtFrAndSc.first,
-                  let dtOrFr = latestCertificate.dtFrOrSc.add(days: 90) else {
-                return CertificateHolderMaskNotRequiredStatusViewModel(
-                    userDefaults: userDefaults,
-                    certificateHolderStatus: certificateHolderStatusModel,
-                    federalState: userDefaults.stateSelection
-                )
-            }
+            let latestCertificate = certificatesUsed.sortedByDtFrAndSc.first
+            let isTest = latestCertificate?.vaccinationCertificate.isTest ?? false
+            let dtOrFr = latestCertificate?.dtFrOrSc.add(days: isTest ? 1 : 90)
             return CertificateHolderMaskNotRequiredStatusViewModel(
                 userDefaults: userDefaults,
                 certificateHolderStatus: certificateHolderStatusModel,
-                date: dtOrFr.readableString,
+                date: dtOrFr?.readableString,
                 federalState: userDefaults.stateSelection
             )
         }

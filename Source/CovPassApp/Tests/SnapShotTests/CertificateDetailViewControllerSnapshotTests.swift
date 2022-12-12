@@ -472,6 +472,18 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         verifyView(view: viewController.view, height: 1600)
     }
 
+    func test_maskRuleAvailable_and_notNeedMask_testCert() throws {
+        let date = try XCTUnwrap(DateUtils.parseDate("2021-01-26T15:05:00"))
+        let token = CBORWebToken.mockTestCertificate.extended()
+        let certs = [token]
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        certificateHolderStatusModel.needsMask = false
+        certificateHolderStatusModel.latestMaskRuleDate = DateUtils.parseDate("2021-01-26T15:05:00")
+        let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
+        let viewController = CertificateDetailViewController(viewModel: viewModel)
+        verifyView(view: viewController.view, height: 1600)
+    }
+
     func test_maskRuleAvailable_and_needMask_() throws {
         let date = try XCTUnwrap(DateUtils.parseDate("2021-01-26T15:05:00"))
         let token = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(date).extended()

@@ -962,6 +962,17 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.subtitle, "Exempt until May 3, 2021")
     }
 
+    func testMaskStatusViewModel_optionalTestCert() throws {
+        // When
+        let certificates: [ExtendedCBORWebToken] = [CBORWebToken.mockTestCertificate.extended()]
+        configureCustomSut(certificates: certificates, maskRulesAvailable: true, needsMask: false)
+        let viewModel = sut.maskStatusViewModel
+
+        // Then
+        XCTAssertTrue(viewModel is CertificateHolderMaskNotRequiredStatusViewModel)
+        XCTAssertEqual(viewModel.subtitle, "Exempt until Dec 13, 2022")
+    }
+
     func testMaskStatusViewModel_required() throws {
         // Given
         let certificates: [ExtendedCBORWebToken] = try [.token1Of1()]
