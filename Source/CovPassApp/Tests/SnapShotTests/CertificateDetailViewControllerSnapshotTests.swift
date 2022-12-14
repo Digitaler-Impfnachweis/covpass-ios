@@ -473,8 +473,10 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
     }
 
     func test_maskRuleAvailable_and_notNeedMask_testCert() throws {
-        let date = try XCTUnwrap(DateUtils.parseDate("2021-01-26T15:05:00"))
-        let token = CBORWebToken.mockTestCertificate.extended()
+        let date = try XCTUnwrap(DateUtils.parseDate("2022-12-12T15:05:00"))
+        let token = CBORWebToken.mockTestCertificate
+            .mockTestDate(date)
+            .extended()
         let certs = [token]
         certificateHolderStatusModel.areMaskRulesAvailable = true
         certificateHolderStatusModel.needsMask = false

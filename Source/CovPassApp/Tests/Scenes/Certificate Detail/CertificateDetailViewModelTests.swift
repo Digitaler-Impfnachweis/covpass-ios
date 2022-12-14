@@ -964,7 +964,11 @@ class CertificateDetailViewModelTests: XCTestCase {
 
     func testMaskStatusViewModel_optionalTestCert() throws {
         // When
-        let certificates: [ExtendedCBORWebToken] = [CBORWebToken.mockTestCertificate.extended()]
+        let date = try XCTUnwrap(DateUtils.parseDate("2022-12-12T15:05:00"))
+        let token = CBORWebToken.mockTestCertificate
+            .mockTestDate(date)
+            .extended()
+        let certificates: [ExtendedCBORWebToken] = [token]
         configureCustomSut(certificates: certificates, maskRulesAvailable: true, needsMask: false)
         let viewModel = sut.maskStatusViewModel
 
