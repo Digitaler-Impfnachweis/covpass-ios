@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -85,7 +85,6 @@
                         <constraint firstItem="82g-zi-aCD" firstAttribute="leading" secondItem="jKW-C5-W8f" secondAttribute="leading" id="JOF-q8-ohh"/>
                         <constraint firstItem="82g-zi-aCD" firstAttribute="trailing" secondItem="jKW-C5-W8f" secondAttribute="trailing" id="cQU-Dh-JYG"/>
                         <constraint firstItem="82g-zi-aCD" firstAttribute="width" secondItem="VW9-v2-QBU" secondAttribute="width" id="s8e-ru-vOk"/>
-                        <constraint firstItem="82g-zi-aCD" firstAttribute="height" secondItem="VW9-v2-QBU" secondAttribute="height" priority="250" id="wU9-qy-JBO"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="jKW-C5-W8f"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="VW9-v2-QBU"/>

@@ -30,6 +30,7 @@ public class StateSelectionViewController: UIViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .backgroundPrimary
         setupViews()
     }
 

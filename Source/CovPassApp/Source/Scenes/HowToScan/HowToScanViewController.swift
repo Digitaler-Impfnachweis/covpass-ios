@@ -119,6 +119,7 @@ class HowToScanViewController: UIViewController {
         toolbarView.delegate = self
         toolbarView.disableLeftButton()
         toolbarView.disableRightButton()
+        toolbarView.setWhiteGradient()
     }
 }
 

@@ -119,7 +119,6 @@
                         <constraint firstAttribute="trailing" secondItem="pKH-mL-QJc" secondAttribute="trailing" id="4lb-7H-X01"/>
                         <constraint firstItem="pKH-mL-QJc" firstAttribute="leading" secondItem="kdV-CK-EDP" secondAttribute="leading" id="931-Jg-Klg"/>
                         <constraint firstItem="pKH-mL-QJc" firstAttribute="trailing" secondItem="POY-P5-LHu" secondAttribute="trailing" id="Gbl-ck-cf4"/>
-                        <constraint firstItem="pKH-mL-QJc" firstAttribute="height" secondItem="POY-P5-LHu" secondAttribute="height" priority="250" id="TCf-VJ-AJQ"/>
                         <constraint firstItem="pKH-mL-QJc" firstAttribute="leading" secondItem="POY-P5-LHu" secondAttribute="leading" id="bOS-fC-LCh"/>
                         <constraint firstAttribute="bottom" secondItem="pKH-mL-QJc" secondAttribute="bottom" priority="250" id="hdY-yT-6qw"/>
                     </constraints>

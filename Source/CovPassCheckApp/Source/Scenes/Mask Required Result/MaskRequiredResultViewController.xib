@@ -140,7 +140,6 @@
                         <constraint firstItem="dfv-wP-L03" firstAttribute="bottom" secondItem="Qvk-cf-3Rd" secondAttribute="bottom" id="ci2-Kf-iFw"/>
                         <constraint firstItem="dfv-wP-L03" firstAttribute="top" secondItem="Qvk-cf-3Rd" secondAttribute="top" id="cyG-55-Qd3"/>
                         <constraint firstItem="dfv-wP-L03" firstAttribute="leading" secondItem="Qvk-cf-3Rd" secondAttribute="leading" id="jah-LH-144"/>
-                        <constraint firstItem="dfv-wP-L03" firstAttribute="height" secondItem="b4q-5D-z1n" secondAttribute="height" priority="250" id="m2i-F6-t0t"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="Qvk-cf-3Rd"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="b4q-5D-z1n"/>

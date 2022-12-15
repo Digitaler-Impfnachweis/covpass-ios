@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -26,11 +26,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wC3-y9-13u">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wC3-y9-13u">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZn-8r-649" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="570.5"/>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RZn-8r-649" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="569"/>
                             <subviews>
                                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a59-FX-pcd" customClass="StaticWebView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="8" width="312" height="250"/>
@@ -96,7 +96,6 @@
                     <constraints>
                         <constraint firstItem="RZn-8r-649" firstAttribute="trailing" secondItem="Xks-eg-7gO" secondAttribute="trailing" id="GuZ-ji-I4z"/>
                         <constraint firstItem="RZn-8r-649" firstAttribute="top" secondItem="Xks-eg-7gO" secondAttribute="top" id="UxX-Nc-nMY"/>
-                        <constraint firstItem="RZn-8r-649" firstAttribute="height" secondItem="2u7-hy-TxK" secondAttribute="height" multiplier="1.00223" priority="250" constant="1" id="WJP-8q-hI3"/>
                         <constraint firstItem="RZn-8r-649" firstAttribute="leading" secondItem="Xks-eg-7gO" secondAttribute="leading" id="X0r-2Y-Ynm"/>
                         <constraint firstItem="RZn-8r-649" firstAttribute="bottom" secondItem="Xks-eg-7gO" secondAttribute="bottom" id="sPg-Ob-r5G"/>
                         <constraint firstItem="RZn-8r-649" firstAttribute="width" secondItem="2u7-hy-TxK" secondAttribute="width" id="vJ8-ZE-URp"/>

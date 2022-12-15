@@ -412,11 +412,23 @@ public class CustomToolbarView: XibView {
 
     override public func initView() {
         super.initView()
-        gradientLayer.removeFromSuperlayer()
         backgroundColor = .clear
+        setGrayGradient()
+    }
+
+    public func setWhiteGradient() {
+        setGradient(gradient: [UIColor(white: 1, alpha: 0).cgColor, UIColor.white.cgColor, UIColor.white.cgColor])
+    }
+
+    public func setGrayGradient() {
+        setGradient(gradient: [UIColor(white: 1, alpha: 0).cgColor, UIColor.backgroundPrimary.cgColor, UIColor.backgroundPrimary.cgColor])
+    }
+
+    private func setGradient(gradient: [CGColor]) {
+        gradientLayer.removeFromSuperlayer()
         gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
-        gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor.backgroundPrimary.cgColor, UIColor.backgroundPrimary.cgColor]
+        gradientLayer.colors = gradient
         layer.insertSublayer(gradientLayer, at: 0)
     }
 

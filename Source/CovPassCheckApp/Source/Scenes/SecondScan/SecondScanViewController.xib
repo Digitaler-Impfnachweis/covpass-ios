@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -30,16 +30,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asq-Je-taX" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="68" width="414" height="60"/>
+                    <rect key="frame" x="0.0" y="64" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" placeholder="YES" id="epB-oE-mB6"/>
                     </constraints>
                 </view>
-                <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-Ut-n76">
-                    <rect key="frame" x="0.0" y="128" width="414" height="533.5"/>
+                <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-Ut-n76">
+                    <rect key="frame" x="0.0" y="124" width="414" height="537.5"/>
                     <subviews>
-                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
+                        <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="539"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CaI-1f-Rt7">
@@ -101,7 +101,6 @@
                         <constraint firstItem="dfv-wP-L03" firstAttribute="bottom" secondItem="Qvk-cf-3Rd" secondAttribute="bottom" id="ci2-Kf-iFw"/>
                         <constraint firstItem="dfv-wP-L03" firstAttribute="top" secondItem="Qvk-cf-3Rd" secondAttribute="top" id="cyG-55-Qd3"/>
                         <constraint firstItem="dfv-wP-L03" firstAttribute="leading" secondItem="Qvk-cf-3Rd" secondAttribute="leading" id="jah-LH-144"/>
-                        <constraint firstItem="dfv-wP-L03" firstAttribute="height" secondItem="b4q-5D-z1n" secondAttribute="height" priority="250" id="m2i-F6-t0t"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="Qvk-cf-3Rd"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="b4q-5D-z1n"/>

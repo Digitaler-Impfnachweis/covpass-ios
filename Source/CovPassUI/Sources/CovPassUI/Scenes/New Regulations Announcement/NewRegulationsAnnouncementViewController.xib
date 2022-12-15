@@ -101,7 +101,6 @@ VON DER MASKENPFLICHT SIND ALLE PERSONEN BEFREIT, DIE INNERHALB DER LETZTEN 3 MO
                         <constraint firstItem="CRe-ZO-Bfp" firstAttribute="width" secondItem="htz-up-ex4" secondAttribute="width" id="M08-02-xMy"/>
                         <constraint firstItem="CRe-ZO-Bfp" firstAttribute="top" secondItem="J5p-9K-z9N" secondAttribute="top" id="MSn-gT-LD6"/>
                         <constraint firstItem="CRe-ZO-Bfp" firstAttribute="trailing" secondItem="J5p-9K-z9N" secondAttribute="trailing" id="Xd6-Kn-trJ"/>
-                        <constraint firstItem="CRe-ZO-Bfp" firstAttribute="height" secondItem="htz-up-ex4" secondAttribute="height" priority="250" id="oGJ-KW-wAP"/>
                         <constraint firstItem="CRe-ZO-Bfp" firstAttribute="bottom" secondItem="J5p-9K-z9N" secondAttribute="bottom" id="oao-Ww-qE4"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="J5p-9K-z9N"/>

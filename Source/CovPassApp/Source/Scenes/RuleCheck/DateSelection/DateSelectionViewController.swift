@@ -41,6 +41,7 @@ class DateSelectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .backgroundPrimary
         configureText()
     }
 
