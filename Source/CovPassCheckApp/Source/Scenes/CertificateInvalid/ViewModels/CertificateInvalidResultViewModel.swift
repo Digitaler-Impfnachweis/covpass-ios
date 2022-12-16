@@ -15,7 +15,8 @@ private enum Constants {
     static let subtitleFormat = "".localized
     static let description = "technical_validation_check_popup_unsuccessful_certificate_subline".localized
     static let travelRules = "entry_check_link".localized
-    static let buttonTitle = "technical_validation_check_popup_valid_vaccination_button_1_title".localized
+    static let startOverButtonTitle = "technical_validation_check_popup_valid_vaccination_button_1_title".localized
+    static let retryButtonTitle = "technical_validation_check_popup_retry".localized
     static let revocationHeadline = "infschg_result_mask_optional_infobox_title".localized
     static let revocationInfoText = "infschg_result_mask_optional_infobox_copy".localized
     static let revocationLinkTitle = "infschg_result_mask_optional_infobox_link".localized
@@ -31,21 +32,18 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
     let title = Constants.title
     let subtitle: String
     let description = Constants.description
-    var holderName: String
-    var holderNameTransliterated: String
-    var holderBirthday: String
     var travelRules: String = Constants.travelRules
     var travelRulesIsHidden: Bool
     let revocationInfoHidden: Bool
     let revocationHeadline = Constants.revocationHeadline
     let revocationInfoText = Constants.revocationInfoText
     let revocationLinkTitle = Constants.revocationLinkTitle
-    let buttonTitle = Constants.buttonTitle
+    let startOverButtonTitle = Constants.startOverButtonTitle
+    let retryButtonTitle = Constants.retryButtonTitle
     let countdownTimerModel: CountdownTimerModel
     var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
-
     var reasonViewModels: [CertificateInvalidReasonViewModelProtocol]
-
+    var rescanIsHidden: Bool
     private let token: ExtendedCBORWebToken?
     private let resolver: Resolver<ValidatorDetailSceneResult>
     private let router: CertificateInvalidResultRouterProtocol
@@ -54,6 +52,7 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
     private let checkType: CheckType
 
     init(token: ExtendedCBORWebToken?,
+         rescanIsHidden: Bool,
          countdownTimerModel: CountdownTimerModel,
          resolver: Resolver<ValidatorDetailSceneResult>,
          router: CertificateInvalidResultRouterProtocol,
@@ -66,17 +65,10 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
             ("DE_" + persistence.stateSelection).localized
         )
         self.resolver = resolver
+        self.rescanIsHidden = rescanIsHidden
         self.router = router
         self.revocationKeyFilename = revocationKeyFilename
         revocationInfoHidden = !persistence.revocationExpertMode || token == nil
-        let dgc = token?.vaccinationCertificate.hcert.dgc
-        holderName = dgc?.nam.fullName ?? ""
-        holderNameTransliterated = dgc?.nam.fullNameTransliterated ?? ""
-        if let dgc = token?.vaccinationCertificate.hcert.dgc {
-            holderBirthday = .init(format: Constants.birthday, DateUtils.displayDateOfBirth(dgc))
-        } else {
-            holderBirthday = ""
-        }
         reasonViewModels = Self.reasonViewModels()
         checkSituationType = .init(rawValue: persistence.checkSituation) ?? .withinGermany
         checkType = .init(rawValue: persistence.selectedCheckType) ?? .mask
@@ -88,7 +80,8 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
     private static func reasonViewModels() -> [CertificateInvalidReasonViewModelProtocol] {
         [
             CertificateInvalidInvalidSignatureReasonViewModel(),
-            CertificateInvalidQRCodeReasonViewModel()
+            CertificateInvalidQRCodeReasonViewModel(),
+            CertificateExpiredReasonViewModel()
         ]
     }
 
@@ -108,8 +101,12 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
         true
     }
 
-    func rescan() {
+    func startOver() {
         resolver.fulfill(.startOver)
+    }
+
+    func retry() {
+        resolver.fulfill(.rescan)
     }
 
     func revoke(_: Any) {

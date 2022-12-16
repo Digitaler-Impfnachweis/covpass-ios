@@ -28,6 +28,7 @@ final class CertificateInvalidResultViewControllerSnapshotTests: BaseSnapShotTes
         persistence.checkSituation = checkSituation.rawValue
         let viewModel = CertificateInvalidResultViewModel(
             token: token,
+            rescanIsHidden: false,
             countdownTimerModel: countdownTimerModel,
             resolver: resolver,
             router: CertificateInvalidResultRouterMock(),

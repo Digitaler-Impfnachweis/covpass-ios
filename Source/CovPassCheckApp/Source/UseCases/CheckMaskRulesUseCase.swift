@@ -11,28 +11,26 @@ import Foundation
 import PromiseKit
 
 enum CheckMaskRulesUseCaseError: Error, Equatable {
-    case differentPersonalInformation(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken)
-    case secondScanSameToken(_ token: ExtendedCBORWebToken)
-    case maskRulesNotAvailable(_ token: ExtendedCBORWebToken)
-    case holderNeedsMask(_ token: ExtendedCBORWebToken)
-    case invalidDueToRules(_ token: ExtendedCBORWebToken)
-    case invalidDueToTechnicalReason(_ token: ExtendedCBORWebToken)
+    case differentPersonalInformation
+    case secondScanSameToken
+    case maskRulesNotAvailable
+    case holderNeedsMask
+    case invalidToken
 }
 
 struct CheckMaskRulesUseCase {
-    let token: ExtendedCBORWebToken
     let region: String?
     let revocationRepository: CertificateRevocationRepositoryProtocol
     public let holderStatus: CertificateHolderStatusModelProtocol
-    let additionalToken: ExtendedCBORWebToken?
+    let tokens: [ExtendedCBORWebToken]
     let ignoringPiCheck: Bool
 
-    func execute() -> Promise<ExtendedCBORWebToken> {
+    func execute() -> Promise<Void> {
         firstly {
             checkMaskRulesAvailable()
         }
         .then {
-            isRevoked(token)
+            isRevoked(tokens.last)
         }
         .then {
             checkDomesticRules()
@@ -44,90 +42,96 @@ struct CheckMaskRulesUseCase {
             additionalTokenIsNotSameLikeBefore()
         }
         .then {
-            checkNoDifferentPersonalinformation()
+            additionalTokenIsSamePerson()
         }
         .then {
             checkMaskRules()
         }
-        .then {
-            Promise.value(token)
-        }
-    }
-
-    private func tokensForMaskRuleCheck() -> [ExtendedCBORWebToken] {
-        var tokens: [ExtendedCBORWebToken] = [token]
-        if let token = additionalToken {
-            tokens.append(token)
-        }
-        return tokens
     }
 
     private func checkMaskRulesAvailable() -> Promise<Void> {
         guard holderStatus.maskRulesAvailable(for: region) else {
-            return .init(error: CheckMaskRulesUseCaseError.maskRulesNotAvailable(token))
+            return .init(error: CheckMaskRulesUseCaseError.maskRulesNotAvailable)
         }
         return .value
     }
 
     private func additionalTokenIsNotSameLikeBefore() -> Promise<Void> {
-        guard let additionalToken = additionalToken else {
+        guard let firstToken = tokens.last else {
             return .value
         }
-        guard additionalToken == token else {
-            return .value
+        let tokens = tokens.dropLast()
+        let qrCodes = tokens.map(\.vaccinationQRCodeData)
+        if qrCodes.contains(firstToken.vaccinationQRCodeData) {
+            return .init(error: CheckMaskRulesUseCaseError.secondScanSameToken)
         }
-        return .init(error: CheckMaskRulesUseCaseError.secondScanSameToken(token))
+        return .value
     }
 
-    private func checkNoDifferentPersonalinformation() -> Promise<Void> {
+    private func additionalTokenIsSamePerson() -> Promise<Void> {
+        guard let firstToken = tokens.last else {
+            return .value
+        }
         guard !ignoringPiCheck else {
             return .value
         }
-        if let additionalToken = additionalToken,
-           additionalToken.vaccinationCertificate.hcert.dgc != token.vaccinationCertificate.hcert.dgc {
-            return .init(error: CheckMaskRulesUseCaseError.differentPersonalInformation(token, additionalToken))
+        let tokens = tokens.dropLast()
+        guard !tokens.isEmpty else {
+            return .value
         }
+        let personalInformations = tokens.map(\.personalInformation)
+        let allPersonalInformationsSame = personalInformations.contains(where: { $0 == firstToken.personalInformation })
+
+        if !allPersonalInformationsSame {
+            return .init(error: CheckMaskRulesUseCaseError.differentPersonalInformation)
+        }
+
         return .value
     }
 
     private func checkMaskRules() -> Promise<Void> {
-        if holderStatus.holderNeedsMask(tokensForMaskRuleCheck(), region: region) {
-            return .init(error: CheckMaskRulesUseCaseError.holderNeedsMask(token))
+        if holderStatus.holderNeedsMask(tokens, region: region) {
+            return .init(error: CheckMaskRulesUseCaseError.holderNeedsMask)
         }
         return .value
     }
 
-    private func isRevoked(_ token: ExtendedCBORWebToken) -> Promise<Void> {
-        firstly {
+    private func isRevoked(_ token: ExtendedCBORWebToken?) -> Promise<Void> {
+        guard let token = token else {
+            return .init(error: ApplicationError.unknownError)
+        }
+        return firstly {
             revocationRepository.isRevoked(token)
         }
         .then { isRevoked -> Promise<Void> in
             if isRevoked {
-                return .init(error: CertificateError.revoked(token))
+                return .init(error: CheckMaskRulesUseCaseError.invalidToken)
             }
             return .value
         }
     }
 
     private func checkDomesticRules() -> Promise<Void> {
-        switch holderStatus.checkDomesticAcceptanceAndInvalidationRules([token]) {
+        switch holderStatus.checkDomesticAcceptanceAndInvalidationRules(tokens) {
         case .passed:
             return .value
-        case .failedTechnical:
-            return .init(error: CheckMaskRulesUseCaseError.invalidDueToTechnicalReason(token))
-        case .failedFunctional:
-            return .init(error: CheckMaskRulesUseCaseError.invalidDueToRules(token))
+        case .failedTechnical, .failedFunctional:
+            return .init(error: CheckMaskRulesUseCaseError.invalidToken)
         }
     }
 
     private func checkEuRules() -> Promise<Void> {
-        switch holderStatus.checkEuInvalidationRules([token]) {
+        switch holderStatus.checkEuInvalidationRules(tokens) {
         case .passed:
             return .value
-        case .failedTechnical:
-            return .init(error: CheckMaskRulesUseCaseError.invalidDueToTechnicalReason(token))
-        case .failedFunctional:
-            return .init(error: CheckMaskRulesUseCaseError.invalidDueToRules(token))
+        case .failedTechnical, .failedFunctional:
+            return .init(error: CheckMaskRulesUseCaseError.invalidToken)
         }
+    }
+}
+
+private extension ExtendedCBORWebToken {
+    var personalInformation: DigitalGreenCertificate {
+        vaccinationCertificate.hcert.dgc
     }
 }

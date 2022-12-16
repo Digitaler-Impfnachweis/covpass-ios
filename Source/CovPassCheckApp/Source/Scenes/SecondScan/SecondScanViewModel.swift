@@ -48,18 +48,15 @@ class SecondScanViewModel: SecondScanViewModelProtocol {
     var startOverButtonTitle: String = Constant.Keys.startOverButtonTitle
     var delegate: ViewModelDelegate?
     private var isThirdScan: Bool
-    private var token: ExtendedCBORWebToken
-    private var secondToken: ExtendedCBORWebToken?
+    private var tokens: [ExtendedCBORWebToken]
     private var resolver: Resolver<ValidatorDetailSceneResult>
 
     init(resolver: Resolver<ValidatorDetailSceneResult>,
-         token: ExtendedCBORWebToken,
-         secondToken: ExtendedCBORWebToken?,
+         tokens: [ExtendedCBORWebToken],
          countdownTimerModel: CountdownTimerModel) {
         self.resolver = resolver
-        self.token = token
-        self.secondToken = secondToken
-        isThirdScan = secondToken != nil
+        self.tokens = tokens
+        isThirdScan = tokens.count == 2
         self.countdownTimerModel = countdownTimerModel
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()
@@ -78,9 +75,7 @@ class SecondScanViewModel: SecondScanViewModelProtocol {
     }
 
     func scanNext() {
-        isThirdScan ?
-            resolver.fulfill(.thirdScan(token, secondToken!)) :
-            resolver.fulfill(.secondScan(token))
+        resolver.fulfill(.scanNext)
     }
 
     func cancel() {

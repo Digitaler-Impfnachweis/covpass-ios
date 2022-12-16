@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,19 +14,13 @@
                 <outlet property="bottomStackView" destination="0iA-GH-w0u" id="7nb-wn-Occ"/>
                 <outlet property="cancelButton" destination="Hd6-rV-gUs" id="FEB-wc-lx1"/>
                 <outlet property="counterLabel" destination="Ki2-e0-9DS" id="WSW-N1-8hv"/>
-                <outlet property="firstResultCard" destination="H8H-rn-rzt" id="5wj-oO-nYR"/>
-                <outlet property="firstResultHeadlineLabel" destination="9O8-fL-NAA" id="9Pj-YB-XlU"/>
                 <outlet property="headline" destination="asq-Je-taX" id="UQC-rw-ZqZ"/>
                 <outlet property="ignoreStackView" destination="Gjq-nP-y9t" id="WfU-4S-2EN"/>
                 <outlet property="ignoreView" destination="Nnw-nD-UOI" id="6Lc-1J-p8h"/>
+                <outlet property="personsStackView" destination="O7A-Cj-s0p" id="2nC-U4-dI5"/>
                 <outlet property="rescanButton" destination="Zw9-2k-H61" id="Kq1-4N-LS1"/>
                 <outlet property="scrollView" destination="cg9-Ut-n76" id="gfw-vM-KAE"/>
-                <outlet property="secondResultCard" destination="8nB-lQ-nFx" id="V0y-bm-6Je"/>
-                <outlet property="secondResultHeadlineLabel" destination="EeC-Lp-PbD" id="fnv-n5-rmH"/>
                 <outlet property="subtitleLabel" destination="HSg-Kh-hx8" id="Qt4-ph-zlD"/>
-                <outlet property="thirdResultCard" destination="x05-vI-NU9" id="BuJ-9Z-t1g"/>
-                <outlet property="thirdResultHeadlineLabel" destination="0DB-bx-XW6" id="0Yq-AZ-ySw"/>
-                <outlet property="thirdResultStackView" destination="DLO-7u-8Be" id="Gzz-zY-zPc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -36,17 +30,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asq-Je-taX" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="64" width="414" height="60"/>
+                    <rect key="frame" x="0.0" y="68" width="414" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" placeholder="YES" id="epB-oE-mB6"/>
                     </constraints>
                 </view>
-                <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-Ut-n76">
-                    <rect key="frame" x="0.0" y="124" width="414" height="738"/>
+                <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-Ut-n76">
+                    <rect key="frame" x="0.0" y="128" width="414" height="734"/>
                     <subviews>
-                        <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="929"/>
+                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="734"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CaI-1f-Rt7">
                                     <rect key="frame" x="24" y="14" width="345" height="33.5"/>
@@ -60,58 +54,11 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="O7A-Cj-s0p">
-                                    <rect key="frame" x="24" y="69.5" width="366" height="459"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="h0N-xg-y9e">
-                                            <rect key="frame" x="0.0" y="0.0" width="366" height="125"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zertifikat" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9O8-fL-NAA" userLabel="titel">
-                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="H8H-rn-rzt" userLabel="1.Scann" customClass="CertResultCard" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="25" width="366" height="100"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </view>
-                                            </subviews>
-                                        </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5fA-3D-XQN">
-                                            <rect key="frame" x="0.0" y="167" width="366" height="125"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zertifikat" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeC-Lp-PbD" userLabel="titel">
-                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="8nB-lQ-nFx" userLabel="2.Scann" customClass="CertResultCard" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="25" width="366" height="100"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </view>
-                                            </subviews>
-                                        </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DLO-7u-8Be">
-                                            <rect key="frame" x="0.0" y="334" width="366" height="125"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zertifikat" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DB-bx-XW6" userLabel="titel">
-                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="x05-vI-NU9" userLabel="3.Scann" customClass="CertResultCard" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="25" width="366" height="100"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </view>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="O7A-Cj-s0p">
+                                    <rect key="frame" x="24" y="69.666666666666629" width="366" height="459"/>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
-                                    <rect key="frame" x="0.0" y="528.5" width="414" height="368.5"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
+                                    <rect key="frame" x="0.0" y="528.66666666666674" width="414" height="368.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0Z-i5-Me7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="368.5"/>
@@ -249,17 +196,6 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
-    <designables>
-        <designable name="8nB-lQ-nFx">
-            <size key="intrinsicContentSize" width="414" height="100"/>
-        </designable>
-        <designable name="H8H-rn-rzt">
-            <size key="intrinsicContentSize" width="414" height="100"/>
-        </designable>
-        <designable name="x05-vI-NU9">
-            <size key="intrinsicContentSize" width="414" height="100"/>
-        </designable>
-    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

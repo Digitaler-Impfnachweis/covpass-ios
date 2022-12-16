@@ -272,6 +272,10 @@
 
 "technical_validation_check_popup_retry" = "Letzten Scan wiederholen";
 
+"technical_validation_invalid_expired_title" = "Zertifikat abgelaufen";
+
+"technical_validation_invalid_expired_subtitle" = "Das technische Ablaufdatum des Zertifikats wurde überschritten. Scannen Sie ein neu ausgestelltes Zertifikat ein.";
+
 "technical_validation_check_popup_valid_vaccination_button_3_title" = "Abbrechen";
 
 "functional_validation_check_popup_unsuccessful_certificate_title" = "Unvollständiger Impfschutz";

@@ -11,34 +11,25 @@ import Foundation
 import PromiseKit
 
 enum CheckIfsg22aUseCaseError: Error, Equatable {
-    case secondScanSameToken(_ token: ExtendedCBORWebToken)
-    case thirdScanSameToken(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken)
-    case differentPersonalInformation(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken, _ thirdToken: ExtendedCBORWebToken?)
-    case vaccinationCycleIsNotComplete(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken?, _ thirdToken: ExtendedCBORWebToken?)
-    case invalidToken(_ token: ExtendedCBORWebToken)
+    case secondScanSameToken
+    case differentPersonalInformation
+    case vaccinationCycleIsNotComplete
+    case invalidToken
 }
 
 struct CheckIfsg22aUseCase {
-    let currentToken: ExtendedCBORWebToken
     let revocationRepository: CertificateRevocationRepositoryProtocol
     public let holderStatus: CertificateHolderStatusModelProtocol
-    let secondScannedToken: ExtendedCBORWebToken?
-    let firstScannedToken: ExtendedCBORWebToken?
+    let tokens: [ExtendedCBORWebToken]
     var ignoringPiCheck: Bool
 
     private var isScanNumber: Int {
-        if firstScannedToken != nil {
-            return 3
-        } else if secondScannedToken != nil {
-            return 2
-        } else {
-            return 1
-        }
+        tokens.count + 1
     }
 
-    func execute() -> Promise<ExtendedCBORWebToken> {
+    func execute() -> Promise<Void> {
         firstly {
-            isRevoked(currentToken)
+            isRevoked(tokens.last)
         }
         .then {
             checkDomesticRules()
@@ -52,81 +43,72 @@ struct CheckIfsg22aUseCase {
         .then {
             checkIfsg22aRules()
         }
-        .then {
-            Promise.value(currentToken)
-        }
-    }
-
-    private func tokensForIfsg22aCheck() -> [ExtendedCBORWebToken] {
-        var tokens: [ExtendedCBORWebToken] = [currentToken]
-        if let secondToken = secondScannedToken {
-            tokens.append(secondToken)
-        }
-        if let firstToken = firstScannedToken {
-            tokens.append(firstToken)
-        }
-        return tokens
     }
 
     private func additionalTokenIsNotSameLikeBefore() -> Promise<Void> {
-        let tokens = [firstScannedToken, secondScannedToken]
-        let qrCodes = tokens.map(\.?.vaccinationQRCodeData)
-        if qrCodes.contains(currentToken.vaccinationQRCodeData), let secondScannedToken = secondScannedToken {
-            if isScanNumber == 2 {
-                return .init(error: CheckIfsg22aUseCaseError.secondScanSameToken(secondScannedToken))
-            } else if isScanNumber == 3, let firstScannedToken = firstScannedToken {
-                return .init(error: CheckIfsg22aUseCaseError.thirdScanSameToken(firstScannedToken, secondScannedToken))
-            }
+        guard let currentToken = tokens.last else {
+            return .value
+        }
+        let tokens = tokens.dropLast()
+        guard !tokens.isEmpty else {
+            return .value
+        }
+        let qrCodes = tokens.map(\.vaccinationQRCodeData)
+        if qrCodes.contains(currentToken.vaccinationQRCodeData) {
+            return .init(error: CheckIfsg22aUseCaseError.secondScanSameToken)
         }
         return .value
     }
 
     private func additionalTokenIsSamePerson() -> Promise<Void> {
+        guard let currentToken = tokens.last else {
+            return .value
+        }
+        let tokens = tokens.dropLast()
+        guard !tokens.isEmpty else {
+            return .value
+        }
         guard !ignoringPiCheck else {
             return .value
         }
-        let personalInformations = [firstScannedToken?.personalInformation, secondScannedToken?.personalInformation]
+        let personalInformations = tokens.map(\.personalInformation)
         let allPersonalInformationsSame = personalInformations.contains(where: { $0 == currentToken.personalInformation })
 
         if !allPersonalInformationsSame {
-            if let secondScannedToken = secondScannedToken, let firstScannedToken = firstScannedToken {
-                return .init(error: CheckIfsg22aUseCaseError.differentPersonalInformation(firstScannedToken, secondScannedToken, currentToken))
-            }
-
-            if let secondScannedToken = secondScannedToken {
-                return .init(error: CheckIfsg22aUseCaseError.differentPersonalInformation(secondScannedToken, currentToken, nil))
-            }
+            return .init(error: CheckIfsg22aUseCaseError.differentPersonalInformation)
         }
 
         return .value
     }
 
     private func checkIfsg22aRules() -> Promise<Void> {
-        let tokens = tokensForIfsg22aCheck()
         guard holderStatus.vaccinationCycleIsComplete(tokens).passed else {
-            return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete(currentToken, secondScannedToken, firstScannedToken))
+            return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete)
         }
         return .value
     }
 
-    private func isRevoked(_ token: ExtendedCBORWebToken) -> Promise<Void> {
-        firstly {
+    private func isRevoked(_ token: ExtendedCBORWebToken?) -> Promise<Void> {
+        guard let token = token else {
+            return .init(error: ApplicationError.unknownError)
+        }
+        return firstly {
             revocationRepository.isRevoked(token)
         }
         .then { isRevoked -> Promise<Void> in
             if isRevoked {
-                return .init(error: CertificateError.revoked(token))
+                return .init(error: CheckIfsg22aUseCaseError.invalidToken)
             }
             return .value
         }
     }
 
     private func checkDomesticRules() -> Promise<Void> {
-        switch holderStatus.checkDomesticInvalidationRules([currentToken]) {
+        switch holderStatus.checkDomesticInvalidationRules(tokens) {
         case .passed:
             return .value
         case .failedTechnical, .failedFunctional:
-            return .init(error: CheckIfsg22aUseCaseError.invalidToken(currentToken))
+            return .init(error: CheckIfsg22aUseCaseError.invalidToken)
         }
     }
 }

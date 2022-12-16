@@ -185,6 +185,8 @@ class ValidatorOverviewViewModel {
     var withinGermanyIsSelected: Bool { checkSituation == .withinGermany }
 
     private var isFreshInstallation: Bool
+    var tokensToCheck: [ExtendedCBORWebToken] = []
+    var doNotRemoveLastToken: Bool = false
 
     // MARK: - Lifecycle
 

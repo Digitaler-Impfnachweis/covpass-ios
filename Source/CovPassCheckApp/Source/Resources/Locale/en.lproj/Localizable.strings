@@ -272,6 +272,10 @@
 
 "technical_validation_check_popup_retry" = "Retry last scan";
 
+"technical_validation_invalid_expired_title" = "Certificate expired";
+
+"technical_validation_invalid_expired_subtitle" = "The technical expiry date of the certificate has been exceeded. Scan a newly issued certificate.";
+
 "technical_validation_check_popup_valid_vaccination_button_3_title" = "Cancel";
 
 "functional_validation_check_popup_unsuccessful_certificate_title" = "Incomplete vaccination protection";

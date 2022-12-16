@@ -47,10 +47,8 @@ extension ValidatorOverviewViewModel {
     func errorHandlingTravelRules(error: Error) -> Promise<ValidatorDetailSceneResult> {
         if (error as? TravelRulesError) == .cancel {
             return .value(.close)
-        } else if case let CertificateError.revoked(token) = error {
-            return router.showTravelRulesInvalid(token: token)
         } else {
-            return router.showTravelRulesInvalid(token: nil)
+            return router.showTravelRulesInvalid(token: tokensToCheck.first, rescanIsHidden: true)
         }
     }
 }

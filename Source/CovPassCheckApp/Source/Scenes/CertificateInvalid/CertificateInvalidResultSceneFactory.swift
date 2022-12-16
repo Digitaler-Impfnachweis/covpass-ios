@@ -13,10 +13,14 @@ import UIKit
 struct CertificateInvalidResultSceneFactory: ResolvableSceneFactory {
     private let router: CertificateInvalidResultRouterProtocol
     private let token: ExtendedCBORWebToken?
+    private let rescanIsHidden: Bool
 
-    init(router: CertificateInvalidResultRouterProtocol, token: ExtendedCBORWebToken?) {
+    init(router: CertificateInvalidResultRouterProtocol,
+         token: ExtendedCBORWebToken?,
+         rescanIsHidden: Bool) {
         self.router = router
         self.token = token
+        self.rescanIsHidden = rescanIsHidden
     }
 
     func make(resolvable: Resolver<ValidatorDetailSceneResult>) -> UIViewController {
@@ -28,6 +32,7 @@ struct CertificateInvalidResultSceneFactory: ResolvableSceneFactory {
         let revocationKeyFilename = XCConfiguration.certificationRevocationEncryptionKey
         let viewModel = CertificateInvalidResultViewModel(
             token: token,
+            rescanIsHidden: rescanIsHidden,
             countdownTimerModel: countdownTimerModel,
             resolver: resolvable,
             router: router,

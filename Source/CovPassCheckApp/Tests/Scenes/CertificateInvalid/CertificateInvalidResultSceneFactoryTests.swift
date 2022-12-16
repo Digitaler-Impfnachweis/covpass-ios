@@ -18,7 +18,8 @@ final class CertificateInvalidResultSceneFactoryTests: XCTestCase {
         let token = try ExtendedCBORWebToken.mock()
         sut = .init(
             router: CertificateInvalidResultRouterMock(),
-            token: token
+            token: token,
+            rescanIsHidden: false
         )
     }
 

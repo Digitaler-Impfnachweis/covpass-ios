@@ -31,29 +31,26 @@ private enum Constants {
     }
 }
 
+struct PersonViewModel {
+    let title: String
+    let name: String
+    let nameTranslittered: String
+    let dateOfBirth: String
+    let cardImage: UIImage
+    let backgroundColor: UIColor
+    let borderColor: UIColor
+    let isHidden: Bool
+}
+
 class DifferentPersonViewModel: DifferentPersonViewModelProtocol {
     let title: String = Constants.Keys.title
     let subtitle: String = Constants.Keys.subtitle
-    let firstResultTitle: String = Constants.Keys.label_1stcert
-    let firstResultCardImage: UIImage = Constants.Images.iconCardInverse
     let footerHeadline: String = Constants.Keys.ignore_title
     let footerText: String = Constants.Keys.ignore_copy
     let footerLinkText: String = Constants.Keys.ignore_link
     let rescanButtonTitle: String = Constants.Keys.rescanButtonTitle
     let cancelButtonTitle: String = Constants.Keys.cancelButtonTitle
-    let firstResultName: String
-    let firstResultNameTranslittered: String
-    let firstResultDateOfBirth: String
-    let secondResultTitle: String = Constants.Keys.label_2ndcert
-    let secondResultName: String
-    let secondResultNameTranslittered: String
-    let secondResultCardImage: UIImage
-    let secondResultDateOfBirth: String
-    let thirdResultTitle: String = Constants.Keys.label_3ndcert
-    let thirdResultCardImage: UIImage = Constants.Images.iconCardInverseWarning
-    let thirdResultName: String?
-    let thirdResultNameTranslittered: String?
-    let thirdResultDateOfBirth: String?
+    var personViewModels: [PersonViewModel] = []
     let countdownTimerModel: CountdownTimerModel
     let ignoringIsHidden: Bool
     let thirdCardIsHidden: Bool
@@ -65,68 +62,95 @@ class DifferentPersonViewModel: DifferentPersonViewModelProtocol {
         }
     }
 
-    private let firstToken: ExtendedCBORWebToken
-    private let secondToken: ExtendedCBORWebToken
-    private let thirdToken: ExtendedCBORWebToken?
+    private let tokens: [ExtendedCBORWebToken]
     private let resolver: Resolver<ValidatorDetailSceneResult>
     private let sameBirthdate: Bool
-    private let isThirdScan: Bool
 
-    init(firstToken: ExtendedCBORWebToken,
-         secondToken: ExtendedCBORWebToken,
-         thirdToken: ExtendedCBORWebToken?,
+    init(tokens: [ExtendedCBORWebToken],
          resolver: Resolver<ValidatorDetailSceneResult>,
          countdownTimerModel: CountdownTimerModel) {
-        self.firstToken = firstToken
-        self.secondToken = secondToken
-        self.thirdToken = thirdToken
+        self.tokens = tokens
         self.resolver = resolver
         self.countdownTimerModel = countdownTimerModel
-        let firstAndSecondTokenSameDate = firstToken.vaccinationCertificate.hcert.dgc.dob == secondToken.vaccinationCertificate.hcert.dgc.dob
-        var secondAndThirdTokenSameDat = true
-        if let thirdToken = thirdToken {
-            secondAndThirdTokenSameDat = secondToken.vaccinationCertificate.hcert.dgc.dob == thirdToken.vaccinationCertificate.hcert.dgc.dob
-        }
-        sameBirthdate = firstAndSecondTokenSameDate && secondAndThirdTokenSameDat
+        sameBirthdate = tokens.containsSameDob
         ignoringIsHidden = !sameBirthdate
-        isThirdScan = thirdToken != nil
-        thirdCardIsHidden = thirdToken == nil
-        let firstTokenDgc = firstToken.vaccinationCertificate.hcert.dgc
-        firstResultName = firstTokenDgc.nam.fullName
-        firstResultNameTranslittered = firstTokenDgc.nam.fullNameTransliterated
-        firstResultDateOfBirth = String(format: Constants.Keys.validation_check_popup_test_date_of_birth,
-                                        DateUtils.displayDateOfBirth(firstTokenDgc))
-        let secondTokenDgc = secondToken.vaccinationCertificate.hcert.dgc
-        secondResultName = secondTokenDgc.nam.fullName
-        secondResultNameTranslittered = secondTokenDgc.nam.fullNameTransliterated
-        secondResultCardImage = thirdCardIsHidden ? Constants.Images.iconCardInverseWarning : Constants.Images.iconCardInverse
-        secondResultDateOfBirth = String(format: Constants.Keys.validation_check_popup_test_date_of_birth,
-                                         DateUtils.displayDateOfBirth(secondTokenDgc))
-        let thirdTokenDgc = thirdToken?.vaccinationCertificate.hcert.dgc
-        thirdResultName = thirdTokenDgc?.nam.fullName
-        thirdResultNameTranslittered = thirdTokenDgc?.nam.fullNameTransliterated
-        if let dgc = thirdTokenDgc {
-            thirdResultDateOfBirth = String(format: Constants.Keys.validation_check_popup_test_date_of_birth,
-                                            DateUtils.displayDateOfBirth(dgc))
-        } else {
-            thirdResultDateOfBirth = nil
+        thirdCardIsHidden = tokens.count == 2
+        let dateOfBirthFormat = Constants.Keys.validation_check_popup_test_date_of_birth
+        for (index, token) in self.tokens.enumerated() {
+            let dgc = token.vaccinationCertificate.hcert.dgc
+            let dateOfBirthString = DateUtils.displayDateOfBirth(dgc)
+            let dateOfBirth = String(format: dateOfBirthFormat, dateOfBirthString)
+            let cardImage: UIImage
+            let title: String
+            let backgroundColor: UIColor
+            let borderColor: UIColor
+            let isHidden: Bool
+
+            switch index {
+            case 0:
+                title = Constants.Keys.label_1stcert
+                cardImage = Constants.Images.iconCardInverse
+                backgroundColor = .brandAccent20
+                borderColor = .clear
+                isHidden = false
+            case 1:
+                title = Constants.Keys.label_2ndcert
+                cardImage = thirdCardIsHidden ? Constants.Images.iconCardInverseWarning : Constants.Images.iconCardInverse
+                backgroundColor = thirdCardIsHidden ? .resultYellowBackground : .brandAccent20
+                borderColor = thirdCardIsHidden ? .resultYellow : .brandAccent20
+                isHidden = false
+            case 2:
+                title = Constants.Keys.label_3ndcert
+                cardImage = Constants.Images.iconCardInverseWarning
+                backgroundColor = .resultYellowBackground
+                borderColor = .resultYellow
+                isHidden = thirdCardIsHidden
+            default:
+                title = Constants.Keys.label_1stcert
+                cardImage = Constants.Images.iconCardInverse
+                backgroundColor = .brandAccent20
+                borderColor = .clear
+                isHidden = false
+            }
+
+            let viewModel = PersonViewModel(title: title,
+                                            name: dgc.nam.fullName,
+                                            nameTranslittered: dgc.nam.fullNameTransliterated,
+                                            dateOfBirth: dateOfBirth,
+                                            cardImage: cardImage,
+                                            backgroundColor: backgroundColor,
+                                            borderColor: borderColor,
+                                            isHidden: isHidden)
+            personViewModels.append(viewModel)
         }
         countdownTimerModel.start()
     }
 
     func rescan() {
-        if isThirdScan {
-            resolver.fulfill(.thirdScan(firstToken, secondToken))
-        } else {
-            resolver.fulfill(.secondScan(firstToken))
-        }
+        resolver.fulfill(.rescan)
     }
 
     func ignoreButton() {
-        resolver.fulfill(.ignore(firstToken, secondToken, thirdToken))
+        resolver.fulfill(.ignore)
     }
 
     func close() {
         resolver.fulfill(.close)
+    }
+}
+
+private extension Array where Element == ExtendedCBORWebToken {
+    var containsSameDob: Bool {
+        let dobs = map(\.vaccinationCertificate.hcert.dgc.dob)
+        return dobs.duplicates().count == 1
+    }
+}
+
+private extension Array where Element == Date? {
+    func duplicates() -> Array {
+        let groups = Dictionary(grouping: self, by: { $0 })
+        let duplicateGroups = groups.filter { $1.count > 1 }
+        let duplicates = Array(duplicateGroups.keys)
+        return duplicates
     }
 }
