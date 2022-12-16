@@ -22,7 +22,7 @@ public struct AnnouncementSceneFactory: ResolvableSceneFactory {
     }
 
     public func make(resolvable: Resolver<Void>) -> UIViewController {
-        let bundle = Bundle.commonBundle
+        let bundle = Bundle.main
         guard let url = Locale.current.isGerman() ? bundle.germanAnnouncementsURL : bundle.englishAnnouncementsURL
         else {
             fatalError("Invalid resource URL.")

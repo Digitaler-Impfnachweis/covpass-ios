@@ -13,7 +13,7 @@ class Bundle_ResourceURLTests: XCTestCase {
     private var sut: Bundle!
 
     override func setUpWithError() throws {
-        sut = .commonBundle
+        sut = .main
     }
 
     override func tearDownWithError() throws {
