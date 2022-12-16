@@ -38,8 +38,8 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
     private let resolver: Resolver<CertificateDetailSceneResult>
     private var router: CertificatesOverviewPersonRouterProtocol
     private var selectedCertificateIndex: Int = 0
-    private var certificateOwnerName: String { selectedCertificate.vaccinationCertificate.hcert.dgc.nam.fullName }
-    private var selectedCertificate: ExtendedCBORWebToken { certificatesToShow[selectedCertificateIndex] }
+    private var certificateOwnerName: String { selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullName ?? "" }
+    private var selectedCertificate: ExtendedCBORWebToken? { selectedCertificateIndex < certificatesToShow.count ? certificatesToShow[selectedCertificateIndex] : nil }
     private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
     private var certificate: CBORWebToken { token.vaccinationCertificate }
     private var token: ExtendedCBORWebToken {
