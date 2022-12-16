@@ -43,7 +43,7 @@ final class VaccinationCycleCompleteResultViewModel: VaccinationCycleCompleteRes
     let revocationInfoText = Constants.revocationInfoText
     let revocationLinkTitle = Constants.revocationLinkTitle
     let buttonTitle = Constants.buttonTitle
-    let countdownTimerModel: CountdownTimerModel
+    var countdownTimerModel: CountdownTimerModel
     var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
 
     private let token: ExtendedCBORWebToken
@@ -73,7 +73,6 @@ final class VaccinationCycleCompleteResultViewModel: VaccinationCycleCompleteRes
         title = checkSituationType == .withinGermany ? Constants.title : Constants.entryCheckTitle
         subtitle = checkSituationType == .withinGermany ? Constants.subtitleFormat : Constants.entryCheckSubtitle
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
-        countdownTimerModel.start()
     }
 
     private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {

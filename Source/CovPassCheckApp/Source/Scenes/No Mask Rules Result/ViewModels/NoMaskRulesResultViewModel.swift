@@ -36,7 +36,7 @@ final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
     let revocationInfoText = Constants.revocationInfoText
     let revocationLinkTitle = Constants.revocationLinkTitle
     let buttonTitle = Constants.buttonTitle
-    let countdownTimerModel: CountdownTimerModel
+    var countdownTimerModel: CountdownTimerModel
     var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
 
     private let token: ExtendedCBORWebToken
@@ -62,7 +62,6 @@ final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
         revocationInfoHidden = !persistence.revocationExpertMode
 
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
-        countdownTimerModel.start()
     }
 
     private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {

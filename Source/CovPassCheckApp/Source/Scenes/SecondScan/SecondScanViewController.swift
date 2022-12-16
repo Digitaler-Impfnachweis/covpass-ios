@@ -39,6 +39,16 @@ class SecondScanViewController: UIViewController {
 //        UIAccessibility.post(notification: .layoutChanged, argument: headerStackView)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.startCountdown()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.stopCountdown()
+    }
+
     private func configureView() {
         headerView.attributedTitleText = viewModel.title.styledAs(.header_2)
         subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body)

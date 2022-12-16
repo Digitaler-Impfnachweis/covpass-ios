@@ -181,6 +181,7 @@ final class SecondScanViewModelTests: XCTestCase {
 
         // When
         configureSut()
+        sut.startCountdown()
 
         // Then
         wait(for: [didUpdateExpectation, doneExpectation], timeout: 3, enforceOrder: true)

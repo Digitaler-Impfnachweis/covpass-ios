@@ -63,6 +63,16 @@ final class MaskOptionalResultViewController: UIViewController {
         UIAccessibility.post(notification: .layoutChanged, argument: headerStackView)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.startCountdown()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.stopCountdown()
+    }
+
     private func configureInfoHeaderView() {
         infoHeaderView.attributedTitleText = nil
         infoHeaderView.action = viewModel.cancel

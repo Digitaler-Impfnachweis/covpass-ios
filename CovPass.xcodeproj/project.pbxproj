@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		0904337E270EFEA50008267B /* BaseSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0904337D270EFEA50008267B /* BaseSnapShotTests.swift */; };
+		091BD1C62949E500000217A4 /* AnnouncementViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BD1C42949E500000217A4 /* AnnouncementViewModelTests.swift */; };
+		091BD1C72949E500000217A4 /* AnnouncementViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BD1C52949E500000217A4 /* AnnouncementViewControllerSnapshotTests.swift */; };
+		091BD1C82949E5BB000217A4 /* Bundle+ResourceURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9D2E329479E71007E29DC /* Bundle+ResourceURLTests.swift */; };
+		091BD1CA2949E5F5000217A4 /* Bundle+ResourceURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BD1C92949E5F5000217A4 /* Bundle+ResourceURLTests.swift */; };
+		091BD1CD2949E6CF000217A4 /* mock_announcements.html in Resources */ = {isa = PBXBuildFile; fileRef = 091BD1CC2949E6CF000217A4 /* mock_announcements.html */; };
+		091BD1CE2949E7B6000217A4 /* announcements_en.html in Resources */ = {isa = PBXBuildFile; fileRef = 09F9D2E029475538007E29DC /* announcements_en.html */; };
+		091BD1D02949EF21000217A4 /* WhatsNewSettingsSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BD1CF2949EF21000217A4 /* WhatsNewSettingsSceneFactoryTests.swift */; };
+		091BD1D32949EF44000217A4 /* WhatsNewSettingsRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BD1D22949EF44000217A4 /* WhatsNewSettingsRouterMock.swift */; };
+		091BD1D92949EF8C000217A4 /* WhatsNewSettingsRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BD1D62949EF8C000217A4 /* WhatsNewSettingsRouterMock.swift */; };
+		091BD1DA2949EF8C000217A4 /* WhatsNewSettingsViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BD1D72949EF8C000217A4 /* WhatsNewSettingsViewControllerSnapshotTests.swift */; };
+		091BD1DB2949EF8C000217A4 /* WhatsNewSettingsSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BD1D82949EF8C000217A4 /* WhatsNewSettingsSceneFactoryTests.swift */; };
 		091CEC392729A30A00F8514F /* TrustedListDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993330427299700000D6BF6 /* TrustedListDetailsRouter.swift */; };
 		091CEC3A2729A30A00F8514F /* TrustedListDetailsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993330327299700000D6BF6 /* TrustedListDetailsSceneFactory.swift */; };
 		091D878727463D800097C80D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 091D878627463D800097C80D /* CryptoSwift */; };
@@ -240,6 +251,12 @@
 		09E854372799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E854362799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift */; };
 		09E8543A279993470051AEEE /* AppInformationRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E85439279993470051AEEE /* AppInformationRouterMock.swift */; };
 		09F124C428F9954E000F7843 /* SelectStateOnboardingSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F124C328F9954E000F7843 /* SelectStateOnboardingSceneFactory.swift */; };
+		09F9D2D82947504B007E29DC /* announcements_de.html in Resources */ = {isa = PBXBuildFile; fileRef = 09F9D2D629474F83007E29DC /* announcements_de.html */; };
+		09F9D2DC29475091007E29DC /* announcements_de.html in Resources */ = {isa = PBXBuildFile; fileRef = 09F9D2DA29475090007E29DC /* announcements_de.html */; };
+		09F9D2DD29475091007E29DC /* announcements_en.html in Resources */ = {isa = PBXBuildFile; fileRef = 09F9D2DB29475090007E29DC /* announcements_en.html */; };
+		09F9D2DF29475288007E29DC /* mock_announcements.html in Resources */ = {isa = PBXBuildFile; fileRef = 09F9D2DE29475288007E29DC /* mock_announcements.html */; };
+		09F9D2E129475B2E007E29DC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9198289843C5003FC588 /* OpenSans-Regular.ttf */; };
+		09F9D2E229475B2F007E29DC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9198289843C5003FC588 /* OpenSans-Regular.ttf */; };
 		216D1F48264EF50300370F16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F43264EF50300370F16 /* Localizable.strings */; };
 		216D1F49264EF50300370F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
 		216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */; };
@@ -645,6 +662,15 @@
 
 /* Begin PBXFileReference section */
 		0904337D270EFEA50008267B /* BaseSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSnapShotTests.swift; sourceTree = "<group>"; };
+		091BD1C42949E500000217A4 /* AnnouncementViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementViewModelTests.swift; sourceTree = "<group>"; };
+		091BD1C52949E500000217A4 /* AnnouncementViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		091BD1C92949E5F5000217A4 /* Bundle+ResourceURLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+ResourceURLTests.swift"; sourceTree = "<group>"; };
+		091BD1CC2949E6CF000217A4 /* mock_announcements.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = mock_announcements.html; sourceTree = "<group>"; };
+		091BD1CF2949EF21000217A4 /* WhatsNewSettingsSceneFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewSettingsSceneFactoryTests.swift; sourceTree = "<group>"; };
+		091BD1D22949EF44000217A4 /* WhatsNewSettingsRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewSettingsRouterMock.swift; sourceTree = "<group>"; };
+		091BD1D62949EF8C000217A4 /* WhatsNewSettingsRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewSettingsRouterMock.swift; sourceTree = "<group>"; };
+		091BD1D72949EF8C000217A4 /* WhatsNewSettingsViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewSettingsViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		091BD1D82949EF8C000217A4 /* WhatsNewSettingsSceneFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewSettingsSceneFactoryTests.swift; sourceTree = "<group>"; };
 		091DE728284F97BF00EB99FC /* ScanViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewViewModelTests.swift; sourceTree = "<group>"; };
 		09279969291AAB2B00296B68 /* ScanAndParseQRCodeAndCheckIfsg22aUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanAndParseQRCodeAndCheckIfsg22aUseCase.swift; sourceTree = "<group>"; };
@@ -855,6 +881,12 @@
 		09E854362799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		09E85439279993470051AEEE /* AppInformationRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationRouterMock.swift; sourceTree = "<group>"; };
 		09F124C328F9954E000F7843 /* SelectStateOnboardingSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStateOnboardingSceneFactory.swift; sourceTree = "<group>"; };
+		09F9D2D629474F83007E29DC /* announcements_de.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = announcements_de.html; sourceTree = "<group>"; };
+		09F9D2DA29475090007E29DC /* announcements_de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = announcements_de.html; sourceTree = "<group>"; };
+		09F9D2DB29475090007E29DC /* announcements_en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = announcements_en.html; sourceTree = "<group>"; };
+		09F9D2DE29475288007E29DC /* mock_announcements.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = mock_announcements.html; sourceTree = "<group>"; };
+		09F9D2E029475538007E29DC /* announcements_en.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = announcements_en.html; sourceTree = "<group>"; };
+		09F9D2E329479E71007E29DC /* Bundle+ResourceURLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+ResourceURLTests.swift"; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		212E757D264F0D09007C0F3A /* CovPassUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CovPassUI; sourceTree = "<group>"; };
@@ -1283,6 +1315,49 @@
 				3840F1382921890400DB824C /* VaccinationCycleIncompleteSnapshotTests.swift */,
 			);
 			path = SnapShotTests;
+			sourceTree = "<group>";
+		};
+		091BD1C32949E500000217A4 /* Announcement */ = {
+			isa = PBXGroup;
+			children = (
+				091BD1C42949E500000217A4 /* AnnouncementViewModelTests.swift */,
+				091BD1C52949E500000217A4 /* AnnouncementViewControllerSnapshotTests.swift */,
+			);
+			path = Announcement;
+			sourceTree = "<group>";
+		};
+		091BD1CB2949E6CF000217A4 /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				091BD1CC2949E6CF000217A4 /* mock_announcements.html */,
+			);
+			path = Ressources;
+			sourceTree = "<group>";
+		};
+		091BD1D12949EF44000217A4 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				091BD1D22949EF44000217A4 /* WhatsNewSettingsRouterMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		091BD1D42949EF8C000217A4 /* WhatsNewSettings */ = {
+			isa = PBXGroup;
+			children = (
+				091BD1D52949EF8C000217A4 /* Mocks */,
+				091BD1D72949EF8C000217A4 /* WhatsNewSettingsViewControllerSnapshotTests.swift */,
+				091BD1D82949EF8C000217A4 /* WhatsNewSettingsSceneFactoryTests.swift */,
+			);
+			path = WhatsNewSettings;
+			sourceTree = "<group>";
+		};
+		091BD1D52949EF8C000217A4 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				091BD1D62949EF8C000217A4 /* WhatsNewSettingsRouterMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		092C9CAD28EB900500DCFDAC /* DifferentPerson */ = {
@@ -2742,6 +2817,7 @@
 		88AB2A5F25FA40CE00D4EA52 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				091BD1CB2949E6CF000217A4 /* Ressources */,
 				09C54F15291D5E9700707210 /* RuleExtension.swift */,
 				09541B5827FD7FD800A32547 /* CBORWebTokenExtensions.swift */,
 				E79CF9ED27E896FC00C4619E /* Extensions */,
@@ -2759,6 +2835,8 @@
 		88BEE03926550DFD00479E5E /* Static */ = {
 			isa = PBXGroup;
 			children = (
+				09F9D2DA29475090007E29DC /* announcements_de.html */,
+				09F9D2DB29475090007E29DC /* announcements_en.html */,
 				3509F33426CFD04C00A078E5 /* contact-covpass-de.html */,
 				3876382626ADBED100FBCA47 /* contact-covpass-en.html */,
 				3509F33226CFD02500A078E5 /* privacy-covpass-de.html */,
@@ -2770,6 +2848,8 @@
 		88BEE04026550E1900479E5E /* Static */ = {
 			isa = PBXGroup;
 			children = (
+				09F9D2D629474F83007E29DC /* announcements_de.html */,
+				09F9D2E029475538007E29DC /* announcements_en.html */,
 				38234168268A28C500722A46 /* contact-covpasscheck-de.html */,
 				3876382B26ADBED900FBCA47 /* contact-covpasscheck-en.html */,
 				88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */,
@@ -2971,6 +3051,7 @@
 		E735E0AC2865D6C70032025C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				09F9D2DE29475288007E29DC /* mock_announcements.html */,
 				E735E0AD2865D7340032025C /* Test QR Codes.pdf */,
 			);
 			path = Resources;
@@ -3287,22 +3368,17 @@
 		E773F5D328B520300051AE75 /* WhatsNewSettings */ = {
 			isa = PBXGroup;
 			children = (
-				E773F5E528B5323D0051AE75 /* Mocks */,
+				091BD1D12949EF44000217A4 /* Mocks */,
+				091BD1CF2949EF21000217A4 /* WhatsNewSettingsSceneFactoryTests.swift */,
 				E773F5E828B533E00051AE75 /* WhatsNewSettingsViewControllerSnapshotTests.swift */,
 			);
 			path = WhatsNewSettings;
 			sourceTree = "<group>";
 		};
-		E773F5E528B5323D0051AE75 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Mocks;
-			sourceTree = "<group>";
-		};
 		E79CF9ED27E896FC00C4619E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				09F9D2E329479E71007E29DC /* Bundle+ResourceURLTests.swift */,
 				E773F5B528B3A4F80051AE75 /* AudioPlayer+FactoryTests.swift */,
 				E773F5B828B3A5FB0051AE75 /* AVAudioSession+CovPassCheckTests.swift */,
 				E7101B612872F76F0026584A /* CertificateRevocationFilesystemDataSource+FactoryTests.swift */,
@@ -3400,6 +3476,8 @@
 		E7CB54B427B55407002FA55E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				091BD1D42949EF8C000217A4 /* WhatsNewSettings */,
+				091BD1C32949E500000217A4 /* Announcement */,
 				09770F75292799FF007C71FA /* Choose Check Situation */,
 				0976FDE2291E64320052A0B2 /* SecondScsan */,
 				09C54EEB291CFAE100707210 /* CertificateInvalid */,
@@ -3535,6 +3613,7 @@
 		E7F7817B27C40090009AC907 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				091BD1C92949E5F5000217A4 /* Bundle+ResourceURLTests.swift */,
 				09C6E1E32938C19800BA169F /* RuleExtension.swift */,
 				E7BA19D128BFB09100751DE8 /* CertificateHolderStatusModel+FactoryTests.swift */,
 				E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */,
@@ -3753,6 +3832,7 @@
 				216D1FE0264EF76800370F16 /* CertificateDetailViewController.xib in Resources */,
 				216D1F49264EF50300370F16 /* Assets.xcassets in Resources */,
 				38E3625D269B712900DE6D4C /* RuleCheckViewController.xib in Resources */,
+				09F9D2DD29475091007E29DC /* announcements_en.html in Resources */,
 				E74C919A289843C5003FC588 /* OpenSans-Bold.ttf in Resources */,
 				3882AEC226700BB3000354CD /* CertificateItemDetailViewController.xib in Resources */,
 				E74C91A2289843C5003FC588 /* OpenSans-SemiBold.ttf in Resources */,
@@ -3762,6 +3842,7 @@
 				096897AA27C3E3C1009E2886 /* ReissueResultViewController.xib in Resources */,
 				216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */,
 				E7170774280091A9000B2E32 /* revocation-trust-key-release.pem in Resources */,
+				09F9D2DC29475091007E29DC /* announcements_de.html in Resources */,
 				385FC19F269ED63500D19AF8 /* DateSelectionViewController.xib in Resources */,
 				0933177E273ABB2A0036DB2A /* ChooseCertificateViewController.xib in Resources */,
 				3523616C26D66BC50085B243 /* BoosterNotificationViewController.xib in Resources */,
@@ -3786,6 +3867,8 @@
 			files = (
 				E735E0AE2865D7340032025C /* Test QR Codes.pdf in Resources */,
 				E74C919428984377003FC588 /* CovPass.png in Resources */,
+				09F9D2E129475B2E007E29DC /* OpenSans-Regular.ttf in Resources */,
+				09F9D2DF29475288007E29DC /* mock_announcements.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3803,6 +3886,7 @@
 				E7DE167328AFF02F007FDF46 /* CovpassCheck-Certificate-scanned.wav in Resources */,
 				3823416A268A2A3900722A46 /* contact-covpasscheck-de.html in Resources */,
 				0960FFDB2926506A000A0C86 /* ChooseCheckSituationViewController.xib in Resources */,
+				09F9D2D82947504B007E29DC /* announcements_de.html in Resources */,
 				3876382E26ADBFE500FBCA47 /* contact-covpasscheck-en.html in Resources */,
 				E7DE167228AFF02F007FDF46 /* CovpassCheck-Activated.wav in Resources */,
 				09467882291D693600195307 /* SecondScanViewController.xib in Resources */,
@@ -3820,6 +3904,7 @@
 				E74C91A0289843C5003FC588 /* OpenSans-Regular.ttf in Resources */,
 				6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */,
 				09C54F04291CFAEC00707210 /* CertificateInvalidResultViewController.xib in Resources */,
+				091BD1CE2949E7B6000217A4 /* announcements_en.html in Resources */,
 				0976FDDF291E58EF0052A0B2 /* VaccinationCycleCompleteResultViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3828,7 +3913,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09F9D2E229475B2F007E29DC /* OpenSans-Regular.ttf in Resources */,
 				E74C919628984377003FC588 /* CovPass.png in Resources */,
+				091BD1CD2949E6CF000217A4 /* mock_announcements.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4083,8 +4170,10 @@
 				09CE6C9D27AB40700048BDA4 /* HowToScanRouterMock.swift in Sources */,
 				216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */,
 				E72CDF5728C8BA340008D4B8 /* NewRegulationsAnnouncementViewControllerSnapshotTests.swift in Sources */,
+				091BD1D02949EF21000217A4 /* WhatsNewSettingsSceneFactoryTests.swift in Sources */,
 				E74C5AC628C74F1900F5370F /* Persistence+CovPassTests.swift in Sources */,
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,
+				091BD1D32949EF44000217A4 /* WhatsNewSettingsRouterMock.swift in Sources */,
 				E70C3E9A27A95523001F07FF /* RuleCheckViewModelTests.swift in Sources */,
 				098E44CE282D4B1E00411776 /* CardViewSnapShotTests.swift in Sources */,
 				E7CDDC8F28072F59006B5190 /* VaccinationCertificateItemViewModelTests.swift in Sources */,
@@ -4179,6 +4268,7 @@
 				E738566F2864E6040070C1B0 /* CertificateImportSuccessViewViewModelTests.swift in Sources */,
 				E72CDF5328C8B83C0008D4B8 /* NewRegulationsAnnouncementSceneFactoryTests.swift in Sources */,
 				09590D382715E67F004410D7 /* MockExtendedCBORWebToken.swift in Sources */,
+				091BD1CA2949E5F5000217A4 /* Bundle+ResourceURLTests.swift in Sources */,
 				E70393B928C26DC50079572C /* CertificateHolderImmunizationStatusViewModelMock.swift in Sources */,
 				E7BA19D228BFB09100751DE8 /* CertificateHolderStatusModel+FactoryTests.swift in Sources */,
 				09E85435279992DC0051AEEE /* AppInformationRouterMock.swift in Sources */,
@@ -4356,9 +4446,12 @@
 				09E854372799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */,
 				E7D1F0A22861E04700FA7465 /* ScanSceneFactoryTests.swift in Sources */,
 				0928183127A2C3B900A0199F /* CheckSituationViewControllerSnapShotTests.swift in Sources */,
+				091BD1C62949E500000217A4 /* AnnouncementViewModelTests.swift in Sources */,
 				0976FDE7291E67170052A0B2 /* SecondScanViewModelTests.swift in Sources */,
+				091BD1D92949EF8C000217A4 /* WhatsNewSettingsRouterMock.swift in Sources */,
 				E773F5B228B378480051AE75 /* AcousticFeedbackSettingsViewControllerSnapshotTests.swift in Sources */,
 				E740448928901E5200B53AE3 /* CountdownTimerModelMock.swift in Sources */,
+				091BD1DB2949EF8C000217A4 /* WhatsNewSettingsSceneFactoryTests.swift in Sources */,
 				09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */,
 				09B20762291BC92E00C4E370 /* VaccinationCycleCompleteResultViewControllerSnapshotTests.swift in Sources */,
 				E7101B632872F7C60026584A /* CertificateRevocationFilesystemDataSource+FactoryTests.swift in Sources */,
@@ -4373,6 +4466,7 @@
 				09B20760291BC92E00C4E370 /* VaccinationCycleCompleteResultRouterMock.swift in Sources */,
 				E7101B602872F70C0026584A /* CertificateRevocationHTTPClient+FactoryTests.swift in Sources */,
 				0999707E291AD1AE00ACCDA8 /* CheckIfsg22aUseCaseTests.swift in Sources */,
+				091BD1DA2949EF8C000217A4 /* WhatsNewSettingsViewControllerSnapshotTests.swift in Sources */,
 				E782BBA027D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift in Sources */,
 				E773F5B728B3A5210051AE75 /* AudioPlayer+FactoryTests.swift in Sources */,
 				09541B5B27FD887500A32547 /* ParseCertificateUseCaseTests.swift in Sources */,
@@ -4393,11 +4487,13 @@
 				0957848C27A2D35B00E8206C /* ValidationResultMock.swift in Sources */,
 				E74E98CB2892F6A100F73632 /* CertificateRevocationWrapperRepositoryTests.swift in Sources */,
 				0938F7E0289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift in Sources */,
+				091BD1C82949E5BB000217A4 /* Bundle+ResourceURLTests.swift in Sources */,
 				E75F7DEB28DDCA1400675093 /* MaskRequiredResultRouterMock.swift in Sources */,
 				09C54F16291D5E9700707210 /* RuleExtension.swift in Sources */,
 				E7DE166428AFD5BB007FDF46 /* AcousticFeedbackSettingsRouterMock.swift in Sources */,
 				0968610F28D9DE9C00F54B9A /* StateSelectionViewControllerSnapshotTests.swift in Sources */,
 				E76229F62816EADE00BF937C /* MockPersistence.swift in Sources */,
+				091BD1C72949E500000217A4 /* AnnouncementViewControllerSnapshotTests.swift in Sources */,
 				E7DE165F28AFD3A6007FDF46 /* EnglishAppInformationViewModelTests.swift in Sources */,
 				09770F7B292799FF007C71FA /* ChooseCheckSituationRouterMock.swift in Sources */,
 				E79CF9F027E8981100C4619E /* URLSession+CertificateRevocationTests.swift in Sources */,

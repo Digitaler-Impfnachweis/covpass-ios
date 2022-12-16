@@ -54,7 +54,7 @@ class DifferentPersonViewModel: DifferentPersonViewModelProtocol {
     let thirdResultName: String?
     let thirdResultNameTranslittered: String?
     let thirdResultDateOfBirth: String?
-    let countdownTimerModel: CountdownTimerModel
+    var countdownTimerModel: CountdownTimerModel
     let ignoringIsHidden: Bool
     let thirdCardIsHidden: Bool
     var delegate: ViewModelDelegate? {
@@ -111,7 +111,6 @@ class DifferentPersonViewModel: DifferentPersonViewModelProtocol {
         } else {
             thirdResultDateOfBirth = nil
         }
-        countdownTimerModel.start()
     }
 
     func rescan() {

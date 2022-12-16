@@ -174,7 +174,11 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
 
     func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken],
                                  context: ReissueContext) -> Promise<Void> {
-        sceneCoordinator.present(
+        if cborWebTokens.isEmpty {
+            // Do not start the reissue process when we don't have any tokens
+            return .value
+        }
+        return sceneCoordinator.present(
             ReissueStartSceneFactory(
                 router: ReissueStartRouter(sceneCoordinator: sceneCoordinator),
                 tokens: cborWebTokens,

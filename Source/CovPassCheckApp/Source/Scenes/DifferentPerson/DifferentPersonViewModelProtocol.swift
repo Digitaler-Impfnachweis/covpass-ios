@@ -9,7 +9,7 @@ import CovPassCommon
 import CovPassUI
 import UIKit
 
-protocol DifferentPersonViewModelProtocol {
+protocol DifferentPersonViewModelProtocol: CountdownViewModel {
     var title: String { get }
     var subtitle: String { get }
     var firstResultCardImage: UIImage { get }
@@ -35,7 +35,6 @@ protocol DifferentPersonViewModelProtocol {
     var ignoringIsHidden: Bool { get }
     var thirdCardIsHidden: Bool { get }
     var delegate: ViewModelDelegate? { get set }
-    var countdownTimerModel: CountdownTimerModel { get }
     func rescan()
     func ignoreButton()
     func close()

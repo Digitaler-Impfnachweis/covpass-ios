@@ -50,6 +50,16 @@ class DifferentPersonViewController: UIViewController {
         setupGradientBottomView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.startCountdown()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.stopCountdown()
+    }
+
     private func configureView() {
         configureHeadline()
         configureButtons()

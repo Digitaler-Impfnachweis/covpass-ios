@@ -38,6 +38,8 @@ class DifferentPersonViewModelTests: XCTestCase {
         delegate.didUpdate = {
             expectation.fulfill()
         }
+        sut.startCountdown()
+
         // Then
         wait(for: [expectation], timeout: 2)
         XCTAssertTrue(sut.countdownTimerModel.shouldDismiss)
