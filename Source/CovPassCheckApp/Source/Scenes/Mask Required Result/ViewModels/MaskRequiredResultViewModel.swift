@@ -45,7 +45,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     let buttonTitle = Constants.buttonTitle
     let secondCertificateHintHidden: Bool
     let reasonViewModels: [MaskRequiredReasonViewModelProtocol]
-    let countdownTimerModel: CountdownTimerModel
+    var countdownTimerModel: CountdownTimerModel
     lazy var secondCertificateReasonViewModel: MaskRequiredSecondCertificateReasonViewModelProtocol = MaskRequiredSecondCertificateReasonViewModel()
 
     var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
@@ -81,7 +81,6 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
         self.certificateHolderStatus = certificateHolderStatus
 
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
-        countdownTimerModel.start()
     }
 
     private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {

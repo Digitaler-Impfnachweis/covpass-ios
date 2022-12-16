@@ -9,7 +9,7 @@ import CovPassCommon
 import CovPassUI
 import UIKit
 
-protocol CertificateInvalidResultViewModelProtocol: CancellableViewModelProtocol {
+protocol CertificateInvalidResultViewModelProtocol: CancellableViewModelProtocol & CountdownViewModel {
     var delegate: ViewModelDelegate? { get set }
     var image: UIImage { get }
     var title: String { get }
@@ -23,7 +23,6 @@ protocol CertificateInvalidResultViewModelProtocol: CancellableViewModelProtocol
     var revocationLinkTitle: String { get }
     var startOverButtonTitle: String { get }
     var retryButtonTitle: String { get }
-    var countdownTimerModel: CountdownTimerModel { get }
     var closeButtonAccessibilityText: String { get }
     var reasonViewModels: [CertificateInvalidReasonViewModelProtocol] { get }
     var rescanIsHidden: Bool { get }

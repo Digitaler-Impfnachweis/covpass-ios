@@ -9,7 +9,7 @@ import CovPassCommon
 import CovPassUI
 import UIKit
 
-protocol MaskRequiredResultViewModelProtocol: CancellableViewModelProtocol {
+protocol MaskRequiredResultViewModelProtocol: CancellableViewModelProtocol & CountdownViewModel {
     var delegate: ViewModelDelegate? { get set }
     var image: UIImage { get }
     var title: String { get }
@@ -20,7 +20,6 @@ protocol MaskRequiredResultViewModelProtocol: CancellableViewModelProtocol {
     var secondCertificateReasonViewModel: MaskRequiredSecondCertificateReasonViewModelProtocol { get }
     var buttonTitle: String { get }
     var secondCertificateHintHidden: Bool { get }
-    var countdownTimerModel: CountdownTimerModel { get }
     var revocationInfoHidden: Bool { get }
     var revocationHeadline: String { get }
     var revocationInfoText: String { get }

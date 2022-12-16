@@ -9,13 +9,12 @@ import CovPassCommon
 import CovPassUI
 import UIKit
 
-protocol VaccinationCycleIncompleteResultViewModelProtocol: CancellableViewModelProtocol {
+protocol VaccinationCycleIncompleteResultViewModelProtocol: CancellableViewModelProtocol & CountdownViewModel {
     var delegate: ViewModelDelegate? { get set }
     var title: String { get }
     var subtitle: String { get }
     var description: String { get }
     var buttonTitle: String { get }
-    var countdownTimerModel: CountdownTimerModel { get }
     var closeButtonAccessibilityText: String { get }
     var reasonViewModels: [CertificateInvalidReasonViewModelProtocol] { get }
     var faqLinkTitle: String { get }

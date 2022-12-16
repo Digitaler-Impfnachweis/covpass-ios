@@ -43,7 +43,7 @@ class SecondScanViewModel: SecondScanViewModelProtocol {
     var hintTitle: String = Constant.Keys.hintTitle
     var hintSubtitle: String = Constant.Keys.hintSubtitle
     var hintImage: UIImage = .warning
-    let countdownTimerModel: CountdownTimerModel
+    var countdownTimerModel: CountdownTimerModel
     var scanNextButtonTitle: String = Constant.Keys.scanNextButtonTitle
     var startOverButtonTitle: String = Constant.Keys.startOverButtonTitle
     var delegate: ViewModelDelegate?
@@ -59,7 +59,6 @@ class SecondScanViewModel: SecondScanViewModelProtocol {
         isThirdScan = tokens.count == 2
         self.countdownTimerModel = countdownTimerModel
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
-        countdownTimerModel.start()
     }
 
     private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {

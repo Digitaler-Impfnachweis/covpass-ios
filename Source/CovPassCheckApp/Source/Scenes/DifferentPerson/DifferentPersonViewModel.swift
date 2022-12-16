@@ -51,7 +51,7 @@ class DifferentPersonViewModel: DifferentPersonViewModelProtocol {
     let rescanButtonTitle: String = Constants.Keys.rescanButtonTitle
     let cancelButtonTitle: String = Constants.Keys.cancelButtonTitle
     var personViewModels: [PersonViewModel] = []
-    let countdownTimerModel: CountdownTimerModel
+    var countdownTimerModel: CountdownTimerModel
     let ignoringIsHidden: Bool
     let thirdCardIsHidden: Bool
     var delegate: ViewModelDelegate? {
@@ -123,7 +123,6 @@ class DifferentPersonViewModel: DifferentPersonViewModelProtocol {
                                             isHidden: isHidden)
             personViewModels.append(viewModel)
         }
-        countdownTimerModel.start()
     }
 
     func rescan() {

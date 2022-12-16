@@ -48,7 +48,7 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
     let revocationInfoText = Constants.revocationInfoText
     let revocationLinkTitle = Constants.revocationLinkTitle
     let buttonTitle = Constants.buttonTitle
-    let countdownTimerModel: CountdownTimerModel
+    var countdownTimerModel: CountdownTimerModel
     var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
 
     private let token: ExtendedCBORWebToken
@@ -81,7 +81,6 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
         holderBirthday = .init(format: Constants.birthday, DateUtils.displayDateOfBirth(dgc))
 
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
-        countdownTimerModel.start()
     }
 
     private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {

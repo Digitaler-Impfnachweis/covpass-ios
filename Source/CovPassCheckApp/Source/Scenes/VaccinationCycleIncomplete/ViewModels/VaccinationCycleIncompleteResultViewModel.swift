@@ -28,7 +28,7 @@ final class VaccinationCycleIncompleteResultViewModel: VaccinationCycleIncomplet
     let subtitle = Constants.subtitle
     let description = Constants.description
     let buttonTitle = Constants.buttonTitle
-    let countdownTimerModel: CountdownTimerModel
+    var countdownTimerModel: CountdownTimerModel
     var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
     var reasonViewModels: [CertificateInvalidReasonViewModelProtocol] {
         [
@@ -49,9 +49,7 @@ final class VaccinationCycleIncompleteResultViewModel: VaccinationCycleIncomplet
         self.countdownTimerModel = countdownTimerModel
         self.resolver = resolver
         self.router = router
-
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
-        countdownTimerModel.start()
     }
 
     private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {

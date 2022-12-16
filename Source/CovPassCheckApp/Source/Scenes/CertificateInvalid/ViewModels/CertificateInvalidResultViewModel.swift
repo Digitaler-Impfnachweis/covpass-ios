@@ -40,7 +40,7 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
     let revocationLinkTitle = Constants.revocationLinkTitle
     let startOverButtonTitle = Constants.startOverButtonTitle
     let retryButtonTitle = Constants.retryButtonTitle
-    let countdownTimerModel: CountdownTimerModel
+    var countdownTimerModel: CountdownTimerModel
     var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
     var reasonViewModels: [CertificateInvalidReasonViewModelProtocol]
     var rescanIsHidden: Bool
@@ -74,7 +74,6 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
         checkType = .init(rawValue: persistence.selectedCheckType) ?? .mask
         travelRulesIsHidden = checkSituationType == .withinGermany || checkType == .mask
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
-        countdownTimerModel.start()
     }
 
     private static func reasonViewModels() -> [CertificateInvalidReasonViewModelProtocol] {

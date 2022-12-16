@@ -9,7 +9,7 @@ import CovPassCommon
 import CovPassUI
 import UIKit
 
-protocol NoMaskRulesResultViewModelProtocol: CancellableViewModelProtocol {
+protocol NoMaskRulesResultViewModelProtocol: CancellableViewModelProtocol & CountdownViewModel {
     var delegate: ViewModelDelegate? { get set }
     var image: UIImage { get }
     var title: String { get }
@@ -21,7 +21,6 @@ protocol NoMaskRulesResultViewModelProtocol: CancellableViewModelProtocol {
     var revocationInfoText: String { get }
     var revocationLinkTitle: String { get }
     var buttonTitle: String { get }
-    var countdownTimerModel: CountdownTimerModel { get }
     var closeButtonAccessibilityText: String { get }
 
     func rescan()

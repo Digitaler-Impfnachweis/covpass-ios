@@ -8,7 +8,7 @@
 import CovPassUI
 import UIKit
 
-protocol SecondScanViewModelProtocol {
+protocol SecondScanViewModelProtocol: CountdownViewModel {
     var delegate: ViewModelDelegate? { get set }
     var title: String { get }
     var subtitle: String { get }
@@ -27,7 +27,6 @@ protocol SecondScanViewModelProtocol {
     var hintImage: UIImage { get }
     var scanNextButtonTitle: String { get }
     var startOverButtonTitle: String { get }
-    var countdownTimerModel: CountdownTimerModel { get }
     func startOver()
     func scanNext()
     func cancel()
