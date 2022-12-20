@@ -141,15 +141,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                                         animated: true)
     }
 
-    func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
-        let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
-        return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
-                                                                       reasonType: .technical,
-                                                                       secondCertificateHintHidden: true,
-                                                                       token: token),
-                                        animated: true)
-    }
-
     func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         let router = MaskOptionalResultRouter(sceneCoordinator: sceneCoordinator)
         return sceneCoordinator.present(MaskOptionalResultSceneFactory(router: router,

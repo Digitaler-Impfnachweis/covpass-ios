@@ -19,7 +19,6 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var routeToStateSelectionExpectation = XCTestExpectation(description: "routeToStateSelection")
     var showMaskRequiredBusinessRulesExpectation = XCTestExpectation(description: "showMaskRequiredBusinessRules")
     var showMaskRequiredBusinessRulesSecondScanAllowedExpectation = XCTestExpectation(description: "showMaskRequiredBusinessRulesSecondScanAllowed")
-    var showMaskRequiredTechnicalErrorExpectation = XCTestExpectation(description: "showMaskRequiredTechnicalError")
     var showMaskOptionalExpectation = XCTestExpectation(description: "showMaskOptional")
     var showNoMaskRulesExpectation = XCTestExpectation(description: "showNoMaskRulesE")
     var showDifferentPersonExpectation = XCTestExpectation(description: "showDifferentPersonExpectation")
@@ -35,6 +34,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showTravelRulesInvalidExpectation = XCTestExpectation(description: "showTravelRulesInvalidExpectation")
     var showTravelRulesNotAvailableExpectation = XCTestExpectation(description: "showTravelRulesNotAvailableExpectation")
     var showMaskRulesInvalidExpectation = XCTestExpectation(description: "showMaskRulesInvalidExpectation")
+    var showMaskRulesInvalidResponse: Promise<ValidatorDetailSceneResult> = .value(.close)
     var routeToRulesUpdateExpectation = XCTestExpectation(description: "routeToRulesUpdateExpectation")
     var showAnnouncementExpectation = XCTestExpectation(description: "showAnnouncementExpectation")
     var showTravelRulesNotAvailableResponse: Promise<Void> = .value
@@ -54,7 +54,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
 
     func showMaskRulesInvalid(token _: ExtendedCBORWebToken?, rescanIsHidden _: Bool) -> Promise<ValidatorDetailSceneResult> {
         showMaskRulesInvalidExpectation.fulfill()
-        return .value(.close)
+        return showMaskRulesInvalidResponse
     }
 
     func showTravelRulesNotAvailable() -> Promise<Void> {
@@ -114,11 +114,6 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
 
     func showMaskRequiredBusinessRulesSecondScanAllowed(token _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         showMaskRequiredBusinessRulesSecondScanAllowedExpectation.fulfill()
-        return .value(.close)
-    }
-
-    func showMaskRequiredTechnicalError(token _: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
-        showMaskRequiredTechnicalErrorExpectation.fulfill()
         return .value(.close)
     }
 

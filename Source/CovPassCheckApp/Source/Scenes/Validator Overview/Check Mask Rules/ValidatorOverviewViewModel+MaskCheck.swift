@@ -21,10 +21,12 @@ extension ValidatorOverviewViewModel {
 
     func checkMaskStatus(ignoringPiCheck: Bool = false) {
         isLoadingScan = true
+        shouldDropLastTokenOnError = false
         firstly {
             scanOrReuse(ignoringPiCheck: ignoringPiCheck)
         }
         .get {
+            self.shouldDropLastTokenOnError = true
             self.tokensToCheck.append($0)
         }
         .then { _ in
@@ -54,7 +56,7 @@ extension ValidatorOverviewViewModel {
 
     func errorHandlingMaskCheck(error: Error) -> Promise<ValidatorDetailSceneResult> {
         guard let firstToken = tokensToCheck.first else {
-            return router.showMaskRulesInvalid(token: nil, rescanIsHidden: tokensToCheck.count > 1)
+            return router.showMaskRulesInvalid(token: nil, rescanIsHidden: isFirstScan)
         }
         switch error as? CheckMaskRulesUseCaseError {
         case .differentPersonalInformation:
@@ -70,9 +72,9 @@ extension ValidatorOverviewViewModel {
                 return router.showMaskRequiredBusinessRulesSecondScanAllowed(token: firstToken)
             }
         case .invalidToken:
-            return router.showMaskRulesInvalid(token: firstToken, rescanIsHidden: tokensToCheck.count > 1)
+            return router.showMaskRulesInvalid(token: firstToken, rescanIsHidden: isFirstScan)
         case .none:
-            return router.showMaskRulesInvalid(token: nil, rescanIsHidden: tokensToCheck.count > 1)
+            return router.showMaskRulesInvalid(token: nil, rescanIsHidden: isFirstScan)
         }
     }
 
@@ -84,7 +86,9 @@ extension ValidatorOverviewViewModel {
         case .close:
             tokensToCheck = []
         case .rescan:
-            tokensToCheck = tokensToCheck.dropLast()
+            if shouldDropLastTokenOnError {
+                tokensToCheck = tokensToCheck.dropLast()
+            }
             checkMaskStatus(ignoringPiCheck: false)
         case .scanNext:
             checkMaskStatus(ignoringPiCheck: false)
