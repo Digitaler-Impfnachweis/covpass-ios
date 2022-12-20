@@ -1672,11 +1672,11 @@
 
 "certificate_renewal_error_title" = "Neuausstellung fehlgeschlagen";
 
-"certificate_renewal_error_copy" = "Leider gab es ein Problem bei der Neuausstellung Ihres Zertifikats. Bitte überprüfen Sie Ihre Internetverbindung. Beachten Sie, dass Sie das Zertifikat maximal drei Mal im Jahr neu ausstellen lassen können. Für Informationen zum unten aufgeführten Fehlercode kontaktieren Sie bitte unsere Hotline unter 0800–4747–001 oder support@covpass-app.de.\n\nFehlercode: %@";
+"certificate_renewal_error_copy" = "Leider gab es ein Problem bei der Neuausstellung Ihres Zertifikats. Bitte überprüfen Sie Ihre Internetverbindung. Beachten Sie auch, dass ein Zertifikat maximal drei Mal neu ausgestellt werden kann. Falls Sie Ihr Zertifikat bereits in der Corona-Warn-App oder auf einem anderen Gerät erneuert haben, scannen Sie das erneuerte Zertifikat mit der CovPass-App ein.\n\nFehlercode: %@";
 
 "certificate_renewal_error_button_primary" = "OK";
 
-"certificate_renewal_error_button_secondary" = "Mehr Informationen";
+"certificate_renewal_error_button_secondary" = "Mehr in den häufigen Fragen";
 
 
 /********** DCC renewal when expiring **********/

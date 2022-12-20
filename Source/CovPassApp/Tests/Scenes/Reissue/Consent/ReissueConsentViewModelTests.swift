@@ -105,7 +105,7 @@ class ReissueConsentViewModelTests: XCTestCase {
             URL(string: "https://www.digitaler-impfnachweis-app.de/en/faq#fragen-zur-covpass-app")
         )
         let expectedTitle = "Reissue failed"
-        let expectedMessage = "Unfortunately, there was a problem reissuing your certificate. Please check your internet connection. Note that the certificate can be reissued a maximum of three times a year. For more information on the error code below please contact our hotline at 0800–4747–001 or support@covpass-app.de.\n\nError code: R000"
+        let expectedMessage = String(format: "certificate_renewal_error_copy".localized, "R000")
 
         let error = NSError(domain: "", code: 0)
         reissueRepository.error = error

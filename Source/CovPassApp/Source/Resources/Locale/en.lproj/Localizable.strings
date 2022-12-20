@@ -1672,11 +1672,11 @@
 
 "certificate_renewal_error_title" = "Reissue failed";
 
-"certificate_renewal_error_copy" = "Unfortunately, there was a problem reissuing your certificate. Please check your internet connection. Note that the certificate can be reissued a maximum of three times a year. For more information on the error code below please contact our hotline at 0800–4747–001 or support@covpass-app.de.\n\nError code: %@";
+"certificate_renewal_error_copy" = "Unfortunately, there was a problem reissuing your certificate. Please check your internet connection. Also note that a certificate can be renewed a maximum of three times. If you have already renewed your certificate in the Corona-Warn-App or on another device, scan the renewed certificate with the CovPass app.\n\nError code: %@";
 
 "certificate_renewal_error_button_primary" = "OK";
 
-"certificate_renewal_error_button_secondary" = "More information";
+"certificate_renewal_error_button_secondary" = "More in the FAQ";
 
 
 /********** DCC renewal when expiring **********/
