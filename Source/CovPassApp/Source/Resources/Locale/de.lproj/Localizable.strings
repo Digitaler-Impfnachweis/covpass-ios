@@ -1703,9 +1703,11 @@
 
 "renewal_expiry_consent_list_item_4" = "In bestimmten Fällen werden zusätzlich zu dem zu erneuernden Zertifikat weitere Zertifikate übermittelt. Dies ist erforderlich, um die bisherige Abfolge der Impfungen und Genesungen im neuen Zertifikat aufnehmen zu können.";
 
-"renewal_expiry_success_copy" = "Sie können Ihr Zertifikat nun weiterhin wie gewohnt nutzen.";
+"renewal_expiry_success_copy" = "Sie können Ihr Zertifikat nun weiterhin wie gewohnt nutzen.\n\nBitte beachten Sie, dass auch Ihr Papier-Zertifikat bald abläuft oder bereits abgelaufen ist. Wenn gewünscht, können Sie Ihr neues Zertifikat als PDF-Datei herunterladen und ausdrucken.";
 
 "renewal_expiry_success_button" = "OK";
+
+"renewal_expiry_success_download_button" = "PDF erstellen";
 
 
 /********** DCC revocation **********/

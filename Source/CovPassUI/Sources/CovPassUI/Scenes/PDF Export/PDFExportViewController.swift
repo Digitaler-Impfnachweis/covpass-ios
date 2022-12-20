@@ -7,16 +7,15 @@
 //
 
 import CovPassCommon
-import CovPassUI
 import UIKit
 
 private enum Constants {
     enum Accessibility {
-        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized(bundle: .main))
     }
 }
 
-class PDFExportViewController: UIViewController {
+public class PDFExportViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet var headline: InfoHeaderView!
@@ -27,7 +26,7 @@ class PDFExportViewController: UIViewController {
 
     private(set) var viewModel: PDFExportViewModel
 
-    var filename: String {
+    public var filename: String {
         let dgc = viewModel.token.vaccinationCertificate.hcert.dgc
         let name = dgc.nam.fullName.replacingOccurrences(of: " ", with: "-")
         // Use last few characters of the UVCI to have a unique identifier for the pdf file
@@ -40,14 +39,14 @@ class PDFExportViewController: UIViewController {
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: PDFExportViewModel) {
+    public init(viewModel: PDFExportViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .main)
+        super.init(nibName: String(describing: Self.self), bundle: .module)
     }
 
     // MARK: - Lifecycle
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }

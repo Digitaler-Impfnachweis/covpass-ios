@@ -7,6 +7,7 @@
 
 @testable import CovPassApp
 import CovPassCommon
+import CovPassUI
 import PromiseKit
 import XCTest
 
@@ -18,7 +19,7 @@ class PDFExportViewControllerTests: XCTestCase {
         try super.setUpWithError()
         let (_, resolver) = Promise<Void>.pending()
         let token = try ExtendedCBORWebToken.token1Of1()
-        let exporter = SVGPDFExporter()!
+        let exporter = SVGPDFExporter(converter: SVGToPDFConverter())
         viewModel = PDFExportViewModel(token: token, resolvable: resolver, exporter: exporter)
         sut = PDFExportViewController(viewModel: viewModel)
     }

@@ -1703,9 +1703,11 @@
 
 "renewal_expiry_consent_list_item_4" = "In certain cases, additional certificates are sent in addition to the certificate to be renewed. This is necessary in order to be able to include the previous sequence of vaccinations and recoveries in the new certificate.";
 
-"renewal_expiry_success_copy" = "You can now continue to use your certificate as usual.";
+"renewal_expiry_success_copy" = "You can now continue to use your certificate as usual.\n\nPlease note that your paper certificate will also expire soon or has already expired. If desired, you can download your new certificate as a PDF file and print it out.";
 
 "renewal_expiry_success_button" = "OK";
+
+"renewal_expiry_success_download_button" = "Create PDF";
 
 
 /********** DCC revocation **********/

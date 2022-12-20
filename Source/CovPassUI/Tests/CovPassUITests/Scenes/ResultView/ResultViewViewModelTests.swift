@@ -5,6 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 @testable import CovPassUI
 import PromiseKit
 import UIKit
@@ -13,6 +14,7 @@ import XCTest
 class ResultViewViewModelTests: XCTestCase {
     private var promise: Promise<Void>!
     private var resolver: Resolver<Void>!
+    private var router: ResultViewRouterMock!
     private var sut: ResultViewViewModel!
 
     override func setUpWithError() throws {
@@ -20,16 +22,23 @@ class ResultViewViewModelTests: XCTestCase {
         let image = UIImage.close
         self.promise = promise
         self.resolver = resolver
+        router = .init()
+        let token = ExtendedCBORWebToken(vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
+                                         vaccinationQRCodeData: "TEST")
         sut = .init(
             image: image,
             title: "TITLE",
             description: "DESCRIPTION",
             buttonTitle: "BUTTONTITLE",
-            resolver: resolver
+            shareButtonTitle: "SHAREBUTTONTITLE",
+            resolver: resolver,
+            router: router,
+            certificate: token
         )
     }
 
     override func tearDownWithError() throws {
+        router = nil
         resolver = nil
         sut = nil
     }
@@ -58,6 +67,14 @@ class ResultViewViewModelTests: XCTestCase {
         XCTAssertEqual(buttonTitle, "BUTTONTITLE")
     }
 
+    func testShareButtonTitle() {
+        // When
+        let buttonTitle = sut.shareButtonTitle
+
+        // Then
+        XCTAssertEqual(buttonTitle, "SHAREBUTTONTITLE")
+    }
+
     func testImage() {
         // When
         let image = sut.image
@@ -78,5 +95,12 @@ class ResultViewViewModelTests: XCTestCase {
 
         // Then
         wait(for: [expectation], timeout: 1)
+    }
+
+    func testSharePDFTapped() {
+        // When
+        sut.shareAsPdf()
+        // Then
+        wait(for: [router.showPdfExpectation], timeout: 1)
     }
 }

@@ -7,23 +7,24 @@
 //
 
 import CovPassCommon
-import CovPassUI
 import PromiseKit
 import UIKit
 
-struct PDFExportSceneFactory: ResolvableSceneFactory {
+public struct PDFExportSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
 
     let token: ExtendedCBORWebToken
 
     // MARK: - Lifecycle
 
-    init(token: ExtendedCBORWebToken) {
+    public init(token: ExtendedCBORWebToken) {
         self.token = token
     }
 
-    func make(resolvable: Resolver<Void>) -> UIViewController {
-        let exporter = SVGPDFExporter()!
+    public func make(resolvable: Resolver<Void>) -> UIViewController {
+        guard let exporter = SVGPDFExporter() else {
+            fatalError("initialization of SVGPDFExporter failed")
+        }
         let viewModel = PDFExportViewModel(
             token: token,
             resolvable: resolvable,

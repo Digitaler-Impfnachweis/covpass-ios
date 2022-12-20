@@ -61,6 +61,7 @@
 		094924072833B33E00824260 /* ResultViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094924062833B33E00824260 /* ResultViewSnapShotTests.swift */; };
 		09499150292657EA00D00C17 /* CheckSituationResolvableSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949914E292657EA00D00C17 /* CheckSituationResolvableSceneFactory.swift */; };
 		09499151292657EA00D00C17 /* CheckSituationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949914F292657EA00D00C17 /* CheckSituationSceneFactory.swift */; };
+		094E22502950DA6E00B452C3 /* ResultViewRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E224F2950DA6E00B452C3 /* ResultViewRouterMock.swift */; };
 		09541B5727FD7E7F00A32547 /* CheckMaskRulesUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09541B5527FD7E7C00A32547 /* CheckMaskRulesUseCaseTests.swift */; };
 		09541B5927FD7FD800A32547 /* CBORWebTokenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09541B5827FD7FD800A32547 /* CBORWebTokenExtensions.swift */; };
 		09541B5B27FD887500A32547 /* ParseCertificateUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09541B5A27FD887500A32547 /* ParseCertificateUseCaseTests.swift */; };
@@ -320,15 +321,10 @@
 		21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */; };
 		3509F33526CFD04C00A078E5 /* contact-covpass-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 3509F33426CFD04C00A078E5 /* contact-covpass-de.html */; };
 		351C6B4D26E15C2D00321B3C /* FileManager+Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */; };
-		3520AA6C26B85AA900D22435 /* PDFExportViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520AA6B26B85AA900D22435 /* PDFExportViewModelProtocol.swift */; };
 		3523616426D66A5F0085B243 /* BoosterNotificationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523616326D66A5F0085B243 /* BoosterNotificationSceneFactory.swift */; };
 		3523616626D66ABC0085B243 /* BoosterNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523616526D66ABC0085B243 /* BoosterNotificationViewModel.swift */; };
 		3523616826D66AC90085B243 /* BoosterNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523616726D66AC90085B243 /* BoosterNotificationViewController.swift */; };
 		3523616C26D66BC50085B243 /* BoosterNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */; };
-		35F99E0D26B2B60700D3EFC3 /* PDFExportSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */; };
-		35F99E0F26B2B67100D3EFC3 /* PDFExportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */; };
-		35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */; };
-		35F99E1426B2B75C00D3EFC3 /* PDFExportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1326B2B75C00D3EFC3 /* PDFExportViewController.xib */; };
 		381EA91F26D8FD5C0014F2A5 /* privacy-covpass-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 3509F33226CFD02500A078E5 /* privacy-covpass-de.html */; };
 		3823416A268A2A3900722A46 /* contact-covpasscheck-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 38234168268A28C500722A46 /* contact-covpasscheck-de.html */; };
 		3829A309269CFEA800B8346C /* DCCCertLogicFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3829A308269CFEA800B8346C /* DCCCertLogicFactory.swift */; };
@@ -534,7 +530,6 @@
 		E79CF9EC27E8923C00C4619E /* URLSession+CertificateRevocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9EB27E8923C00C4619E /* URLSession+CertificateRevocation.swift */; };
 		E79CF9F027E8981100C4619E /* URLSession+CertificateRevocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9EE27E8974800C4619E /* URLSession+CertificateRevocationTests.swift */; };
 		E79CF9F627E8C6DB00C4619E /* CertificateRevocationWrapperRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9F327E8C5DB00C4619E /* CertificateRevocationWrapperRepository+FactoryTests.swift */; };
-		E7AD8C7527D11A2E00220E9F /* SVGPDFExporter+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */; };
 		E7B49CF3283CC51900401C2E /* CertificateRevocationOfflineService+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B49CF2283CC51900401C2E /* CertificateRevocationOfflineService+Factory.swift */; };
 		E7B49CF7283CD17A00401C2E /* CertificateRevocationOfflineService+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B49CF4283CCFEC00401C2E /* CertificateRevocationOfflineService+FactoryTests.swift */; };
 		E7B49CF9283D1A3900401C2E /* CertificateRevocationHTTPClient+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B49CF8283D1A3900401C2E /* CertificateRevocationHTTPClient+Factory.swift */; };
@@ -705,6 +700,7 @@
 		094924062833B33E00824260 /* ResultViewSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewSnapShotTests.swift; sourceTree = "<group>"; };
 		0949914E292657EA00D00C17 /* CheckSituationResolvableSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationResolvableSceneFactory.swift; sourceTree = "<group>"; };
 		0949914F292657EA00D00C17 /* CheckSituationSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationSceneFactory.swift; sourceTree = "<group>"; };
+		094E224F2950DA6E00B452C3 /* ResultViewRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewRouterMock.swift; sourceTree = "<group>"; };
 		0950C97528E1C68100C82228 /* CertificateHolderStatusModel+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateHolderStatusModel+Factory.swift"; sourceTree = "<group>"; };
 		0950C97728E1C6A500C82228 /* CertificateHolderStatusModel+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateHolderStatusModel+FactoryTests.swift"; sourceTree = "<group>"; };
 		09541B5527FD7E7C00A32547 /* CheckMaskRulesUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMaskRulesUseCaseTests.swift; sourceTree = "<group>"; };
@@ -970,16 +966,11 @@
 		3509F33226CFD02500A078E5 /* privacy-covpass-de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpass-de.html"; sourceTree = "<group>"; };
 		3509F33426CFD04C00A078E5 /* contact-covpass-de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "contact-covpass-de.html"; sourceTree = "<group>"; };
 		351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Simulator.swift"; sourceTree = "<group>"; };
-		3520AA6B26B85AA900D22435 /* PDFExportViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewModelProtocol.swift; sourceTree = "<group>"; };
 		3523616326D66A5F0085B243 /* BoosterNotificationSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationSceneFactory.swift; sourceTree = "<group>"; };
 		3523616526D66ABC0085B243 /* BoosterNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationViewModel.swift; sourceTree = "<group>"; };
 		3523616726D66AC90085B243 /* BoosterNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationViewController.swift; sourceTree = "<group>"; };
 		3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoosterNotificationViewController.xib; sourceTree = "<group>"; };
 		359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockExtendedCBORWebToken.swift; sourceTree = "<group>"; };
-		35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportSceneFactory.swift; sourceTree = "<group>"; };
-		35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewModel.swift; sourceTree = "<group>"; };
-		35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewController.swift; sourceTree = "<group>"; };
-		35F99E1326B2B75C00D3EFC3 /* PDFExportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDFExportViewController.xib; sourceTree = "<group>"; };
 		381442092646ED5800207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		3814420B2646ED7600207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		381A13F32647DB580037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
@@ -1191,7 +1182,6 @@
 		E79CF9EE27E8974800C4619E /* URLSession+CertificateRevocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateRevocationTests.swift"; sourceTree = "<group>"; };
 		E79CF9F127E8C2FA00C4619E /* CertificateRevocationWrapperRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationWrapperRepository+Factory.swift"; sourceTree = "<group>"; };
 		E79CF9F327E8C5DB00C4619E /* CertificateRevocationWrapperRepository+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationWrapperRepository+FactoryTests.swift"; sourceTree = "<group>"; };
-		E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGPDFExporter+Factory.swift"; sourceTree = "<group>"; };
 		E7B49CF2283CC51900401C2E /* CertificateRevocationOfflineService+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationOfflineService+Factory.swift"; sourceTree = "<group>"; };
 		E7B49CF4283CCFEC00401C2E /* CertificateRevocationOfflineService+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationOfflineService+FactoryTests.swift"; sourceTree = "<group>"; };
 		E7B49CF8283D1A3900401C2E /* CertificateRevocationHTTPClient+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationHTTPClient+Factory.swift"; sourceTree = "<group>"; };
@@ -1472,6 +1462,14 @@
 				0949914F292657EA00D00C17 /* CheckSituationSceneFactory.swift */,
 			);
 			path = "Check Situation";
+			sourceTree = "<group>";
+		};
+		094E224E2950DA5700B452C3 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				094E224F2950DA6E00B452C3 /* ResultViewRouterMock.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		09541B5427FD7E6B00A32547 /* UseCases */ = {
@@ -1985,7 +1983,6 @@
 				216D1F23264EF4E400370F16 /* Main */,
 				E74C5AC728C75F5C00F5370F /* New Regulations Announcement */,
 				216D1F25264EF4E400370F16 /* Onboarding */,
-				35F99E0B26B2B01500D3EFC3 /* PDF Export */,
 				09D6E816276CA65300134FBA /* Protocols */,
 				09D580E827C0BD5D00CB50CB /* Reissue */,
 				38E36253269B712900DE6D4C /* RuleCheck */,
@@ -2162,7 +2159,6 @@
 				351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */,
 				E7D1F0902861C9AF00FA7465 /* PDFCBORExtractor+Factory.swift */,
 				216D1F3A264EF4ED00370F16 /* StringLocalization.swift */,
-				E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */,
 				E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */,
 				09C422A327F5BA8D00232036 /* URLSession+CertificateRevocation.swift */,
 				38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */,
@@ -2488,34 +2484,6 @@
 				3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		35F99E0B26B2B01500D3EFC3 /* PDF Export */ = {
-			isa = PBXGroup;
-			children = (
-				35F99E1226B2B74C00D3EFC3 /* View */,
-				35F99E1526B2B77000D3EFC3 /* Protocols */,
-				35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */,
-				35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */,
-				35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */,
-			);
-			path = "PDF Export";
-			sourceTree = "<group>";
-		};
-		35F99E1226B2B74C00D3EFC3 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				35F99E1326B2B75C00D3EFC3 /* PDFExportViewController.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		35F99E1526B2B77000D3EFC3 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				3520AA6B26B85AA900D22435 /* PDFExportViewModelProtocol.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		3840F1212921683600DB824C /* VaccinationCycleIncomplete */ = {
@@ -3087,6 +3055,7 @@
 		E738566C2864E59E0070C1B0 /* Certificate Import */ = {
 			isa = PBXGroup;
 			children = (
+				094E224E2950DA5700B452C3 /* Mock */,
 				E700EFB628578A740088D4CB /* Selection */,
 				E738566D2864E5C40070C1B0 /* Success */,
 			);
@@ -3848,7 +3817,6 @@
 				3523616C26D66BC50085B243 /* BoosterNotificationViewController.xib in Resources */,
 				216D1F48264EF50300370F16 /* Localizable.strings in Resources */,
 				3509F33526CFD04C00A078E5 /* contact-covpass-de.html in Resources */,
-				35F99E1426B2B75C00D3EFC3 /* PDFExportViewController.xib in Resources */,
 				09D580F727C0BD9700CB50CB /* ReissueStartViewController.xib in Resources */,
 				216D1F9E264EF73D00370F16 /* WelcomeViewController.xib in Resources */,
 				E7B98B302858BBB5005861C8 /* CertificateImportSelectionViewController.xib in Resources */,
@@ -4009,7 +3977,6 @@
 				3882AEBD267006B4000354CD /* RecoveryCertificateItemViewModel.swift in Sources */,
 				385FC1B0269F21A200D19AF8 /* RuleCheckDetailViewController.swift in Sources */,
 				216D1FFC264EF77C00370F16 /* AppInformationSceneFactory.swift in Sources */,
-				35F99E0F26B2B67100D3EFC3 /* PDFExportViewModel.swift in Sources */,
 				38E3625C269B712900DE6D4C /* RuleCheckViewModel.swift in Sources */,
 				0983F5F128378E7C0020DBF0 /* CertificateCardViewModel.swift in Sources */,
 				E7C8A4712853333900025770 /* CoseSign1MessageConverter+Factory.swift in Sources */,
@@ -4087,7 +4054,6 @@
 				09B5D240276A194C005F8FCE /* ScanCountRouter.swift in Sources */,
 				09331776273ABB2A0036DB2A /* ChooseCertificateRouter.swift in Sources */,
 				09D6E818276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift in Sources */,
-				35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */,
 				950629E42746CD5B00138EBE /* ConsentExchangeRouter.swift in Sources */,
 				3523616626D66ABC0085B243 /* BoosterNotificationViewModel.swift in Sources */,
 				09898B8C2768CC2F00BB2801 /* ScanCountWarningViewModel.swift in Sources */,
@@ -4130,8 +4096,6 @@
 				65E0DB0E2657F5A0004C660F /* CertificateViewModel.swift in Sources */,
 				0983F5EE28378E7C0020DBF0 /* CertificatesOverviewViewModel.swift in Sources */,
 				E715CB7228637DE600D07443 /* TestImportSelectionItem.swift in Sources */,
-				E7AD8C7527D11A2E00220E9F /* SVGPDFExporter+Factory.swift in Sources */,
-				35F99E0D26B2B60700D3EFC3 /* PDFExportSceneFactory.swift in Sources */,
 				21A77A52265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift in Sources */,
 				216D1FAD264EF74600370F16 /* PassOnboardingPageViewModel.swift in Sources */,
 				E70393B428C2636A0079572C /* CertificateHolderIncompleteImmunizationStatusViewModel.swift in Sources */,
@@ -4141,7 +4105,6 @@
 				E7B49CF9283D1A3900401C2E /* CertificateRevocationHTTPClient+Factory.swift in Sources */,
 				0938F7DC2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */,
 				09C422A227F5BA5B00232036 /* CertificateRevocationRepository+Factory.swift in Sources */,
-				3520AA6C26B85AA900D22435 /* PDFExportViewModelProtocol.swift in Sources */,
 				95BB0D4827020EBE00885BA3 /* ScanPleaseSceneFactory.swift in Sources */,
 				E715CB7028637BFA00D07443 /* RecoveryImportSelectionItem.swift in Sources */,
 				E76229F22816D6C500BF937C /* DataPrivacSceneFactory.swift in Sources */,
@@ -4186,6 +4149,7 @@
 				E7385652286465EF0070C1B0 /* ScanRouterMock.swift in Sources */,
 				09D5812127C27CB700CB50CB /* ReissueStartViewModelTests.swift in Sources */,
 				E7D1F0932861CABD00FA7465 /* PDFCBORExtractor+FactoryTests.swift in Sources */,
+				094E22502950DA6E00B452C3 /* ResultViewRouterMock.swift in Sources */,
 				E773F5E928B533E00051AE75 /* WhatsNewSettingsViewControllerSnapshotTests.swift in Sources */,
 				E76B96EC27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift in Sources */,
 				09C7FEFA28F9ACF5001854B2 /* SelectStateOnboardingViewControllerSnapShotTests.swift in Sources */,

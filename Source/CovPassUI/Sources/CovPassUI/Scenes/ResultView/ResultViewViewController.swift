@@ -8,6 +8,7 @@ public class ResultViewViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var submitButton: MainButton!
+    @IBOutlet var pdfExportButton: MainButton!
 
     // MARK: - Properties
 
@@ -30,6 +31,7 @@ public class ResultViewViewController: UIViewController {
 
     func configureView() {
         configureSaveButton()
+        configurePdfExportButton()
         configureImageView()
         configureLabels()
     }
@@ -40,6 +42,14 @@ public class ResultViewViewController: UIViewController {
         submitButton.style = .primary
         submitButton.title = viewModel.buttonTitle
         submitButton.action = viewModel.submitTapped
+    }
+
+    private func configurePdfExportButton() {
+        pdfExportButton.isHidden = viewModel.shareButtonTitle.isNilOrEmpty
+        pdfExportButton.title = viewModel.shareButtonTitle
+        pdfExportButton.style = .secondary
+        pdfExportButton.icon = .share
+        pdfExportButton.action = viewModel.shareAsPdf
     }
 
     private func configureImageView() {
