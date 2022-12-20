@@ -132,7 +132,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         let showNotification = sut.showNotification
 
         // Then
-        XCTAssertFalse(showNotification)
+        XCTAssertTrue(showNotification)
     }
 
     func testIsShowNotification_expired_before_100Days_default() {
@@ -164,7 +164,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         let showNotification = sut.showNotification
 
         // Then
-        XCTAssertFalse(showNotification)
+        XCTAssertTrue(showNotification)
     }
 
     func testIsShowNotification_expired_before_100Days_reissueProcessNewBadgeAlreadySeen_true() {
@@ -196,7 +196,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         let showNotification = sut.showNotification
 
         // Then
-        XCTAssertFalse(showNotification)
+        XCTAssertTrue(showNotification)
     }
 
     func testIsShowNotification_aboutToExpire_default() {
@@ -260,7 +260,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         let showNotification = sut.showNotification
 
         // Then
-        XCTAssertFalse(showNotification)
+        XCTAssertTrue(showNotification)
     }
 
     func testIsShowNotification_invalid_default() {

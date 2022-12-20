@@ -300,7 +300,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.statusInvalidCircle, model.subtitleIcon)
+        XCTAssertEqual(.expiredDotNotification, model.subtitleIcon)
         XCTAssertEqual("No valid certificate", model.title)
         XCTAssertEqual("No valid certificate", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)

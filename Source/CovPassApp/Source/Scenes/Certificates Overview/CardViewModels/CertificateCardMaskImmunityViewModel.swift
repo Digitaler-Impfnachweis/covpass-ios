@@ -34,12 +34,7 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
             return false
         }
         let cert = token.vaccinationCertificate
-        let reissueDetailsNotAlreadySeen = !(token.reissueProcessNewBadgeAlreadySeen ?? false)
-        let reissueNotificationNotAlreadySeen = (reissueDetailsNotAlreadySeen && cert.expiredForLessOrEqual90Days)
-        guard token.expiryAlertWasNotShown || reissueNotificationNotAlreadySeen else {
-            return false
-        }
-        return cert.expiresSoon || token.isInvalid || cert.isExpired
+        return cert.expiresSoon || cert.isExpired || (token.isInvalid && token.expiryAlertWasNotShown)
     }
 
     private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol

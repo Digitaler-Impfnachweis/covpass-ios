@@ -129,7 +129,7 @@
 
 "certificates_start_screen_qrcode_certificate_invalid_subtitle" = "Ungültig";
 
-"vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Status überprüfen";
+"vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Zertifikat erneuern";
 
 "certificates_start_screen_qr_code_app_reference_text" = "Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App prüfen.";
 
