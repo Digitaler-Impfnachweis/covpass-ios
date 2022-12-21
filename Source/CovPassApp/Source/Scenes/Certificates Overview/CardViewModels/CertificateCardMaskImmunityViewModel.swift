@@ -22,6 +22,9 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     private lazy var dgc: DigitalGreenCertificate = certificate.hcert.dgc
     private lazy var certificate = token.vaccinationCertificate
     private lazy var isExpired = certificate.isExpired
+    private lazy var expiredMoreThan90Days = certificate.expiredMoreThan90Days
+    private lazy var expiredForLessOrEqual90Days = certificate.expiredForLessOrEqual90Days
+    private lazy var willExpireInLessOrEqual28Days = certificate.willExpireInLessOrEqual28Days
     private lazy var isRevoked = token.isRevoked
     private lazy var tokenIsInvalid = token.isInvalid
     private var showBoosterAvailabilityNotification: Bool {
@@ -134,7 +137,20 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         return ""
     }()
 
-    lazy var headerSubtitle: String? = showNotification ? "infschg_start_notification".localized : nil
+    lazy var headerSubtitle: String? = {
+        guard showNotification else {
+            return nil
+        }
+        if expiredMoreThan90Days {
+            return "certificates_overview_expired_title".localized
+        } else if expiredForLessOrEqual90Days {
+            return "vaccination_start_screen_qrcode_renewal_note_subtitle".localized
+        } else if willExpireInLessOrEqual28Days {
+            return "vaccination_start_screen_qrcode_renewal_note_subtitle".localized
+        } else {
+            return "infschg_start_notification".localized
+        }
+    }()
 
     var titleIcon: UIImage {
         if isInvalid {

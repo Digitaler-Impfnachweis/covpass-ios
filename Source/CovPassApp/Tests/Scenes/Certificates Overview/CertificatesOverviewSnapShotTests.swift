@@ -112,19 +112,6 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         verifyView(view: viewController.view, waitAfter: 0.1)
     }
 
-    func test_IsExpired() {
-        let vacinationRepoMock = VaccinationRepositoryMock()
-        var cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
-        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
-        cert.wasExpiryAlertShown = true
-        cert.reissueProcessNewBadgeAlreadySeen = true
-        let certs = [cert]
-        vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
-        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 0.1)
-    }
-
     func test_IsInvalid() {
         let vacinationRepoMock = VaccinationRepositoryMock()
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
@@ -162,18 +149,29 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         verifyView(view: viewController.view, waitAfter: 0.1)
     }
 
-    func test_notification_IsExpired() {
+    func test_isExpired_more_than_90_days() {
         let vacinationRepoMock = VaccinationRepositoryMock()
         var cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
-        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
+        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: -90, to: Date())
         let certs = [cert]
         vacinationRepoMock.certificates = certs
         let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 0.1)
+        verifyView(view: viewController.view, waitAfter: 1.0)
     }
 
-    func test_notification_aboutToExpired() {
+    func test_isExpired_less_than_90_days() {
+        let vacinationRepoMock = VaccinationRepositoryMock()
+        var cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: -14, to: Date())
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        verifyView(view: viewController.view, waitAfter: 1.0)
+    }
+
+    func test_aboutToExpire_in_28_days() {
         let vacinationRepoMock = VaccinationRepositoryMock()
         var cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 6, to: Date())
@@ -181,6 +179,6 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 1.3)
+        verifyView(view: viewController.view, waitAfter: 1.0)
     }
 }

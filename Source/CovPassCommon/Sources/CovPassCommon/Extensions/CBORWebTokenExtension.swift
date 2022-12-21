@@ -48,6 +48,13 @@ public extension CBORWebToken {
         iss == "DE"
     }
 
+    var expiredMoreThan90Days: Bool {
+        guard let exp = exp else { return false }
+        let daysSinceExpiry = Date().daysSince(exp)
+        let expiredMoreThan90Days = daysSinceExpiry >= 90
+        return expiredMoreThan90Days
+    }
+
     var expiredForLessOrEqual90Days: Bool {
         guard let exp = exp else { return false }
         let daysSinceExpiry = Date().daysSince(exp)
