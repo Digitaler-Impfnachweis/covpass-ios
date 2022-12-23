@@ -41,6 +41,14 @@ public extension Array where Element == ExtendedCBORWebToken {
         vaccinationExpiryReissueCandidate != nil
     }
 
+    var areRecoveriesQualifiedForExpiryReissue: Bool {
+        !recoveryExpiryReissueCandidates.isEmpty
+    }
+
+    var areCertificatesQualifiedForExpiryReissue: Bool {
+        areVaccinationsQualifiedForExpiryReissue || areRecoveriesQualifiedForExpiryReissue
+    }
+
     var qualifiedCertificatesForVaccinationExpiryReissue: Self {
         let allCertificatesOrderedByDate = sortedByDtFrAndSc
         guard let reissueCandidate = allCertificatesOrderedByDate.vaccinationExpiryReissueCandidate else {

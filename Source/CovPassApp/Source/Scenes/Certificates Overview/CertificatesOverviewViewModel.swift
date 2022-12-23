@@ -384,7 +384,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.showBoosterNotificationIfNeeded()
         }
         .then {
-            self.showCertificatesReissueIfNeeded()
+            self.showCertificatesBoosterRenewalIfNeeded()
+        }
+        .then {
+            self.showCertificatesExtensionReissueIfNeeded()
         }
         .then {
             self.showRevocationWarningIfNeeded()
@@ -398,25 +401,48 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
-    private func showCertificatesReissueIfNeeded() -> Guarantee<Void> {
+    private func showCertificatesBoosterRenewalIfNeeded() -> Guarantee<Void> {
         let partitions = certificateList.certificates.partitionedByOwner
-        let showCertificatesReissuePromises = partitions
+        let showBoosterRenewalReissuePromises = partitions
             .filter(\.qualifiedForReissue)
             .filter(\.reissueProcessInitialNotAlreadySeen)
-            .map(showCertificatesReissue(tokens:))
+            .map(showCertificatesBoosterRenewal(tokens:))
         let guarantee = when(
-            fulfilled: showCertificatesReissuePromises.makeIterator(),
+            fulfilled: showBoosterRenewalReissuePromises.makeIterator(),
             concurrently: 1
         ).recover { _ in
             .value([])
         }.asVoid()
-
         return guarantee
     }
 
-    private func showCertificatesReissue(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
-        repository.setReissueProcess(initialAlreadySeen: true, newBadgeAlreadySeen: false, tokens: tokens).cauterize()
-        return router.showCertificatesReissue(for: tokens, context: .boosterRenewal)
+    private func showCertificatesExtensionReissueIfNeeded() -> Guarantee<Void> {
+        let partitions = certificateList.certificates.partitionedByOwner
+        let showBoosterRenewalReissuePromises = partitions
+            .filter(\.areCertificatesQualifiedForExpiryReissue)
+            .filter(\.reissueProcessInitialNotAlreadySeen)
+            .map(showCertificatesExtensionReissue(tokens:))
+        let guarantee = when(
+            fulfilled: showBoosterRenewalReissuePromises.makeIterator(),
+            concurrently: 1
+        ).recover { _ in
+            .value([])
+        }.asVoid()
+        return guarantee
+    }
+
+    private func showCertificatesExtensionReissue(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        repository.setReissueProcess(initialAlreadySeen: true,
+                                     newBadgeAlreadySeen: false,
+                                     tokens: tokens).cauterize()
+        return router.showExtensionRenewalReissue(for: tokens)
+    }
+
+    private func showCertificatesBoosterRenewal(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        repository.setReissueProcess(initialAlreadySeen: true,
+                                     newBadgeAlreadySeen: false,
+                                     tokens: tokens).cauterize()
+        return router.showBoosterRenewalReissue(for: tokens)
     }
 
     private func payloadFromScannerResult(_ result: ScanResult) -> Promise<String> {

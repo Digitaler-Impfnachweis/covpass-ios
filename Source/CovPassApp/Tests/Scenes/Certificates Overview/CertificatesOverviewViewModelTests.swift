@@ -337,7 +337,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(true, model.isInvalid)
     }
 
-    func testShowNotificationsIfNeeded_showCertificatesReissueIfNeeded_shown() throws {
+    func testShowNotificationsIfNeeded_showBoosterRenewalReissueIfNeeded_shown() throws {
         let singleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
             .mockVaccinationUVCI("1")
             .medicalProduct(.biontech)
@@ -379,7 +379,25 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         sut.showNotificationsIfNeeded()
 
         // Then
-        wait(for: [router.showCertificatesReissueExpectation], timeout: 4)
+        wait(for: [router.showBoosterRenewalReissueExpectation], timeout: 4)
+    }
+
+    func test_extension_reissue_shown() throws {
+        var token = CBORWebToken.mockVaccinationCertificate
+        token.exp = .init() - 1
+
+        // Given
+        configureSut(
+            certificates: [
+                token.extended()
+            ]
+        )
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showExtensionRenewalReissueExpectation], timeout: 4)
     }
 
     func testShowNotificationsIfNeeded_showRevocationWarning_token_not_revoked() throws {

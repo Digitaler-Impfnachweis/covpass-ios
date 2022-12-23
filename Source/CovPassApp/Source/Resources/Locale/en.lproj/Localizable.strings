@@ -1624,7 +1624,7 @@
 
 "certificate_renewal_startpage_copy" = "The EU specifications for certain vaccination certificates have been changed. This certificate does not correspond to the current numbering. It is still valid. However, if it is a certificate for a booster vaccination, it will not be recognized as such when checked.\n\nTherefore we recommend requesting a new certificate with the number 2/1 directly free of charge via the app.";
 
-"certificate_renewal_startpage_copy_box" = "The process is uncomplicated and takes only a few minutes. You can trigger the renewal also later on the overview of your certificates.";
+"certificate_renewal_startpage_copy_box" = "The process is uncomplicated and takes only a few minutes. You can trigger the renewal also later in the detailed view of your certificates.";
 
 "certificate_renewal_startpage_main_button" = "Renew now";
 
@@ -1692,6 +1692,8 @@
 "renewal_expiry_notification_copy_recovery" = "The technical validity of your recovery certificate is about to expire or has already expired. Renew the certificate to continue using it.";
 
 "renewal_expiry_notification_button_recovery" = "Renew recovery certificate";
+
+"renewal_expiry_notification_button" = "Renew now";
 
 "renewal_expiry_consent_box_item_1" = "The app transmits the aforementioned certificates to the RKI for verification.";
 

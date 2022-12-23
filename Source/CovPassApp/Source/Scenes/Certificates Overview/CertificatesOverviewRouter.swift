@@ -172,17 +172,28 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
                                      initialisationData: data))
     }
 
-    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken],
-                                 context: ReissueContext) -> Promise<Void> {
+    func showExtensionRenewalReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
         if cborWebTokens.isEmpty {
-            // Do not start the reissue process when we don't have any tokens
             return .value
         }
         return sceneCoordinator.present(
             ReissueStartSceneFactory(
                 router: ReissueStartRouter(sceneCoordinator: sceneCoordinator),
                 tokens: cborWebTokens,
-                context: context
+                context: .certificateExtension
+            )
+        )
+    }
+
+    func showBoosterRenewalReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        if cborWebTokens.isEmpty {
+            return .value
+        }
+        return sceneCoordinator.present(
+            ReissueStartSceneFactory(
+                router: ReissueStartRouter(sceneCoordinator: sceneCoordinator),
+                tokens: cborWebTokens,
+                context: .boosterRenewal
             )
         )
     }

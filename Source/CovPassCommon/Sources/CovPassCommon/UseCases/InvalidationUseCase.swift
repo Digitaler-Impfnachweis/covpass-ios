@@ -53,9 +53,9 @@ public class InvalidationUseCase {
     }
 
     private func areRevoked(_ tokens: [ExtendedCBORWebToken]) -> Guarantee<[ExtendedCBORWebToken]> {
-        let showCertificatesReissuePromises = tokens
+        let showBoosterRenewalReissuePromises = tokens
             .map(isRevoked(_:))
-        let guarantee = when(fulfilled: showCertificatesReissuePromises.makeIterator(),
+        let guarantee = when(fulfilled: showBoosterRenewalReissuePromises.makeIterator(),
                              concurrently: 1)
             .recover { _ in
                 .value([])

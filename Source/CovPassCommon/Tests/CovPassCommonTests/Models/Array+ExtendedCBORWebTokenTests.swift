@@ -1498,6 +1498,92 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(sortedByDtFrAndSc[1], token1r)
         XCTAssertEqual(sortedByDtFrAndSc[2], token1t)
     }
+
+    func test_areRecoveriesQualifiedForExpiryReissue_will_expire_in_1_second() {
+        var token = CBORWebToken.mockRecoveryCertificate
+        token.exp = .init() + 1
+        let sut = [token.extended()]
+        // WHEN
+        let areRecoveriesQualifiedForExpiryReissue = sut.areRecoveriesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertTrue(areRecoveriesQualifiedForExpiryReissue)
+    }
+
+    func test_areRecoveriesQualifiedForExpiryReissue_is_expired_for_1_second() {
+        var token = CBORWebToken.mockRecoveryCertificate
+        token.exp = .init() - 1
+        let sut = [token.extended()]
+        // WHEN
+        let areRecoveriesQualifiedForExpiryReissue = sut.areRecoveriesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertTrue(areRecoveriesQualifiedForExpiryReissue)
+    }
+
+    func test_areRecoveriesQualifiedForExpiryReissue_is_expired_for_1_second_but_not_recovery() {
+        var token = CBORWebToken.mockVaccinationCertificate
+        token.exp = .init() - 1
+        let sut = [token.extended()]
+        // WHEN
+        let areRecoveriesQualifiedForExpiryReissue = sut.areRecoveriesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertFalse(areRecoveriesQualifiedForExpiryReissue)
+    }
+
+    func test_areCertificatesQualifiedForExpiryReissue_with_recovery_certificate() {
+        var token = CBORWebToken.mockRecoveryCertificate
+        token.exp = .init() - 1
+        let sut = [token.extended()]
+        // WHEN
+        let areCertificatesQualifiedForExpiryReissue = sut.areCertificatesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertTrue(areCertificatesQualifiedForExpiryReissue)
+    }
+
+    func test_areCertificatesQualifiedForExpiryReissue_with_vaccination_certificate() {
+        var token = CBORWebToken.mockVaccinationCertificate
+        token.exp = .init() - 1
+        let sut = [token.extended()]
+        // WHEN
+        let areCertificatesQualifiedForExpiryReissue = sut.areCertificatesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertTrue(areCertificatesQualifiedForExpiryReissue)
+    }
+
+    func test_areCertificatesQualifiedForExpiryReissue_with_test_certificate() {
+        var token = CBORWebToken.mockTestCertificate
+        token.exp = .init() - 1
+        let sut = [token.extended()]
+        // WHEN
+        let areCertificatesQualifiedForExpiryReissue = sut.areCertificatesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertFalse(areCertificatesQualifiedForExpiryReissue)
+    }
+
+    func test_areCertificatesQualifiedForExpiryReissue_with_multiple_reissuable_and_not_reissuable() {
+        var token1 = CBORWebToken.mockVaccinationCertificate
+        token1.exp = .init() - 1
+        var token2 = CBORWebToken.mockRecoveryCertificate
+        token2.exp = .init() - 1
+        var token3 = CBORWebToken.mockTestCertificate
+        token3.exp = .init() - 1
+        var token4 = CBORWebToken.mockTestCertificate
+        token4.exp = .init() - 1
+        let sut = [token1.extended(),
+                   token2.extended(),
+                   token3.extended(),
+                   token4.extended()]
+        // WHEN
+        let areCertificatesQualifiedForExpiryReissue = sut.areCertificatesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertTrue(areCertificatesQualifiedForExpiryReissue)
+    }
 }
 
 private extension DigitalGreenCertificate {

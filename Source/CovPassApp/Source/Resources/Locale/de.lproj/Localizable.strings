@@ -1624,7 +1624,7 @@
 
 "certificate_renewal_startpage_copy" = "Die Spezifikationen der EU für bestimmte Impfzertifikate wurden geändert. Dieses Zertifikat entspricht nicht der aktuellen Nummerierung. Es ist weiterhin gültig. Falls es sich jedoch um ein Zertifikat für eine Auffrischimpfung handelt, wird diese bei einer Prüfung nicht erkannt.\n\nWir empfehlen Ihnen daher, ein neues Impfzertifikat mit der Nummer 2/1 direkt kostenlos über die App anzufordern. Hierfür ist Ihr Einverständnis erforderlich.";
 
-"certificate_renewal_startpage_copy_box" = "Der Vorgang ist ganz unkompliziert und dauert nur wenige Minuten. Sie können die Erneuerung auch später in der Übersicht Ihrer Zertifikate anstoßen.";
+"certificate_renewal_startpage_copy_box" = "Der Vorgang ist ganz unkompliziert und dauert nur wenige Minuten. Sie können die Erneuerung auch später in der Detailansicht Ihrer Zertifikate anstoßen.";
 
 "certificate_renewal_startpage_main_button" = "Jetzt erneuern";
 
@@ -1692,6 +1692,8 @@
 "renewal_expiry_notification_copy_recovery" = "Die technische Laufzeit Ihres Genesenenzertifikats läuft bald ab oder ist bereits abgelaufen. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
 
 "renewal_expiry_notification_button_recovery" = "Genesenenzertifikat erneuern";
+
+"renewal_expiry_notification_button" = "Jetzt erneuern";
 
 "renewal_expiry_consent_box_item_1" = "Die App übermittelt die genannten Zertifikate zur Überprüfung an das RKI.";
 
