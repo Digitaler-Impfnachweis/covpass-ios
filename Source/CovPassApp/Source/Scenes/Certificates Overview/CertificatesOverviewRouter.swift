@@ -22,6 +22,14 @@ private enum Constants {
         static let errorMessage = "file_import_error_access_copy".localized
         static let errorButtonText = "file_import_error_access_button".localized
     }
+
+    enum Reissue {
+        enum NotDe {
+            static let title = "renewal_expiry_modal_not_available_title".localized
+            static let copy = "renewal_expiry_modal_not_available_copy".localized
+            static let buttonTitle = "renewal_expiry_modal_not_available_title_1".localized
+        }
+    }
 }
 
 class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRouterProtocol {
@@ -214,6 +222,15 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             title: Constants.Texts.errorTitle,
             message: Constants.Texts.errorMessage,
             actions: [.init(title: Constants.Texts.errorButtonText)],
+            style: .alert
+        )
+    }
+
+    func showCertificateExpiredNotDe() {
+        showDialog(
+            title: Constants.Reissue.NotDe.title,
+            message: Constants.Reissue.NotDe.copy,
+            actions: [.init(title: Constants.Reissue.NotDe.buttonTitle)],
             style: .alert
         )
     }

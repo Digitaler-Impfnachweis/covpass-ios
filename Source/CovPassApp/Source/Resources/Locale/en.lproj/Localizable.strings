@@ -1735,7 +1735,7 @@
 
 "renewal_expiry_modal_not_available_copy" = "The technical validity of at least one of your certificates is about to expire. As your certificate was not issued in Germany, it cannot be renewed in the CovPass app. Please check the requirements of the country of issuance.";
 
-"renewal_expiry_modal_not_available_title" = "OK";
+"renewal_expiry_modal_not_available_title_1" = "OK";
 
 "renewal_expiry_success_download_button" = "Create PDF";
 

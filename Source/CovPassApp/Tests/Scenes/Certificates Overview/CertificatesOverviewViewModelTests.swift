@@ -498,7 +498,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         sut.showNotificationsIfNeeded()
 
         // Then
-        wait(for: [router.showStateSelectionOnboardingExpectation], timeout: 1)
+        wait(for: [router.showStateSelectionOnboardingExpectation], timeout: 2)
     }
 
     func testShowNotificationsIfNeeded_new_regulations_announcement_already_shown() {
@@ -547,7 +547,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
 
         // Then
-        wait(for: [router.showDialogExpectation], timeout: 2)
+        wait(for: [router.showCertificateExpiredNotDeExpectation], timeout: 2)
     }
 
     func testRefresh_expiry_notification_token_is_expired() throws {
@@ -558,7 +558,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
 
         // Then
-        wait(for: [router.showDialogExpectation], timeout: 2)
+        wait(for: [router.showCertificateExpiredNotDeExpectation], timeout: 2)
     }
 
     func testRefresh_expiry_notification_token_expires_soon() throws {
@@ -569,7 +569,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
 
         // Then
-        wait(for: [router.showDialogExpectation], timeout: 2)
+        wait(for: [router.showCertificateExpiredNotDeExpectation], timeout: 2)
     }
 
     func testRefresh_expiry_notification_token_is_expired_expiry_already_shown() throws {
@@ -600,10 +600,10 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
 
         // Then
-        wait(for: [router.showDialogExpectation], timeout: 2)
+        wait(for: [router.showCertificateExpiredNotDeExpectation], timeout: 2)
     }
 
-    func testRefresh_expiry_notification_only_shown_once() throws {
+    func testRefresh_expiry_notification_only_shown_once_non_DE() throws {
         // Given
         let tokens: [ExtendedCBORWebToken] = [.expired]
         configureSut(certificates: tokens)
@@ -616,7 +616,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         wait(for: [
             vaccinationRepository.setExpiryAlertExpectation,
             vaccinationRepository.getCertificateListExpectation,
-            router.showDialogExpectation
+            router.showCertificateExpiredNotDeExpectation
         ], timeout: 1)
     }
 
@@ -917,7 +917,7 @@ private extension ExtendedCBORWebToken {
     static var expired: ExtendedCBORWebToken {
         .init(
             vaccinationCertificate: .init(
-                iss: "",
+                iss: "IT",
                 iat: nil,
                 exp: .distantPast,
                 hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1"))
@@ -929,7 +929,7 @@ private extension ExtendedCBORWebToken {
     static var expiresSoon: ExtendedCBORWebToken {
         .init(
             vaccinationCertificate: .init(
-                iss: "",
+                iss: "IT",
                 iat: nil,
                 exp: Date() + 60,
                 hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1"))
@@ -941,7 +941,7 @@ private extension ExtendedCBORWebToken {
     static var invalidToken: ExtendedCBORWebToken {
         .init(
             vaccinationCertificate: .init(
-                iss: "",
+                iss: "IT",
                 iat: nil,
                 exp: nil,
                 hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1"))

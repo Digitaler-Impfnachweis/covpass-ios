@@ -39,4 +39,5 @@ protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
     func showCertificatePicker(tokens: [ExtendedCBORWebToken]) -> Promise<Void>
     func showCertificateImportError()
     func showStateSelectionOnboarding() -> Promise<Void>
+    func showCertificateExpiredNotDe()
 }

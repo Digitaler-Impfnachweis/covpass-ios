@@ -191,7 +191,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .cauterize()
     }
 
-    func refresh() -> Promise<Void> {
+    private func initalRefresh() -> Promise<Void> {
         firstly {
             repository.getCertificateList()
         }
@@ -212,9 +212,14 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 self.delegate?.viewModelNeedsFirstCertificateVisible()
             }
             self.lastKnownFavoriteCertificateId = self.certificateList.favoriteCertificateId
-        }.then {
-            self.showExpiryAlertIfNeeded()
         }
+    }
+
+    func refresh() -> Promise<Void> {
+        initalRefresh()
+            .then(showNonDeExpiryAlertIfNeeded)
+            .then(showCertificatesBoosterRenewalIfNeeded)
+            .then(showCertificatesExtensionReissueIfNeeded)
     }
 
     private var lastPlayload: String = ""
@@ -368,37 +373,17 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     /// Show notifications like announcements and booster notifications one after another
     func showNotificationsIfNeeded() {
-        firstly {
-            self.refresh()
-        }
-        .then {
-            self.showDataPrivacyIfNeeded()
-        }
-        .then {
-            self.showAnnouncementIfNeeded()
-        }
-        .then {
-            self.showStateSelectionOnboarding()
-        }
-        .then {
-            self.showBoosterNotificationIfNeeded()
-        }
-        .then {
-            self.showCertificatesBoosterRenewalIfNeeded()
-        }
-        .then {
-            self.showCertificatesExtensionReissueIfNeeded()
-        }
-        .then {
-            self.showRevocationWarningIfNeeded()
-        }
-        .then(updateDomesticRules)
-        .then {
-            self.refresh()
-        }
-        .catch { error in
-            print("\(#file):\(#function) Error: \(error.localizedDescription)")
-        }
+        firstly { self.initalRefresh() }
+            .then(showDataPrivacyIfNeeded)
+            .then(showAnnouncementIfNeeded)
+            .then(showStateSelectionOnboarding)
+            .then(showBoosterNotificationIfNeeded)
+            .then(showRevocationWarningIfNeeded)
+            .then(updateDomesticRules)
+            .then(refresh)
+            .catch { error in
+                print("\(#file):\(#function) Error: \(error.localizedDescription)")
+            }
     }
 
     private func showCertificatesBoosterRenewalIfNeeded() -> Guarantee<Void> {
@@ -582,27 +567,16 @@ extension CertificatesOverviewViewModel {
         }
     }
 
-    private func showExpiryAlertIfNeeded() -> Guarantee<Void> {
-        let tokens = tokensToShowExpirationAlertFor()
-        for var token in tokens {
-            token.wasExpiryAlertShown = true
-        }
-        if !tokens.isEmpty {
-            repository.setExpiryAlert(shown: true, tokens: tokens)
-                .then { _ in
-                    self.repository.getCertificateList()
-                }
-                .ensure {
-                    self.showExpiryAlert()
-                }
-                .get { certificateList in
-                    self.certificateList = certificateList
-                }
-                .then { _ in
-                    self.refresh()
-                }
-                .cauterize()
-        }
+    private func showNonDeExpiryAlertIfNeeded() -> Guarantee<Void> {
+        let tokens = tokensToShowExpirationAlertFor().filter(\.vaccinationCertificate.isNotGermanIssuer)
+        for var token in tokens { token.wasExpiryAlertShown = true }
+        guard !tokens.isEmpty else { return .value }
+        repository.setExpiryAlert(shown: true, tokens: tokens)
+            .then(repository.getCertificateList)
+            .ensure(router.showCertificateExpiredNotDe)
+            .get { certificateList in
+                self.certificateList = certificateList
+            }.cauterize()
         return .value
     }
 
@@ -617,18 +591,6 @@ extension CertificatesOverviewViewModel {
                 let showAlert = token.expiresSoon || extendedToken.isInvalid || token.isExpired
                 return showAlert
             }
-    }
-
-    private func showExpiryAlert() {
-        let action = DialogAction(
-            title: "error_validity_check_certificates_button_title".localized
-        )
-        router.showDialog(
-            title: "certificate_check_invalidity_error_title".localized,
-            message: "error_validity_check_certificates_message".localized,
-            actions: [action],
-            style: .alert
-        )
     }
 
     private func showRevocationWarningIfNeeded() -> Guarantee<Void> {

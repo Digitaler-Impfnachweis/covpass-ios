@@ -1735,7 +1735,7 @@
 
 "renewal_expiry_modal_not_available_copy" = "Die technische Gültigkeit mindestens eines Ihrer Zertifikate läuft bald ab. Da Ihr Zertifikat nicht in Deutschland ausgestellt wurde, kann dieses nicht in der CovPass-App erneuert werden. Bitte prüfen Sie die Vorgaben des Ausstellungslandes.";
 
-"renewal_expiry_modal_not_available_title" = "OK";
+"renewal_expiry_modal_not_available_title_1" = "OK";
 
 "renewal_expiry_success_download_button" = "PDF erstellen";
 

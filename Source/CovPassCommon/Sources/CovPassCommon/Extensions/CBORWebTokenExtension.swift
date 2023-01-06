@@ -48,6 +48,10 @@ public extension CBORWebToken {
         iss == "DE"
     }
 
+    var isNotGermanIssuer: Bool {
+        !isGermanIssuer
+    }
+
     var expiredMoreThan90Days: Bool {
         guard let exp = exp else { return false }
         let daysSinceExpiry = Date().daysSince(exp)

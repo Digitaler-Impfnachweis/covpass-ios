@@ -24,6 +24,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showCertificatePickerExpectation = XCTestExpectation(description: "showCertificatePickerExpectation")
     let showQRCodeScanAndSelectionViewExpectation = XCTestExpectation(description: "showQRCodeScanAndSelectionViewExpectation")
     let showHowToScanExpectation = XCTestExpectation(description: "showHowToScanExpectation")
+    let showCertificateExpiredNotDeExpectation = XCTestExpectation(description: "showCertificateExpiredNotDeExpectation")
     let showAnnouncementExpectation = XCTestExpectation(description: "showAnnouncementExpectation")
     let showNewRegulationsAnnouncementExpectation = XCTestExpectation(description: "showNewRegulationsAnnouncementExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
@@ -33,6 +34,10 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     var scanQRCodePayload: String = ""
     var receivedCertificatePickerTokens: [ExtendedCBORWebToken]?
     var showQRCodeScanAndSelectionViewValue = QRCodeImportResult.scanResult(.success(""))
+
+    func showCertificateExpiredNotDe() {
+        showCertificateExpiredNotDeExpectation.fulfill()
+    }
 
     func showCheckSituation(userDefaults _: Persistence) -> Promise<Void> {
         showCheckSituationExpectation.fulfill()
