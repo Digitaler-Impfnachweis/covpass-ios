@@ -121,7 +121,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForBoosterRenewal)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 2)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -145,7 +145,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForBoosterRenewal)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 3)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -166,7 +166,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForBoosterRenewal)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertTrue(candidateForReissue.count == 2)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -190,7 +190,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForBoosterRenewal)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 3)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -217,7 +217,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertFalse(certs.qualifiedForReissue)
+        XCTAssertFalse(certs.qualifiedForBoosterRenewal)
         XCTAssertTrue(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 0)
         XCTAssertFalse(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -240,7 +240,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForBoosterRenewal)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 2)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -259,7 +259,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      recoveryCert]
 
         // WHEN
-        let candidateForReissue = certs.qualifiedForReissue
+        let candidateForReissue = certs.qualifiedForBoosterRenewal
 
         // THEN
         XCTAssertFalse(candidateForReissue)
@@ -271,7 +271,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      someOtherCert1]
 
         // WHEN
-        let candidateForReissue = certs.qualifiedForReissue
+        let candidateForReissue = certs.qualifiedForBoosterRenewal
 
         // THEN
         XCTAssertFalse(candidateForReissue)
@@ -283,7 +283,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert]
 
         // WHEN
-        let candidateForReissue = certs.qualifiedForReissue
+        let candidateForReissue = certs.qualifiedForBoosterRenewal
 
         // THEN
         XCTAssertFalse(candidateForReissue)
@@ -297,14 +297,14 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      vaccinationWithTwoShotsOfVaccine]
 
         // WHEN
-        let candidateForReissue = certs.qualifiedForReissue
+        let candidateForReissue = certs.qualifiedForBoosterRenewal
 
         // THEN
         XCTAssertTrue(candidateForReissue)
 
         // BUT WHEN
         certs.append(boosterCertificateAfterReIssue)
-        let candidateForReissueAfterReissue = certs.qualifiedForReissue
+        let candidateForReissueAfterReissue = certs.qualifiedForBoosterRenewal
 
         // THEN
         XCTAssertFalse(candidateForReissueAfterReissue)

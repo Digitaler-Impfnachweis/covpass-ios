@@ -177,7 +177,7 @@ class VaccinationRepositoryTests: XCTestCase {
             try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
-            XCTAssertEqual(error.localizedDescription, CertificateError.expiredCertifcate.localizedDescription)
+            XCTAssertEqual(error.localizedDescription, HCertError.illegalKeyUsage.localizedDescription)
         }
     }
 
@@ -215,7 +215,7 @@ class VaccinationRepositoryTests: XCTestCase {
         do {
             let res = try sut.checkCertificate(CertificateMock.validCertifcateRSA).wait()
             try sut.validateEntity(res)
-            XCTFail("Should fail")
+            XCTAssert(true)
         } catch {
             XCTAssertEqual(error.localizedDescription, CertificateError.expiredCertifcate.localizedDescription)
         }

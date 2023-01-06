@@ -21,15 +21,64 @@ private enum Constants {
 class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     // MARK: - Properties
 
-    let router: CertificateItemDetailRouterProtocol
-    let isGerman: Bool
+    private let router: CertificateItemDetailRouterProtocol
+    private let resolver: Resolver<CertificateDetailSceneResult>?
     private let repository: VaccinationRepositoryProtocol
     private let certificate: ExtendedCBORWebToken
+    private let certificates: [ExtendedCBORWebToken]
     private var dgc: DigitalGreenCertificate {
         certificate.vaccinationCertificate.hcert.dgc
     }
 
-    private let resolver: Resolver<CertificateDetailSceneResult>?
+    private var passed28DaysBeforeExpiration: Bool {
+        certificate.vaccinationCertificate.passed28DaysBeforeExpiration
+    }
+
+    private var expiredMoreThan90Days: Bool {
+        certificate.vaccinationCertificate.expiredMoreThan90Days
+    }
+
+    private var expiredForLessOrEqual90Days: Bool {
+        certificate.vaccinationCertificate.expiredForLessOrEqual90Days
+    }
+
+    private var willExpireInLessOrEqual28Days: Bool {
+        certificate.vaccinationCertificate.willExpireInLessOrEqual28Days
+    }
+
+    private var isExpired: Bool {
+        certificate.vaccinationCertificate.isExpired
+    }
+
+    private var isReissuable: Bool {
+        certificates.qualifiedCertificatesForVaccinationExpiryReissue.first == certificate || !certificates.cleanDuplicates.qualifiedCertificatesForRecoveryExpiryReissue.filter { $0.first == certificate }.isEmpty
+    }
+
+    private var isSuperseded: Bool {
+        guard isVaccination else {
+            return false
+        }
+        guard !certificates.isEmpty else {
+            return false
+        }
+        return certificates.sortLatest().firstVaccination != certificate
+    }
+
+    private var isVaccination: Bool {
+        certificate.vaccinationCertificate.certType == .vaccination
+    }
+
+    private var expirationDate: Date? {
+        certificate.vaccinationCertificate.exp
+    }
+
+    private var reissuableRecoveries: [[ExtendedCBORWebToken]] {
+        certificates.cleanDuplicates.qualifiedCertificatesForRecoveryExpiryReissue
+    }
+
+    private var recoveryReissueIndex: Int {
+        reissuableRecoveries.firstIndex(where: { $0.first?.vaccinationQRCodeData == certificate.vaccinationQRCodeData }) ?? 0
+    }
 
     var title: String {
         if dgc.r != nil {
@@ -51,33 +100,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         return "vaccination_certificate_detail_view_vaccination_headline".localized
     }
 
-    var isExpired: Bool {
-        certificate.vaccinationCertificate.isExpired
-    }
-
-    var expiresSoonDate: Date? {
-        if certificate.vaccinationCertificate.expiresSoon {
-            return certificate.vaccinationCertificate.exp
-        }
-        return nil
-    }
-
-    var isInvalid: Bool {
-        certificate.isInvalid
-    }
-
-    lazy var isRevoked = certificate.isRevoked
-    lazy var hideQRCodeButtons = (isInvalid && !certificate.vaccinationCertificate.isExpired) || isRevoked
-    lazy var revocationText = (
-        certificate.vaccinationCertificate.isGermanIssuer ?
-            "revocation_detail_single_DE" :
-            "revocation_detail_single_notDE"
-    ).localized
-
-    private var dob: String {
-        DateUtils.displayIsoDateOfBirth(dgc)
-    }
-
+    private var dob: String { DateUtils.displayIsoDateOfBirth(dgc) }
     var items: [ListContentItem] {
         if let r = dgc.r?.first {
             return [
@@ -142,13 +165,141 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         return []
     }
 
-    var canExportToPDF: Bool {
-        certificate.canExportToPDF
+    var canExportToPDF: Bool { certificate.canExportToPDF }
+    var vaasResultToken: VAASValidaitonResultToken?
+    var hasValidationResult: Bool { vaasResultToken != nil }
+    var isInvalid: Bool { certificate.isInvalid }
+    var isRevoked: Bool { certificate.isRevoked }
+    let isGerman: Bool
+    lazy var hideQRCodeButtons = (isInvalid && !certificate.vaccinationCertificate.isExpired) || isRevoked
+    lazy var revocationText = (
+        certificate.vaccinationCertificate.isGermanIssuer ?
+            "revocation_detail_single_DE" :
+            "revocation_detail_single_notDE"
+    ).localized
+
+    var expirationHintButtonIsHidden: Bool? {
+        guard !expirationHintIsHidden else { return nil }
+        return !isReissuable
     }
 
-    var vaasResultToken: VAASValidaitonResultToken?
-    var hasValidationResult: Bool {
-        vaasResultToken != nil
+    var expirationHintIsHidden: Bool {
+        guard !certificate.vaccinationCertificate.isTest else { return true }
+        return !certificate.vaccinationCertificate.passed28DaysBeforeExpiration && !isRevoked && !isInvalid
+    }
+
+    var expirationHintIcon: UIImage? {
+        guard !expirationHintIsHidden else { return nil }
+        if !isReissuable {
+            if certificate.vaccinationCertificate.willExpireInLessOrEqual28Days {
+                return .activity
+            } else if certificate.vaccinationCertificate.isExpired, isSuperseded {
+                return .warning
+            } else if isRevoked {
+                return .warning
+            } else if isInvalid {
+                return .warning
+            }
+        }
+        return .error
+    }
+
+    var expirationHintBackgroundColor: UIColor? {
+        guard !expirationHintIsHidden else { return nil }
+        if isSuperseded, certificate.vaccinationCertificate.isExpired {
+            return .hintBackground
+        } else if isRevoked {
+            return .hintBackground
+        } else if isInvalid {
+            return .hintBackground
+        }
+        return .brandAccent20
+    }
+
+    var expirationHintBorderColor: UIColor? {
+        guard !expirationHintIsHidden else { return nil }
+        if isSuperseded, certificate.vaccinationCertificate.isExpired {
+            return .hintBorder
+        } else if isRevoked {
+            return .hintBorder
+        } else if isInvalid {
+            return .hintBorder
+        }
+        return .brandAccent40
+    }
+
+    var expirationHintTitle: String? {
+        if isRevoked || isInvalid {
+            return "certificate_invalid_detail_view_note_title".localized.replaceIfAvailable(expirationDate: expirationDate)
+        } else if isSuperseded {
+            if willExpireInLessOrEqual28Days {
+                return "certificate_expires_detail_view_note_title".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else {
+                if isVaccination {
+                    return "renewal_bluebox_title_expired_vaccination".localized.replaceIfAvailable(expirationDate: expirationDate)
+                } else {
+                    return "renewal_bluebox_title_expired_recovery".localized.replaceIfAvailable(expirationDate: expirationDate)
+                }
+            }
+        } else if certificate.vaccinationCertificate.willExpireInLessOrEqual28Days {
+            if isVaccination {
+                return "renewal_bluebox_title_expiring_soon_vaccination".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else {
+                return "renewal_bluebox_title_expiring_soon_recovery".localized.replaceIfAvailable(expirationDate: expirationDate)
+            }
+        } else if isExpired {
+            if isVaccination {
+                return "renewal_bluebox_title_expired_vaccination".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else {
+                return "renewal_bluebox_title_expired_recovery".localized.replaceIfAvailable(expirationDate: expirationDate)
+            }
+        }
+
+        return nil
+    }
+
+    var expirationHintButtonTitle: String? {
+        guard !expirationHintIsHidden, isGerman else { return nil }
+        if certificate.vaccinationCertificate.isVaccination {
+            return "renewal_expiry_notification_button_vaccination".localized
+        } else if certificate.vaccinationCertificate.isRecovery {
+            return "renewal_expiry_notification_button_recovery".localized
+        }
+        return nil
+    }
+
+    var expirationHintBodyText: String? {
+        if !isGerman, isRevoked {
+            return "revocation_detail_single_notDE".localized.replaceIfAvailable(expirationDate: expirationDate)
+        } else if isRevoked {
+            return "revocation_detail_single_DE".localized.replaceIfAvailable(expirationDate: expirationDate)
+        } else if isInvalid {
+            return "revocation_detail_locationID".localized.replaceIfAvailable(expirationDate: expirationDate)
+        } else if isReissuable {
+            if willExpireInLessOrEqual28Days {
+                return "renewal_bluebox_copy_expiring_soon".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else if isExpired {
+                return "renewal_bluebox_copy_expired".localized.replaceIfAvailable(expirationDate: expirationDate)
+            }
+        } else if isSuperseded {
+            if willExpireInLessOrEqual28Days {
+                return "certificate_expires_detail_view_note_message".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else if isExpired {
+                return "certificate_expired_detail_view_note_message".localized.replaceIfAvailable(expirationDate: expirationDate)
+            }
+        } else if !isReissuable {
+            if isGerman, willExpireInLessOrEqual28Days {
+                return "renewal_bluebox_copy_expiring_soon_not_available".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else if isGerman, expiredForLessOrEqual90Days || expiredMoreThan90Days {
+                return "renewal_bluebox_copy_expiry_not_available".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else if !isGerman, willExpireInLessOrEqual28Days {
+                return "renewal_bluebox_copy_expiring_soon_not_german".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else if !isGerman, expiredForLessOrEqual90Days || expiredMoreThan90Days {
+                return "renewal_bluebox_copy_expiry_not_german".localized.replaceIfAvailable(expirationDate: expirationDate)
+            }
+        }
+
+        return nil
     }
 
     // MARK: - Lifecyle
@@ -157,12 +308,14 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         router: CertificateItemDetailRouterProtocol,
         repository: VaccinationRepositoryProtocol,
         certificate: ExtendedCBORWebToken,
+        certificates: [ExtendedCBORWebToken],
         resolvable: Resolver<CertificateDetailSceneResult>?,
         vaasResultToken: VAASValidaitonResultToken?
     ) {
         self.router = router
         self.repository = repository
         self.certificate = certificate
+        self.certificates = certificates
         resolver = resolvable
         self.vaasResultToken = vaasResultToken
         isGerman = certificate.vaccinationCertificate.isGermanIssuer
@@ -191,6 +344,36 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
 
     func startPDFExport() {
         router.showPDFExport(for: certificate).cauterize()
+    }
+
+    func triggerVaccinationExpiryReissue() {
+        if isVaccination {
+            showReissue(
+                for: certificates.qualifiedCertificatesForVaccinationExpiryReissue,
+                context: .certificateExtension
+            )
+        } else {
+            triggerRecoveryExpiryReissue(index: recoveryReissueIndex)
+        }
+    }
+
+    func triggerRecoveryExpiryReissue(index: Int) {
+        guard reissuableRecoveries.indices.contains(index) else {
+            return
+        }
+        showReissue(
+            for: reissuableRecoveries[index],
+            context: .certificateExtension
+        )
+    }
+
+    private func showReissue(for certificates: [ExtendedCBORWebToken],
+                             context: ReissueContext) {
+        router.showReissue(for: certificates.cleanDuplicates, context: context)
+            .ensure {
+                self.resolver?.fulfill(.didReissuedCertificate)
+            }
+            .cauterize()
     }
 
     private func showDeleteDialog() -> Promise<Void> {
@@ -240,5 +423,16 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         let formatter = includesTime ? DateUtils.displayDateTimeFormatter : DateUtils.audioDateFormatter
         let dateStr = formatter.string(from: date)
         return "\(label)\n\(dateStr)"
+    }
+}
+
+extension String {
+    func replaceIfAvailable(expirationDate: Date?) -> String {
+        if let expirationDate = expirationDate {
+            return String(format: self,
+                          DateUtils.displayDateFormatter.string(from: expirationDate),
+                          DateUtils.displayTimeFormatter.string(from: expirationDate))
+        }
+        return self
     }
 }

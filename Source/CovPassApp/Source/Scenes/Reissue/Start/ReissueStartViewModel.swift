@@ -53,7 +53,7 @@ class ReissueStartViewModel: ReissueStartViewModelProtocol {
         case .boosterRenewal:
             reissuableTokens = tokens.sortedByDn
         case .certificateExtension:
-            reissuableTokens = tokens
+            reissuableTokens = tokens.sortedByDtFrAndSc
         }
         certItem = reissuableTokens[0].certItem(active: true)
     }

@@ -12,6 +12,8 @@ import PromiseKit
 import UIKit
 
 final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
+    var showVaccinationExpiryReissueButtonInNotification: Bool = true
+    var recoveryExpiryCount: Int = 1
     var router: CertificateDetailRouterProtocol = CertificateDetailRouterMock()
     var delegate: ViewModelDelegate?
     var favoriteIcon: UIImage?
@@ -35,7 +37,7 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
     var boosterReissueNotificationBody = "The EU specifications for certain vaccination certificates have been changed. This certificate does not correspond to the current numbering. It is still valid. However, if it is a certificate for a booster vaccination, it will not be recognized as such when checked.\n\nTherefore we recommend requesting a new certificate with the number 2/1 directly free of charge via the app."
     var reissueNotificationHighlightText = "New"
     var boosterReissueButtonTitle = "Update"
-    var expiryReissueNotificationTitle = "Renewal needed"
+    var reissueVaccinationTitle = "Renewal needed"
     var vaccinationExpiryReissueNotificationBody = "The technical expiry date of your vaccination certificate is coming up. Renew the certificate to continue using it."
     var vaccinationExpiryReissueButtonTitle = "Renew vaccination certificate"
     var recoveryExpiryReissueNotificationBody = "The technical expiry date of your recovery certificate is coming up. Renew the certificate to continue using it."
@@ -51,8 +53,6 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
     var accessibilityCertificatesTitle = "Digital EU Zertifikat"
     var showBoosterReissueNotification = false
     var showVaccinationExpiryReissueNotification = false
-    var showBoosterReissueIsNewBadge = false
-    var showVaccinationExpiryReissueIsNewBadge = false
     var recoveryExpiryReissueCandidatesCount: Int {
         showRecoveryExpiryReissueIsNewBadgeValues.count
     }
@@ -63,6 +63,9 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
     var maskStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol = CertificateHolderImmunizationStatusViewModelMock()
     var immunizationDetailsHidden: Bool = false
     var maskFaqLink: String = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#"
+
+    var showRecoveryExpiryReissueButtonInNotification: Bool = true
+
     func showRecoveryExpiryReissueIsNewBadge(index: Int) -> Bool {
         if index < showRecoveryExpiryReissueIsNewBadgeValues.count {
             return showRecoveryExpiryReissueIsNewBadgeValues[index]
@@ -80,4 +83,15 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
     func updateReissueCandidate(to _: Bool) {}
     func markExpiryReissueCandidatesAsSeen() {}
     func showStateSelection() {}
+    func reissueRecoveryTitle(index: Int) -> String {
+        "Recovery Reissue Title for Element No. \(index)"
+    }
+
+    func recoveryExpiryReissueNotificationBody(index: Int) -> String {
+        "Recovery Reissue Body for Element No. \(index)"
+    }
+
+    func showRecoveryExpiryReissueButtonInNotification(index _: Int) -> Bool {
+        showRecoveryExpiryReissueButtonInNotification
+    }
 }

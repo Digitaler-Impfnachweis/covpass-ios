@@ -13,18 +13,6 @@ import UIKit
 
 private enum Constants {
     enum Keys {
-        enum Reissue {
-            static let boosterHeadline = "certificate_renewal_startpage_headline".localized
-            static let boosterDescription = "certificate_renewal_startpage_copy".localized
-            static let newText = "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
-            static let boosterButtonTitle = "certificate_renewal_detail_view_notification_box_secondary_button".localized
-            static let expiryHeadline = "renewal_expiry_notification_title".localized
-            static let vaccinationExpiryDescription = "renewal_expiry_notification_copy_vaccination".localized
-            static let recoveryExpiryDescription = "renewal_expiry_notification_copy_recovery".localized
-            static let vaccinationExpiryButtonTitle = "renewal_expiry_notification_button_vaccination".localized
-            static let recoveryExpiryButtonTitle = "renewal_expiry_notification_button_recovery".localized
-        }
-
         enum PersonalData {
             static let title = "certificates_overview_personal_data_title".localized
             static let name = "certificates_overview_personal_data_name".localized
@@ -54,8 +42,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     weak var delegate: ViewModelDelegate?
     var router: CertificateDetailRouterProtocol
-    private let repository: VaccinationRepositoryProtocol
-    private var certificates: [ExtendedCBORWebToken]
+    let repository: VaccinationRepositoryProtocol
+    var certificates: [ExtendedCBORWebToken]
     private let boosterLogic: BoosterLogicProtocol
     private let boosterCandidate: BoosterCandidate?
     private let resolver: Resolver<CertificateDetailSceneResult>
@@ -304,12 +292,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     // MARK: - Booster Notifications
 
-    /// show booster notification until user uploads a new certificate
     var showBoosterNotification: Bool {
         boosterCandidate?.state != BoosterCandidate.BoosterState.none
     }
 
-    /// show new booster notification hint only once
     var showNewBoosterNotification: Bool {
         boosterCandidate?.state == BoosterCandidate.BoosterState.new
     }
@@ -325,75 +311,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         return "\(String(format: "vaccination_certificate_overview_booster_vaccination_notification_message".localized, description, rule.identifier))\n\n\("vaccination_certificate_overview_faqlink".localized)"
     }
 
-    var boosterNotificationHighlightText = Constants.Keys.Reissue.newText
-
-    // MARK: Reissue
-
-    var showBoosterReissueNotification: Bool {
-        certificates.qualifiedForReissue
+    var immunizationDetailsHidden: Bool {
+        !(selectedCertificatetIsInvalid || selectedCertificateIsRevoked)
     }
-
-    var showVaccinationExpiryReissueNotification: Bool {
-        certificates.areVaccinationsQualifiedForExpiryReissue
-    }
-
-    var showVaccinationExpiryReissueIsNewBadge: Bool {
-        !certificates.vaccinationExpiryReissueNewBadgeAlreadySeen
-    }
-
-    private var vaccinationExpiryReissueTokens: [ExtendedCBORWebToken] {
-        certificates.qualifiedCertificatesForVaccinationExpiryReissue
-    }
-
-    var showBoosterReissueIsNewBadge: Bool {
-        guard let alreadyShown = boosterReissueTokens.first?.reissueProcessNewBadgeAlreadySeen else {
-            return false
-        }
-        return !alreadyShown
-    }
-
-    private var boosterReissueTokens: [ExtendedCBORWebToken] {
-        certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany
-    }
-
-    func showRecoveryExpiryReissueIsNewBadge(index: Int) -> Bool {
-        guard recoveryExpiryReissueCandidatesCount > 0 else {
-            return false
-        }
-        guard index < recoveryExpiryReissueCandidatesCount,
-              let alreadySeen = recoveryExpiryReissueTokens[index].first?.reissueProcessNewBadgeAlreadySeen else {
-            return true
-        }
-        return !alreadySeen
-    }
-
-    var recoveryExpiryReissueCandidatesCount: Int {
-        recoveryExpiryReissueTokens.count
-    }
-
-    private var recoveryExpiryReissueTokens: [[ExtendedCBORWebToken]] {
-        certificates.cleanDuplicates.qualifiedCertificatesForRecoveryExpiryReissue
-    }
-
-    var boosterReissueNotificationTitle = Constants.Keys.Reissue.boosterHeadline
-
-    var boosterReissueNotificationBody = Constants.Keys.Reissue.boosterDescription
-
-    var reissueNotificationHighlightText = Constants.Keys.Reissue.newText
-
-    var boosterReissueButtonTitle = Constants.Keys.Reissue.boosterButtonTitle
-
-    let expiryReissueNotificationTitle = Constants.Keys.Reissue.expiryHeadline
-
-    let vaccinationExpiryReissueNotificationBody = Constants.Keys.Reissue.vaccinationExpiryDescription
-
-    let vaccinationExpiryReissueButtonTitle = Constants.Keys.Reissue.vaccinationExpiryButtonTitle
-
-    let recoveryExpiryReissueNotificationBody = Constants.Keys.Reissue.recoveryExpiryDescription
-
-    let recoveryExpiryReissueButtonTitle = Constants.Keys.Reissue.recoveryExpiryButtonTitle
-
-    var immunizationDetailsHidden: Bool { !(isInvalid || selectedToken?.expiresSoon ?? false) }
 
     // MARK: - Lifecyle
 
@@ -463,14 +383,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
     }
 
-    func updateReissueCandidate(to value: Bool) {
-        if certificates.qualifiedForReissue {
-            repository.setReissueProcess(initialAlreadySeen: value,
-                                         newBadgeAlreadySeen: value,
-                                         tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()
-        }
-    }
-
     func updateBoosterCandiate() {
         guard var candidate = boosterCandidate, candidate.state == .new else { return }
         candidate.state = .qualified
@@ -494,80 +406,13 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .cauterize()
     }
 
-    func triggerBoosterReissue() {
-        showReissue(
-            for: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany,
-            context: .boosterRenewal
-        )
-    }
-
-    private func showReissue(
-        for certificates: [ExtendedCBORWebToken],
-        context: ReissueContext
-    ) {
-        router.showReissue(for: certificates.cleanDuplicates, context: context)
-            .ensure {
-                self.refreshCertsAndUpdateView()
-            }
-            .cauterize()
-    }
-
-    func triggerVaccinationExpiryReissue() {
-        showReissue(
-            for: vaccinationExpiryReissueTokens,
-            context: .certificateExtension
-        )
-    }
-
-    func triggerRecoveryExpiryReissue(index: Int) {
-        guard 0 ..< recoveryExpiryReissueCandidatesCount ~= index else {
-            return
-        }
-        showReissue(
-            for: recoveryExpiryReissueTokens[index],
-            context: .certificateExtension
-        )
-    }
-
-    func markExpiryReissueCandidatesAsSeen() {
-        markVaccinationExpiryReissueAsSeen()
-        markRecoveryExpiryReissueAsSeen()
-    }
-
     func showStateSelection() {
         router.showStateSelection().done { [weak self] in
             self?.refreshCertsAndUpdateView()
         }.cauterize()
     }
 
-    private func markVaccinationExpiryReissueAsSeen() {
-        guard var vaccination = vaccinationExpiryReissueTokens.first else {
-            return
-        }
-        vaccination.reissueProcessNewBadgeAlreadySeen = true
-        repository.replace(vaccination).cauterize()
-    }
-
-    private func markRecoveryExpiryReissueAsSeen() {
-        let recoveries = recoveryExpiryReissueTokens
-        for tokens in recoveries {
-            guard var recovery = tokens.first else {
-                continue
-            }
-            recovery.reissueProcessNewBadgeAlreadySeen = true
-            repository.replace(recovery).cauterize()
-        }
-    }
-
     // MARK: Private methods
-
-    private func removeReissueDataIfBoosterWasDeleted() {
-        if certificates.filterBoosters.isEmpty {
-            repository.setReissueProcess(initialAlreadySeen: false,
-                                         newBadgeAlreadySeen: false,
-                                         tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()
-        }
-    }
 
     private func certDetailDoneDidDeleteCertificate(_ cert: ExtendedCBORWebToken, _ result: CertificateDetailSceneResult) {
         certificates = certificates.filter { $0 != cert }
@@ -584,6 +429,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     private func certetailDone(_ result: CertificateDetailSceneResult, cert: ExtendedCBORWebToken) {
         switch result {
+        case .didReissuedCertificate:
+            refreshCertsAndUpdateView()
         case .didDeleteCertificate:
             certDetailDoneDidDeleteCertificate(cert, result)
         default: break
@@ -593,9 +440,11 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private func certItem(_ vm: CertificateItemViewModel?,
                           _ cert: ReversedCollection<[ExtendedCBORWebToken]>.Element) -> CertificateItem? {
         CertificateItem(viewModel: vm!) {
-            self.router.showDetail(for: cert).done { [weak self] in
-                self?.certetailDone($0, cert: cert)
-            }.cauterize()
+            self.router.showDetail(for: cert, certificates: self.certificates)
+                .done { [weak self] in
+                    self?.certetailDone($0, cert: cert)
+                }
+                .cauterize()
         }
     }
 

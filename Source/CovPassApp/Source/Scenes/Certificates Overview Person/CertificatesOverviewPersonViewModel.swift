@@ -111,6 +111,8 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
 
     private func handleCertificateDetailSceneResult(_ result: CertificateDetailSceneResult) {
         switch result {
+        case .didReissuedCertificate:
+            resolver.fulfill(.didReissuedCertificate)
         case .didDeleteCertificate:
             resolver.fulfill(.didDeleteCertificate)
         case let .showCertificatesOnOverview(certificate):

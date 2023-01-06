@@ -95,6 +95,8 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             for var certificate in list.certificates {
                 if (try? checkCertificate(certificate.vaccinationQRCodeData).wait()) == nil {
                     certificate.invalid = true
+                } else {
+                    certificate.invalid = false
                 }
                 checkedCertificates.append(certificate)
             }
@@ -307,7 +309,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             QRCoder.parse(data)
         }
         .map(on: .global()) {
-            try self.parseCertificate($0, expirationRuleIsActive: true, checkSealCertificate: checkSealCertificate)
+            try self.parseCertificate($0, expirationRuleIsActive: false, checkSealCertificate: checkSealCertificate)
         }
     }
 

@@ -27,6 +27,7 @@
 		092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */; };
 		092100532750E32D00E3F7B8 /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 092100522750E32D00E3F7B8 /* iOSSnapshotTestCase */; };
 		092100552750E32D00E3F7B8 /* iOSSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 092100522750E32D00E3F7B8 /* iOSSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0921429B295C38780075A668 /* CertificateDetailViewModel+Reissue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921429A295C38780075A668 /* CertificateDetailViewModel+Reissue.swift */; };
 		0927996C291AAD3B00296B68 /* ScanQRCodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0927996B291AAD3B00296B68 /* ScanQRCodeProtocol.swift */; };
 		0927996E291AAD9C00296B68 /* CheckIfsg22aUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0927996D291AAD9C00296B68 /* CheckIfsg22aUseCase.swift */; };
 		0928183127A2C3B900A0199F /* CheckSituationViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0928183027A2C3B900A0199F /* CheckSituationViewControllerSnapShotTests.swift */; };
@@ -182,6 +183,10 @@
 		0999707E291AD1AE00ACCDA8 /* CheckIfsg22aUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0999707D291AD1AE00ACCDA8 /* CheckIfsg22aUseCaseTests.swift */; };
 		099C1B9228C205F50068C6BB /* CertificateCardMaskImmunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099C1B9128C205F50068C6BB /* CertificateCardMaskImmunityViewModel.swift */; };
 		09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */; };
+		09A3C04B295B6614008B774C /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9199289843C5003FC588 /* OpenSans-SemiBold.ttf */; };
+		09A3C04C295B6614008B774C /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9197289843C5003FC588 /* OpenSans-Bold.ttf */; };
+		09A3C04D295B6615008B774C /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9199289843C5003FC588 /* OpenSans-SemiBold.ttf */; };
+		09A3C04E295B6615008B774C /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9197289843C5003FC588 /* OpenSans-Bold.ttf */; };
 		09A92D6428C786E100477251 /* CertificateCardMaskImmunityViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A92D6328C786E100477251 /* CertificateCardMaskImmunityViewModelTests.swift */; };
 		09ABDAC827FC3D7C0078EB11 /* ParseCertificateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABDAC727FC3D7C0078EB11 /* ParseCertificateUseCase.swift */; };
 		09ABDACB27FC934B0078EB11 /* CertificateRevocationRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABDAC927FC93440078EB11 /* CertificateRevocationRepositoryMock.swift */; };
@@ -668,6 +673,7 @@
 		091BD1D82949EF8C000217A4 /* WhatsNewSettingsSceneFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewSettingsSceneFactoryTests.swift; sourceTree = "<group>"; };
 		091DE728284F97BF00EB99FC /* ScanViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewViewModelTests.swift; sourceTree = "<group>"; };
+		0921429A295C38780075A668 /* CertificateDetailViewModel+Reissue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateDetailViewModel+Reissue.swift"; sourceTree = "<group>"; };
 		0927996B291AAD3B00296B68 /* ScanQRCodeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeProtocol.swift; sourceTree = "<group>"; };
 		0927996D291AAD9C00296B68 /* CheckIfsg22aUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckIfsg22aUseCase.swift; sourceTree = "<group>"; };
 		0928183027A2C3B900A0199F /* CheckSituationViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSituationViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
@@ -2964,6 +2970,7 @@
 				093949AD28F70132005C4C43 /* Immunization */,
 				093949AC28F70127005C4C43 /* Mask */,
 				216D1F12264EF4E400370F16 /* CertificateDetailViewModel.swift */,
+				0921429A295C38780075A668 /* CertificateDetailViewModel+Reissue.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -3835,6 +3842,8 @@
 			files = (
 				E735E0AE2865D7340032025C /* Test QR Codes.pdf in Resources */,
 				E74C919428984377003FC588 /* CovPass.png in Resources */,
+				09A3C04C295B6614008B774C /* OpenSans-Bold.ttf in Resources */,
+				09A3C04B295B6614008B774C /* OpenSans-SemiBold.ttf in Resources */,
 				09F9D2E129475B2E007E29DC /* OpenSans-Regular.ttf in Resources */,
 				09F9D2DF29475288007E29DC /* mock_announcements.html in Resources */,
 			);
@@ -3881,8 +3890,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09A3C04D295B6615008B774C /* OpenSans-SemiBold.ttf in Resources */,
 				09F9D2E229475B2F007E29DC /* OpenSans-Regular.ttf in Resources */,
 				E74C919628984377003FC588 /* CovPass.png in Resources */,
+				09A3C04E295B6615008B774C /* OpenSans-Bold.ttf in Resources */,
 				091BD1CD2949E6CF000217A4 /* mock_announcements.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4094,6 +4105,7 @@
 				216D1FB1264EF74600370F16 /* OnboardingRouter.swift in Sources */,
 				0983F5EC28378E7C0020DBF0 /* CertificatesOverviewPersonViewModelProtocol.swift in Sources */,
 				65E0DB0E2657F5A0004C660F /* CertificateViewModel.swift in Sources */,
+				0921429B295C38780075A668 /* CertificateDetailViewModel+Reissue.swift in Sources */,
 				0983F5EE28378E7C0020DBF0 /* CertificatesOverviewViewModel.swift in Sources */,
 				E715CB7228637DE600D07443 /* TestImportSelectionItem.swift in Sources */,
 				21A77A52265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift in Sources */,

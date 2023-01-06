@@ -24,11 +24,12 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
 
     // MARK: - Methods
 
-    func showDetail(for certificate: ExtendedCBORWebToken) -> Promise<CertificateDetailSceneResult> {
+    func showDetail(for certificate: ExtendedCBORWebToken,
+                    certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
         sceneCoordinator.push(
             CertificateItemDetailSceneFactory(
                 router: CertificateItemDetailRouter(sceneCoordinator: sceneCoordinator),
-                certificate: certificate
+                certificate: certificate, certificates: certificates
             )
         )
     }

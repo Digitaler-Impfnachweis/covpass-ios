@@ -198,6 +198,8 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
                     XCTFail()
                 case .addNewCertificate:
                     XCTFail()
+                case .didReissuedCertificate:
+                    XCTFail()
                 }
             }
             .cauterize()
@@ -222,6 +224,8 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
                 case .showCertificatesOnOverview:
                     XCTFail()
                 case .didDeleteCertificate:
+                    XCTFail()
+                case .didReissuedCertificate:
                     XCTFail()
                 }
             }

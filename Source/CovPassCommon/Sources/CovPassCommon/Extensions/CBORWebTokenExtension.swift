@@ -68,4 +68,10 @@ public extension CBORWebToken {
         let willExpireInLessOrEqual28Days = daysSinceExpiry < 0 && daysSinceExpiry >= -28
         return willExpireInLessOrEqual28Days
     }
+
+    var passed28DaysBeforeExpiration: Bool {
+        guard let exp = exp else { return false }
+        let daysSinceExpiry = Date().daysSince(exp)
+        return daysSinceExpiry >= -28
+    }
 }

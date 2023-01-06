@@ -13,11 +13,29 @@ import PromiseKit
 import XCTest
 
 class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
-    func testConsentScreen() {
-        let vm = ValidationServiceViewModel(router: ValidationServiceRouterMock(), initialisationData: ValidationServiceInitialisation.mock)
-        let vc = ValidationServiceViewController(viewModel: vm)
+    private var sut: CertificateItemDetailViewController!
 
-        verifyView(view: vc.view, height: 1350)
+    private func configureSut(result: VAASValidationResultStatus,
+                              verifyingService: String,
+                              token: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended(),
+                              tokens: [ExtendedCBORWebToken] = []) {
+        var vaasValidationResultToken = VAASValidaitonResultToken.mock
+        vaasValidationResultToken.result = result
+        vaasValidationResultToken.provider = "Lufthansa"
+        vaasValidationResultToken.verifyingService = verifyingService
+        let viewModel = CertificateItemDetailViewModel(router: CertificateItemDetailRouterMock(),
+                                                       repository: VaccinationRepositoryMock(),
+                                                       certificate: token,
+                                                       certificates: tokens,
+                                                       resolvable: nil,
+                                                       vaasResultToken: vaasValidationResultToken)
+        sut = CertificateItemDetailViewController(viewModel: viewModel)
+    }
+
+    func testConsentScreen() {
+        let viewModel = ValidationServiceViewModel(router: ValidationServiceRouterMock(), initialisationData: ValidationServiceInitialisation.mock)
+        let sut = ValidationServiceViewController(viewModel: viewModel)
+        verifyView(view: sut.view, height: 1350)
     }
 
     func testWebViewScreen() {
@@ -42,33 +60,18 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
     }
 
     func test_validation_result_passed() {
-        var vaasValidationResultToken = VAASValidaitonResultToken.mock
-        vaasValidationResultToken.result = .passed
-        vaasValidationResultToken.provider = "Lufthansa"
-        vaasValidationResultToken.verifyingService = "Booking Demo Validation Service TSI"
-        let vm = CertificateItemDetailViewModel(router: CertificateItemDetailRouterMock(), repository: VaccinationRepositoryMock(), certificate: try! ExtendedCBORWebToken.mock(), resolvable: nil, vaasResultToken: vaasValidationResultToken)
-        let vc = CertificateItemDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 2200)
+        configureSut(result: .passed, verifyingService: "Booking Demo Validation Service TSI")
+        verifyView(view: sut.view, height: 2200)
     }
 
     func test_validation_result_cross_check() {
-        var vaasValidationResultToken = VAASValidaitonResultToken.mock
-        vaasValidationResultToken.result = .crossCheck
-        vaasValidationResultToken.provider = "Lufthansa"
-        vaasValidationResultToken.verifyingService = "Betreiber_Validationservice"
-        let vm = CertificateItemDetailViewModel(router: CertificateItemDetailRouterMock(), repository: VaccinationRepositoryMock(), certificate: try! ExtendedCBORWebToken.mock(), resolvable: nil, vaasResultToken: vaasValidationResultToken)
-        let vc = CertificateItemDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 2200)
+        configureSut(result: .crossCheck, verifyingService: "Betreiber_Validationservice")
+        verifyView(view: sut.view, height: 2200)
     }
 
     func test_validation_result_fail() {
-        var vaasValidationResultToken = VAASValidaitonResultToken.mock
-        vaasValidationResultToken.result = .fail
-        vaasValidationResultToken.provider = "Lufthansa"
-        vaasValidationResultToken.verifyingService = "Betreiber_Validationservice"
-        let vm = CertificateItemDetailViewModel(router: CertificateItemDetailRouterMock(), repository: VaccinationRepositoryMock(), certificate: try! ExtendedCBORWebToken.mock(), resolvable: nil, vaasResultToken: vaasValidationResultToken)
-        let vc = CertificateItemDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 2200)
+        configureSut(result: .fail, verifyingService: "Betreiber_Validationservice")
+        verifyView(view: sut.view, height: 2200)
     }
 }
 

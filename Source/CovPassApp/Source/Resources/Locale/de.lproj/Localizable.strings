@@ -1119,7 +1119,7 @@
 
 "certificate_expires_detail_view_note_title" = "Zertifikat läuft am %@ um %@ ab";
 
-"certificate_expires_detail_view_note_message" = "Wenn es sich hierbei um Ihr neuestes Zertifikat handelt, können Sie es auf der Übersicht Ihrer Zertifikate erneuern. Sie können frühere Zertifikate nicht erneuern. In Ihrem neuesten Zertifikat sind alle notwendigen Informationen für eine Prüfung enthalten.";
+"certificate_expires_detail_view_note_message" = "Die technische Gültigkeit Ihres Zertifikats läuft bald ab. Sie müssen es jedoch nicht erneuern, da es für den Nachweis Ihres Immunschutzes nicht mehr relevant ist.";
 
 "certificate_expires_detail_view_note_nonDE" = "Dieses Zertifikat wurde nicht in Deutschland ausgestellt und kann daher nicht in der App erneuert werden. Bitte wenden Sie sich an den Aussteller des Zertifikats.";
 
@@ -1129,7 +1129,7 @@
 
 "certificate_expired_detail_view_note_title" = "Zertifikat abgelaufen";
 
-"certificate_expired_detail_view_note_message" = "Wenn es sich hierbei um Ihr neuestes Zertifikat handelt, können Sie es auf der Übersicht Ihrer Zertifikate erneuern. Andernfalls müssen Sie nichts tun, da in Ihrem neuesten Zertifikat alle notwendigen Informationen für eine Prüfung enthalten sind.";
+"certificate_expired_detail_view_note_message" = "Die technische Gültigkeit Ihres Zertifikats ist am %@ um %@ abgelaufen. Sie müssen es jedoch nicht erneuern, da es für den Nachweis Ihres Immunschutzes nicht mehr relevant ist.";
 
 
 /********** print certificate **********/
@@ -1685,7 +1685,27 @@
 
 "renewal_expiry_notification_title" = "Erneuerung notwendig";
 
-"renewal_expiry_notification_copy_vaccination" = "Die technische Laufzeit Ihres Impfzertifikats läuft bald ab oder ist bereits abgelaufen. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
+"renewal_bluebox_title_expiring_soon_vaccination" = "Impfzertifikat läuft bald ab";
+
+"renewal_bluebox_title_expiring_soon_recovery" = "Genesenenzertifikat läuft bald ab";
+
+"renewal_bluebox_title_expired_vaccination" = "Impfzertifikat abgelaufen";
+
+"renewal_bluebox_title_expired_recovery" = "Genesenenzertifikat abgelaufen";
+
+"renewal_bluebox_copy_expiring_soon" = "Die technische Gültigkeit Ihres Zertifikats läuft am %@ um %@ ab. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
+
+"renewal_bluebox_copy_expired" = "Die technische Gültigkeit Ihres Zertifikats ist am %@ um %@ abgelaufen. Erneuern Sie jetzt Ihr Zertifikat, um es weiterhin nutzen zu können.";
+
+"renewal_bluebox_copy_expiry_not_available" = "Die technische Gültigkeit Ihres Zertifikats ist am %@ um %@ abgelaufen. Wenn Sie das Zertifikat weiter benötigen, wenden Sie sich bitte an eine Apotheke, um sich ein neues Zertifikat ausstellen zu lassen.";
+
+"renewal_bluebox_copy_expiring_soon_not_available" = "Die technische Gültigkeit Ihres Zertifikats läuft am %@ um %@ ab. Wenn Sie das Zertifikat weiter benötigen, wenden Sie sich bitte an eine Apotheke, um sich ein neues Zertifikat ausstellen zu lassen.";
+
+"renewal_bluebox_copy_expiry_not_german" = "Die technische Gültigkeit mindestens eines Ihrer Zertifikate ist abgelaufen. Da Ihr Zertifikat nicht in Deutschland ausgestellt wurde, kann dieses nicht in der CovPass-App erneuert werden. Bitte prüfen Sie die Vorgaben des Ausstellungslandes.";
+
+"renewal_bluebox_copy_expiring_soon_not_german" = "Die technische Gültigkeit Ihres Zertifikats läuft am %@ um %@ ab. Da Ihr Zertifikat nicht in Deutschland ausgestellt wurde, kann dieses nicht in der CovPass-App erneuert werden. Bitte prüfen Sie die Vorgaben des Ausstellungslandes.";
+
+"renewal_expiry_notification_copy_vaccination" = "Die technische Laufzeit Ihres Zertifikats läuft bald ab oder ist bereits abgelaufen. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
 
 "renewal_expiry_notification_button_vaccination" = "Impfzertifikat erneuern";
 
@@ -1710,6 +1730,12 @@
 "renewal_expiry_success_copy" = "Sie können Ihr Zertifikat nun weiterhin wie gewohnt nutzen.\n\nBitte beachten Sie, dass auch Ihr Papier-Zertifikat bald abläuft oder bereits abgelaufen ist. Wenn gewünscht, können Sie Ihr neues Zertifikat als PDF-Datei herunterladen und ausdrucken.";
 
 "renewal_expiry_success_button" = "OK";
+
+"renewal_expiry_modal_not_available_title" = "Erneuern Sie Ihr Zertifikat";
+
+"renewal_expiry_modal_not_available_copy" = "Die technische Gültigkeit mindestens eines Ihrer Zertifikate läuft bald ab. Da Ihr Zertifikat nicht in Deutschland ausgestellt wurde, kann dieses nicht in der CovPass-App erneuert werden. Bitte prüfen Sie die Vorgaben des Ausstellungslandes.";
+
+"renewal_expiry_modal_not_available_title" = "OK";
 
 "renewal_expiry_success_download_button" = "PDF erstellen";
 

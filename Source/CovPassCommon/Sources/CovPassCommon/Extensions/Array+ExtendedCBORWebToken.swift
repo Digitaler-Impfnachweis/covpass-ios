@@ -30,7 +30,7 @@ public extension Array where Element == ExtendedCBORWebToken {
         contains { $0.matches(extendedCBORWebToken) }
     }
 
-    var qualifiedForReissue: Bool {
+    var qualifiedForBoosterRenewal: Bool {
         guard filter2Of1.isEmpty else {
             return false
         }

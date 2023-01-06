@@ -179,6 +179,6 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 1.0)
+        verifyView(view: viewController.view, waitAfter: 1.5)
     }
 }

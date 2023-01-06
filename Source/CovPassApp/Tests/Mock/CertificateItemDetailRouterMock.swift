@@ -11,6 +11,10 @@ import CovPassUI
 import PromiseKit
 
 struct CertificateItemDetailRouterMock: CertificateItemDetailRouterProtocol {
+    func showReissue(for _: [ExtendedCBORWebToken], context _: ReissueContext) -> Promise<Void> {
+        .value
+    }
+
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
     func showCertificate(for _: ExtendedCBORWebToken) -> Promise<Void> {

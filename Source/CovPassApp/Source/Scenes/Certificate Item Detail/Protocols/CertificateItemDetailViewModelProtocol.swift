@@ -14,17 +14,22 @@ protocol CertificateItemDetailViewModelProtocol {
     var title: String { get }
     var headline: String { get }
     var revocationText: String { get }
-    var isRevoked: Bool { get }
     var hideQRCodeButtons: Bool { get }
-    var isExpired: Bool { get }
-    var expiresSoonDate: Date? { get }
-    var isInvalid: Bool { get }
     var items: [ListContentItem] { get }
     var canExportToPDF: Bool { get }
     var vaasResultToken: VAASValidaitonResultToken? { get }
     var hasValidationResult: Bool { get }
-    var isGerman: Bool { get }
+    var expirationHintButtonIsHidden: Bool? { get }
+    var expirationHintIsHidden: Bool { get }
+    var expirationHintIcon: UIImage? { get }
+    var expirationHintBackgroundColor: UIColor? { get }
+    var expirationHintBorderColor: UIColor? { get }
+    var expirationHintTitle: String? { get }
+    var expirationHintButtonTitle: String? { get }
+    var expirationHintBodyText: String? { get }
     func showQRCode()
     func startPDFExport()
     func deleteCertificate()
+    func triggerVaccinationExpiryReissue()
+    func triggerRecoveryExpiryReissue(index: Int)
 }

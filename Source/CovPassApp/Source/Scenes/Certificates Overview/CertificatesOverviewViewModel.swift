@@ -404,7 +404,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private func showCertificatesBoosterRenewalIfNeeded() -> Guarantee<Void> {
         let partitions = certificateList.certificates.partitionedByOwner
         let showBoosterRenewalReissuePromises = partitions
-            .filter(\.qualifiedForReissue)
+            .filter(\.qualifiedForBoosterRenewal)
             .filter(\.reissueProcessInitialNotAlreadySeen)
             .map(showCertificatesBoosterRenewal(tokens:))
         let guarantee = when(
@@ -493,6 +493,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     private func handleCertificateDetailSceneResult(_ result: CertificateDetailSceneResult) {
         switch result {
+        case .didReissuedCertificate:
+            refresh().cauterize()
         case .didDeleteCertificate:
             router.showCertificateDidDeleteDialog()
             delegate?.viewModelNeedsFirstCertificateVisible()

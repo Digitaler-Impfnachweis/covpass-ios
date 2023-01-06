@@ -121,7 +121,7 @@ class CertificateDetailViewController: UIViewController {
         nameHeadline.textableView.accessibilityTraits = .header
         nameHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         nameHeadline.textableView.accessibilityTraits = .header
-        stackView.setCustomSpacing(.space_24, after: nameHeadline)
+        stackView.setCustomSpacing(.space_6, after: nameHeadline)
     }
 
     private func setupScanHintView() {
@@ -162,7 +162,6 @@ class CertificateDetailViewController: UIViewController {
         reissueStackView.removeAllArrangedSubviews()
         if viewModel.showBoosterReissueNotification {
             let hintButton = createReissueHintButton()
-            hintButton.topRightLabel.isHidden = !viewModel.showBoosterReissueIsNewBadge
             hintButton.button.action = viewModel.triggerBoosterReissue
             hintButton.titleLabel.attributedText = viewModel.boosterReissueNotificationTitle.styledAs(.header_3)
             hintButton.bodyTextView.attributedText = viewModel.boosterReissueNotificationBody.styledAs(.body)
@@ -170,33 +169,34 @@ class CertificateDetailViewController: UIViewController {
             reissueStackView.addArrangedSubview(hintButton)
         } else if viewModel.showVaccinationExpiryReissueNotification {
             let hintButton = createReissueHintButton()
-            hintButton.topRightLabel.isHidden = !viewModel.showVaccinationExpiryReissueIsNewBadge
             hintButton.button.action = viewModel.triggerVaccinationExpiryReissue
-            hintButton.titleLabel.attributedText = viewModel.expiryReissueNotificationTitle.styledAs(.header_3)
+            hintButton.titleLabel.attributedText = viewModel.reissueVaccinationTitle.styledAs(.header_3)
             hintButton.bodyTextView.attributedText = viewModel.vaccinationExpiryReissueNotificationBody.styledAs(.body)
             hintButton.button.title = viewModel.vaccinationExpiryReissueButtonTitle
+            hintButton.hintButtonWrapper.isHidden = !viewModel.showVaccinationExpiryReissueButtonInNotification
             reissueStackView.addArrangedSubview(hintButton)
         }
         for index in 0 ..< viewModel.recoveryExpiryReissueCandidatesCount {
             let hintButton = createReissueHintButton()
-            hintButton.topRightLabel.isHidden = !viewModel.showRecoveryExpiryReissueIsNewBadge(index: index)
             hintButton.button.action = { [weak self] in
                 self?.viewModel.triggerRecoveryExpiryReissue(index: index)
             }
-            hintButton.titleLabel.attributedText = viewModel.expiryReissueNotificationTitle.styledAs(.header_3)
-            hintButton.bodyTextView.attributedText = viewModel.recoveryExpiryReissueNotificationBody.styledAs(.body)
+            hintButton.titleLabel.attributedText = viewModel.reissueRecoveryTitle(index: index).styledAs(.header_3)
+            hintButton.bodyTextView.attributedText = viewModel.recoveryExpiryReissueNotificationBody(index: index).styledAs(.body)
             hintButton.button.title = viewModel.recoveryExpiryReissueButtonTitle
+            hintButton.hintButtonWrapper.isHidden = !viewModel.showRecoveryExpiryReissueButtonInNotification(index: index)
             reissueStackView.addArrangedSubview(hintButton)
         }
         reissueStackView.isHidden = reissueStackView.arrangedSubviews.isEmpty
+        stackView.setCustomSpacing(20, after: reissueStackView)
     }
 
     private func createReissueHintButton() -> HintButton {
         let reissueHintView = HintButton()
-        reissueHintView.topRightLabel.text = viewModel.reissueNotificationHighlightText
-        reissueHintView.containerView.backgroundColor = .neutralWhite
-        reissueHintView.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
-        reissueHintView.button.style = .alternative
+        reissueHintView.bodyTextView.backgroundColor = .clear
+        reissueHintView.containerView.backgroundColor = .brandAccent20
+        reissueHintView.containerView?.layer.borderColor = UIColor.brandAccent40.cgColor
+        reissueHintView.button.style = .primary
         reissueHintView.backgroundColor = .backgroundPrimary
         return reissueHintView
     }

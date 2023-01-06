@@ -406,17 +406,8 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         .seriesOfDoses(2)
         .extended(vaccinationQRCodeData: "2")
 
-    func testCertificateDetail_ShowReissueNotification() {
+    func test_showBoosterRenewal_notification() {
         var singleDoseImmunizationJohnsonCert = singleDoseImmunizationJohnsonCert
-        singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen = false
-        let certs = [singleDoseImmunizationJohnsonCert, vaccinationWithTwoShotsOfVaccine]
-        let vm = configureSut(certs: certs)
-        let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1800)
-    }
-
-    func testCertificateDetail_ShowReissueNotification_NewBadgeAlreadySeen() {
-        singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen = true
         let certs = [singleDoseImmunizationJohnsonCert, vaccinationWithTwoShotsOfVaccine]
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
@@ -442,22 +433,17 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         verifyView(view: viewController.view, height: 1600)
     }
 
-    func testReissueNotifications_new_badge_shown() {
-        let viewModel = CertificateDetailViewModelMock()
-        viewModel.showBoosterReissueIsNewBadge = true
-        viewModel.showVaccinationExpiryReissueIsNewBadge = true
-        viewModel.showBoosterReissueNotification = true
-        viewModel.showRecoveryExpiryReissueIsNewBadgeValues = [true, true]
+    func test_reissue_expiry_vaccination_and_recovery_() throws {
+        var tokenVaccination = CBORWebToken.mockVaccinationCertificate.extended()
+        var tokenRecovery1 = CBORWebToken.mockRecoveryCertificate.extended()
+        var tokenRecovery2 = CBORWebToken.mockRecoveryCertificate.extended()
+        tokenVaccination.vaccinationCertificate.exp = try XCTUnwrap(DateUtils.parseDate("2021-04-26T15:05:00"))
+        tokenRecovery1.vaccinationCertificate.exp = try XCTUnwrap(DateUtils.parseDate("2021-02-26T15:05:00"))
+        tokenRecovery2.vaccinationCertificate.exp = try XCTUnwrap(DateUtils.parseDate("2021-03-26T15:05:00"))
+        let certs = [tokenVaccination, tokenRecovery1, tokenRecovery2]
+        let viewModel = configureSut(certs: certs)
         let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1600)
-    }
-
-    func testReissueNotifications_new_badge_for_only_one_recovery() {
-        let viewModel = CertificateDetailViewModelMock()
-        viewModel.showVaccinationExpiryReissueNotification = true
-        viewModel.showRecoveryExpiryReissueIsNewBadgeValues = [false, true]
-        let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1600)
+        verifyView(view: viewController.view, height: 2300, waitAfter: 0.2)
     }
 
     func test_maskRuleAvailable_and_notNeedMask_() throws {
