@@ -219,7 +219,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         initalRefresh()
             .then(showNonDeExpiryAlertIfNeeded)
             .then(showCertificatesBoosterRenewalIfNeeded)
-            .then(showCertificatesExtensionReissueIfNeeded)
+            .then(showVaccinationCertificatesExtensionReissueIfNeeded)
+            .then(showRecoveryCertificatesExtensionReissueIfNeeded)
     }
 
     private var lastPlayload: String = ""
@@ -401,10 +402,28 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         return guarantee
     }
 
-    private func showCertificatesExtensionReissueIfNeeded() -> Guarantee<Void> {
+    private func showVaccinationCertificatesExtensionReissueIfNeeded() -> Guarantee<Void> {
         let partitions = certificateList.certificates.partitionedByOwner
         let showBoosterRenewalReissuePromises = partitions
-            .filter(\.areCertificatesQualifiedForExpiryReissue)
+            .filter(\.areVaccinationsQualifiedForExpiryReissue)
+            .map(\.qualifiedCertificatesForVaccinationExpiryReissue)
+            .filter(\.reissueProcessInitialNotAlreadySeen)
+            .map(showCertificatesExtensionReissue(tokens:))
+        let guarantee = when(
+            fulfilled: showBoosterRenewalReissuePromises.makeIterator(),
+            concurrently: 1
+        ).recover { _ in
+            .value([])
+        }.asVoid()
+        return guarantee
+    }
+
+    private func showRecoveryCertificatesExtensionReissueIfNeeded() -> Guarantee<Void> {
+        let partitions = certificateList.certificates.partitionedByOwner
+        let showBoosterRenewalReissuePromises = partitions
+            .filter(\.areRecoveriesQualifiedForExpiryReissue)
+            .map(\.cleanDuplicates)
+            .flatMap(\.qualifiedCertificatesForRecoveryExpiryReissue)
             .filter(\.reissueProcessInitialNotAlreadySeen)
             .map(showCertificatesExtensionReissue(tokens:))
         let guarantee = when(
