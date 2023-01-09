@@ -57,7 +57,7 @@ extension CertificateDetailViewModel {
         certificates.areVaccinationsQualifiedForExpiryReissue
     }
 
-    var vaccinationExpiryReissueTokens: [ExtendedCBORWebToken] {
+    private var vaccinationExpiryReissueTokens: [ExtendedCBORWebToken] {
         certificates.qualifiedCertificatesForVaccinationExpiryReissue
     }
 
