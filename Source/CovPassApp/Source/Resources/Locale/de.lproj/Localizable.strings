@@ -1849,6 +1849,10 @@
 
 "infschg_start_screen_status_grey_2" = "Keine zusätzlichen Regeln";
 
+"infschg_detail_view_status_not_applicable_title" = "Keine Prüfung möglich";
+
+"infschg_detail_view_status_not_applicable_copy" = "Voraussetzung für die Überprüfung der bundeslandspezifischen Maskenpflicht ist ein technisch gültiges Zertifikat. Bitte überprüfen Sie, ob Sie das Zertifikat erneuern können.";
+
 "infschg_start_screen_status_federal_state" = "in %@";
 
 "infschg_settings_federal_state_title" = "Bundesland";
