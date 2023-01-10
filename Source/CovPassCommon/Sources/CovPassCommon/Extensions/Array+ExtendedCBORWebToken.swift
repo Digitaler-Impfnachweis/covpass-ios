@@ -108,7 +108,9 @@ public extension Array where Element == ExtendedCBORWebToken {
 
     var reissueProcessInitialNotAlreadySeen: Bool { !reissueProcessInitialAlreadySeen }
 
-    var reissueProcessInitialAlreadySeen: Bool { first(where: { $0.reissueProcessInitialAlreadySeen ?? false }) != nil }
+    var reissueProcessInitialAlreadySeen: Bool {
+        first?.reissueProcessInitialAlreadySeen ?? false
+    }
 
     var reissueNewBadgeAlreadySeen: Bool { first(where: { $0.reissueProcessNewBadgeAlreadySeen ?? false }) != nil }
 

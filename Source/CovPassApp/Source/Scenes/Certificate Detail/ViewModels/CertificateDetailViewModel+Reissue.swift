@@ -199,30 +199,6 @@ extension CertificateDetailViewModel {
         )
     }
 
-    func markExpiryReissueCandidatesAsSeen() {
-        markVaccinationExpiryReissueAsSeen()
-        markRecoveryExpiryReissueAsSeen()
-    }
-
-    private func markVaccinationExpiryReissueAsSeen() {
-        guard var vaccination = vaccinationExpiryReissueTokens.first else {
-            return
-        }
-        vaccination.reissueProcessNewBadgeAlreadySeen = true
-        repository.replace(vaccination).cauterize()
-    }
-
-    private func markRecoveryExpiryReissueAsSeen() {
-        let recoveries = recoveriesQualifiedForReissue
-        for tokens in recoveries {
-            guard var recovery = tokens.first else {
-                continue
-            }
-            recovery.reissueProcessNewBadgeAlreadySeen = true
-            repository.replace(recovery).cauterize()
-        }
-    }
-
     func updateReissueCandidate(to value: Bool) {
         if certificates.qualifiedForBoosterRenewal {
             repository.setReissueProcess(initialAlreadySeen: value,

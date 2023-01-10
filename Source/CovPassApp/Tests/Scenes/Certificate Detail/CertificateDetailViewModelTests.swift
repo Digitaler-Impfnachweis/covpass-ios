@@ -755,28 +755,6 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertEqual(tokens.count, 3)
     }
 
-    func testMarkExpiryReissueCandidatesAsSeen() {
-        // Given
-        vaccinationRepo.replaceExpectation.expectedFulfillmentCount = 3
-        configureCustomSut(
-            certificates: [
-                .reissuableRecovery,
-                .reissuableRecovery,
-                .reissuableVaccination,
-                .reissuableVaccination,
-                .nonReissuableVaccination
-            ]
-        )
-
-        // When
-        sut.markExpiryReissueCandidatesAsSeen()
-
-        // Then
-        wait(for: [
-            vaccinationRepo.replaceExpectation
-        ], timeout: 1)
-    }
-
     func testRecoveryExpiryReissueCandidatesCount() {
         // Given
         configureCustomSut(

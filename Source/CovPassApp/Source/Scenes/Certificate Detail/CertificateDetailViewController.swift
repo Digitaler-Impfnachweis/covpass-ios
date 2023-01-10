@@ -62,7 +62,6 @@ class CertificateDetailViewController: UIViewController {
         viewModel.refresh()
         viewModel.updateBoosterCandiate()
         viewModel.updateReissueCandidate(to: true)
-        viewModel.markExpiryReissueCandidatesAsSeen()
     }
 
     // MARK: - Methods
