@@ -98,7 +98,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
         if certificate.vaccinationCertificate.isExpired {
             return "certificates_overview_expired_certificate_note".localized
         }
-        if certificate.vaccinationCertificate.willExpireInLessOrEqual28Days {
+        if certificate.vaccinationCertificate.expiresSoon {
             return "certificates_overview_expires_soon_certificate_note".localized
         }
         if certificate.isInvalid || certificate.isRevoked {

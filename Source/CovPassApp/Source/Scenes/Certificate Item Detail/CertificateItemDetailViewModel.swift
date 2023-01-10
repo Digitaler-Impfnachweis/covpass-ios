@@ -191,14 +191,16 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     var expirationHintIcon: UIImage? {
         guard !expirationHintIsHidden else { return nil }
         if !isReissuable {
-            if certificate.vaccinationCertificate.willExpireInLessOrEqual28Days {
-                return .activity
-            } else if certificate.vaccinationCertificate.isExpired, isSuperseded {
+            if certificate.vaccinationCertificate.isExpired, isSuperseded {
                 return .warning
             } else if isRevoked {
                 return .warning
             } else if isInvalid {
                 return .warning
+            } else if isExpired {
+                return .error
+            } else {
+                return .activity
             }
         }
         return .error
@@ -232,20 +234,14 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         if isRevoked || isInvalid {
             return "certificate_invalid_detail_view_note_title".localized.replaceIfAvailable(expirationDate: expirationDate)
         } else if isSuperseded {
-            if willExpireInLessOrEqual28Days {
-                return "certificate_expires_detail_view_note_title".localized.replaceIfAvailable(expirationDate: expirationDate)
-            } else {
+            if isExpired {
                 if isVaccination {
                     return "renewal_bluebox_title_expired_vaccination".localized.replaceIfAvailable(expirationDate: expirationDate)
                 } else {
                     return "renewal_bluebox_title_expired_recovery".localized.replaceIfAvailable(expirationDate: expirationDate)
                 }
-            }
-        } else if certificate.vaccinationCertificate.willExpireInLessOrEqual28Days {
-            if isVaccination {
-                return "renewal_bluebox_title_expiring_soon_vaccination".localized.replaceIfAvailable(expirationDate: expirationDate)
             } else {
-                return "renewal_bluebox_title_expiring_soon_recovery".localized.replaceIfAvailable(expirationDate: expirationDate)
+                return "certificate_expires_detail_view_note_title".localized.replaceIfAvailable(expirationDate: expirationDate)
             }
         } else if isExpired {
             if isVaccination {
@@ -253,8 +249,13 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
             } else {
                 return "renewal_bluebox_title_expired_recovery".localized.replaceIfAvailable(expirationDate: expirationDate)
             }
+        } else if certificate.vaccinationCertificate.expiresSoon {
+            if isVaccination {
+                return "renewal_bluebox_title_expiring_soon_vaccination".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else {
+                return "renewal_bluebox_title_expiring_soon_recovery".localized.replaceIfAvailable(expirationDate: expirationDate)
+            }
         }
-
         return nil
     }
 
@@ -276,26 +277,26 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         } else if isInvalid {
             return "revocation_detail_locationID".localized.replaceIfAvailable(expirationDate: expirationDate)
         } else if isReissuable {
-            if willExpireInLessOrEqual28Days {
-                return "renewal_bluebox_copy_expiring_soon".localized.replaceIfAvailable(expirationDate: expirationDate)
-            } else if isExpired {
+            if isExpired {
                 return "renewal_bluebox_copy_expired".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else {
+                return "renewal_bluebox_copy_expiring_soon".localized.replaceIfAvailable(expirationDate: expirationDate)
             }
         } else if isSuperseded {
-            if willExpireInLessOrEqual28Days {
-                return "certificate_expires_detail_view_note_message".localized.replaceIfAvailable(expirationDate: expirationDate)
-            } else if isExpired {
+            if isExpired {
                 return "certificate_expired_detail_view_note_message".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else {
+                return "certificate_expires_detail_view_note_message".localized.replaceIfAvailable(expirationDate: expirationDate)
             }
         } else if !isReissuable {
-            if isGerman, willExpireInLessOrEqual28Days {
-                return "renewal_bluebox_copy_expiring_soon_not_available".localized.replaceIfAvailable(expirationDate: expirationDate)
-            } else if isGerman, expiredForLessOrEqual90Days || expiredMoreThan90Days {
+            if isGerman, isExpired {
                 return "renewal_bluebox_copy_expiry_not_available".localized.replaceIfAvailable(expirationDate: expirationDate)
-            } else if !isGerman, willExpireInLessOrEqual28Days {
-                return "renewal_bluebox_copy_expiring_soon_not_german".localized.replaceIfAvailable(expirationDate: expirationDate)
-            } else if !isGerman, expiredForLessOrEqual90Days || expiredMoreThan90Days {
+            } else if !isGerman, isExpired {
                 return "renewal_bluebox_copy_expiry_not_german".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else if isGerman, certificate.vaccinationCertificate.expiresSoon {
+                return "renewal_bluebox_copy_expiring_soon_not_available".localized.replaceIfAvailable(expirationDate: expirationDate)
+            } else if !isGerman, certificate.vaccinationCertificate.expiresSoon {
+                return "renewal_bluebox_copy_expiring_soon_not_german".localized.replaceIfAvailable(expirationDate: expirationDate)
             }
         }
 

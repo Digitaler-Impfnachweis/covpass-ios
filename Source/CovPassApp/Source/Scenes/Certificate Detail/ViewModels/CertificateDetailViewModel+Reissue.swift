@@ -74,30 +74,30 @@ extension CertificateDetailViewModel {
     }
 
     var reissueVaccinationTitle: String {
-        if expiryVaccination?.vaccinationCertificate.willExpireInLessOrEqual28Days ?? false {
-            return Constants.Keys.Reissue.AboutToExpire.titleVaccination
+        if expiryVaccination?.vaccinationCertificate.isExpired ?? false {
+            return Constants.Keys.Reissue.Expired.titleVaccination
         }
-        return Constants.Keys.Reissue.Expired.titleVaccination
+        return Constants.Keys.Reissue.AboutToExpire.titleVaccination
     }
 
     var vaccinationExpiryReissueNotificationBody: String {
         var copyText = ""
         if let reissueableVaccination = expiryVaccination {
-            if reissueableVaccination.vaccinationCertificate.willExpireInLessOrEqual28Days {
-                if !reissueableVaccination.vaccinationCertificate.isGermanIssuer {
-                    copyText = Constants.Keys.Reissue.AboutToExpire.copyNotGerman
-                } else if !certificates.areVaccinationsQualifiedForExpiryReissue {
-                    copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailable
-                } else {
-                    copyText = Constants.Keys.Reissue.AboutToExpire.copy
-                }
-            } else {
+            if reissueableVaccination.vaccinationCertificate.isExpired {
                 if !reissueableVaccination.vaccinationCertificate.isGermanIssuer {
                     copyText = Constants.Keys.Reissue.Expired.copyNotGerman
                 } else if !certificates.areVaccinationsQualifiedForExpiryReissue {
                     copyText = Constants.Keys.Reissue.Expired.copyNotAvailable
                 } else {
                     copyText = Constants.Keys.Reissue.Expired.copy
+                }
+            } else {
+                if !reissueableVaccination.vaccinationCertificate.isGermanIssuer {
+                    copyText = Constants.Keys.Reissue.AboutToExpire.copyNotGerman
+                } else if !certificates.areVaccinationsQualifiedForExpiryReissue {
+                    copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailable
+                } else {
+                    copyText = Constants.Keys.Reissue.AboutToExpire.copy
                 }
             }
             guard let expireDate = reissueableVaccination.vaccinationCertificate.exp else {
@@ -115,10 +115,10 @@ extension CertificateDetailViewModel {
             return ""
         }
         let expiryRecovery = recoveriesPassed28Days[index]
-        if expiryRecovery.vaccinationCertificate.willExpireInLessOrEqual28Days {
-            return Constants.Keys.Reissue.AboutToExpire.titleRecovery
+        if expiryRecovery.vaccinationCertificate.isExpired {
+            return Constants.Keys.Reissue.Expired.titleRecovery
         }
-        return Constants.Keys.Reissue.Expired.titleRecovery
+        return Constants.Keys.Reissue.AboutToExpire.titleRecovery
     }
 
     func recoveryExpiryReissueNotificationBody(index: Int) -> String {
