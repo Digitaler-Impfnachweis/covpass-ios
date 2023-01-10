@@ -59,13 +59,11 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
             // Do not start the reissue process when we don't have any tokens
             return .value
         }
-        return sceneCoordinator.present(
-            ReissueStartSceneFactory(
-                router: ReissueStartRouter(sceneCoordinator: sceneCoordinator),
-                tokens: tokens,
-                context: context
-            )
-        )
+        let router = ReissueConsentRouter(sceneCoordinator: sceneCoordinator)
+        let sceneFactory = ReissueConsentResolvableSceneFactory(router: router,
+                                                                tokens: tokens,
+                                                                context: context)
+        return sceneCoordinator.present(sceneFactory, animated: true)
     }
 
     func showStateSelection() -> Promise<Void> {

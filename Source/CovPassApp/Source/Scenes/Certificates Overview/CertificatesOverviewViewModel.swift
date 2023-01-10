@@ -148,9 +148,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     func updateTrustList() {
         repository.updateTrustListIfNeeded()
-            .done {
-                self.delegate?.viewModelDidUpdate()
-            }
             .catch { [weak self] error in
                 if let error = error as? APIError, error == .notModified {
                     self?.delegate?.viewModelDidUpdate()
@@ -182,11 +179,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                                 userDefaults: self.userDefaults)
                 .execute()
         }
-        .get {
-            self.certificateList = $0
-        }
         .then { _ in
-            self.refresh()
+            self.createCellViewModels()
+        }
+        .get {
+            self.delegate?.viewModelDidUpdate()
         }
         .cauterize()
     }

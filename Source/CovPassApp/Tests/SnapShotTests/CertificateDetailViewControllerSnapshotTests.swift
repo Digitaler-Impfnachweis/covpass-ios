@@ -152,6 +152,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
     func testCertificateDetail_IsExpired() {
         let vacinationRepoMock = VaccinationRepositoryMock()
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        certificateHolderStatusModel.areMaskRulesAvailable = true
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
@@ -163,6 +164,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
     }
 
     func testCertificateDetail_IsInvalid() {
+        certificateHolderStatusModel.areMaskRulesAvailable = true
         let vacinationRepoMock = VaccinationRepositoryMock()
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
@@ -351,6 +353,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
 
     func testCertificateDetail_AllTypes_Selected_Invalid() {
         let vacinationRepoMock = VaccinationRepositoryMock()
+        certificateHolderStatusModel.areMaskRulesAvailable = true
 
         // Invalid
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
@@ -417,6 +420,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
     func testCertificateIsRevoked() throws {
         var token = try ExtendedCBORWebToken.token1Of1()
         token.revoked = true
+        certificateHolderStatusModel.areMaskRulesAvailable = true
         let certs = [token]
         let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
         let viewController = CertificateDetailViewController(viewModel: viewModel)
@@ -427,6 +431,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var token = try ExtendedCBORWebToken.token1Of1()
         token.vaccinationCertificate.exp = Date() - 100
         token.revoked = true
+        certificateHolderStatusModel.areMaskRulesAvailable = true
         let certs = [token]
         let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
         let viewController = CertificateDetailViewController(viewModel: viewModel)
@@ -437,6 +442,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var tokenVaccination = CBORWebToken.mockVaccinationCertificate.extended()
         var tokenRecovery1 = CBORWebToken.mockRecoveryCertificate.extended()
         var tokenRecovery2 = CBORWebToken.mockRecoveryCertificate.extended()
+        certificateHolderStatusModel.areMaskRulesAvailable = true
         tokenVaccination.vaccinationCertificate.exp = try XCTUnwrap(DateUtils.parseDate("2021-04-26T15:05:00"))
         tokenRecovery1.vaccinationCertificate.exp = try XCTUnwrap(DateUtils.parseDate("2021-02-26T15:05:00"))
         tokenRecovery2.vaccinationCertificate.exp = try XCTUnwrap(DateUtils.parseDate("2021-03-26T15:05:00"))

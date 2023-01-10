@@ -12,6 +12,7 @@ import PromiseKit
 import UIKit
 
 final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
+    var immunizationStatusViewIsHidden: Bool = false
     var showVaccinationExpiryReissueButtonInNotification: Bool = true
     var recoveryExpiryCount: Int = 1
     var router: CertificateDetailRouterProtocol = CertificateDetailRouterMock()

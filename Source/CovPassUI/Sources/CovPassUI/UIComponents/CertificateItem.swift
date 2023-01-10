@@ -59,7 +59,9 @@ public class CertificateItem: XibView {
 
         infoLabel.attributedText = viewModel.info.styledAs(.body).colored(.onBackground70)
 
-        info2Label.attributedText = viewModel.info2?.styledAs(.header_3).lineHeight(20)
+        let info2LabelTextStyle: TextStyle = viewModel.isNeutral ? .body : .header_3
+        let info2LabelTextColor: UIColor = viewModel.isNeutral ? .onBackground70 : .onBackground100
+        info2Label.attributedText = viewModel.info2?.styledAs(info2LabelTextStyle).colored(info2LabelTextColor).lineHeight(20)
         info2Label.isHidden = viewModel.info2 == nil
 
         statusIcon.image = viewModel.statusIcon
@@ -68,7 +70,9 @@ public class CertificateItem: XibView {
         statusIconLeadingConstraint.constant = viewModel.statusIconHidden ? 0 : 4
         statusIconTopConstraint.constant = viewModel.statusIconHidden ? 0 : 5
 
-        activeLabel.attributedText = viewModel.activeTitle?.styledAs(.body).colored(.onBackground70)
+        let activeLabelTextStyle: TextStyle = viewModel.isNeutral ? .header_3 : .body
+        let activeLabelTextColor: UIColor = viewModel.isNeutral ? .onBackground100 : .onBackground70
+        activeLabel.attributedText = viewModel.activeTitle?.styledAs(activeLabelTextStyle).colored(activeLabelTextColor)
         activeView.isHidden = viewModel.activeTitle == nil
 
         chevron.tintColor = .brandAccent

@@ -93,6 +93,7 @@ class CertificateDetailViewController: UIViewController {
         immunizationStatusView.imageViewWidthConstraint.constant = 32
         immunizationStatusView.bottomBorder.isHidden = true
         immunizationStatusView.bottomBorder.layoutMargins.bottom = .space_24
+        immunizationStatusView.isHidden = viewModel.immunizationStatusViewIsHidden
     }
 
     private func setupNavigationBar() {

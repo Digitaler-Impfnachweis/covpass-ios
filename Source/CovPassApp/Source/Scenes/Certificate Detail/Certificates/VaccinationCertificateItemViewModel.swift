@@ -60,13 +60,13 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var title: String {
-        neutral ? dgc.nam.fullName : "certificates_overview_vaccination_certificate_title".localized
+        isNeutral ? dgc.nam.fullName : "certificates_overview_vaccination_certificate_title".localized
     }
 
     var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
-        if neutral {
+        if isNeutral {
             return "certificates_overview_vaccination_certificate_title".localized
         }
         guard let v = dgc.v?.first else { return "" }
@@ -76,7 +76,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
-        if neutral {
+        if isNeutral {
             guard let v = dgc.v?.first else { return "" }
             return String(format: "certificates_overview_vaccination_certificate_message".localized, v.dn, v.sd)
         }
@@ -92,10 +92,13 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var info2: String? {
+        if isNeutral, let v = dgc.v?.first {
+            return String(format: "certificates_overview_vaccination_certificate_date".localized, DateUtils.displayDateFormatter.string(from: v.dt))
+        }
         if certificate.vaccinationCertificate.isExpired {
             return "certificates_overview_expired_certificate_note".localized
         }
-        if certificate.vaccinationCertificate.expiresSoon {
+        if certificate.vaccinationCertificate.willExpireInLessOrEqual28Days {
             return "certificates_overview_expires_soon_certificate_note".localized
         }
         if certificate.isInvalid || certificate.isRevoked {
@@ -110,26 +113,24 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
         "accessibility_overview_certificates_label_display_certificate".localized
     }
 
-    var statusIcon: UIImage? { neutral ? nil : .validationCheckmark }
+    var statusIcon: UIImage? { isNeutral ? nil : .validationCheckmark }
 
     var statusIconHidden: Bool { statusIcon == nil }
 
     var statusIconAccessibilityLabel: String? { activeTitle }
 
     var activeTitle: String? {
-        if neutral {
-            if let v = dgc.v?.first {
-                return String(format: "certificates_overview_vaccination_certificate_date".localized, DateUtils.displayDateFormatter.string(from: v.dt))
-            }
+        if isNeutral {
+            return "renewal_expiry_notification_title".localized
         }
         return active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }
 
-    var neutral: Bool
+    var isNeutral: Bool
 
     init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {
         self.certificate = certificate
         self.active = active
-        self.neutral = neutral
+        isNeutral = neutral
     }
 }

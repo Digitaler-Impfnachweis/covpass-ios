@@ -86,10 +86,17 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="fA8-IS-FJY"/>
                 </scrollView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="uEI-0g-fQp">
-                    <rect key="frame" x="0.0" y="726" width="414" height="170"/>
+                    <rect key="frame" x="0.0" y="618" width="414" height="278"/>
                     <subviews>
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ooz-8n-12K">
+                            <rect key="frame" x="87" y="0.0" width="240" height="80"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="rgh-K4-2Hy"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aT8-44-VZP">
-                            <rect key="frame" x="12" y="0.0" width="390" height="58"/>
+                            <rect key="frame" x="12" y="108" width="390" height="58"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="aqT-U2-fgZ" customClass="MainButton" customModule="CovPassUI">
                                     <rect key="frame" x="20" y="0.0" width="350" height="58"/>
@@ -109,7 +116,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZwR-TO-349">
-                            <rect key="frame" x="12" y="86" width="390" height="52"/>
+                            <rect key="frame" x="12" y="194" width="390" height="52"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="kcC-nH-le3" customClass="MainButton" customModule="CovPassUI">
                                     <rect key="frame" x="20" y="0.0" width="350" height="52"/>
@@ -129,7 +136,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfB-tQ-DcO" userLabel="spacer">
-                            <rect key="frame" x="87" y="166" width="240" height="4"/>
+                            <rect key="frame" x="87" y="274" width="240" height="4"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="4" id="J1u-E4-Zdb"/>

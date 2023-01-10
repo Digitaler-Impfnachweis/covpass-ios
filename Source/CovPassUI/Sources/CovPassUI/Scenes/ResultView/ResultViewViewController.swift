@@ -66,7 +66,7 @@ public class ResultViewViewController: UIViewController {
 
     private func setupGradientBottomView() {
         bottomStackView.layoutIfNeeded()
-        scrollView.contentInset.bottom = bottomStackView.bounds.height
+        scrollView.contentInset.bottom = bottomStackView.bounds.height - 80
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bottomStackView.bounds
         gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor.backgroundPrimary.cgColor, UIColor.backgroundPrimary.cgColor]

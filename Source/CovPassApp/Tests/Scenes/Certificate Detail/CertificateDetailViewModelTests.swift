@@ -919,7 +919,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Given
         var token: ExtendedCBORWebToken = try .token2Of2Mustermann()
         token.invalid = true
-        configureCustomSut(certificates: [token])
+        configureCustomSut(certificates: [token], maskRulesAvailable: true)
 
         // When
         let viewModel = sut.maskStatusViewModel

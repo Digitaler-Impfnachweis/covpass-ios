@@ -226,14 +226,12 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var maskStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol {
-        guard !isInvalid else {
-            return CertificateHolderInvalidMaskStatusViewModel()
-        }
-
         guard certificateHolderStatusModel.maskRulesAvailable(for: userDefaults.stateSelection) else {
             return CertificateHolderNoMaskRulesStatusViewModel(federalState: userDefaults.stateSelection)
         }
-
+        guard !isInvalid else {
+            return CertificateHolderInvalidMaskStatusViewModel()
+        }
         if holderNeedsMask {
             if let vaccination = certificates.latestVaccination, let recovery = certificates.latestRecovery,
                recovery.fr > vaccination.dt, !recovery.fr.isOlderThan29Days,
@@ -288,6 +286,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             }
         }
         return CertificateHolderIncompleteImmunizationStatusViewModel()
+    }
+
+    var immunizationStatusViewIsHidden: Bool {
+        expiryVaccination?.vaccinationCertificate.isExpired ?? false
     }
 
     // MARK: - Booster Notifications
