@@ -12,7 +12,8 @@ import PromiseKit
 
 class ReissueStartViewControllerSnapShotTests: BaseSnapShotTests {
     func testDefault() {
-        let token = CBORWebToken.mockVaccinationCertificate.extended()
+        var token = CBORWebToken.mockVaccinationCertificate.extended()
+        token.vaccinationCertificate.exp = .init() + 1
         let (_, resolver) = Promise<Void>.pending()
         let vm = ReissueStartViewModel(router: ReissueStartRouter(sceneCoordinator: SceneCoordinatorMock()),
                                        resolver: resolver,

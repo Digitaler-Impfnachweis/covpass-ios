@@ -33,11 +33,9 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     }
 
     private var showNotificationForExpiryOrInvalid: Bool {
-        guard token.vaccinationCertificate.isNotTest else {
-            return false
-        }
-        let cert = token.vaccinationCertificate
-        return cert.expiresSoon || cert.isExpired || (token.isInvalid && token.expiryAlertWasNotShown)
+        let certs = tokens.filterFirstOfAllTypes.map(\.vaccinationCertificate)
+        let anyCertPassed28DaysExpiry = certs.map(\.passed28DaysBeforeExpiration).contains(where: { $0 == true })
+        return anyCertPassed28DaysExpiry || (token.isInvalid && token.expiryAlertWasNotShown)
     }
 
     private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol

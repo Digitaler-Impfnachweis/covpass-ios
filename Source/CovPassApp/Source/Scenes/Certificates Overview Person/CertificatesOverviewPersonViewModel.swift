@@ -71,7 +71,7 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
         self.certificateHolderStatusModel = certificateHolderStatusModel
         self.certificates = certificates
         holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: persistence.stateSelection)
-        certificatesToShow = certificates.filterFirstOfAllTypes
+        certificatesToShow = certificates.filterFirstOfAllTypesNotExpired
         self.resolver = resolver
         pageSubtitle = String(format: Constants.Keys.modalSubline, certificatesToShow.count)
     }
@@ -143,7 +143,7 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
 
     private func setCertificates(_ certificates: [ExtendedCBORWebToken]) {
         self.certificates = certificates
-        certificatesToShow = certificates.filterFirstOfAllTypes
+        certificatesToShow = certificates.filterFirstOfAllTypesNotExpired
     }
 
     func showDetails() {

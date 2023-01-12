@@ -366,16 +366,20 @@ public extension Array where Element == ExtendedCBORWebToken {
 
     var filterNotExpired: Self { filter(\.isNotExpired) }
 
+    var filterFirstOfAllTypesNotExpired: [ExtendedCBORWebToken] {
+        let sortedList = sortLatest().filterNotInvalid.filterNotRevoked.filterNotExpired
+        return sortedList.filterFirstOfAllTypes
+    }
+
     var filterFirstOfAllTypes: [ExtendedCBORWebToken] {
         var firstOfAll: [ExtendedCBORWebToken] = []
-        let sortedList = sortLatest().filterNotInvalid.filterNotRevoked.filterNotExpired
-        if let firstTest = sortedList.firstTest {
+        if let firstTest = firstTest {
             firstOfAll.append(firstTest)
         }
-        if let firstVaccination = sortedList.firstVaccination {
+        if let firstVaccination = firstVaccination {
             firstOfAll.append(firstVaccination)
         }
-        if let firstRecovery = sortedList.firstRecovery {
+        if let firstRecovery = firstRecovery {
             firstOfAll.append(firstRecovery)
         }
         return firstOfAll

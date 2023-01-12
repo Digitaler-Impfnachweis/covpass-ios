@@ -70,7 +70,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
-        verifyView(vc: vc)
+        verifyView(view: vc.view)
     }
 
     func testMatchOne() {
@@ -91,7 +91,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
-        verifyView(vc: vc)
+        verifyView(view: vc.view)
     }
 
     func testMatchFour() {
@@ -135,6 +135,6 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
-        verifyView(vc: vc)
+        verifyView(view: vc.view)
     }
 }

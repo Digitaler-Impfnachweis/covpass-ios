@@ -72,7 +72,7 @@ class ReissueStartViewModelTests: XCTestCase {
         let certItem = sut.certItem
 
         // Then
-        XCTAssertEqual(certItem.activeLabel.text, "Renewal needed")
+        XCTAssertNil(certItem.activeLabel.text)
     }
 
     func testCertItem_expiry_extension() {

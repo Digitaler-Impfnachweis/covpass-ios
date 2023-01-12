@@ -199,7 +199,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 return .warning
             } else if isExpired {
                 return .error
-            } else {
+            } else if isGerman {
                 return .activity
             }
         }

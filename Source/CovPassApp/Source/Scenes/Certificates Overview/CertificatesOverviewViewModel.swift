@@ -460,7 +460,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
 
     private func showCertificate(certificates: [ExtendedCBORWebToken], forceToDetailsPage: Bool) -> Promise<CertificateDetailSceneResult> {
-        if certificates.filterFirstOfAllTypes.count > 0, !forceToDetailsPage {
+        if certificates.filterFirstOfAllTypesNotExpired.count > 0, !forceToDetailsPage {
             return router.showCertificates(certificates: certificates,
                                            vaccinationRepository: repository,
                                            boosterLogic: boosterLogic)

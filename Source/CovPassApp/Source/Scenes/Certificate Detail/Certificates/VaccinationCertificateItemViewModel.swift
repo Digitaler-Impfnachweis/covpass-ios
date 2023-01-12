@@ -121,7 +121,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
 
     var activeTitle: String? {
         if isNeutral {
-            return "renewal_expiry_notification_title".localized
+            return certificate.vaccinationCertificate.expiresSoon ? "renewal_expiry_notification_title".localized : nil
         }
         return active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }

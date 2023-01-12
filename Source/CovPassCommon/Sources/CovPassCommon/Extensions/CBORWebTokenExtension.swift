@@ -54,28 +54,19 @@ public extension CBORWebToken {
 
     var expiredMoreThan90Days: Bool {
         guard let exp = exp else { return false }
-        let daysSinceExpiry = Date().daysSince(exp)
-        let expiredMoreThan90Days = daysSinceExpiry >= 90
-        return expiredMoreThan90Days
+        let expiresSoonDate = exp + 60 * 60 * 24 * 90
+        return Date() >= expiresSoonDate
     }
 
     var expiredForLessOrEqual90Days: Bool {
-        guard let exp = exp else { return false }
-        let daysSinceExpiry = Date().daysSince(exp)
-        let expiredForLessThan90Days = daysSinceExpiry >= 0 && daysSinceExpiry < 90
-        return expiredForLessThan90Days
+        isExpired && !expiredMoreThan90Days
     }
 
     var willExpireInLessOrEqual28Days: Bool {
-        guard let exp = exp else { return false }
-        let daysSinceExpiry = Date().daysSince(exp)
-        let willExpireInLessOrEqual28Days = daysSinceExpiry < 0 && daysSinceExpiry >= -28
-        return willExpireInLessOrEqual28Days
+        !isExpired && expiresSoon
     }
 
     var passed28DaysBeforeExpiration: Bool {
-        guard let exp = exp else { return false }
-        let daysSinceExpiry = Date().daysSince(exp)
-        return daysSinceExpiry >= -28
+        expiresSoon
     }
 }
