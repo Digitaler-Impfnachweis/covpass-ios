@@ -129,7 +129,7 @@ extension CertificateDetailViewModel {
             if token.willExpireInLessOrEqual28Days {
                 if !token.isGermanIssuer {
                     copyText = Constants.Keys.Reissue.AboutToExpire.copyNotGerman
-                } else if !certificates.areVaccinationsQualifiedForExpiryReissue {
+                } else if !certificates.areRecoveriesQualifiedForExpiryReissue {
                     copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailable
                 } else {
                     copyText = Constants.Keys.Reissue.AboutToExpire.copy

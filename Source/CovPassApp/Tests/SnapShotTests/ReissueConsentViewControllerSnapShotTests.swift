@@ -44,7 +44,8 @@ class ReissueConsentViewControllerSnapShotTests: BaseSnapShotTests {
     }
 
     func testMultipleExpiryContext() {
-        var token = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(.init() - 10000).extended()
+        let date = DateUtils.parseDate("2023-01-12T15:05:00")!
+        var token = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(date).extended()
         let token2 = CBORWebToken.mockVaccinationCertificate.doseNumber(1).extended()
         token.vaccinationCertificate.exp = .init() + 1
         let (_, resolver) = Promise<Void>.pending()
