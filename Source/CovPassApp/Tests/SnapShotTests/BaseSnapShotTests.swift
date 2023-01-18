@@ -27,14 +27,15 @@ class BaseSnapShotTests: FBSnapshotTestCase {
                     record: Bool = false,
                     height: CGFloat = UIScreen.main.bounds.height,
                     waitAfter: TimeInterval = 0.0,
-                    perPixelTolerance: CGFloat = 0.1) {
+                    perPixelTolerance: CGFloat = 0.1,
+                    overallTolerance: CGFloat = 0.0) {
         recordMode = record
         view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: height)
         RunLoop.current.run(for: waitAfter)
         FBSnapshotVerifyView(view,
                              identifier: Locale.preferredLanguages[0],
                              suffixes: NSOrderedSet(arrayLiteral: "_64"),
-                             perPixelTolerance: perPixelTolerance)
+                             perPixelTolerance: perPixelTolerance, overallTolerance: overallTolerance)
     }
 
     func verifyAsync(vc: UIViewController,

@@ -17,10 +17,13 @@ final class CertificateInvalidResultViewController: UIViewController {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var revocationInfoContainerView: UIView!
     @IBOutlet var revocationInfoView: HintView!
-    @IBOutlet var rescanButton: MainButton!
+    @IBOutlet var retryButton: MainButton!
+    @IBOutlet var startOverButton: MainButton!
     @IBOutlet var reasonStackview: UIStackView!
     @IBOutlet var counterLabel: UILabel!
     @IBOutlet var travelRulesLinkLabel: LinkLabel!
+    @IBOutlet var bottomStackView: UIStackView!
+    @IBOutlet var scrollView: UIScrollView!
 
     private var viewModel: CertificateInvalidResultViewModelProtocol
     private lazy var revocationLink: NSAttributedString = {
@@ -54,6 +57,7 @@ final class CertificateInvalidResultViewController: UIViewController {
         configureButton()
         configureCounter()
         configureAccessibility()
+        setupGradientBottomView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -123,8 +127,13 @@ final class CertificateInvalidResultViewController: UIViewController {
     }
 
     private func configureButton() {
-        rescanButton.title = viewModel.buttonTitle
-        rescanButton.action = viewModel.rescan
+        startOverButton.title = viewModel.startOverButtonTitle
+        startOverButton.action = viewModel.startOver
+        startOverButton.style = .alternative
+        retryButton.title = viewModel.retryButtonTitle
+        retryButton.action = viewModel.retry
+        retryButton.style = .primary
+        retryButton.isHidden = viewModel.rescanIsHidden
     }
 
     private func configureCounter() {
@@ -135,6 +144,15 @@ final class CertificateInvalidResultViewController: UIViewController {
         counterLabel.isHidden = countdownTimerModel.hideCountdown
         counterLabel.attributedText = counterInfo
         counterLabel.textAlignment = .center
+    }
+
+    private func setupGradientBottomView() {
+        bottomStackView.layoutIfNeeded()
+        scrollView.contentInset.bottom = bottomStackView.bounds.height
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bottomStackView.bounds
+        gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor.backgroundPrimary.cgColor, UIColor.backgroundPrimary.cgColor]
+        bottomStackView.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     private func configureAccessibility() {

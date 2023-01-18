@@ -148,9 +148,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     func updateTrustList() {
         repository.updateTrustListIfNeeded()
-            .done {
-                self.delegate?.viewModelDidUpdate()
-            }
             .catch { [weak self] error in
                 if let error = error as? APIError, error == .notModified {
                     self?.delegate?.viewModelDidUpdate()
@@ -182,16 +179,16 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                                 userDefaults: self.userDefaults)
                 .execute()
         }
-        .get {
-            self.certificateList = $0
-        }
         .then { _ in
-            self.refresh()
+            self.createCellViewModels()
+        }
+        .get {
+            self.delegate?.viewModelDidUpdate()
         }
         .cauterize()
     }
 
-    func refresh() -> Promise<Void> {
+    private func initalRefresh() -> Promise<Void> {
         firstly {
             repository.getCertificateList()
         }
@@ -212,9 +209,15 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 self.delegate?.viewModelNeedsFirstCertificateVisible()
             }
             self.lastKnownFavoriteCertificateId = self.certificateList.favoriteCertificateId
-        }.then {
-            self.showExpiryAlertIfNeeded()
         }
+    }
+
+    func refresh() -> Promise<Void> {
+        initalRefresh()
+            .then(showNonDeExpiryAlertIfNeeded)
+            .then(showCertificatesBoosterRenewalIfNeeded)
+            .then(showVaccinationCertificatesExtensionReissueIfNeeded)
+            .then(showRecoveryCertificatesExtensionReissueIfNeeded)
     }
 
     private var lastPlayload: String = ""
@@ -368,55 +371,79 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     /// Show notifications like announcements and booster notifications one after another
     func showNotificationsIfNeeded() {
-        firstly {
-            self.refresh()
-        }
-        .then {
-            self.showDataPrivacyIfNeeded()
-        }
-        .then {
-            self.showAnnouncementIfNeeded()
-        }
-        .then {
-            self.showStateSelectionOnboarding()
-        }
-        .then {
-            self.showBoosterNotificationIfNeeded()
-        }
-        .then {
-            self.showCertificatesReissueIfNeeded()
-        }
-        .then {
-            self.showRevocationWarningIfNeeded()
-        }
-        .then(updateDomesticRules)
-        .then {
-            self.refresh()
-        }
-        .catch { error in
-            print("\(#file):\(#function) Error: \(error.localizedDescription)")
-        }
+        firstly { self.initalRefresh() }
+            .then(showDataPrivacyIfNeeded)
+            .then(showAnnouncementIfNeeded)
+            .then(showStateSelectionOnboarding)
+            .then(showBoosterNotificationIfNeeded)
+            .then(showRevocationWarningIfNeeded)
+            .then(updateDomesticRules)
+            .then(refresh)
+            .catch { error in
+                print("\(#file):\(#function) Error: \(error.localizedDescription)")
+            }
     }
 
-    private func showCertificatesReissueIfNeeded() -> Guarantee<Void> {
+    private func showCertificatesBoosterRenewalIfNeeded() -> Guarantee<Void> {
         let partitions = certificateList.certificates.partitionedByOwner
-        let showCertificatesReissuePromises = partitions
-            .filter(\.qualifiedForReissue)
+        let showBoosterRenewalReissuePromises = partitions
+            .filter(\.qualifiedForBoosterRenewal)
             .filter(\.reissueProcessInitialNotAlreadySeen)
-            .map(showCertificatesReissue(tokens:))
+            .map(showCertificatesBoosterRenewal(tokens:))
         let guarantee = when(
-            fulfilled: showCertificatesReissuePromises.makeIterator(),
+            fulfilled: showBoosterRenewalReissuePromises.makeIterator(),
             concurrently: 1
         ).recover { _ in
             .value([])
         }.asVoid()
-
         return guarantee
     }
 
-    private func showCertificatesReissue(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
-        repository.setReissueProcess(initialAlreadySeen: true, newBadgeAlreadySeen: false, tokens: tokens).cauterize()
-        return router.showCertificatesReissue(for: tokens, context: .boosterRenewal)
+    private func showVaccinationCertificatesExtensionReissueIfNeeded() -> Guarantee<Void> {
+        let partitions = certificateList.certificates.partitionedByOwner
+        let showBoosterRenewalReissuePromises = partitions
+            .filter(\.areVaccinationsQualifiedForExpiryReissue)
+            .map(\.qualifiedCertificatesForVaccinationExpiryReissue)
+            .filter(\.reissueProcessInitialNotAlreadySeen)
+            .map(showCertificatesExtensionReissue(tokens:))
+        let guarantee = when(
+            fulfilled: showBoosterRenewalReissuePromises.makeIterator(),
+            concurrently: 1
+        ).recover { _ in
+            .value([])
+        }.asVoid()
+        return guarantee
+    }
+
+    private func showRecoveryCertificatesExtensionReissueIfNeeded() -> Guarantee<Void> {
+        let partitions = certificateList.certificates.partitionedByOwner
+        let showBoosterRenewalReissuePromises = partitions
+            .filter(\.areRecoveriesQualifiedForExpiryReissue)
+            .map(\.cleanDuplicates)
+            .flatMap(\.qualifiedCertificatesForRecoveryExpiryReissue)
+            .filter(\.reissueProcessInitialNotAlreadySeen)
+            .map(showCertificatesExtensionReissue(tokens:))
+        let guarantee = when(
+            fulfilled: showBoosterRenewalReissuePromises.makeIterator(),
+            concurrently: 1
+        ).recover { _ in
+            .value([])
+        }.asVoid()
+        return guarantee
+    }
+
+    private func showCertificatesExtensionReissue(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        repository.setReissueProcess(initialAlreadySeen: true,
+                                     newBadgeAlreadySeen: false,
+                                     tokens: tokens).cauterize()
+        return router.showExtensionRenewalReissue(for: tokens)
+    }
+
+    private func showCertificatesBoosterRenewal(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        repository.setReissueProcess(initialAlreadySeen: true,
+                                     newBadgeAlreadySeen: false,
+                                     tokens: tokens).cauterize()
+        return router.showBoosterRenewalReissue(for: tokens)
     }
 
     private func payloadFromScannerResult(_ result: ScanResult) -> Promise<String> {
@@ -433,7 +460,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
 
     private func showCertificate(certificates: [ExtendedCBORWebToken], forceToDetailsPage: Bool) -> Promise<CertificateDetailSceneResult> {
-        if certificates.filterFirstOfAllTypes.count > 0, !forceToDetailsPage {
+        if certificates.filterFirstOfAllTypesNotExpired.count > 0, !forceToDetailsPage {
             return router.showCertificates(certificates: certificates,
                                            vaccinationRepository: repository,
                                            boosterLogic: boosterLogic)
@@ -467,6 +494,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     private func handleCertificateDetailSceneResult(_ result: CertificateDetailSceneResult) {
         switch result {
+        case .didReissuedCertificate:
+            refresh().cauterize()
         case .didDeleteCertificate:
             router.showCertificateDidDeleteDialog()
             delegate?.viewModelNeedsFirstCertificateVisible()
@@ -554,27 +583,16 @@ extension CertificatesOverviewViewModel {
         }
     }
 
-    private func showExpiryAlertIfNeeded() -> Guarantee<Void> {
-        let tokens = tokensToShowExpirationAlertFor()
-        for var token in tokens {
-            token.wasExpiryAlertShown = true
-        }
-        if !tokens.isEmpty {
-            repository.setExpiryAlert(shown: true, tokens: tokens)
-                .then { _ in
-                    self.repository.getCertificateList()
-                }
-                .ensure {
-                    self.showExpiryAlert()
-                }
-                .get { certificateList in
-                    self.certificateList = certificateList
-                }
-                .then { _ in
-                    self.refresh()
-                }
-                .cauterize()
-        }
+    private func showNonDeExpiryAlertIfNeeded() -> Guarantee<Void> {
+        let tokens = tokensToShowExpirationAlertFor().filter(\.vaccinationCertificate.isNotGermanIssuer)
+        for var token in tokens { token.wasExpiryAlertShown = true }
+        guard !tokens.isEmpty else { return .value }
+        repository.setExpiryAlert(shown: true, tokens: tokens)
+            .then(repository.getCertificateList)
+            .ensure(router.showCertificateExpiredNotDe)
+            .get { certificateList in
+                self.certificateList = certificateList
+            }.cauterize()
         return .value
     }
 
@@ -589,18 +607,6 @@ extension CertificatesOverviewViewModel {
                 let showAlert = token.expiresSoon || extendedToken.isInvalid || token.isExpired
                 return showAlert
             }
-    }
-
-    private func showExpiryAlert() {
-        let action = DialogAction(
-            title: "error_validity_check_certificates_button_title".localized
-        )
-        router.showDialog(
-            title: "certificate_check_invalidity_error_title".localized,
-            message: "error_validity_check_certificates_message".localized,
-            actions: [action],
-            style: .alert
-        )
     }
 
     private func showRevocationWarningIfNeeded() -> Guarantee<Void> {

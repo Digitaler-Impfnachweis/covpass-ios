@@ -30,9 +30,13 @@ final class SecondScanViewModelTests: XCTestCase {
     }
 
     private func configureSut(secondToken: ExtendedCBORWebToken? = nil) {
+        let token = CBORWebToken.mockVaccinationCertificate.extended()
+        var tokens = [token]
+        if let token = secondToken {
+            tokens.append(token)
+        }
         sut = .init(resolver: resolver,
-                    token: CBORWebToken.mockVaccinationCertificate.extended(),
-                    secondToken: secondToken,
+                    tokens: tokens,
                     countdownTimerModel: countdownTimerModel)
         sut.delegate = delegate
     }
@@ -158,7 +162,7 @@ final class SecondScanViewModelTests: XCTestCase {
         // GIVEN
         let waitExpectation = XCTestExpectation(description: "waitExpectation")
         promise.done { sceneResult in
-            XCTAssertEqual(sceneResult, .secondScan(CBORWebToken.mockVaccinationCertificate.extended()))
+            XCTAssertEqual(sceneResult, .scanNext)
             waitExpectation.fulfill()
         }.catch { _ in
             XCTFail("should not fail")

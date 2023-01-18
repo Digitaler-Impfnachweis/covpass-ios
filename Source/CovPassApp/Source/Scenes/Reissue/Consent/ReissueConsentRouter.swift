@@ -38,9 +38,11 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
                                             resolver: resolver))
     }
 
-    func showGenericResultPage(resolver: Resolver<Void>) {
+    func showGenericResultPage(resolver: Resolver<Void>, certificate: ExtendedCBORWebToken) {
         sceneCoordinator
-            .push(ReissueSuccessViewSceneFactory(resolver: resolver))
+            .push(ReissueSuccessViewSceneFactory(resolver: resolver,
+                                                 router: ResultViewRouter(sceneCoordinator: sceneCoordinator),
+                                                 certificate: certificate))
     }
 
     func cancel(resolver: Resolver<Void>) {

@@ -15,7 +15,8 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showStateSelectionOnboardingExpectation = XCTestExpectation(description: "showStateSelectionOnboardingExpectation")
     let showCheckSituationExpectation = XCTestExpectation(description: "showCheckSituationExpectation")
     let showDialogExpectation = XCTestExpectation(description: "showDialogExpectation")
-    let showCertificatesReissueExpectation = XCTestExpectation(description: "showCertificatesReissueExpectation")
+    let showBoosterRenewalReissueExpectation = XCTestExpectation(description: "showBoosterRenewalReissueExpectation")
+    let showExtensionRenewalReissueExpectation = XCTestExpectation(description: "showExtensionRenewalReissueExpectation")
     let showCertificateExpectation = XCTestExpectation(description: "showCertificateExpectation")
     let showCertificateModalExpectation = XCTestExpectation(description: "showCertificateExpectation")
     let toWebsiteFAQExpectation = XCTestExpectation(description: "toWebsiteFAQExpectation")
@@ -23,6 +24,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showCertificatePickerExpectation = XCTestExpectation(description: "showCertificatePickerExpectation")
     let showQRCodeScanAndSelectionViewExpectation = XCTestExpectation(description: "showQRCodeScanAndSelectionViewExpectation")
     let showHowToScanExpectation = XCTestExpectation(description: "showHowToScanExpectation")
+    let showCertificateExpiredNotDeExpectation = XCTestExpectation(description: "showCertificateExpiredNotDeExpectation")
     let showAnnouncementExpectation = XCTestExpectation(description: "showAnnouncementExpectation")
     let showNewRegulationsAnnouncementExpectation = XCTestExpectation(description: "showNewRegulationsAnnouncementExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
@@ -32,6 +34,10 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     var scanQRCodePayload: String = ""
     var receivedCertificatePickerTokens: [ExtendedCBORWebToken]?
     var showQRCodeScanAndSelectionViewValue = QRCodeImportResult.scanResult(.success(""))
+
+    func showCertificateExpiredNotDe() {
+        showCertificateExpiredNotDeExpectation.fulfill()
+    }
 
     func showCheckSituation(userDefaults _: Persistence) -> Promise<Void> {
         showCheckSituationExpectation.fulfill()
@@ -110,8 +116,14 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     }
 
     func startValidationAsAService(with _: ValidationServiceInitialisation) {}
-    func showCertificatesReissue(for _: [ExtendedCBORWebToken], context _: ReissueContext) -> Promise<Void> {
-        showCertificatesReissueExpectation.fulfill()
+
+    func showExtensionRenewalReissue(for _: [ExtendedCBORWebToken]) -> Promise<Void> {
+        showExtensionRenewalReissueExpectation.fulfill()
+        return .value
+    }
+
+    func showBoosterRenewalReissue(for _: [ExtendedCBORWebToken]) -> Promise<Void> {
+        showBoosterRenewalReissueExpectation.fulfill()
         return .value
     }
 

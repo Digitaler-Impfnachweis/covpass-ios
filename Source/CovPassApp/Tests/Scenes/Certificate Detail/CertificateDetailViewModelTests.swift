@@ -208,48 +208,6 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertFalse(sut.showBoosterReissueNotification)
     }
 
-    func testShowReissueNotification_WithNewBadge() throws {
-        // GIVEN: 1/1 and 2/2 qualifies for reissue and set its already new seen property to false
-        var certificates: [ExtendedCBORWebToken] = try [
-            .token1Of1(),
-            .token2Of2()
-        ]
-        certificates[0].reissueProcessNewBadgeAlreadySeen = false
-        certificates[1].reissueProcessNewBadgeAlreadySeen = false
-        configureCustomSut(certificates: certificates)
-
-        // THEN
-        XCTAssertTrue(sut.showBoosterReissueIsNewBadge)
-    }
-
-    func testShowReissueNotification_WithoutNewBadge() throws {
-        // GIVEN: 1/1 and 2/2 qualifies for reissue and set its already new seen property to true
-        var certificates: [ExtendedCBORWebToken] = try [
-            .token1Of1(),
-            .token2Of2()
-        ]
-        certificates[0].reissueProcessNewBadgeAlreadySeen = true
-        certificates[1].reissueProcessNewBadgeAlreadySeen = true
-        configureCustomSut(certificates: certificates)
-
-        // THEN
-        XCTAssertFalse(sut.showBoosterReissueIsNewBadge)
-    }
-
-    func testShowReissueNotification_WithoutNewBadge_alternative() throws {
-        // GIVEN: 1/1 and 2/2 qualifies for reissue and set its already new seen property to true only on one cert should be enough
-        var certificates: [ExtendedCBORWebToken] = try [
-            .token1Of1(),
-            .token2Of2()
-        ]
-        certificates[0].reissueProcessNewBadgeAlreadySeen = true
-        certificates[1].reissueProcessNewBadgeAlreadySeen = false
-        configureCustomSut(certificates: certificates)
-
-        // THEN
-        XCTAssertFalse(sut.showBoosterReissueIsNewBadge)
-    }
-
     func testUpdateReissueCandidate() throws {
         // GIVEN: 1/1 and 2/2 qualifies for reissue
         let certificates: [ExtendedCBORWebToken] = try [
@@ -744,70 +702,6 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertTrue(showVaccinationExpiryReissueNotification)
     }
 
-    func testShowVaccinationExpiryReissueIsNewBadge_is_new() {
-        // Given
-        let token = ExtendedCBORWebToken.reissuableVaccination
-        configureCustomSut(certificates: [token])
-
-        // When
-        let showVaccinationExpiryReissueIsNewBadge = sut.showVaccinationExpiryReissueIsNewBadge
-
-        // Then
-        XCTAssertTrue(showVaccinationExpiryReissueIsNewBadge)
-    }
-
-    func testShowVaccinationExpiryReissueIsNewBadge_is_not_new() {
-        // Given
-        var token = ExtendedCBORWebToken.reissuableVaccination
-        token.reissueProcessNewBadgeAlreadySeen = true
-        configureCustomSut(certificates: [token])
-
-        // When
-        let showVaccinationExpiryReissueIsNewBadge = sut.showVaccinationExpiryReissueIsNewBadge
-
-        // Then
-        XCTAssertFalse(showVaccinationExpiryReissueIsNewBadge)
-    }
-
-    func testShowRecoveryExpiryReissueIsNewBadge_is_new() {
-        // Given
-        var token = ExtendedCBORWebToken.reissuableRecovery
-        token.reissueProcessNewBadgeAlreadySeen = false
-        configureCustomSut(certificates: [token])
-
-        // When
-        let showRecoveryExpiryReissueIsNewBadge = sut.showRecoveryExpiryReissueIsNewBadge(index: 0)
-
-        // Then
-        XCTAssertTrue(showRecoveryExpiryReissueIsNewBadge)
-    }
-
-    func testShowRecoveryExpiryReissueIsNewBadge_is_new_with_nil() {
-        // Given
-        var token = ExtendedCBORWebToken.reissuableRecovery
-        token.reissueProcessNewBadgeAlreadySeen = nil
-        configureCustomSut(certificates: [token])
-
-        // When
-        let showRecoveryExpiryReissueIsNewBadge = sut.showRecoveryExpiryReissueIsNewBadge(index: 0)
-
-        // Then
-        XCTAssertTrue(showRecoveryExpiryReissueIsNewBadge)
-    }
-
-    func testShowRecoveryExpiryReissueIsNewBadge_is_not_new() {
-        // Given
-        var token = ExtendedCBORWebToken.reissuableRecovery
-        token.reissueProcessNewBadgeAlreadySeen = true
-        configureCustomSut(certificates: [token])
-
-        // When
-        let showRecoveryExpiryReissueIsNewBadge = sut.showRecoveryExpiryReissueIsNewBadge(index: 0)
-
-        // Then
-        XCTAssertFalse(showRecoveryExpiryReissueIsNewBadge)
-    }
-
     func testTriggerVaccinationExpiryReissue() {
         // Given
         let token1 = ExtendedCBORWebToken.reissuableVaccination
@@ -859,28 +753,6 @@ class CertificateDetailViewModelTests: XCTestCase {
         ], timeout: 1)
         let tokens = router.receivedReissueTokens
         XCTAssertEqual(tokens.count, 3)
-    }
-
-    func testMarkExpiryReissueCandidatesAsSeen() {
-        // Given
-        vaccinationRepo.replaceExpectation.expectedFulfillmentCount = 3
-        configureCustomSut(
-            certificates: [
-                .reissuableRecovery,
-                .reissuableRecovery,
-                .reissuableVaccination,
-                .reissuableVaccination,
-                .nonReissuableVaccination
-            ]
-        )
-
-        // When
-        sut.markExpiryReissueCandidatesAsSeen()
-
-        // Then
-        wait(for: [
-            vaccinationRepo.replaceExpectation
-        ], timeout: 1)
     }
 
     func testRecoveryExpiryReissueCandidatesCount() {
@@ -1025,7 +897,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Given
         var token: ExtendedCBORWebToken = try .token2Of2Mustermann()
         token.invalid = true
-        configureCustomSut(certificates: [token])
+        configureCustomSut(certificates: [token], maskRulesAvailable: true)
 
         // When
         let viewModel = sut.maskStatusViewModel

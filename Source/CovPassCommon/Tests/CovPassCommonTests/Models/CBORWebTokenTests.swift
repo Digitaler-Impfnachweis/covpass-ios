@@ -85,6 +85,17 @@ class CBORWebTokenTests: XCTestCase {
         XCTAssertEqual(isGermanCert, false)
     }
 
+    func testExpiredMoreThan90Days_expired() {
+        // Given
+        sut.exp = Date().add(days: -90)
+
+        // When
+        let expiredMoreThan90Days = sut.expiredMoreThan90Days
+
+        // Then
+        XCTAssertTrue(expiredMoreThan90Days)
+    }
+
     func testExpiredForLessOrEqual90Days_expired_less_than_90_days_ago() {
         // Given
         sut.exp = Date(timeIntervalSinceNow: -1)

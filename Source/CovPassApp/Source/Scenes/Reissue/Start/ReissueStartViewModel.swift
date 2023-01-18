@@ -17,8 +17,7 @@ private enum Constants {
             static var title = "renewal_expiry_notification_title".localized
             static var description = "renewal_expiry_notification_copy_vaccination".localized
             static var hint = "certificate_renewal_startpage_copy_box".localized
-            static var start_vaccination = "renewal_expiry_notification_button_vaccination".localized
-            static var start_recovery = "renewal_expiry_notification_button_recovery".localized
+            static var button = "renewal_expiry_notification_button".localized
             static var later = "certificate_renewal_startpage_secondary_button".localized
         }
     }
@@ -32,7 +31,7 @@ class ReissueStartViewModel: ReissueStartViewModelProtocol {
     lazy var titleText = context == .boosterRenewal ? Constants.Keys.boosterRenewal.title : Constants.Keys.ExpiryRenewal.title
     lazy var descriptionText = context == .boosterRenewal ? Constants.Keys.boosterRenewal.description : Constants.Keys.ExpiryRenewal.description
     lazy var hintText = context == .boosterRenewal ? Constants.Keys.boosterRenewal.hint : Constants.Keys.ExpiryRenewal.hint
-    lazy var buttonStartTitle = context == .boosterRenewal ? Constants.Keys.boosterRenewal.start : tokens.first?.firstVaccination != nil ? Constants.Keys.ExpiryRenewal.start_vaccination : Constants.Keys.ExpiryRenewal.start_recovery
+    lazy var buttonStartTitle = context == .boosterRenewal ? Constants.Keys.boosterRenewal.start : Constants.Keys.ExpiryRenewal.button
     lazy var buttonLaterTitle = context == .boosterRenewal ? Constants.Keys.boosterRenewal.later : Constants.Keys.ExpiryRenewal.later
     private let resolver: Resolver<Void>
     private let router: ReissueStartRouterProtocol
@@ -54,7 +53,7 @@ class ReissueStartViewModel: ReissueStartViewModelProtocol {
         case .boosterRenewal:
             reissuableTokens = tokens.sortedByDn
         case .certificateExtension:
-            reissuableTokens = tokens
+            reissuableTokens = tokens.sortedByDtFrAndSc
         }
         certItem = reissuableTokens[0].certItem(active: true)
     }

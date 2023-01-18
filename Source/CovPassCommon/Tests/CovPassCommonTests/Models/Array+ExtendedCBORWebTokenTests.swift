@@ -121,7 +121,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForBoosterRenewal)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 2)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -145,7 +145,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForBoosterRenewal)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 3)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -166,7 +166,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForBoosterRenewal)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertTrue(candidateForReissue.count == 2)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -190,7 +190,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForBoosterRenewal)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 3)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -217,7 +217,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertFalse(certs.qualifiedForReissue)
+        XCTAssertFalse(certs.qualifiedForBoosterRenewal)
         XCTAssertTrue(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 0)
         XCTAssertFalse(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -240,7 +240,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
 
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForBoosterRenewal)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 2)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
@@ -259,7 +259,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      recoveryCert]
 
         // WHEN
-        let candidateForReissue = certs.qualifiedForReissue
+        let candidateForReissue = certs.qualifiedForBoosterRenewal
 
         // THEN
         XCTAssertFalse(candidateForReissue)
@@ -271,7 +271,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      someOtherCert1]
 
         // WHEN
-        let candidateForReissue = certs.qualifiedForReissue
+        let candidateForReissue = certs.qualifiedForBoosterRenewal
 
         // THEN
         XCTAssertFalse(candidateForReissue)
@@ -283,7 +283,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      singleDoseImmunizationJohnsonCert]
 
         // WHEN
-        let candidateForReissue = certs.qualifiedForReissue
+        let candidateForReissue = certs.qualifiedForBoosterRenewal
 
         // THEN
         XCTAssertFalse(candidateForReissue)
@@ -297,14 +297,14 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      vaccinationWithTwoShotsOfVaccine]
 
         // WHEN
-        let candidateForReissue = certs.qualifiedForReissue
+        let candidateForReissue = certs.qualifiedForBoosterRenewal
 
         // THEN
         XCTAssertTrue(candidateForReissue)
 
         // BUT WHEN
         certs.append(boosterCertificateAfterReIssue)
-        let candidateForReissueAfterReissue = certs.qualifiedForReissue
+        let candidateForReissueAfterReissue = certs.qualifiedForBoosterRenewal
 
         // THEN
         XCTAssertFalse(candidateForReissueAfterReissue)
@@ -1497,6 +1497,92 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(sortedByDtFrAndSc[0], token1v)
         XCTAssertEqual(sortedByDtFrAndSc[1], token1r)
         XCTAssertEqual(sortedByDtFrAndSc[2], token1t)
+    }
+
+    func test_areRecoveriesQualifiedForExpiryReissue_will_expire_in_1_second() {
+        var token = CBORWebToken.mockRecoveryCertificate
+        token.exp = .init() + 1
+        let sut = [token.extended()]
+        // WHEN
+        let areRecoveriesQualifiedForExpiryReissue = sut.areRecoveriesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertTrue(areRecoveriesQualifiedForExpiryReissue)
+    }
+
+    func test_areRecoveriesQualifiedForExpiryReissue_is_expired_for_1_second() {
+        var token = CBORWebToken.mockRecoveryCertificate
+        token.exp = .init() - 1
+        let sut = [token.extended()]
+        // WHEN
+        let areRecoveriesQualifiedForExpiryReissue = sut.areRecoveriesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertTrue(areRecoveriesQualifiedForExpiryReissue)
+    }
+
+    func test_areRecoveriesQualifiedForExpiryReissue_is_expired_for_1_second_but_not_recovery() {
+        var token = CBORWebToken.mockVaccinationCertificate
+        token.exp = .init() - 1
+        let sut = [token.extended()]
+        // WHEN
+        let areRecoveriesQualifiedForExpiryReissue = sut.areRecoveriesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertFalse(areRecoveriesQualifiedForExpiryReissue)
+    }
+
+    func test_areCertificatesQualifiedForExpiryReissue_with_recovery_certificate() {
+        var token = CBORWebToken.mockRecoveryCertificate
+        token.exp = .init() - 1
+        let sut = [token.extended()]
+        // WHEN
+        let areCertificatesQualifiedForExpiryReissue = sut.areCertificatesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertTrue(areCertificatesQualifiedForExpiryReissue)
+    }
+
+    func test_areCertificatesQualifiedForExpiryReissue_with_vaccination_certificate() {
+        var token = CBORWebToken.mockVaccinationCertificate
+        token.exp = .init() - 1
+        let sut = [token.extended()]
+        // WHEN
+        let areCertificatesQualifiedForExpiryReissue = sut.areCertificatesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertTrue(areCertificatesQualifiedForExpiryReissue)
+    }
+
+    func test_areCertificatesQualifiedForExpiryReissue_with_test_certificate() {
+        var token = CBORWebToken.mockTestCertificate
+        token.exp = .init() - 1
+        let sut = [token.extended()]
+        // WHEN
+        let areCertificatesQualifiedForExpiryReissue = sut.areCertificatesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertFalse(areCertificatesQualifiedForExpiryReissue)
+    }
+
+    func test_areCertificatesQualifiedForExpiryReissue_with_multiple_reissuable_and_not_reissuable() {
+        var token1 = CBORWebToken.mockVaccinationCertificate
+        token1.exp = .init() - 1
+        var token2 = CBORWebToken.mockRecoveryCertificate
+        token2.exp = .init() - 1
+        var token3 = CBORWebToken.mockTestCertificate
+        token3.exp = .init() - 1
+        var token4 = CBORWebToken.mockTestCertificate
+        token4.exp = .init() - 1
+        let sut = [token1.extended(),
+                   token2.extended(),
+                   token3.extended(),
+                   token4.extended()]
+        // WHEN
+        let areCertificatesQualifiedForExpiryReissue = sut.areCertificatesQualifiedForExpiryReissue
+
+        // THEN
+        XCTAssertTrue(areCertificatesQualifiedForExpiryReissue)
     }
 }
 

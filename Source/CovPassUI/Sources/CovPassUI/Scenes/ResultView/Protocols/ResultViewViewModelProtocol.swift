@@ -6,5 +6,7 @@ public protocol ResultViewViewModelProtocol {
     var title: String { get }
     var description: String { get }
     var buttonTitle: String { get }
+    var shareButtonTitle: String? { get }
     func submitTapped()
+    func shareAsPdf()
 }

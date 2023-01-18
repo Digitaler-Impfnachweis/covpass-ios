@@ -132,7 +132,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         let showNotification = sut.showNotification
 
         // Then
-        XCTAssertFalse(showNotification)
+        XCTAssertTrue(showNotification)
     }
 
     func testIsShowNotification_expired_before_100Days_default() {
@@ -164,7 +164,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         let showNotification = sut.showNotification
 
         // Then
-        XCTAssertFalse(showNotification)
+        XCTAssertTrue(showNotification)
     }
 
     func testIsShowNotification_expired_before_100Days_reissueProcessNewBadgeAlreadySeen_true() {
@@ -196,7 +196,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         let showNotification = sut.showNotification
 
         // Then
-        XCTAssertFalse(showNotification)
+        XCTAssertTrue(showNotification)
     }
 
     func testIsShowNotification_aboutToExpire_default() {
@@ -260,7 +260,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         let showNotification = sut.showNotification
 
         // Then
-        XCTAssertFalse(showNotification)
+        XCTAssertTrue(showNotification)
     }
 
     func testIsShowNotification_invalid_default() {
@@ -695,17 +695,43 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         XCTAssertEqual(headerSubtitle, nil)
     }
 
-    func test_headerSubtitle_notification_available_expired() throws {
+    func test_headerSubtitle_notification_available_expired_inside_90_day_range() throws {
         // Given
         var token = try ExtendedCBORWebToken.mock()
-        token.vaccinationCertificate.exp = .init() - 1
+        token.vaccinationCertificate.exp = .init() - Double.random(in: 0 ... 7_776_000)
         let sut = sut(token: token)
 
         // When
         let headerSubtitle = sut.headerSubtitle
 
         // Then
-        XCTAssertEqual(headerSubtitle, "Check status")
+        XCTAssertEqual(headerSubtitle, "Renew certificate")
+    }
+
+    func test_headerSubtitle_notification_available_expired_after_90_day_range() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.mock()
+        token.vaccinationCertificate.exp = .init() - Double.random(in: 7_776_000 ... 17_776_000)
+        let sut = sut(token: token)
+
+        // When
+        let headerSubtitle = sut.headerSubtitle
+
+        // Then
+        XCTAssertEqual(headerSubtitle, "Certificate expired")
+    }
+
+    func test_headerSubtitle_notification_available_will_expire_in_28_day_range() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.mock()
+        token.vaccinationCertificate.exp = .init() + Double.random(in: 86000 ..< 2_419_200)
+        let sut = sut(token: token)
+
+        // When
+        let headerSubtitle = sut.headerSubtitle
+
+        // Then
+        XCTAssertEqual(headerSubtitle, "Renew certificate")
     }
 
     func test_headerSubtitle_notification_available_booster_notification() {

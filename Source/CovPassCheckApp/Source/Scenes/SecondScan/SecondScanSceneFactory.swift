@@ -11,12 +11,10 @@ import PromiseKit
 import UIKit
 
 struct SecondScanSceneFactory: ResolvableSceneFactory {
-    private let token: ExtendedCBORWebToken
-    private let secondToken: ExtendedCBORWebToken?
+    private let tokens: [ExtendedCBORWebToken]
 
-    init(token: ExtendedCBORWebToken, secondToken: ExtendedCBORWebToken?) {
-        self.token = token
-        self.secondToken = secondToken
+    init(tokens: [ExtendedCBORWebToken]) {
+        self.tokens = tokens
     }
 
     func make(resolvable: Resolver<ValidatorDetailSceneResult>) -> UIViewController {
@@ -25,8 +23,7 @@ struct SecondScanSceneFactory: ResolvableSceneFactory {
             countdownDuration: 60
         )
         let viewModel = SecondScanViewModel(resolver: resolvable,
-                                            token: token,
-                                            secondToken: secondToken,
+                                            tokens: tokens,
                                             countdownTimerModel: countdownTimerModel)
         let viewController = SecondScanViewController(viewModel: viewModel)
         return viewController

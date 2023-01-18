@@ -40,10 +40,12 @@ class DifferentPersonViewControllerSnapshotTests: BaseSnapShotTests {
         if let dob = dob {
             token2.vaccinationCertificate.hcert.dgc.dob = dob
         }
+        var tokens: [ExtendedCBORWebToken] = [token1, token2]
+        if let token = thirdToken {
+            tokens.append(token)
+        }
         let vm = DifferentPersonViewModel(
-            firstToken: token1,
-            secondToken: token2,
-            thirdToken: thirdToken,
+            tokens: tokens,
             resolver: resolver,
             countdownTimerModel: countdownTimerModel
         )

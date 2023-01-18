@@ -12,10 +12,11 @@ public class HintButton: XibView {
     // MARK: - IBOutlet
 
     @IBOutlet public var titleLabel: UILabel!
-    @IBOutlet public var topRightLabel: HighlightLabel!
     @IBOutlet public var bodyTextView: UITextView!
     @IBOutlet public var containerView: UIView!
     @IBOutlet public var button: MainButton!
+    @IBOutlet public var hintButtonWrapper: UIView!
+    @IBOutlet public var iconImageView: UIImageView!
 
     // MARK: - Lifecycle
 

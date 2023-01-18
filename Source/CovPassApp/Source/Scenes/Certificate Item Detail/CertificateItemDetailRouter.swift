@@ -35,4 +35,17 @@ class CertificateItemDetailRouter: CertificateItemDetailRouterProtocol, DialogRo
             PDFExportSceneFactory(token: token)
         )
     }
+
+    func showReissue(for tokens: [ExtendedCBORWebToken],
+                     context: ReissueContext) -> Promise<Void> {
+        if tokens.isEmpty {
+            // Do not start the reissue process when we don't have any tokens
+            return .value
+        }
+        let router = ReissueConsentRouter(sceneCoordinator: sceneCoordinator)
+        let sceneFactory = ReissueConsentResolvableSceneFactory(router: router,
+                                                                tokens: tokens,
+                                                                context: context)
+        return sceneCoordinator.present(sceneFactory, animated: true)
+    }
 }

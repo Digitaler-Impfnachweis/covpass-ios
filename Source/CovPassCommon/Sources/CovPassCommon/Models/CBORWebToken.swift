@@ -26,8 +26,8 @@ public struct CBORWebToken: Codable {
 
     /// True if certificate expires soon
     public var expiresSoon: Bool {
-        guard let exp = exp,
-              let expiresSoonDate = Calendar.current.date(byAdding: .day, value: -28, to: exp) else { return false }
+        guard let exp = exp else { return false }
+        let expiresSoonDate = exp + 60 * 60 * 24 * -28
         return Date() >= expiresSoonDate
     }
 

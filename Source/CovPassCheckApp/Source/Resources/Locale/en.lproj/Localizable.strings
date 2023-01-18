@@ -272,6 +272,10 @@
 
 "technical_validation_check_popup_retry" = "Retry last scan";
 
+"technical_validation_invalid_expired_title" = "Certificate expired";
+
+"technical_validation_invalid_expired_subtitle" = "The technical expiry date of the certificate has been exceeded. Scan a newly issued certificate.";
+
 "technical_validation_check_popup_valid_vaccination_button_3_title" = "Cancel";
 
 "functional_validation_check_popup_unsuccessful_certificate_title" = "Incomplete vaccination protection";
@@ -480,7 +484,7 @@
 
 "accessibility_app_information_title_contact_closing_announce" = "Contact has been closed";
 
-"app_information_message_contact_support" = "Contact for technical questions about the CovPassCheck app";
+"app_information_message_contact_support" = "Contact for questions about the CovPassCheck app";
 
 "app_information_message_contact_support_phone" = "Telephone: #0800–4747–002::tel:0800–4747–002#";
 

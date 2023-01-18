@@ -22,6 +22,9 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     private lazy var dgc: DigitalGreenCertificate = certificate.hcert.dgc
     private lazy var certificate = token.vaccinationCertificate
     private lazy var isExpired = certificate.isExpired
+    private lazy var expiredMoreThan90Days = certificate.expiredMoreThan90Days
+    private lazy var expiredForLessOrEqual90Days = certificate.expiredForLessOrEqual90Days
+    private lazy var willExpireInLessOrEqual28Days = certificate.willExpireInLessOrEqual28Days
     private lazy var isRevoked = token.isRevoked
     private lazy var tokenIsInvalid = token.isInvalid
     private var showBoosterAvailabilityNotification: Bool {
@@ -30,16 +33,9 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     }
 
     private var showNotificationForExpiryOrInvalid: Bool {
-        guard token.vaccinationCertificate.isNotTest else {
-            return false
-        }
-        let cert = token.vaccinationCertificate
-        let reissueDetailsNotAlreadySeen = !(token.reissueProcessNewBadgeAlreadySeen ?? false)
-        let reissueNotificationNotAlreadySeen = (reissueDetailsNotAlreadySeen && cert.expiredForLessOrEqual90Days)
-        guard token.expiryAlertWasNotShown || reissueNotificationNotAlreadySeen else {
-            return false
-        }
-        return cert.expiresSoon || token.isInvalid || cert.isExpired
+        let certs = tokens.filterFirstOfAllTypes.map(\.vaccinationCertificate)
+        let anyCertPassed28DaysExpiry = certs.map(\.passed28DaysBeforeExpiration).contains(where: { $0 == true })
+        return anyCertPassed28DaysExpiry || (token.isInvalid && token.expiryAlertWasNotShown)
     }
 
     private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
@@ -139,7 +135,20 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         return ""
     }()
 
-    lazy var headerSubtitle: String? = showNotification ? "infschg_start_notification".localized : nil
+    lazy var headerSubtitle: String? = {
+        guard showNotification else {
+            return nil
+        }
+        if expiredMoreThan90Days {
+            return "certificates_overview_expired_title".localized
+        } else if expiredForLessOrEqual90Days {
+            return "vaccination_start_screen_qrcode_renewal_note_subtitle".localized
+        } else if willExpireInLessOrEqual28Days {
+            return "vaccination_start_screen_qrcode_renewal_note_subtitle".localized
+        } else {
+            return "infschg_start_notification".localized
+        }
+    }()
 
     var titleIcon: UIImage {
         if isInvalid {

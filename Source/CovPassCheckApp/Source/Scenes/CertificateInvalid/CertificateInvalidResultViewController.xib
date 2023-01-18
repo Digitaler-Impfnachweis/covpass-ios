@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,15 +12,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateInvalidResultViewController" customModule="CovPassCheckApp" customModuleProvider="target">
             <connections>
+                <outlet property="bottomStackView" destination="0iA-GH-w0u" id="ZhV-s1-o4Q"/>
                 <outlet property="counterLabel" destination="Ki2-e0-9DS" id="sKI-w1-mnv"/>
                 <outlet property="descriptionLabel" destination="DoA-3w-hHw" id="KfJ-tq-eYP"/>
                 <outlet property="headerStackView" destination="CaI-1f-Rt7" id="raa-sv-bre"/>
                 <outlet property="imageView" destination="KNC-XD-YtE" id="voX-Ru-XHY"/>
                 <outlet property="infoHeaderView" destination="asq-Je-taX" id="yrT-CU-N8Z"/>
                 <outlet property="reasonStackview" destination="yo0-Pg-3os" id="rf2-cs-DtK"/>
-                <outlet property="rescanButton" destination="Zw9-2k-H61" id="97D-AD-0hW"/>
+                <outlet property="retryButton" destination="Zw9-2k-H61" id="Ljv-vD-zm0"/>
                 <outlet property="revocationInfoContainerView" destination="bbw-cK-rm7" id="7jo-gI-Toq"/>
                 <outlet property="revocationInfoView" destination="3y8-5r-4KC" id="bLz-pL-eSM"/>
+                <outlet property="scrollView" destination="cg9-Ut-n76" id="KWa-2P-LGU"/>
+                <outlet property="startOverButton" destination="8dg-gk-sVw" id="VG0-Ie-R14"/>
                 <outlet property="subtitleLabel" destination="HSg-Kh-hx8" id="NZN-fG-qeL"/>
                 <outlet property="titleLabel" destination="ke7-Eq-NYy" id="GdQ-4o-T2C"/>
                 <outlet property="travelRulesLinkLabel" destination="8wc-k4-jKK" id="a1n-Xf-oC7"/>
@@ -33,17 +36,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asq-Je-taX" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="64" width="414" height="60"/>
+                    <rect key="frame" x="0.0" y="68" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" placeholder="YES" id="epB-oE-mB6"/>
                     </constraints>
                 </view>
-                <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-Ut-n76">
-                    <rect key="frame" x="0.0" y="124" width="414" height="633.5"/>
+                <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-Ut-n76">
+                    <rect key="frame" x="0.0" y="128" width="414" height="734"/>
                     <subviews>
-                        <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="633.5"/>
+                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="734"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="certificate_invalid" translatesAutoresizingMaskIntoConstraints="NO" id="KNC-XD-YtE">
                                     <rect key="frame" x="137" y="0.0" width="140" height="140"/>
@@ -52,8 +55,8 @@
                                         <constraint firstAttribute="height" constant="140" id="OLG-z5-B0R"/>
                                     </constraints>
                                 </imageView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CaI-1f-Rt7">
-                                    <rect key="frame" x="24" y="177" width="218" height="37"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="CaI-1f-Rt7">
+                                    <rect key="frame" x="24" y="177" width="218" height="31"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INVALID CERtificate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ke7-Eq-NYy">
                                             <rect key="frame" x="0.0" y="0.0" width="218" height="29"/>
@@ -62,7 +65,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="0.0" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-Kh-hx8">
-                                            <rect key="frame" x="0.0" y="37" width="0.0" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="31" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -70,16 +73,16 @@
                                     </subviews>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ONE OF THE FOLLOWING REASONS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoA-3w-hHw" userLabel="description">
-                                    <rect key="frame" x="24" y="234" width="236.5" height="17"/>
+                                    <rect key="frame" x="24" y="228" width="236.5" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="64.5" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yo0-Pg-3os" userLabel="reasonstackview">
-                                    <rect key="frame" x="0.0" y="275" width="414" height="64.5"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="64.5" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="yo0-Pg-3os" userLabel="reasonstackview">
+                                    <rect key="frame" x="0.0" y="269" width="414" height="64.5"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
-                                    <rect key="frame" x="0.0" y="339.5" width="414" height="270"/>
+                                    <rect key="frame" x="0.0" y="333.5" width="414" height="270"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="8wc-k4-jKK" userLabel="Travel Rules Link Label" customClass="LinkLabel" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -132,47 +135,76 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="Qvk-cf-3Rd"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="b4q-5D-z1n"/>
                 </scrollView>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="0iA-GH-w0u">
-                    <rect key="frame" x="0.0" y="757.5" width="414" height="92.5"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="0iA-GH-w0u">
+                    <rect key="frame" x="0.0" y="671.5" width="414" height="224.5"/>
                     <subviews>
-                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlL-Ce-pHn">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYZ-Ca-Pif">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zw9-2k-H61" userLabel="Rescan Button" customClass="MainButton" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zw9-2k-H61" userLabel="retry button" customClass="MainButton" customModule="CovPassUI">
                                     <rect key="frame" x="147" y="0.0" width="120" height="60"/>
-                                    <color key="backgroundColor" name="AccentColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="120" placeholder="YES" id="AMj-Ae-vHb"/>
                                         <constraint firstAttribute="height" constant="60" id="h4M-WN-7Rk"/>
                                     </constraints>
                                 </view>
                             </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="Zw9-2k-H61" firstAttribute="centerX" secondItem="XlL-Ce-pHn" secondAttribute="centerX" id="CMR-HL-IV9"/>
-                                <constraint firstAttribute="bottom" secondItem="Zw9-2k-H61" secondAttribute="bottom" id="iFV-WO-LMh"/>
-                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Zw9-2k-H61" secondAttribute="trailing" id="kbw-PO-iUV"/>
-                                <constraint firstItem="Zw9-2k-H61" firstAttribute="top" secondItem="XlL-Ce-pHn" secondAttribute="top" id="rn1-hs-ZA2"/>
-                                <constraint firstItem="Zw9-2k-H61" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XlL-Ce-pHn" secondAttribute="leadingMargin" id="sb5-0c-zTE"/>
+                                <constraint firstItem="Zw9-2k-H61" firstAttribute="centerX" secondItem="JYZ-Ca-Pif" secondAttribute="centerX" id="0qX-7T-xl2"/>
+                                <constraint firstItem="Zw9-2k-H61" firstAttribute="top" secondItem="JYZ-Ca-Pif" secondAttribute="top" id="16N-Hh-B9b"/>
+                                <constraint firstItem="Zw9-2k-H61" firstAttribute="centerY" secondItem="JYZ-Ca-Pif" secondAttribute="centerY" id="R58-eq-6XV"/>
+                                <constraint firstAttribute="bottom" secondItem="Zw9-2k-H61" secondAttribute="bottom" id="Yeb-sp-2x7"/>
+                            </constraints>
+                        </view>
+                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlL-Ce-pHn">
+                            <rect key="frame" x="0.0" y="84" width="414" height="60"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dg-gk-sVw" userLabel="startover button" customClass="MainButton" customModule="CovPassUI">
+                                    <rect key="frame" x="147" y="0.0" width="120" height="60"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="120" placeholder="YES" id="8vv-pa-mYT"/>
+                                        <constraint firstAttribute="height" constant="60" id="GML-CK-bRE"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="8dg-gk-sVw" firstAttribute="top" secondItem="XlL-Ce-pHn" secondAttribute="top" id="38P-em-Hce"/>
+                                <constraint firstAttribute="bottom" secondItem="8dg-gk-sVw" secondAttribute="bottom" id="92Y-1r-UU1"/>
+                                <constraint firstItem="8dg-gk-sVw" firstAttribute="centerX" secondItem="XlL-Ce-pHn" secondAttribute="centerX" id="GMD-Jd-I6m"/>
+                                <constraint firstItem="8dg-gk-sVw" firstAttribute="centerY" secondItem="XlL-Ce-pHn" secondAttribute="centerY" id="ZGY-nc-2nO"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diese Ansicht schliesst sich in 59 Sekunden." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki2-e0-9DS">
-                            <rect key="frame" x="0.0" y="72" width="414" height="20.5"/>
+                            <rect key="frame" x="0.0" y="168" width="414" height="20.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sld-QU-nbC" userLabel="spacer">
+                            <rect key="frame" x="0.0" y="212.5" width="414" height="12"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="12" id="X3I-Lx-Gik"/>
+                            </constraints>
+                        </view>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="BackgroundSecondary"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="0iA-GH-w0u" secondAttribute="bottom" constant="12" id="8GC-NV-oWA"/>
+                <constraint firstAttribute="bottom" secondItem="0iA-GH-w0u" secondAttribute="bottom" id="8GC-NV-oWA"/>
                 <constraint firstItem="asq-Je-taX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ESv-qQ-0gp"/>
                 <constraint firstItem="cg9-Ut-n76" firstAttribute="top" secondItem="asq-Je-taX" secondAttribute="bottom" id="R0j-ZG-yRW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="asq-Je-taX" secondAttribute="trailing" id="Txb-aR-OgY"/>
                 <constraint firstItem="0iA-GH-w0u" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="USQ-6p-tbP"/>
-                <constraint firstItem="0iA-GH-w0u" firstAttribute="top" secondItem="cg9-Ut-n76" secondAttribute="bottom" id="Wrz-Qi-XYc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cg9-Ut-n76" secondAttribute="bottom" id="YKy-HE-X7M"/>
                 <constraint firstItem="asq-Je-taX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="aj8-4F-zR4"/>
                 <constraint firstItem="cg9-Ut-n76" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cOs-E6-gDl"/>
                 <constraint firstAttribute="trailing" secondItem="0iA-GH-w0u" secondAttribute="trailing" id="mgn-Xr-KwT"/>
@@ -188,9 +220,6 @@
     </designables>
     <resources>
         <image name="certificate_invalid" width="143" height="140"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="BackgroundSecondary">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -14,17 +14,11 @@ class DifferentPersonViewController: UIViewController {
 
     @IBOutlet var headline: InfoHeaderView!
     @IBOutlet var subtitleLabel: UILabel!
-    @IBOutlet var firstResultHeadlineLabel: UILabel!
-    @IBOutlet var firstResultCard: CertResultCard!
-    @IBOutlet var secondResultHeadlineLabel: UILabel!
-    @IBOutlet var secondResultCard: CertResultCard!
-    @IBOutlet var thirdResultHeadlineLabel: UILabel!
-    @IBOutlet var thirdResultCard: CertResultCard!
+    @IBOutlet var personsStackView: UIStackView!
     @IBOutlet var ignoreView: ParagraphView!
     @IBOutlet var rescanButton: MainButton!
     @IBOutlet var cancelButton: MainButton!
     @IBOutlet var ignoreStackView: UIStackView!
-    @IBOutlet var thirdResultStackView: UIStackView!
     @IBOutlet var bottomStackView: UIStackView!
     @IBOutlet var counterLabel: UILabel!
     @IBOutlet var scrollView: UIScrollView!
@@ -98,75 +92,36 @@ class DifferentPersonViewController: UIViewController {
         ignoreView.bottomBorder.isHidden = true
     }
 
-    private func configureFirstCard() {
-        firstResultHeadlineLabel.attributedText = viewModel.firstResultTitle
-            .styledAs(.header_3)
-            .colored(.onBackground80)
-        firstResultCard.title = viewModel.firstResultName
-            .styledAs(.header_2)
-            .colored(.onBackground110)
-        firstResultCard.subtitle = viewModel.firstResultNameTranslittered
-            .styledAs(.subheader_2)
-            .colored(.onBackground80)
-        firstResultCard.bottomText = viewModel.firstResultDateOfBirth
-            .styledAs(.body)
-            .colored(.onBackground110)
-        firstResultCard.resultImage = viewModel.firstResultCardImage
-        firstResultCard.linkImage = nil
-        firstResultCard?.contentView?.backgroundColor = .brandAccent20
-    }
-
-    private func configureSecondCard() {
-        secondResultHeadlineLabel.attributedText = viewModel.secondResultTitle
-            .styledAs(.header_3)
-            .colored(.onBackground80)
-        secondResultCard.title = viewModel.secondResultName
-            .styledAs(.header_2)
-            .colored(.onBackground110)
-        secondResultCard.subtitle = viewModel.secondResultNameTranslittered
-            .styledAs(.subheader_2)
-            .colored(.onBackground80)
-        secondResultCard.bottomText = viewModel.secondResultDateOfBirth
-            .styledAs(.body)
-            .colored(.onBackground110)
-        secondResultCard.resultImage = viewModel.secondResultCardImage
-        secondResultCard.linkImage = nil
-        secondResultCard?.contentView?.backgroundColor = .brandAccent20
-    }
-
-    private func configureThirdCard() {
-        thirdResultHeadlineLabel.attributedText = viewModel.thirdResultTitle
-            .styledAs(.header_3)
-            .colored(.onBackground80)
-        thirdResultCard.title = viewModel.thirdResultName?
-            .styledAs(.header_2)
-            .colored(.onBackground110)
-        thirdResultCard.subtitle = viewModel.thirdResultNameTranslittered?
-            .styledAs(.subheader_2)
-            .colored(.onBackground80)
-        thirdResultCard.bottomText = viewModel.thirdResultDateOfBirth?
-            .styledAs(.body)
-            .colored(.onBackground110)
-        thirdResultStackView.isHidden = viewModel.thirdCardIsHidden
-        thirdResultCard.resultImage = viewModel.thirdResultCardImage
-        thirdResultCard.linkImage = nil
-        thirdResultCard?.contentView?.backgroundColor = .brandAccent20
-    }
-
-    private func configureYellowBackgroundAndIcon() {
-        let yellowCard = viewModel.thirdCardIsHidden ? secondResultCard : thirdResultCard
-        yellowCard?.contentView?.backgroundColor = .resultYellowBackground
-        yellowCard?.contentView?.layer.borderColor = UIColor.resultYellow.cgColor
-        yellowCard?.contentView?.layer.borderWidth = 2
-    }
-
     private func configureContent() {
         subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body).colored(.onBackground110)
         configureIgnoreView()
-        configureFirstCard()
-        configureSecondCard()
-        configureThirdCard()
-        configureYellowBackgroundAndIcon()
+
+        viewModel.personViewModels.forEach { viewModel in
+            let personView = CertResultCard()
+            let personTitleLabel = PlainLabel()
+            personTitleLabel.attributedText = viewModel.title
+                .styledAs(.header_3)
+                .colored(.onBackground80)
+            personView.title = viewModel.name
+                .styledAs(.header_2)
+                .colored(.onBackground110)
+            personView.subtitle = viewModel.nameTranslittered
+                .styledAs(.subheader_2)
+                .colored(.onBackground80)
+            personView.bottomText = viewModel.dateOfBirth
+                .styledAs(.body)
+                .colored(.onBackground110)
+            personView.isHidden = viewModel.isHidden
+            personView.resultImage = viewModel.cardImage
+            personView.linkImage = nil
+            personView.contentView?.backgroundColor = viewModel.backgroundColor
+            personView.contentView?.layer.borderColor = viewModel.borderColor.cgColor
+            personView.contentView?.layer.borderWidth = 2
+            let personStackView = UIStackView(arrangedSubviews: [personTitleLabel, personView])
+            personStackView.spacing = 8
+            personStackView.axis = .vertical
+            personsStackView.addArrangedSubview(personStackView)
+        }
     }
 
     private func configureCounter() {

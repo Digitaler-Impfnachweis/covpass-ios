@@ -16,11 +16,12 @@ class DifferentPersonViewModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         let (_, resolver) = Promise<ValidatorDetailSceneResult>.pending()
+        let token1 = CBORWebToken.mockVaccinationCertificate.extended()
+        let token2 = CBORWebToken.mockTestCertificate.extended()
+        let tokens = [token1, token2]
         delegate = .init()
         sut = .init(
-            firstToken: CBORWebToken.mockVaccinationCertificate.extended(),
-            secondToken: CBORWebToken.mockTestCertificate.extended(),
-            thirdToken: nil,
+            tokens: tokens,
             resolver: resolver,
             countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0)
         )

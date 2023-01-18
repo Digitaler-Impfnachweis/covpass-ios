@@ -63,6 +63,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     private lazy var qrCodeData: [String] = tokens.map(\.vaccinationQRCodeData)
     private let faqURL: URL
     private let context: ReissueContext
+    private var extendedToken: ExtendedCBORWebToken?
 
     // MARK: - Lifecyle
 
@@ -155,6 +156,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
         guard let unextendedToken = tokens.first else {
             return .init(error: ApplicationError.unknownError)
         }
+        extendedToken = extendedTokens.first
         return vaccinationRepository
             .delete(unextendedToken)
             .then { self.vaccinationRepository.add(tokens: extendedTokens) }
@@ -162,7 +164,11 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
 
     private func handleDoneExtendRenewal() {
         delegate?.viewModelDidUpdate()
-        router.showGenericResultPage(resolver: resolver)
+        guard let extendedToken = extendedToken else {
+            return
+        }
+        router.showGenericResultPage(resolver: resolver,
+                                     certificate: extendedToken)
     }
 
     private func handleDoneBoosterRenewal(_ tokens: [ExtendedCBORWebToken]) {

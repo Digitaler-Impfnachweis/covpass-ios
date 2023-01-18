@@ -27,7 +27,8 @@ class ReissueConsentRouterMock: ReissueConsentRouterProtocol {
         showNextExpectation.fulfill()
     }
 
-    func showGenericResultPage(resolver _: Resolver<Void>) {
+    func showGenericResultPage(resolver _: Resolver<Void>,
+                               certificate _: ExtendedCBORWebToken) {
         showNextGenericPageExpectation.fulfill()
     }
 

@@ -108,6 +108,10 @@ public extension UIColor {
     static let resultRedBackground = UIColor("ResultRedBackground")
 
     static let statusRedDot = UIColor("StatusRedDot")
+
+    static let hintBackground = UIColor("HintBackground")
+
+    static let hintBorder = UIColor("HintBorder")
 }
 
 private extension UIColor {

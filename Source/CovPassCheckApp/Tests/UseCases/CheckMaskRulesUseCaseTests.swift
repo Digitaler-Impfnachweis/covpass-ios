@@ -19,11 +19,10 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
         token = CBORWebToken.mockRecoveryCertificate.mockRecoveryUVCI("FOO").extended()
         revocationRepository = CertificateRevocationRepositoryMock()
         certificateHolderStatusModel = CertificateHolderStatusModelMock()
-        sut = CheckMaskRulesUseCase(token: token,
-                                    region: nil,
+        sut = CheckMaskRulesUseCase(region: nil,
                                     revocationRepository: revocationRepository,
                                     holderStatus: certificateHolderStatusModel,
-                                    additionalToken: nil,
+                                    tokens: [token],
                                     ignoringPiCheck: false)
     }
 
@@ -45,7 +44,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .maskRulesNotAvailable(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .maskRulesNotAvailable)
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -63,7 +62,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CertificateError, .revoked(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidToken)
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -82,7 +81,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidDueToRules(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidToken)
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -101,7 +100,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidDueToTechnicalReason(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidToken)
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -121,7 +120,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidDueToRules(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidToken)
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -141,7 +140,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidDueToTechnicalReason(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidToken)
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -162,7 +161,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .holderNeedsMask(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .holderNeedsMask)
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -178,9 +177,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
         certificateHolderStatusModel.needsMask = false
         // WHEN
         sut.execute()
-            .done { token in
-                XCTAssertNotNil(token)
-                XCTAssertEqual(token, self.token)
+            .done {
                 expectation.fulfill()
             }
             .catch { _ in
@@ -194,11 +191,10 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
     func test_checkMaskRule_withAdditional_token_of_different_person_failed() {
         // GIVEN
         let differentPersonToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended(vaccinationQRCodeData: "3")
-        let sut = CheckMaskRulesUseCase(token: token,
-                                        region: nil,
+        let sut = CheckMaskRulesUseCase(region: nil,
                                         revocationRepository: revocationRepository,
                                         holderStatus: certificateHolderStatusModel,
-                                        additionalToken: differentPersonToken,
+                                        tokens: [token, differentPersonToken],
                                         ignoringPiCheck: false)
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areMaskRulesAvailable = true
@@ -213,7 +209,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .differentPersonalInformation(self.token, differentPersonToken))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .differentPersonalInformation)
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -221,11 +217,10 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
 
     func test_checkMaskRule_withAdditional_same_token_of() {
         // GIVEN
-        let sut = CheckMaskRulesUseCase(token: token,
-                                        region: nil,
+        let sut = CheckMaskRulesUseCase(region: nil,
                                         revocationRepository: revocationRepository,
                                         holderStatus: certificateHolderStatusModel,
-                                        additionalToken: token,
+                                        tokens: [token, token],
                                         ignoringPiCheck: false)
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areMaskRulesAvailable = true
@@ -240,7 +235,7 @@ class CheckMaskRulesUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .secondScanSameToken(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .secondScanSameToken)
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)

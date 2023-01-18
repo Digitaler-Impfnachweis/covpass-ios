@@ -72,7 +72,7 @@ class ReissueStartViewModelTests: XCTestCase {
         let certItem = sut.certItem
 
         // Then
-        XCTAssertEqual(certItem.activeLabel.text, "Vaccinated on Jan 1, 2021")
+        XCTAssertNil(certItem.activeLabel.text)
     }
 
     func testCertItem_expiry_extension() {
@@ -85,6 +85,6 @@ class ReissueStartViewModelTests: XCTestCase {
         let certItem = sut.certItem
 
         // Then
-        XCTAssertEqual(certItem.activeLabel.text, "Maximum valid until May 1, 2022")
+        XCTAssertEqual(certItem.activeLabel.text, "Renewal needed")
     }
 }

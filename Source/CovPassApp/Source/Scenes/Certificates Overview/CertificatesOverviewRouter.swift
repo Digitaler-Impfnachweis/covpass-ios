@@ -22,6 +22,14 @@ private enum Constants {
         static let errorMessage = "file_import_error_access_copy".localized
         static let errorButtonText = "file_import_error_access_button".localized
     }
+
+    enum Reissue {
+        enum NotDe {
+            static let title = "renewal_expiry_modal_not_available_title".localized
+            static let copy = "renewal_expiry_modal_not_available_copy".localized
+            static let buttonTitle = "renewal_expiry_modal_not_available_title_1".localized
+        }
+    }
 }
 
 class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRouterProtocol {
@@ -172,17 +180,28 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
                                      initialisationData: data))
     }
 
-    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken],
-                                 context: ReissueContext) -> Promise<Void> {
+    func showExtensionRenewalReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
         if cborWebTokens.isEmpty {
-            // Do not start the reissue process when we don't have any tokens
             return .value
         }
         return sceneCoordinator.present(
             ReissueStartSceneFactory(
                 router: ReissueStartRouter(sceneCoordinator: sceneCoordinator),
                 tokens: cborWebTokens,
-                context: context
+                context: .certificateExtension
+            )
+        )
+    }
+
+    func showBoosterRenewalReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        if cborWebTokens.isEmpty {
+            return .value
+        }
+        return sceneCoordinator.present(
+            ReissueStartSceneFactory(
+                router: ReissueStartRouter(sceneCoordinator: sceneCoordinator),
+                tokens: cborWebTokens,
+                context: .boosterRenewal
             )
         )
     }
@@ -203,6 +222,15 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             title: Constants.Texts.errorTitle,
             message: Constants.Texts.errorMessage,
             actions: [.init(title: Constants.Texts.errorButtonText)],
+            style: .alert
+        )
+    }
+
+    func showCertificateExpiredNotDe() {
+        showDialog(
+            title: Constants.Reissue.NotDe.title,
+            message: Constants.Reissue.NotDe.copy,
+            actions: [.init(title: Constants.Reissue.NotDe.buttonTitle)],
             style: .alert
         )
     }

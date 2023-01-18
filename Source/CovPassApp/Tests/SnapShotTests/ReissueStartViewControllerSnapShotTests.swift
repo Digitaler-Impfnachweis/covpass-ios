@@ -12,7 +12,8 @@ import PromiseKit
 
 class ReissueStartViewControllerSnapShotTests: BaseSnapShotTests {
     func testDefault() {
-        let token = CBORWebToken.mockVaccinationCertificate.extended()
+        var token = CBORWebToken.mockVaccinationCertificate.extended()
+        token.vaccinationCertificate.exp = .init() + 1
         let (_, resolver) = Promise<Void>.pending()
         let vm = ReissueStartViewModel(router: ReissueStartRouter(sceneCoordinator: SceneCoordinatorMock()),
                                        resolver: resolver,
@@ -23,7 +24,20 @@ class ReissueStartViewControllerSnapShotTests: BaseSnapShotTests {
     }
 
     func testDefaultExpiryContext() {
-        let token = CBORWebToken.mockVaccinationCertificate.extended()
+        var token = CBORWebToken.mockVaccinationCertificate.extended()
+        token.vaccinationCertificate.exp = .init() + 1
+        let (_, resolver) = Promise<Void>.pending()
+        let vm = ReissueStartViewModel(router: ReissueStartRouter(sceneCoordinator: SceneCoordinatorMock()),
+                                       resolver: resolver,
+                                       tokens: [token],
+                                       context: .certificateExtension)
+        let vc = ReissueStartViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1000)
+    }
+
+    func testDefaultExpiryContext_recovery() {
+        var token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.vaccinationCertificate.exp = .init() + 1
         let (_, resolver) = Promise<Void>.pending()
         let vm = ReissueStartViewModel(router: ReissueStartRouter(sceneCoordinator: SceneCoordinatorMock()),
                                        resolver: resolver,

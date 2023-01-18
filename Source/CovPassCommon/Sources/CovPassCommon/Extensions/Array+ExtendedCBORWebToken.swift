@@ -30,7 +30,7 @@ public extension Array where Element == ExtendedCBORWebToken {
         contains { $0.matches(extendedCBORWebToken) }
     }
 
-    var qualifiedForReissue: Bool {
+    var qualifiedForBoosterRenewal: Bool {
         guard filter2Of1.isEmpty else {
             return false
         }
@@ -39,6 +39,14 @@ public extension Array where Element == ExtendedCBORWebToken {
 
     var areVaccinationsQualifiedForExpiryReissue: Bool {
         vaccinationExpiryReissueCandidate != nil
+    }
+
+    var areRecoveriesQualifiedForExpiryReissue: Bool {
+        !recoveryExpiryReissueCandidates.isEmpty
+    }
+
+    var areCertificatesQualifiedForExpiryReissue: Bool {
+        areVaccinationsQualifiedForExpiryReissue || areRecoveriesQualifiedForExpiryReissue
     }
 
     var qualifiedCertificatesForVaccinationExpiryReissue: Self {
@@ -100,7 +108,9 @@ public extension Array where Element == ExtendedCBORWebToken {
 
     var reissueProcessInitialNotAlreadySeen: Bool { !reissueProcessInitialAlreadySeen }
 
-    var reissueProcessInitialAlreadySeen: Bool { first(where: { $0.reissueProcessInitialAlreadySeen ?? false }) != nil }
+    var reissueProcessInitialAlreadySeen: Bool {
+        first?.reissueProcessInitialAlreadySeen ?? false
+    }
 
     var reissueNewBadgeAlreadySeen: Bool { first(where: { $0.reissueProcessNewBadgeAlreadySeen ?? false }) != nil }
 
@@ -356,16 +366,20 @@ public extension Array where Element == ExtendedCBORWebToken {
 
     var filterNotExpired: Self { filter(\.isNotExpired) }
 
+    var filterFirstOfAllTypesNotExpired: [ExtendedCBORWebToken] {
+        let sortedList = sortLatest().filterNotInvalid.filterNotRevoked.filterNotExpired
+        return sortedList.filterFirstOfAllTypes
+    }
+
     var filterFirstOfAllTypes: [ExtendedCBORWebToken] {
         var firstOfAll: [ExtendedCBORWebToken] = []
-        let sortedList = sortLatest().filterNotInvalid.filterNotRevoked.filterNotExpired
-        if let firstTest = sortedList.firstTest {
+        if let firstTest = firstTest {
             firstOfAll.append(firstTest)
         }
-        if let firstVaccination = sortedList.firstVaccination {
+        if let firstVaccination = firstVaccination {
             firstOfAll.append(firstVaccination)
         }
-        if let firstRecovery = sortedList.firstRecovery {
+        if let firstRecovery = firstRecovery {
             firstOfAll.append(firstRecovery)
         }
         return firstOfAll

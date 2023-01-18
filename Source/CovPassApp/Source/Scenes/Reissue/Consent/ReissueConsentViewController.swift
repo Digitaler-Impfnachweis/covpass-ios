@@ -39,6 +39,7 @@ class ReissueConsentViewController: UIViewController {
         updateView()
         configureActions()
         configureActivityIndicator()
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     // MARK: - Methods

@@ -54,19 +54,19 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var title: String {
-        neutral ? dgc.nam.fullName : "certificates_overview_recovery_certificate_title".localized
+        isNeutral ? dgc.nam.fullName : "certificates_overview_recovery_certificate_title".localized
     }
 
     var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
-        neutral ? "certificates_overview_recovery_certificate_title".localized : "certificates_overview_recovery_certificate_message".localized
+        isNeutral ? "certificates_overview_recovery_certificate_title".localized : "certificates_overview_recovery_certificate_message".localized
     }
 
     var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
-        neutral ? "certificates_overview_recovery_certificate_message".localized : infoString(forAccessibility: false) ?? ""
+        isNeutral ? "certificates_overview_recovery_certificate_message".localized : infoString(forAccessibility: false) ?? ""
     }
 
     var infoAccessibilityLabel: String? {
@@ -74,6 +74,9 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var info2: String? {
+        if isNeutral {
+            return infoString(forAccessibility: false) ?? ""
+        }
         if certificate.vaccinationCertificate.isExpired {
             return "certificates_overview_expired_certificate_note".localized
         }
@@ -92,22 +95,25 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         "accessibility_overview_certificates_label_display_certificate".localized
     }
 
-    var statusIcon: UIImage? { neutral ? nil : .validationCheckmark }
+    var statusIcon: UIImage? { isNeutral ? nil : .validationCheckmark }
 
     var statusIconHidden: Bool { statusIcon == nil }
 
     var statusIconAccessibilityLabel: String? { nil }
 
     var activeTitle: String? {
-        neutral ? infoString(forAccessibility: false) ?? "" : active ? "certificates_overview_currently_uses_certificate_note".localized : nil
+        if isNeutral {
+            return "renewal_expiry_notification_title".localized
+        }
+        return active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }
 
-    var neutral: Bool
+    var isNeutral: Bool
 
     init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {
         self.certificate = certificate
         self.active = active
-        self.neutral = neutral
+        isNeutral = neutral
     }
 
     // MARK: - Helpers

@@ -12,6 +12,8 @@ import Foundation
 import UIKit
 
 struct ResultItemViewModel: CertificateItemViewModel {
+    var isNeutral: Bool = false
+
     let result: CertificateResult
 
     var icon: UIImage {

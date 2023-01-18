@@ -300,7 +300,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.statusInvalidCircle, model.subtitleIcon)
+        XCTAssertEqual(.expiredDotNotification, model.subtitleIcon)
         XCTAssertEqual("No valid certificate", model.title)
         XCTAssertEqual("No valid certificate", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
@@ -337,7 +337,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(true, model.isInvalid)
     }
 
-    func testShowNotificationsIfNeeded_showCertificatesReissueIfNeeded_shown() throws {
+    func testShowNotificationsIfNeeded_showBoosterRenewalReissueIfNeeded_shown() throws {
         let singleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
             .mockVaccinationUVCI("1")
             .medicalProduct(.biontech)
@@ -379,7 +379,81 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         sut.showNotificationsIfNeeded()
 
         // Then
-        wait(for: [router.showCertificatesReissueExpectation], timeout: 4)
+        wait(for: [router.showBoosterRenewalReissueExpectation], timeout: 4)
+    }
+
+    func test_extension_reissue_shown() throws {
+        var token = CBORWebToken.mockVaccinationCertificate
+        token.exp = .init() - 1
+
+        // Given
+        configureSut(
+            certificates: [
+                token.extended()
+            ]
+        )
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showExtensionRenewalReissueExpectation], timeout: 4)
+    }
+
+    func test_extension_reissue_shown_two_persons() throws {
+        router.showExtensionRenewalReissueExpectation.expectedFulfillmentCount = 2
+        var token = CBORWebToken.mockVaccinationCertificate
+        token.exp = .init() - 1
+        var token2 = CBORWebToken.mockVaccinationCertificate.mockName(.init(gn: "bar", fn: "foo", gnt: "foo", fnt: "BAAR"))
+        token2.exp = .init() - 1
+
+        // Given
+        configureSut(
+            certificates: [
+                token.extended(),
+                token2.extended()
+            ]
+        )
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showExtensionRenewalReissueExpectation], timeout: 4)
+    }
+
+    func test_extension_reissue_shown_two_times_each_two_persons_recovery() throws {
+        router.showExtensionRenewalReissueExpectation.expectedFulfillmentCount = 4
+        var token = CBORWebToken.mockRecoveryCertificate
+            .recoveryTestDate(.init() - 10000)
+        token.exp = .init() - 1
+        var token2 = CBORWebToken.mockRecoveryCertificate
+            .recoveryTestDate(.init() - 100_000)
+            .mockName(.init(gn: "bar", fn: "foo", gnt: "foo", fnt: "BAAR"))
+        token2.exp = .init() - 1
+        var token3 = CBORWebToken.mockRecoveryCertificate
+            .recoveryTestDate(.init() - 100_000)
+        token3.exp = .init() - 1
+        var token4 = CBORWebToken.mockRecoveryCertificate
+            .recoveryTestDate(.init() - 10000)
+            .mockName(.init(gn: "bar", fn: "foo", gnt: "foo", fnt: "BAAR"))
+        token4.exp = .init() - 1
+
+        // Given
+        configureSut(
+            certificates: [
+                token.extended(vaccinationQRCodeData: "1"),
+                token2.extended(vaccinationQRCodeData: "2"),
+                token4.extended(vaccinationQRCodeData: "3"),
+                token3.extended(vaccinationQRCodeData: "4")
+            ]
+        )
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showExtensionRenewalReissueExpectation], timeout: 4)
     }
 
     func testShowNotificationsIfNeeded_showRevocationWarning_token_not_revoked() throws {
@@ -480,7 +554,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         sut.showNotificationsIfNeeded()
 
         // Then
-        wait(for: [router.showStateSelectionOnboardingExpectation], timeout: 1)
+        wait(for: [router.showStateSelectionOnboardingExpectation], timeout: 2)
     }
 
     func testShowNotificationsIfNeeded_new_regulations_announcement_already_shown() {
@@ -529,7 +603,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
 
         // Then
-        wait(for: [router.showDialogExpectation], timeout: 2)
+        wait(for: [router.showCertificateExpiredNotDeExpectation], timeout: 2)
     }
 
     func testRefresh_expiry_notification_token_is_expired() throws {
@@ -540,7 +614,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
 
         // Then
-        wait(for: [router.showDialogExpectation], timeout: 2)
+        wait(for: [router.showCertificateExpiredNotDeExpectation], timeout: 2)
     }
 
     func testRefresh_expiry_notification_token_expires_soon() throws {
@@ -551,7 +625,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
 
         // Then
-        wait(for: [router.showDialogExpectation], timeout: 2)
+        wait(for: [router.showCertificateExpiredNotDeExpectation], timeout: 2)
     }
 
     func testRefresh_expiry_notification_token_is_expired_expiry_already_shown() throws {
@@ -582,10 +656,10 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
 
         // Then
-        wait(for: [router.showDialogExpectation], timeout: 2)
+        wait(for: [router.showCertificateExpiredNotDeExpectation], timeout: 2)
     }
 
-    func testRefresh_expiry_notification_only_shown_once() throws {
+    func testRefresh_expiry_notification_only_shown_once_non_DE() throws {
         // Given
         let tokens: [ExtendedCBORWebToken] = [.expired]
         configureSut(certificates: tokens)
@@ -598,7 +672,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         wait(for: [
             vaccinationRepository.setExpiryAlertExpectation,
             vaccinationRepository.getCertificateListExpectation,
-            router.showDialogExpectation
+            router.showCertificateExpiredNotDeExpectation
         ], timeout: 1)
     }
 
@@ -766,7 +840,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         }
 
         // Then
-        wait(for: [router.showCertificateModalExpectation], timeout: 2)
+        wait(for: [router.showCertificateModalExpectation], timeout: 3)
     }
 
     func testScanCertificate_revokedCertificate() throws {
@@ -899,7 +973,7 @@ private extension ExtendedCBORWebToken {
     static var expired: ExtendedCBORWebToken {
         .init(
             vaccinationCertificate: .init(
-                iss: "",
+                iss: "IT",
                 iat: nil,
                 exp: .distantPast,
                 hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1"))
@@ -911,7 +985,7 @@ private extension ExtendedCBORWebToken {
     static var expiresSoon: ExtendedCBORWebToken {
         .init(
             vaccinationCertificate: .init(
-                iss: "",
+                iss: "IT",
                 iat: nil,
                 exp: Date() + 60,
                 hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1"))
@@ -923,7 +997,7 @@ private extension ExtendedCBORWebToken {
     static var invalidToken: ExtendedCBORWebToken {
         .init(
             vaccinationCertificate: .init(
-                iss: "",
+                iss: "IT",
                 iat: nil,
                 exp: nil,
                 hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1"))

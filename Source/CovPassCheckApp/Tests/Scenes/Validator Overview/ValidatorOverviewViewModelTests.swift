@@ -256,17 +256,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         wait(for: [router.routeToStateSelectionExpectation], timeout: 1)
     }
 
-    func test_scanAction_showMaskRequiredTechnicalError_unexpected() {
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showMaskRulesInvalidExpectation
-        ], timeout: 1)
-    }
-
-    func test_scanAction_showMaskRequiredTechnicalError_alternative() {
+    func test_checkMaskStatus_showMaskRequiredTechnicalError_alternative() {
         // GIVEN
         certLogic.validateResult = []
         repository.checkedCert = CBORWebToken.mockVaccinationCertificate
@@ -279,10 +269,24 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
 
-    func test_scanAction_showMaskRequiredBusinessRules() {
+    func test_checkMaskStatus_showMaskRequiredBusinessRulesSecondScanAllowedExpectation() {
         // GIVEN
-        certLogic.validateResult = [.init(rule: acceptenceRule, result: .fail)]
+        certLogic.validateResult = [.init(rule: maskRule, result: .fail)]
         repository.checkedCert = CBORWebToken.mockVaccinationCertificate
+        // When
+        sut.checkMaskStatus()
+
+        // Then
+        wait(for: [
+            router.showMaskRequiredBusinessRulesSecondScanAllowedExpectation
+        ], timeout: 1)
+    }
+
+    func test_checkMaskStatus_showMaskRequiredBusinessRules() {
+        // GIVEN
+        certLogic.validateResult = [.init(rule: maskRule, result: .fail)]
+        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
+        sut.tokensToCheck = [CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "2")]
         // When
         sut.checkMaskStatus()
 
@@ -292,7 +296,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
 
-    func test_scanAction_showMaskRequiredBusinessRulesSecondScanAllowed() {
+    func test_checkMaskStatus_showMaskRequiredBusinessRulesSecondScanAllowed() {
         // GIVEN
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed)]
         repository.checkedCert = CBORWebToken.mockVaccinationCertificate
@@ -305,7 +309,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
 
-    func test_scanAction_showMaskRequiredBusinessRules_testCertificate() {
+    func test_checkMaskStatus_showMaskRequiredBusinessRules_testCertificate() {
         // GIVEN
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed)]
         repository.checkedCert = CBORWebToken.mockTestCertificate
@@ -318,7 +322,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
 
-    func test_scanAction_showNoMaskRules() {
+    func test_checkMaskStatus_showNoMaskRules() {
         // GIVEN
         certLogic.areRulesAvailable = false
         repository.checkedCert = CBORWebToken.mockVaccinationCertificate
@@ -331,7 +335,48 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
 
-    func test_scanAction_showMaskRequiredTechnicalError_alternative_revoked() {
+    func test_checkMaskStatus_showMaskRequiredTechnicalErrorExpectation_withQualifiedToken_needToDrop() {
+        // GIVEN
+        certLogic.validationError = NSError(domain: "Some Error", code: 500)
+        let token = CBORWebToken.mockVaccinationCertificate
+        repository.checkedCert = token
+        router.showMaskRulesInvalidResponse = .value(.rescan)
+        // When
+        sut.checkMaskStatus()
+
+        // Then
+        XCTAssertEqual(sut.tokensToCheck.count, 0)
+        wait(for: [
+            router.showMaskRulesInvalidExpectation
+        ], timeout: 1)
+    }
+
+    func test_checkMaskStatus_showMaskRequiredTechnicalErrorExpectation_withoutQualifiedToken_dontNeedToDrop() {
+        // GIVEN
+        certLogic.validationError = NSError(domain: "Some Error", code: 500)
+        repository.checkedCert = nil
+        router.showMaskRulesInvalidResponse = .value(.rescan)
+        // When
+        sut.checkMaskStatus()
+
+        // Then
+        XCTAssertEqual(sut.tokensToCheck.count, 0)
+        wait(for: [
+            router.showMaskRulesInvalidExpectation
+        ], timeout: 1)
+    }
+
+    func test_checkMaskStatus_showMaskRequiredTechnicalError_unexpected() {
+        // When
+        sut.checkMaskStatus()
+
+        // Then
+        wait(for: [
+            router.showMaskRulesInvalidExpectation
+        ], timeout: 1)
+    }
+
+    func test_checkMaskStatus_showMaskRequiredTechnicalError_alternative_revoked() {
         // GIVEN
         revocationRepository.isRevoked = true
         repository.checkedCert = CBORWebToken.mockVaccinationCertificate
@@ -344,13 +389,14 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
 
-    func test_scanAction_secondScan_differentPerson() {
+    func test_checkMaskStatus_secondScan_differentPerson() {
         // GIVEN
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
                                     .init(rule: maskRule, result: .passed)]
         repository.checkedCert = CBORWebToken.mockVaccinationCertificateWithOtherName
+        sut.tokensToCheck = [CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "1")]
         // When
-        sut.checkMaskStatus(firstToken: CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "1"))
+        sut.checkMaskStatus()
 
         // Then
         wait(for: [
@@ -358,15 +404,17 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
 
-    func test_scanAction_secondScan_differentPerson_ignoring() {
+    func test_checkMaskStatus_secondScan_differentPerson_ignoring() {
         // GIVEN
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
                                     .init(rule: maskRule, result: .passed)]
         let firstToken = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "1")
         let secondToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended(vaccinationQRCodeData: "2")
         repository.checkedCert = secondToken.vaccinationCertificate
+        sut.tokensToCheck = [firstToken, secondToken]
+
         // When
-        sut.checkMaskStatus(firstToken: firstToken, secondToken: secondToken, ignoringPiCheck: true)
+        sut.checkMaskStatus(ignoringPiCheck: true)
 
         // Then
         wait(for: [
@@ -374,16 +422,18 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
 
-    func test_scanAction_secondScan_differentPerson_ignoring_after_response() {
+    func test_checkMaskStatus_secondScan_differentPerson_ignoring_after_response() {
         // GIVEN
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
                                     .init(rule: maskRule, result: .passed)]
         let firstToken = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "1")
         let secondToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended(vaccinationQRCodeData: "2")
         repository.checkedCert = secondToken.vaccinationCertificate
-        router.showDifferentPersonResult = .ignore(firstToken, secondToken, nil)
+        router.showDifferentPersonResult = .ignore
+        sut.tokensToCheck = [firstToken]
+
         // When
-        sut.checkMaskStatus(firstToken: firstToken)
+        sut.checkMaskStatus()
 
         // Then
         wait(for: [
@@ -400,15 +450,16 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             .extended(vaccinationQRCodeData: "1")
         repository.checkedCert = token.vaccinationCertificate
         router.scanQRCodeResponse = "1"
+        sut.tokensToCheck = [additionalToken]
         // When
-        sut.checkMaskStatus(firstToken: additionalToken)
+        sut.checkMaskStatus()
         // Then
         wait(for: [
             router.secondScanSameTokenExpectation
         ], timeout: 1)
     }
 
-    func test_scanAction_showMaskOptional() {
+    func test_checkMaskStatus_showMaskOptional() {
         // GIVEN
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
                                     .init(rule: maskRule, result: .passed)]
@@ -489,8 +540,10 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             .mockRecoveryCertificate
             .extended(vaccinationQRCodeData: "2")
         repository.checkedCert = token.vaccinationCertificate
+        sut.tokensToCheck = [secondToken]
+
         // When
-        sut.checkImmunityStatusWithinGermany(secondToken: secondToken)
+        sut.checkImmunityStatusWithinGermany()
         // Then
         wait(for: [
             router.showIfsg22aCheckDifferentPersonExpectation
@@ -508,10 +561,11 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         let firstToken = CBORWebToken
             .mockRecoveryCertificate
             .extended(vaccinationQRCodeData: "2")
-        router.showIfsg22aCheckDifferentPersonResponse = .value(.ignore(firstToken, secondToken, nil))
+        router.showIfsg22aCheckDifferentPersonResponse = .value(.ignore)
         repository.checkedCert = firstToken.vaccinationCertificate
+        sut.tokensToCheck = [secondToken]
         // When
-        sut.checkImmunityStatusWithinGermany(secondToken: secondToken)
+        sut.checkImmunityStatusWithinGermany()
         // Then
         wait(for: [
             router.showIfsg22aCheckDifferentPersonExpectation,
@@ -531,8 +585,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             .mockRecoveryCertificate
             .extended(vaccinationQRCodeData: "2")
         repository.checkedCert = token.vaccinationCertificate
+        sut.tokensToCheck = [secondToken]
         // When
-        sut.checkImmunityStatusWithinGermany(secondToken: secondToken, ignoringPiCheck: true)
+        sut.checkImmunityStatusWithinGermany(ignoringPiCheck: true)
         // Then
         wait(for: [
             router.showVaccinationCycleCompleteExpectation
@@ -554,8 +609,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             .mockRecoveryCertificate
             .extended(vaccinationQRCodeData: "3")
         repository.checkedCert = thirdToken.vaccinationCertificate
+        sut.tokensToCheck = [firstToken, secondToken]
         // When
-        sut.checkImmunityStatusWithinGermany(firstToken: firstToken, secondToken: secondToken)
+        sut.checkImmunityStatusWithinGermany()
         // Then
         wait(for: [
             router.showIfsg22aCheckDifferentPersonExpectation
@@ -576,10 +632,11 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         let firstToken = CBORWebToken
             .mockRecoveryCertificate
             .extended(vaccinationQRCodeData: "3")
-        router.showIfsg22aCheckDifferentPersonResponse = .value(.ignore(firstToken, secondToken, thirdToken))
+        router.showIfsg22aCheckDifferentPersonResponse = .value(.ignore)
         repository.checkedCert = thirdToken.vaccinationCertificate
+        sut.tokensToCheck = [firstToken, secondToken]
         // When
-        sut.checkImmunityStatusWithinGermany(firstToken: firstToken, secondToken: secondToken)
+        sut.checkImmunityStatusWithinGermany()
         // Then
         wait(for: [
             router.showIfsg22aCheckDifferentPersonExpectation,
@@ -602,8 +659,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             .mockRecoveryCertificate
             .extended(vaccinationQRCodeData: "3")
         repository.checkedCert = thirdToken.vaccinationCertificate
+        sut.tokensToCheck = [firstToken, secondToken, thirdToken]
         // When
-        sut.checkImmunityStatusWithinGermany(firstToken: firstToken, secondToken: secondToken, thirdToken: thirdToken, ignoringPiCheck: true)
+        sut.checkImmunityStatusWithinGermany(ignoringPiCheck: true)
         // Then
         wait(for: [
             router.showVaccinationCycleCompleteExpectation
@@ -618,8 +676,10 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         let additionalToken = CBORWebToken.mockVaccinationCertificate
             .extended(vaccinationQRCodeData: "2")
         repository.checkedCert = token.vaccinationCertificate
+        sut.tokensToCheck = [additionalToken]
+
         // When
-        sut.checkImmunityStatusWithinGermany(secondToken: additionalToken)
+        sut.checkImmunityStatusWithinGermany()
         // Then
         wait(for: [
             router.showIfsg22aNotCompleteExpectation
@@ -635,8 +695,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             .extended(vaccinationQRCodeData: "1")
         repository.checkedCert = token.vaccinationCertificate
         router.scanQRCodeResponse = "1"
+        sut.tokensToCheck = [additionalToken]
         // When
-        sut.checkImmunityStatusWithinGermany(secondToken: additionalToken)
+        sut.checkImmunityStatusWithinGermany()
         // Then
         wait(for: [
             router.secondScanSameTokenExpectation
@@ -811,5 +872,23 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         sut.showNotificationsIfNeeded()
         // Then
         wait(for: [router.showAnnouncementExpectation], timeout: 1)
+    }
+
+    func test_isFirstScan() throws {
+        // Given
+        sut.tokensToCheck = []
+        // When
+        let isFirstScan = sut.isFirstScan
+        // Then
+        XCTAssertTrue(isFirstScan)
+    }
+
+    func test_isNotFirstScan() throws {
+        // Given
+        sut.tokensToCheck = [try .mock()]
+        // When
+        let isFirstScan = sut.isFirstScan
+        // Then
+        XCTAssertFalse(isFirstScan)
     }
 }

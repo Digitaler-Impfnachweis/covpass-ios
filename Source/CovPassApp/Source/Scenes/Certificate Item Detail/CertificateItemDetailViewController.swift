@@ -21,6 +21,7 @@ class CertificateItemDetailViewController: UIViewController {
     @IBOutlet var buttonStackView: UIStackView!
     @IBOutlet var titleLabel: PlainLabel!
     @IBOutlet var hintView: HintView!
+    @IBOutlet var expirationHintView: HintButton!
     @IBOutlet var qrCodeButton: MainButton!
     @IBOutlet var pdfExportButton: MainButton!
     @IBOutlet var infoLabel1: LinkLabel!
@@ -52,9 +53,9 @@ class CertificateItemDetailViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .backgroundPrimary
         scrollView.contentInset = .init(top: .space_24, left: .zero, bottom: .space_70, right: .zero)
-
         setupNavigationBar()
         setupHeadline()
+        hintView.isHidden = true
         if viewModel.hasValidationResult {
             setupVAASResultHintView()
         } else {
@@ -97,34 +98,20 @@ class CertificateItemDetailViewController: UIViewController {
     }
 
     private func setupHintView() {
-        hintView.isHidden = true
-        hintView.iconView.image = .warning
-        hintView.containerView.backgroundColor = .infoBackground
-        hintView.containerView?.layer.borderColor = UIColor.infoAccent.cgColor
-        stackView.setCustomSpacing(.space_24, after: hintView)
-        if viewModel.isExpired {
-            let bodyText = viewModel.isGerman ?
-                "certificate_expired_detail_view_note_message" :
-                "certificate_expires_detail_view_note_nonDE"
-            hintView.isHidden = false
-            hintView.titleLabel.attributedText = "certificate_expired_detail_view_note_title".localized.styledAs(.header_3)
-            hintView.bodyLabel.attributedText = bodyText.localized.styledAs(.body)
-        } else if let date = viewModel.expiresSoonDate {
-            hintView.isHidden = false
-            hintView.iconView.image = .activity
-            hintView.titleLabel.attributedText = String(format: "certificate_expires_detail_view_note_title".localized, DateUtils.displayDateFormatter.string(from: date), DateUtils.displayTimeFormatter.string(from: date)).styledAs(.header_3)
-            hintView.bodyLabel.attributedText = "certificate_expires_detail_view_note_message".localized.styledAs(.body)
-            hintView.containerView.backgroundColor = .onBackground50
-            hintView.containerView.layer.borderColor = UIColor.onBrandBase.cgColor
-        } else if viewModel.isInvalid {
-            hintView.isHidden = false
-            hintView.titleLabel.attributedText = "certificate_invalid_detail_view_note_title".localized.styledAs(.header_3)
-            hintView.bodyLabel.attributedText = "certificate_invalid_detail_view_note_message".localized.styledAs(.body)
-        } else if viewModel.isRevoked {
-            hintView.isHidden = false
-            hintView.titleLabel.attributedText = "certificate_invalid_detail_view_note_title".localized.styledAs(.header_3)
-            hintView.bodyLabel.attributedText = viewModel.revocationText.styledAs(.body)
-        }
+        expirationHintView.isHidden = viewModel.expirationHintIsHidden
+        guard !viewModel.expirationHintIsHidden else { return }
+        expirationHintView.iconImageView.image = viewModel.expirationHintIcon
+        expirationHintView.containerView.backgroundColor = viewModel.expirationHintBackgroundColor
+        expirationHintView.containerView?.layer.borderColor = viewModel.expirationHintBorderColor?.cgColor
+        expirationHintView.titleLabel.attributedText = viewModel.expirationHintTitle?.styledAs(.header_3)
+        expirationHintView.bodyTextView.attributedText = viewModel.expirationHintBodyText?.styledAs(.body)
+        expirationHintView.bodyTextView.backgroundColor = .clear
+        expirationHintView.bodyTextView.textContainerInset = .init(top: -6, left: -6, bottom: 6, right: 6)
+        expirationHintView.button.title = viewModel.expirationHintButtonTitle
+        expirationHintView.hintButtonWrapper.isHidden = viewModel.expirationHintButtonIsHidden ?? true
+        expirationHintView.button.action = viewModel.triggerVaccinationExpiryReissue
+        expirationHintView.backgroundColor = .backgroundPrimary
+        stackView.setCustomSpacing(.space_24, after: expirationHintView)
     }
 
     private func setupVAASResultHintView() {

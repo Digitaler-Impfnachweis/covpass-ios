@@ -17,10 +17,10 @@ enum TravelRulesError: Error {
 }
 
 enum ValidatorDetailSceneResult: Equatable {
-    case ignore(_ token1: ExtendedCBORWebToken, _ token2: ExtendedCBORWebToken, _ token3: ExtendedCBORWebToken?)
+    case ignore
     case close
-    case secondScan(ExtendedCBORWebToken)
-    case thirdScan(ExtendedCBORWebToken, ExtendedCBORWebToken)
+    case rescan
+    case scanNext
     case startOver
 }
 
@@ -127,7 +127,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
         return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
                                                                        reasonType: .functional,
-                                                                       secondCertificateHintHidden: false,
+                                                                       secondCertificateHintHidden: true,
                                                                        token: token),
                                         animated: true)
     }
@@ -137,15 +137,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
                                                                        reasonType: .functional,
                                                                        secondCertificateHintHidden: false,
-                                                                       token: token),
-                                        animated: true)
-    }
-
-    func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
-        let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
-        return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
-                                                                       reasonType: .technical,
-                                                                       secondCertificateHintHidden: true,
                                                                        token: token),
                                         animated: true)
     }
@@ -164,18 +155,16 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                                         animated: true)
     }
 
-    func showMaskCheckDifferentPerson(firstToken: ExtendedCBORWebToken,
-                                      secondToken: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        let view = DifferentPersonSceneFactory(firstToken: firstToken,
-                                               secondToken: secondToken,
-                                               thirdToken: nil)
+    func showMaskCheckDifferentPerson(tokens: [ExtendedCBORWebToken]) -> Promise<ValidatorDetailSceneResult> {
+        let view = DifferentPersonSceneFactory(tokens: tokens)
         return sceneCoordinator.present(view, animated: true)
     }
 
-    func showMaskRulesInvalid(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+    func showMaskRulesInvalid(token: ExtendedCBORWebToken?, rescanIsHidden: Bool) -> Promise<ValidatorDetailSceneResult> {
         let router = CertificateInvalidResultRouter(sceneCoordinator: sceneCoordinator)
         let view = CertificateInvalidResultSceneFactory(router: router,
-                                                        token: token)
+                                                        token: token,
+                                                        rescanIsHidden: rescanIsHidden)
         return sceneCoordinator.present(view, animated: true)
     }
 
@@ -188,25 +177,21 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         return sceneCoordinator.present(view, animated: true)
     }
 
-    func showIfsg22aCheckDifferentPerson(firstToken: ExtendedCBORWebToken,
-                                         secondToken: ExtendedCBORWebToken,
-                                         thirdToken: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
-        let view = DifferentPersonSceneFactory(firstToken: firstToken,
-                                               secondToken: secondToken,
-                                               thirdToken: thirdToken)
+    func showIfsg22aCheckDifferentPerson(tokens: [ExtendedCBORWebToken]) -> Promise<ValidatorDetailSceneResult> {
+        let view = DifferentPersonSceneFactory(tokens: tokens)
         return sceneCoordinator.present(view, animated: true)
     }
 
-    func showIfsg22aNotComplete(token: ExtendedCBORWebToken, secondToken: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
-        let view = SecondScanSceneFactory(token: token,
-                                          secondToken: secondToken)
+    func showIfsg22aNotComplete(tokens: [ExtendedCBORWebToken]) -> Promise<ValidatorDetailSceneResult> {
+        let view = SecondScanSceneFactory(tokens: tokens)
         return sceneCoordinator.present(view, animated: true)
     }
 
-    func showIfsg22aCheckError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+    func showIfsg22aCheckError(token: ExtendedCBORWebToken?, rescanIsHidden: Bool) -> Promise<ValidatorDetailSceneResult> {
         let router = CertificateInvalidResultRouter(sceneCoordinator: sceneCoordinator)
         let view = CertificateInvalidResultSceneFactory(router: router,
-                                                        token: token)
+                                                        token: token,
+                                                        rescanIsHidden: rescanIsHidden)
         return sceneCoordinator.present(view, animated: true)
     }
 
@@ -215,10 +200,11 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         return sceneCoordinator.present(view, animated: true)
     }
 
-    func showTravelRulesInvalid(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+    func showTravelRulesInvalid(token: ExtendedCBORWebToken?, rescanIsHidden: Bool) -> Promise<ValidatorDetailSceneResult> {
         let router = CertificateInvalidResultRouter(sceneCoordinator: sceneCoordinator)
         let view = CertificateInvalidResultSceneFactory(router: router,
-                                                        token: token)
+                                                        token: token,
+                                                        rescanIsHidden: rescanIsHidden)
         return sceneCoordinator.present(view, animated: true)
     }
 
@@ -257,7 +243,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         }
     }
 
-    func secondScanSameToken(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+    func sameTokenScanned() -> Promise<ValidatorDetailSceneResult> {
         Promise { seal in
             showDialog(
                 title: Constants.Keys.ifsg_second_scan_alreadyScanner_title,
@@ -268,35 +254,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                         style: UIAlertAction.Style.default,
                         isEnabled: true,
                         completion: { _ in
-                            seal.fulfill(.secondScan(token))
-                        }
-                    ),
-                    DialogAction(
-                        title: Constants.Keys.ifsg_second_scan_alreadyScanner_cancel,
-                        style: UIAlertAction.Style.default,
-                        isEnabled: true,
-                        completion: { _ in
-                            seal.fulfill(.close)
-                        }
-                    )
-                ],
-                style: .alert
-            )
-        }
-    }
-
-    func thirdScanSameToken(secondToken: ExtendedCBORWebToken, firstToken: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        Promise { seal in
-            showDialog(
-                title: Constants.Keys.ifsg_second_scan_alreadyScanner_title,
-                message: Constants.Keys.ifsg_second_scan_alreadyScanner_subtitle,
-                actions: [
-                    DialogAction(
-                        title: Constants.Keys.ifsg_second_scan_alreadyScanner_rescan,
-                        style: UIAlertAction.Style.default,
-                        isEnabled: true,
-                        completion: { _ in
-                            seal.fulfill(.thirdScan(secondToken, firstToken))
+                            seal.fulfill(.rescan)
                         }
                     ),
                     DialogAction(

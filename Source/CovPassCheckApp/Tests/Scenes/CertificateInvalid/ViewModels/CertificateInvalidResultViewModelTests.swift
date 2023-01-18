@@ -34,6 +34,7 @@ final class CertificateInvalidResultViewModelTests: XCTestCase {
     private func configureSut() {
         sut = .init(
             token: CBORWebToken.mockVaccinationCertificate.extended(),
+            rescanIsHidden: false,
             countdownTimerModel: countdownTimerModel,
             resolver: resolver,
             router: router,
@@ -73,7 +74,7 @@ final class CertificateInvalidResultViewModelTests: XCTestCase {
         }.cauterize()
 
         // When
-        sut.rescan()
+        sut.startOver()
 
         // Then
         wait(for: [expectation], timeout: 1)

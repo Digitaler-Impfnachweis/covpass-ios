@@ -120,8 +120,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     }
 
     func scanSecondCertificate() {
-        guard let token = token else { return }
-        resolver.fulfill(.secondScan(token))
+        resolver.fulfill(.scanNext)
     }
 
     func revoke(_: Any) {

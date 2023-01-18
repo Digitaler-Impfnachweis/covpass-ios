@@ -13,18 +13,12 @@ import UIKit
 struct DifferentPersonSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
 
-    var firstToken: ExtendedCBORWebToken
-    var secondToken: ExtendedCBORWebToken
-    var thirdToken: ExtendedCBORWebToken?
+    var tokens: [ExtendedCBORWebToken]
 
     // MARK: - Lifecycle
 
-    init(firstToken: ExtendedCBORWebToken,
-         secondToken: ExtendedCBORWebToken,
-         thirdToken: ExtendedCBORWebToken?) {
-        self.firstToken = firstToken
-        self.secondToken = secondToken
-        self.thirdToken = thirdToken
+    init(tokens: [ExtendedCBORWebToken]) {
+        self.tokens = tokens
     }
 
     func make(resolvable: Resolver<ValidatorDetailSceneResult>) -> UIViewController {
@@ -32,9 +26,7 @@ struct DifferentPersonSceneFactory: ResolvableSceneFactory {
             dismissAfterSeconds: 120,
             countdownDuration: 60
         )
-        let viewModel = DifferentPersonViewModel(firstToken: firstToken,
-                                                 secondToken: secondToken,
-                                                 thirdToken: thirdToken,
+        let viewModel = DifferentPersonViewModel(tokens: tokens,
                                                  resolver: resolvable,
                                                  countdownTimerModel: countdownTimerModel)
         let viewController = DifferentPersonViewController(viewModel: viewModel)

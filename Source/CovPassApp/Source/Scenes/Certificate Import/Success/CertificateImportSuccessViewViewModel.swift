@@ -5,6 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import PromiseKit
 
@@ -21,7 +22,10 @@ final class CertificateImportSuccessViewViewModel: ResultViewViewModel {
             title: Constants.title,
             description: Constants.description,
             buttonTitle: Constants.buttonTitle,
-            resolver: resolver
+            shareButtonTitle: nil,
+            resolver: resolver,
+            router: nil,
+            certificate: nil
         )
     }
 }

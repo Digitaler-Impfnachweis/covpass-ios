@@ -31,9 +31,12 @@ class SecondScanSnapShotTests: BaseSnapShotTests {
             countdownDuration: 0
         )
         let token = CBORWebToken.mockVaccinationCertificate.extended()
+        var tokens = [token]
+        if let token = secondToken {
+            tokens.append(token)
+        }
         let viewModel = SecondScanViewModel(resolver: resolver,
-                                            token: token,
-                                            secondToken: secondToken,
+                                            tokens: tokens,
                                             countdownTimerModel: countdownTimerModel)
         sut = .init(viewModel: viewModel)
     }

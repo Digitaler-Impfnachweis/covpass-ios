@@ -9,9 +9,9 @@ import UIKit
 
 struct CertificateHolderInvalidMaskStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol {
     let icon: UIImage = .statusMaskInvalidCircle
-    let title = "infschg_detail_page_no_valid_certificate_title".localized
+    let title = "infschg_detail_view_status_not_applicable_title".localized
     let subtitle: String? = nil
-    let description = "infschg_detail_page_no_valid_certificate_copy".localized
+    let description = "infschg_detail_view_status_not_applicable_copy".localized
     var date: String?
     var federalState: String?
     var federalStateText: String?

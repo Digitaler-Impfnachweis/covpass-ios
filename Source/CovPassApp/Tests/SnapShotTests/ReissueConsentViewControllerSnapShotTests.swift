@@ -12,7 +12,8 @@ import PromiseKit
 
 class ReissueConsentViewControllerSnapShotTests: BaseSnapShotTests {
     func testDefault() {
-        let token = CBORWebToken.mockVaccinationCertificate.extended()
+        var token = CBORWebToken.mockVaccinationCertificate.extended()
+        token.vaccinationCertificate.exp = .init() + 1
         let (_, resolver) = Promise<Void>.pending()
         let vm = ReissueConsentViewModel(router: ReissueConsentRouter(sceneCoordinator: SceneCoordinatorMock()),
                                          resolver: resolver,
@@ -27,11 +28,30 @@ class ReissueConsentViewControllerSnapShotTests: BaseSnapShotTests {
     }
 
     func testDefaultExpiryContext() {
-        let token = CBORWebToken.mockVaccinationCertificate.extended()
+        var token = CBORWebToken.mockVaccinationCertificate.extended()
+        token.vaccinationCertificate.exp = .init() + 1
         let (_, resolver) = Promise<Void>.pending()
         let vm = ReissueConsentViewModel(router: ReissueConsentRouter(sceneCoordinator: SceneCoordinatorMock()),
                                          resolver: resolver,
                                          tokens: [token],
+                                         reissueRepository: CertificateReissueRepositoryMock(),
+                                         vaccinationRepository: VaccinationRepositoryMock(),
+                                         decoder: JSONDecoder(),
+                                         locale: .current,
+                                         context: .certificateExtension)
+        let vc = ReissueConsentViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1000)
+    }
+
+    func testMultipleExpiryContext() {
+        let date = DateUtils.parseDate("2023-01-12T15:05:00")!
+        var token = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(date).extended()
+        let token2 = CBORWebToken.mockVaccinationCertificate.doseNumber(1).extended()
+        token.vaccinationCertificate.exp = .init() + 1
+        let (_, resolver) = Promise<Void>.pending()
+        let vm = ReissueConsentViewModel(router: ReissueConsentRouter(sceneCoordinator: SceneCoordinatorMock()),
+                                         resolver: resolver,
+                                         tokens: [token, token2],
                                          reissueRepository: CertificateReissueRepositoryMock(),
                                          vaccinationRepository: VaccinationRepositoryMock(),
                                          decoder: JSONDecoder(),

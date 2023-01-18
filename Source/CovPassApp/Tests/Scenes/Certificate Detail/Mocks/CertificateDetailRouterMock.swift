@@ -24,7 +24,8 @@ final class CertificateDetailRouterMock: CertificateDetailRouterProtocol {
         return .value
     }
 
-    func showDetail(for _: ExtendedCBORWebToken) -> Promise<CertificateDetailSceneResult> {
+    func showDetail(for _: ExtendedCBORWebToken,
+                    certificates _: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
         .value(.addNewCertificate)
     }
 
