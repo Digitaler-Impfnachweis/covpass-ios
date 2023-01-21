@@ -849,6 +849,8 @@
 
 "certificates_overview_recovery_certificate_valid_until_date" = "Höchstens gültig bis %@";
 
+"certificates_overview_recovery_certificate_sample_date" = "Positiver Test vom %@";
+
 "certificates_overview_recovery_certificate_valid_from_date" = "Gültig ab %@";
 
 "certificates_overview_test_certificate_title" = "Testzertifikat";

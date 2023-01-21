@@ -55,6 +55,15 @@ extension CBORWebToken {
         return self
     }
 
+    func recovery(isValid: Bool = true) -> Self {
+        if isValid {
+            hcert.dgc.r?.first?.df = .init() - 1
+        } else {
+            hcert.dgc.r?.first?.df = .init() + 1
+        }
+        return self
+    }
+
     func medicalProduct(_ mp: MedicalProduct) -> Self {
         hcert.dgc.v?.first?.mp = mp.rawValue
         return self

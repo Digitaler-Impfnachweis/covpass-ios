@@ -104,4 +104,70 @@ class RecoveryCertificateItemViewModelTests: XCTestCase {
         // Then
         XCTAssertNotEqual(info2, "Certificate invalid")
     }
+
+    func test_valid_reecovery() {
+        // GIVEN
+        let testDate = Date()
+        let isActive = true
+        let isValid = true
+        let token = CBORWebToken
+            .mockRecoveryCertificate
+            .recovery(isValid: isValid)
+            .recoveryTestDate(testDate)
+            .extended()
+        let expectation = String(format: "certificates_overview_recovery_certificate_sample_date".localized,
+                                 DateUtils.displayDateFormatter.string(from: testDate))
+        let sut = RecoveryCertificateItemViewModel(token, active: isActive)
+        // WHEN
+        let infoString = sut.info
+        // THEN
+        XCTAssertEqual(infoString, expectation)
+    }
+
+    func test_invalid_reecovery() throws {
+        // GIVEN
+        let testDate = Date()
+        let isActive = true
+        let isValid = false
+        let token = CBORWebToken
+            .mockRecoveryCertificate
+            .recovery(isValid: isValid)
+            .recoveryTestDate(testDate)
+            .extended()
+        let certificateValidFrom = try XCTUnwrap(token.vaccinationCertificate.hcert.dgc.r?.first?.df)
+        let expectation = String(format: "certificates_overview_recovery_certificate_valid_from_date".localized,
+                                 DateUtils.displayDateFormatter.string(from: certificateValidFrom))
+        let sut = RecoveryCertificateItemViewModel(token, active: isActive)
+        // WHEN
+        let infoString = sut.info
+        // THEN
+        XCTAssertEqual(infoString, expectation)
+    }
+
+    func test_active_reecovery() throws {
+        // GIVEN
+        let isActive = true
+        let token = CBORWebToken
+            .mockRecoveryCertificate
+            .extended()
+        let sut = RecoveryCertificateItemViewModel(token, active: isActive)
+        let expectation = "certificates_overview_currently_uses_certificate_note".localized
+        // WHEN
+        let activeTitle = sut.activeTitle
+        // THEN
+        XCTAssertEqual(activeTitle, expectation)
+    }
+
+    func test_inActive_reecovery() throws {
+        // GIVEN
+        let isActive = false
+        let token = CBORWebToken
+            .mockRecoveryCertificate
+            .extended()
+        let sut = RecoveryCertificateItemViewModel(token, active: isActive)
+        // WHEN
+        let activeTitle = sut.activeTitle
+        // THEN
+        XCTAssertNil(activeTitle)
+    }
 }

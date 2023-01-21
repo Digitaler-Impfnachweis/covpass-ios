@@ -123,8 +123,10 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
 
         let formatter = accessibility ? DateUtils.audioDateFormatter : DateUtils.displayDateFormatter
         if Date() < r.df {
-            return String(format: "certificates_overview_recovery_certificate_valid_from_date".localized, formatter.string(from: r.df))
+            return String(format: "certificates_overview_recovery_certificate_valid_from_date".localized,
+                          formatter.string(from: r.df))
         }
-        return String(format: "certificates_overview_recovery_certificate_valid_until_date".localized, formatter.string(from: r.du))
+        return String(format: "certificates_overview_recovery_certificate_sample_date".localized,
+                      formatter.string(from: r.fr))
     }
 }
