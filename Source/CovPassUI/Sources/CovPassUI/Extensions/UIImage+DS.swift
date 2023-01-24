@@ -365,6 +365,9 @@ public extension UIImage {
 
     @ImageLoader(name: "expired-dot")
     private(set) static var expiredDotNotification
+
+    @ImageLoader(name: "external-link")
+    private(set) static var externalLink
 }
 
 @propertyWrapper

@@ -98,6 +98,7 @@ final class VaccinationCycleCompleteResultViewController: UIViewController {
         travelRulesLinkLabel.attributedText = viewModel.travelRules.styledAs(.header_3)
         travelRulesLinkLabel.isHidden = viewModel.travelRulesIsHidden
         travelRulesLinkLabel.layoutMargins = .init(top: 24, left: 18, bottom: 0, right: 18)
+        travelRulesLinkLabel.applyRightImage(.externalLink)
     }
 
     private func configureHolderInformationView() {

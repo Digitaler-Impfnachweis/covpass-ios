@@ -296,7 +296,7 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "Bei Impfserien mit nicht in Deutschland zugelassenen Impfstoffen muss mindestens eine Impfung mit einem mRNA-Impfstoff nachgewiesen werden.";
 
-"validation_faq_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
+"validation_faq_link" = "#Zu den häufigen Fragen::https://www.digitaler-impfnachweis-app.de/faq/#wer-gilt-in-deutschland-als-vollst-ndig-geimpft-#";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_button" = "Neue Prüfung";
 

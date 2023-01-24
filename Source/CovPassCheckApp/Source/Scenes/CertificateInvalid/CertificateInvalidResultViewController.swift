@@ -101,6 +101,7 @@ final class CertificateInvalidResultViewController: UIViewController {
         travelRulesLinkLabel.attributedText = viewModel.travelRules.styledAs(.header_3)
         travelRulesLinkLabel.isHidden = viewModel.travelRulesIsHidden
         travelRulesLinkLabel.layoutMargins = .init(top: 8, left: 18, bottom: 0, right: 18)
+        travelRulesLinkLabel.applyRightImage(.externalLink)
     }
 
     private func configureReasonStackView() {
@@ -129,7 +130,7 @@ final class CertificateInvalidResultViewController: UIViewController {
     private func configureButton() {
         startOverButton.title = viewModel.startOverButtonTitle
         startOverButton.action = viewModel.startOver
-        startOverButton.style = .alternative
+        startOverButton.style = viewModel.rescanIsHidden ? .primary : .alternative
         retryButton.title = viewModel.retryButtonTitle
         retryButton.action = viewModel.retry
         retryButton.style = .primary
