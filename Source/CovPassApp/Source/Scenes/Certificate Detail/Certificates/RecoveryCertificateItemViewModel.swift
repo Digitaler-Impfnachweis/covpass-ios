@@ -77,14 +77,16 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         if isNeutral {
             return infoString(forAccessibility: false) ?? ""
         }
-        if certificate.vaccinationCertificate.isExpired {
-            return "certificates_overview_expired_certificate_note".localized
-        }
-        if certificate.vaccinationCertificate.expiresSoon {
-            return "certificates_overview_expires_soon_certificate_note".localized
-        }
-        if certificate.isInvalid || certificate.isRevoked {
-            return "certificates_overview_invalid_certificate_note".localized
+        if !renewalNeeded {
+            if certificate.vaccinationCertificate.isExpired {
+                return "certificates_overview_expired_certificate_note".localized
+            }
+            if certificate.vaccinationCertificate.expiresSoon {
+                return "certificates_overview_expires_soon_certificate_note".localized
+            }
+            if certificate.isInvalid || certificate.isRevoked {
+                return "certificates_overview_invalid_certificate_note".localized
+            }
         }
         return nil
     }
@@ -103,12 +105,23 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
 
     var activeTitle: String? {
         if isNeutral {
-            return "renewal_expiry_notification_title".localized
+            return nil
         }
         return active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }
 
     var isNeutral: Bool
+    var warningText: String? {
+        if renewalNeeded {
+            return "renewal_expiry_notification_title".localized
+        }
+        return nil
+    }
+
+    var renewalNeeded: Bool {
+        let cert = certificate.vaccinationCertificate
+        return certificate.isNotRevoked && active && cert.expiresSoon && !cert.expiredMoreThan90Days && cert.isGermanIssuer
+    }
 
     init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {
         self.certificate = certificate

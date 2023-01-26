@@ -9,6 +9,7 @@
 import UIKit
 
 struct CertificateItemViewModelMock: CertificateItemViewModel {
+    var warningText: String?
     var isNeutral: Bool = false
     var icon: UIImage = .init()
     var iconColor: UIColor = .purple

@@ -22,9 +22,10 @@ class RecoveryCertificateItemViewModelTests: XCTestCase {
         XCTAssertEqual(icon, .expired)
     }
 
-    private func prepareSut(active: Bool = false, revoked: Bool? = nil) throws -> RecoveryCertificateItemViewModel {
+    private func prepareSut(active: Bool = false, revoked: Bool? = nil, expirationDate: Date? = nil) throws -> RecoveryCertificateItemViewModel {
         var token = try ExtendedCBORWebToken.token1Of1()
         token.revoked = revoked
+        token.vaccinationCertificate.exp = expirationDate
         return .init(token, active: active)
     }
 
@@ -169,5 +170,43 @@ class RecoveryCertificateItemViewModelTests: XCTestCase {
         let activeTitle = sut.activeTitle
         // THEN
         XCTAssertNil(activeTitle)
+    }
+
+    func test_warning_notExpired() throws {
+        // Given
+        let sut = try prepareSut(active: true)
+        // When
+        let warningText = sut.warningText
+        // Then
+        XCTAssertNil(warningText)
+    }
+
+    func test_warning_aboutToExpire() throws {
+        // Given
+        let sut = try prepareSut(active: true, expirationDate: .init() + 100)
+        let expectation = "renewal_expiry_notification_title".localized
+        // When
+        let warningText = sut.warningText
+        // Then
+        XCTAssertEqual(warningText, expectation)
+    }
+
+    func test_warning_expired_lessThan90Days() throws {
+        // Given
+        let sut = try prepareSut(active: true, expirationDate: .init().add(days: -70))
+        let expectation = "renewal_expiry_notification_title".localized
+        // When
+        let warningText = sut.warningText
+        // Then
+        XCTAssertEqual(warningText, expectation)
+    }
+
+    func test_warning_expired_moreThan90Days() throws {
+        // Given
+        let sut = try prepareSut(active: true, expirationDate: .init().add(days: -100))
+        // When
+        let warningText = sut.warningText
+        // Then
+        XCTAssertNil(warningText)
     }
 }
