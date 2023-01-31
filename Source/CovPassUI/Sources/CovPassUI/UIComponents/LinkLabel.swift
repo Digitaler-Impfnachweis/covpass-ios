@@ -51,12 +51,17 @@ public class LinkLabel: XibView {
         }
     }
 
-    public func applyRightImage(_: UIImage) {
-        let attachment = NSTextAttachment()
-        attachment.image = .externalLink
-        let imageString = NSAttributedString(attachment: attachment)
-        textableView.textStorage.insert(.init(string: " "), at: textableView.textStorage.string.count)
-        textableView.textStorage.insert(imageString, at: textableView.textStorage.string.count)
+    public func applyRightImage(image: UIImage) {
+        let wholeRange = NSRange(textableView.attributedText.string.startIndex..., in: textableView.attributedText.string)
+        textableView.attributedText.enumerateAttribute(.link, in: wholeRange, options: []) { value, range, _ in
+            if value != nil {
+                let attachment = NSTextAttachment()
+                attachment.image = image
+                let imageString = NSAttributedString(attachment: attachment)
+                textableView.textStorage.insert(.init(string: " "), at: range.upperBound)
+                textableView.textStorage.insert(imageString, at: range.upperBound + 1)
+            }
+        }
     }
 }
 

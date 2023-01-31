@@ -275,15 +275,17 @@ private extension ParagraphView {
     func setup(with viewModel: CertificateHolderImmunizationStatusViewModelProtocol) {
         layoutMargins.top = .space_24
         layoutMargins.left = .space_7
+        let linkLabelRightImage: UIImage? = viewModel.linkLabel != nil ? .externalLink : nil
         updateView(image: viewModel.icon,
                    title: viewModel.title.styledAs(.header_3),
                    subtitle: viewModel.subtitle?.styledAs(.header_3).colored(.onBackground80),
                    secondSubtitle: viewModel.federalStateText?.styledAs(.subheader_2).colored(.onBackground80),
                    body: viewModel.description.styledAs(.body).colored(.onBackground110),
-                   secondBody: viewModel.linkLabel?.styledAs(.body),
+                   secondBody: viewModel.linkLabel?.styledAs(.header_3),
                    footerHeadline: viewModel.notice?.styledAs(.header_3).colored(.onBackground110),
                    footerBody: viewModel.noticeText?.styledAs(.body).colored(.onBackground110),
                    footerButtonTitle: viewModel.selectFederalStateButtonTitle,
-                   contentMode: .center)
+                   contentMode: .center,
+                   linkLabelRightImage: linkLabelRightImage)
     }
 }

@@ -118,7 +118,7 @@ final class VaccinationCycleIncompleteResultViewController: UIViewController {
         linkLabel.linkCallback = { [weak self] url in
             self?.viewModel.openFAQ(url)
         }
-        linkLabel.applyRightImage(.externalLink)
+        linkLabel.applyRightImage(image: .externalLink)
     }
 
     private func configureAccessibility() {

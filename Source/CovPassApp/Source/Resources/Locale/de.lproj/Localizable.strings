@@ -588,7 +588,9 @@
 
 "MX" = "Mexiko";
 
-"certificate_check_validity_selection_country_note" = "Sie finden Ihr Reiseland nicht? In einem mehrstufigen Prozess werden nach und nach mehr Länder verfügbar gemacht. \n\nMehr Informationen finden Sie in den Häufigen Fragen und unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"certificate_check_validity_selection_country_note" = "Sie finden Ihr Reiseland nicht? In einem mehrstufigen Prozess werden nach und nach mehr Länder verfügbar gemacht. \n\nMehr Informationen finden Sie in den Häufigen Fragen und auf der #Website Re-Open EU.::https://reopen.europa.eu/de#";
+
+"Reopen_EU_external_link" = "#Zur Website Re-Open EU::https://reopen.europa.eu/de#";
 
 "certificate_check_validity_selection_country_action_button" = "Übernehmen";
 
@@ -638,7 +640,7 @@
 
 "certificate_check_validity_result_not_testable" = "Nicht prüfbar";
 
-"certificate_check_validity_note" = "Beachten Sie, dass sich die Einreiseregeln ändern können. Prüfen Sie daher die Zertifikate mindestens 48 Stunden vorher. Es können in einzelnen Regionen oder bei Ihrer Rückkehr weitere Regeln oder Einschränkungen gelten. Zudem ist es möglich, dass weitere Dokumente für eine Einreise notwendig sind.\n\nMehr Informationen finden Sie in den Häufigen Fragen und unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"certificate_check_validity_note" = "Beachten Sie, dass sich die Einreiseregeln ändern können. Prüfen Sie daher die Zertifikate mindestens 48 Stunden vorher. Es können in einzelnen Regionen oder bei Ihrer Rückkehr weitere Regeln oder Einschränkungen gelten. Zudem ist es möglich, dass weitere Dokumente für eine Einreise notwendig sind.\n\nMehr Informationen finden Sie in den Häufigen Fragen und auf der #Website Re-Open EU.::https://reopen.europa.eu/de#";
 
 "certificate_check_validity_detail_view_vaccination_result_title" = "Digitales COVID-Impfzertifikat der EU";
 
@@ -648,9 +650,9 @@
 
 "certificate_check_validity_detail_view_vaccination_result_button" = "QR-Code anzeigen";
 
-"certificate_check_validity_detail_view_vaccination_result_note_de" = "Das Impfzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"certificate_check_validity_detail_view_vaccination_result_note_de" = "Das Impfzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie auf der #Website Re-Open EU.::https://reopen.europa.eu/de#";
 
-"certificate_check_validity_detail_view_vaccination_result_note_en" = "A certificate of vaccination is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"certificate_check_validity_detail_view_vaccination_result_note_en" = "A certificate of vaccination is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country on the #website Re-Open EU.::https://reopen.europa.eu/en#";
 
 "certificate_check_validity_detail_view_test_result_title" = "Digitales COVID-Testzertifikat der EU";
 
@@ -662,9 +664,9 @@
 
 "certificate_check_validity_detail_view_test_result_button_disabled" = "Sie können nur deutsche Zertifikate als PDF-Dokumente herunterladen.";
 
-"certificate_check_validity_detail_view_test_result_note_de" = "Das Testzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"certificate_check_validity_detail_view_test_result_note_de" = "Das Testzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie auf der #Website Re-Open EU.::https://reopen.europa.eu/de#";
 
-"certificate_check_validity_detail_view_test_result_note_en" = "A test certificate is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"certificate_check_validity_detail_view_test_result_note_en" = "A test certificate is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country on the #website Re-Open EU.::https://reopen.europa.eu/en#";
 
 "certificate_check_validity_detail_view_recovery_result_title" = "Digitales COVID-Genesenenzertifikat der EU";
 
@@ -674,13 +676,13 @@
 
 "certificate_check_validity_detail_view_recovery_result_button" = "QR-Code anzeigen";
 
-"certificate_check_validity_detail_view_recovery_result_note_de" = "Das Genesenenzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"certificate_check_validity_detail_view_recovery_result_note_de" = "Das Genesenenzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie auf der #Website Re-Open EU.::https://reopen.europa.eu/de#";
 
-"certificate_check_validity_detail_view_recovery_result_note_en" = "A certificate of recovery is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"certificate_check_validity_detail_view_recovery_result_note_en" = "A certificate of recovery is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country on the #website Re-Open EU.::https://reopen.europa.eu/en#";
 
 "certificate_check_validity_detail_view_result_no_rules_title" = "Zertifikat nicht prüfbar";
 
-"certificate_check_validity_detail_view_result_no_rules_message" = "Für das gewählte Land und den gewählten Zeitpunkt stehen derzeit keine Einreiseregeln für die Prüfung in der App zur Verfügung.\n\n Bitte informieren Sie sich unter #https://reopen.europa.eu::https://reopen.europa.eu#, ob das Zertifikat für die Einreise in das gewählte Land gültig ist.";
+"certificate_check_validity_detail_view_result_no_rules_message" = "Für das gewählte Land und den gewählten Zeitpunkt stehen derzeit keine Einreiseregeln für die Prüfung in der App zur Verfügung.\n\n Bitte informieren Sie sich auf der #Website Re-Open EU,::https://reopen.europa.eu/de# ob das Zertifikat für die Einreise in das gewählte Land gültig ist.";
 
 "certificate_check_validity_detail_view_result_valid_title" = "Dieses Zertifikat ist am Reisedatum gültig";
 
@@ -949,9 +951,9 @@
 
 "vaccination_certificate_detail_view_data_expiry_date_note" = "Sie werden in der App benachrichtigt, falls Sie das Zertifikat erneuern können.";
 
-"vaccination_certificate_detail_view_data_vaccine_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"vaccination_certificate_detail_view_data_vaccine_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie auf der #Website Re-Open EU.::https://reopen.europa.eu/de#";
 
-"vaccination_certificate_detail_view_data_vaccine_note_en" = "This certificate is not a travel document. The scientific findings about Covid-19 and vaccination, testing and recovery are continuing to evolve, which includes findings about new, concerning virus variants. \n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"vaccination_certificate_detail_view_data_vaccine_note_en" = "This certificate is not a travel document. The scientific findings about Covid-19 and vaccination, testing and recovery are continuing to evolve, which includes findings about new, concerning virus variants. \n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country on the #website Re-Open EU.::https://reopen.europa.eu/en#";
 
 "vaccination_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
@@ -1033,9 +1035,9 @@
 
 "test_certificate_detail_view_data_expiry_date_note" = "Sie werden in der App benachrichtigt, falls Sie das Zertifikat erneuern können.";
 
-"test_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"test_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie auf der #Website Re-Open EU.::https://reopen.europa.eu/de#";
 
-"test_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific findings about Covid-19 and vaccination, testing and recovery are continuing to evolve, which includes findings about new, concerning virus variants. \n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"test_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific findings about Covid-19 and vaccination, testing and recovery are continuing to evolve, which includes findings about new, concerning virus variants. \n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country on the #website Re-Open EU.::https://reopen.europa.eu/en#";
 
 "test_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
@@ -1101,9 +1103,9 @@
 
 "recovery_certificate_detail_view_data_expiry_date_note" = "Sie werden in der App benachrichtigt, falls Sie das Zertifikat erneuern können.";
 
-"recovery_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"recovery_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie auf der #Website Re-Open EU.::https://reopen.europa.eu/de#";
 
-"recovery_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific findings about Covid-19 and vaccination, testing and recovery are continuing to evolve, which includes findings about new, concerning virus variants. \n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
+"recovery_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific findings about Covid-19 and vaccination, testing and recovery are continuing to evolve, which includes findings about new, concerning virus variants. \n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country on the #website Re-Open EU.::https://reopen.europa.eu/en#";
 
 "recovery_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
@@ -1680,7 +1682,7 @@
 
 "certificate_renewal_error_button_primary" = "OK";
 
-"certificate_renewal_error_button_secondary" = "Mehr in den häufigen Fragen";
+"certificate_renewal_error_button_secondary" = "Zu den häufigen Fragen";
 
 
 /********** DCC renewal when expiring **********/
@@ -1819,7 +1821,7 @@
 
 "infschg_cert_overview_immunisation_invalid" = "Fügen Sie ein gültiges Zertifikat hinzu oder erneuern Sie Ihr neuestes Zertifikat, um Informationen zu Ihrem Impfstatus zu erhalten.";
 
-"infschg_more_info_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
+"infschg_more_info_link" = "#Zu den häufigen Fragen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
 "infschg_popup_choose_federal_state_title" = "Wählen Sie Ihr Bundesland";
 
@@ -1875,9 +1877,9 @@
 
 "infschg_detail_page_no_mask_mandatory_copy_1" = "Sie sind in diesem Bundesland in einigen Situationen von der Maskenpflicht ausgenommen; eine Maske ist dennoch empfohlen.\n\n *Regeln vom %@ (Gültigkeitsbeginn)";
 
-"infschg_detail_page_no_mask_mandatory_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
+"infschg_detail_page_no_mask_mandatory_link" = "#Zu den häufigen Fragen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
-"infschg_detail_page_no_mask_mandatory_subtitle_2" = "Hinweis:";
+"infschg_detail_page_no_mask_mandatory_subtitle_2" = "Weitere Informationen zur Maskenpflicht";
 
 "infschg_detail_page_no_mask_mandatory_copy_2" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit Sie ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigt durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass Sie auch durch Impfungen oder Genesung (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreit sind. Eine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und für Patientinnen und Patienten in Arztpraxen.\n\nSollten Ihre in der App hinterlegten COVID-Zertifikate ausreichen, um Sie in Ihrem Bundesland von der Maskenpflicht zu befreien, färbt sich Ihr Zertifikat grün. Ihre Befreiung von der Maskenpflicht in Ihrem Bundesland kann durch einen Scan Ihres QR-Codes mithilfe der CovPassCheck-App nachgewiesen werden.";
 
@@ -1891,9 +1893,9 @@
 
 "infschg_detail_page_mask_mandatory_copy_1" = "Sie sind in diesem Bundesland nicht von der Maskenpflicht ausgenommen.\n\n *Regeln vom %@ (Gültigkeitsbeginn)";
 
-"infschg_detail_page_mask_mandatory_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
+"infschg_detail_page_mask_mandatory_link" = "#Zu den häufigen Fragen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
-"infschg_detail_page_mask_mandatory_subtitle_2" = "Hinweis:";
+"infschg_detail_page_mask_mandatory_subtitle_2" = "Weitere Informationen zur Maskenpflicht";
 
 "infschg_detail_page_mask_mandatory_copy_2" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit Sie ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigt durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass Sie auch durch Impfungen oder Genesung (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreit sind. Eine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und für Patientinnen und Patienten in Arztpraxen.\n\nSollten Ihre in der App hinterlegten COVID-Zertifikate ausreichen, um Sie in Ihrem Bundesland von der Maskenpflicht zu befreien, färbt sich Ihr Zertifikat grün. Ihre Befreiung von der Maskenpflicht in Ihrem Bundesland kann durch einen Scan Ihres QR-Codes mithilfe der CovPassCheck-App nachgewiesen werden.";
 
@@ -1905,9 +1907,9 @@
 
 "infschg_detail_page_mask_status_uncertain_copy_1" = "Für dieses Bundesland liegen dem RKI aktuell keine bundeslandspezifischen Regeln vor. Es gelten daher nur die bundeseinheitlichen Regeln zur Maskenpflicht.";
 
-"infschg_detail_page_mask_status_uncertain_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
+"infschg_detail_page_mask_status_uncertain_link" = "#Zu den häufigen Fragen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
-"infschg_detail_page_mask_status_uncertain_subtitle_2" = "Hinweis:";
+"infschg_detail_page_mask_status_uncertain_subtitle_2" = "Weitere Informationen zur Maskenpflicht";
 
 "infschg_detail_page_mask_status_uncertain_copy_2" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit Sie ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigt durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass Sie auch durch Impfungen oder Genesung (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreit sind. Eine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und für Patientinnen und Patienten in Arztpraxen.\n\nSollten Ihre in der App hinterlegten COVID-Zertifikate ausreichen, um Sie in Ihrem Bundesland von der Maskenpflicht zu befreien, färbt sich Ihr Zertifikat grün. Ihre Befreiung von der Maskenpflicht in Ihrem Bundesland kann durch einen Scan Ihres QR-Codes mithilfe der CovPassCheck-App nachgewiesen werden.";
 
@@ -1917,7 +1919,7 @@
 
 "infschg_detail_page_no_valid_certificate_copy" = "In Ihrem Bundesland können Sie bis zu 24h von der Maskenpflicht befreit werden. Beachten Sie, dass in Ihrem Bundesland andere Bestimmungen gelten können. Denken Sie auch daran, dass die Befreiung nicht für Orte gilt, an denen eine besondere Maskenpflicht gilt: z.B. Arztpraxen, Krankenhäuser oder dem Personenfernverkehr.";
 
-"infschg_detail_page_no_valid_certificate_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
+"infschg_detail_page_no_valid_certificate_link" = "#Zu den häufigen Fragen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
 "accessibility_app_popup_choose_federal_state_announce" = "Die Ansicht \"Bundesland wählen\" wurde geöffnet";
 
@@ -1961,3 +1963,18 @@
 "DE_SH" = "Schleswig-Holstein";
 
 "DE_TH" = "Thüringen";
+
+
+/********** common a11y labels **********/
+
+"a11y_accordion_collapsed" = "eingeklappt";
+
+"a11y_accordion_expanded" = "ausgeklappt";
+
+"a11y_accordion_expand_hint_ios" = "Doppelklicken zum Ausklappen";
+
+"a11y_accordion_expand_hint_android" = "Ausklappen";
+
+"a11y_accordion_collapse_hint_ios" = "Doppelklicken zum Einklappen";
+
+"a11y_accordion_collapse_hint_android" = "Einklappen";

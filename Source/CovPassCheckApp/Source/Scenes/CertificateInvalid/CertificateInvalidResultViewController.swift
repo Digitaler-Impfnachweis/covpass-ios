@@ -101,7 +101,7 @@ final class CertificateInvalidResultViewController: UIViewController {
         travelRulesLinkLabel.attributedText = viewModel.travelRules.styledAs(.header_3)
         travelRulesLinkLabel.isHidden = viewModel.travelRulesIsHidden
         travelRulesLinkLabel.layoutMargins = .init(top: 8, left: 18, bottom: 0, right: 18)
-        travelRulesLinkLabel.applyRightImage(.externalLink)
+        travelRulesLinkLabel.applyRightImage(image: .externalLink)
     }
 
     private func configureReasonStackView() {

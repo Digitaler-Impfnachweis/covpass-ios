@@ -88,7 +88,8 @@ public class ParagraphView: XibView {
                            footerHeadline: NSAttributedString? = nil,
                            footerBody: NSAttributedString? = nil,
                            footerButtonTitle: String? = nil,
-                           contentMode: ContentMode = .scaleAspectFit) {
+                           contentMode: ContentMode = .scaleAspectFit,
+                           linkLabelRightImage: UIImage? = nil) {
         imageView.image = image
         imageView.contentMode = contentMode
         imageContainerView.isHidden = image == nil
@@ -107,6 +108,9 @@ public class ParagraphView: XibView {
 
         bodyTextView.attributedText = secondBody
         bodyTextView.isHidden = secondBody.isNilOrEmpty
+        if let linkLabelRightImage = linkLabelRightImage {
+            bodyTextView.applyRightImage(image: linkLabelRightImage)
+        }
         verticalContainerStackView.setCustomSpacing(48, after: bodyTextView)
 
         footerHeadlineLabel.attributedText = footerHeadline
