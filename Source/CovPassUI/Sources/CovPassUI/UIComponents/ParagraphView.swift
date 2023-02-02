@@ -14,15 +14,13 @@ public class ParagraphView: XibView {
 
     @IBOutlet public var horizontalContainerStackView: UIStackView!
     @IBOutlet public var verticalContainerStackView: UIStackView!
+    @IBOutlet public var verticalHeaderStackView: UIStackView!
     @IBOutlet public var imageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var secondSubtitleLabel: UILabel!
     @IBOutlet var bodyLabel: UILabel!
-    @IBOutlet var bodyTextView: LinkLabel!
-    @IBOutlet var footerStackView: UIStackView!
-    @IBOutlet var footerHeadlineLabel: UILabel!
-    @IBOutlet var footerBodyLabel: UILabel!
+    @IBOutlet public var footerButtonWrapper: UIView!
     @IBOutlet public var footerButton: MainButton!
     @IBOutlet public var bottomBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet public var bottomBorderLeftConstraint: NSLayoutConstraint!
@@ -42,40 +40,27 @@ public class ParagraphView: XibView {
         contentView?.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         horizontalContainerStackView.spacing = .space_24
         bottomBorder.backgroundColor = .onBackground20
-        bodyTextView.textableView.textContainer.lineFragmentPadding = 0
     }
 
     // MARK: - Methods
 
     private func setupAccessibility() {
-        if footerHeadlineLabel.text.isNilOrEmpty {
-            titleLabel.isAccessibilityElement = false
-            subtitleLabel.isAccessibilityElement = false
-            bodyLabel.isAccessibilityElement = false
-            subtitleLabel.isAccessibilityElement = false
-            let alternativeAccessibilityLabelText = [
-                titleLabel.attributedText?.string,
-                subtitleLabel.attributedText?.string
-            ].compactMap { $0 }.joined(separator: "\n")
-            accessibilityLabel = accessibilityLabelValue ??
-                (alternativeAccessibilityLabelText.isEmpty ? nil : alternativeAccessibilityLabelText)
-            accessibilityValue = bodyLabel.attributedText?.string ?? ""
-            isAccessibilityElement = true
-            accessibilityTraits = .staticText
-            footerButton.style = .alternative
-            if #available(iOS 13.0, *) {
-                accessibilityRespondsToUserInteraction = true
-            }
-        } else {
-            if #available(iOS 13.0, *) {
-                titleLabel.accessibilityRespondsToUserInteraction = true
-                subtitleLabel.accessibilityRespondsToUserInteraction = true
-                secondSubtitleLabel.accessibilityRespondsToUserInteraction = true
-                bodyLabel.accessibilityRespondsToUserInteraction = true
-                bodyTextView.accessibilityRespondsToUserInteraction = true
-                footerHeadlineLabel.accessibilityRespondsToUserInteraction = true
-                footerBodyLabel.accessibilityRespondsToUserInteraction = true
-            }
+        titleLabel.isAccessibilityElement = false
+        subtitleLabel.isAccessibilityElement = false
+        bodyLabel.isAccessibilityElement = false
+        subtitleLabel.isAccessibilityElement = false
+        let alternativeAccessibilityLabelText = [
+            titleLabel.attributedText?.string,
+            subtitleLabel.attributedText?.string
+        ].compactMap { $0 }.joined(separator: "\n")
+        accessibilityLabel = accessibilityLabelValue ??
+            (alternativeAccessibilityLabelText.isEmpty ? nil : alternativeAccessibilityLabelText)
+        accessibilityValue = bodyLabel.attributedText?.string ?? ""
+        isAccessibilityElement = true
+        accessibilityTraits = .staticText
+        footerButton.style = .alternative
+        if #available(iOS 13.0, *) {
+            accessibilityRespondsToUserInteraction = true
         }
     }
 
@@ -84,12 +69,9 @@ public class ParagraphView: XibView {
                            subtitle: NSAttributedString? = nil,
                            secondSubtitle: NSAttributedString? = nil,
                            body: NSAttributedString? = nil,
-                           secondBody: NSAttributedString? = nil,
-                           footerHeadline: NSAttributedString? = nil,
-                           footerBody: NSAttributedString? = nil,
                            footerButtonTitle: String? = nil,
                            contentMode: ContentMode = .scaleAspectFit,
-                           linkLabelRightImage: UIImage? = nil) {
+                           customSpacingAfterHeaderStack: CGFloat = 4) {
         imageView.image = image
         imageView.contentMode = contentMode
         imageContainerView.isHidden = image == nil
@@ -99,30 +81,15 @@ public class ParagraphView: XibView {
 
         subtitleLabel.attributedText = subtitle
         subtitleLabel.isHidden = subtitle.isNilOrEmpty
+        verticalContainerStackView.setCustomSpacing(customSpacingAfterHeaderStack, after: verticalHeaderStackView)
 
         secondSubtitleLabel.attributedText = secondSubtitle
         secondSubtitleLabel.isHidden = secondSubtitle.isNilOrEmpty
 
         bodyLabel.attributedText = body
         bodyLabel.isHidden = body.isNilOrEmpty
-
-        bodyTextView.attributedText = secondBody
-        bodyTextView.isHidden = secondBody.isNilOrEmpty
-        if let linkLabelRightImage = linkLabelRightImage {
-            bodyTextView.applyRightImage(image: linkLabelRightImage)
-        }
-        verticalContainerStackView.setCustomSpacing(48, after: bodyTextView)
-
-        footerHeadlineLabel.attributedText = footerHeadline
-        footerHeadlineLabel.isHidden = footerHeadline.isNilOrEmpty
-
-        footerBodyLabel.attributedText = footerBody
-        footerBodyLabel.isHidden = footerBody.isNilOrEmpty
-
         footerButton.title = footerButtonTitle
-        footerButton.isHidden = footerButtonTitle.isNilOrEmpty
-
-        footerStackView.isHidden = footerHeadline.isNilOrEmpty && footerBody.isNilOrEmpty && footerButtonTitle.isNilOrEmpty
+        footerButtonWrapper.isHidden = footerButtonTitle.isNilOrEmpty
 
         setupAccessibility()
     }

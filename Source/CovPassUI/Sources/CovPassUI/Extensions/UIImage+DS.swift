@@ -366,6 +366,12 @@ public extension UIImage {
     @ImageLoader(name: "expired-dot")
     private(set) static var expiredDotNotification
 
+    @ImageLoader(name: "icon_blue_down")
+    private(set) static var iconBlueDownArrow
+
+    @ImageLoader(name: "icon_blue_up")
+    private(set) static var iconBlueUpArrow
+
     @ImageLoader(name: "external-link")
     private(set) static var externalLink
 }

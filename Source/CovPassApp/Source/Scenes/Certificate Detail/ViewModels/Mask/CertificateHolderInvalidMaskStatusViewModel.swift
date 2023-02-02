@@ -16,7 +16,7 @@ struct CertificateHolderInvalidMaskStatusViewModel: CertificateHolderImmunizatio
     var federalState: String?
     var federalStateText: String?
     let linkLabel: String? = "infschg_detail_page_no_valid_certificate_link".localized
-    let notice: String? = nil
-    let noticeText: String? = nil
-    let selectFederalStateButtonTitle: String? = nil
+    let notice: String? = "infschg_detail_page_mask_status_uncertain_subtitle_2".localized
+    let noticeText: String? = "infschg_detail_page_mask_status_uncertain_copy_2".localized
+    let selectFederalStateButtonTitle: String? = "infschg_detail_page_mask_status_uncertain_button".localized
 }
