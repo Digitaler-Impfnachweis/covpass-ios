@@ -152,7 +152,7 @@ class DCCCertLogicTests: XCTestCase {
     }
 
     func testValidVaccination() throws {
-        let cert = try repository.checkCertificate(CertificateMock.validCertificate2, checkSealCertificate: false).wait()
+        let cert = try repository.checkCertificate(CertificateMock.validCertificate2, expirationRuleIsActive: false, checkSealCertificate: false).wait()
 
         let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
 
@@ -172,7 +172,7 @@ class DCCCertLogicTests: XCTestCase {
 //    }
 
     func testInvalidVaccinationEU() throws {
-        let cert = try repository.checkCertificate(CertificateMock.validCertificate2, checkSealCertificate: false).wait()
+        let cert = try repository.checkCertificate(CertificateMock.validCertificate2, expirationRuleIsActive: false, checkSealCertificate: false).wait()
         cert.hcert.dgc.v![0].dt = Date(timeIntervalSince1970: 0)
 
         let res = try sut.validate(type: .eu, countryCode: "DE", validationClock: Date(), certificate: cert)
@@ -189,7 +189,7 @@ class DCCCertLogicTests: XCTestCase {
                                    service: DCCServiceMock(),
                                    keychain: MockPersistence(),
                                    userDefaults: MockPersistence())
-            let cert = try repository.checkCertificate(CertificateMock.validCertificate2, checkSealCertificate: false).wait()
+            let cert = try repository.checkCertificate(CertificateMock.validCertificate2, expirationRuleIsActive: false, checkSealCertificate: false).wait()
 
             _ = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
 
@@ -226,7 +226,7 @@ class DCCCertLogicTests: XCTestCase {
 //    }
 
     func testInvalidRecoveryEU() throws {
-        let cert = try repository.checkCertificate(CertificateMock.validRecoveryCertificate, checkSealCertificate: false).wait()
+        let cert = try repository.checkCertificate(CertificateMock.validRecoveryCertificate, expirationRuleIsActive: false, checkSealCertificate: false).wait()
         cert.hcert.dgc.r![0].fr = Date(timeIntervalSince1970: 0)
 
         let res = try sut.validate(type: .eu, countryCode: "DE", validationClock: Date(), certificate: cert)

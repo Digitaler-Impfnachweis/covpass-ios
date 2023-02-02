@@ -29,23 +29,28 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         let certs = tokens.filterFirstOfAllTypes.map(\.vaccinationCertificate)
         return certs.map(\.expiredMoreThan90Days).contains(where: { $0 == true })
     }
+
     private var anyCertExpiredForLessOrEqual90Days: Bool {
         let certs = tokens.filterFirstOfAllTypes.map(\.vaccinationCertificate)
         return certs.map(\.expiredForLessOrEqual90Days).contains(where: { $0 == true })
     }
+
     private var anyCertWillExpireInLessOrEqual28Days: Bool {
         let certs = tokens.filterFirstOfAllTypes.map(\.vaccinationCertificate)
         return certs.map(\.willExpireInLessOrEqual28Days).contains(where: { $0 == true })
     }
+
     private var showBoosterAvailabilityNotification: Bool {
         guard let boosterCandidate = boosterLogic.checkCertificates([token]) else { return false }
         return boosterCandidate.state == .new
     }
+
     private var showNotificationForExpiryOrInvalid: Bool {
         let certs = tokens.filterFirstOfAllTypes.map(\.vaccinationCertificate)
         let anyCertPassed28DaysExpiry = certs.map(\.passed28DaysBeforeExpiration).contains(where: { $0 == true })
         return anyCertPassed28DaysExpiry || (token.isInvalid && token.expiryAlertWasNotShown)
     }
+
     private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
 
     // MARK: public properties

@@ -93,7 +93,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             var list = list
             var checkedCertificates = [ExtendedCBORWebToken]()
             for var certificate in list.certificates {
-                if (try? checkCertificate(certificate.vaccinationQRCodeData).wait()) == nil {
+                if (try? checkCertificate(certificate.vaccinationQRCodeData, expirationRuleIsActive: false).wait()) == nil {
                     certificate.invalid = true
                 } else {
                     certificate.invalid = false
@@ -304,18 +304,18 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
-    public func checkCertificate(_ data: String, checkSealCertificate: Bool = false) -> Promise<CBORWebToken> {
+    public func checkCertificate(_ data: String, expirationRuleIsActive: Bool, checkSealCertificate: Bool = false) -> Promise<CBORWebToken> {
         firstly {
             QRCoder.parse(data)
         }
         .map(on: .global()) {
-            try self.parseCertificate($0, expirationRuleIsActive: false, checkSealCertificate: checkSealCertificate)
+            try self.parseCertificate($0, expirationRuleIsActive: expirationRuleIsActive, checkSealCertificate: checkSealCertificate)
         }
     }
 
-    public func validCertificate(_ data: String, checkSealCertificate: Bool = false) -> Promise<ExtendedCBORWebToken> {
+    public func validCertificate(_ data: String, expirationRuleIsActive: Bool, checkSealCertificate: Bool = false) -> Promise<ExtendedCBORWebToken> {
         firstly {
-            checkCertificate(data, checkSealCertificate: checkSealCertificate)
+            checkCertificate(data, expirationRuleIsActive: expirationRuleIsActive, checkSealCertificate: checkSealCertificate)
         }
         .then {
             Promise.value(ExtendedCBORWebToken(vaccinationCertificate: $0,
