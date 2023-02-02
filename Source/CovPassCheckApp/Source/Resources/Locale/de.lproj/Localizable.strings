@@ -582,7 +582,7 @@
 
 "app_information_title_checkrules" = "Prüfregeln";
 
-"app_information_offline_revocation_copy_1" = "Hier können Sie die Regeln aktualisieren, nach denen Zertifkate geprüft werden. Sollte Ihr Smartphone üblicherweise mit dem Internet verbunden sein, passiert das automatisch.";
+"app_information_offline_revocation_copy_1" = "Hier können Sie die Regeln aktualisieren, nach denen Zertifikate geprüft werden. Sollte Ihr Smartphone üblicherweise mit dem Internet verbunden sein, passiert das automatisch.";
 
 "app_information_offline_revocation_title" = "Gesperrte Zertifikate offline prüfen";
 
