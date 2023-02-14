@@ -208,10 +208,17 @@ class CertificateItemDetailViewController: UIViewController {
     }
 
     private func setupInfo() {
+        infoLabel1.backgroundColor = .neutralWhite
+        infoLabel1.linkFont = .scaledBoldBody
         infoLabel1.attributedText = "vaccination_certificate_detail_view_data_vaccine_note_de".localized.styledAs(.body)
         infoLabel1.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_24, right: .space_24)
+        infoLabel1.applyRightImage(image: .externalLink)
+        stackView.setCustomSpacing(.space_8, after: infoLabel1)
+        infoLabel2.backgroundColor = .neutralWhite
+        infoLabel2.linkFont = .scaledBoldBody
         infoLabel2.attributedText = "vaccination_certificate_detail_view_data_vaccine_note_en".localized.styledAs(.body)
         infoLabel2.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_40, right: .space_24)
+        infoLabel2.applyRightImage(image: .externalLink)
     }
 
     @objc private func deleteCertificate() {

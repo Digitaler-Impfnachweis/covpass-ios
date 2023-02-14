@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,14 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParagraphView" customModule="CovPassUI">
             <connections>
                 <outlet property="bodyLabel" destination="pB5-YI-Mnc" id="8lx-D9-Gzs"/>
-                <outlet property="bodyTextView" destination="IQd-Dx-F3J" id="J6Y-g2-kto"/>
                 <outlet property="bottomBorder" destination="rov-aZ-Hta" id="oxJ-bu-uZc"/>
                 <outlet property="bottomBorderHeightConstraint" destination="psK-6Y-pBg" id="rUI-aY-1dm"/>
                 <outlet property="bottomBorderLeftConstraint" destination="gSb-lo-6j2" id="xgL-rp-3eT"/>
-                <outlet property="footerBodyLabel" destination="Pec-cf-6Bj" id="eTd-Cc-Yv5"/>
                 <outlet property="footerButton" destination="xcu-GR-FU3" id="hPD-K1-TLj"/>
-                <outlet property="footerHeadlineLabel" destination="4Mm-Vf-pAr" id="qpK-YY-Bid"/>
-                <outlet property="footerStackView" destination="0Jr-Pd-oBC" id="x91-O2-SF8"/>
+                <outlet property="footerButtonWrapper" destination="Eae-WC-ak0" id="LWe-7P-eyi"/>
                 <outlet property="horizontalContainerStackView" destination="ic2-aK-ldk" id="Lj0-Gg-OZv"/>
                 <outlet property="imageContainerView" destination="uzo-jD-8bQ" id="yKV-Nl-9nS"/>
                 <outlet property="imageView" destination="FzW-WO-SYV" id="NPd-vG-b9h"/>
@@ -27,6 +24,7 @@
                 <outlet property="subtitleLabel" destination="qk3-yp-hUc" id="FeM-rg-w9I"/>
                 <outlet property="titleLabel" destination="Shp-hj-0SD" id="Goj-xR-g9y"/>
                 <outlet property="verticalContainerStackView" destination="oUb-Cv-MzU" id="aH2-nv-4v9"/>
+                <outlet property="verticalHeaderStackView" destination="5T4-RZ-OCj" id="iMs-16-96i"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -58,7 +56,7 @@
                             <rect key="frame" x="39" y="0.0" width="320" height="292"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-RZ-OCj">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="174"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="204"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shp-hj-0SD">
                                             <rect key="frame" x="0.0" y="0.0" width="31" height="17"/>
@@ -67,13 +65,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qk3-yp-hUc" userLabel="Subtitle">
-                                            <rect key="frame" x="0.0" y="87" width="53" height="17"/>
+                                            <rect key="frame" x="0.0" y="102" width="53" height="17"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zt-yu-hNU" userLabel="secondSubtitle">
-                                            <rect key="frame" x="0.0" y="174" width="0.0" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="204" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -81,41 +79,30 @@
                                     </subviews>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pB5-YI-Mnc">
-                                    <rect key="frame" x="0.0" y="178" width="320" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="208" width="320" height="0.0"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="IQd-Dx-F3J" customClass="LinkLabel" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="182" width="320" height="50"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="0Jr-Pd-oBC" userLabel="Footer StackView">
-                                    <rect key="frame" x="0.0" y="236" width="320" height="56"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eae-WC-ak0">
+                                    <rect key="frame" x="0.0" y="212" width="320" height="80"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uwo-T5-4Yn" userLabel="Text">
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Mm-Vf-pAr" userLabel="FooterHeadline">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pec-cf-6Bj" userLabel="FooterBody">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xcu-GR-FU3" userLabel="FooterButton" customClass="MainButton" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="24" width="200" height="32"/>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xcu-GR-FU3" userLabel="FooterButton" customClass="MainButton" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="24" width="320" height="32"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="kqs-SD-oZt"/>
                                             </constraints>
                                         </view>
                                     </subviews>
-                                </stackView>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="xcu-GR-FU3" secondAttribute="bottom" constant="24" id="00G-Qa-YcM"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xcu-GR-FU3" secondAttribute="trailing" id="05N-K6-9Wl"/>
+                                        <constraint firstItem="xcu-GR-FU3" firstAttribute="top" secondItem="Eae-WC-ak0" secondAttribute="top" constant="24" id="G08-dG-Skz"/>
+                                        <constraint firstItem="xcu-GR-FU3" firstAttribute="leading" secondItem="Eae-WC-ak0" secondAttribute="leading" id="TRz-rz-fOW"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </stackView>
@@ -144,11 +131,6 @@
             <point key="canvasLocation" x="-184.78260869565219" y="-60.602678571428569"/>
         </view>
     </objects>
-    <designables>
-        <designable name="IQd-Dx-F3J">
-            <size key="intrinsicContentSize" width="320" height="50"/>
-        </designable>
-    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

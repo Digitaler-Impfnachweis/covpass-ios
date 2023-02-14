@@ -40,10 +40,10 @@ public protocol VaccinationRepositoryProtocol {
     ///
     /// - USED BY CovPassCheck App
     /// TODO added checkSealCertificate temporarliy as long as the ExtendedCBORWebToken mocks do not work properly
-    func checkCertificate(_ data: String, checkSealCertificate: Bool) -> Promise<CBORWebToken>
+    func checkCertificate(_ data: String, expirationRuleIsActive: Bool, checkSealCertificate: Bool) -> Promise<CBORWebToken>
 
     /// Variant of `checkCertificate` which returns an `ExtendedCBORWebToken`.
-    func validCertificate(_ data: String, checkSealCertificate: Bool) -> Promise<ExtendedCBORWebToken>
+    func validCertificate(_ data: String, expirationRuleIsActive: Bool, checkSealCertificate: Bool) -> Promise<ExtendedCBORWebToken>
 
     /// Toogles the favorite state and returns the updated flag
     func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool>

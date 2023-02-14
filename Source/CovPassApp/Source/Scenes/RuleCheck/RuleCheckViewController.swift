@@ -113,12 +113,14 @@ class RuleCheckViewController: UIViewController {
             self?.viewModel.showDateSelection()
         }
 
+        info.linkFont = .scaledBoldBody
         info.attributedText = "certificate_check_validity_note".localized.styledAs(.body)
         info.layoutMargins = .init(top: .space_8, left: .space_8, bottom: .space_8, right: .space_8)
         info.backgroundColor = .backgroundSecondary20
         info.layer.borderWidth = 1.0
         info.layer.borderColor = UIColor.onBackground20.cgColor
         info.layer.cornerRadius = 12.0
+        info.applyRightImage(image: .externalLink)
 
         stackView.subviews.forEach { subview in
             subview.removeFromSuperview()

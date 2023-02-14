@@ -50,6 +50,19 @@ public class LinkLabel: XibView {
             additionalTextableView.attributedText = NSMutableAttributedString(attributedString: nv).replaceLink(linkFont: linkFont).replaceLink(linkFont: linkFont)
         }
     }
+
+    public func applyRightImage(image: UIImage) {
+        let wholeRange = NSRange(textableView.attributedText.string.startIndex..., in: textableView.attributedText.string)
+        textableView.attributedText.enumerateAttribute(.link, in: wholeRange, options: []) { value, range, _ in
+            if value != nil {
+                let attachment = NSTextAttachment()
+                attachment.image = image
+                let imageString = NSAttributedString(attachment: attachment)
+                textableView.textStorage.insert(.init(string: " "), at: range.upperBound)
+                textableView.textStorage.insert(imageString, at: range.upperBound + 1)
+            }
+        }
+    }
 }
 
 extension LinkLabel: UITextViewDelegate {

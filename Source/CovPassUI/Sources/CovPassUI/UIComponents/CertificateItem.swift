@@ -24,6 +24,8 @@ public class CertificateItem: XibView {
     @IBOutlet var statusIconWrapper: UIView!
     @IBOutlet var statusIconLeadingConstraint: NSLayoutConstraint!
     @IBOutlet var statusIconTopConstraint: NSLayoutConstraint!
+    @IBOutlet public var warningLabel: UILabel!
+    @IBOutlet public var warningWrapper: UIView!
 
     private let action: (() -> Void)?
     private let hasAction: Bool
@@ -36,6 +38,7 @@ public class CertificateItem: XibView {
         self.viewModel = viewModel
         self.action = action
         super.init(frame: CGRect.zero)
+        warningWrapper.isHidden = true
         setupView()
     }
 
@@ -78,6 +81,9 @@ public class CertificateItem: XibView {
         chevron.tintColor = .brandAccent
 
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressItem)))
+
+        warningLabel.attributedText = viewModel.warningText?.description.styledAs(.header_3)
+        warningWrapper.isHidden = viewModel.warningText == nil
 
         setupAccessibility()
     }

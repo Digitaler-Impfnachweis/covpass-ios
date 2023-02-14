@@ -39,7 +39,9 @@ class CertificateDetailViewController: UIViewController {
     @IBOutlet var birtdateView: ParagraphView!
     @IBOutlet var scanHintView: HintView!
     @IBOutlet var immunizationStatusView: ParagraphView!
+    @IBOutlet var maskStatusStackView: UIStackView!
     @IBOutlet var maskStatusView: ParagraphView!
+    private let expandableMaskNoteView = ExpandableView()
 
     // MARK: - Properties
 
@@ -62,6 +64,7 @@ class CertificateDetailViewController: UIViewController {
         viewModel.refresh()
         viewModel.updateBoosterCandiate()
         viewModel.updateReissueCandidate(to: true)
+        setupMaskNoteView()
     }
 
     // MARK: - Methods
@@ -69,7 +72,6 @@ class CertificateDetailViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .backgroundPrimary
         scrollView.contentInset = .init(top: .space_24, left: .zero, bottom: .space_70, right: .zero)
-
         setupHeadline()
         setupImmunizationView()
         setupBoosterHintView()
@@ -79,6 +81,17 @@ class CertificateDetailViewController: UIViewController {
         setupCertificates()
         setupNavigationBar()
         setupStatusView()
+    }
+
+    private func setupMaskNoteView() {
+        let borderView = UIView()
+        borderView.backgroundColor = .divider
+        borderView.setConstant(height: 1)
+        expandableMaskNoteView.backgroundColor = .neutralWhite
+        expandableMaskNoteView.stackViewMarings = .init(top: 0, left: 80, bottom: 0, right: 24)
+        maskStatusStackView.addArrangedSubview(borderView)
+        maskStatusStackView.addArrangedSubview(expandableMaskNoteView)
+        stackView.setCustomSpacing(.space_12, after: maskStatusStackView)
     }
 
     private func setupStatusView() {
@@ -93,6 +106,10 @@ class CertificateDetailViewController: UIViewController {
         immunizationStatusView.bottomBorder.isHidden = true
         immunizationStatusView.bottomBorder.layoutMargins.bottom = .space_24
         immunizationStatusView.isHidden = viewModel.immunizationStatusViewIsHidden
+
+        expandableMaskNoteView.updateView(title: viewModel.maskStatusViewModel.notice?.styledAs(.header_3).colored(.onBackground110),
+                                          body: viewModel.maskStatusViewModel.noticeText?.styledAs(.body).colored(.onBackground110),
+                                          footer: viewModel.maskStatusViewModel.linkLabel?.styledAs(.body))
     }
 
     private func setupNavigationBar() {
@@ -279,10 +296,7 @@ private extension ParagraphView {
                    title: viewModel.title.styledAs(.header_3),
                    subtitle: viewModel.subtitle?.styledAs(.header_3).colored(.onBackground80),
                    secondSubtitle: viewModel.federalStateText?.styledAs(.subheader_2).colored(.onBackground80),
-                   body: viewModel.description.styledAs(.body).colored(.onBackground110),
-                   secondBody: viewModel.linkLabel?.styledAs(.body),
-                   footerHeadline: viewModel.notice?.styledAs(.header_3).colored(.onBackground110),
-                   footerBody: viewModel.noticeText?.styledAs(.body).colored(.onBackground110),
+                   body: viewModel.description.styledAs(.body).colored(.onBackground80),
                    footerButtonTitle: viewModel.selectFederalStateButtonTitle,
                    contentMode: .center)
     }

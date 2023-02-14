@@ -51,7 +51,7 @@ class QualityAssuranceTests: XCTestCase {
             certificateCount += 1
             if let data = parseQRCode(file) {
                 do {
-                    _ = try repository.checkCertificate(data).wait()
+                    _ = try repository.checkCertificate(data, expirationRuleIsActive: false).wait()
                 } catch {
                     errors.append("Failed to check certificate \(file) with\(error.displayCodeWithMessage(""))")
                 }
@@ -75,7 +75,7 @@ class QualityAssuranceTests: XCTestCase {
             certificateCount += 1
             if let data = parseQRCode(file) {
                 do {
-                    let certificate = try repository.checkCertificate(data).wait()
+                    let certificate = try repository.checkCertificate(data, expirationRuleIsActive: false).wait()
                     do {
                         let result = try certLogic.validate(countryCode: "DE", validationClock: Date(), certificate: certificate)
                         if result.contains(where: { $0.result == .fail || $0.result == .open }) {
@@ -104,7 +104,7 @@ class QualityAssuranceTests: XCTestCase {
             XCTFail("Cannot parse QR code from file \(file)")
             return
         }
-        _ = try repository.checkCertificate(data).wait()
+        _ = try repository.checkCertificate(data, expirationRuleIsActive: false).wait()
     }
 
     // Parse QR Code from given file

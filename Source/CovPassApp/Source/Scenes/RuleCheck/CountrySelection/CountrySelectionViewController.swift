@@ -70,13 +70,15 @@ class CountrySelectionViewController: UIViewController {
     }
 
     private func configureText() {
+        info.linkFont = .scaledBoldBody
         info.attributedText = "certificate_check_validity_selection_country_note".localized.styledAs(.body)
         info.enableAccessibility(label: "certificate_check_validity_selection_country_note".localized)
         info.layoutMargins = .init(top: .space_8, left: .space_8, bottom: .space_8, right: .space_8)
-        info.backgroundColor = .backgroundSecondary20
+        info.backgroundColor = .backgroundSecondary50
         info.layer.borderWidth = Constants.Layout.borderWith
-        info.layer.borderColor = UIColor.onBackground20.cgColor
+        info.layer.borderColor = UIColor.backgroundSecondary60.cgColor
         info.layer.cornerRadius = Constants.Layout.cornerRadius
+        info.applyRightImage(image: .externalLink)
 
         stackView.arrangedSubviews.forEach { subview in
             guard let item = subview as? CountryItemView else { return }

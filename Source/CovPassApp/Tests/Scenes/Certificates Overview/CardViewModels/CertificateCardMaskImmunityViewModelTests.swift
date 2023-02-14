@@ -25,6 +25,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
     }
 
     private func sut(token: ExtendedCBORWebToken,
+                     tokens: [ExtendedCBORWebToken] = [],
                      boosterLogic: BoosterLogicMock = BoosterLogicMock(),
                      needsMask: Bool = true,
                      maskRuleAvailable: Bool = true) -> CertificateCardMaskImmunityViewModel {
@@ -32,8 +33,9 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         certificateHolder.needsMask = needsMask
         certificateHolder.areMaskRulesAvailable = maskRuleAvailable
         let userDefaults = UserDefaultsPersistence()
+        let tokens: [ExtendedCBORWebToken] = tokens + [token]
         return .init(token: token,
-                     tokens: [token],
+                     tokens: tokens,
                      onAction: { _ in },
                      certificateHolderStatusModel: certificateHolder,
                      repository: VaccinationRepositoryMock(),
@@ -726,6 +728,21 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         var token = try ExtendedCBORWebToken.mock()
         token.vaccinationCertificate.exp = .init() + Double.random(in: 86000 ..< 2_419_200)
         let sut = sut(token: token)
+
+        // When
+        let headerSubtitle = sut.headerSubtitle
+
+        // Then
+        XCTAssertEqual(headerSubtitle, "Renew certificate")
+    }
+
+    func test_headerSubtitle_notification_available_will_expire_in_28_day_range_with_other_certificate_in_chain() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.mock()
+        token.vaccinationCertificate.exp = .init() + Double.random(in: 86000 ..< 2_419_200)
+        var token2 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "w")
+        token2.vaccinationCertificate.exp = .init() + Double.random(in: 2_419_200 ..< 12_419_200)
+        let sut = sut(token: token2, tokens: [token])
 
         // When
         let headerSubtitle = sut.headerSubtitle

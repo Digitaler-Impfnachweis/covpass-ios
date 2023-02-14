@@ -123,6 +123,7 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var isNeutral: Bool
+    var warningText: String?
 
     init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {
         self.certificate = certificate

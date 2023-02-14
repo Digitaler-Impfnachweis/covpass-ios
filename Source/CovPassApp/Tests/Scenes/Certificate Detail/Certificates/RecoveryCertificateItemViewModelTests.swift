@@ -22,9 +22,10 @@ class RecoveryCertificateItemViewModelTests: XCTestCase {
         XCTAssertEqual(icon, .expired)
     }
 
-    private func prepareSut(active: Bool = false, revoked: Bool? = nil) throws -> RecoveryCertificateItemViewModel {
+    private func prepareSut(active: Bool = false, revoked: Bool? = nil, expirationDate: Date? = nil) throws -> RecoveryCertificateItemViewModel {
         var token = try ExtendedCBORWebToken.token1Of1()
         token.revoked = revoked
+        token.vaccinationCertificate.exp = expirationDate
         return .init(token, active: active)
     }
 
@@ -103,5 +104,109 @@ class RecoveryCertificateItemViewModelTests: XCTestCase {
 
         // Then
         XCTAssertNotEqual(info2, "Certificate invalid")
+    }
+
+    func test_valid_reecovery() {
+        // GIVEN
+        let testDate = Date()
+        let isActive = true
+        let isValid = true
+        let token = CBORWebToken
+            .mockRecoveryCertificate
+            .recovery(isValid: isValid)
+            .recoveryTestDate(testDate)
+            .extended()
+        let expectation = String(format: "certificates_overview_recovery_certificate_sample_date".localized,
+                                 DateUtils.displayDateFormatter.string(from: testDate))
+        let sut = RecoveryCertificateItemViewModel(token, active: isActive)
+        // WHEN
+        let infoString = sut.info
+        // THEN
+        XCTAssertEqual(infoString, expectation)
+    }
+
+    func test_invalid_reecovery() throws {
+        // GIVEN
+        let testDate = Date()
+        let isActive = true
+        let isValid = false
+        let token = CBORWebToken
+            .mockRecoveryCertificate
+            .recovery(isValid: isValid)
+            .recoveryTestDate(testDate)
+            .extended()
+        let certificateValidFrom = try XCTUnwrap(token.vaccinationCertificate.hcert.dgc.r?.first?.df)
+        let expectation = String(format: "certificates_overview_recovery_certificate_valid_from_date".localized,
+                                 DateUtils.displayDateFormatter.string(from: certificateValidFrom))
+        let sut = RecoveryCertificateItemViewModel(token, active: isActive)
+        // WHEN
+        let infoString = sut.info
+        // THEN
+        XCTAssertEqual(infoString, expectation)
+    }
+
+    func test_active_reecovery() throws {
+        // GIVEN
+        let isActive = true
+        let token = CBORWebToken
+            .mockRecoveryCertificate
+            .extended()
+        let sut = RecoveryCertificateItemViewModel(token, active: isActive)
+        let expectation = "certificates_overview_currently_uses_certificate_note".localized
+        // WHEN
+        let activeTitle = sut.activeTitle
+        // THEN
+        XCTAssertEqual(activeTitle, expectation)
+    }
+
+    func test_inActive_reecovery() throws {
+        // GIVEN
+        let isActive = false
+        let token = CBORWebToken
+            .mockRecoveryCertificate
+            .extended()
+        let sut = RecoveryCertificateItemViewModel(token, active: isActive)
+        // WHEN
+        let activeTitle = sut.activeTitle
+        // THEN
+        XCTAssertNil(activeTitle)
+    }
+
+    func test_warning_notExpired() throws {
+        // Given
+        let sut = try prepareSut(active: true)
+        // When
+        let warningText = sut.warningText
+        // Then
+        XCTAssertNil(warningText)
+    }
+
+    func test_warning_aboutToExpire() throws {
+        // Given
+        let sut = try prepareSut(active: true, expirationDate: .init() + 100)
+        let expectation = "renewal_expiry_notification_title".localized
+        // When
+        let warningText = sut.warningText
+        // Then
+        XCTAssertEqual(warningText, expectation)
+    }
+
+    func test_warning_expired_lessThan90Days() throws {
+        // Given
+        let sut = try prepareSut(active: true, expirationDate: .init().add(days: -70))
+        let expectation = "renewal_expiry_notification_title".localized
+        // When
+        let warningText = sut.warningText
+        // Then
+        XCTAssertEqual(warningText, expectation)
+    }
+
+    func test_warning_expired_moreThan90Days() throws {
+        // Given
+        let sut = try prepareSut(active: true, expirationDate: .init().add(days: -100))
+        // When
+        let warningText = sut.warningText
+        // Then
+        XCTAssertNil(warningText)
     }
 }

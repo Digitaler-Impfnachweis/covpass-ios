@@ -87,7 +87,8 @@ class DifferentPersonViewController: UIViewController {
 
         ignoreView.updateView(title: titleText,
                               subtitle: subtitleText,
-                              secondBody: footerButtonText)
+                              body: footerButtonText,
+                              customSpacingAfterHeaderStack: 12)
         ignoreStackView.isHidden = viewModel.ignoringIsHidden
         ignoreView.bottomBorder.isHidden = true
     }

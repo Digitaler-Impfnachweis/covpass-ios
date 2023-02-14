@@ -75,13 +75,13 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testCheckCertificateValidExtendedKeyUsage() throws {
-        let res = try sut.checkCertificate(CertificateMock.validExtendedKeyUsageGreece).wait()
+        let res = try sut.checkCertificate(CertificateMock.validExtendedKeyUsageGreece, expirationRuleIsActive: false).wait()
         XCTAssertEqual(res.iss, "GR")
     }
 
     func testCheckCertificateInvalidExtendedKeyUsage() {
         do {
-            _ = try sut.checkCertificate(CertificateMock.invalidExtendedKeyUsagePoland).wait()
+            _ = try sut.checkCertificate(CertificateMock.invalidExtendedKeyUsagePoland, expirationRuleIsActive: false).wait()
             XCTFail("test should fail")
         } catch {
             XCTAssertEqual(error.localizedDescription, HCertError.illegalKeyUsage.localizedDescription)
@@ -89,7 +89,7 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testCheckCertificateValidEC() throws {
-        let res = try sut.checkCertificate(CertificateMock.validCertificate2, checkSealCertificate: false).wait()
+        let res = try sut.checkCertificate(CertificateMock.validCertificate2, expirationRuleIsActive: false, checkSealCertificate: false).wait()
         XCTAssertEqual(res.iss, "IT")
     }
 
@@ -114,7 +114,7 @@ class VaccinationRepositoryTests: XCTestCase {
         let expectation = XCTestExpectation()
 
         // When
-        sut.checkCertificate(token)
+        sut.checkCertificate(token, expirationRuleIsActive: false)
             .done { tokens in
                 XCTAssertNoThrow(try self.sut.validateEntity(tokens))
                 expectation.fulfill()
@@ -131,7 +131,7 @@ class VaccinationRepositoryTests: XCTestCase {
         let expectation = XCTestExpectation()
 
         // When
-        sut.checkCertificate(token)
+        sut.checkCertificate(token, expirationRuleIsActive: false)
             .done { tokens in
                 XCTAssertNoThrow(try self.sut.validateEntity(tokens))
                 expectation.fulfill()
@@ -148,7 +148,7 @@ class VaccinationRepositoryTests: XCTestCase {
         let expectation = XCTestExpectation()
 
         // When
-        sut.checkCertificate(token)
+        sut.checkCertificate(token, expirationRuleIsActive: false)
             .done { tokens in
                 XCTAssertNoThrow(try self.sut.validateEntity(tokens))
                 expectation.fulfill()
@@ -161,7 +161,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testCheckCertificateInvalidEntity() {
         do {
-            let res = try sut.checkCertificate(CertificateMock.validCertificate2).wait()
+            let res = try sut.checkCertificate(CertificateMock.validCertificate2, expirationRuleIsActive: false).wait()
             res.hcert.dgc.v?.first?.ci = "URN:UVCI:01DE/foobar/F4G7014KQQ2XD0NY8FJHSTDXZ#S"
 
             try sut.validateEntity(res)
@@ -173,7 +173,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testValidateEntityInvalidCertificateInvalidSignature() {
         do {
-            let res = try sut.checkCertificate(CertificateMock.invalidCertificateInvalidSignature).wait()
+            let res = try sut.checkCertificate(CertificateMock.invalidCertificateInvalidSignature, expirationRuleIsActive: false).wait()
             try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
@@ -183,7 +183,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testValidateEntityInvalidCertificate() {
         do {
-            let res = try sut.checkCertificate(CertificateMock.invalidCertificate).wait()
+            let res = try sut.checkCertificate(CertificateMock.invalidCertificate, expirationRuleIsActive: false).wait()
             try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
@@ -193,7 +193,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testValidateEntityInvalidCertificateOldFormat() {
         do {
-            let res = try sut.checkCertificate(CertificateMock.invalidCertificateOldFormat).wait()
+            let res = try sut.checkCertificate(CertificateMock.invalidCertificateOldFormat, expirationRuleIsActive: false).wait()
             try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
@@ -203,7 +203,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testValidateEntityInvalidExtendedKeyUsagePoland() {
         do {
-            let res = try sut.checkCertificate(CertificateMock.invalidExtendedKeyUsagePoland).wait()
+            let res = try sut.checkCertificate(CertificateMock.invalidExtendedKeyUsagePoland, expirationRuleIsActive: false).wait()
             try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
@@ -213,7 +213,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testValidateEntityValidCertifcateRSA() {
         do {
-            let res = try sut.checkCertificate(CertificateMock.validCertifcateRSA).wait()
+            let res = try sut.checkCertificate(CertificateMock.validCertifcateRSA, expirationRuleIsActive: false).wait()
             try sut.validateEntity(res)
             XCTAssert(true)
         } catch {
@@ -408,13 +408,13 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testCheckCertificate() throws {
-        let token = try sut.checkCertificate(CertificateMock.validCertificate2, checkSealCertificate: false).wait()
+        let token = try sut.checkCertificate(CertificateMock.validCertificate2, expirationRuleIsActive: false, checkSealCertificate: false).wait()
         XCTAssertEqual(token.hcert.dgc.uvci, "URN:UVCI:01DE/84503/1651139518/DXSGWLWL40SU8ZFKIYIBK30A4#S")
     }
 
     func testCheckCertificateFails() {
         do {
-            _ = try sut.checkCertificate(CertificateMock.invalidCertificate).wait()
+            _ = try sut.checkCertificate(CertificateMock.invalidCertificate, expirationRuleIsActive: false).wait()
             XCTFail("Should fail")
         } catch {
             XCTAssertEqual(error.localizedDescription, CoseParsingError.wrongType.localizedDescription)

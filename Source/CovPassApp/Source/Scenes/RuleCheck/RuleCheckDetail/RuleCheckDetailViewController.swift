@@ -97,17 +97,23 @@ class RuleCheckDetailViewController: UIViewController {
     }
 
     private func setupInfo() {
+        infoLabel1.linkFont = .scaledBoldBody
         infoLabel1.attributedText = viewModel.infoText1.styledAs(.body)
         infoLabel1.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_24, right: .space_24)
+        infoLabel1.applyRightImage(image: .externalLink)
+        infoLabel2.linkFont = .scaledBoldBody
         infoLabel2.attributedText = viewModel.infoText2.styledAs(.body)
         infoLabel2.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_40, right: .space_24)
+        infoLabel2.applyRightImage(image: .externalLink)
     }
 
     private func setupResultView() {
         resultView.layoutMargins.bottom = .space_24
         resultView.iconView.image = viewModel.resultIcon
         resultView.titleLabel.attributedText = viewModel.resultTitle.styledAs(.header_3)
+        resultView.bodyLabel.linkFont = .scaledBoldBody
         resultView.bodyLabel.attributedText = viewModel.resultSubtitle.styledAs(.body)
+        resultView.bodyLabel.applyRightImage(image: .externalLink)
         resultView.containerView?.backgroundColor = viewModel.resultColorBackground
         resultView.containerView?.layer.borderColor = viewModel.resultColor.cgColor
     }

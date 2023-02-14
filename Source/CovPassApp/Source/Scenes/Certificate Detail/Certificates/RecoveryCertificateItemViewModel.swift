@@ -77,14 +77,16 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         if isNeutral {
             return infoString(forAccessibility: false) ?? ""
         }
-        if certificate.vaccinationCertificate.isExpired {
-            return "certificates_overview_expired_certificate_note".localized
-        }
-        if certificate.vaccinationCertificate.expiresSoon {
-            return "certificates_overview_expires_soon_certificate_note".localized
-        }
-        if certificate.isInvalid || certificate.isRevoked {
-            return "certificates_overview_invalid_certificate_note".localized
+        if !renewalNeeded {
+            if certificate.vaccinationCertificate.isExpired {
+                return "certificates_overview_expired_certificate_note".localized
+            }
+            if certificate.vaccinationCertificate.expiresSoon {
+                return "certificates_overview_expires_soon_certificate_note".localized
+            }
+            if certificate.isInvalid || certificate.isRevoked {
+                return "certificates_overview_invalid_certificate_note".localized
+            }
         }
         return nil
     }
@@ -103,12 +105,23 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
 
     var activeTitle: String? {
         if isNeutral {
-            return "renewal_expiry_notification_title".localized
+            return nil
         }
         return active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }
 
     var isNeutral: Bool
+    var warningText: String? {
+        if renewalNeeded {
+            return "renewal_expiry_notification_title".localized
+        }
+        return nil
+    }
+
+    var renewalNeeded: Bool {
+        let cert = certificate.vaccinationCertificate
+        return certificate.isNotRevoked && active && cert.expiresSoon && !cert.expiredMoreThan90Days && cert.isGermanIssuer
+    }
 
     init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {
         self.certificate = certificate
@@ -123,8 +136,10 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
 
         let formatter = accessibility ? DateUtils.audioDateFormatter : DateUtils.displayDateFormatter
         if Date() < r.df {
-            return String(format: "certificates_overview_recovery_certificate_valid_from_date".localized, formatter.string(from: r.df))
+            return String(format: "certificates_overview_recovery_certificate_valid_from_date".localized,
+                          formatter.string(from: r.df))
         }
-        return String(format: "certificates_overview_recovery_certificate_valid_until_date".localized, formatter.string(from: r.du))
+        return String(format: "certificates_overview_recovery_certificate_sample_date".localized,
+                      formatter.string(from: r.fr))
     }
 }

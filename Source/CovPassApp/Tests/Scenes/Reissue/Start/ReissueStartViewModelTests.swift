@@ -77,14 +77,15 @@ class ReissueStartViewModelTests: XCTestCase {
 
     func testCertItem_expiry_extension() {
         // Given
-        let token1 = CBORWebToken.mockRecoveryCertificate.recoveryTestDate(.distantFuture).extended(vaccinationQRCodeData: "1")
+        var token1 = CBORWebToken.mockRecoveryCertificate.recoveryTestDate(.distantFuture).extended(vaccinationQRCodeData: "1")
         let token2 = CBORWebToken.mockVaccinationCertificate.doseNumber(1).extended(vaccinationQRCodeData: "1")
+        token1.vaccinationCertificate.exp = .init() + 100
         configureSut(tokens: [token1, token2], context: .certificateExtension)
 
         // When
         let certItem = sut.certItem
 
         // Then
-        XCTAssertEqual(certItem.activeLabel.text, "Renewal needed")
+        XCTAssertEqual(certItem.warningLabel.text, "Renewal needed")
     }
 }
