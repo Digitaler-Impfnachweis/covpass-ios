@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,7 +14,6 @@
             <connections>
                 <outlet property="checkSituationContainerStackView" destination="Oe4-qR-2Rh" id="o2g-na-J8w"/>
                 <outlet property="checkSituationView" destination="7Kg-Ah-BNm" id="QsC-Kr-gBF"/>
-                <outlet property="checkTypeSegment" destination="m40-Sj-leB" id="6Nq-Vh-sn1"/>
                 <outlet property="checkTypesStackview" destination="G6F-CQ-iUw" id="ayw-Es-x60"/>
                 <outlet property="headerView" destination="zJo-A3-iFe" id="O25-eI-mKv"/>
                 <outlet property="immunityCheckView" destination="SNB-La-IeS" id="ZQP-9m-KjY"/>
@@ -29,7 +28,6 @@
                 <outlet property="offlineInformationUpdateContainer" destination="NlC-Yh-THb" id="UAE-W2-rUN"/>
                 <outlet property="offlineInformationView" destination="ZnB-jU-bzk" id="0W5-g1-brB"/>
                 <outlet property="offlineModusTopContainer" destination="UTe-Ib-b3t" id="ZiG-jk-Dt4"/>
-                <outlet property="scanCard" destination="0Le-DA-8MJ" id="hqR-DR-0ma"/>
                 <outlet property="timeHintContainerStackView" destination="kHf-9N-E7S" id="g7u-qF-Q2a"/>
                 <outlet property="timeHintView" destination="h6e-Af-Kqm" id="oa1-he-uRS"/>
                 <outlet property="view" destination="oRh-oW-Top" id="0bV-Tk-AFp"/>
@@ -49,55 +47,29 @@
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPz-bQ-P6F" userLabel="body">
-                            <rect key="frame" x="0.0" y="100" width="414" height="1458"/>
+                            <rect key="frame" x="0.0" y="100" width="414" height="1013"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-gd-ynO">
-                                    <rect key="frame" x="24" y="12" width="366" height="1446"/>
+                                    <rect key="frame" x="24" y="12" width="366" height="1001"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTD-88-mud">
-                                            <rect key="frame" x="0.0" y="0.0" width="366" height="71"/>
-                                            <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="m40-Sj-leB" userLabel="check type segment" customClass="SegmentedControl" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="48"/>
-                                                    <segments>
-                                                        <segment title="First"/>
-                                                        <segment title="Second"/>
-                                                    </segments>
-                                                    <connections>
-                                                        <action selector="chekTypeSegmentChanged:" destination="-1" eventType="valueChanged" id="NeU-4O-eGh"/>
-                                                    </connections>
-                                                </segmentedControl>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="m40-Sj-leB" secondAttribute="trailing" id="8Zg-I1-28i"/>
-                                                <constraint firstItem="m40-Sj-leB" firstAttribute="leading" secondItem="jTD-88-mud" secondAttribute="leading" id="ILE-0a-Ljc"/>
-                                                <constraint firstAttribute="bottom" secondItem="m40-Sj-leB" secondAttribute="bottom" constant="24" id="ea4-O4-eQ5"/>
-                                                <constraint firstItem="m40-Sj-leB" firstAttribute="top" secondItem="jTD-88-mud" secondAttribute="top" id="rwd-Sz-yY1"/>
-                                            </constraints>
-                                        </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="G6F-CQ-iUw">
-                                            <rect key="frame" x="0.0" y="71" width="366" height="502"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="366" height="128"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="350" translatesAutoresizingMaskIntoConstraints="NO" id="0Le-DA-8MJ" customClass="ScanCardView" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="350"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                </view>
                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="SNB-La-IeS" customClass="ImmunityScanCardView" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="374" width="366" height="128"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="128"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bzN-Jx-xE8" userLabel="spacer">
-                                            <rect key="frame" x="0.0" y="573" width="366" height="24"/>
+                                            <rect key="frame" x="0.0" y="128" width="366" height="24"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="DaZ-se-xqs"/>
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="qET-OI-wQe">
-                                            <rect key="frame" x="0.0" y="597" width="366" height="849"/>
+                                            <rect key="frame" x="0.0" y="152" width="366" height="849"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Oe4-qR-2Rh">
                                                     <rect key="frame" x="0.0" y="0.0" width="366" height="30"/>
@@ -322,9 +294,6 @@
         </tapGestureRecognizer>
     </objects>
     <designables>
-        <designable name="0Le-DA-8MJ">
-            <size key="intrinsicContentSize" width="366" height="350"/>
-        </designable>
         <designable name="7Kg-Ah-BNm">
             <size key="intrinsicContentSize" width="366" height="30"/>
         </designable>

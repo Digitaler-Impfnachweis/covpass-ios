@@ -110,7 +110,7 @@ class CertificatesOverviewViewController: UIViewController {
         layout.scrollDirection = .horizontal
         collectionView.collectionViewLayout = layout
         collectionView.register(UINib(nibName: "\(NoCertificateCollectionViewCell.self)", bundle: Bundle.uiBundle), forCellWithReuseIdentifier: "\(NoCertificateCollectionViewCell.self)")
-        collectionView.register(UINib(nibName: "\(CertificateMaskImmunityCollectionViewCell.self)", bundle: Bundle.uiBundle), forCellWithReuseIdentifier: "\(CertificateMaskImmunityCollectionViewCell.self)")
+        collectionView.register(UINib(nibName: "\(CertificateOverviewCollectionViewCell.self)", bundle: Bundle.uiBundle), forCellWithReuseIdentifier: "\(CertificateOverviewCollectionViewCell.self)")
         collectionView.showsHorizontalScrollIndicator = false
     }
 
@@ -152,8 +152,8 @@ extension CertificatesOverviewViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: vm.reuseIdentifier, for: indexPath) as? CardCollectionViewCell else { return UICollectionViewCell() }
         cell.viewModel = vm
         cell.viewModel?.delegate = cell
-        (cell as? CertificateMaskImmunityCollectionViewCell)?.contentStackView.layoutMargins.top = 20
-        (cell as? CertificateMaskImmunityCollectionViewCell)?.contentStackView.layoutMargins.bottom = 0
+        (cell as? CertificateOverviewCollectionViewCell)?.contentStackView.layoutMargins.top = 20
+        (cell as? CertificateOverviewCollectionViewCell)?.contentStackView.layoutMargins.bottom = 0
         return cell
     }
 }

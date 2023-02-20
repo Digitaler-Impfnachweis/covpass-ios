@@ -10,8 +10,6 @@ import Foundation
 import PromiseKit
 
 struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
-    var areMaskRulesAvailable = false
-    var needsMask = false
     var isVaccinationCycleComplete = HolderStatusResponse(passed: true, results: nil)
     var areIfsg22aRulesAvailable = true
     var areTravelRulesAvailableForGermanyResponse = true
@@ -19,7 +17,6 @@ struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     var checkDomesticInvalidationRulesResult = CertificateHolderStatusResult.passed
     var checkEuInvalidationRulesResult = CertificateHolderStatusResult.passed
     var validCertificates: [ExtendedCBORWebToken]?
-    var latestMaskRuleDate: Date?
 
     func areTravelRulesAvailableForGermany() -> Bool {
         areTravelRulesAvailableForGermanyResponse
@@ -35,22 +32,6 @@ struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
 
     func checkEuInvalidationRules(_: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
         checkEuInvalidationRulesResult
-    }
-
-    func holderNeedsMask(_: [ExtendedCBORWebToken], region _: String?) -> Bool {
-        needsMask
-    }
-
-    func holderNeedsMaskAsync(_: [ExtendedCBORWebToken], region _: String?) -> Guarantee<Bool> {
-        .value(needsMask)
-    }
-
-    func maskRulesAvailable(for _: String?) -> Bool {
-        areMaskRulesAvailable
-    }
-
-    func latestMaskRuleDate(for _: String?) -> Date? {
-        latestMaskRuleDate
     }
 
     func validCertificates(_ certificates: [ExtendedCBORWebToken], logicType _: DCCCertLogic.LogicType) -> [ExtendedCBORWebToken] {

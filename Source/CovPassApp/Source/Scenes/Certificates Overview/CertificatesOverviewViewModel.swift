@@ -38,7 +38,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private let revocationRepository: CertificateRevocationRepositoryProtocol
     private var certLogic: DCCCertLogicProtocol
     private let boosterLogic: BoosterLogicProtocol
-    private var cellViewModels: [CertificateCardMaskImmunityViewModel] = .init()
+    private var cellViewModels: [CertificateOverviewCardViewModel] = .init()
     private var certificateList: CertificateList
     private var lastKnownFavoriteCertificateId: String?
     private var userDefaults: UserDefaultsPersistence
@@ -46,7 +46,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private lazy var faqURL: URL? = locale.isGerman() ? Constants.Config.covpassFaqUrlGerman : Constants.Config.covpassFaqUrlEnglish
     private let jsonDecoder = JSONDecoder()
     private let pdfExtractor: CertificateExtractorProtocol
-    private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
     private var privacyFileUrl: URL? {
         guard let url = Bundle.main.url(forResource: Constants.Config.privacySrcDe,
                                         withExtension: Constants.Config.privacySrcExt) else {
@@ -94,10 +93,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         boosterLogic: BoosterLogicProtocol,
         userDefaults: UserDefaultsPersistence,
         locale: Locale,
-        pdfExtractor: CertificateExtractorProtocol,
-        certificateHolderStatusModel: CertificateHolderStatusModelProtocol
+        pdfExtractor: CertificateExtractorProtocol
     ) {
-        self.certificateHolderStatusModel = certificateHolderStatusModel
         self.pdfExtractor = pdfExtractor
         self.router = router
         self.repository = repository
@@ -374,7 +371,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         firstly { self.initalRefresh() }
             .then(showDataPrivacyIfNeeded)
             .then(showAnnouncementIfNeeded)
-            .then(showStateSelectionOnboarding)
             .then(showBoosterNotificationIfNeeded)
             .then(showRevocationWarningIfNeeded)
             .then(updateDomesticRules)
@@ -546,18 +542,6 @@ extension CertificatesOverviewViewModel {
         userDefaults.privacyHash = currentDataPrivacyHash
         return router.showDataPrivacy()
     }
-
-    private func showStateSelectionOnboarding() -> Promise<Void> {
-        if userDefaults.selectStateOnboardingWasShown {
-            return .value
-        }
-        return router
-            .showStateSelectionOnboarding()
-            .ensure {
-                self.userDefaults.selectStateOnboardingWasShown = true
-            }
-            .recover { _ in () }
-    }
 }
 
 // MARK: - Booster Notifications
@@ -654,36 +638,19 @@ extension CertificatesOverviewViewModel {
     }
 
     private func createCellViewModels() -> Promise<Void> {
-        let cellViewModelPromises = certificatePairsSorted
-            .compactMap { certificatePair -> Promise<CertificateCardMaskImmunityViewModel>? in
+        cellViewModels = certificatePairsSorted
+            .compactMap { certificatePair -> CertificateOverviewCardViewModel? in
                 let sortedCertificates = certificatePair.certificates.sortLatest()
                 guard let cert = sortedCertificates.first else { return nil }
-                return Promise { seal in
-                    let viewModel = CertificateCardMaskImmunityViewModel(
-                        token: cert,
-                        tokens: sortedCertificates,
-                        onAction: onActionCardView,
-                        certificateHolderStatusModel: certificateHolderStatusModel,
-                        repository: repository,
-                        boosterLogic: boosterLogic,
-                        userDefaults: userDefaults
-                    )
-                    viewModel
-                        .updateCertificateHolderStatus()
-                        .done {
-                            seal.fulfill(viewModel)
-                        }
-                        .catch { error in
-                            print("Unable to update holder status: \(error)")
-                            seal.fulfill(viewModel)
-                        }
-                }
+                return CertificateOverviewCardViewModel(
+                    token: cert,
+                    tokens: sortedCertificates,
+                    onAction: onActionCardView,
+                    repository: repository,
+                    boosterLogic: boosterLogic,
+                    userDefaults: userDefaults
+                )
             }
-
-        return when(fulfilled: cellViewModelPromises).done { viewModels in
-            DispatchQueue.main.async {
-                self.cellViewModels = viewModels
-            }
-        }
+        return .value
     }
 }

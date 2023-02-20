@@ -37,8 +37,6 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         certificates: [ExtendedCBORWebToken] = [],
         locale: Locale = .current
     ) {
-        let certificateHolderStatusModel = CertificateHolderStatusModelMock()
-        certificateHolderStatusModel.needsMask = true
         vaccinationRepository.certificates = certificates
         sut = CertificatesOverviewViewModel(
             router: router,
@@ -48,8 +46,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             boosterLogic: BoosterLogicMock(),
             userDefaults: userDefaults,
             locale: locale,
-            pdfExtractor: pdfExtrator,
-            certificateHolderStatusModel: certificateHolderStatusModel
+            pdfExtractor: pdfExtrator
         )
         sut.delegate = delegate
     }
@@ -88,9 +85,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.iconRed, model.subtitleIcon)
-        XCTAssertEqual("No additional rules", model.title)
+        XCTAssertEqual("", model.title)
         XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
     }
@@ -118,9 +113,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.iconRed, model.subtitleIcon)
-        XCTAssertEqual("No additional rules", model.title)
+        XCTAssertEqual("", model.title)
         XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
     }
@@ -146,9 +139,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.iconRed, model.subtitleIcon)
-        XCTAssertEqual("No additional rules", model.title)
+        XCTAssertEqual("", model.title)
         XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
     }
@@ -175,9 +166,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.iconRed, model.subtitleIcon)
-        XCTAssertEqual("No additional rules", model.title)
+        XCTAssertEqual("", model.title)
         XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
     }
@@ -204,9 +193,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.iconRed, model.subtitleIcon)
-        XCTAssertEqual("No additional rules", model.title)
+        XCTAssertEqual("", model.title)
         XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
     }
@@ -236,10 +223,8 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.statusInvalidCircle, model.subtitleIcon)
-        XCTAssertEqual("No valid certificate", model.title)
-        XCTAssertEqual("No valid certificate", model.subtitle)
+        XCTAssertEqual("", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
     }
 
@@ -267,10 +252,8 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.expiredDotNotification, model.subtitleIcon)
-        XCTAssertEqual("No valid certificate", model.title)
-        XCTAssertEqual("No valid certificate", model.subtitle)
+        XCTAssertEqual("", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
     }
 
@@ -299,10 +282,8 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.expiredDotNotification, model.subtitleIcon)
-        XCTAssertEqual("No valid certificate", model.title)
-        XCTAssertEqual("No valid certificate", model.subtitle)
+        XCTAssertEqual("", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
     }
 
@@ -330,10 +311,8 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
-        XCTAssertEqual(.expiredDotNotification, model.subtitleIcon)
-        XCTAssertEqual("No valid certificate", model.title)
-        XCTAssertEqual("No valid certificate", model.subtitle)
+        XCTAssertEqual("", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
     }
 
@@ -544,29 +523,6 @@ class CertificatesOverviewViewModelTests: XCTestCase {
 
         // Then
         wait(for: [router.showAnnouncementExpectation], timeout: 1)
-    }
-
-    func test_showNotificationsIfNeeded_selectStateOnboarding_not_shown() {
-        // Given
-        userDefaults.selectStateOnboardingWasShown = false
-
-        // When
-        sut.showNotificationsIfNeeded()
-
-        // Then
-        wait(for: [router.showStateSelectionOnboardingExpectation], timeout: 2)
-    }
-
-    func testShowNotificationsIfNeeded_new_regulations_announcement_already_shown() {
-        // Given
-        userDefaults.newRegulationsOnboardingScreenWasShown = true
-        router.showNewRegulationsAnnouncementExpectation.isInverted = true
-
-        // When
-        sut.showNotificationsIfNeeded()
-
-        // Then
-        wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 2)
     }
 
     func testRefresh_expiry_notification_token_is_valid() throws {

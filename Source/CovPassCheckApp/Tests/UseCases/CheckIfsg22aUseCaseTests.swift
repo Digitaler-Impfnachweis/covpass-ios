@@ -72,7 +72,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
 
     func test_checkIfsg22a_rules_passed() {
         // GIVEN
-        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        let expectation = XCTestExpectation(description: "test should fail")
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
         certificateHolderStatusModel.domesticInvalidationRulesPassedResult = .passed
@@ -97,7 +97,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
                                       holderStatus: certificateHolderStatusModel,
                                       tokens: [token, differentPersonToken],
                                       ignoringPiCheck: false)
-        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        let expectation = XCTestExpectation(description: "test should fail")
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
         certificateHolderStatusModel.domesticInvalidationRulesPassedResult = .passed
@@ -121,7 +121,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
                                       holderStatus: certificateHolderStatusModel,
                                       tokens: [token, token],
                                       ignoringPiCheck: false)
-        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        let expectation = XCTestExpectation(description: "test should fail")
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
         certificateHolderStatusModel.domesticInvalidationRulesPassedResult = .passed
@@ -146,7 +146,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
                                       holderStatus: certificateHolderStatusModel,
                                       tokens: [token, token, firstScannedToken],
                                       ignoringPiCheck: false)
-        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        let expectation = XCTestExpectation(description: "test should fail")
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
         certificateHolderStatusModel.domesticInvalidationRulesPassedResult = .passed

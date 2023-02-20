@@ -16,10 +16,6 @@ public extension Rule {
 
     var isAcceptenceOrInvalidationRule: Bool { ruleType == .acceptence || ruleType == .invalidation }
 
-    var isGStatusRule: Bool { ruleType == ._2G || ruleType == ._2GPlus || ruleType == ._3G || ruleType == ._3GPlus }
-
-    var isMaskStatusRule: Bool { ruleType == .mask }
-
     var isIfsg22aRule: Bool { ruleType == .impfstatusBZwei || ruleType == .impfstatusCZwei || ruleType == .impfstatusEZwei || ruleType == .impfstatusEEins }
 
     var isNoRuleIdentifier: Bool { identifier == "GR-DE-0001" }

@@ -33,36 +33,6 @@ public protocol CertificateHolderStatusModelProtocol {
     ///            `failedFunctional`, if the user doesn't passed the rules due to CertLogic
     func checkEuInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult
 
-    /// Queries the internal rules, if a certificate passed needs to wear a medical face mask.
-    /// - Parameters:
-    ///   - certifiates: The certificates of one Person
-    ///   - region: A region for which the rules should be respected
-    /// - Returns: `true`, if holder needs to wear a mask. `false`, if the user doesn't have to wear
-    /// a mask, is unkown, or on any internal error.
-    func holderNeedsMask(_ certificates: [ExtendedCBORWebToken],
-                         region: String?) -> Bool
-
-    /// Queries the internal rules, if a certificate (owner) needs to wear a medical face mask. The request will be fired in Queue global.
-    /// - Parameters:
-    ///   - certifiates: The certificates of one Person
-    ///   - region: A region for which the rules should be respected
-    /// - Returns: `true`, if holder needs to wear a mask. `false`, if the user doesn't have to wear
-    /// a mask, is unkown, or on any internal error.
-    func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken],
-                              region: String?) -> Guarantee<Bool>
-
-    /// Queries the internal rules, if rules for given parameter is available. Can be helpfull to prevent requests to CertLogic where it is clear that no rules are available
-    /// - Parameters:
-    /// - region: A region for which the rules should be respected
-    /// - Returns: `true`, if rules available for region. `false`, if no rules are available
-    func maskRulesAvailable(for region: String?) -> Bool
-
-    /// Queries the latest mask rule date for given region
-    /// - Parameters:
-    /// - region: A region for which the rules should be respected
-    /// - Returns: `Date`, if rules available for region. `nil`, if no rules are available
-    func latestMaskRuleDate(for region: String?) -> Date?
-
     /// Queries if travel rules available. Travel rules means: EU Enpoint, Country = DE and Region = nil
     /// - Parameters:
     /// - Returns: `Bool`, if rules available for traveling to germany. `nil`, if no rules are available

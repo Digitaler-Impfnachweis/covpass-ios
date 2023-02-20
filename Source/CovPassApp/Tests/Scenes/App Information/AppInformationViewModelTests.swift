@@ -13,7 +13,6 @@ class GermanAppInformationViewModelTests: XCTestCase {
     func testEntries_default() {
         // Given
         let expectedTitles = [
-            AppInformationBaseViewModel.Texts.federalStateTitle,
             AppInformationBaseViewModel.Texts.appInformationTitle,
             "app_information_list_update_notifications".localized,
             AppInformationBaseViewModel.Texts.faqTitle,
@@ -33,7 +32,7 @@ class GermanAppInformationViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 10)
+        XCTAssertEqual(entries.count, 9)
         for index in 0 ..< min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }
@@ -44,7 +43,6 @@ class EnglishAppInformationViewModelTests: XCTestCase {
     func testEntries_default() {
         // Given
         let expectedTitles = [
-            AppInformationBaseViewModel.Texts.federalStateTitle,
             AppInformationBaseViewModel.Texts.appInformationTitle,
             "app_information_list_update_notifications".localized,
             AppInformationBaseViewModel.Texts.faqTitle,
@@ -63,7 +61,7 @@ class EnglishAppInformationViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 9)
+        XCTAssertEqual(entries.count, 8)
         for index in 0 ..< min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }

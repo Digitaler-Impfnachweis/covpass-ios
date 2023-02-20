@@ -15,7 +15,6 @@ class CertificateHolderStatusModelTests: XCTestCase {
     private var sut: CertificateHolderStatusModel!
     private var token: ExtendedCBORWebToken!
     private var rule: Rule!
-    private let maskStatusRuleTypeIdentifier = "Mask"
 
     override func setUpWithError() throws {
         certLogic = .init()
@@ -57,26 +56,6 @@ class CertificateHolderStatusModelTests: XCTestCase {
         let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
         // THEN
         XCTAssertEqual(result, .failedFunctional)
-    }
-
-    func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeMaskWhichIsFailed() {
-        // GIVEN
-        rule.type = "Mask"
-        certLogic.validateResult = [.init(rule: rule, result: .fail)]
-        // WHEN
-        let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
-        // THEN
-        XCTAssertEqual(result, .passed)
-    }
-
-    func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeMaskWhichIsPassed() {
-        // GIVEN
-        rule.type = "Mask"
-        certLogic.validateResult = [.init(rule: rule, result: .passed)]
-        // WHEN
-        let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
-        // THEN
-        XCTAssertEqual(result, .passed)
     }
 
     func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeOfAcceptanceWhichIsFailed() {
@@ -137,26 +116,6 @@ class CertificateHolderStatusModelTests: XCTestCase {
         XCTAssertEqual(result, .failedFunctional)
     }
 
-    func test_checkEuInvalidationRules_with_ruleWhichHasTypeMaskWhichIsFailed() {
-        // GIVEN
-        rule.type = "Mask"
-        certLogic.validateResult = [.init(rule: rule, result: .fail)]
-        // WHEN
-        let result = sut.checkEuInvalidationRules([token])
-        // THEN
-        XCTAssertEqual(result, .passed)
-    }
-
-    func test_checkEuInvalidationRules_with_ruleWhichHasTypeMaskWhichIsPassed() {
-        // GIVEN
-        rule.type = "Mask"
-        certLogic.validateResult = [.init(rule: rule, result: .passed)]
-        // WHEN
-        let result = sut.checkEuInvalidationRules([token])
-        // THEN
-        XCTAssertEqual(result, .passed)
-    }
-
     func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsFailed() {
         // GIVEN
         rule.type = "Invalidation"
@@ -185,121 +144,6 @@ class CertificateHolderStatusModelTests: XCTestCase {
         let result = sut.checkEuInvalidationRules([token])
         // THEN
         XCTAssertEqual(result, .passed)
-    }
-
-    // MARK: holderNeedsMask
-
-    func test_holderNeedsMask_emptyToken() {
-        // WHEN
-        let result = sut.holderNeedsMask([], region: nil)
-        // THEN
-        XCTAssertEqual(result, true)
-    }
-
-    func test_holderNeedsMask_someError() {
-        // GIVEN
-        certLogic.validationError = NSError(domain: "some error", code: 1)
-        // WHEN
-        let result = sut.holderNeedsMask([token], region: nil)
-        // THEN
-        XCTAssertEqual(result, true)
-    }
-
-    func test_holderNeedsMask_Failed_inResult() {
-        // GIVEN
-        rule.type = "Mask"
-        certLogic.validateResult = [.init(rule: rule, result: .fail)]
-        // WHEN
-        let result = sut.holderNeedsMask([token], region: nil)
-        // THEN
-        XCTAssertEqual(result, true)
-    }
-
-    func test_holderNeedsMask_Open_inResult() {
-        // GIVEN
-        rule.type = "Acceptance"
-        certLogic.validateResult = [.init(rule: rule, result: .open)]
-        // WHEN
-        let result = sut.holderNeedsMask([token], region: nil)
-        // THEN
-        XCTAssertEqual(result, true)
-    }
-
-    func test_holderNeedsMask_Passed_ButNotMaskRule_inResult() {
-        // GIVEN
-        rule.type = "Acceptance"
-        certLogic.validateResult = [.init(rule: rule, result: .passed)]
-        // WHEN
-        let result = sut.holderNeedsMask([token], region: nil)
-        // THEN
-        XCTAssertEqual(result, true)
-    }
-
-    func test_holderNeedsMask_Passed_MaskRule_inResult() {
-        // GIVEN
-        rule.type = maskStatusRuleTypeIdentifier
-        certLogic.validateResult = [.init(rule: rule, result: .passed)]
-        // WHEN
-        let result = sut.holderNeedsMask([token], region: nil)
-        // THEN
-        XCTAssertEqual(result, false)
-    }
-
-    func test_holderNeedsMaskAsync_Passed_MaskRule_inResult() {
-        // GIVEN
-        let expectation = XCTestExpectation(description: "Should have same result like non async method")
-        rule.type = maskStatusRuleTypeIdentifier
-        certLogic.validateResult = [.init(rule: rule, result: .passed)]
-        // WHEN
-        sut.holderNeedsMaskAsync([token], region: nil)
-            .done { result in
-                XCTAssertEqual(result, false)
-                expectation.fulfill()
-            }
-        // THEN
-        wait(for: [expectation], timeout: 1)
-    }
-
-    // MARK: maskRulesAvailable
-
-    func test_maskRulesAvailable_true() {
-        // GIVEN
-        let expectedResult = true
-        certLogic.areRulesAvailable = expectedResult
-        // WHEN
-        let result = sut.maskRulesAvailable(for: nil)
-        // THEN
-        XCTAssertEqual(result, expectedResult)
-    }
-
-    func test_maskRulesAvailable_false() {
-        // GIVEN
-        let expectedResult = false
-        certLogic.areRulesAvailable = expectedResult
-        // WHEN
-        let result = sut.maskRulesAvailable(for: nil)
-        // THEN
-        XCTAssertEqual(result, expectedResult)
-    }
-
-    func test_latestMaskRuleDate_withRegion() {
-        // GIVEN
-        let ruleMock = Rule.mock
-        certLogic.rules = [ruleMock]
-        // WHEN
-        let result = sut.latestMaskRuleDate(for: "HH")
-        // THEN
-        XCTAssertEqual(result, ruleMock.validFromDate)
-    }
-
-    func test_latestMaskRuleDate_withoutRegion() {
-        // GIVEN
-        let ruleMock = Rule.mock
-        certLogic.rules = [ruleMock]
-        // WHEN
-        let result = sut.latestMaskRuleDate(for: nil)
-        // THEN
-        XCTAssertNil(result)
     }
 
     func test_ifsg22aRulesAvailable_true() {

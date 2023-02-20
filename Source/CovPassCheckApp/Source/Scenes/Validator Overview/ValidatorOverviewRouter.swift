@@ -121,53 +121,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         return sceneCoordinator.present(factory, animated: true)
     }
 
-    // MARK: Mask Check
-
-    func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
-        return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
-                                                                       reasonType: .functional,
-                                                                       secondCertificateHintHidden: true,
-                                                                       token: token),
-                                        animated: true)
-    }
-
-    func showMaskRequiredBusinessRulesSecondScanAllowed(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
-        return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
-                                                                       reasonType: .functional,
-                                                                       secondCertificateHintHidden: false,
-                                                                       token: token),
-                                        animated: true)
-    }
-
-    func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        let router = MaskOptionalResultRouter(sceneCoordinator: sceneCoordinator)
-        return sceneCoordinator.present(MaskOptionalResultSceneFactory(router: router,
-                                                                       token: token),
-                                        animated: true)
-    }
-
-    func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        let router = NoMaskRulesResultRouter(sceneCoordinator: sceneCoordinator)
-        return sceneCoordinator.present(NoMaskRulesResultSceneFactory(router: router,
-                                                                      token: token),
-                                        animated: true)
-    }
-
-    func showMaskCheckDifferentPerson(tokens: [ExtendedCBORWebToken]) -> Promise<ValidatorDetailSceneResult> {
-        let view = DifferentPersonSceneFactory(tokens: tokens)
-        return sceneCoordinator.present(view, animated: true)
-    }
-
-    func showMaskRulesInvalid(token: ExtendedCBORWebToken?, rescanIsHidden: Bool) -> Promise<ValidatorDetailSceneResult> {
-        let router = CertificateInvalidResultRouter(sceneCoordinator: sceneCoordinator)
-        let view = CertificateInvalidResultSceneFactory(router: router,
-                                                        token: token,
-                                                        rescanIsHidden: rescanIsHidden)
-        return sceneCoordinator.present(view, animated: true)
-    }
-
     // MARK: Ifsg22a Check
 
     func showVaccinationCycleComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {

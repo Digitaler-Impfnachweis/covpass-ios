@@ -30,7 +30,7 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
     var manageCertificatesIcon: UIImage { showBadge ? .manageNotification : .manage }
     var manageCertificatesButtonStyle: MainButtonStyle { .alternativeWhiteTitle }
     var dotPageIndicatorIsHidden: Bool { certificateViewModels.count == 1 }
-    var backgroundColor: UIColor { holderNeedsMask ? .onBrandAccent70 : .brandAccent90 }
+    var backgroundColor: UIColor { .onBrandAccent70 }
     private let repository: VaccinationRepositoryProtocol
     private let boosterLogic: BoosterLogicProtocol
     private var certificates: [ExtendedCBORWebToken]
@@ -40,7 +40,6 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
     private var selectedCertificateIndex: Int = 0
     private var certificateOwnerName: String { selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullName ?? "" }
     private var selectedCertificate: ExtendedCBORWebToken? { selectedCertificateIndex < certificatesToShow.count ? certificatesToShow[selectedCertificateIndex] : nil }
-    private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
     private var certificate: CBORWebToken { token.vaccinationCertificate }
     private var token: ExtendedCBORWebToken {
         guard let latestCertificate = certificates.sortLatest().first else {
@@ -49,7 +48,6 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
         return latestCertificate
     }
 
-    private var holderNeedsMask: Bool
     private var persistence: Persistence
 
     // MARK: - Lifecycle
@@ -58,7 +56,6 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
          persistence: Persistence,
          repository: VaccinationRepositoryProtocol,
          boosterLogic: BoosterLogicProtocol,
-         certificateHolderStatusModel: CertificateHolderStatusModelProtocol,
          certificates: [ExtendedCBORWebToken],
          resolver: Resolver<CertificateDetailSceneResult>) {
         if certificates.isEmpty {
@@ -68,9 +65,7 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
         self.persistence = persistence
         self.repository = repository
         self.boosterLogic = boosterLogic
-        self.certificateHolderStatusModel = certificateHolderStatusModel
         self.certificates = certificates
-        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: persistence.stateSelection)
         certificatesToShow = certificates.filterFirstOfAllTypesNotExpired
         self.resolver = resolver
         pageSubtitle = String(format: Constants.Keys.modalSubline, certificatesToShow.count)
@@ -81,7 +76,6 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
     private func cardViewModels(for _: [ExtendedCBORWebToken]) -> [CardViewModel] {
         certificatesToShow.map { cert in
             CertificateCardViewModel(token: cert,
-                                     holderNeedsMask: holderNeedsMask,
                                      onAction: showCertificate,
                                      repository: repository,
                                      boosterLogic: boosterLogic)

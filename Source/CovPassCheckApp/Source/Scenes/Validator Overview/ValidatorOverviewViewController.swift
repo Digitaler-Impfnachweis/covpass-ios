@@ -12,18 +12,12 @@ import Foundation
 import Scanner
 import UIKit
 
-public enum CheckType: Int {
-    case mask, immunity
-}
-
 class ValidatorOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet var headerView: InfoHeaderView!
-    @IBOutlet var scanCard: ScanCardView!
     @IBOutlet var checkTypesStackview: UIStackView!
     @IBOutlet var immunityCheckView: ImmunityScanCardView!
-    @IBOutlet var checkTypeSegment: SegmentedControl!
     @IBOutlet var timeHintContainerStackView: UIStackView!
     @IBOutlet var timeHintView: HintView!
     @IBOutlet var offlineInformationView: UIView!
@@ -89,34 +83,8 @@ class ValidatorOverviewViewController: UIViewController {
         headerView.action = viewModel.showAppInformation
     }
 
-    private func setScanButtonLoadingState() {
-        if viewModel.isLoadingScan {
-            scanCard.actionButton.startAnimating()
-        } else {
-            scanCard.actionButton.stopAnimating()
-        }
-    }
-
     private func setupCardView() {
-        setScanButtonLoadingState()
         setupTimeHintView()
-
-        scanCard.actionButton.title = viewModel.scanActionTitle
-        scanCard.actionButton.action = {
-            self.viewModel.checkMaskStatus()
-        }
-        scanCard.titleLabel.attributedText = viewModel.scanDropDownTitle
-            .styledAs(.header_3)
-            .colored(.neutralWhite)
-        scanCard.textLabel.attributedText = viewModel.scanDropDownValue
-            .styledAs(.body)
-            .colored(.neutralWhite)
-        scanCard.subtitle.attributedText = viewModel.maskRuleDateCopy?.styledAs(.body).colored(.neutralWhite).aligned(to: .center)
-        scanCard.chooseAction = viewModel.chooseAction
-        scanCard.chooseButton.innerButton.titleLabel?.text = nil
-        scanCard.chooseButton.enableAccessibility(label: viewModel.scanDropDownTitle,
-                                                  hint: viewModel.scanDropDownValue,
-                                                  traits: .selected)
 
         let immunityCheckTitleAccessibility = viewModel.immunityCheckTitleAccessibility
         let immunityCheckTitle = viewModel.immunityCheckTitle
@@ -146,19 +114,6 @@ class ValidatorOverviewViewController: UIViewController {
         immunityCheckView.linkAction = { _ in
             self.viewModel.routeToRulesUpdate()
         }
-
-        configureSegmentControl()
-    }
-
-    func configureSegmentControl() {
-        checkTypeSegment.setTitle(viewModel.segmentMaskTitle, forSegmentAt: CheckType.mask.rawValue)
-        checkTypeSegment.setTitle(viewModel.segmentImmunityTitle, forSegmentAt: CheckType.immunity.rawValue)
-        let font = UIFont(name: UIFont.sansBold, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0, weight: .bold)
-        let boldTextAttributes: [NSAttributedString.Key: AnyObject] = [.font: font]
-        checkTypeSegment.setTitleTextAttributes(boldTextAttributes, for: .selected)
-        checkTypeSegment.selectedSegmentIndex = viewModel.selectedCheckType.rawValue
-        immunityCheckView.isHidden = viewModel.selectedCheckType == .mask
-        scanCard.isHidden = viewModel.selectedCheckType == .immunity
     }
 
     private func setupCheckSituationView() {
@@ -169,7 +124,7 @@ class ValidatorOverviewViewController: UIViewController {
                                   backGroundColor: .clear,
                                   imageWidth: .space_16,
                                   edgeInstes: .init(top: 0, left: 0, bottom: 0, right: 0))
-        checkSituationContainerStackView.isHidden = viewModel.selectedCheckType == .mask
+        checkSituationContainerStackView.isHidden = false
     }
 
     private func setupTimeHintView() {
@@ -204,13 +159,6 @@ class ValidatorOverviewViewController: UIViewController {
     }
 
     // MARK: - Actions
-
-    @IBAction func chekTypeSegmentChanged(_ sender: UISegmentedControl) {
-        guard let selectedCheckType = CheckType(rawValue: sender.selectedSegmentIndex) else {
-            return
-        }
-        viewModel.selectedCheckType = selectedCheckType
-    }
 
     @IBAction func routeToUpdateTapped(_: Any) {
         viewModel.routeToRulesUpdate()

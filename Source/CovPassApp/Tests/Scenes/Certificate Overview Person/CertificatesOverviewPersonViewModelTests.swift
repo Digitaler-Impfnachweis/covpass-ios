@@ -72,12 +72,10 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
     }
 
     func configSut(certificates: [ExtendedCBORWebToken]) -> CertificatesOverviewPersonViewModel {
-        let certificateHolder = CertificateHolderStatusModelMock()
         let sut = CertificatesOverviewPersonViewModel(router: router,
                                                       persistence: MockPersistence(),
                                                       repository: vaccinationRepository,
                                                       boosterLogic: boosterLogicMock,
-                                                      certificateHolderStatusModel: certificateHolder,
                                                       certificates: certificates,
                                                       resolver: resolver)
         sut.delegate = viewModelDelegate

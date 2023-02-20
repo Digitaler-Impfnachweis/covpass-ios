@@ -17,18 +17,14 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
                       ntpDate: Date = Date(),
                       ntpOffset: TimeInterval = 0.0,
                       logicType _: DCCCertLogic.LogicType = .deAcceptenceAndInvalidationRules,
-                      selectedCheckType: CheckType = .mask,
-                      selectedCheckSituation: CheckSituationType = .enteringGermany,
-                      latestMaskRuleDate: Date? = DateUtils.parseDate("2021-04-26T15:05:00")) -> ValidatorOverviewViewController {
+                      selectedCheckSituation: CheckSituationType = .enteringGermany) -> ValidatorOverviewViewController {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
         var userDefaults = MockPersistence()
         userDefaults.lastUpdatedTrustList = lastUpdateTrustList
         vaccinationRepoMock.shouldTrustListUpdate = shouldTrustListUpdate
-        userDefaults.selectedCheckType = selectedCheckType.rawValue
         userDefaults.checkSituation = selectedCheckSituation.rawValue
         let certificateHolderStatus = CertificateHolderStatusModelMock()
-        certificateHolderStatus.latestMaskRuleDate = latestMaskRuleDate
         let vm = ValidatorOverviewViewModel(router: ValidatorMockRouter(),
                                             repository: vaccinationRepoMock,
                                             revocationRepository: CertificateRevocationRepositoryMock(),
@@ -45,11 +41,6 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
 
     func testDefault() {
         let sut = configureSut()
-        verifyView(view: sut.view)
-    }
-
-    func testDefault_NoMaskRules() {
-        let sut = configureSut(latestMaskRuleDate: nil)
         verifyView(view: sut.view)
     }
 
@@ -72,12 +63,12 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
     }
 
     func testImmunitySelected() {
-        let sut = configureSut(selectedCheckType: .immunity)
+        let sut = configureSut()
         verifyView(view: sut.view, waitAfter: 0.1)
     }
 
     func testImmunitySelected_withinGermany() {
-        let sut = configureSut(selectedCheckType: .immunity, selectedCheckSituation: .withinGermany)
+        let sut = configureSut(selectedCheckSituation: .withinGermany)
         verifyView(view: sut.view, waitAfter: 0.1)
     }
 
@@ -85,7 +76,6 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
         let sut = configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
                                ntpDate: DateUtils.parseDate("2021-04-26T15:05:00")!,
                                ntpOffset: 7201,
-                               selectedCheckType: .immunity,
                                selectedCheckSituation: .withinGermany)
         verifyView(view: sut.view, waitAfter: 0.0)
     }

@@ -52,7 +52,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private let certificateHolderDateOfBirth: Date?
     private var isFavorite = false
     private var showFavorite = false
-    private var holderNeedsMask = true
     private var vaccinationCycleCompleteResponse: HolderStatusResponse
     private var vaccinationCycleIsComplete: Bool { vaccinationCycleCompleteResponse.passed }
     private var selectedCertificate: ExtendedCBORWebToken? { certificates.sortLatest().first }
@@ -225,43 +224,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             }
     }
 
-    var maskStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol {
-        guard certificateHolderStatusModel.maskRulesAvailable(for: userDefaults.stateSelection) else {
-            return CertificateHolderNoMaskRulesStatusViewModel(federalState: userDefaults.stateSelection)
-        }
-        guard !isInvalid else {
-            return CertificateHolderInvalidMaskStatusViewModel()
-        }
-        if holderNeedsMask {
-            if let vaccination = certificates.latestVaccination, let recovery = certificates.latestRecovery,
-               recovery.fr > vaccination.dt, !recovery.fr.isOlderThan29Days,
-               let fr = recovery.fr.add(days: 29) {
-                return CertificateHolderMaskRequiredStatusViewModel(
-                    userDefaults: userDefaults,
-                    certificateHolderStatus: certificateHolderStatusModel,
-                    date: fr.readableString,
-                    federalState: userDefaults.stateSelection
-                )
-            }
-            return CertificateHolderMaskRequiredStatusViewModel(
-                userDefaults: userDefaults,
-                certificateHolderStatus: certificateHolderStatusModel,
-                federalState: userDefaults.stateSelection
-            )
-        } else {
-            let certificatesUsed = certificateHolderStatusModel.validCertificates(certificates, logicType: .deAcceptenceAndInvalidationRules)
-            let latestCertificate = certificatesUsed.sortedByDtFrAndSc.first
-            let isTest = latestCertificate?.vaccinationCertificate.isTest ?? false
-            let dtOrFr = latestCertificate?.dtFrOrSc.add(days: isTest ? 1 : 90)
-            return CertificateHolderMaskNotRequiredStatusViewModel(
-                userDefaults: userDefaults,
-                certificateHolderStatus: certificateHolderStatusModel,
-                date: dtOrFr?.readableString,
-                federalState: userDefaults.stateSelection
-            )
-        }
-    }
-
     var vaccinationCycleCompleteDescription: String {
         if let localizedDescription = vaccinationCycleCompleteResponse.results?.values.first?.first?.rule?.localizedDescription(for: Locale.current.languageCode) {
             return localizedDescription
@@ -336,7 +298,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         self.certificates = certificates
         boosterCandidate = boosterLogic.checkCertificates(certificates)
         resolver = resolvable
-        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates, region: userDefaults.stateSelection)
         vaccinationCycleCompleteResponse = certificateHolderStatusModel.vaccinationCycleIsComplete(certificates)
         guard let digitalGreenCertificate = certificates.first?.vaccinationCertificate.hcert.dgc else {
             return nil
@@ -398,7 +359,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .map {
             if let selectedCertificate = self.selectedCertificate {
                 self.certificates = $0.certificates.filterMatching(selectedCertificate)
-                self.holderNeedsMask = self.certificateHolderStatusModel.holderNeedsMask(self.certificates, region: self.userDefaults.stateSelection)
                 self.vaccinationCycleCompleteResponse = self.certificateHolderStatusModel.vaccinationCycleIsComplete(self.certificates)
             }
         }
@@ -418,7 +378,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     private func certDetailDoneDidDeleteCertificate(_ cert: ExtendedCBORWebToken, _ result: CertificateDetailSceneResult) {
         certificates = certificates.filter { $0 != cert }
-        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: userDefaults.stateSelection)
         vaccinationCycleCompleteResponse = certificateHolderStatusModel.vaccinationCycleIsComplete(certificates)
         if certificates.count > 0 {
             delegate?.viewModelDidUpdate()
