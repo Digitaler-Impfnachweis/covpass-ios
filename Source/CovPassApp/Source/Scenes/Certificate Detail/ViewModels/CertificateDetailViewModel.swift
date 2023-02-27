@@ -251,7 +251,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationStatusViewIsHidden: Bool {
-        expiryVaccination?.vaccinationCertificate.isExpired ?? false
+        certificates.sortLatest().first?.vaccinationCertificate.isExpired ?? false
     }
 
     // MARK: - Booster Notifications
