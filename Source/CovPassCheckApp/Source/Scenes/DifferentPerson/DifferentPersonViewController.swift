@@ -97,6 +97,7 @@ class DifferentPersonViewController: UIViewController {
         subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body).colored(.onBackground110)
         configureIgnoreView()
 
+        personsStackView.removeAllArrangedSubviews()
         viewModel.personViewModels.forEach { viewModel in
             let personView = CertResultCard()
             let personTitleLabel = PlainLabel()
