@@ -80,12 +80,11 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         // WHEN
         sut.execute()
             .done {
-                expectation.fulfill()
+                XCTFail("should fail")
             }
             .catch { _ in
                 // THEN
-
-                XCTFail("Should not Fail")
+                expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
     }
