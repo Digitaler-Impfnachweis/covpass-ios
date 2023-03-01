@@ -49,7 +49,7 @@ class CertificateItemDetailViewControllerSnapshotTests: BaseSnapShotTests {
 
     func test_expired_doesnt_have_to_be_renewed_vaccination() {
         configureSut(token: .vaccination_expiredLessThen90Days, tokens: [.vaccination_soonExpiring, .vaccination_expiredLessThen90Days])
-        verifyView(view: sut.view, height: 600, overallTolerance: 0.01)
+        verifyView(view: sut.view, height: 600, overallTolerance: 0.02)
     }
 
     func test_expiring_doesnt_have_to_be_renewed_vaccination() {

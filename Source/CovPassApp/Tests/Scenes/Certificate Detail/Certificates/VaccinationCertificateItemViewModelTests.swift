@@ -143,4 +143,69 @@ class VaccinationCertificateItemViewModelTests: XCTestCase {
         // Then
         XCTAssertNil(warningText)
     }
+
+    func test_renewalNeeded_true() throws {
+        // Given
+        let sut = try prepareSut(active: true,
+                                 revoked: false,
+                                 expirationDate: .init().add(days: 12))
+        // When
+        let renewalNeeded = sut.renewalNeeded
+        // Then
+        XCTAssertTrue(renewalNeeded)
+    }
+
+    func test_renewalNeeded_true_even_if_active_is_false() throws {
+        // Given
+        let sut = try prepareSut(active: false, revoked: false, expirationDate: .init().add(days: 12))
+        // When
+        let renewalNeeded = sut.renewalNeeded
+        // Then
+        XCTAssertTrue(renewalNeeded)
+    }
+
+    func test_renewalNeeded_false() throws {
+        // Given
+        let sut = try prepareSut(active: true, revoked: true, expirationDate: .init().add(days: 12))
+        // When
+        let renewalNeeded = sut.renewalNeeded
+        // Then
+        XCTAssertFalse(renewalNeeded)
+    }
+
+    func test_info2_certificate_expired_more_than_90_days() throws {
+        // Given
+        let sut = try prepareSut(active: true, revoked: true, expirationDate: .init().add(days: -100))
+        // When
+        let info2 = sut.info2
+        // Then
+        XCTAssertEqual(info2, "certificates_overview_expired_certificate_note".localized)
+    }
+
+    func test_info2_certificate_expired_less_than_90_days() throws {
+        // Given
+        let sut = try prepareSut(active: true, revoked: true, expirationDate: .init().add(days: -89))
+        // When
+        let info2 = sut.info2
+        // Then
+        XCTAssertEqual(info2, "certificates_overview_expired_certificate_note".localized)
+    }
+
+    func test_info2_certificate_expires_soon() throws {
+        // Given
+        let sut = try prepareSut(active: true, revoked: true, expirationDate: .init().add(days: 20))
+        // When
+        let info2 = sut.info2
+        // Then
+        XCTAssertEqual(info2, "certificates_overview_expires_soon_certificate_note".localized)
+    }
+
+    func test_info2_certificate_isRevoked() throws {
+        // Given
+        let sut = try prepareSut(active: true, revoked: true, expirationDate: .init().add(days: 200))
+        // When
+        let info2 = sut.info2
+        // Then
+        XCTAssertEqual(info2, "certificates_overview_invalid_certificate_note".localized)
+    }
 }

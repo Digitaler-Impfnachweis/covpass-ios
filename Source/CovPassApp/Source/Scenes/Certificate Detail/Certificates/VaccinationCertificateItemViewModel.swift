@@ -95,16 +95,14 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
         if isNeutral, let v = dgc.v?.first {
             return String(format: "certificates_overview_vaccination_certificate_date".localized, DateUtils.displayDateFormatter.string(from: v.dt))
         }
-        if !renewalNeeded {
-            if certificate.vaccinationCertificate.isExpired {
-                return "certificates_overview_expired_certificate_note".localized
-            }
-            if certificate.vaccinationCertificate.expiresSoon {
-                return "certificates_overview_expires_soon_certificate_note".localized
-            }
-            if certificate.isInvalid || certificate.isRevoked {
-                return "certificates_overview_invalid_certificate_note".localized
-            }
+        if certificate.vaccinationCertificate.isExpired {
+            return "certificates_overview_expired_certificate_note".localized
+        }
+        if certificate.vaccinationCertificate.expiresSoon {
+            return "certificates_overview_expires_soon_certificate_note".localized
+        }
+        if certificate.isInvalid || certificate.isRevoked {
+            return "certificates_overview_invalid_certificate_note".localized
         }
         return nil
     }
@@ -139,7 +137,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
 
     var renewalNeeded: Bool {
         let cert = certificate.vaccinationCertificate
-        return certificate.isNotRevoked && active && cert.expiresSoon && !cert.expiredMoreThan90Days && cert.isGermanIssuer
+        return certificate.isNotRevoked && cert.expiresSoon && !cert.expiredMoreThan90Days && cert.isGermanIssuer
     }
 
     init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {
