@@ -432,7 +432,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         sut.showNotificationsIfNeeded()
 
         // Then
-        wait(for: [router.showExtensionRenewalReissueExpectation], timeout: 4)
+        wait(for: [router.showExtensionRenewalReissueExpectation, delegate.viewModelDidUpdateExpectation], timeout: 4)
     }
 
     func testShowNotificationsIfNeeded_showRevocationWarning_token_not_revoked() throws {

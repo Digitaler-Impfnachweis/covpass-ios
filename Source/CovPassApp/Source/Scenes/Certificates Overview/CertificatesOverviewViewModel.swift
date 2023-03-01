@@ -215,6 +215,16 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             .then(showCertificatesBoosterRenewalIfNeeded)
             .then(showVaccinationCertificatesExtensionReissueIfNeeded)
             .then(showRecoveryCertificatesExtensionReissueIfNeeded)
+            .then(repository.getCertificateList)
+            .get {
+                self.certificateList = $0
+            }
+            .then { _ in
+                self.createCellViewModels()
+            }
+            .get {
+                self.delegate?.viewModelDidUpdate()
+            }
     }
 
     private var lastPlayload: String = ""
