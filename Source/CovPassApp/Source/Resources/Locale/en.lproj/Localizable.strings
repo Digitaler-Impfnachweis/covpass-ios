@@ -867,9 +867,9 @@
 
 "certificates_overview_pcr_test_certificate_date" = "Sample taken on %@";
 
-"certificates_overview_all_certificates_app_reference_title" = "Please scan!";
+"certificates_overview_all_certificates_app_reference_title" = "Notice:";
 
-"certificates_overview_all_certificates_app_reference_text" = "Do not show this sensitive data to other people in restaurants, at events or in similar situations. Always have your QR code checked with the CovPassCheck app.";
+"certificates_overview_all_certificates_app_reference_text" = "Do not show this sensitive data. In testing situations, only let the QR code be scanned with the CovPassCheck app.";
 
 
 /********** detail view: delete certificate **********/
