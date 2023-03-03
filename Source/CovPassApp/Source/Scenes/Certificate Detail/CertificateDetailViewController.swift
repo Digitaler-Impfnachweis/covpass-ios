@@ -14,7 +14,7 @@ import UIKit
 
 private enum Constants {
     enum Text {
-        static let scanHintTitle = "certificates_start_screen_pop_up_app_reference_title".localized
+        static let scanHintTitle = "certificates_overview_all_certificates_app_reference_title".localized
         static let scanHintText = "certificates_overview_all_certificates_app_reference_text".localized
     }
 }
