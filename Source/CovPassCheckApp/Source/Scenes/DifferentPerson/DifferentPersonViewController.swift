@@ -164,3 +164,11 @@ extension DifferentPersonViewController: ViewModelDelegate {
 
     func viewModelUpdateDidFailWithError(_: Error) {}
 }
+
+// MARK: - ModalInteractiveDismissibleProtocol
+
+extension DifferentPersonViewController: ModalInteractiveDismissibleProtocol {
+    func modalViewControllerDidDismiss() {
+        viewModel.close()
+    }
+}

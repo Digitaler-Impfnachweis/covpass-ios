@@ -156,3 +156,11 @@ extension VaccinationCycleCompleteResultViewController: ViewModelDelegate {
 
     func viewModelUpdateDidFailWithError(_: Error) {}
 }
+
+// MARK: - ModalInteractiveDismissibleProtocol
+
+extension VaccinationCycleCompleteResultViewController: ModalInteractiveDismissibleProtocol {
+    func modalViewControllerDidDismiss() {
+        viewModel.cancel()
+    }
+}
