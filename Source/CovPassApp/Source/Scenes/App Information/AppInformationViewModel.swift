@@ -14,11 +14,6 @@ class GermanAppInformationViewModel: AppInformationBaseViewModel {
     override var entries: [AppInformationEntry] {
         [
             AppInformationEntry(
-                title: Texts.federalStateTitle,
-                scene: FederalStateSettingsSceneFactory(sceneCoordinator: router.sceneCoordinator),
-                rightTitle: persistence.stateSelection.isEmpty ? "" : "DE_\(persistence.stateSelection)".localized
-            ),
-            AppInformationEntry(
                 title: Texts.appInformationTitle,
                 scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
             ),
@@ -61,11 +56,6 @@ class GermanAppInformationViewModel: AppInformationBaseViewModel {
 class EnglishAppInformationViewModel: AppInformationBaseViewModel {
     override var entries: [AppInformationEntry] {
         [
-            AppInformationEntry(
-                title: Texts.federalStateTitle,
-                scene: FederalStateSettingsSceneFactory(sceneCoordinator: router.sceneCoordinator),
-                rightTitle: persistence.stateSelection.isEmpty ? "" : "DE_\(persistence.stateSelection)".localized
-            ),
             AppInformationEntry(
                 title: Texts.appInformationTitle,
                 scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)

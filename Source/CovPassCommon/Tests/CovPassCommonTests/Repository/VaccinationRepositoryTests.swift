@@ -675,9 +675,9 @@ class VaccinationRepositoryTests: XCTestCase {
         let person2Cert2 = CertificateMock.validCertificate3.appending("A")
 
         do {
-            _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
-            _ = try sut.scanCertificate(person2Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
-            _ = try sut.scanCertificate(person2Cert2, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false, expirationRuleIsActive: false).wait()
+            _ = try sut.scanCertificate(person2Cert1, isCountRuleEnabled: false, expirationRuleIsActive: false).wait()
+            _ = try sut.scanCertificate(person2Cert2, isCountRuleEnabled: true, expirationRuleIsActive: false).wait()
             XCTAssert(true)
         } catch {
             print(error)
@@ -692,10 +692,10 @@ class VaccinationRepositoryTests: XCTestCase {
         let person3Cert1 = CertificateMock.validCertificate3.appending("B")
 
         do {
-            _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
-            _ = try sut.scanCertificate(person2Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
-            _ = try sut.scanCertificate(person2Cert2, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
-            _ = try sut.scanCertificate(person3Cert1, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false, expirationRuleIsActive: false).wait()
+            _ = try sut.scanCertificate(person2Cert1, isCountRuleEnabled: false, expirationRuleIsActive: false).wait()
+            _ = try sut.scanCertificate(person2Cert2, isCountRuleEnabled: false, expirationRuleIsActive: false).wait()
+            _ = try sut.scanCertificate(person3Cert1, isCountRuleEnabled: true, expirationRuleIsActive: false).wait()
             XCTAssert(true)
         } catch {
             print(error)

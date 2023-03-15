@@ -25,7 +25,6 @@ class CardViewSnapShotTests: BaseSnapShotTests {
             boosterRepoMock.boosterCandidates = [boosterCandidate]
         }
         let viewModel = CertificateCardViewModel(token: certificate,
-                                                 holderNeedsMask: true,
                                                  onAction: { _ in },
                                                  repository: vacinationRepoMock,
                                                  boosterLogic: boosterRepoMock)

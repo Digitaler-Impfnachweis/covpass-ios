@@ -25,8 +25,6 @@ private enum Constants {
         enum ScanCard {
             static let actionTitle = "validation_start_screen_scan_action_button_title".localized
             static let dropDownTitle = "infschg_start_screen_dropdown_title".localized
-            static let maskRuleDateUnavailable = "state_ruleset_date_unavailable".localized
-            static let maskRuleDateAvailable = "state_ruleset_date_available_long".localized
         }
 
         enum OfflineInformation {
@@ -53,11 +51,6 @@ private enum Constants {
                 static let immunityCheckDescription = "start_vaccination_status_entry_subtitle".localized
                 static let immunityCheckActionTitle = "validation_start_screen_scan_action_button_title".localized
             }
-        }
-
-        enum Segment {
-            static let maskTitle = "start_screen_toggle_mask".localized
-            static let immunityTitle = "start_screen_toggle_vaccination".localized
         }
 
         enum CheckSituation {
@@ -90,8 +83,6 @@ class ValidatorOverviewViewModel {
     let offlineInformationDescription = Constants.Keys.OfflineInformation.copy
     let offlineInformationUpdateCellTitle = Constants.Keys.OfflineInformation.link_title
     let offlineInformationCellIcon = UIImage.chevronRight
-    let segmentMaskTitle = Constants.Keys.Segment.maskTitle
-    let segmentImmunityTitle = Constants.Keys.Segment.immunityTitle
     let timeHintTitle = Constants.Keys.TimeHint.syncTitle
 
     var delegate: ViewModelDelegate?
@@ -105,12 +96,6 @@ class ValidatorOverviewViewModel {
     }
 
     var scanDropDownValue: String { "DE_\(userDefaults.stateSelection)".localized }
-    var maskRuleDateCopy: String? {
-        guard let date = certificateHolderStatus.latestMaskRuleDate(for: userDefaults.stateSelection) else {
-            return Constants.Keys.ScanCard.maskRuleDateUnavailable
-        }
-        return String(format: Constants.Keys.ScanCard.maskRuleDateAvailable, DateUtils.displayDateFormatter.string(from: date))
-    }
 
     var timeHintSubTitle: String {
         String(format: Constants.Keys.TimeHint.syncMessage, ntpDateFormatted)
@@ -167,12 +152,6 @@ class ValidatorOverviewViewModel {
             Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckActionTitle
     }
 
-    public var selectedCheckType: CheckType {
-        didSet {
-            postSetSelectedCheckType()
-        }
-    }
-
     var checkSituation: CheckSituationType { .init(rawValue: userDefaults.checkSituation) ?? .withinGermany }
     var checkSituationTitle: String {
         withinGermanyIsSelected ? Constants.Keys.CheckSituation.withinGermanyTitle : Constants.Keys.CheckSituation.enteringGermanyTitle
@@ -211,9 +190,7 @@ class ValidatorOverviewViewModel {
         self.schedulerIntervall = schedulerIntervall
         isFreshInstallation = userDefaults.privacyHash == nil
         currentDataPrivacyHash = privacyFile.sha256()
-        selectedCheckType = CheckType(rawValue: userDefaults.selectedCheckType) ?? .mask
         setupTimer()
-        setupProperties()
     }
 
     // MARK: - Methods
@@ -249,28 +226,8 @@ class ValidatorOverviewViewModel {
         return router.showAnnouncement()
     }
 
-    private func resetCheckTypeIfCheckSituationWasNotChoosenBefore() {
-        if UserDefaults.standard.object(forKey: UserDefaults.keyCheckSituation) == nil {
-            selectedCheckType = .mask
-        }
-    }
-
-    private func setupProperties() {
-        resetCheckTypeIfCheckSituationWasNotChoosenBefore()
-    }
-
     private func routeToChooseCheckSituation() -> PMKFinalizer {
         router.routeToChooseCheckSituation().cauterize()
-    }
-
-    private func postSetSelectedCheckType() {
-        userDefaults.selectedCheckType = selectedCheckType.rawValue
-        if selectedCheckType == .immunity, UserDefaults.standard.object(forKey: UserDefaults.keyCheckSituation) == nil {
-            routeToChooseCheckSituation().finally {
-                self.delegate?.viewModelDidUpdate()
-            }
-        }
-        delegate?.viewModelDidUpdate()
     }
 
     private func setupTimer() {

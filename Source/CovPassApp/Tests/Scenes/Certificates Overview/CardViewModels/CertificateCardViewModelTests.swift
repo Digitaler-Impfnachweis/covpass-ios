@@ -28,7 +28,6 @@ class CertificateCardViewModelTests: XCTestCase {
                      boosterLogic: BoosterLogicMock = BoosterLogicMock()) -> CertificateCardViewModel {
         .init(
             token: token,
-            holderNeedsMask: true,
             onAction: { _ in },
             repository: VaccinationRepositoryMock(),
             boosterLogic: boosterLogic,

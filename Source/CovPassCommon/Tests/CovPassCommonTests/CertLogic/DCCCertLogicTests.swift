@@ -66,10 +66,10 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertEqual(sut.valueSets.count, 8)
         XCTAssertEqual(sut.valueSets["country-2-codes"]?.count, 250)
         XCTAssertEqual(sut.valueSets["covid-19-lab-result"]?.count, 2)
-        XCTAssertEqual(sut.valueSets["covid-19-lab-test-manufacturer-and-name"]?.count, 288)
+        XCTAssertEqual(sut.valueSets["covid-19-lab-test-manufacturer-and-name"]?.count, 290)
         XCTAssertEqual(sut.valueSets["covid-19-lab-test-type"]?.count, 2)
         XCTAssertEqual(sut.valueSets["disease-agent-targeted"]?.count, 1)
-        XCTAssertEqual(sut.valueSets["sct-vaccines-covid-19"]?.count, 6)
+        XCTAssertEqual(sut.valueSets["sct-vaccines-covid-19"]?.count, 9)
         XCTAssertEqual(sut.valueSets["vaccines-covid-19-auth-holders"]?.count, 30)
         XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 38)
     }
@@ -454,18 +454,6 @@ class DCCCertLogicTests: XCTestCase {
         wait(for: [exp], timeout: 0.1, enforceOrder: true)
     }
 
-    func test_domesticRules_gStatus() throws {
-        // WHEN
-        let token = CBORWebToken.mockVaccinationCertificate
-        XCTAssertNoThrow(try sut.validate(type: .gStatus, countryCode: "DE", validationClock: Date(), certificate: token))
-    }
-
-    func test_domesticRules_maskStatus() throws {
-        // WHEN
-        let token = CBORWebToken.mockVaccinationCertificate
-        XCTAssertThrowsError(try sut.validate(type: .maskStatus, countryCode: "DE", validationClock: Date(), certificate: token))
-    }
-
     func test_rules_countryNil_regionAT_rulesEU() {
         // WHEN
         let rules = sut.rules(logicType: .eu, country: nil, region: "AT")
@@ -501,13 +489,6 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertFalse(rulesAvailable)
     }
 
-    func test_rulesNotAvailable_regionNW_rulesMask() {
-        // WHEN
-        let rulesAvailable = sut.rulesAvailable(logicType: .maskStatus, region: "BLA")
-        // THEN
-        XCTAssertFalse(rulesAvailable)
-    }
-
     func test_rulesNotAvailable_regionNIL_euInvalidation() {
         // WHEN
         let rulesAvailable = sut.rulesAvailable(logicType: .euInvalidation, region: nil)
@@ -527,123 +508,5 @@ class DCCCertLogicTests: XCTestCase {
         let rulesAvailable = sut.rulesAvailable(logicType: .ifsg22a, region: nil)
         // THEN
         XCTAssertTrue(rulesAvailable)
-    }
-
-    func test_ifsg22a_ImpfstatusCZwei_pass() throws {
-        // GIVEN
-        let token = CBORWebToken
-            .mockVaccinationCertificate
-            .doseNumber(3)
-            .seriesOfDoses(3)
-            .medicalProduct(.biontech)
-        // WHEN
-        let validationResult = try? sut.validate(type: .ifsg22a,
-                                                 countryCode: "DE",
-                                                 validationClock: Date(),
-                                                 certificate: token)
-        // THEN
-        XCTAssertTrue(true)
-        #warning("TODO: enable after rules arrived in Production")
-//        XCTAssertEqual(validationResult?.passedResults.count, 1)
-//        XCTAssertEqual(validationResult!.passedResults.first!.rule!.type, "ImpfstatusCZwei")
-//        XCTAssertEqual(validationResult?.failedResults.count, 2)
-//        XCTAssertEqual(validationResult?.openResults.count, 0)
-    }
-
-    func test_ifsg22a_ImpfstatusCZwei_fail() throws {
-        // GIVEN
-        let token = CBORWebToken
-            .mockVaccinationCertificate
-            .doseNumber(2)
-            .seriesOfDoses(3)
-            .medicalProduct(.biontech)
-        // WHEN
-        let validationResult = try? sut.validate(type: .ifsg22a,
-                                                 countryCode: "DE",
-                                                 validationClock: Date(),
-                                                 certificate: token)
-        // THEN
-        XCTAssertTrue(true)
-        #warning("TODO: enable after rules arrived in Production")
-//        XCTAssertEqual(validationResult?.passedResults.count, 0)
-//        XCTAssertEqual(validationResult?.failedResults.count, 3)
-//        XCTAssertEqual(validationResult?.openResults.count, 0)
-    }
-
-    func test_ifsg22a_ImpfstatusBZwei_pass() throws {
-        // GIVEN
-        let token = CBORWebToken
-            .mockVaccinationCertificate
-            .doseNumber(3)
-            .seriesOfDoses(3)
-            .medicalProduct(.biontech)
-            .extended()
-        let token2 = CBORWebToken.mockRecoveryCertificate.extended()
-
-        let joinedTokens = try XCTUnwrap([token, token2].joinedTokens)
-        // WHEN
-        let validationResult = try? sut.validate(type: .ifsg22a,
-                                                 countryCode: "DE",
-                                                 validationClock: Date(),
-                                                 certificate: joinedTokens)
-        // THEN
-        XCTAssertTrue(true)
-        #warning("TODO: enable after rules arrived in Production")
-//        XCTAssertEqual(validationResult?.passedResults.count, 1)
-//        XCTAssertEqual(validationResult?.passedResults.first!.rule!.type, "ImpfstatusBZwei")
-//        XCTAssertEqual(validationResult?.failedResults.count, 2)
-//        XCTAssertEqual(validationResult?.openResults.count, 0)
-    }
-
-    func test_ifsg22a_ImpfstatusEZwei_pass() throws {
-        // GIVEN
-        let token = CBORWebToken
-            .mockVaccinationCertificate
-            .doseNumber(2)
-            .seriesOfDoses(3)
-            .medicalProduct(.biontech)
-            .extended()
-        let token2 = CBORWebToken.mockRecoveryCertificate.extended()
-
-        let joinedTokens = try XCTUnwrap([token, token2].joinedTokens)
-
-        // WHEN
-        let validationResult = try? sut.validate(type: .ifsg22a,
-                                                 countryCode: "DE",
-                                                 validationClock: Date(),
-                                                 certificate: joinedTokens)
-        // THEN
-        XCTAssertTrue(true)
-        #warning("TODO: enable after rules arrived in Production")
-//        XCTAssertEqual(validationResult?.passedResults.count, 1)
-//        print(validationResult!.passedResults.first!.rule!.type)
-//        XCTAssertEqual(validationResult?.passedResults.first!.rule!.type, "ImpfstatusEZwei")
-//        XCTAssertEqual(validationResult?.failedResults.count, 2)
-//        XCTAssertEqual(validationResult?.openResults.count, 0)
-    }
-
-    func test_ifsg22a_ImpfstatusEZwei_fail() throws {
-        // GIVEN
-        let token = CBORWebToken
-            .mockVaccinationCertificate
-            .doseNumber(2)
-            .seriesOfDoses(3)
-            .medicalProduct(.biontech)
-            .extended()
-        let token2 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: Date() - 10).extended()
-
-        let joinedTokens = try XCTUnwrap([token, token2].joinedTokens)
-
-        // WHEN
-        let validationResult = try? sut.validate(type: .ifsg22a,
-                                                 countryCode: "DE",
-                                                 validationClock: Date(),
-                                                 certificate: joinedTokens)
-        // THEN
-        XCTAssertTrue(true)
-        #warning("TODO: enable after rules arrived in Production")
-//        XCTAssertEqual(validationResult?.passedResults.count, 0)
-//        XCTAssertEqual(validationResult?.failedResults.count, 3)
-//        XCTAssertEqual(validationResult?.openResults.count, 0)
     }
 }

@@ -77,16 +77,14 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         if isNeutral {
             return infoString(forAccessibility: false) ?? ""
         }
-        if !renewalNeeded {
-            if certificate.vaccinationCertificate.isExpired {
-                return "certificates_overview_expired_certificate_note".localized
-            }
-            if certificate.vaccinationCertificate.expiresSoon {
-                return "certificates_overview_expires_soon_certificate_note".localized
-            }
-            if certificate.isInvalid || certificate.isRevoked {
-                return "certificates_overview_invalid_certificate_note".localized
-            }
+        if certificate.vaccinationCertificate.isExpired {
+            return "certificates_overview_expired_certificate_note".localized
+        }
+        if certificate.vaccinationCertificate.expiresSoon {
+            return "certificates_overview_expires_soon_certificate_note".localized
+        }
+        if certificate.isInvalid || certificate.isRevoked {
+            return "certificates_overview_invalid_certificate_note".localized
         }
         return nil
     }
@@ -120,7 +118,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
 
     var renewalNeeded: Bool {
         let cert = certificate.vaccinationCertificate
-        return certificate.isNotRevoked && active && cert.expiresSoon && !cert.expiredMoreThan90Days && cert.isGermanIssuer
+        return certificate.isNotRevoked && cert.expiresSoon && !cert.expiredMoreThan90Days && cert.isGermanIssuer
     }
 
     init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {

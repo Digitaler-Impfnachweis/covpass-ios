@@ -1,5 +1,5 @@
 //
-//  CertificateCollectionViewCell.swift
+//  CertificateOverviewCollectionViewCell.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -12,6 +12,10 @@ import UIKit
 
 private enum Constants {
     static let qrInfoText = "certificates_start_screen_qr_code_app_reference_text".localized
+    enum Accessibility {
+        static let actionHint = "accessibility_button".localized
+    }
+
     enum Layout {
         static let cornerRadius: CGFloat = 26
         static let shadowRadius: CGFloat = 16
@@ -20,32 +24,20 @@ private enum Constants {
     }
 }
 
-public typealias CertificateCardViewModelProtocol = CardViewModel & CertificateCardViewModelBase
-
-public protocol CertificateCardViewModelBase {
-    var title: String { get }
-    var subtitle: String { get }
-    var headerSubtitle: String? { get }
-    var titleIcon: UIImage { get }
-    var subtitleIcon: UIImage { get }
-    var isInvalid: Bool { get }
-    var qrCode: UIImage? { get }
-    var name: String { get }
-    var tintColor: UIColor { get }
-    var delegate: ViewModelDelegate? { get set }
-    var regionText: String? { get }
-    func onClickAction()
-}
-
 @IBDesignable
-public class CertificateCollectionViewCell: CardCollectionViewCell {
+public class CertificateOverviewCollectionViewCell: CardCollectionViewCell {
     // MARK: - IBOutlet
 
     @IBOutlet public var containerView: UIView!
     @IBOutlet public var contentStackView: UIStackView!
     @IBOutlet public var titleStackView: UIStackView!
-    @IBOutlet public var titleView: UILabel!
-    @IBOutlet public var qrContainerView: QRContainerView!
+    @IBOutlet public var titleLabel: UILabel!
+    @IBOutlet public var qrContainerView: QRContainerOverView!
+    @IBOutlet public var gotoDetailButton: UIButton!
+    @IBOutlet var redDotWrapper: UIView!
+    @IBOutlet var redDotView: UIView!
+    @IBOutlet var statusLabelWrapper: UIView!
+    @IBOutlet var statusLabel: UILabel!
 
     // MARK: - Public Properties
 
@@ -73,6 +65,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         containerView.layer.cornerRadius = Constants.Layout.cornerRadius
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressAction)))
         contentStackView.setCustomSpacing(.space_16, after: titleStackView)
+        redDotView.drawRedDot()
     }
 
     override public func layoutSubviews() {
@@ -83,21 +76,22 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
     private func updateView() {
         guard let vm = viewModel as? CertificateCardViewModelProtocol else { return }
         containerView.backgroundColor = vm.backgroundColor
-        qrContainerView.icon = vm.titleIcon
-        qrContainerView.iconView?.tintColor = vm.iconTintColor
         qrContainerView.image = vm.qrCode
         qrContainerView.layoutMargins.bottom = .space_18
         qrContainerView.isHidden = vm.qrCode == nil
-        qrContainerView.title = vm.title
-        qrContainerView.titleColorValue = vm.textColor
-        qrContainerView.subtitle = vm.subtitle
-        qrContainerView.subtitleColorValue = vm.textColor
         qrContainerView.qrInfoText = Constants.qrInfoText
         qrContainerView.isInvalid = vm.isInvalid
-        titleView.attributedText = vm.name.styledAs(.header_3).colored(vm.tintColor)
-        titleView.lineBreakMode = .byTruncatingTail
-        titleView.backgroundColor = .clear
-        titleView.isHidden = true
+        qrContainerView.updateViews()
+        titleLabel.attributedText = vm.name.styledAs(.header_3).colored(vm.tintColor)
+        titleLabel.lineBreakMode = .byTruncatingTail
+        titleLabel.backgroundColor = .clear
+        titleLabel.isHidden = false
+        statusLabelWrapper.isHidden = !vm.showNotification
+        redDotWrapper.isHidden = !vm.showNotification
+        statusLabel.attributedText = vm.headerSubtitle?.styledAs(.label).colored(.neutralWhite)
+        gotoDetailButton.tintColor = vm.tintColor
+        gotoDetailButton.setImage(.chevronRight.withRenderingMode(.alwaysTemplate), for: .normal)
+        gotoDetailButton.isAccessibilityElement = false
         var accessibilityText = "\(vm.name) \n \(vm.title) \n \(vm.subtitle) \n \(vm.headerSubtitle ?? "")"
         if !vm.isInvalid {
             accessibilityText.append(" \n \(Constants.qrInfoText)")
@@ -106,19 +100,26 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
     }
 
     override public func viewModelDidUpdate() {
-        DispatchQueue.main.async {
-            self.updateView()
-        }
+        updateView()
+    }
+
+    // MARK: - Actions
+
+    @IBAction public func onPressAction() {
+        (viewModel as? CertificateCardViewModelProtocol)?.onClickAction()
     }
 
     override public func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         super.didUpdateFocus(in: context, with: coordinator)
         contentView.updateFocusBorderView()
     }
+}
 
-    // MARK: - Actions
-
-    @objc public func onPressAction() {
-        (viewModel as? CertificateCardViewModelProtocol)?.onClickAction()
+private extension UIView {
+    func drawRedDot() {
+        backgroundColor = .statusRedDot
+        layer.cornerRadius = 7
+        layer.borderColor = UIColor.neutralWhite.cgColor
+        layer.borderWidth = 1.5
     }
 }

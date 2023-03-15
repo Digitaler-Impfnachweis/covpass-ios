@@ -138,6 +138,14 @@ extension VaccinationCycleIncompleteResultViewController: ViewModelDelegate {
     func viewModelUpdateDidFailWithError(_: Error) {}
 }
 
+// MARK: - ModalInteractiveDismissibleProtocol
+
+extension VaccinationCycleIncompleteResultViewController: ModalInteractiveDismissibleProtocol {
+    func modalViewControllerDidDismiss() {
+        viewModel.cancel()
+    }
+}
+
 private extension ParagraphView {
     func setup(with viewModel: CertificateInvalidReasonViewModelProtocol) {
         layoutMargins.top = 0

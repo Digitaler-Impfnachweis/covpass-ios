@@ -110,7 +110,7 @@ class ArrayValidationResultTests: XCTestCase {
         // GIVEN
         let rule = Rule(identifier: "FOO", type: "Acceptance", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
         let rule2 = Rule(identifier: "Bar", type: "Invalidation", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
-        let rule3 = Rule(identifier: "Bar", type: "Mask", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
+        let rule3 = Rule(identifier: "Bar", type: "TwoGPlus", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
         let sut: [ValidationResult] = [.init(rule: rule, result: .open, validationErrors: nil),
                                        .init(rule: rule3, result: .open, validationErrors: nil),
                                        .init(rule: rule2, result: .open, validationErrors: nil)]
@@ -148,7 +148,7 @@ class ArrayValidationResultTests: XCTestCase {
         // GIVEN
         let rule = Rule(identifier: "FOO", type: "Acceptance", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
         let rule2 = Rule(identifier: "Bar", type: "Invalidation", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
-        let rule3 = Rule(identifier: "Tst", type: "Mask", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
+        let rule3 = Rule(identifier: "Tst", type: "Acceptance", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
         let sut: [ValidationResult] = [.init(rule: rule, result: .open, validationErrors: nil),
                                        .init(rule: rule2, result: .passed, validationErrors: nil),
                                        .init(rule: rule3, result: .fail, validationErrors: nil)]

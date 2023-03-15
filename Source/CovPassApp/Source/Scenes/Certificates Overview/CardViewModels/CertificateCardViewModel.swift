@@ -48,26 +48,22 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         return cert.expiresSoon || token.isInvalid || cert.isExpired
     }
 
-    private var holderNeedsMask: Bool
     var showNotification: Bool {
         showBoosterAvailabilityNotification || showNotificationForExpiryOrInvalid
     }
 
-    var maskRulesNotAvailable: Bool = true
     var regionText: String?
 
     // MARK: - Lifecycle
 
     init(
         token: ExtendedCBORWebToken,
-        holderNeedsMask: Bool,
         onAction: @escaping (ExtendedCBORWebToken) -> Void,
         repository: VaccinationRepositoryProtocol,
         boosterLogic: BoosterLogicProtocol,
         currentDate: Date = Date()
     ) {
         self.token = token
-        self.holderNeedsMask = holderNeedsMask
         self.onAction = onAction
         self.repository = repository
         self.boosterLogic = boosterLogic
@@ -89,7 +85,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var textColor: UIColor {
-        holderNeedsMask ? .onBrandAccent70 : .brandAccent90
+        .onBrandAccent70
     }
 
     lazy var title: String = {
@@ -141,11 +137,11 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         if isInvalid {
             return .expired
         } else if isPCRTest || isRapidAntigenTest {
-            return holderNeedsMask ? .detailStatusTestInverse : .statusTestNegative
+            return .detailStatusTestInverse
         } else if isPartialVaccination {
-            return holderNeedsMask ? .startStatusPartial : .statusFullGreen
+            return .startStatusPartial
         }
-        return holderNeedsMask ? .statusFullDetail : .statusFullGreen
+        return .statusFullDetail
     }
 
     var subtitleIcon: UIImage = .init()

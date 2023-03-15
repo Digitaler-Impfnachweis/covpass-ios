@@ -12,7 +12,7 @@ import PromiseKit
 import Scanner
 import UIKit
 
-protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanQRCodeProtocol, MaskCheckRouterProtocol, CheckImmunityRouterProtocol {
+protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanQRCodeProtocol, CheckImmunityRouterProtocol {
     func showAppInformation(userDefaults: Persistence)
     func showDataPrivacy() -> Promise<Void>
     func showAnnouncement() -> Promise<Void>
@@ -22,20 +22,7 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanQRCodeProtoc
     func sameTokenScanned() -> Promise<ValidatorDetailSceneResult>
 }
 
-protocol MaskCheckRouterProtocol {
-    // MARK: Mask Check
-
-    func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
-    func showMaskRequiredBusinessRulesSecondScanAllowed(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
-    func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
-    func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
-    func showMaskCheckDifferentPerson(tokens: [ExtendedCBORWebToken]) -> Promise<ValidatorDetailSceneResult>
-    func showMaskRulesInvalid(token: ExtendedCBORWebToken?, rescanIsHidden: Bool) -> Promise<ValidatorDetailSceneResult>
-}
-
 protocol CheckImmunityRouterProtocol {
-    // MARK: Ifsg22a Check
-
     func showVaccinationCycleComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aCheckDifferentPerson(tokens: [ExtendedCBORWebToken]) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aNotComplete(tokens: [ExtendedCBORWebToken]) -> Promise<ValidatorDetailSceneResult>

@@ -62,27 +62,6 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         return passed ? .passed : .failedFunctional
     }
 
-    public func holderNeedsMask(_ certificates: [ExtendedCBORWebToken],
-                                region: String?) -> Bool {
-        let validCertificates = validCertificates(certificates, logicType: .deAcceptenceAndInvalidationRules)
-        guard let joinedTokens = validCertificates.joinedTokens else {
-            return true
-        }
-        guard let validationResults = try? validate(certificate: joinedTokens, type: .maskStatus, region: region) else {
-            return true
-        }
-        return validationResults.holderNeedsMask
-    }
-
-    public func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken],
-                                     region: String?) -> Guarantee<Bool> {
-        Guarantee { resolver in
-            DispatchQueue.global(qos: .userInitiated).async {
-                resolver(holderNeedsMask(certificates, region: region))
-            }
-        }
-    }
-
     public func vaccinationCycleIsComplete(_ certificates: [ExtendedCBORWebToken]) -> HolderStatusResponse {
         let validCertificates = validCertificates(certificates, logicType: .deInvalidationRules)
         guard let joinedTokens = validCertificates.joinedAllTokens else {
@@ -92,15 +71,6 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
             return .init(passed: false, results: nil)
         }
         return .init(passed: validationResults.vaccinationCycleIsComplete, results: validationResults.vaccinationCyclePassedResults)
-    }
-
-    public func maskRulesAvailable(for region: String?) -> Bool {
-        dccCertLogic.rulesAvailable(logicType: .maskStatus, region: region)
-    }
-
-    public func latestMaskRuleDate(for region: String?) -> Date? {
-        if region == nil { return nil }
-        return dccCertLogic.rules(logicType: .maskStatus, country: "DE", region: region).map(\.validFromDate).latestDate
     }
 
     public func areTravelRulesAvailableForGermany() -> Bool {
@@ -170,11 +140,5 @@ private extension Array where Element == ValidationResult {
     var vaccinationCyclePassedResults: [RuleType?: [ValidationResult]]? {
         let dict = Dictionary(grouping: self, by: { $0.rule?.ruleType })
         return dict.filter { $0.value.failedAndOpenResults.isEmpty == true }
-    }
-
-    var holderNeedsMask: Bool {
-        let maskOptionalRules = filter { $0.rule?.isMaskStatusRule ?? false }
-        let maskOptionalRuleFailed = maskOptionalRules.passedResults.isEmpty
-        return maskOptionalRuleFailed
     }
 }

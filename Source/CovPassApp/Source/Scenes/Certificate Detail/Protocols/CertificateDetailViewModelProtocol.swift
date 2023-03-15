@@ -53,7 +53,6 @@ protocol CertificateDetailViewModelProtocol {
     var immunizationDetailsHidden: Bool { get }
     var immunizationStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol { get }
     var immunizationStatusViewIsHidden: Bool { get }
-    var maskStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol { get }
     func reissueRecoveryTitle(index: Int) -> String
     func recoveryExpiryReissueNotificationBody(index: Int) -> String
     func showRecoveryExpiryReissueButtonInNotification(index: Int) -> Bool

@@ -47,15 +47,13 @@ class CertificateDetailViewModelTests: XCTestCase {
     }
 
     private func configureCustomSut(certificates: [ExtendedCBORWebToken] = [CBORWebToken.mockVaccinationCertificate.extended()],
-                                    maskRulesAvailable: Bool = false,
-                                    needsMask: Bool = false,
+                                    maskRulesAvailable _: Bool = false,
+                                    needsMask _: Bool = false,
                                     isVaccinationCycleComplete: Bool = false,
                                     vaccinatsionCycleCompleteByRule: RuleType? = .impfstatusEEins) {
         boosterLogic = BoosterLogicMock()
         vaccinationRepo = VaccinationRepositoryMock()
         delegate = .init()
-        certificateHolderStatusModel.areMaskRulesAvailable = maskRulesAvailable
-        certificateHolderStatusModel.needsMask = needsMask
         rule1.description.first?.desc = descriptionText + " " + (vaccinatsionCycleCompleteByRule?.rawValue ?? "")
         results = [vaccinatsionCycleCompleteByRule: [.init(rule: rule1)]]
         certificateHolderStatusModel.isVaccinationCycleIsComplete = .init(passed: isVaccinationCycleComplete, results: results)
@@ -809,101 +807,6 @@ class CertificateDetailViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(count, 0)
-    }
-
-    func testMaskStatusViewModel_noMaskRulesAvailable() throws {
-        // When
-        let certificates: [ExtendedCBORWebToken] = try [.token1Of1()]
-        configureCustomSut(certificates: certificates, maskRulesAvailable: false, needsMask: false)
-        let viewModel = sut.maskStatusViewModel
-
-        // Then
-        XCTAssertTrue(viewModel is CertificateHolderNoMaskRulesStatusViewModel)
-        XCTAssertEqual(viewModel.subtitle, nil)
-        XCTAssertEqual(viewModel.federalStateText, "in Schleswig-Holstein")
-    }
-
-    func testMaskStatusViewModel_optional() throws {
-        // When
-        let certificates: [ExtendedCBORWebToken] = try [.token1Of1()]
-        configureCustomSut(certificates: certificates, maskRulesAvailable: true, needsMask: false)
-        let viewModel = sut.maskStatusViewModel
-
-        // Then
-        XCTAssertTrue(viewModel is CertificateHolderMaskNotRequiredStatusViewModel)
-        XCTAssertEqual(viewModel.subtitle, "Exempt until May 3, 2021")
-    }
-
-    func testMaskStatusViewModel_optionalTestCert() throws {
-        // When
-        let date = try XCTUnwrap(DateUtils.parseDate("2022-12-12T15:05:00"))
-        let token = CBORWebToken.mockTestCertificate
-            .mockTestDate(date)
-            .extended()
-        let certificates: [ExtendedCBORWebToken] = [token]
-        configureCustomSut(certificates: certificates, maskRulesAvailable: true, needsMask: false)
-        let viewModel = sut.maskStatusViewModel
-
-        // Then
-        XCTAssertTrue(viewModel is CertificateHolderMaskNotRequiredStatusViewModel)
-        XCTAssertEqual(viewModel.subtitle, "Exempt until Dec 13, 2022")
-    }
-
-    func testMaskStatusViewModel_required() throws {
-        // Given
-        let certificates: [ExtendedCBORWebToken] = try [.token1Of1()]
-        configureCustomSut(certificates: certificates, maskRulesAvailable: true, needsMask: true)
-
-        // When
-        let viewModel = sut.maskStatusViewModel
-
-        // Then
-        XCTAssertTrue(viewModel is CertificateHolderMaskRequiredStatusViewModel)
-        XCTAssertEqual(viewModel.subtitle, nil)
-    }
-
-    func testMaskStatusViewModel_required_withRecoveryAsFreshest_butOlderThan29Days() throws {
-        // Given
-        try configureCustomSut(certificates: [.token3Of3(), .reissuableRecovery], maskRulesAvailable: true, needsMask: true)
-
-        // When
-        let viewModel = sut.maskStatusViewModel
-
-        // Then
-        XCTAssertTrue(viewModel is CertificateHolderMaskRequiredStatusViewModel)
-        XCTAssertEqual(viewModel.subtitle, nil)
-    }
-
-    func testMaskStatusViewModel_required_withRecoveryAsFreshest_notOlderThan29Days() throws {
-        // Given
-        let recoveryCert: ExtendedCBORWebToken = .reissuableRecovery
-        let dateOfRecovery = Date().add(days: 5)!
-        recoveryCert.vaccinationCertificate.hcert.dgc.r!.first!.fr = dateOfRecovery
-        try configureCustomSut(certificates: [.token3Of3(),
-                                              recoveryCert],
-                               maskRulesAvailable: true,
-                               needsMask: true)
-
-        // When
-        let viewModel = sut.maskStatusViewModel
-
-        // Then
-        let formattedDate = DateUtils.displayDateFormatter.string(from: dateOfRecovery.add(days: 29)!)
-        XCTAssertTrue(viewModel is CertificateHolderMaskRequiredStatusViewModel)
-        XCTAssertEqual(viewModel.subtitle, "Exempt from \(formattedDate)")
-    }
-
-    func testMaskStatusViewModel_invalid() throws {
-        // Given
-        var token: ExtendedCBORWebToken = try .token2Of2Mustermann()
-        token.invalid = true
-        configureCustomSut(certificates: [token], maskRulesAvailable: true)
-
-        // When
-        let viewModel = sut.maskStatusViewModel
-
-        // Then
-        XCTAssertTrue(viewModel is CertificateHolderInvalidMaskStatusViewModel)
     }
 
     func testImmunizationStatusViewModel_incomplete() throws {

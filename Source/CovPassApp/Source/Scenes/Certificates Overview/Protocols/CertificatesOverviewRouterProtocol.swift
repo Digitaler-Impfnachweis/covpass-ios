@@ -38,6 +38,5 @@ protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
     func showExtensionRenewalReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void>
     func showCertificatePicker(tokens: [ExtendedCBORWebToken]) -> Promise<Void>
     func showCertificateImportError()
-    func showStateSelectionOnboarding() -> Promise<Void>
     func showCertificateExpiredNotDe()
 }

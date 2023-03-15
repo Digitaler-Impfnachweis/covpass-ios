@@ -17,10 +17,6 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showGproofExpectation = XCTestExpectation(description: "showGproofExpectation")
     var scanQRCodeExpectation = XCTestExpectation(description: "scanQRCodeExpectation")
     var routeToStateSelectionExpectation = XCTestExpectation(description: "routeToStateSelection")
-    var showMaskRequiredBusinessRulesExpectation = XCTestExpectation(description: "showMaskRequiredBusinessRules")
-    var showMaskRequiredBusinessRulesSecondScanAllowedExpectation = XCTestExpectation(description: "showMaskRequiredBusinessRulesSecondScanAllowed")
-    var showMaskOptionalExpectation = XCTestExpectation(description: "showMaskOptional")
-    var showNoMaskRulesExpectation = XCTestExpectation(description: "showNoMaskRulesE")
     var showDifferentPersonExpectation = XCTestExpectation(description: "showDifferentPersonExpectation")
     var showDifferentPersonResult = ValidatorDetailSceneResult.startOver
     var showVaccinationCycleCompleteExpectation = XCTestExpectation(description: "showVaccinationCycleCompleteExpectation")
@@ -33,8 +29,6 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showTravelRulesValidExpectation = XCTestExpectation(description: "showTravelRulesValidExpectation")
     var showTravelRulesInvalidExpectation = XCTestExpectation(description: "showTravelRulesInvalidExpectation")
     var showTravelRulesNotAvailableExpectation = XCTestExpectation(description: "showTravelRulesNotAvailableExpectation")
-    var showMaskRulesInvalidExpectation = XCTestExpectation(description: "showMaskRulesInvalidExpectation")
-    var showMaskRulesInvalidResponse: Promise<ValidatorDetailSceneResult> = .value(.close)
     var routeToRulesUpdateExpectation = XCTestExpectation(description: "routeToRulesUpdateExpectation")
     var showAnnouncementExpectation = XCTestExpectation(description: "showAnnouncementExpectation")
     var showTravelRulesNotAvailableResponse: Promise<Void> = .value
@@ -50,11 +44,6 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     func showAnnouncement() -> PromiseKit.Promise<Void> {
         showAnnouncementExpectation.fulfill()
         return .value
-    }
-
-    func showMaskRulesInvalid(token _: ExtendedCBORWebToken?, rescanIsHidden _: Bool) -> Promise<ValidatorDetailSceneResult> {
-        showMaskRulesInvalidExpectation.fulfill()
-        return showMaskRulesInvalidResponse
     }
 
     func showTravelRulesNotAvailable() -> Promise<Void> {
@@ -105,31 +94,6 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     func routeToStateSelection() -> Promise<Void> {
         routeToStateSelectionExpectation.fulfill()
         return .value
-    }
-
-    func showMaskRequiredBusinessRules(token _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        showMaskRequiredBusinessRulesExpectation.fulfill()
-        return .value(.close)
-    }
-
-    func showMaskRequiredBusinessRulesSecondScanAllowed(token _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        showMaskRequiredBusinessRulesSecondScanAllowedExpectation.fulfill()
-        return .value(.close)
-    }
-
-    func showMaskOptional(token _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        showMaskOptionalExpectation.fulfill()
-        return .value(.close)
-    }
-
-    func showNoMaskRules(token _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        showNoMaskRulesExpectation.fulfill()
-        return .value(.close)
-    }
-
-    func showMaskCheckDifferentPerson(tokens _: [CovPassCommon.ExtendedCBORWebToken]) -> Promise<ValidatorDetailSceneResult> {
-        showDifferentPersonExpectation.fulfill()
-        return .value(showDifferentPersonResult)
     }
 
     func showVaccinationCycleComplete(token _: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {

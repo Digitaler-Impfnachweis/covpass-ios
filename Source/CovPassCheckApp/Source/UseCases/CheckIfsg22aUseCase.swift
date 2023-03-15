@@ -82,7 +82,14 @@ struct CheckIfsg22aUseCase {
     }
 
     private func checkIfsg22aRules() -> Promise<Void> {
-        guard holderStatus.vaccinationCycleIsComplete(tokens).passed else {
+        let response = holderStatus.vaccinationCycleIsComplete(tokens)
+        guard response.passed else {
+            return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete)
+        }
+        guard let ruleType = response.results?.first?.key else {
+            return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete)
+        }
+        if ruleType == .impfstatusEEins {
             return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete)
         }
         return .value

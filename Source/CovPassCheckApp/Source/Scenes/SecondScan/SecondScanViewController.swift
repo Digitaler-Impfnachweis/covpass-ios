@@ -127,3 +127,11 @@ extension SecondScanViewController: ViewModelDelegate {
 
     func viewModelUpdateDidFailWithError(_: Error) {}
 }
+
+// MARK: - ModalInteractiveDismissibleProtocol
+
+extension SecondScanViewController: ModalInteractiveDismissibleProtocol {
+    func modalViewControllerDidDismiss() {
+        viewModel.cancel()
+    }
+}

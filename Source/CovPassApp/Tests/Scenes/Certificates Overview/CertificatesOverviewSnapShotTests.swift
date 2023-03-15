@@ -19,7 +19,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         let sceneCoordinator = DefaultSceneCoordinator(window: window)
         let router = CertificatesOverviewRouter(sceneCoordinator: sceneCoordinator)
-        let viewModel = viewModel(router: router, repository: VaccinationRepositoryMock(), holderNeedsMask: true)
+        let viewModel = viewModel(router: router, repository: VaccinationRepositoryMock())
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         verifyView(view: navigationController.view, waitAfter: 0.1)
@@ -28,14 +28,9 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
     private func viewModel(
         router: CertificatesOverviewRouterProtocol = CertificatesOverviewRouterMock(),
         boosterLogic: BoosterLogicMock = BoosterLogicMock(),
-        repository: VaccinationRepositoryProtocol,
-        holderNeedsMask: Bool,
-        maskRulesAvailable: Bool = false
+        repository: VaccinationRepositoryProtocol
     ) -> CertificatesOverviewViewModelProtocol {
-        let certificateHolderStatusModel = CertificateHolderStatusModelMock()
-        certificateHolderStatusModel.areMaskRulesAvailable = maskRulesAvailable
-        certificateHolderStatusModel.needsMask = holderNeedsMask
-        return CertificatesOverviewViewModel(
+        CertificatesOverviewViewModel(
             router: router,
             repository: repository,
             revocationRepository: CertificateRevocationRepositoryMock(),
@@ -43,8 +38,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
             boosterLogic: boosterLogic,
             userDefaults: UserDefaultsPersistence(),
             locale: .current,
-            pdfExtractor: CertificateExtractorMock(),
-            certificateHolderStatusModel: certificateHolderStatusModel
+            pdfExtractor: CertificateExtractorMock()
         )
     }
 
@@ -63,53 +57,9 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
                      cert2,
                      cert3]
         vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
+        let viewModel = viewModel(repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         verifyView(view: viewController.view, waitAfter: 0.3)
-    }
-
-    func test_maskNeeded() {
-        let vacinationRepoMock = VaccinationRepositoryMock()
-        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
-        let certs = [cert]
-        vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: true, maskRulesAvailable: true)
-        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 0.3)
-    }
-
-    func test_booster_notification_maskNeeded() {
-        let vacinationRepoMock = VaccinationRepositoryMock()
-        let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
-        let certs = [cert]
-        let boosterLogicMock = BoosterLogicMock()
-        var boosterCandidate = BoosterCandidate(certificate: cert)
-        boosterCandidate.state = .new
-        boosterLogicMock.boosterCandidates = [boosterCandidate]
-        vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(boosterLogic: boosterLogicMock, repository: vacinationRepoMock, holderNeedsMask: true, maskRulesAvailable: true)
-        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 0.1)
-    }
-
-    func test_maskNotNeeded() {
-        let vacinationRepoMock = VaccinationRepositoryMock()
-        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
-        let certs = [cert]
-        vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
-        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 0.1)
-    }
-
-    func test_maskRulesNotAvailable() {
-        let vacinationRepoMock = VaccinationRepositoryMock()
-        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
-        let certs = [cert]
-        vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: false)
-        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 0.1)
     }
 
     func test_IsInvalid() {
@@ -118,7 +68,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.invalid = true
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
+        let viewModel = viewModel(repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         verifyView(view: viewController.view, waitAfter: 0.3)
     }
@@ -129,7 +79,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.revoked = true
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
+        let viewModel = viewModel(repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         verifyView(view: viewController.view, waitAfter: 0.1)
     }
@@ -144,7 +94,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         boosterCandidate.state = .new
         boosterLogicMock.boosterCandidates = [boosterCandidate]
         vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(boosterLogic: boosterLogicMock, repository: vacinationRepoMock, holderNeedsMask: false)
+        let viewModel = viewModel(boosterLogic: boosterLogicMock, repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         verifyView(view: viewController.view, waitAfter: 0.1)
     }
@@ -155,7 +105,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: -90, to: Date())
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
+        let viewModel = viewModel(repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         verifyView(view: viewController.view, waitAfter: 1.0)
     }
@@ -166,7 +116,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: -14, to: Date())
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
+        let viewModel = viewModel(repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         verifyView(view: viewController.view, waitAfter: 1.0)
     }
@@ -177,7 +127,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 6, to: Date())
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
+        let viewModel = viewModel(repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         verifyView(view: viewController.view, waitAfter: 1.5)
     }

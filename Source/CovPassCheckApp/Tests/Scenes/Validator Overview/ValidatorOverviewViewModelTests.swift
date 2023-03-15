@@ -30,7 +30,6 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     private var certificateHolderStatus: CertificateHolderStatusModelMock!
     private var revocationRepository: CertificateRevocationRepositoryMock!
     private let invalidationRule = Rule(type: "Invalidation")
-    private let maskRule = Rule(type: "Mask")
     private let acceptenceRule = Rule(type: "Acceptence")
     private let bZweiRule = Rule(type: "ImpfstatusBZwei")
 
@@ -237,240 +236,12 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(userDefaults.privacyHash, privacyHash)
     }
 
-    func testStartQRCodeValidation() {
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.scanQRCodeExpectation,
-            audioPlayer.playCovPassCheckCertificateScannedIfEnabledExpectation
-        ], timeout: 1)
-    }
-
     func testStateSelection() {
         // When
         sut.chooseAction()
 
         // Then
         wait(for: [router.routeToStateSelectionExpectation], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showMaskRequiredTechnicalError_alternative() {
-        // GIVEN
-        certLogic.validateResult = []
-        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showMaskRequiredBusinessRulesSecondScanAllowedExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showMaskRequiredBusinessRulesSecondScanAllowedExpectation() {
-        // GIVEN
-        certLogic.validateResult = [.init(rule: maskRule, result: .fail)]
-        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showMaskRequiredBusinessRulesSecondScanAllowedExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showMaskRequiredBusinessRules() {
-        // GIVEN
-        certLogic.validateResult = [.init(rule: maskRule, result: .fail)]
-        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
-        sut.tokensToCheck = [CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "2")]
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showMaskRequiredBusinessRulesExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showMaskRequiredBusinessRulesSecondScanAllowed() {
-        // GIVEN
-        certLogic.validateResult = [.init(rule: invalidationRule, result: .passed)]
-        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showMaskRequiredBusinessRulesSecondScanAllowedExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showMaskRequiredBusinessRules_testCertificate() {
-        // GIVEN
-        certLogic.validateResult = [.init(rule: invalidationRule, result: .passed)]
-        repository.checkedCert = CBORWebToken.mockTestCertificate
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showMaskRequiredBusinessRulesExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showNoMaskRules() {
-        // GIVEN
-        certLogic.areRulesAvailable = false
-        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showNoMaskRulesExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showMaskRequiredTechnicalErrorExpectation_withQualifiedToken_needToDrop() {
-        // GIVEN
-        certLogic.validationError = NSError(domain: "Some Error", code: 500)
-        let token = CBORWebToken.mockVaccinationCertificate
-        repository.checkedCert = token
-        router.showMaskRulesInvalidResponse = .value(.rescan)
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        XCTAssertEqual(sut.tokensToCheck.count, 0)
-        wait(for: [
-            router.showMaskRulesInvalidExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showMaskRequiredTechnicalErrorExpectation_withoutQualifiedToken_dontNeedToDrop() {
-        // GIVEN
-        certLogic.validationError = NSError(domain: "Some Error", code: 500)
-        repository.checkedCert = nil
-        router.showMaskRulesInvalidResponse = .value(.rescan)
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        XCTAssertEqual(sut.tokensToCheck.count, 0)
-        wait(for: [
-            router.showMaskRulesInvalidExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showMaskRequiredTechnicalError_unexpected() {
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showMaskRulesInvalidExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showMaskRequiredTechnicalError_alternative_revoked() {
-        // GIVEN
-        revocationRepository.isRevoked = true
-        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showMaskRulesInvalidExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_secondScan_differentPerson() {
-        // GIVEN
-        certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
-                                    .init(rule: maskRule, result: .passed)]
-        repository.checkedCert = CBORWebToken.mockVaccinationCertificateWithOtherName
-        sut.tokensToCheck = [CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "1")]
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showDifferentPersonExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_secondScan_differentPerson_ignoring() {
-        // GIVEN
-        certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
-                                    .init(rule: maskRule, result: .passed)]
-        let firstToken = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "1")
-        let secondToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended(vaccinationQRCodeData: "2")
-        repository.checkedCert = secondToken.vaccinationCertificate
-        sut.tokensToCheck = [firstToken, secondToken]
-
-        // When
-        sut.checkMaskStatus(ignoringPiCheck: true)
-
-        // Then
-        wait(for: [
-            router.showMaskOptionalExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_secondScan_differentPerson_ignoring_after_response() {
-        // GIVEN
-        certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
-                                    .init(rule: maskRule, result: .passed)]
-        let firstToken = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "1")
-        let secondToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended(vaccinationQRCodeData: "2")
-        repository.checkedCert = secondToken.vaccinationCertificate
-        router.showDifferentPersonResult = .ignore
-        sut.tokensToCheck = [firstToken]
-
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showDifferentPersonExpectation,
-            router.showMaskOptionalExpectation
-        ], timeout: 1)
-    }
-
-    func test_maskCheck_secondScan_sameCert() {
-        // GIVEN
-        let token = CBORWebToken.mockVaccinationCertificate
-            .extended()
-        let additionalToken = CBORWebToken.mockVaccinationCertificate
-            .extended(vaccinationQRCodeData: "1")
-        repository.checkedCert = token.vaccinationCertificate
-        router.scanQRCodeResponse = "1"
-        sut.tokensToCheck = [additionalToken]
-        // When
-        sut.checkMaskStatus()
-        // Then
-        wait(for: [
-            router.secondScanSameTokenExpectation
-        ], timeout: 1)
-    }
-
-    func test_checkMaskStatus_showMaskOptional() {
-        // GIVEN
-        certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
-                                    .init(rule: maskRule, result: .passed)]
-        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
-        // When
-        sut.checkMaskStatus()
-
-        // Then
-        wait(for: [
-            router.showMaskOptionalExpectation
-        ], timeout: 1)
     }
 
     func test_checkImmunityStatus_vaccinationCycleIsComplete() {
@@ -532,7 +303,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
-                                    .init(rule: maskRule, result: .passed)]
+                                    .init(rule: acceptenceRule, result: .passed)]
         let token = CBORWebToken
             .mockVaccinationCertificateWithOtherName
             .extended(vaccinationQRCodeData: "1")
@@ -554,7 +325,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
-                                    .init(rule: maskRule, result: .passed)]
+                                    .init(rule: acceptenceRule, result: .passed)]
         let secondToken = CBORWebToken
             .mockVaccinationCertificateWithOtherName
             .extended(vaccinationQRCodeData: "1")
@@ -577,7 +348,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
-                                    .init(rule: maskRule, result: .passed)]
+                                    .init(rule: acceptenceRule, result: .passed)]
         let token = CBORWebToken
             .mockVaccinationCertificateWithOtherName
             .extended(vaccinationQRCodeData: "1")
@@ -598,7 +369,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
-                                    .init(rule: maskRule, result: .passed)]
+                                    .init(rule: acceptenceRule, result: .passed)]
         let thirdToken = CBORWebToken
             .mockVaccinationCertificateWithOtherName
             .extended(vaccinationQRCodeData: "1")
@@ -622,7 +393,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
-                                    .init(rule: maskRule, result: .passed)]
+                                    .init(rule: acceptenceRule, result: .passed)]
         let thirdToken = CBORWebToken
             .mockVaccinationCertificateWithOtherName
             .extended(vaccinationQRCodeData: "1")
@@ -648,7 +419,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // GIVEN
         userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
-                                    .init(rule: maskRule, result: .passed)]
+                                    .init(rule: acceptenceRule, result: .passed)]
         let thirdToken = CBORWebToken
             .mockVaccinationCertificateWithOtherName
             .extended(vaccinationQRCodeData: "1")
@@ -761,43 +532,6 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [
             router.showTravelRulesNotAvailableExpectation
-        ], timeout: 1)
-    }
-
-    func test_selectedCheckType_mask() {
-        // When
-        sut.selectedCheckType = .mask
-        // Then
-        XCTAssertEqual(userDefaults.selectedCheckType, CheckType.mask.rawValue)
-    }
-
-    func test_selectedCheckType_immunity() {
-        // When
-        sut.selectedCheckType = .immunity
-        // Then
-        XCTAssertEqual(userDefaults.selectedCheckType, CheckType.immunity.rawValue)
-    }
-
-    func test_selectedCheckType_immunity_checkSituationNotSeenBefore() {
-        // GIVEN
-        UserDefaults.standard.set(nil, forKey: UserDefaults.keyCheckSituation)
-        // When
-        sut.selectedCheckType = .immunity
-        // Then
-        wait(for: [
-            router.routeToChooseCheckSituationExpectation
-        ], timeout: 1)
-    }
-
-    func test_selectedCheckType_immunity_checkSituationSeenBefore() {
-        // GIVEN
-        UserDefaults.standard.set(CheckSituationType.withinGermany.rawValue, forKey: UserDefaults.keyCheckSituation)
-        router.routeToChooseCheckSituationExpectation.isInverted = true
-        // When
-        sut.selectedCheckType = .immunity
-        // Then
-        wait(for: [
-            router.routeToChooseCheckSituationExpectation
         ], timeout: 1)
     }
 
