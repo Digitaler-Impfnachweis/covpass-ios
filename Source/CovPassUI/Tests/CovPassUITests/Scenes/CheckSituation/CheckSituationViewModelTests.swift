@@ -27,15 +27,12 @@ class CheckSituationViewModelTests: XCTestCase {
         repository = .init()
         router = CheckSituationRouterMock()
         delegate = ViewModelDelegateMock()
-        configureSut(checkSituation: .enteringGermany)
+        configureSut()
     }
 
-    private func configureSut(context: CheckSituationViewModelContextType = .settings,
-                              checkSituation: CheckSituationType) {
+    private func configureSut() {
         let (_, resolver) = Promise<Void>.pending()
-        persistence.checkSituation = checkSituation.rawValue
-        sut = CheckSituationViewModel(context: context,
-                                      userDefaults: persistence,
+        sut = CheckSituationViewModel(userDefaults: persistence,
                                       router: router,
                                       resolver: resolver,
                                       offlineRevocationService: offlineRevocationService,
@@ -56,32 +53,13 @@ class CheckSituationViewModelTests: XCTestCase {
     }
 
     func testSettingsContext() {
-        // WHEN
-        sut.context = .settings
-
         // THEN
-        XCTAssertEqual(sut.pageTitle, "check_context_onboarding_title")
-        XCTAssertEqual(sut.newBadgeText, "check_context_onboarding_tag")
-        XCTAssertEqual(sut.pageImage, .illustration4)
         XCTAssertEqual(sut.footerText, "app_information_offline_revocation_copy_1")
-        XCTAssertEqual(sut.doneButtonTitle, "check_context_onboarding_button")
         XCTAssertEqual(sut.descriptionTextIsTop, true)
-        XCTAssertEqual(sut.pageTitleIsHidden, true)
         XCTAssertEqual(sut.newBadgeIconIsHidden, true)
         XCTAssertEqual(sut.pageImageIsHidden, true)
         XCTAssertEqual(sut.buttonIsHidden, true)
         XCTAssertFalse(sut.offlineRevocationIsHidden)
-    }
-
-    func testOfflineRevocationIsHidden_information_context() {
-        // Given
-        sut.context = .information
-
-        // When
-        let isHidden = sut.offlineRevocationIsHidden
-
-        // Then
-        XCTAssertTrue(isHidden)
     }
 
     func testOfflineRevocationIsEnabled_true() {
@@ -158,6 +136,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // Given
         var userDefaults = UserDefaultsPersistence()
         userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
+        userDefaults.lastUpdateDomesticRules = DateUtils.parseDate("2021-04-26T15:05:00")
         userDefaults.lastUpdatedValueSets = DateUtils.parseDate("2021-04-26T15:05:00")
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
         offlineRevocationService.lastSuccessfulUpdate = DateUtils.parseDate("2021-04-26T15:05:00")
@@ -168,8 +147,6 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.downloadStateTextColor, .neutralBlack)
         XCTAssertEqual(sut.downloadStateHintColor, .warningAlternative)
         XCTAssertEqual(sut.downloadStateHintTitle, "settings_rules_list_status_outofdate")
-        XCTAssertEqual(sut.entryRulesTitle, "settings_rules_list_entry")
-        XCTAssertEqual(sut.entryRulesSubtitle, "Apr 26, 2021 at 3:05 PM")
         XCTAssertEqual(sut.domesticRulesUpdateTitle, "settings_rules_list_domestic")
         XCTAssertEqual(sut.domesticRulesUpdateSubtitle, "Apr 26, 2021 at 3:05 PM")
         XCTAssertEqual(sut.valueSetsTitle, "settings_rules_list_features")
@@ -190,6 +167,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // Given
         var userDefaults = UserDefaultsPersistence()
         userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
+        userDefaults.lastUpdateDomesticRules = DateUtils.parseDate("2021-04-26T15:05:00")
         userDefaults.lastUpdatedValueSets = DateUtils.parseDate("2021-04-26T15:05:00")
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
         repository.shouldTrustListUpdate = false
@@ -203,8 +181,6 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.downloadStateTextColor, .neutralWhite)
         XCTAssertEqual(sut.downloadStateHintColor, .resultGreen)
         XCTAssertEqual(sut.downloadStateHintTitle, "settings_rules_list_status_updated")
-        XCTAssertEqual(sut.entryRulesTitle, "settings_rules_list_entry")
-        XCTAssertEqual(sut.entryRulesSubtitle, "Apr 26, 2021 at 3:05 PM")
         XCTAssertEqual(sut.domesticRulesUpdateTitle, "settings_rules_list_domestic")
         XCTAssertEqual(sut.domesticRulesUpdateSubtitle, "Apr 26, 2021 at 3:05 PM")
         XCTAssertEqual(sut.valueSetsTitle, "settings_rules_list_features")
@@ -338,176 +314,5 @@ class CheckSituationViewModelTests: XCTestCase {
 
         // Then
         XCTAssertFalse(isHidden)
-    }
-
-    func testDescriptionIsHidden_information() {
-        // Given
-        configureSut(context: .information, checkSituation: .enteringGermany)
-
-        // When
-        let isHidden = sut.descriptionIsHidden
-
-        // Then
-        XCTAssertFalse(isHidden)
-    }
-
-    // MARK: - Check situation related
-
-    func test_checkSituation_title() {
-        // WHEN
-        let sut = sut.checkSituationTitle
-
-        // THEN
-        XCTAssertEqual(sut, "settings_rules_context_title")
-    }
-
-    func test_checkSituation_subtitle() {
-        // WHEN
-        let sut = sut.checkSituationSubtitle
-
-        // THEN
-        XCTAssertEqual(sut, "settings_rules_context_subtitle")
-    }
-
-    func test_checkSituation_isHidden_context_settings() {
-        // GIVEN
-        sut.context = .settings
-        // WHEN
-        let sut = sut.checkSituationIsHidden
-        // THEN
-        XCTAssertEqual(sut, false)
-    }
-
-    func test_checkSituation_isHidden_context_information() {
-        // GIVEN
-        sut.context = .information
-        // WHEN
-        let sut = sut.checkSituationIsHidden
-        // THEN
-        XCTAssertEqual(sut, true)
-    }
-
-    func test_checkSituation_withinGermanyImage_unchecked() {
-        // GIVEN
-        configureSut(checkSituation: .enteringGermany)
-        // WHEN
-        let sut = sut.checkSituationWithinGermanyImage
-        // THEN
-        XCTAssertEqual(sut, .checkboxUnchecked)
-    }
-
-    func test_checkSituation_withinGermanyImage_checked() {
-        // GIVEN
-        configureSut(checkSituation: .withinGermany)
-        // WHEN
-        let sut = sut.checkSituationWithinGermanyImage
-        // THEN
-        XCTAssertEqual(sut, .checkboxChecked)
-    }
-
-    func test_checkSituation_withinGermanyTitle() {
-        // WHEN
-        let sut = sut.checkSituationWithinGermanyTitle
-
-        // THEN
-        XCTAssertEqual(sut, "settings_rules_context_germany_title")
-    }
-
-    func test_checkSituation_withinGermanySubtitle() {
-        // WHEN
-        let sut = sut.checkSituationWithinGermanySubtitle
-
-        // THEN
-        XCTAssertEqual(sut, "settings_rules_context_germany_subtitle")
-    }
-
-    func test_checkSituation_enteringGermanyImage_unchecked() {
-        // GIVEN
-        configureSut(checkSituation: .withinGermany)
-        // WHEN
-        let sut = sut.checkSituationEnteringGermanyImage
-        // THEN
-        XCTAssertEqual(sut, .checkboxUnchecked)
-    }
-
-    func test_checkSituation_enteringGermanyImage_checked() {
-        // GIVEN
-        configureSut(checkSituation: .enteringGermany)
-        // WHEN
-        let sut = sut.checkSituationEnteringGermanyImage
-        // THEN
-        XCTAssertEqual(sut, .checkboxChecked)
-    }
-
-    func test_checkSituation_enteringGermanyTitle() {
-        // WHEN
-        let sut = sut.checkSituationEnteringGermanyTitle
-
-        // THEN
-        XCTAssertEqual(sut, "settings_rules_context_entry_title")
-    }
-
-    func test_checkSituation_enteringGermanySubtitle() {
-        // WHEN
-        let sut = sut.checkSituationEnteringGermanySubtitle
-
-        // THEN
-        XCTAssertEqual(sut, "settings_rules_context_entry_subtitle")
-    }
-
-    func test_checkSituation_withinGermanyOptionAccessibiliyLabel_unselected() {
-        // GIVEN
-        configureSut(checkSituation: .enteringGermany)
-        // WHEN
-        let sut = sut.checkSituationWithinGermanyOptionAccessibiliyLabel
-        // THEN
-        XCTAssertEqual(sut, "accessibility_option_unselected")
-    }
-
-    func test_checkSituation_withinGermanyOptionAccessibiliyLabel_selected() {
-        // GIVEN
-        configureSut(checkSituation: .withinGermany)
-        // WHEN
-        let sut = sut.checkSituationWithinGermanyOptionAccessibiliyLabel
-        // THEN
-        XCTAssertEqual(sut, "accessibility_option_selected")
-    }
-
-    func test_checkSituation_enteringGermanyOptionAccessibiliyLabel_selected() {
-        // GIVEN
-        configureSut(checkSituation: .enteringGermany)
-        // WHEN
-        let sut = sut.checkSituationEnteringGermanyOptionAccessibiliyLabel
-        // THEN
-        XCTAssertEqual(sut, "accessibility_option_selected")
-    }
-
-    func test_checkSituation_enteringGermanyOptionAccessibiliyLabel_unselected() {
-        // GIVEN
-        configureSut(checkSituation: .withinGermany)
-        // WHEN
-        let sut = sut.checkSituationEnteringGermanyOptionAccessibiliyLabel
-        // THEN
-        XCTAssertEqual(sut, "accessibility_option_unselected")
-    }
-
-    func test_checkSituation_enteringGermanyViewIsChoosen() {
-        // GIVEN
-        configureSut(checkSituation: .withinGermany)
-        // WHEN
-        sut.enteringGermanyViewIsChoosen()
-        let sut = sut.checkSituationEnteringGermanyImage
-        // THEN
-        XCTAssertEqual(sut, .checkboxChecked)
-    }
-
-    func test_checkSituation_withinGermanyIsChoosen() {
-        // GIVEN
-        configureSut(checkSituation: .enteringGermany)
-        // WHEN
-        sut.withinGermanyIsChoosen()
-        let sut = sut.checkSituationWithinGermanyImage
-        // THEN
-        XCTAssertEqual(sut, .checkboxChecked)
     }
 }

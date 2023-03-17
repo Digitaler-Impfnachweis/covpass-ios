@@ -115,12 +115,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
 
-    func routeToChooseCheckSituation() -> Promise<Void> {
-        let router = ChooseCheckSituationRouter(sceneCoordinator: sceneCoordinator)
-        let factory = ChooseCheckSituationSceneFactory(router: router)
-        return sceneCoordinator.present(factory, animated: true)
-    }
-
     // MARK: Ifsg22a Check
 
     func showVaccinationCycleComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {

@@ -10,11 +10,7 @@ import PromiseKit
 
 extension ValidatorOverviewViewModel {
     func checkImmunityStatus() {
-        if withinGermanyIsSelected {
-            checkImmunityStatusWithinGermany()
-        } else {
-            checkImmunityStatusEnteringGermany()
-        }
+        checkImmunityStatusWithinGermany()
     }
 
     private func scanOrReuse(ignoringPiCheck: Bool) -> Promise<ExtendedCBORWebToken> {

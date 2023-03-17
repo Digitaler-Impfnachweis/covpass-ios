@@ -13,20 +13,16 @@ import UIKit
 public struct CheckSituationResolvableSceneFactory: ResolvableSceneFactory {
     // MARK: - Lifecycle
 
-    private let contextType: CheckSituationViewModelContextType
     private let userDefaults: Persistence
 
-    public init(contextType: CheckSituationViewModelContextType,
-                userDefaults: Persistence) {
+    public init(userDefaults: Persistence) {
         self.userDefaults = userDefaults
-        self.contextType = contextType
     }
 
     // MARK: - Methods
 
     public func make(resolvable: Resolver<Void>) -> UIViewController {
-        let viewModel = CheckSituationViewModel(context: contextType,
-                                                userDefaults: userDefaults,
+        let viewModel = CheckSituationViewModel(userDefaults: userDefaults,
                                                 router: nil,
                                                 resolver: resolvable,
                                                 offlineRevocationService: nil,

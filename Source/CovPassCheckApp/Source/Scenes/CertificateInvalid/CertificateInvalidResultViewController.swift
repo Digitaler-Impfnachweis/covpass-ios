@@ -21,7 +21,6 @@ final class CertificateInvalidResultViewController: UIViewController {
     @IBOutlet var startOverButton: MainButton!
     @IBOutlet var reasonStackview: UIStackView!
     @IBOutlet var counterLabel: UILabel!
-    @IBOutlet var travelRulesLinkLabel: LinkLabel!
     @IBOutlet var bottomStackView: UIStackView!
     @IBOutlet var scrollView: UIScrollView!
 
@@ -98,10 +97,6 @@ final class CertificateInvalidResultViewController: UIViewController {
             .colored(.onBackground110)
         let titleSubTitleA11lText = viewModel.title + viewModel.subtitle
         headerStackView.enableAccessibility(label: titleSubTitleA11lText, traits: .header)
-        travelRulesLinkLabel.attributedText = viewModel.travelRules.styledAs(.header_3)
-        travelRulesLinkLabel.isHidden = viewModel.travelRulesIsHidden
-        travelRulesLinkLabel.layoutMargins = .init(top: 8, left: 18, bottom: 0, right: 18)
-        travelRulesLinkLabel.applyRightImage(image: .externalLink)
     }
 
     private func configureReasonStackView() {

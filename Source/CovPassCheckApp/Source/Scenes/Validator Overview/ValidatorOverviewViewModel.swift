@@ -45,17 +45,10 @@ private enum Constants {
                 static let immunityCheckActionTitle = "validation_start_screen_scan_action_button_title".localized
                 static let immunityCheckInfoText = "start_screen_vaccination_status_hint".localized
             }
-
-            enum EnterginGermany {
-                static let immunityCheckTitle = "start_vaccination_status_entry_title".localized
-                static let immunityCheckDescription = "start_vaccination_status_entry_subtitle".localized
-                static let immunityCheckActionTitle = "validation_start_screen_scan_action_button_title".localized
-            }
         }
 
         enum CheckSituation {
             static let withinGermanyTitle = "startscreen_rules_tag_local".localized
-            static let enteringGermanyTitle = "startscreen_rules_tag_europe".localized
         }
     }
 
@@ -124,44 +117,13 @@ class ValidatorOverviewViewModel {
     var offlineInformationStateBackgroundColor: UIColor { shouldSomethingBeUpdated ? .warningAlternative : .resultGreen }
     var offlineInformationStateText: String { shouldSomethingBeUpdated ? Constants.Keys.OfflineInformation.status_unavailable : Constants.Keys.OfflineInformation.status_available }
     var offlineInformationUpdateCellSubtitle: String { shouldSomethingBeUpdated ? Constants.Keys.OfflineInformation.subtitle_unavailable : Constants.Keys.OfflineInformation.link_subtitle_available }
-    var immunityCheckTitle: String {
-        withinGermanyIsSelected ?
-            Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckTitle :
-            Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckTitle
-    }
 
-    var immunityCheckTitleAccessibility: String {
-        withinGermanyIsSelected ?
-            Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckTitleAccessibility : Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckTitle
-    }
-
-    var immunityCheckDescription: String {
-        withinGermanyIsSelected ?
-            Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckDescription :
-            Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckDescription
-    }
-
-    var immunityCheckInfoText: String? {
-        withinGermanyIsSelected ?
-            Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckInfoText : nil
-    }
-
-    var immunityCheckActionTitle: String {
-        withinGermanyIsSelected ?
-            Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckActionTitle :
-            Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckActionTitle
-    }
-
-    var checkSituation: CheckSituationType { .init(rawValue: userDefaults.checkSituation) ?? .withinGermany }
-    var checkSituationTitle: String {
-        withinGermanyIsSelected ? Constants.Keys.CheckSituation.withinGermanyTitle : Constants.Keys.CheckSituation.enteringGermanyTitle
-    }
-
-    var checkSituationImage: UIImage {
-        withinGermanyIsSelected ? .flagDE : .flagWorld
-    }
-
-    var withinGermanyIsSelected: Bool { checkSituation == .withinGermany }
+    let immunityCheckTitle = Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckTitle
+    let immunityCheckTitleAccessibility = Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckTitleAccessibility
+    let immunityCheckDescription = Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckDescription
+    let immunityCheckInfoText = Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckInfoText
+    let immunityCheckActionTitle = Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckActionTitle
+    let checkSituationTitle = Constants.Keys.CheckSituation.withinGermanyTitle
 
     private var isFreshInstallation: Bool
     var tokensToCheck: [ExtendedCBORWebToken] = []
@@ -224,10 +186,6 @@ class ValidatorOverviewViewModel {
         }
         userDefaults.announcementVersion = bundleVersion
         return router.showAnnouncement()
-    }
-
-    private func routeToChooseCheckSituation() -> PMKFinalizer {
-        router.routeToChooseCheckSituation().cauterize()
     }
 
     private func setupTimer() {

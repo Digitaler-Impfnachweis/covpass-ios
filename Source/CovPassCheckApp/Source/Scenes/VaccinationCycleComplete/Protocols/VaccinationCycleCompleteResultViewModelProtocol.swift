@@ -18,15 +18,12 @@ protocol VaccinationCycleCompleteResultViewModelProtocol: CancellableViewModelPr
     var holderName: String { get }
     var holderNameTransliterated: String { get }
     var holderBirthday: String { get }
-    var travelRules: String { get }
-    var travelRulesIsHidden: Bool { get }
     var revocationInfoHidden: Bool { get }
     var revocationHeadline: String { get }
     var revocationInfoText: String { get }
     var revocationLinkTitle: String { get }
     var buttonTitle: String { get }
     var closeButtonAccessibilityText: String { get }
-
     func rescan()
     func revoke(_: Any)
 }

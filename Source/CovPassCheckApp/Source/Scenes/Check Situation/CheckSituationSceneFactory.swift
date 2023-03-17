@@ -28,9 +28,7 @@ public struct CheckSituationSceneFactory: SceneFactory {
         guard let offlineRevocationService = CertificateRevocationOfflineService.shared else {
             fatalError("CertificateRevocationOfflineService must not be nil.")
         }
-        let context: CheckSituationViewModelContextType = .settings
-        let viewModel = CheckSituationViewModel(context: context,
-                                                userDefaults: userDefaults,
+        let viewModel = CheckSituationViewModel(userDefaults: userDefaults,
                                                 router: router,
                                                 resolver: nil,
                                                 offlineRevocationService: offlineRevocationService,

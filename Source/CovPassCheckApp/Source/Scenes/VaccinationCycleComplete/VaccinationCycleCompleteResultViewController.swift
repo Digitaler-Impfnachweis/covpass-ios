@@ -21,7 +21,6 @@ final class VaccinationCycleCompleteResultViewController: UIViewController {
     @IBOutlet var revocationInfoView: HintView!
     @IBOutlet var rescanButton: MainButton!
     @IBOutlet var counterLabel: UILabel!
-    @IBOutlet var travelRulesLinkLabel: LinkLabel!
 
     private var viewModel: VaccinationCycleCompleteResultViewModelProtocol
     private lazy var revocationLink: NSAttributedString = {
@@ -95,10 +94,6 @@ final class VaccinationCycleCompleteResultViewController: UIViewController {
             .colored(.onBackground110)
         let titleSubTitleA11lText = viewModel.title + viewModel.subtitle
         headerStackView.enableAccessibility(label: titleSubTitleA11lText, traits: .header)
-        travelRulesLinkLabel.attributedText = viewModel.travelRules.styledAs(.header_3)
-        travelRulesLinkLabel.isHidden = viewModel.travelRulesIsHidden
-        travelRulesLinkLabel.layoutMargins = .init(top: 24, left: 18, bottom: 0, right: 18)
-        travelRulesLinkLabel.applyRightImage(image: .externalLink)
     }
 
     private func configureHolderInformationView() {
