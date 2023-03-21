@@ -5,6 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 @testable import CovPassApp
 import CovPassCommon
 import PromiseKit
@@ -21,22 +22,26 @@ private enum Constants {
 
 class RuleCheckDetailViewModelTests: XCTestCase {
     private var sut: RuleCheckDetailViewModel!
+    private var result: [ValidationResult] = []
+
     override func setUpWithError() throws {
         try configureSut(token: .mock())
     }
 
     override func tearDownWithError() throws {
+        result = []
         sut = nil
     }
 
-    private func configureSut(token: ExtendedCBORWebToken) {
+    private func configureSut(token: ExtendedCBORWebToken, result: [ValidationResult] = []) {
         let (_, resolver) = Promise<Void>.pending()
+        self.result = result
         sut = .init(
             router: RuleCheckDetailRouter(
                 sceneCoordinator: SceneCoordinatorMock()
             ),
             resolvable: resolver,
-            result: .init(certificate: token, result: []),
+            result: .init(certificate: token, result: result),
             country: "IS",
             date: Date(timeIntervalSinceReferenceDate: 0)
         )
@@ -184,5 +189,36 @@ class RuleCheckDetailViewModelTests: XCTestCase {
             title == Constants.countryRecoveryAndTestTitle
         }
         XCTAssertEqual(countryItem?.1, "Brazil")
+    }
+
+    func test_resultSubtitle_resultEmpty() throws {
+        // GIVEN
+        configureSut(token: try .mock(), result: [])
+        // WHEN
+        let resultSubtitle = sut.resultSubtitle
+        // THEN
+        XCTAssertEqual(resultSubtitle, "For the selected country and date, there are currently no entry rules available to check for in the App. \n\nPlease check on the #website Re-Open EU::https://reopen.europa.eu/en# whether the certificate is valid for entry into the selected country.")
+    }
+
+    func test_resultSubtitle_oneResultPassed() throws {
+        // GIVEN
+        let rule: Rule = .init()
+        let result: Array<ValidationResult>.ArrayLiteralElement = .init(rule: rule, result: .passed)
+        configureSut(token: try .mock(), result: [result])
+        // WHEN
+        let resultSubtitle = sut.resultSubtitle
+        // THEN
+        XCTAssertEqual(resultSubtitle, "For Iceland on Jan 1, 2001 at 1:00 AM\n\n1 rule of the destination country was successfully checked.")
+    }
+
+    func test_resultSubtitle_twoResultPassed() throws {
+        // GIVEN
+        let rule: Rule = .init()
+        let result: Array<ValidationResult>.ArrayLiteralElement = .init(rule: rule, result: .passed)
+        configureSut(token: try .mock(), result: [result, result])
+        // WHEN
+        let resultSubtitle = sut.resultSubtitle
+        // THEN
+        XCTAssertEqual(resultSubtitle, "For Iceland on Jan 1, 2001 at 1:00 AM\n\n2 rules of the destination country were successfully checked.")
     }
 }

@@ -688,7 +688,9 @@
 
 "certificate_check_validity_detail_view_result_valid_message" = "For %@ on %@";
 
-"certificate_check_validity_detail_view_result_valid_info" = "%d rules of the destination country were successfully checked.";
+"certificate_check_validity_detail_view_result_valid_info_singular" = "1 rule of the destination country was successfully checked.";
+
+"certificate_check_validity_detail_view_result_valid_info_plural" = "%d rules of the destination country were successfully checked.";
 
 "certificate_check_validity_detail_view_result_valid_info_no_rules" = "There are currently no entry rules available for this certificate type and the selected country and date. Please note the following:";
 

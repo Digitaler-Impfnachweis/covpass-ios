@@ -688,7 +688,9 @@
 
 "certificate_check_validity_detail_view_result_valid_message" = "Für %@, am %@";
 
-"certificate_check_validity_detail_view_result_valid_info" = "Es wurden %d Regeln des Ziellandes erfolgreich überprüft.";
+"certificate_check_validity_detail_view_result_valid_info_singular" = "Es wurde 1 Regel des Ziellandes erfolgreich überprüft.";
+
+"certificate_check_validity_detail_view_result_valid_info_plural" = "Es wurden %d Regeln des Ziellandes erfolgreich überprüft.";
 
 "certificate_check_validity_detail_view_result_valid_info_no_rules" = "Für diesen Zertifikattyp sind derzeit keine Einreiseregeln für das gewählte Land und den gewählten Zeitpunkt vorhanden. Bitte beachten Sie die folgenden Hinweise:";
 

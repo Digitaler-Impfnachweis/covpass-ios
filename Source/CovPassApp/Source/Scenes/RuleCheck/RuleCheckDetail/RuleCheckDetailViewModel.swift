@@ -96,8 +96,10 @@ class RuleCheckDetailViewModel {
         }
         if result.state == .passed {
             let acceptanceRules = result.result.filterAcceptanceRules
+            let rulesCount = acceptanceRules.count
+            let resultValidInfo = rulesCount == 1 ? "certificate_check_validity_detail_view_result_valid_info_singular".localized : "certificate_check_validity_detail_view_result_valid_info_plural".localized
             let ruleInfo = acceptanceRules.isEmpty ? "certificate_check_validity_detail_view_result_valid_info_no_rules".localized :
-                String(format: "certificate_check_validity_detail_view_result_valid_info".localized, acceptanceRules.count)
+                String(format: resultValidInfo, rulesCount)
             return "\(subtitle)\n\n\(ruleInfo)"
         }
         return subtitle
