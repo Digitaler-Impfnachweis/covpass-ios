@@ -197,7 +197,7 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         // WHEN
         let resultSubtitle = sut.resultSubtitle
         // THEN
-        XCTAssertEqual(resultSubtitle, "For the selected country and date, there are currently no entry rules available to check for in the App. \n\nPlease check on the #website Re-Open EU::https://reopen.europa.eu/en# whether the certificate is valid for entry into the selected country.")
+        XCTAssertEqual(resultSubtitle, "For Iceland on Jan 1, 2001 at 1:00 AM\n\nUnfortunately, an automatic check is not possible, as no entry rules are stored for this country. Please consult the website of the Federal Foreign Office for more information.")
     }
 
     func test_resultSubtitle_oneResultPassed() throws {

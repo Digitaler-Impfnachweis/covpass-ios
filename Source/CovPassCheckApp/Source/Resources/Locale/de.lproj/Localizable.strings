@@ -560,7 +560,7 @@
 
 "settings_rules_list_loading_cancel" = "Abbrechen";
 
-"app_information_message_update" = "Legen Sie fest, nach welchen Regeln COVID-Zertifikate geprüft werden sollen. Aktualisieren Sie gegebenenfalls die Prüfregeln (siehe unten).";
+"app_information_message_update" = "Hier können Sie die Regeln aktualisieren, nach denen Zertifikate geprüft werden. Sollte Ihr Smartphone üblicherweise mit dem Internet verbunden sein, passiert das automatisch.";
 
 "app_information_rules_list_title" = "Regelwerk";
 
