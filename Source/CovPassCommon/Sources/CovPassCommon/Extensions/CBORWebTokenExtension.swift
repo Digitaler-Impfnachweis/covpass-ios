@@ -54,7 +54,7 @@ public extension CBORWebToken {
 
     var expiredMoreThan90Days: Bool {
         guard let exp = exp else { return false }
-        let expiresSoonDate = exp + 60 * 60 * 24 * 90
+        guard let expiresSoonDate = Calendar.current.date(byAdding: .day, value: 90, to: exp) else { return false }
         return Date() >= expiresSoonDate
     }
 

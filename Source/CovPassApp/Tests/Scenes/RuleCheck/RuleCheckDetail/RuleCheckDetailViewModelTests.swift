@@ -67,7 +67,7 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         XCTAssertEqual(fullnameTransliteratedItem?.1, "SCHMITT<MUSTERMANN, ERIKA<DOERTE")
         XCTAssertEqual(
             technicalExpiryDateItem?.1,
-            "Valid until Apr 23, 2023 at 10:38 AM\nYou will be notified in the app if you can renew the certificate."
+            "Valid until Jun 23, 2026 at 8:25 PM\nYou will be notified in the app if you can renew the certificate."
         )
         XCTAssertEqual(countryItem?.1, "Germany")
         XCTAssertEqual(dobItem?.1, "1964-08-12")
