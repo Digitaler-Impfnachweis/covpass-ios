@@ -88,18 +88,11 @@ class CertificatesOverviewViewController: UIViewController {
     }
 
     private func setupHeaderView() {
-        headerView.attributedTitleText = "certificate_action_button_check_validity".localized.styledAs(.header_3).colored(.brandBase).lineHeight(Constants.Layout.actionLineHeight)
-        headerView.titleButton.isHidden = !viewModel.hasCertificates
-        headerView.titleIcon.isHidden = !viewModel.hasCertificates
+        headerView.titleIcon.isHidden = true
+        headerView.titleButton.isHidden = true
         headerView.image = .settings
         headerView.actionButton.enableAccessibility(label: viewModel.accessibilityMoreInformation)
-
-        headerView.titleAction = { [weak self] in
-            self?.viewModel.showRuleCheck()
-        }
-        headerView.action = { [weak self] in
-            self?.viewModel.showAppInformation()
-        }
+        headerView.action = viewModel.showAppInformation
     }
 
     private func setupCollectionView() {

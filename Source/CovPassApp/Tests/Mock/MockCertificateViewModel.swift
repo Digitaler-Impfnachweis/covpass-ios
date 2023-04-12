@@ -98,8 +98,6 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
         // TODO: Add tests
     }
 
-    func showRuleCheck() {}
-
     func showNotificationsIfNeeded() {}
 
     func viewModel(for _: Int) -> CardViewModel {

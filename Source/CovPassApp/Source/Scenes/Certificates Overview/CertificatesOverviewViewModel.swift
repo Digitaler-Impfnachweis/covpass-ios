@@ -364,14 +364,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
-    func showRuleCheck() {
-        if certificateList.certificates.filterValidAndNotExpiredCertsWhichArenNotFraud.isEmpty {
-            router.showFilteredCertsErrorDialog()
-        } else {
-            router.showRuleCheck().cauterize()
-        }
-    }
-
     func showAppInformation() {
         router.showAppInformation()
     }

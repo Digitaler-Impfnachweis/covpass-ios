@@ -27,7 +27,6 @@ protocol CertificatesOverviewViewModelProtocol {
     func updateValueSets()
     func scanCertificate(withIntroduction: Bool)
     func showAppInformation()
-    func showRuleCheck()
     func showNotificationsIfNeeded()
     func handleOpen(url: URL) -> Bool
     func viewModel(for row: Int) -> CardViewModel

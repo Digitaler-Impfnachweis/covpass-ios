@@ -20,8 +20,6 @@ public protocol DialogRouterProtocol: RouterProtocol {
     func showUnexpectedErrorDialog(_ error: Error)
 
     func showNoInternetErrorDialog(_ error: Error)
-
-    func showFilteredCertsErrorDialog()
 }
 
 public extension DialogRouterProtocol {
@@ -52,16 +50,6 @@ public extension DialogRouterProtocol {
             title: "error_no_connection_to_server_title".localized(bundle: .main),
             message: error.displayCodeWithMessage("error_no_connection_to_server_message".localized(bundle: .main)),
             actions: [DialogAction(title: "error_connect_to_internet_button_ok".localized(bundle: .uiBundle))],
-            style: .alert
-        )
-        sceneCoordinator.present(scene).cauterize()
-    }
-
-    func showFilteredCertsErrorDialog() {
-        let scene = AlertSceneFactory(
-            title: "no_cert_applicable_for_validation_dialog_header".localized(bundle: .main),
-            message: "no_cert_applicable_for_validation_dialog_message".localized(bundle: .main),
-            actions: [DialogAction(title: "no_cert_applicable_for_validation_positive_button_text".localized(bundle: .main))],
             style: .alert
         )
         sceneCoordinator.present(scene).cauterize()

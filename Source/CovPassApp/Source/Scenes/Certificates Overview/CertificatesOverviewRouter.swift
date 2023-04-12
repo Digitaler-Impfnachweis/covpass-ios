@@ -139,14 +139,6 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
         }
     }
 
-    func showRuleCheck() -> Promise<Void> {
-        sceneCoordinator.present(
-            RuleCheckSceneFactory(
-                router: RuleCheckRouter(sceneCoordinator: sceneCoordinator)
-            )
-        )
-    }
-
     func showQRCodeScanAndSelectionView() -> Promise<QRCodeImportResult> {
         sceneCoordinator.present(
             ScanSceneFactory(
