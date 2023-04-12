@@ -688,7 +688,9 @@
 
 "certificate_check_validity_detail_view_result_valid_message" = "For %@ on %@";
 
-"certificate_check_validity_detail_view_result_valid_info" = "%d rules of the destination country were successfully checked.";
+"certificate_check_validity_detail_view_result_valid_info_singular" = "1 rule of the destination country was successfully checked.";
+
+"certificate_check_validity_detail_view_result_valid_info_plural" = "%d rules of the destination country were successfully checked.";
 
 "certificate_check_validity_detail_view_result_valid_info_no_rules" = "There are currently no entry rules available for this certificate type and the selected country and date. Please note the following:";
 
@@ -697,6 +699,12 @@
 "certificate_check_validity_detail_view_result_not_testable_first_message" = "For %@ on %@";
 
 "certificate_check_validity_detail_view_result_not_testable_second_message" = "Sorry, an automatic check is not possible for this certificate. Please review the information marked out below yourself.";
+
+"check_validity_no_rules_status" = "No rules available";
+
+"check_validity_no_rules_title" = "No entry rules available";
+
+"check_validity_no_rules_copy" = "Unfortunately, an automatic check is not possible, as no entry rules are stored for this country. Please consult the website of the Federal Foreign Office for more information.";
 
 "certificate_check_validity_detail_view_result_not_testable_note_title" = "Review this information";
 

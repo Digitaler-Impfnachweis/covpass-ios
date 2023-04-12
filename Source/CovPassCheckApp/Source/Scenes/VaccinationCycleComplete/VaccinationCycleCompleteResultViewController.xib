@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -24,7 +24,6 @@
                 <outlet property="revocationInfoView" destination="3y8-5r-4KC" id="bLz-pL-eSM"/>
                 <outlet property="subtitleLabel" destination="HSg-Kh-hx8" id="NZN-fG-qeL"/>
                 <outlet property="titleLabel" destination="ke7-Eq-NYy" id="GdQ-4o-T2C"/>
-                <outlet property="travelRulesLinkLabel" destination="nz0-nh-NBA" id="w5H-cG-ytx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,7 +33,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asq-Je-taX" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="64" width="414" height="60"/>
+                    <rect key="frame" x="0.0" y="68" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" placeholder="YES" id="epB-oE-mB6"/>
@@ -79,15 +78,11 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
                                     <rect key="frame" x="0.0" y="440" width="414" height="142"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="nz0-nh-NBA" userLabel="Travel Rules Link Label" customClass="LinkLabel" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="72" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-cK-rm7" userLabel="Revocation Info Container View">
-                                            <rect key="frame" x="0.0" y="70" width="414" height="72"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="142"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3y8-5r-4KC" customClass="HintView" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="8" width="414" height="56"/>
+                                                    <rect key="frame" x="0.0" y="8" width="414" height="126"/>
                                                     <color key="backgroundColor" systemColor="systemBrownColor"/>
                                                 </view>
                                             </subviews>
@@ -206,11 +201,6 @@
             <point key="canvasLocation" x="140" y="41.943127962085306"/>
         </view>
     </objects>
-    <designables>
-        <designable name="nz0-nh-NBA">
-            <size key="intrinsicContentSize" width="414" height="50"/>
-        </designable>
-    </designables>
     <resources>
         <image name="vaccination_cycle_complete" width="143" height="140"/>
         <namedColor name="AccentColor">

@@ -15,8 +15,6 @@ protocol CertificateInvalidResultViewModelProtocol: CancellableViewModelProtocol
     var title: String { get }
     var subtitle: String { get }
     var description: String { get }
-    var travelRules: String { get }
-    var travelRulesIsHidden: Bool { get }
     var revocationInfoHidden: Bool { get }
     var revocationHeadline: String { get }
     var revocationInfoText: String { get }

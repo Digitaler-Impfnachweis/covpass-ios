@@ -5,6 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 @testable import CovPassApp
 import CovPassCommon
 import PromiseKit
@@ -21,22 +22,26 @@ private enum Constants {
 
 class RuleCheckDetailViewModelTests: XCTestCase {
     private var sut: RuleCheckDetailViewModel!
+    private var result: [ValidationResult] = []
+
     override func setUpWithError() throws {
         try configureSut(token: .mock())
     }
 
     override func tearDownWithError() throws {
+        result = []
         sut = nil
     }
 
-    private func configureSut(token: ExtendedCBORWebToken) {
+    private func configureSut(token: ExtendedCBORWebToken, result: [ValidationResult] = []) {
         let (_, resolver) = Promise<Void>.pending()
+        self.result = result
         sut = .init(
             router: RuleCheckDetailRouter(
                 sceneCoordinator: SceneCoordinatorMock()
             ),
             resolvable: resolver,
-            result: .init(certificate: token, result: []),
+            result: .init(certificate: token, result: result),
             country: "IS",
             date: Date(timeIntervalSinceReferenceDate: 0)
         )
@@ -62,7 +67,7 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         XCTAssertEqual(fullnameTransliteratedItem?.1, "SCHMITT<MUSTERMANN, ERIKA<DOERTE")
         XCTAssertEqual(
             technicalExpiryDateItem?.1,
-            "Valid until Apr 23, 2023 at 10:38 AM\nYou will be notified in the app if you can renew the certificate."
+            "Valid until Jun 23, 2026 at 8:25 PM\nYou will be notified in the app if you can renew the certificate."
         )
         XCTAssertEqual(countryItem?.1, "Germany")
         XCTAssertEqual(dobItem?.1, "1964-08-12")
@@ -184,5 +189,36 @@ class RuleCheckDetailViewModelTests: XCTestCase {
             title == Constants.countryRecoveryAndTestTitle
         }
         XCTAssertEqual(countryItem?.1, "Brazil")
+    }
+
+    func test_resultSubtitle_resultEmpty() throws {
+        // GIVEN
+        configureSut(token: try .mock(), result: [])
+        // WHEN
+        let resultSubtitle = sut.resultSubtitle
+        // THEN
+        XCTAssertEqual(resultSubtitle, "For Iceland on Jan 1, 2001 at 1:00 AM\n\nUnfortunately, an automatic check is not possible, as no entry rules are stored for this country. Please consult the website of the Federal Foreign Office for more information.")
+    }
+
+    func test_resultSubtitle_oneResultPassed() throws {
+        // GIVEN
+        let rule: Rule = .init()
+        let result: Array<ValidationResult>.ArrayLiteralElement = .init(rule: rule, result: .passed)
+        configureSut(token: try .mock(), result: [result])
+        // WHEN
+        let resultSubtitle = sut.resultSubtitle
+        // THEN
+        XCTAssertEqual(resultSubtitle, "For Iceland on Jan 1, 2001 at 1:00 AM\n\n1 rule of the destination country was successfully checked.")
+    }
+
+    func test_resultSubtitle_twoResultPassed() throws {
+        // GIVEN
+        let rule: Rule = .init()
+        let result: Array<ValidationResult>.ArrayLiteralElement = .init(rule: rule, result: .passed)
+        configureSut(token: try .mock(), result: [result, result])
+        // WHEN
+        let resultSubtitle = sut.resultSubtitle
+        // THEN
+        XCTAssertEqual(resultSubtitle, "For Iceland on Jan 1, 2001 at 1:00 AM\n\n2 rules of the destination country were successfully checked.")
     }
 }

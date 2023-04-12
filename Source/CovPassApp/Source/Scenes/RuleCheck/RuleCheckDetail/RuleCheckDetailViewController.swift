@@ -27,8 +27,6 @@ class RuleCheckDetailViewController: UIViewController {
     @IBOutlet var itemStackView: UIStackView!
     @IBOutlet var subtitleLabel: PlainLabel!
     @IBOutlet var qrCodeButton: MainButton!
-    @IBOutlet var infoLabel1: LinkLabel!
-    @IBOutlet var infoLabel2: LinkLabel!
     @IBOutlet var resultView: HintView!
 
     // MARK: - Properties
@@ -54,7 +52,6 @@ class RuleCheckDetailViewController: UIViewController {
         setupHeadline()
         setupList()
         setupButton()
-        setupInfo()
         setupResultView()
     }
 
@@ -94,17 +91,6 @@ class RuleCheckDetailViewController: UIViewController {
         qrCodeButton.style = .secondary
         qrCodeButton.icon = .scan
         qrCodeButton.action = viewModel.showQRCode
-    }
-
-    private func setupInfo() {
-        infoLabel1.linkFont = .scaledBoldBody
-        infoLabel1.attributedText = viewModel.infoText1.styledAs(.body)
-        infoLabel1.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_24, right: .space_24)
-        infoLabel1.applyRightImage(image: .externalLink)
-        infoLabel2.linkFont = .scaledBoldBody
-        infoLabel2.attributedText = viewModel.infoText2.styledAs(.body)
-        infoLabel2.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_40, right: .space_24)
-        infoLabel2.applyRightImage(image: .externalLink)
     }
 
     private func setupResultView() {

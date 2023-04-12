@@ -12,17 +12,8 @@ public class CheckSituationViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet var stackview: UIStackView!
-    @IBOutlet var hStackView: UIStackView!
-    @IBOutlet var titleLabel: PlainLabel!
-    @IBOutlet var newBadgeView: HighlightLabel!
-    @IBOutlet var newBadgeWrapper: UIView!
-    @IBOutlet var descriptionTextWrapper: UIView!
-    @IBOutlet var subTitleTextWrapper: UIView!
-    @IBOutlet var pageImageView: UIImageView!
     @IBOutlet var descriptionLabel: PlainLabel!
     @IBOutlet var descriptionContainerView: UIView!
-    @IBOutlet var subTitleLabel: PlainLabel!
-    @IBOutlet var saveButton: MainButton!
     @IBOutlet var offlineRevocationView: UIView!
     @IBOutlet var offlineRevocationTitleLabel: UILabel!
     @IBOutlet var offlineRevocationSwitch: LabeledSwitch!
@@ -32,9 +23,6 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var downloadStateHintLabel: PlainLabel!
     @IBOutlet var downloadStateIconImageView: UIImageView!
     @IBOutlet var downloadStateWrapper: UIView!
-    @IBOutlet var entryRulesStackView: UIStackView!
-    @IBOutlet var entryRulesTitleLabel: PlainLabel!
-    @IBOutlet var entryRulesSubtitleLabel: PlainLabel!
     @IBOutlet var domesticRulesStackView: UIStackView!
     @IBOutlet var domesticRulesTitleLabel: PlainLabel!
     @IBOutlet var domesticRulesSubtitleLabel: PlainLabel!
@@ -55,12 +43,6 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var cancelButton: MainButton!
     @IBOutlet var downloadingHintLabel: PlainLabel!
     @IBOutlet var activityIndicatorWrapper: UIView!
-    @IBOutlet var checkSituationContainer: UIView!
-    @IBOutlet var checkSituationTitleLabel: PlainLabel!
-    @IBOutlet var checkSituationSubtitle: PlainLabel!
-    @IBOutlet var checkSituationWithinGermany: ImageTitleSubtitleView!
-    @IBOutlet var checkSituationEnteringGermany: ImageTitleSubtitleView!
-
     @IBOutlet public var mainButton: MainButton!
     private let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
 
@@ -87,12 +69,10 @@ public class CheckSituationViewController: UIViewController {
 
     override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIAccessibility.post(notification: .announcement, argument: viewModel.onboardingOpen)
     }
 
     override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIAccessibility.post(notification: .announcement, argument: viewModel.onboardingClose)
     }
 
     override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -100,40 +80,11 @@ public class CheckSituationViewController: UIViewController {
         configureHidden()
     }
 
-    private func configureSaveButton() {
-        saveButton.style = .primary
-        saveButton.title = viewModel.doneButtonTitle
-        saveButton.action = viewModel.doneIsTapped
-    }
-
     private func configureHidden() {
         descriptionContainerView.isHidden = viewModel.descriptionIsHidden
-        saveButton.isHidden = viewModel.buttonIsHidden
-        subTitleTextWrapper.isHidden = viewModel.subTitleIsHidden
-        hStackView.isHidden = viewModel.hStackViewIsHidden
-        newBadgeWrapper.isHidden = viewModel.newBadgeIconIsHidden
-        pageImageView.isHidden = viewModel.pageImageIsHidden || UIScreen.isLandscape
-        titleLabel.isHidden = viewModel.pageTitleIsHidden
-    }
-
-    private func configureImageView() {
-        pageImageView.image = viewModel.pageImage
-        pageImageView.isAccessibilityElement = false
-        pageImageView.enableAccessibility(label: viewModel.onboardingImageDescription, traits: .image)
-    }
-
-    private func configureSpacings() {
-        if viewModel.descriptionTextIsTop {
-            stackview.removeArrangedSubview(descriptionTextWrapper)
-            stackview.insertArrangedSubview(descriptionTextWrapper, at: 0)
-        }
-        stackview.setCustomSpacing(24, after: descriptionTextWrapper)
-        stackview.setCustomSpacing(28, after: hStackView)
-        stackview.setCustomSpacing(44, after: pageImageView)
     }
 
     private func configureUpdateEntriesStackViews() {
-        entryRulesStackView.isAccessibilityElement = true
         domesticRulesStackView.isAccessibilityElement = true
         valueSetsStackView.isAccessibilityElement = true
         certificateProviderStackView.isAccessibilityElement = true
@@ -150,18 +101,11 @@ public class CheckSituationViewController: UIViewController {
         navigationItem.leftBarButtonItem = backButton
         navigationController?.navigationBar.tintColor = .onBackground100
 
-        titleLabel.attributedText = viewModel.pageTitle.styledAs(.header_2)
-        newBadgeView.attributedText = viewModel.newBadgeText.styledAs(.label).colored(.white)
         descriptionLabel.attributedText = viewModel.footerText.styledAs(.body)
-        subTitleLabel.attributedText = viewModel.subTitleText.styledAs(.header_3)
         configureUpdateEntriesStackViews()
-        configureImageView()
         configureHidden()
-        configureSaveButton()
-        configureSpacings()
         configureOfflineRevocationView()
         configureUpdateView()
-        configureCheckSituation()
     }
 
     private func configureOfflineRevocationView() {
@@ -183,14 +127,11 @@ public class CheckSituationViewController: UIViewController {
 
     private func configureAccessibilityRespondsToUserInteraction() {
         if #available(iOS 13.0, *) {
-            titleLabel.accessibilityRespondsToUserInteraction = true
             descriptionLabel.accessibilityRespondsToUserInteraction = true
-            subTitleLabel.accessibilityRespondsToUserInteraction = true
             offlineRevocationTitleLabel.accessibilityRespondsToUserInteraction = true
             offlineRevocationDescriptionLabel.accessibilityRespondsToUserInteraction = true
             bodyTitleLabel.accessibilityRespondsToUserInteraction = true
             downloadStateHintLabel.accessibilityRespondsToUserInteraction = true
-            entryRulesStackView.accessibilityRespondsToUserInteraction = true
             domesticRulesStackView.accessibilityRespondsToUserInteraction = true
             valueSetsStackView.accessibilityRespondsToUserInteraction = true
             certificateProviderStackView.accessibilityRespondsToUserInteraction = true
@@ -218,8 +159,6 @@ extension CheckSituationViewController {
         mainButton.style = .primary
         cancelButton.title = viewModel.cancelButtonTitle
         cancelButton.style = .plain
-        entryRulesTitleLabel.attributedText = viewModel.entryRulesTitle.styledAs(.header_3)
-        entryRulesStackView.accessibilityLabel = viewModel.entryRulesTitle
         domesticRulesTitleLabel.attributedText = viewModel.domesticRulesUpdateTitle.styledAs(.header_3)
         domesticRulesStackView.accessibilityLabel = viewModel.domesticRulesUpdateTitle
         valueSetsTitleLabel.attributedText = viewModel.valueSetsTitle.styledAs(.header_3)
@@ -266,8 +205,6 @@ extension CheckSituationViewController {
         downloadStateHintLabel.attributedText = viewModel.downloadStateHintTitle.styledAs(.label).colored(viewModel.downloadStateTextColor)
         downloadStateIconImageView.image = viewModel.downloadStateHintIcon
         downloadStateWrapper.backgroundColor = viewModel.downloadStateHintColor
-        entryRulesSubtitleLabel.attributedText = viewModel.entryRulesSubtitle.styledAs(.body)
-        entryRulesStackView.accessibilityValue = viewModel.entryRulesSubtitle
         domesticRulesSubtitleLabel.attributedText = viewModel.domesticRulesUpdateSubtitle.styledAs(.body)
         domesticRulesStackView.accessibilityValue = viewModel.domesticRulesUpdateSubtitle
         valueSetsSubtitleLabel.attributedText = viewModel.valueSetsSubtitle.styledAs(.body)
@@ -281,58 +218,11 @@ extension CheckSituationViewController {
         authorityListView.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
         authorityListDivider.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
     }
-
-    private func configureCheckSituation() {
-        guard !viewModel.checkSituationIsHidden else {
-            checkSituationContainer.isHidden = true
-            return
-        }
-        checkSituationContainer.isHidden = false
-        checkSituationTitleLabel.attributedText = viewModel.checkSituationTitle.styledAs(.header_2)
-        checkSituationTitleLabel.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
-        checkSituationSubtitle.attributedText = viewModel.checkSituationSubtitle.styledAs(.body)
-        checkSituationSubtitle.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
-        updateWithinGermany()
-        updateEnteringGermany()
-    }
-
-    func updateWithinGermany() {
-        let title = viewModel.checkSituationWithinGermanyTitle.styledAs(.header_3)
-        let subtitle = viewModel.checkSituationWithinGermanySubtitle.styledAs(.body)
-        let image = viewModel.checkSituationWithinGermanyImage
-        checkSituationWithinGermany.update(title: title,
-                                           subtitle: subtitle,
-                                           rightImage: image,
-                                           backGroundColor: .neutralWhite,
-                                           edgeInstes: .init(top: 12, left: 24, bottom: 12, right: 24))
-        checkSituationWithinGermany.onTap = {
-            self.viewModel.withinGermanyIsChoosen()
-            UIAccessibility.post(notification: .layoutChanged, argument: self.viewModel.checkSituationWithinGermanyOptionAccessibiliyLabel)
-        }
-        checkSituationWithinGermany.containerView?.accessibilityValue = viewModel.checkSituationWithinGermanyOptionAccessibiliyLabel
-    }
-
-    func updateEnteringGermany() {
-        let title = viewModel.checkSituationEnteringGermanyTitle.styledAs(.header_3)
-        let subtitle = viewModel.checkSituationEnteringGermanySubtitle.styledAs(.body)
-        let image = viewModel.checkSituationEnteringGermanyImage
-        checkSituationEnteringGermany.update(title: title,
-                                             subtitle: subtitle,
-                                             rightImage: image,
-                                             backGroundColor: .neutralWhite,
-                                             edgeInstes: .init(top: 12, left: 24, bottom: 12, right: 24))
-        checkSituationEnteringGermany.onTap = {
-            self.viewModel.enteringGermanyViewIsChoosen()
-            UIAccessibility.post(notification: .layoutChanged, argument: self.viewModel.checkSituationEnteringGermanyOptionAccessibiliyLabel)
-        }
-        checkSituationEnteringGermany.containerView?.accessibilityValue = viewModel.checkSituationEnteringGermanyOptionAccessibiliyLabel
-    }
 }
 
 extension CheckSituationViewController: ViewModelDelegate {
     public func viewModelDidUpdate() {
         updateUpdateRelatedViews()
-        configureCheckSituation()
         toggleOfflineRevocationIfNeeded()
     }
 

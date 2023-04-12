@@ -206,7 +206,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         certificates
             .reversed()
             .compactMap { cert in
-                let active = cert == selectedCertificate
+                let active = cert == selectedCertificate && cert.isNotExpired
                 var vm: CertificateItemViewModel?
                 if cert.vaccinationCertificate.hcert.dgc.r != nil {
                     vm = RecoveryCertificateItemViewModel(cert, active: active)

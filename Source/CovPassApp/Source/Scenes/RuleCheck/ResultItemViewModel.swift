@@ -78,7 +78,7 @@ struct ResultItemViewModel: CertificateItemViewModel {
 
     var info: String {
         if result.state == .open {
-            return "certificate_check_validity_result_not_testable".localized
+            return "check_validity_no_rules_status".localized
         }
         if result.state == .fail {
             return "certificate_check_validity_result_not_valid".localized
