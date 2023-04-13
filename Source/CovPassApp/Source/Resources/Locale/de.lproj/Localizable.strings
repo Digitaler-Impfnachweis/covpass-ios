@@ -36,13 +36,13 @@
 
 "accessibility_page_indicator" = "Seite %d von %d";
 
-"vaccination_first_onboarding_page_title" = "Erster Schritt: Übertragen Sie das digitale COVID-Zertifikat der EU auf Ihr Smartphone";
+"vaccination_first_onboarding_page_title" = "Übertragen Sie das digitale COVID-Zertifikat der EU auf Ihr Smartphone";
 
 "vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das digitale COVID-Zertifikat der EU für eine Corona-Impfung oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das digitale COVID-Zertifikat der EU wird sofort auf Ihr Smartphone übertragen.";
 
-"vaccination_second_onboarding_page_title" = "Zweiter Schritt: Rufen Sie den QR-Code in der CovPass-App auf";
+"vaccination_second_onboarding_page_title" = "Rufen Sie den QR-Code in der CovPass-App auf";
 
-"vaccination_second_onboarding_page_message" = "Mit dem QR-Code können Sie Corona-Impfungen und Genesungen von einer Corona-Infektion nachweisen. Ebenso zeigt die App an, ob Sie in bestimmten Bundesländern im öffentlichen Personennahverkehr und in öffentlich zugänglichen Innenräumen wie beispielsweise Restaurants oder Freizeitveranstaltungen eine Maske tragen müssen oder nicht.";
+"vaccination_second_onboarding_page_message" = "Mit dem QR-Code können Sie Corona-Impfungen und Genesungen von einer Corona-Infektion nachweisen. Bei Bedarf können Sie den QR-Code in der CovPass-App vorzeigen. Der QR-Code wird dann von der prüfenden Person mit der CovPassCheck-App gescannt. Halten Sie dazu ergänzend Ihr Ausweisdokument bereit.";
 
 "vaccination_third_onboarding_page_title" = "Dritter Schritt: Zeigen Sie den QR-Code bei Bedarf vor";
 

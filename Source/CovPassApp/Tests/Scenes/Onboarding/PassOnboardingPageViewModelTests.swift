@@ -35,11 +35,4 @@ class PassOnboardingPageViewModelTests: XCTestCase {
         XCTAssertEqual(sut.title, "vaccination_second_onboarding_page_title".localized)
         XCTAssertEqual(sut.info, "vaccination_second_onboarding_page_message".localized)
     }
-
-    func testPage3Values() {
-        sut = PassOnboardingPageViewModel(type: .page3)
-        XCTAssertEqual(sut.image, .onboardingScreen3)
-        XCTAssertEqual(sut.title, "vaccination_third_onboarding_page_title".localized)
-        XCTAssertEqual(sut.info, "vaccination_third_onboarding_page_message".localized)
-    }
 }

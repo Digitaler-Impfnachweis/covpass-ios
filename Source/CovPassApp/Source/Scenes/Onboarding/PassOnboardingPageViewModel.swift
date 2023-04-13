@@ -25,8 +25,6 @@ class PassOnboardingPageViewModel: OnboardingPageViewModel {
             return .onboardingScreen1
         case .page2:
             return .onboardingScreen2
-        case .page3:
-            return .onboardingScreen3
         default:
             return nil
         }
@@ -38,8 +36,6 @@ class PassOnboardingPageViewModel: OnboardingPageViewModel {
             return "vaccination_first_onboarding_page_title".localized
         case .page2:
             return "vaccination_second_onboarding_page_title".localized
-        case .page3:
-            return "vaccination_third_onboarding_page_title".localized
         default:
             return nil
         }
@@ -51,8 +47,6 @@ class PassOnboardingPageViewModel: OnboardingPageViewModel {
             return "vaccination_first_onboarding_page_message".localized
         case .page2:
             return "vaccination_second_onboarding_page_message".localized
-        case .page3:
-            return "vaccination_third_onboarding_page_message".localized
         default:
             return nil
         }
