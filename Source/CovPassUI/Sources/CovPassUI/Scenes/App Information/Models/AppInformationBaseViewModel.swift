@@ -61,7 +61,6 @@ public extension AppInformationBaseViewModel {
         public static let whatsNewOn = "settings_list_status_on".localized(bundle: .main)
         public static let whatsNewOff = "settings_list_status_off".localized(bundle: .main)
         public static let leichteSprache = "app_information_title_company_easy_language".localized(bundle: .main)
-        public static let contactTitle = "app_information_title_contact".localized(bundle: .main)
         public static let faqTitle = "app_information_title_faq".localized(bundle: .main)
         public static let datenschutzTitle = "app_information_title_datenschutz".localized(bundle: .main)
         public static let companyDetailsTitle = "app_information_title_company_details".localized(bundle: .main)
@@ -78,7 +77,6 @@ public extension AppInformationBaseViewModel {
         public enum Opening {
             public static let informationAnnounce = "accessibility_app_information_title_information_announce".localized(bundle: .main)
             public static let leichteSprache = "accessibility_app_information_title_simple_language_announce".localized(bundle: .main)
-            public static let contactTitle = "accessibility_app_information_title_contact_announce".localized(bundle: .main)
             public static let faqTitle = "accessibility_app_information_title_faq_announce".localized(bundle: .main)
             public static let datenschutzTitle = "accessibility_app_information_datenschutz_announce".localized(bundle: .main)
             public static let companyDetailsTitle = "accessibility_app_information_title_legal_information_announce".localized(bundle: .main)
@@ -89,7 +87,6 @@ public extension AppInformationBaseViewModel {
         public enum Closing {
             public static let informationAnnounce = "accessibility_app_information_title_information_closing_announce".localized(bundle: .main)
             public static let leichteSprache = "accessibility_app_information_title_simple_language_announce_closing".localized(bundle: .main)
-            public static let contactTitle = "accessibility_app_information_title_contact_closing_announce".localized(bundle: .main)
             public static let faqTitle = "accessibility_app_information_title_faq_announce_closing".localized(bundle: .main)
             public static let datenschutzTitle = "accessibility_app_information_datenschutz_closing_announce".localized(bundle: .main)
             public static let companyDetailsTitle = "accessibility_app_information_title_legal_information_announce_closing".localized(bundle: .main)
