@@ -88,64 +88,6 @@ class CertificateHolderStatusModelTests: XCTestCase {
         XCTAssertEqual(result, .passed)
     }
 
-    // MARK: checkEuInvalidationRules
-
-    func test_checkEuInvalidationRules_emptyToken() {
-        // WHEN
-        let result = sut.checkEuInvalidationRules([])
-        // THEN
-        XCTAssertEqual(result, .failedTechnical)
-    }
-
-    func test_checkEuInvalidationRules_someError() {
-        // GIVEN
-        certLogic.validationError = NSError(domain: "some error", code: 1)
-        // WHEN
-        let result = sut.checkEuInvalidationRules([token])
-        // THEN
-        XCTAssertEqual(result, .failedTechnical)
-    }
-
-    func test_checkEuInvalidationRuless_with_ruleWhichHasTypeOfInvalidationWhichIsFailed() {
-        // GIVEN
-        rule.type = "Invalidation"
-        certLogic.validateResult = [.init(rule: rule)]
-        // WHEN
-        let result = sut.checkEuInvalidationRules([token])
-        // THEN
-        XCTAssertEqual(result, .failedFunctional)
-    }
-
-    func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsFailed() {
-        // GIVEN
-        rule.type = "Invalidation"
-        certLogic.validateResult = [.init(rule: rule, result: .fail)]
-        // WHEN
-        let result = sut.checkEuInvalidationRules([token])
-        // THEN
-        XCTAssertEqual(result, .failedFunctional)
-    }
-
-    func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsOpen() {
-        // GIVEN
-        rule.type = "Invalidation"
-        certLogic.validateResult = [.init(rule: rule, result: .open)]
-        // WHEN
-        let result = sut.checkEuInvalidationRules([token])
-        // THEN
-        XCTAssertEqual(result, .failedFunctional)
-    }
-
-    func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsPassed() {
-        // GIVEN
-        rule.type = "Invalidation"
-        certLogic.validateResult = [.init(rule: rule, result: .passed)]
-        // WHEN
-        let result = sut.checkEuInvalidationRules([token])
-        // THEN
-        XCTAssertEqual(result, .passed)
-    }
-
     func test_ifsg22aRulesAvailable_true() {
         // GIVEN
         let expectedResult = true
@@ -191,32 +133,5 @@ class CertificateHolderStatusModelTests: XCTestCase {
         let result = sut.vaccinationCycleIsComplete([token])
         // THEN
         XCTAssertEqual(result.passed, false)
-    }
-
-    func test_areTravelRulesAvailableForGermany_true() {
-        // GIVEN
-        certLogic.rules = [.init(countryCode: "DE")]
-        // WHEN
-        let areTravelRulesAvailableForGermany = sut.areTravelRulesAvailableForGermany()
-        // THEN
-        XCTAssertTrue(areTravelRulesAvailableForGermany)
-    }
-
-    func test_areTravelRulesAvailableForGermany_false() {
-        // GIVEN
-        certLogic.rules = []
-        // WHEN
-        let areTravelRulesAvailableForGermany = sut.areTravelRulesAvailableForGermany()
-        // THEN
-        XCTAssertFalse(areTravelRulesAvailableForGermany)
-    }
-
-    func test_areTravelRulesAvailableForGermany_containsRuleToSkip_false() {
-        // GIVEN
-        certLogic.rules = [.init(identifier: "GR-DE-0001")]
-        // WHEN
-        let areTravelRulesAvailableForGermany = sut.areTravelRulesAvailableForGermany()
-        // THEN
-        XCTAssertFalse(areTravelRulesAvailableForGermany)
     }
 }

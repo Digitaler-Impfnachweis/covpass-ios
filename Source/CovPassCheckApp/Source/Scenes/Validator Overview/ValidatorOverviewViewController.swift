@@ -63,8 +63,6 @@ class ValidatorOverviewViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
-        viewModel.updateDCCRules()
-        viewModel.updateValueSets()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

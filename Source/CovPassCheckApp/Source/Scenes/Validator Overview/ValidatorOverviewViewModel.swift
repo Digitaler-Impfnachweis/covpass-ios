@@ -80,7 +80,7 @@ class ValidatorOverviewViewModel {
 
     var delegate: ViewModelDelegate?
     var userDefaults: Persistence
-    var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || vaccinationRepository.trustListShouldBeUpdated() }
+    var shouldSomethingBeUpdated: Bool { vaccinationRepository.trustListShouldBeUpdated() }
 
     var isLoadingScan = false {
         didSet {
@@ -207,19 +207,6 @@ class ValidatorOverviewViewModel {
                     self?.delegate?.viewModelDidUpdate()
                 }
             }
-    }
-
-    func updateDCCRules() {
-        certLogic
-            .updateRulesIfNeeded()
-            .done { [weak self] in
-                self?.delegate?.viewModelDidUpdate()
-            }
-            .cauterize()
-    }
-
-    func updateValueSets() {
-        certLogic.updateValueSetsIfNeeded().cauterize()
     }
 
     func showAppInformation() {

@@ -57,12 +57,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-    private func prepareSut(lastUpdateTrustList: Date? = nil, lastUpdateDccrRules: Date? = nil) {
+    private func prepareSut(lastUpdateTrustList: Date? = nil) {
         if let lastUpdateTrustList = lastUpdateTrustList {
             userDefaults.lastUpdatedTrustList = lastUpdateTrustList
-        }
-        if let lastUpdateDccrRules = lastUpdateDccrRules {
-            userDefaults.lastUpdatedDCCRules = lastUpdateDccrRules
         }
         sut = .init(
             router: router,

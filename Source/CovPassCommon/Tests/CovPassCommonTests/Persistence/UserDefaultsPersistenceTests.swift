@@ -59,33 +59,4 @@ class UserDefaultsPersistenceTests: XCTestCase {
         // THEN
         XCTAssertEqual(revocationExpertMode, false)
     }
-
-    func testLastUpdateDomesticRules_Nil() throws {
-        // GIVEN
-        try sut.delete(UserDefaults.keyLastUpdateDomesticRuless)
-        // WHEN
-        let lastUpdateDomesticRules = sut.lastUpdateDomesticRules
-        // THEN
-        XCTAssertNil(lastUpdateDomesticRules)
-    }
-
-    func testLastUpdateDomesticRules_Date_over_store() throws {
-        // GIVEN
-        let date = Date()
-        try sut.store(UserDefaults.keyLastUpdateDomesticRuless, value: date)
-        // WHEN
-        let lastUpdateDomesticRules = sut.lastUpdateDomesticRules
-        // THEN
-        XCTAssertEqual(date, lastUpdateDomesticRules)
-    }
-
-    func testLastUpdateDomesticRules_Date() throws {
-        // GIVEN
-        let date = Date()
-        sut.lastUpdateDomesticRules = date
-        // WHEN
-        let lastUpdateDomesticRules = sut.lastUpdateDomesticRules
-        // THEN
-        XCTAssertEqual(date, lastUpdateDomesticRules)
-    }
 }

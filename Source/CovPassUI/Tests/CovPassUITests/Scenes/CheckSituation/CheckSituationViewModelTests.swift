@@ -13,7 +13,6 @@ import XCTest
 class CheckSituationViewModelTests: XCTestCase {
     var offlineRevocationService: CertificateRevocationOfflineServiceMock!
     var repository: VaccinationRepositoryMock!
-    var certLogic: DCCCertLogicMock!
     var persistence: UserDefaultsPersistence!
     var router: CheckSituationRouterMock!
     var delegate: ViewModelDelegateMock!
@@ -23,7 +22,6 @@ class CheckSituationViewModelTests: XCTestCase {
         super.setUp()
         persistence = .init()
         offlineRevocationService = .init()
-        certLogic = .init()
         repository = .init()
         router = CheckSituationRouterMock()
         delegate = ViewModelDelegateMock()
@@ -36,14 +34,12 @@ class CheckSituationViewModelTests: XCTestCase {
                                       router: router,
                                       resolver: resolver,
                                       offlineRevocationService: offlineRevocationService,
-                                      repository: repository,
-                                      certLogic: certLogic)
+                                      repository: repository)
         sut.delegate = delegate
     }
 
     override func tearDown() {
         offlineRevocationService = nil
-        certLogic = nil
         delegate = nil
         repository = nil
         router = nil
@@ -135,28 +131,17 @@ class CheckSituationViewModelTests: XCTestCase {
     func testPropertiesWithLastUpdate() {
         // Given
         var userDefaults = UserDefaultsPersistence()
-        userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
-        userDefaults.lastUpdateDomesticRules = DateUtils.parseDate("2021-04-26T15:05:00")
-        userDefaults.lastUpdatedValueSets = DateUtils.parseDate("2021-04-26T15:05:00")
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
         offlineRevocationService.lastSuccessfulUpdate = DateUtils.parseDate("2021-04-26T15:05:00")
 
         // Then
         XCTAssertEqual(sut.listTitle, "app_information_title_checkrules")
-        XCTAssertEqual(sut.downloadStateHintIcon, .warning)
-        XCTAssertEqual(sut.downloadStateTextColor, .neutralBlack)
-        XCTAssertEqual(sut.downloadStateHintColor, .warningAlternative)
-        XCTAssertEqual(sut.downloadStateHintTitle, "settings_rules_list_status_outofdate")
-        XCTAssertEqual(sut.domesticRulesUpdateTitle, "settings_rules_list_domestic")
-        XCTAssertEqual(sut.domesticRulesUpdateSubtitle, "Apr 26, 2021 at 3:05 PM")
-        XCTAssertEqual(sut.valueSetsTitle, "settings_rules_list_features")
-        XCTAssertEqual(sut.valueSetsSubtitle, "Apr 26, 2021 at 3:05 PM")
+        XCTAssertEqual(sut.downloadStateHintIcon, .check)
+        XCTAssertEqual(sut.downloadStateTextColor, .neutralWhite)
+        XCTAssertEqual(sut.downloadStateHintColor, .resultGreen)
+        XCTAssertEqual(sut.downloadStateHintTitle, "settings_rules_list_status_updated")
         XCTAssertEqual(sut.certificateProviderTitle, "settings_rules_list_issuer")
         XCTAssertEqual(sut.certificateProviderSubtitle, "Apr 26, 2021 at 3:05 PM")
-        XCTAssertEqual(sut.countryListTitle, "settings_rules_list_countries")
-        XCTAssertEqual(sut.countryListSubtitle, "Apr 26, 2021 at 3:05 PM")
-        XCTAssertEqual(sut.authorityListTitle, "settings_rules_list_authorities")
-        XCTAssertEqual(sut.authorityListSubtitle, "Apr 26, 2021 at 3:05 PM")
         XCTAssertEqual(sut.loadingHintTitle, "settings_rules_list_loading_title")
         XCTAssertEqual(sut.offlineModusButton, "app_information_message_update_button")
         XCTAssertEqual(sut.cancelButtonTitle, "settings_rules_list_loading_cancel")
@@ -166,13 +151,8 @@ class CheckSituationViewModelTests: XCTestCase {
     func testPropertiesWithLastUpdateWhileNothingToUpdate() {
         // Given
         var userDefaults = UserDefaultsPersistence()
-        userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
-        userDefaults.lastUpdateDomesticRules = DateUtils.parseDate("2021-04-26T15:05:00")
-        userDefaults.lastUpdatedValueSets = DateUtils.parseDate("2021-04-26T15:05:00")
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
         repository.shouldTrustListUpdate = false
-        certLogic.rulesShouldBeUpdated = false
-        certLogic.valueSetsShouldBeUpdated = false
         offlineRevocationService.shouldOfflineUpdate = false
 
         // Then
@@ -181,14 +161,8 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.downloadStateTextColor, .neutralWhite)
         XCTAssertEqual(sut.downloadStateHintColor, .resultGreen)
         XCTAssertEqual(sut.downloadStateHintTitle, "settings_rules_list_status_updated")
-        XCTAssertEqual(sut.domesticRulesUpdateTitle, "settings_rules_list_domestic")
-        XCTAssertEqual(sut.domesticRulesUpdateSubtitle, "Apr 26, 2021 at 3:05 PM")
-        XCTAssertEqual(sut.valueSetsTitle, "settings_rules_list_features")
-        XCTAssertEqual(sut.valueSetsSubtitle, "Apr 26, 2021 at 3:05 PM")
         XCTAssertEqual(sut.certificateProviderTitle, "settings_rules_list_issuer")
         XCTAssertEqual(sut.certificateProviderSubtitle, "Apr 26, 2021 at 3:05 PM")
-        XCTAssertEqual(sut.countryListTitle, "settings_rules_list_countries")
-        XCTAssertEqual(sut.countryListSubtitle, "Apr 26, 2021 at 3:05 PM")
         XCTAssertEqual(sut.loadingHintTitle, "settings_rules_list_loading_title")
         XCTAssertEqual(sut.offlineModusButton, "app_information_message_update_button")
         XCTAssertEqual(sut.cancelButtonTitle, "settings_rules_list_loading_cancel")
@@ -198,58 +172,31 @@ class CheckSituationViewModelTests: XCTestCase {
     func testRefresh() {
         // Given
         let exp1 = expectation(description: "didUpdate viewModel before loading with isLoading false")
-        let exp2 = expectation(description: "didRefresh didUpdateRules")
-        let exp3 = expectation(description: "didRefresh didUpdateValueSets")
-        let exp4 = expectation(description: "didRefresh didUpdateTrustListHandler")
+        let exp3 = expectation(description: "didRefresh didUpdateTrustListHandler")
         let exp5 = expectation(description: "didUpdate viewModel after loading with isLoading true")
         delegate.didUpdate = { exp1.fulfill() }
-        certLogic.didUpdateRules = { exp2.fulfill() }
-        certLogic.didUpdateValueSets = { exp3.fulfill() }
-        repository.didUpdateTrustListHandler = { exp4.fulfill() }
-
+        repository.didUpdateTrustListHandler = {
+            exp3.fulfill()
+        }
         // When
         sut.refresh()
+
         delegate.didUpdate = { exp5.fulfill() }
 
         // Then
         XCTAssertTrue(sut.isLoading)
-        wait(for: [exp1, exp2, exp3, offlineRevocationService.updateExpectation, exp4, exp5], timeout: 2, enforceOrder: true)
+        wait(for: [exp1, exp3, exp5], timeout: 2, enforceOrder: true)
         XCTAssertFalse(sut.isLoading)
-    }
-
-    func testCancel() {
-        // Given
-        let exp2 = expectation(description: "didRefresh didUpdateRules")
-        let exp3 = expectation(description: "didRefresh didUpdateTrustListHandler")
-        exp3.isInverted = true
-        offlineRevocationService.updateExpectation.isInverted = true
-        certLogic.didUpdateRules = {
-            print("1")
-            exp2.fulfill()
-        }
-        repository.didUpdateTrustListHandler = {
-            exp3.fulfill()
-        }
-        sut.refresh()
-
-        // When
-        sut.cancel()
-
-        // Then
-        XCTAssertFalse(sut.isLoading)
-        wait(for: [exp2, exp3, offlineRevocationService.updateExpectation], timeout: 0.1, enforceOrder: true)
     }
 
     func testSkipOfflineDownloadIfDisabled() {
         // Given
         let exp1 = expectation(description: "didUpdate viewModel before loading with isLoading false")
-        let exp2 = expectation(description: "didRefresh didUpdateRules")
         let exp3 = expectation(description: "didRefresh didUpdateTrustListHandler")
         let exp4 = expectation(description: "didUpdate viewModel after loading with isLoading true")
         persistence.isCertificateRevocationOfflineServiceEnabled = false
         offlineRevocationService.updateExpectation.isInverted = true
         delegate.didUpdate = { exp1.fulfill() }
-        certLogic.didUpdateRules = { exp2.fulfill() }
         repository.didUpdateTrustListHandler = { exp3.fulfill() }
 
         // When
@@ -258,53 +205,7 @@ class CheckSituationViewModelTests: XCTestCase {
 
         // Then
         XCTAssertTrue(sut.isLoading)
-        wait(for: [exp1, exp2, offlineRevocationService.updateExpectation, exp3, exp4], timeout: 2, enforceOrder: true)
-        XCTAssertFalse(sut.isLoading)
-    }
-
-    func testErrorNoInternet() {
-        // GIVEN
-        certLogic.throwErrorOnUpdateRules = true
-
-        // WHEN
-        sut.refresh()
-
-        // THEN
-        wait(for: [router.noInternetExpecation], timeout: 2)
-    }
-
-    func testErroOtherCallsAreNotDisturbed() {
-        // GIVEN
-        certLogic.throwErrorOnUpdateRules = true
-        persistence.isCertificateRevocationOfflineServiceEnabled = true
-        let exp1 = expectation(description: "didUpdate viewModel before loading with isLoading false")
-        let exp2 = expectation(description: "didRefresh didUpdateRules")
-        let exp3 = expectation(description: "didRefresh didUpdateValueSets")
-        let exp4 = expectation(description: "didRefresh didUpdateTrustListHandler")
-        let exp5 = expectation(description: "didUpdate viewModel after loading with isLoading true")
-        exp2.isInverted = true
-        delegate.didUpdate = {
-            exp1.fulfill()
-        }
-        certLogic.didUpdateRules = {
-            exp2.fulfill()
-        }
-        certLogic.didUpdateValueSets = {
-            exp3.fulfill()
-        }
-        repository.didUpdateTrustListHandler = {
-            exp4.fulfill()
-        }
-
-        // When
-        sut.refresh()
-        delegate.didUpdate = {
-            exp5.fulfill()
-        }
-
-        // Then
-        XCTAssertTrue(sut.isLoading)
-        wait(for: [exp1, router.noInternetExpecation, exp2, exp3, offlineRevocationService.updateExpectation, exp4, exp5], timeout: 3, enforceOrder: true)
+        wait(for: [exp1, offlineRevocationService.updateExpectation, exp3, exp4], timeout: 2, enforceOrder: true)
         XCTAssertFalse(sut.isLoading)
     }
 

@@ -12,8 +12,5 @@ public extension KeychainPersistence {
     enum Keys: String, CaseIterable {
         case certificateList = "VaccinationCertificateList"
         case trustList = "TrustList"
-        case dccRules = "DCCRules"
-        case dccDomesticRules = "DCCDomesticRules"
-        case boosterRules = "BooterRules"
     }
 }

@@ -27,8 +27,7 @@ PINNING_HASHES_VAAS = b5b2db195b572b4ad1125c66b657d25f75c709a092dbb9ac052de0ca23
 
 
 // DCC RULES
-DCC_RULES_URL = https:/$()/distribution.dcc-rules.de
-DCC_RULES_FILE = dcc-rules.json
+DCC_BN_RULES_FILE = dcc-bn-rules.json
 DCC_DOMESTIC_RULES_FILE = dcc-domestic-rules.json
 
 

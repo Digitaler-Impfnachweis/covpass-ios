@@ -25,8 +25,7 @@ PINNING_HASHES = 99cbc210bec8bad16f0827e733b1972e2a7b110cfbbc01e749c2b8572ddbf30
 
 
 // DCC RULES
-DCC_RULES_URL = https:/$()/distribution.dcc-rules.de
-DCC_RULES_FILE = dcc-rules.json
+DCC_BN_RULES_FILE = dcc-bn-rules.json
 DCC_DOMESTIC_RULES_FILE = dcc-domestic-rules.json
 
 

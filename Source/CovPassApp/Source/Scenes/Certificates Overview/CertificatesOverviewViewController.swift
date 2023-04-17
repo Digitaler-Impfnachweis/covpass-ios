@@ -56,8 +56,6 @@ class CertificatesOverviewViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
-        viewModel.updateBoosterRules()
-        viewModel.updateValueSets()
         viewModel.revokeIfNeeded()
     }
 

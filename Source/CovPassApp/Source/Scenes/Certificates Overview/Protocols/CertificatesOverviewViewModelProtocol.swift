@@ -23,8 +23,6 @@ protocol CertificatesOverviewViewModelProtocol {
     func revokeIfNeeded()
     func refresh() -> Promise<Void>
     func updateTrustList()
-    func updateBoosterRules()
-    func updateValueSets()
     func scanCertificate(withIntroduction: Bool)
     func showAppInformation()
     func showNotificationsIfNeeded()

@@ -36,16 +36,8 @@ public protocol CheckSituationViewModelProtocol {
     var downloadStateHintIcon: UIImage { get }
     var downloadStateHintColor: UIColor { get }
     var downloadStateTextColor: UIColor { get }
-    var domesticRulesUpdateTitle: String { get }
-    var domesticRulesUpdateSubtitle: String { get }
-    var valueSetsTitle: String { get }
-    var valueSetsSubtitle: String { get }
     var certificateProviderTitle: String { get }
     var certificateProviderSubtitle: String { get }
-    var countryListTitle: String { get }
-    var countryListSubtitle: String { get }
-    var authorityListTitle: String { get }
-    var authorityListSubtitle: String { get }
     var isLoading: Bool { get }
     func doneIsTapped()
     func toggleOfflineRevocation()

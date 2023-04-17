@@ -28,11 +28,7 @@ private enum Constants {
             static let listTitle = "app_information_title_checkrules".localized(bundle: .main)
             static let statusAvailable = "settings_rules_list_status_updated".localized(bundle: .main)
             static let statusUnavailable = "settings_rules_list_status_outofdate".localized(bundle: .main)
-            static let domesticRulesTitle = "settings_rules_list_domestic".localized(bundle: .main)
-            static let valueSetsTitle = "settings_rules_list_features".localized(bundle: .main)
             static let certificateProviderTitle = "settings_rules_list_issuer".localized(bundle: .main)
-            static let countryListTitle = "settings_rules_list_countries".localized(bundle: .main)
-            static let authorityListTitle = "settings_rules_list_authorities".localized(bundle: .main)
             static let loadTitle = "app_information_message_update_button".localized(bundle: .main)
             static let loadingTitle = "settings_rules_list_loading_title".localized(bundle: .main)
             static let cancelTitle = "settings_rules_list_loading_cancel".localized(bundle: .main)
@@ -90,34 +86,9 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
         shouldSomethingBeUpdated ? .neutralBlack : .neutralWhite
     }
 
-    public let domesticRulesUpdateTitle: String = Constants.Keys.Update.domesticRulesTitle
-
-    public var domesticRulesUpdateSubtitle: String {
-        guard let date = userDefaults.lastUpdateDomesticRules else { return "" }
-        return DateUtils.displayDateTimeFormatter.string(from: date)
-    }
-
-    public let valueSetsTitle: String = Constants.Keys.Update.valueSetsTitle
-    public var valueSetsSubtitle: String {
-        guard let date = userDefaults.lastUpdateDomesticRules else { return "" }
-        return DateUtils.displayDateTimeFormatter.string(from: date)
-    }
-
     public let certificateProviderTitle: String = Constants.Keys.Update.certificateProviderTitle
     public var certificateProviderSubtitle: String {
         guard let date = userDefaults.lastUpdatedTrustList else { return "" }
-        return DateUtils.displayDateTimeFormatter.string(from: date)
-    }
-
-    public let countryListTitle: String = Constants.Keys.Update.countryListTitle
-    public var countryListSubtitle: String {
-        guard let date = userDefaults.lastUpdatedDCCRules else { return "" }
-        return DateUtils.displayDateTimeFormatter.string(from: date)
-    }
-
-    public let authorityListTitle: String = Constants.Keys.Update.authorityListTitle
-    public var authorityListSubtitle: String {
-        guard let date = offlineRevocationService?.lastSuccessfulUpdate else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
 
@@ -129,11 +100,8 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
 
     // MARK: - Private properties
 
-    private var canceled: Bool = false
     private var shouldSomethingBeUpdated: Bool {
-        certLogic.rulesShouldBeUpdated ||
-            certLogic.valueSetsShouldBeUpdated ||
-            repository.trustListShouldBeUpdated() ||
+        repository.trustListShouldBeUpdated() ||
             (offlineRevocationIsEnabled ? offlineRevocationService?.updateNeeded() ?? false : false)
     }
 
@@ -141,20 +109,17 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     private var userDefaults: Persistence
     private let offlineRevocationService: CertificateRevocationOfflineServiceProtocol?
     private let repository: VaccinationRepositoryProtocol
-    private let certLogic: DCCCertLogicProtocol
     private let router: CheckSituationRouterProtocol?
 
     public init(userDefaults: Persistence,
                 router: CheckSituationRouterProtocol?,
                 resolver: Resolver<Void>?,
                 offlineRevocationService: CertificateRevocationOfflineServiceProtocol?,
-                repository: VaccinationRepositoryProtocol,
-                certLogic: DCCCertLogicProtocol) {
+                repository: VaccinationRepositoryProtocol) {
         self.offlineRevocationService = offlineRevocationService
         self.userDefaults = userDefaults
         self.resolver = resolver
         self.repository = repository
-        self.certLogic = certLogic
         self.router = router
         hStackViewIsHidden = true
         buttonIsHidden = true
@@ -215,32 +180,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
 // MARK: - Methods of Update Context
 
 extension CheckSituationViewModel {
-    func loadRulesAndCountryList() -> Guarantee<Void> {
-        Guarantee { seal in
-            certLogic.updateRules()
-                .done {
-                    seal(())
-                }
-                .catch { [weak self] error in
-                    self?.errorHandling(error)
-                    seal(())
-                }
-        }
-    }
-
-    func loadValueSets() -> Guarantee<Void> {
-        Guarantee { seal in
-            certLogic.updateValueSets()
-                .done {
-                    seal(())
-                }
-                .catch { [weak self] error in
-                    self?.errorHandling(error)
-                    seal(())
-                }
-        }
-    }
-
     func loadRevocationData() -> Guarantee<Void> {
         Guarantee { seal in
             downloadOfflineRevocationIfIsEnabled()
@@ -268,17 +207,10 @@ extension CheckSituationViewModel {
     }
 
     public func refresh() {
-        canceled = false
         isLoading = true
         firstly {
-            self.loadRulesAndCountryList()
+            self.loadTrustLists()
         }
-        .then(loadValueSets)
-        .then(checkIfCancelled)
-        .then(loadRevocationData)
-        .then(checkIfCancelled)
-        .then(loadTrustLists)
-        .then(checkIfCancelled)
         .ensure {
             self.isLoading = false
         }
@@ -298,12 +230,7 @@ extension CheckSituationViewModel {
         offlineRevocationIsEnabled ? (offlineRevocationService?.update() ?? .value) : .value
     }
 
-    private func checkIfCancelled() -> Promise<Void> {
-        canceled ? .init(error: TrustListDownloadError.cancelled) : .value(())
-    }
-
     public func cancel() {
         isLoading = false
-        canceled = true
     }
 }

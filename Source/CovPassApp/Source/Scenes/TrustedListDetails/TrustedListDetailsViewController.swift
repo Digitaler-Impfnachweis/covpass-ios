@@ -18,21 +18,9 @@ class TrustedListDetailsViewController: UIViewController {
     @IBOutlet var downloadStateHintLabel: PlainLabel!
     @IBOutlet var downloadStateIconImageView: UIImageView!
     @IBOutlet var downloadStateWrapper: UIView!
-    @IBOutlet var entryRulesContainer: UIView!
-    @IBOutlet var entryRulesTitleLabel: PlainLabel!
-    @IBOutlet var entryRulesSubtitleLabel: PlainLabel!
-    @IBOutlet var domesticRulesContainer: UIView!
-    @IBOutlet var domesticRulesTitleLabel: PlainLabel!
-    @IBOutlet var domesticRulesSubtitleLabel: PlainLabel!
-    @IBOutlet var valueSetsContainer: UIView!
-    @IBOutlet var valueSetsTitleLabel: PlainLabel!
-    @IBOutlet var valueSetsSubtitleLabel: PlainLabel!
     @IBOutlet var certificateProviderContainer: UIView!
     @IBOutlet var certificateProviderTitleLabel: PlainLabel!
     @IBOutlet var certificateProviderSubtitleLabel: PlainLabel!
-    @IBOutlet var countryListContainer: UIView!
-    @IBOutlet var countryListTitleLabel: PlainLabel!
-    @IBOutlet var countryListSubtitleLabel: PlainLabel!
     @IBOutlet var cancelButton: MainButton!
     @IBOutlet var downloadingHintLabel: PlainLabel!
     @IBOutlet var activityIndicatorWrapper: UIView!
@@ -84,7 +72,6 @@ class TrustedListDetailsViewController: UIViewController {
 
     private func setupButtonActions() {
         mainButton.action = viewModel.refresh
-        cancelButton.action = viewModel.cancel
     }
 
     private func setupStaticTexts() {
@@ -93,11 +80,7 @@ class TrustedListDetailsViewController: UIViewController {
         mainButton.style = .primary
         cancelButton.title = viewModel.cancelButtonTitle
         cancelButton.style = .plain
-        entryRulesTitleLabel.attributedText = viewModel.entryRulesTitle.styledAs(.header_3)
-        domesticRulesTitleLabel.attributedText = viewModel.domesticRulesTitle.styledAs(.header_3)
-        valueSetsTitleLabel.attributedText = viewModel.valueSetsTitle.styledAs(.header_3)
         certificateProviderTitleLabel.attributedText = viewModel.certificateProviderTitle.styledAs(.header_3)
-        countryListTitleLabel.attributedText = viewModel.countryListTitle.styledAs(.header_3)
         downloadingHintLabel.attributedText = viewModel.loadingHintTitle.styledAs(.header_3).colored(.gray)
         bodyTitleLabel.attributedText = viewModel.listTitle.styledAs(.header_2)
         bodyTitleLabel.accessibilityTraits = .header
@@ -141,39 +124,17 @@ class TrustedListDetailsViewController: UIViewController {
         downloadStateHintLabel.attributedText = viewModel.downloadStateHintTitle.styledAs(.label).colored(viewModel.downloadStateTextColor)
         downloadStateIconImageView.image = viewModel.downloadStateHintIcon
         downloadStateWrapper.backgroundColor = viewModel.downloadStateHintColor
-        entryRulesSubtitleLabel.attributedText = viewModel.entryRulesSubtitle.styledAs(.body)
-        domesticRulesSubtitleLabel.attributedText = viewModel.domesticRulesSubtitle.styledAs(.body)
-        valueSetsSubtitleLabel.attributedText = viewModel.valueSetsSubtitle.styledAs(.body)
         certificateProviderSubtitleLabel.attributedText = viewModel.certificateProviderSubtitle.styledAs(.body)
-        countryListSubtitleLabel.attributedText = viewModel.countryListSubtitle.styledAs(.body)
-
         configureAccessibility()
     }
 
     private func configureAccessibility() {
-        domesticRulesContainer.enableAccessibility(label: viewModel.domesticRulesTitle,
-                                                   value: viewModel.entryRulesSubtitle,
-                                                   traits: .staticText)
-        entryRulesContainer.enableAccessibility(label: viewModel.entryRulesTitle,
-                                                value: viewModel.entryRulesSubtitle,
-                                                traits: .staticText)
-        valueSetsContainer.enableAccessibility(label: viewModel.valueSetsTitle,
-                                               value: viewModel.valueSetsSubtitle,
-                                               traits: .staticText)
         certificateProviderContainer.enableAccessibility(label: viewModel.certificateProviderTitle,
                                                          value: viewModel.certificateProviderSubtitle,
                                                          traits: .staticText)
-        countryListContainer.enableAccessibility(label: viewModel.countryListTitle,
-                                                 value: viewModel.countryListSubtitle,
-                                                 traits: .staticText)
-
         if #available(iOS 13.0, *) {
             headerView.accessibilityRespondsToUserInteraction = true
-            entryRulesContainer.accessibilityRespondsToUserInteraction = true
-            domesticRulesContainer.accessibilityRespondsToUserInteraction = true
-            valueSetsContainer.accessibilityRespondsToUserInteraction = true
             certificateProviderContainer.accessibilityRespondsToUserInteraction = true
-            countryListContainer.accessibilityRespondsToUserInteraction = true
         }
     }
 

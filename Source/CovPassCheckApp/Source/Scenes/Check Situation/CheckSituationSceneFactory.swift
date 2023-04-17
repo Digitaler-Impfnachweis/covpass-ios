@@ -32,8 +32,7 @@ public struct CheckSituationSceneFactory: SceneFactory {
                                                 router: router,
                                                 resolver: nil,
                                                 offlineRevocationService: offlineRevocationService,
-                                                repository: VaccinationRepository.create(),
-                                                certLogic: DCCCertLogic.create())
+                                                repository: VaccinationRepository.create())
         let viewController = CheckSituationViewController(viewModel: viewModel)
         return viewController
     }

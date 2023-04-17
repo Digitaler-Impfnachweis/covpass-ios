@@ -190,7 +190,6 @@
 		09A90998299D21D00001302F /* SceneCoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9091E299D21D00001302F /* SceneCoordinatorMock.swift */; };
 		09A90999299D21D00001302F /* VAASRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A9091F299D21D00001302F /* VAASRepositoryMock.swift */; };
 		09A9099A299D21D00001302F /* ScanRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A90920299D21D00001302F /* ScanRouterMock.swift */; };
-		09A9099B299D21D00001302F /* DCCServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A90921299D21D00001302F /* DCCServiceMock.swift */; };
 		09A9099C299D21D00001302F /* ViewModelDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A90922299D21D00001302F /* ViewModelDelegateMock.swift */; };
 		09A9099D299D21D00001302F /* MockCertificateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A90923299D21D00001302F /* MockCertificateViewModel.swift */; };
 		09A9099E299D21D00001302F /* VaccinationRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A90924299D21D00001302F /* VaccinationRepositoryMock.swift */; };
@@ -705,7 +704,6 @@
 		09A9091E299D21D00001302F /* SceneCoordinatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorMock.swift; sourceTree = "<group>"; };
 		09A9091F299D21D00001302F /* VAASRepositoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VAASRepositoryMock.swift; sourceTree = "<group>"; };
 		09A90920299D21D00001302F /* ScanRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanRouterMock.swift; sourceTree = "<group>"; };
-		09A90921299D21D00001302F /* DCCServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCCServiceMock.swift; sourceTree = "<group>"; };
 		09A90922299D21D00001302F /* ViewModelDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelDelegateMock.swift; sourceTree = "<group>"; };
 		09A90923299D21D00001302F /* MockCertificateViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockCertificateViewModel.swift; sourceTree = "<group>"; };
 		09A90924299D21D00001302F /* VaccinationRepositoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationRepositoryMock.swift; sourceTree = "<group>"; };
@@ -1659,7 +1657,6 @@
 				09A9091E299D21D00001302F /* SceneCoordinatorMock.swift */,
 				09A9091F299D21D00001302F /* VAASRepositoryMock.swift */,
 				09A90920299D21D00001302F /* ScanRouterMock.swift */,
-				09A90921299D21D00001302F /* DCCServiceMock.swift */,
 				09A90922299D21D00001302F /* ViewModelDelegateMock.swift */,
 				09A90923299D21D00001302F /* MockCertificateViewModel.swift */,
 				09A90924299D21D00001302F /* VaccinationRepositoryMock.swift */,
@@ -3499,7 +3496,6 @@
 				09A909A3299D21D00001302F /* CountrySelectionMock.swift in Sources */,
 				09A909C4299D21D00001302F /* URLSession+CertificateReissueTests.swift in Sources */,
 				09A909B0299D21D00001302F /* ReissueStartViewRouterMock.swift in Sources */,
-				09A9099B299D21D00001302F /* DCCServiceMock.swift in Sources */,
 				09A90990299D21D00001302F /* PassOnboardingPageViewModelTests.swift in Sources */,
 				09A90981299D21D00001302F /* ReissueResultViewModelTests.swift in Sources */,
 				09A90992299D21D00001302F /* SceneFactoryMock.swift in Sources */,

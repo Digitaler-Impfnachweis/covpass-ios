@@ -152,18 +152,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             }
     }
 
-    func updateDomesticRules() -> Promise<Void> {
-        certLogic.updateDomesticIfNeeded()
-    }
-
-    func updateBoosterRules() {
-        certLogic.updateBoosterRulesIfNeeded().cauterize()
-    }
-
-    func updateValueSets() {
-        certLogic.updateValueSetsIfNeeded().cauterize()
-    }
-
     func revokeIfNeeded() {
         firstly {
             repository.getCertificateList()
@@ -375,7 +363,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             .then(showAnnouncementIfNeeded)
             .then(showBoosterNotificationIfNeeded)
             .then(showRevocationWarningIfNeeded)
-            .then(updateDomesticRules)
             .then(refresh)
             .catch { error in
                 print("\(#file):\(#function) Error: \(error.localizedDescription)")

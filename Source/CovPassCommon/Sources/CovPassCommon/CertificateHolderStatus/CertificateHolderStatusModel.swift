@@ -51,17 +51,6 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         return passed ? .passed : .failedFunctional
     }
 
-    public func checkEuInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
-        guard let joinedTokens = certificates.joinedTokens else {
-            return .failedTechnical
-        }
-        guard let validationResults = try? validate(certificate: joinedTokens, type: .euInvalidation, countryCode: joinedTokens.iss) else {
-            return .failedTechnical
-        }
-        let passed = validationResults.filterInvalidationRules.failedAndOpenResults.isEmpty
-        return passed ? .passed : .failedFunctional
-    }
-
     public func vaccinationCycleIsComplete(_ certificates: [ExtendedCBORWebToken]) -> HolderStatusResponse {
         let validCertificates = validCertificates(certificates, logicType: .deInvalidationRules)
         guard let joinedTokens = validCertificates.joinedAllTokens else {
@@ -71,12 +60,6 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
             return .init(passed: false, results: nil)
         }
         return .init(passed: validationResults.vaccinationCycleIsComplete, results: validationResults.vaccinationCyclePassedResults)
-    }
-
-    public func areTravelRulesAvailableForGermany() -> Bool {
-        var euAcceptenceRulesForGermany = dccCertLogic.rules(logicType: .euAcceptence, country: "DE", region: nil)
-        euAcceptenceRulesForGermany.removeAll(where: \.isNoRuleIdentifier)
-        return !euAcceptenceRulesForGermany.isEmpty
     }
 
     public func ifsg22aRulesAvailable() -> Bool {
