@@ -1110,3 +1110,7 @@
 "entry_check_success_copy" = "Now match the following data with an identity document of the person being checked.";
 
 "entry_check_link" = "#More about the Coronavirus Entry Regulations::https://www.bundesgesundheitsministerium.de/en/service/gesetze-und-verordnungen/guv-19-lp/coronavirus-einreiseverordnung.html#";
+
+"start_infobox_title" = "Important information";
+
+"start_infobox_copy" = "The rules according to which the app checks certificates will no longer be updated and will remain at the status of 30 May 2023.";

@@ -21,7 +21,10 @@ private enum Constants {
 class CertificatesOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
-    @IBOutlet var headerView: OverviewHeaderView!
+    @IBOutlet var informationIcon: UIImageView!
+    @IBOutlet var settingsButton: UIButton!
+    @IBOutlet var informationTitle: PlainLabel!
+    @IBOutlet var informationCopy: PlainLabel!
     @IBOutlet var addButton: MainButton!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var dotPageIndicator: DotPageIndicator!
@@ -85,12 +88,16 @@ class CertificatesOverviewViewController: UIViewController {
         dotPageIndicator.isHidden = !viewModel.showMultipleCertificateHolder
     }
 
+    @IBAction func settingsTapped(_: Any) {
+        viewModel.showAppInformation()
+    }
+
     private func setupHeaderView() {
-        headerView.titleIcon.isHidden = true
-        headerView.titleButton.isHidden = true
-        headerView.image = .settings
-        headerView.actionButton.enableAccessibility(label: viewModel.accessibilityMoreInformation)
-        headerView.action = viewModel.showAppInformation
+        settingsButton.setImage(.settings, for: .normal)
+        settingsButton.enableAccessibility(label: viewModel.accessibilityMoreInformation)
+        informationTitle.attributedText = viewModel.informationTitle.styledAs(.header_3)
+        informationCopy.attributedText = viewModel.informationCopy.styledAs(.body)
+        informationIcon.image = .warning
     }
 
     private func setupCollectionView() {

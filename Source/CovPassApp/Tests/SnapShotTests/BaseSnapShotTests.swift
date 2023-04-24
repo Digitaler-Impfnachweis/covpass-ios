@@ -37,17 +37,4 @@ class BaseSnapShotTests: FBSnapshotTestCase {
                              suffixes: NSOrderedSet(arrayLiteral: "_64"),
                              perPixelTolerance: perPixelTolerance, overallTolerance: overallTolerance)
     }
-
-    func verifyAsync(vc: UIViewController,
-                     wait: TimeInterval = 0.1,
-                     record: Bool = false) {
-        recordMode = record
-        let expectationHere = expectation(description: "Some Expectation")
-        vc.view.bounds = UIScreen.main.bounds
-        DispatchQueue.main.asyncAfter(deadline: .now() + wait) {
-            self.verifyView(vc: vc, record: record)
-            expectationHere.fulfill()
-        }
-        waitForExpectations(timeout: 1.0 + wait, handler: nil)
-    }
 }

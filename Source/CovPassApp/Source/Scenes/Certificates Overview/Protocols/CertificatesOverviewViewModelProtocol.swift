@@ -20,6 +20,8 @@ protocol CertificatesOverviewViewModelProtocol {
     var accessibilityMoreInformation: String { get }
     var openingAnnouncment: String { get }
     var closingAnnouncment: String { get }
+    var informationTitle: String { get }
+    var informationCopy: String { get }
     func revokeIfNeeded()
     func refresh() -> Promise<Void>
     func updateTrustList()

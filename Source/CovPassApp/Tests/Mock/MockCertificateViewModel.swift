@@ -32,6 +32,8 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     var openingAnnouncment = "announcement"
     var closingAnnouncment: String = "closingannouncement"
     var showMultipleCertificateHolder = true
+    var informationTitle: String = ""
+    var informationCopy: String = ""
 
     func handleOpen(url _: URL) -> Bool {
         true

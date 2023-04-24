@@ -15,7 +15,11 @@ import UIKit
 class ValidatorOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
-    @IBOutlet var headerView: InfoHeaderView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var informationIcon: UIImageView!
+    @IBOutlet var settingsButton: UIButton!
+    @IBOutlet var informationTitle: PlainLabel!
+    @IBOutlet var informationCopy: PlainLabel!
     @IBOutlet var checkTypesStackview: UIStackView!
     @IBOutlet var immunityCheckView: ImmunityScanCardView!
     @IBOutlet var timeHintContainerStackView: UIStackView!
@@ -57,6 +61,7 @@ class ValidatorOverviewViewController: UIViewController {
         setupOfflineInformationView()
         setupCheckSituationView()
         viewModel.showNotificationsIfNeeded()
+        scrollView.contentInsetAdjustmentBehavior = .never
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -72,13 +77,15 @@ class ValidatorOverviewViewController: UIViewController {
 
     // MARK: - Methods
 
+    @IBAction func settingsTapped(_: Any) {
+        viewModel.showAppInformation()
+    }
+
     private func setupHeaderView() {
-        headerView.attributedTitleText = viewModel.title.styledAs(.header_2)
-        let settingsImage: UIImage = .settings
-        settingsImage.accessibilityLabel = "app_information_title".localized
-        settingsImage.accessibilityTraits = .button
-        headerView.image = settingsImage
-        headerView.action = viewModel.showAppInformation
+        settingsButton.setImage(.settings, for: .normal)
+        informationTitle.attributedText = viewModel.informationTitle.styledAs(.header_3)
+        informationCopy.attributedText = viewModel.informationCopy.styledAs(.body)
+        informationIcon.image = .warning
     }
 
     private func setupCardView() {

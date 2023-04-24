@@ -1110,3 +1110,7 @@
 "entry_check_success_copy" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
 "entry_check_link" = "#Mehr zur Coronavirus-Einreiseverordnung::https://www.bundesgesundheitsministerium.de/service/gesetze-und-verordnungen/guv-19-lp/coronaeinreisev.html#";
+
+"start_infobox_title" = "Wichtige Information";
+
+"start_infobox_copy" = "Die Regeln, nach denen die App Zertifikate prüft, werden nicht mehr aktualisiert und verbleiben auf dem Stand vom 30. Mai 2023.";

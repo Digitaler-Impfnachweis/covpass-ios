@@ -1986,3 +1986,7 @@
 "a11y_accordion_collapse_hint_ios" = "Double tap to collapse";
 
 "a11y_accordion_collapse_hint_android" = "Collapse";
+
+"start_infobox_title" = "Important information";
+
+"start_infobox_copy" = "The Corona entry regulation is expiring. You can no longer check your certificates in the app for validity when travelling.";

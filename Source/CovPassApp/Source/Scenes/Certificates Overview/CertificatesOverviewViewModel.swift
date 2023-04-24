@@ -83,6 +83,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         countOfCells() > 1
     }
 
+    let informationTitle = "start_infobox_title".localized
+    let informationCopy = "start_infobox_copy".localized
+
     // MARK: - Lifecycle
 
     init(
