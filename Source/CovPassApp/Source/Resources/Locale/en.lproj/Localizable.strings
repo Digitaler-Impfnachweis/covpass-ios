@@ -1278,9 +1278,9 @@
 
 "accessibility_app_information_title_information_closing_announce" = "Information has been closed";
 
-"accessibility_app_information_title_checking_rules_announce" = "Update Checking Rules has been opened";
+"accessibility_app_information_title_checking_rules_announce" = "Checking Rules has been opened";
 
-"accessibility_app_information_title_checking_rules_closing_announce" = "Update checking rules has been closed";
+"accessibility_app_information_title_checking_rules_closing_announce" = "Checking rules has been closed";
 
 "accessibility_app_information_title_update_notifications_announce" = "Update notifications has been opened";
 
@@ -1330,6 +1330,24 @@
 
 "app_information_title_company_details_linked" = "#Legal information::$0#";
 
+"app_imprint_title" = "Publisher";
+
+"app_imprint_subtitle" = "(responsible according to § 5 para. 1 TMG, § 18 para. 1 MStV, DSGVO, BDSG)";
+
+"app_imprint_publisher" = "Robert Koch-Institut";
+
+"app_imprint_address" = "Nordufer 20\n13353 Berlin\nrepresented by the President";
+
+"app_imprint_contact_title" = "Contact";
+
+"app_imprint_contact_mail" = "#info@covpass-app.de::mailto:info@covpass-app.de#";
+
+"app_imprint_contact_form" = "or use the #contact-form of the Robert Koch-Institut::https://www.rki.de/SharedDocs/Kontaktformulare/weitere/covpass-app/covpass-app_Integrator.html#";
+
+"app_imprint_identnr_title" = "VAT identification number";
+
+"app_imprint_identnr_nr" = "DE 165 893 430";
+
 "app_information_title_company_easy_language_linked" = "#Leichte Sprache::$0#";
 
 "app_information_title_company_easy_language" = "Leichte Sprache";
@@ -1344,7 +1362,7 @@
 
 "app_information_title_accessibility_statement_linked" = "#Accessibility statement::$0#";
 
-"app_information_title_update" = "Update checking rules";
+"app_information_title_update" = "Checking rules";
 
 "app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
 

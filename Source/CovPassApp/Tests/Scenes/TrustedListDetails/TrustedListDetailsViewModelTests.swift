@@ -47,7 +47,7 @@ class TrustedListDetailsViewModelTests: XCTestCase {
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
 
         // Then
-        XCTAssertEqual(sut.title, "Update checking rules")
+        XCTAssertEqual(sut.title, "Checking rules")
         XCTAssertEqual(sut.oflineModusDescription, "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.")
         XCTAssertEqual(sut.listTitle, "Checking rules")
         XCTAssertEqual(sut.downloadStateHintIcon, .warning)
@@ -71,7 +71,7 @@ class TrustedListDetailsViewModelTests: XCTestCase {
         certLogic.valueSetsShouldBeUpdated = false
 
         // Then
-        XCTAssertEqual(sut.title, "Update checking rules")
+        XCTAssertEqual(sut.title, "Checking rules")
         XCTAssertEqual(sut.oflineModusDescription, "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.")
         XCTAssertEqual(sut.listTitle, "Checking rules")
         XCTAssertEqual(sut.downloadStateHintIcon, .check)

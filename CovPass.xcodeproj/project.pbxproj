@@ -39,6 +39,8 @@
 		0933177E273ABB2A0036DB2A /* ChooseCertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09331770273ABB2A0036DB2A /* ChooseCertificateViewController.xib */; };
 		0933177F273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331772273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift */; };
 		09331781273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331774273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift */; };
+		093418B129F020B600C5859D /* ImprintViewControllerSnapsShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093418B029F020B600C5859D /* ImprintViewControllerSnapsShotTests.swift */; };
+		093418B429F021B400C5859D /* ImprintViewControllerSnapsShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093418B329F021B400C5859D /* ImprintViewControllerSnapsShotTests.swift */; };
 		0938F7DC2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938F7DB2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift */; };
 		0938F7E0289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938F7DF289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift */; };
 		0939EAB827043BD80086729C /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 0939EAB727043BD80086729C /* Kronos */; };
@@ -575,6 +577,8 @@
 		09331770273ABB2A0036DB2A /* ChooseCertificateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseCertificateViewController.xib; sourceTree = "<group>"; };
 		09331772273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateRouterProtocol.swift; sourceTree = "<group>"; };
 		09331774273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateViewModelProtocol.swift; sourceTree = "<group>"; };
+		093418B029F020B600C5859D /* ImprintViewControllerSnapsShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImprintViewControllerSnapsShotTests.swift; sourceTree = "<group>"; };
+		093418B329F021B400C5859D /* ImprintViewControllerSnapsShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImprintViewControllerSnapsShotTests.swift; sourceTree = "<group>"; };
 		0938F7DB2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationResolvableSceneFactory.swift; sourceTree = "<group>"; };
 		0938F7DF289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateRevocationOfflineServiceMock.swift; sourceTree = "<group>"; };
 		093FC960294C8DF50043F36C /* ScanAndParseQRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanAndParseQRCode.swift; sourceTree = "<group>"; };
@@ -1187,6 +1191,22 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		093418AF29F020A800C5859D /* Imprint */ = {
+			isa = PBXGroup;
+			children = (
+				093418B029F020B600C5859D /* ImprintViewControllerSnapsShotTests.swift */,
+			);
+			path = Imprint;
+			sourceTree = "<group>";
+		};
+		093418B229F021B400C5859D /* Imprint */ = {
+			isa = PBXGroup;
+			children = (
+				093418B329F021B400C5859D /* ImprintViewControllerSnapsShotTests.swift */,
+			);
+			path = Imprint;
+			sourceTree = "<group>";
+		};
 		093949AD28F70132005C4C43 /* Immunization */ = {
 			isa = PBXGroup;
 			children = (
@@ -1349,6 +1369,7 @@
 		09A908B9299D21D00001302F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				093418B229F021B400C5859D /* Imprint */,
 				09A908C4299D21D00001302F /* Certificate Overview Person */,
 				09A908C7299D21D00001302F /* Certificate */,
 				09A908CB299D21D00001302F /* Certificate Detail */,
@@ -2846,6 +2867,7 @@
 		E7CB54B427B55407002FA55E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				093418AF29F020A800C5859D /* Imprint */,
 				091BD1D42949EF8C000217A4 /* WhatsNewSettings */,
 				091BD1C32949E500000217A4 /* Announcement */,
 				0976FDE2291E64320052A0B2 /* SecondScsan */,
@@ -3431,6 +3453,7 @@
 				09A90982299D21D00001302F /* ReissueResultRouterMock.swift in Sources */,
 				09A9098B299D21D00001302F /* CertificatesOverviewSnapShotTests.swift in Sources */,
 				09A909C3299D21D00001302F /* PDFCBORExtractor+FactoryTests.swift in Sources */,
+				093418B429F021B400C5859D /* ImprintViewControllerSnapsShotTests.swift in Sources */,
 				09A9098A299D21D00001302F /* CertificateOverviewCardViewModelTests.swift in Sources */,
 				09A90986299D21D00001302F /* AnnouncementViewModelTests.swift in Sources */,
 				09A90972299D21D00001302F /* AppInformationViewModelTests.swift in Sources */,
@@ -3672,6 +3695,7 @@
 				0957848A27A2D31C00E8206C /* DCCCertLogicMock.swift in Sources */,
 				E79CF9F627E8C6DB00C4619E /* CertificateRevocationWrapperRepository+FactoryTests.swift in Sources */,
 				3840F13A2921894300DB824C /* VaccinationCycleIncompleteSnapshotTests.swift in Sources */,
+				093418B129F020B600C5859D /* ImprintViewControllerSnapsShotTests.swift in Sources */,
 				0969AB8B2785F45F00ECCA74 /* ValidatorOverviewSnapShotTests.swift in Sources */,
 				E7DE165D28AFD389007FDF46 /* GermanAppInformationViewModelTests.swift in Sources */,
 				0957848C27A2D35B00E8206C /* ValidationResultMock.swift in Sources */,

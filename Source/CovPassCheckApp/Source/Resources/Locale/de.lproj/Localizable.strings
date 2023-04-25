@@ -510,6 +510,24 @@
 
 "app_information_title_company_details_linked" = "#Impressum::$0#";
 
+"app_imprint_title" = "Herausgeber";
+
+"app_imprint_subtitle" = "(verantwortlich nach § 5 Abs. 1 TMG, § 18 Abs. 1 MStV, DSGVO, BDSG)";
+
+"app_imprint_publisher" = "Robert Koch-Institut";
+
+"app_imprint_address" = "Nordufer 20\n13353 Berlin\nvertreten durch den Präsidenten";
+
+"app_imprint_contact_title" = "Kontakt";
+
+"app_imprint_contact_mail" = "#info@covpass-app.de::mailto:info@covpass-app.de#";
+
+"app_imprint_contact_form" = "oder über das #Kontaktformular des Robert Koch-Institut::https://www.rki.de/SharedDocs/Kontaktformulare/weitere/covpass-app/covpass-app_Integrator.html#";
+
+"app_imprint_identnr_title" = "Umsatzsteueridentifikationsnummer";
+
+"app_imprint_identnr_nr" = "DE 165 893 430";
+
 "app_information_title_company_easy_language_linked" = "#Leichte Sprache::$0#";
 
 "app_information_title_company_easy_language" = "Leichte Sprache";
@@ -560,7 +578,7 @@
 
 "settings_rules_list_loading_cancel" = "Abbrechen";
 
-"app_information_message_update" = "Hier können Sie die Regeln aktualisieren, nach denen Zertifikate geprüft werden. Sollte Ihr Smartphone üblicherweise mit dem Internet verbunden sein, passiert das automatisch.";
+"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
 
 "app_information_rules_list_title" = "Regelwerk";
 

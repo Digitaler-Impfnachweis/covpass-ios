@@ -31,10 +31,10 @@ class GermanAppInformationViewModel: AppInformationBaseViewModel {
                       enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.datenschutzTitle,
                       closingAnnounce: Accessibility.Closing.datenschutzTitle),
-            .webEntry(title: Texts.companyDetailsTitle,
-                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!,
-                      openingAnnounce: Accessibility.Opening.companyDetailsTitle,
-                      closingAnnounce: Accessibility.Closing.companyDetailsTitle),
+            AppInformationEntry(
+                title: Texts.companyDetailsTitle,
+                scene: ImprintSceneFactory()
+            ),
             .webEntry(title: Texts.openSourceLicenseTitle,
                       url: licenseBundle.url(forResource: "license_de", withExtension: "html")!,
                       enableDynamicFonts: true,
@@ -65,10 +65,10 @@ class EnglishAppInformationViewModel: AppInformationBaseViewModel {
                       enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.datenschutzTitle,
                       closingAnnounce: Accessibility.Closing.datenschutzTitle),
-            .webEntry(title: Texts.companyDetailsTitle,
-                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/imprint/")!,
-                      openingAnnounce: Accessibility.Opening.companyDetailsTitle,
-                      closingAnnounce: Accessibility.Closing.companyDetailsTitle),
+            AppInformationEntry(
+                title: Texts.companyDetailsTitle,
+                scene: ImprintSceneFactory()
+            ),
             .webEntry(title: Texts.openSourceLicenseTitle,
                       url: licenseBundle.url(forResource: "license_en", withExtension: "html")!,
                       enableDynamicFonts: true,
