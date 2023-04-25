@@ -992,7 +992,7 @@ private extension ExtendedCBORWebToken {
 
     static func token2Of2Mustermann() throws -> Self {
         try token(from: """
-            {"1":"DE","4":1682239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Erika","fn":"Mustermann","gnt":"ERIKA","fnt":"MUSTERMANN"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":2,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}
+            {"1":"DE","4":1782239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Erika","fn":"Mustermann","gnt":"ERIKA","fnt":"MUSTERMANN"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":2,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}
             """
         )
     }
