@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
         "state": {
           "branch": null,
-          "revision": "19b3c3ceed117c5cc883517c4e658548315ba70b",
-          "version": "1.6.0"
+          "revision": "95c18f1c1bc44d5547728621ed680850368f7a45",
+          "version": "1.7.0"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/mxcl/PromiseKit",
         "state": {
           "branch": null,
-          "revision": "43772616c46a44a9977e41924ae01d0e55f2f9ca",
-          "version": "6.18.1"
+          "revision": "8a98e31a47854d3180882c8068cc4d9381bf382d",
+          "version": "6.22.1"
         }
       },
       {
@@ -87,8 +87,8 @@
         "repositoryURL": "https://github.com/unrelentingtech/SwiftCBOR",
         "state": {
           "branch": null,
-          "revision": "98a59c305cca5c5367c3422d5e127661d4e76e24",
-          "version": "0.4.5"
+          "revision": "edc01765cf6b3685bb622bb09242ef5964fb991b",
+          "version": "0.4.6"
         }
       },
       {
