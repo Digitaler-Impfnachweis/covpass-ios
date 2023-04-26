@@ -26,6 +26,11 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var certificateProviderStackView: UIStackView!
     @IBOutlet var certificateProviderTitleLabel: PlainLabel!
     @IBOutlet var certificateProviderSubtitleLabel: PlainLabel!
+    @IBOutlet var authorityListStackView: UIStackView!
+    @IBOutlet var authorityListView: UIView!
+    @IBOutlet var authorityListDivider: UIView!
+    @IBOutlet var authorityListTitleLabel: PlainLabel!
+    @IBOutlet var authorityListSubtitleLabel: PlainLabel!
     @IBOutlet var cancelButton: MainButton!
     @IBOutlet var downloadingHintLabel: PlainLabel!
     @IBOutlet var activityIndicatorWrapper: UIView!
@@ -72,6 +77,7 @@ public class CheckSituationViewController: UIViewController {
 
     private func configureUpdateEntriesStackViews() {
         certificateProviderStackView.isAccessibilityElement = true
+        authorityListStackView.isAccessibilityElement = true
     }
 
     func configureView() {
@@ -116,6 +122,7 @@ public class CheckSituationViewController: UIViewController {
             downloadStateHintLabel.accessibilityRespondsToUserInteraction = true
             certificateProviderStackView.accessibilityRespondsToUserInteraction = true
             downloadingHintLabel.accessibilityRespondsToUserInteraction = true
+            authorityListStackView.accessibilityRespondsToUserInteraction = true
         }
     }
 
@@ -138,6 +145,7 @@ extension CheckSituationViewController {
         cancelButton.title = viewModel.cancelButtonTitle
         cancelButton.style = .plain
         certificateProviderTitleLabel.attributedText = viewModel.certificateProviderTitle.styledAs(.header_3)
+        authorityListTitleLabel.attributedText = viewModel.authorityListTitle.styledAs(.header_3)
         certificateProviderStackView.accessibilityLabel = viewModel.certificateProviderTitle
         downloadingHintLabel.attributedText = viewModel.loadingHintTitle.styledAs(.header_3).colored(.gray)
         bodyTitleLabel.attributedText = viewModel.listTitle.styledAs(.header_2)
@@ -177,6 +185,10 @@ extension CheckSituationViewController {
         downloadStateWrapper.backgroundColor = viewModel.downloadStateHintColor
         certificateProviderSubtitleLabel.attributedText = viewModel.certificateProviderSubtitle.styledAs(.body)
         certificateProviderStackView.accessibilityValue = viewModel.certificateProviderSubtitle
+        authorityListSubtitleLabel.attributedText = viewModel.authorityListSubtitle.styledAs(.body)
+        authorityListStackView.accessibilityValue = viewModel.authorityListSubtitle
+        authorityListView.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
+        authorityListDivider.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
     }
 }
 

@@ -142,6 +142,8 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.downloadStateHintTitle, "settings_rules_list_status_updated")
         XCTAssertEqual(sut.certificateProviderTitle, "settings_rules_list_issuer")
         XCTAssertEqual(sut.certificateProviderSubtitle, "Apr 26, 2021 at 3:05 PM")
+        XCTAssertEqual(sut.authorityListTitle, "settings_rules_list_authorities")
+        XCTAssertEqual(sut.authorityListSubtitle, "Apr 26, 2021 at 3:05 PM")
         XCTAssertEqual(sut.loadingHintTitle, "settings_rules_list_loading_title")
         XCTAssertEqual(sut.offlineModusButton, "app_information_message_update_button")
         XCTAssertEqual(sut.cancelButtonTitle, "settings_rules_list_loading_cancel")
@@ -172,20 +174,18 @@ class CheckSituationViewModelTests: XCTestCase {
     func testRefresh() {
         // Given
         let exp1 = expectation(description: "didUpdate viewModel before loading with isLoading false")
-        let exp3 = expectation(description: "didRefresh didUpdateTrustListHandler")
-        let exp5 = expectation(description: "didUpdate viewModel after loading with isLoading true")
+        let exp2 = expectation(description: "didRefresh didUpdateTrustListHandler")
+        let exp3 = expectation(description: "didUpdate viewModel after loading with isLoading true")
         delegate.didUpdate = { exp1.fulfill() }
-        repository.didUpdateTrustListHandler = {
-            exp3.fulfill()
-        }
+        repository.didUpdateTrustListHandler = { exp2.fulfill() }
+
         // When
         sut.refresh()
-
-        delegate.didUpdate = { exp5.fulfill() }
+        delegate.didUpdate = { exp3.fulfill() }
 
         // Then
         XCTAssertTrue(sut.isLoading)
-        wait(for: [exp1, exp3, exp5], timeout: 2, enforceOrder: true)
+        wait(for: [exp1, exp2, offlineRevocationService.updateExpectation, exp3], timeout: 2, enforceOrder: true)
         XCTAssertFalse(sut.isLoading)
     }
 

@@ -29,6 +29,7 @@ private enum Constants {
             static let statusAvailable = "settings_rules_list_status_updated".localized(bundle: .main)
             static let statusUnavailable = "settings_rules_list_status_outofdate".localized(bundle: .main)
             static let certificateProviderTitle = "settings_rules_list_issuer".localized(bundle: .main)
+            static let authorityListTitle = "settings_rules_list_authorities".localized(bundle: .main)
             static let loadTitle = "app_information_message_update_button".localized(bundle: .main)
             static let loadingTitle = "settings_rules_list_loading_title".localized(bundle: .main)
             static let cancelTitle = "settings_rules_list_loading_cancel".localized(bundle: .main)
@@ -89,6 +90,12 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public let certificateProviderTitle: String = Constants.Keys.Update.certificateProviderTitle
     public var certificateProviderSubtitle: String {
         guard let date = userDefaults.lastUpdatedTrustList else { return "" }
+        return DateUtils.displayDateTimeFormatter.string(from: date)
+    }
+
+    public let authorityListTitle: String = Constants.Keys.Update.authorityListTitle
+    public var authorityListSubtitle: String {
+        guard let date = offlineRevocationService?.lastSuccessfulUpdate else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
 
@@ -211,6 +218,7 @@ extension CheckSituationViewModel {
         firstly {
             self.loadTrustLists()
         }
+        .then(loadRevocationData)
         .ensure {
             self.isLoading = false
         }

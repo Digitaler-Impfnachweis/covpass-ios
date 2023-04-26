@@ -22,9 +22,11 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
         shouldUpdate: Bool = true
     ) {
         var persistence = UserDefaultsPersistence()
+        let certificateRevocationOfflineServiceMock = CertificateRevocationOfflineServiceMock()
         persistence.isCertificateRevocationOfflineServiceEnabled = true
         if let date = updateDate {
             persistence.lastUpdatedTrustList = date
+            certificateRevocationOfflineServiceMock.lastSuccessfulUpdate = date
         }
         let vaccinationRepositoryMock = VaccinationRepositoryMock()
         vaccinationRepositoryMock.shouldTrustListUpdate = shouldUpdate
@@ -32,7 +34,7 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
             userDefaults: persistence,
             router: nil,
             resolver: nil,
-            offlineRevocationService: CertificateRevocationOfflineServiceMock(),
+            offlineRevocationService: certificateRevocationOfflineServiceMock,
             repository: vaccinationRepositoryMock
         )
         sut = CheckSituationViewController(viewModel: viewModel)

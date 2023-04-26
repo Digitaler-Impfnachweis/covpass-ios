@@ -75,8 +75,7 @@
                                                         <constraint firstAttribute="height" constant="24" id="6Js-Aa-2Az"/>
                                                         <constraint firstAttribute="width" constant="24" id="bJZ-0h-30N"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <connections>
                                                         <action selector="settingsTapped:" destination="-1" eventType="touchUpInside" id="kRX-Gx-sm7"/>
                                                     </connections>
