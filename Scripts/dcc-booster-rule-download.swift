@@ -27,4 +27,4 @@ for ruleSummary in rulesSummary {
 let jsonData = try! JSONSerialization.data(withJSONObject: result, options: [])
 try! jsonData.write(to: URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("Certificates/DEMO/DCC/dcc-bn-rules.json"))
 try! jsonData.write(to: URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("Certificates/PROD/DCC/dcc-bn-rules.json"))
-try! jsonData.write(to: URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("Certificates/PROD_RKI/DCC/dcc-domestic-rules.json"))
+try! jsonData.write(to: URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("Certificates/PROD_RKI/DCC/dcc-bn-rules.json"))
