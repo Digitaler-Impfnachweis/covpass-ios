@@ -23,18 +23,9 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var downloadStateHintLabel: PlainLabel!
     @IBOutlet var downloadStateIconImageView: UIImageView!
     @IBOutlet var downloadStateWrapper: UIView!
-    @IBOutlet var domesticRulesStackView: UIStackView!
-    @IBOutlet var domesticRulesTitleLabel: PlainLabel!
-    @IBOutlet var domesticRulesSubtitleLabel: PlainLabel!
-    @IBOutlet var valueSetsStackView: UIStackView!
-    @IBOutlet var valueSetsTitleLabel: PlainLabel!
-    @IBOutlet var valueSetsSubtitleLabel: PlainLabel!
     @IBOutlet var certificateProviderStackView: UIStackView!
     @IBOutlet var certificateProviderTitleLabel: PlainLabel!
     @IBOutlet var certificateProviderSubtitleLabel: PlainLabel!
-    @IBOutlet var countryListStackView: UIView!
-    @IBOutlet var countryListTitleLabel: PlainLabel!
-    @IBOutlet var countryListSubtitleLabel: PlainLabel!
     @IBOutlet var authorityListStackView: UIStackView!
     @IBOutlet var authorityListView: UIView!
     @IBOutlet var authorityListDivider: UIView!
@@ -85,10 +76,7 @@ public class CheckSituationViewController: UIViewController {
     }
 
     private func configureUpdateEntriesStackViews() {
-        domesticRulesStackView.isAccessibilityElement = true
-        valueSetsStackView.isAccessibilityElement = true
         certificateProviderStackView.isAccessibilityElement = true
-        countryListStackView.isAccessibilityElement = true
         authorityListStackView.isAccessibilityElement = true
     }
 
@@ -132,12 +120,9 @@ public class CheckSituationViewController: UIViewController {
             offlineRevocationDescriptionLabel.accessibilityRespondsToUserInteraction = true
             bodyTitleLabel.accessibilityRespondsToUserInteraction = true
             downloadStateHintLabel.accessibilityRespondsToUserInteraction = true
-            domesticRulesStackView.accessibilityRespondsToUserInteraction = true
-            valueSetsStackView.accessibilityRespondsToUserInteraction = true
             certificateProviderStackView.accessibilityRespondsToUserInteraction = true
-            countryListStackView.accessibilityRespondsToUserInteraction = true
-            authorityListStackView.accessibilityRespondsToUserInteraction = true
             downloadingHintLabel.accessibilityRespondsToUserInteraction = true
+            authorityListStackView.accessibilityRespondsToUserInteraction = true
         }
     }
 
@@ -159,16 +144,9 @@ extension CheckSituationViewController {
         mainButton.style = .primary
         cancelButton.title = viewModel.cancelButtonTitle
         cancelButton.style = .plain
-        domesticRulesTitleLabel.attributedText = viewModel.domesticRulesUpdateTitle.styledAs(.header_3)
-        domesticRulesStackView.accessibilityLabel = viewModel.domesticRulesUpdateTitle
-        valueSetsTitleLabel.attributedText = viewModel.valueSetsTitle.styledAs(.header_3)
-        valueSetsStackView.accessibilityLabel = viewModel.valueSetsTitle
         certificateProviderTitleLabel.attributedText = viewModel.certificateProviderTitle.styledAs(.header_3)
-        certificateProviderStackView.accessibilityLabel = viewModel.certificateProviderTitle
-        countryListTitleLabel.attributedText = viewModel.countryListTitle.styledAs(.header_3)
-        countryListStackView.accessibilityLabel = viewModel.countryListTitle
         authorityListTitleLabel.attributedText = viewModel.authorityListTitle.styledAs(.header_3)
-        authorityListStackView.accessibilityLabel = viewModel.authorityListTitle
+        certificateProviderStackView.accessibilityLabel = viewModel.certificateProviderTitle
         downloadingHintLabel.attributedText = viewModel.loadingHintTitle.styledAs(.header_3).colored(.gray)
         bodyTitleLabel.attributedText = viewModel.listTitle.styledAs(.header_2)
         bodyTitleLabel.enableAccessibility(label: viewModel.listTitle, traits: .header)
@@ -205,14 +183,8 @@ extension CheckSituationViewController {
         downloadStateHintLabel.attributedText = viewModel.downloadStateHintTitle.styledAs(.label).colored(viewModel.downloadStateTextColor)
         downloadStateIconImageView.image = viewModel.downloadStateHintIcon
         downloadStateWrapper.backgroundColor = viewModel.downloadStateHintColor
-        domesticRulesSubtitleLabel.attributedText = viewModel.domesticRulesUpdateSubtitle.styledAs(.body)
-        domesticRulesStackView.accessibilityValue = viewModel.domesticRulesUpdateSubtitle
-        valueSetsSubtitleLabel.attributedText = viewModel.valueSetsSubtitle.styledAs(.body)
-        valueSetsStackView.accessibilityValue = viewModel.valueSetsSubtitle
         certificateProviderSubtitleLabel.attributedText = viewModel.certificateProviderSubtitle.styledAs(.body)
         certificateProviderStackView.accessibilityValue = viewModel.certificateProviderSubtitle
-        countryListSubtitleLabel.attributedText = viewModel.countryListSubtitle.styledAs(.body)
-        countryListStackView.accessibilityValue = viewModel.countryListSubtitle
         authorityListSubtitleLabel.attributedText = viewModel.authorityListSubtitle.styledAs(.body)
         authorityListStackView.accessibilityValue = viewModel.authorityListSubtitle
         authorityListView.isHidden = !offlineRevocationSwitch.uiSwitch.isOn

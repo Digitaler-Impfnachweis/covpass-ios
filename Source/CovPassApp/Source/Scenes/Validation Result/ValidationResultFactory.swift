@@ -17,7 +17,6 @@ struct ValidationResultFactory {
                                 repository: VaccinationRepositoryProtocol,
                                 certificate: ExtendedCBORWebToken?,
                                 error: Error?,
-                                type _: DCCCertLogic.LogicType = .eu,
                                 token: VAASValidaitonResultToken,
                                 userDefaults: Persistence) -> ValidationResultViewModel {
         guard let cert = certificate?.vaccinationCertificate, error == nil else {

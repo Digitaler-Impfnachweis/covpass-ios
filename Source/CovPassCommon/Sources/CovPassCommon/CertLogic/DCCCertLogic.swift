@@ -33,7 +33,7 @@ public class RuleSimple: Codable {
         identifier = try container.decodeTrimmedString(forKey: .identifier)
         version = try container.decodeTrimmedString(forKey: .version)
         hash = try container.decodeTrimmedString(forKey: .hash)
-        country = try container.decodeStringIfPresentOr(defaultValue: Constants.defaultCountry, forKey: .country) // currently booster rules are DE only
+        country = try container.decodeStringIfPresentOr(defaultValue: Constants.defaultCountry, forKey: .country)
     }
 }
 
@@ -58,53 +58,21 @@ public struct ValueSet: Codable {
 }
 
 public class DCCCertLogic: DCCCertLogicProtocol {
-    private let initialDCCRulesURL: URL
     private let initialDomesticDCCRulesURL: URL
-    private let service: DCCServiceProtocol
+    private let initialDCCBNRulesURL: URL
     private let keychain: Persistence
     private var userDefaults: Persistence
     private let jsonDecoder = JSONDecoder()
     private let jsonEncoder = JSONEncoder()
 
     public enum LogicType: String {
-        // validate against EU rules
-        case eu
-        // validate against EU rules
-        case euAcceptence
-        // validate against EU rules (only invalidations)
-        case euInvalidation
-        // validate against DE (acceptence and invalidation rules) domestic rules
         case deAcceptenceAndInvalidationRules
-        // validate against DE (invalidation rules) domestic rules
         case deInvalidationRules
-        // validate against DE domestic rules for ifsg22a rule types
         case ifsg22a
-        // validate against vaccination booster rules
         case booster
     }
 
-    var dccRules: [Rule] {
-        // Try to load rules from keychain
-        if let rulesData = try? keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue) as? Data,
-           let rules = try? jsonDecoder.decode([Rule].self, from: rulesData) {
-            return rules
-        }
-        // Try to load local rules
-        if let localRules = try? Data(contentsOf: initialDCCRulesURL),
-           let rules = try? jsonDecoder.decode([Rule].self, from: localRules) {
-            return rules
-        }
-        return []
-    }
-
     var dccDomesticRules: [Rule] {
-        // Try to load rules from keychain
-        if let rulesData = try? keychain.fetch(KeychainPersistence.Keys.dccDomesticRules.rawValue) as? Data,
-           let rules = try? jsonDecoder.decode([Rule].self, from: rulesData),
-           !rules.isEmpty {
-            return rules
-        }
-        // Try to load local rules
         if let localRules = try? Data(contentsOf: initialDomesticDCCRulesURL),
            let rules = try? jsonDecoder.decode([Rule].self, from: localRules) {
             return rules
@@ -113,9 +81,8 @@ public class DCCCertLogic: DCCCertLogicProtocol {
     }
 
     var boosterRules: [Rule] {
-        // Try to load rules from keychain
-        if let rulesData = try? keychain.fetch(KeychainPersistence.Keys.boosterRules.rawValue) as? Data,
-           let rules = try? jsonDecoder.decode([Rule].self, from: rulesData) {
+        if let localRules = try? Data(contentsOf: initialDCCBNRulesURL),
+           let rules = try? jsonDecoder.decode([Rule].self, from: localRules) {
             return rules
         }
         return []
@@ -149,22 +116,6 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         ]
     }
 
-    public var rulesShouldBeUpdated: Bool {
-        userDefaults.lastUpdatedDCCRules?.passed24Hours ?? true
-    }
-
-    public var boosterRulesShouldBeUpdated: Bool {
-        userDefaults.lastUpdatedBoosterRules?.passed24Hours ?? true
-    }
-
-    public var valueSetsShouldBeUpdated: Bool {
-        userDefaults.lastUpdatedValueSets?.passed24Hours ?? true
-    }
-
-    public var domesticRulesShouldBeUpdated: Bool {
-        userDefaults.lastUpdateDomesticRules?.passed24Hours ?? true
-    }
-
     private static func valueSetFromFile(_ name: String) -> [String] {
         guard let url = Bundle.commonBundle.url(forResource: name, withExtension: "json"),
               let data = try? Data(contentsOf: url)
@@ -191,14 +142,12 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         Countries.loadDefaultCountries()
     }
 
-    public init(initialDCCRulesURL: URL,
+    public init(initialDCCBNRulesURL: URL,
                 initialDomesticDCCRulesURL: URL,
-                service: DCCServiceProtocol,
                 keychain: Persistence,
                 userDefaults: Persistence) {
-        self.initialDCCRulesURL = initialDCCRulesURL
         self.initialDomesticDCCRulesURL = initialDomesticDCCRulesURL
-        self.service = service
+        self.initialDCCBNRulesURL = initialDCCBNRulesURL
         self.keychain = keychain
         self.userDefaults = userDefaults
     }
@@ -206,12 +155,6 @@ public class DCCCertLogic: DCCCertLogicProtocol {
     private func rulesFor(logicType: LogicType) -> [Rule] {
         var rules = [Rule]()
         switch logicType {
-        case .eu:
-            rules = dccRules
-        case .euAcceptence:
-            rules = dccRules.acceptanceRules
-        case .euInvalidation:
-            rules = dccRules.invalidationRules
         case .booster:
             rules = boosterRules
         case .deAcceptenceAndInvalidationRules:
@@ -235,7 +178,7 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         return rulesFor(logicType: logicType).filter { $0.region == region }
     }
 
-    public func validate(type: LogicType = .eu,
+    public func validate(type: LogicType,
                          countryCode: String,
                          region: String? = nil,
                          validationClock: Date,
@@ -279,173 +222,5 @@ public class DCCCertLogic: DCCCertLogicProtocol {
             throw DCCCertLogicError.encodingError
         }
         return engine.validate(filter: filter, external: external, payload: payload, validationType: validationType)
-    }
-
-    // MARK: - Updating local rules and data
-
-    public func updateRulesIfNeeded() -> Promise<Void> {
-        guard rulesShouldBeUpdated else {
-            return .value
-        }
-        return updateRules()
-    }
-
-    public func updateRules() -> Promise<Void> {
-        firstly {
-            service.loadCountryList()
-        }.then(on: .global()) { _ in
-            self.updateDCCRules()
-        }
-        .then(on: .global()) {
-            self.updateDomesticRules()
-        }
-    }
-
-    private func updateCountryRules(localRules: [Rule], remoteRules: [RuleSimple]) -> Promise<[Rule]> {
-        Promise { seal in
-            var updatedRules = [Rule]()
-            for remoteRule in remoteRules {
-                if let localRule = localRules.first(where: { $0.countryCode == remoteRule.country && $0.hash == remoteRule.hash }) {
-                    updatedRules.append(localRule)
-                } else {
-                    let rule = try service.loadDCCRule(country: remoteRule.country, hash: remoteRule.hash).wait()
-                    updatedRules.append(rule)
-                }
-            }
-            seal.fulfill(updatedRules)
-        }
-    }
-
-    public func updateBoosterRulesIfNeeded() -> Promise<Void> {
-        guard boosterRulesShouldBeUpdated else {
-            return .value
-        }
-        return updateBoosterRules()
-    }
-
-    public func updateBoosterRules() -> Promise<Void> {
-        firstly {
-            service.loadBoosterRules()
-        }
-        .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
-            self.updateCountryBoosterRules(localRules: self.boosterRules, remoteRules: remoteRules)
-        }
-        .map(on: .global()) { rules in
-            let data = try self.jsonEncoder.encode(rules)
-            try self.keychain.store(KeychainPersistence.Keys.boosterRules.rawValue, value: data)
-        }
-        .then(on: .global()) { () -> Promise<Void> in
-            self.userDefaults.lastUpdatedBoosterRules = Date()
-            return .value
-        }
-    }
-
-    public func updateValueSetsIfNeeded() -> Promise<Void> {
-        guard valueSetsShouldBeUpdated else {
-            return .value
-        }
-        return updateValueSets()
-    }
-
-    public func updateValueSets() -> Promise<Void> {
-        firstly {
-            service.loadValueSets()
-        }
-        .then(on: .global()) { remoteValueSets in
-            Promise { seal in
-                var valueSets = [ValueSet]()
-                var updatedValueSets = [ValueSet]()
-                if let storedData = self.userDefaults.valueSets {
-                    valueSets = try self.jsonDecoder.decode([ValueSet].self, from: storedData)
-                }
-                for remoteValueSet in remoteValueSets {
-                    guard let remoteId = remoteValueSet["id"], let remoteHash = remoteValueSet["hash"] else { continue }
-                    if let localValueSet = valueSets.first(where: { $0.id == remoteId && $0.hash == remoteHash }) {
-                        updatedValueSets.append(localValueSet)
-                    } else {
-                        let valueSet = try self.service.loadValueSet(id: remoteId, hash: remoteHash).wait()
-                        updatedValueSets.append(valueSet)
-                    }
-                }
-                let data = try self.jsonEncoder.encode(updatedValueSets)
-                self.userDefaults.valueSets = data
-                seal.fulfill_()
-            }
-        }
-        .then(on: .global()) { () -> Promise<Void> in
-            self.userDefaults.lastUpdatedValueSets = Date()
-            return .value
-        }
-    }
-
-    public func updateDomesticIfNeeded() -> Promise<Void> {
-        guard domesticRulesShouldBeUpdated else {
-            return .value
-        }
-        return updateDomesticRules()
-    }
-
-    public func updateDomesticRules() -> Promise<Void> {
-        firstly {
-            service.loadDomesticRules()
-        }
-        .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
-            self.updateCountryDomesticRules(localRules: self.dccDomesticRules, remoteRules: remoteRules)
-        }
-        .map(on: .global()) { rules in
-            let data = try self.jsonEncoder.encode(rules)
-            try self.keychain.store(KeychainPersistence.Keys.dccDomesticRules.rawValue, value: data)
-        }
-        .then(on: .global()) { () -> Promise<Void> in
-            self.userDefaults.lastUpdateDomesticRules = Date()
-            return .value
-        }
-    }
-
-    public func updateDCCRules() -> Promise<Void> {
-        firstly {
-            service.loadDCCRules()
-        }
-        .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
-            self.updateCountryRules(localRules: self.dccRules, remoteRules: remoteRules)
-        }
-        .map(on: .global()) { rules in
-            let data = try self.jsonEncoder.encode(rules)
-            try self.keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: data)
-        }
-        .then(on: .global()) { () -> Promise<Void> in
-            self.userDefaults.lastUpdatedDCCRules = Date()
-            return .value
-        }
-    }
-
-    private func updateCountryDomesticRules(localRules: [Rule], remoteRules: [RuleSimple]) -> Promise<[Rule]> {
-        Promise { seal in
-            var updatedRules = [Rule]()
-            for remoteRule in remoteRules {
-                if let localRule = localRules.first(where: { $0.countryCode == remoteRule.country && $0.hash == remoteRule.hash }) {
-                    updatedRules.append(localRule)
-                } else {
-                    let rule = try service.loadDomesticRule(hash: remoteRule.hash).wait()
-                    updatedRules.append(rule)
-                }
-            }
-            seal.fulfill(updatedRules)
-        }
-    }
-
-    private func updateCountryBoosterRules(localRules: [Rule], remoteRules: [RuleSimple]) -> Promise<[Rule]> {
-        Promise { seal in
-            var updatedRules = [Rule]()
-            for remoteRule in remoteRules {
-                if let localRule = localRules.first(where: { $0.countryCode == remoteRule.country && $0.hash == remoteRule.hash }) {
-                    updatedRules.append(localRule)
-                } else {
-                    let rule = try service.loadBoosterRule(hash: remoteRule.hash).wait()
-                    updatedRules.append(rule)
-                }
-            }
-            seal.fulfill(updatedRules)
-        }
     }
 }

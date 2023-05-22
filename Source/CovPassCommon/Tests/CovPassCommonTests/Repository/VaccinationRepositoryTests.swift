@@ -90,7 +90,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testCheckCertificateValidEC() throws {
         let res = try sut.checkCertificate(CertificateMock.validCertificate2, expirationRuleIsActive: false, checkSealCertificate: false).wait()
-        XCTAssertEqual(res.iss, "IT")
+        XCTAssertEqual(res.iss, "DE")
     }
 
 //    func testCheckCertificateValidRSA() throws {
@@ -409,7 +409,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testCheckCertificate() throws {
         let token = try sut.checkCertificate(CertificateMock.validCertificate2, expirationRuleIsActive: false, checkSealCertificate: false).wait()
-        XCTAssertEqual(token.hcert.dgc.uvci, "URN:UVCI:01DE/84503/1651139518/DXSGWLWL40SU8ZFKIYIBK30A4#S")
+        XCTAssertEqual(token.hcert.dgc.uvci, "URN:UVCI:01DE/84503/1683901894/DXSGWLWL40SU8ZFKIYIBK30A4#S")
     }
 
     func testCheckCertificateFails() {
@@ -553,7 +553,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testScanCertificate() throws {
         let token = try sut.scanCertificate(CertificateMock.validCertificate2, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
-        XCTAssertEqual((token as! ExtendedCBORWebToken).vaccinationCertificate.hcert.dgc.uvci, "URN:UVCI:01DE/84503/1651139518/DXSGWLWL40SU8ZFKIYIBK30A4#S")
+        XCTAssertEqual((token as! ExtendedCBORWebToken).vaccinationCertificate.hcert.dgc.uvci, "URN:UVCI:01DE/84503/1683901894/DXSGWLWL40SU8ZFKIYIBK30A4#S")
     }
 
     func testScanCertificateFailsPositive() {

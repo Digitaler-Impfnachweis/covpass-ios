@@ -25,19 +25,6 @@ public protocol CertificateHolderStatusModelProtocol {
     ///            `failedTechnical`, if the user doesn't passed the rules or due to any  error.
     func checkDomesticInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult
 
-    /// Queries the rules, if a certificate passed eu rules (invalidation rules only)
-    /// - Parameters:
-    ///   - certifiates: The certificates of one Person
-    /// - Returns: `passed`, if passed the rules.
-    ///            `failedTechnical`, if the user doesn't passed the rules due to any internal error.
-    ///            `failedFunctional`, if the user doesn't passed the rules due to CertLogic
-    func checkEuInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult
-
-    /// Queries if travel rules available. Travel rules means: EU Enpoint, Country = DE and Region = nil
-    /// - Parameters:
-    /// - Returns: `Bool`, if rules available for traveling to germany. `nil`, if no rules are available
-    func areTravelRulesAvailableForGermany() -> Bool
-
     /// Queries the internal rules, if a certificate passed the §22a IfSG rules.
     /// - Parameters:
     ///   - certifiates: The certificates of one Person

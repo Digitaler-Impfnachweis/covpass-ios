@@ -16,7 +16,6 @@ import UIKit
 
 private enum Constants {
     enum Keys {
-        static let title = "validation_start_screen_title".localized
         enum TimeHint {
             static let syncTitle = "validation_start_screen_scan_sync_message_title".localized
             static let syncMessage = "validation_start_screen_scan_sync_message_text".localized
@@ -70,7 +69,8 @@ class ValidatorOverviewViewModel {
     let router: ValidatorOverviewRouterProtocol
     let certLogic: DCCCertLogicProtocol
     let audioPlayer: AudioPlayerProtocol
-    let title = Constants.Keys.title
+    let informationTitle = "start_infobox_title".localized
+    let informationCopy = "start_infobox_copy".localized
     let scanActionTitle = Constants.Keys.ScanCard.actionTitle
     let scanDropDownTitle = Constants.Keys.ScanCard.dropDownTitle
     let offlineInformationDescription = Constants.Keys.OfflineInformation.copy
@@ -80,7 +80,7 @@ class ValidatorOverviewViewModel {
 
     var delegate: ViewModelDelegate?
     var userDefaults: Persistence
-    var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || vaccinationRepository.trustListShouldBeUpdated() }
+    var shouldSomethingBeUpdated: Bool { vaccinationRepository.trustListShouldBeUpdated() }
 
     var isLoadingScan = false {
         didSet {
@@ -207,19 +207,6 @@ class ValidatorOverviewViewModel {
                     self?.delegate?.viewModelDidUpdate()
                 }
             }
-    }
-
-    func updateDCCRules() {
-        certLogic
-            .updateRulesIfNeeded()
-            .done { [weak self] in
-                self?.delegate?.viewModelDidUpdate()
-            }
-            .cauterize()
-    }
-
-    func updateValueSets() {
-        certLogic.updateValueSetsIfNeeded().cauterize()
     }
 
     func showAppInformation() {

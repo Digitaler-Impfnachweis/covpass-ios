@@ -36,13 +36,13 @@
 
 "accessibility_page_indicator" = "Seite %d von %d";
 
-"vaccination_first_onboarding_page_title" = "Erster Schritt: Übertragen Sie das digitale COVID-Zertifikat der EU auf Ihr Smartphone";
+"vaccination_first_onboarding_page_title" = "Übertragen Sie das digitale COVID-Zertifikat der EU auf Ihr Smartphone";
 
 "vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das digitale COVID-Zertifikat der EU für eine Corona-Impfung oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das digitale COVID-Zertifikat der EU wird sofort auf Ihr Smartphone übertragen.";
 
-"vaccination_second_onboarding_page_title" = "Zweiter Schritt: Rufen Sie den QR-Code in der CovPass-App auf";
+"vaccination_second_onboarding_page_title" = "Rufen Sie den QR-Code in der CovPass-App auf";
 
-"vaccination_second_onboarding_page_message" = "Mit dem QR-Code können Sie Corona-Impfungen und Genesungen von einer Corona-Infektion nachweisen. Ebenso zeigt die App an, ob Sie in bestimmten Bundesländern im öffentlichen Personennahverkehr und in öffentlich zugänglichen Innenräumen wie beispielsweise Restaurants oder Freizeitveranstaltungen eine Maske tragen müssen oder nicht.";
+"vaccination_second_onboarding_page_message" = "Mit dem QR-Code können Sie Corona-Impfungen und Genesungen von einer Corona-Infektion nachweisen. Bei Bedarf können Sie den QR-Code in der CovPass-App vorzeigen. Der QR-Code wird dann von der prüfenden Person mit der CovPassCheck-App gescannt. Halten Sie dazu ergänzend Ihr Ausweisdokument bereit.";
 
 "vaccination_third_onboarding_page_title" = "Dritter Schritt: Zeigen Sie den QR-Code bei Bedarf vor";
 
@@ -1278,9 +1278,9 @@
 
 "accessibility_app_information_title_information_closing_announce" = "Die Ansicht \"Informationen\" wurde geschlossen";
 
-"accessibility_app_information_title_checking_rules_announce" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geöffnet";
+"accessibility_app_information_title_checking_rules_announce" = "Die Ansicht \"Prüfregeln\" wurde geöffnet";
 
-"accessibility_app_information_title_checking_rules_closing_announce" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geschlossen";
+"accessibility_app_information_title_checking_rules_closing_announce" = "Die Ansicht \"Prüfregeln\" wurde geschlossen";
 
 "accessibility_app_information_title_update_notifications_announce" = "Die Ansicht \"Update-Benachrichtigungen\" wurde geöffnet";
 
@@ -1330,6 +1330,24 @@
 
 "app_information_title_company_details_linked" = "#Impressum::$0#";
 
+"app_imprint_title" = "Herausgeber";
+
+"app_imprint_subtitle" = "(verantwortlich nach § 5 Abs. 1 TMG, § 18 Abs. 1 MStV, DSGVO, BDSG)";
+
+"app_imprint_publisher" = "Robert Koch-Institut";
+
+"app_imprint_address" = "Nordufer 20\n13353 Berlin\nvertreten durch den Präsidenten";
+
+"app_imprint_contact_title" = "Kontakt";
+
+"app_imprint_contact_mail" = "#info@covpass-app.de::mailto:info@covpass-app.de#";
+
+"app_imprint_contact_form" = "oder über das #Kontaktformular des Robert Koch-Institut::https://www.rki.de/SharedDocs/Kontaktformulare/weitere/covpass-app/covpass-app_Integrator.html#";
+
+"app_imprint_identnr_title" = "Umsatzsteueridentifikationsnummer";
+
+"app_imprint_identnr_nr" = "DE 165 893 430";
+
 "app_information_title_company_easy_language_linked" = "#Leichte Sprache::$0#";
 
 "app_information_title_company_easy_language" = "Leichte Sprache";
@@ -1344,9 +1362,9 @@
 
 "app_information_title_accessibility_statement_linked" = "#Barrierefreiheitserklärung::$0#";
 
-"app_information_title_update" = "Prüfregeln aktualisieren";
+"app_information_title_update" = "Prüfregeln";
 
-"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Einreiseregeln in den entsprechenden Ländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
+"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
 
 "app_information_list_update_notifications" = "Update-Benachrichtigungen";
 
@@ -1986,3 +2004,7 @@
 "a11y_accordion_collapse_hint_ios" = "Doppelklicken zum Einklappen";
 
 "a11y_accordion_collapse_hint_android" = "Einklappen";
+
+"start_infobox_title" = "Wichtige Information";
+
+"start_infobox_copy" = "Die Corona-Einreiseverordnung läuft aus. Sie können ihre Zertifikate in der App nicht mehr auf Gültigkeit bei Reisen prüfen.";

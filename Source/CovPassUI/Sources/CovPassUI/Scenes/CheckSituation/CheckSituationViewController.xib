@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,24 +13,18 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckSituationViewController" customModule="CovPassUI">
             <connections>
                 <outlet property="activityIndicatorWrapper" destination="K6O-Xe-HNu" id="ToB-Oi-EhW"/>
-                <outlet property="authorityListDivider" destination="V0R-5P-cjh" id="Qud-cE-ewK"/>
-                <outlet property="authorityListStackView" destination="DNe-fo-4yF" id="9FI-Ga-WaY"/>
-                <outlet property="authorityListSubtitleLabel" destination="ale-lQ-RcM" id="Um9-15-OYU"/>
-                <outlet property="authorityListTitleLabel" destination="qhF-Pk-3Z9" id="39y-Dd-6i2"/>
-                <outlet property="authorityListView" destination="B7l-HY-19t" id="gDM-x4-GHY"/>
+                <outlet property="authorityListDivider" destination="Ma7-MM-nyW" id="LW2-sn-eMt"/>
+                <outlet property="authorityListStackView" destination="Crd-KP-D4H" id="Ua0-VQ-o49"/>
+                <outlet property="authorityListSubtitleLabel" destination="5Zh-kP-8w8" id="5Ji-bt-wEp"/>
+                <outlet property="authorityListTitleLabel" destination="Alu-bF-Bod" id="y6e-ay-bho"/>
+                <outlet property="authorityListView" destination="WS9-w0-mdz" id="YJd-8E-yMs"/>
                 <outlet property="bodyTitleLabel" destination="ne7-71-95X" id="0ro-P3-7qK"/>
                 <outlet property="cancelButton" destination="yYe-dl-hMS" id="rbB-ab-ez2"/>
                 <outlet property="certificateProviderStackView" destination="5OC-6B-m0M" id="Ode-a4-WyK"/>
                 <outlet property="certificateProviderSubtitleLabel" destination="7pf-kH-iDz" id="Wmw-TC-KnH"/>
                 <outlet property="certificateProviderTitleLabel" destination="efu-GZ-x0y" id="rBC-as-DF2"/>
-                <outlet property="countryListStackView" destination="yIh-Qr-Ssr" id="zhX-gB-Wof"/>
-                <outlet property="countryListSubtitleLabel" destination="tb6-Wf-0hS" id="4Pk-Np-kAN"/>
-                <outlet property="countryListTitleLabel" destination="9gw-rI-wkA" id="yj5-Qk-5bK"/>
                 <outlet property="descriptionContainerView" destination="ADv-Ie-vgD" id="Bsb-M5-exP"/>
                 <outlet property="descriptionLabel" destination="jkW-LO-gqs" id="kbe-ym-Y4t"/>
-                <outlet property="domesticRulesStackView" destination="gJv-OT-wdv" id="ntm-VU-LCS"/>
-                <outlet property="domesticRulesSubtitleLabel" destination="kON-aZ-l9X" id="9I4-MU-e04"/>
-                <outlet property="domesticRulesTitleLabel" destination="Wcx-ds-yWC" id="pKj-e9-giA"/>
                 <outlet property="downloadStateHintLabel" destination="HZM-Wa-tBr" id="pK1-zB-wIF"/>
                 <outlet property="downloadStateIconImageView" destination="Iwj-PS-kZ4" id="w5o-yH-PDf"/>
                 <outlet property="downloadStateWrapper" destination="BYh-5G-y0f" id="d3v-vp-YUw"/>
@@ -42,9 +36,6 @@
                 <outlet property="offlineRevocationView" destination="0xJ-YP-s2H" id="lM4-hl-372"/>
                 <outlet property="stackview" destination="AB7-iK-S63" id="D5F-U3-98G"/>
                 <outlet property="updateStackview" destination="dja-AL-WwP" id="6Bo-aI-ua0"/>
-                <outlet property="valueSetsStackView" destination="ifH-sS-D3R" id="3s1-8W-xD8"/>
-                <outlet property="valueSetsSubtitleLabel" destination="128-g4-qqF" id="ufo-8E-Dxe"/>
-                <outlet property="valueSetsTitleLabel" destination="FFQ-tF-3bl" id="TtL-lj-yG6"/>
                 <outlet property="view" destination="iN0-l3-epB" id="5bK-nm-zTi"/>
             </connections>
         </placeholder>
@@ -57,7 +48,7 @@
                     <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AB7-iK-S63">
-                            <rect key="frame" x="0.0" y="32" width="414" height="1555"/>
+                            <rect key="frame" x="0.0" y="32" width="414" height="2165"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="fI0-wE-LDZ" userLabel="Page Image">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
@@ -105,10 +96,10 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="dja-AL-WwP" userLabel="updateStackview">
-                                    <rect key="frame" x="0.0" y="423" width="414" height="1132"/>
+                                    <rect key="frame" x="0.0" y="423" width="414" height="1742"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2lw-mO-LjI" userLabel="body">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="956"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="1566"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bic-sA-fCz">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="336"/>
@@ -176,87 +167,23 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1vF-lG-4Ao">
-                                                    <rect key="frame" x="0.0" y="352" width="414" height="604"/>
+                                                    <rect key="frame" x="0.0" y="352" width="414" height="1214"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="fbM-wJ-X5s" userLabel="list">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="604"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="1214"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="idP-BI-ywG" userLabel="domesticRules">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
-                                                                    <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gJv-OT-wdv" userLabel="domesticRules">
-                                                                            <rect key="frame" x="24" y="0.0" width="366" height="217"/>
-                                                                            <subviews>
-                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="Wcx-ds-yWC" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="196"/>
-                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                                </view>
-                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="kON-aZ-l9X" userLabel="subtitle" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                    <rect key="frame" x="0.0" y="196" width="366" height="21"/>
-                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                                </view>
-                                                                            </subviews>
-                                                                        </stackView>
-                                                                    </subviews>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="gJv-OT-wdv" secondAttribute="bottom" id="3uj-sz-Lon"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="gJv-OT-wdv" secondAttribute="trailing" constant="24" id="BEO-0z-r6a"/>
-                                                                        <constraint firstItem="gJv-OT-wdv" firstAttribute="top" secondItem="idP-BI-ywG" secondAttribute="top" id="eJj-xo-c3F"/>
-                                                                        <constraint firstItem="gJv-OT-wdv" firstAttribute="leading" secondItem="idP-BI-ywG" secondAttribute="leading" constant="24" id="xTf-Kt-xDU"/>
-                                                                    </constraints>
-                                                                </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMl-lX-4eX" userLabel="divider">
-                                                                    <rect key="frame" x="0.0" y="223" width="414" height="1"/>
-                                                                    <color key="backgroundColor" name="Divider"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="1" id="G6x-3p-0lT"/>
-                                                                    </constraints>
-                                                                </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-wA-4re" userLabel="valueSets">
-                                                                    <rect key="frame" x="0.0" y="230" width="414" height="82"/>
-                                                                    <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ifH-sS-D3R" userLabel="valueSets">
-                                                                            <rect key="frame" x="24" y="0.0" width="366" height="82"/>
-                                                                            <subviews>
-                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="FFQ-tF-3bl" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="61"/>
-                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                                </view>
-                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="128-g4-qqF" userLabel="subtitle" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                    <rect key="frame" x="0.0" y="61" width="366" height="21"/>
-                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                                </view>
-                                                                            </subviews>
-                                                                        </stackView>
-                                                                    </subviews>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="ifH-sS-D3R" secondAttribute="bottom" id="ay8-uJ-Kpf"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="ifH-sS-D3R" secondAttribute="trailing" constant="24" id="hfB-UL-LGb"/>
-                                                                        <constraint firstItem="ifH-sS-D3R" firstAttribute="leading" secondItem="cPe-wA-4re" secondAttribute="leading" constant="24" id="iQe-iv-DLj"/>
-                                                                        <constraint firstItem="ifH-sS-D3R" firstAttribute="top" secondItem="cPe-wA-4re" secondAttribute="top" id="xBY-9F-01X"/>
-                                                                    </constraints>
-                                                                </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ve-vI-iOf" userLabel="divider">
-                                                                    <rect key="frame" x="0.0" y="318" width="414" height="1"/>
-                                                                    <color key="backgroundColor" name="Divider"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="1" id="Xkf-HP-czO"/>
-                                                                    </constraints>
-                                                                </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGe-PH-1P2" userLabel="certificateProvider">
-                                                                    <rect key="frame" x="0.0" y="325" width="414" height="82"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="597"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5OC-6B-m0M" userLabel="certProvider">
-                                                                            <rect key="frame" x="24" y="0.0" width="366" height="82"/>
+                                                                            <rect key="frame" x="24" y="0.0" width="366" height="597"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="efu-GZ-x0y" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="61"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="576"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="7pf-kH-iDz" userLabel="subtitle" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                    <rect key="frame" x="0.0" y="61" width="366" height="21"/>
+                                                                                    <rect key="frame" x="0.0" y="576" width="366" height="21"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 </view>
                                                                             </subviews>
@@ -271,24 +198,24 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z35-Ia-LWo" userLabel="divider">
-                                                                    <rect key="frame" x="0.0" y="413" width="414" height="1"/>
+                                                                    <rect key="frame" x="0.0" y="603" width="414" height="1"/>
                                                                     <color key="backgroundColor" name="Divider"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="1" id="uNt-3q-2uM"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIh-Qr-Ssr" userLabel="countryList">
-                                                                    <rect key="frame" x="0.0" y="420" width="414" height="82"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WS9-w0-mdz" userLabel="certificateProvider">
+                                                                    <rect key="frame" x="0.0" y="610" width="414" height="597"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RXH-XA-FFu" userLabel="countryList">
-                                                                            <rect key="frame" x="24" y="0.0" width="366" height="82"/>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Crd-KP-D4H" userLabel="certProvider">
+                                                                            <rect key="frame" x="24" y="0.0" width="366" height="597"/>
                                                                             <subviews>
-                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="9gw-rI-wkA" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="61"/>
+                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="Alu-bF-Bod" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="576"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 </view>
-                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="tb6-Wf-0hS" userLabel="subtitle" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                    <rect key="frame" x="0.0" y="61" width="366" height="21"/>
+                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="5Zh-kP-8w8" userLabel="subtitle" customClass="PlainLabel" customModule="CovPassUI">
+                                                                                    <rect key="frame" x="0.0" y="576" width="366" height="21"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 </view>
                                                                             </subviews>
@@ -296,49 +223,17 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="RXH-XA-FFu" secondAttribute="trailing" constant="24" id="PYl-dH-TIm"/>
-                                                                        <constraint firstItem="RXH-XA-FFu" firstAttribute="leading" secondItem="yIh-Qr-Ssr" secondAttribute="leading" constant="24" id="WLF-Rd-AYd"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="RXH-XA-FFu" secondAttribute="bottom" id="aEJ-jC-cEr"/>
-                                                                        <constraint firstItem="RXH-XA-FFu" firstAttribute="top" secondItem="yIh-Qr-Ssr" secondAttribute="top" id="zXb-6V-IZ4"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="Crd-KP-D4H" secondAttribute="bottom" id="EYc-dM-pzM"/>
+                                                                        <constraint firstItem="Crd-KP-D4H" firstAttribute="leading" secondItem="WS9-w0-mdz" secondAttribute="leading" constant="24" id="bab-0m-oIb"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="Crd-KP-D4H" secondAttribute="trailing" constant="24" id="dRe-YS-nwH"/>
+                                                                        <constraint firstItem="Crd-KP-D4H" firstAttribute="top" secondItem="WS9-w0-mdz" secondAttribute="top" id="vbk-bl-M9n"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bU-wG-XQ4" userLabel="divider">
-                                                                    <rect key="frame" x="0.0" y="508" width="414" height="1"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ma7-MM-nyW" userLabel="divider">
+                                                                    <rect key="frame" x="0.0" y="1213" width="414" height="1"/>
                                                                     <color key="backgroundColor" name="Divider"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="1" id="MHh-Ej-RiP"/>
-                                                                    </constraints>
-                                                                </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B7l-HY-19t" userLabel="authorityList">
-                                                                    <rect key="frame" x="0.0" y="515" width="414" height="82"/>
-                                                                    <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DNe-fo-4yF" userLabel="authorityList">
-                                                                            <rect key="frame" x="24" y="0.0" width="366" height="82"/>
-                                                                            <subviews>
-                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="qhF-Pk-3Z9" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="61"/>
-                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                                </view>
-                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="ale-lQ-RcM" userLabel="subtitle" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                    <rect key="frame" x="0.0" y="61" width="366" height="21"/>
-                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                                </view>
-                                                                            </subviews>
-                                                                        </stackView>
-                                                                    </subviews>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                    <constraints>
-                                                                        <constraint firstItem="DNe-fo-4yF" firstAttribute="leading" secondItem="B7l-HY-19t" secondAttribute="leading" constant="24" id="8OM-p6-hse"/>
-                                                                        <constraint firstItem="DNe-fo-4yF" firstAttribute="top" secondItem="B7l-HY-19t" secondAttribute="top" id="Tal-Zj-gdC"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="DNe-fo-4yF" secondAttribute="bottom" id="eb8-k8-hsR"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="DNe-fo-4yF" secondAttribute="trailing" constant="24" id="pQ1-NT-a8Q"/>
-                                                                    </constraints>
-                                                                </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0R-5P-cjh" userLabel="divider">
-                                                                    <rect key="frame" x="0.0" y="603" width="414" height="1"/>
-                                                                    <color key="backgroundColor" name="Divider"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="1" id="1wf-Fl-aAY"/>
+                                                                        <constraint firstAttribute="height" constant="1" id="Mlc-ZH-3jD"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
@@ -358,7 +253,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oKN-Ex-2gz" userLabel="bottom">
-                                            <rect key="frame" x="0.0" y="980" width="414" height="152"/>
+                                            <rect key="frame" x="0.0" y="1590" width="414" height="152"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Nj-Gq-NfJ" userLabel="Downloading Hint Label" customClass="PlainLabel" customModule="CovPassUI">
                                                     <rect key="frame" x="87" y="0.0" width="240" height="20"/>
@@ -411,19 +306,16 @@
         </view>
     </objects>
     <designables>
-        <designable name="128-g4-qqF">
-            <size key="intrinsicContentSize" width="414" height="21"/>
-        </designable>
         <designable name="1Nj-Gq-NfJ">
             <size key="intrinsicContentSize" width="240" height="20"/>
+        </designable>
+        <designable name="5Zh-kP-8w8">
+            <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
         <designable name="7pf-kH-iDz">
             <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
-        <designable name="9gw-rI-wkA">
-            <size key="intrinsicContentSize" width="414" height="21"/>
-        </designable>
-        <designable name="FFQ-tF-3bl">
+        <designable name="Alu-bF-Bod">
             <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
         <designable name="HZM-Wa-tBr">
@@ -432,29 +324,14 @@
         <designable name="Ivx-lO-k36">
             <size key="intrinsicContentSize" width="414" height="20"/>
         </designable>
-        <designable name="Wcx-ds-yWC">
-            <size key="intrinsicContentSize" width="414" height="21"/>
-        </designable>
-        <designable name="ale-lQ-RcM">
-            <size key="intrinsicContentSize" width="414" height="21"/>
-        </designable>
         <designable name="efu-GZ-x0y">
             <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
         <designable name="jkW-LO-gqs">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
-        <designable name="kON-aZ-l9X">
-            <size key="intrinsicContentSize" width="414" height="21"/>
-        </designable>
         <designable name="ne7-71-95X">
             <size key="intrinsicContentSize" width="100" height="128"/>
-        </designable>
-        <designable name="qhF-Pk-3Z9">
-            <size key="intrinsicContentSize" width="414" height="21"/>
-        </designable>
-        <designable name="tb6-Wf-0hS">
-            <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
         <designable name="yYe-dl-hMS">
             <size key="intrinsicContentSize" width="414" height="20"/>

@@ -48,46 +48,6 @@ public extension Persistence {
         }
     }
 
-    var lastUpdatedBoosterRules: Date? {
-        get {
-            let value = try? fetch(UserDefaults.keyLastUpdatedBoosterRules) as? Date
-            return value
-        }
-        set {
-            try? store(UserDefaults.keyLastUpdatedBoosterRules, value: newValue as Any)
-        }
-    }
-
-    var lastUpdatedValueSets: Date? {
-        get {
-            let value = try? fetch(UserDefaults.keyLastUpdatedValueSets) as? Date
-            return value
-        }
-        set {
-            try? store(UserDefaults.keyLastUpdatedValueSets, value: newValue as Any)
-        }
-    }
-
-    var lastUpdatedDCCRules: Date? {
-        get {
-            let value = try? fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date
-            return value
-        }
-        set {
-            try? store(UserDefaults.keyLastUpdatedDCCRules, value: newValue as Any)
-        }
-    }
-
-    var lastUpdateDomesticRules: Date? {
-        get {
-            let value = try? fetch(UserDefaults.keyLastUpdateDomesticRuless) as? Date
-            return value
-        }
-        set {
-            try? store(UserDefaults.keyLastUpdateDomesticRuless, value: newValue as Any)
-        }
-    }
-
     var lastUpdatedTrustList: Date? {
         get {
             let value = try? fetch(UserDefaults.keyLastUpdatedTrustList) as? Date

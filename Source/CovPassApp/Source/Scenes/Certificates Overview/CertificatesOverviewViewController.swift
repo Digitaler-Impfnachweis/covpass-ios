@@ -21,7 +21,10 @@ private enum Constants {
 class CertificatesOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
-    @IBOutlet var headerView: OverviewHeaderView!
+    @IBOutlet var informationIcon: UIImageView!
+    @IBOutlet var settingsButton: UIButton!
+    @IBOutlet var informationTitle: PlainLabel!
+    @IBOutlet var informationCopy: PlainLabel!
     @IBOutlet var addButton: MainButton!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var dotPageIndicator: DotPageIndicator!
@@ -56,8 +59,6 @@ class CertificatesOverviewViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
-        viewModel.updateBoosterRules()
-        viewModel.updateValueSets()
         viewModel.revokeIfNeeded()
     }
 
@@ -87,19 +88,16 @@ class CertificatesOverviewViewController: UIViewController {
         dotPageIndicator.isHidden = !viewModel.showMultipleCertificateHolder
     }
 
-    private func setupHeaderView() {
-        headerView.attributedTitleText = "certificate_action_button_check_validity".localized.styledAs(.header_3).colored(.brandBase).lineHeight(Constants.Layout.actionLineHeight)
-        headerView.titleButton.isHidden = !viewModel.hasCertificates
-        headerView.titleIcon.isHidden = !viewModel.hasCertificates
-        headerView.image = .settings
-        headerView.actionButton.enableAccessibility(label: viewModel.accessibilityMoreInformation)
+    @IBAction func settingsTapped(_: Any) {
+        viewModel.showAppInformation()
+    }
 
-        headerView.titleAction = { [weak self] in
-            self?.viewModel.showRuleCheck()
-        }
-        headerView.action = { [weak self] in
-            self?.viewModel.showAppInformation()
-        }
+    private func setupHeaderView() {
+        settingsButton.setImage(.settings, for: .normal)
+        settingsButton.enableAccessibility(label: viewModel.accessibilityMoreInformation)
+        informationTitle.attributedText = viewModel.informationTitle.styledAs(.header_3)
+        informationCopy.attributedText = viewModel.informationCopy.styledAs(.body)
+        informationIcon.image = .warning
     }
 
     private func setupCollectionView() {

@@ -26,8 +26,7 @@ public struct CheckSituationResolvableSceneFactory: ResolvableSceneFactory {
                                                 router: nil,
                                                 resolver: resolvable,
                                                 offlineRevocationService: nil,
-                                                repository: VaccinationRepository.create(),
-                                                certLogic: DCCCertLogic.create())
+                                                repository: VaccinationRepository.create())
         let viewController = CheckSituationViewController(viewModel: viewModel)
         return viewController
     }

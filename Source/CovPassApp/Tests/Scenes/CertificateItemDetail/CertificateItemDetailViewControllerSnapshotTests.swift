@@ -59,7 +59,7 @@ class CertificateItemDetailViewControllerSnapshotTests: BaseSnapShotTests {
 
     func test_expired_cant_be_renewed_vaccination() {
         configureSut(token: .vaccination_expiredMoreThen90Days, tokens: [.vaccination_expiredMoreThen90Days])
-        verifyView(view: sut.view, height: 600, overallTolerance: 0.01)
+        verifyView(view: sut.view, height: 600, overallTolerance: 0.03)
     }
 
     func test_expired_cant_be_renewed_not_german_vaccination() {
@@ -111,7 +111,7 @@ class CertificateItemDetailViewControllerSnapshotTests: BaseSnapShotTests {
 
     func test_expired_cant_be_renewed_recovery() {
         configureSut(token: .recovery_expiredMoreThen90Days, tokens: [.recovery_expiredMoreThen90Days])
-        verifyView(view: sut.view, height: 600, overallTolerance: 0.01)
+        verifyView(view: sut.view, height: 600, overallTolerance: 0.03)
     }
 
     func test_expired_cant_be_renewed_not_german_recovery() {

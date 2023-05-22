@@ -26,8 +26,6 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
     func testWithLastUpdate() {
         var userDefaults = UserDefaultsPersistence()
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
-        userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
-        userDefaults.lastUpdatedValueSets = DateUtils.parseDate("2021-04-26T15:05:00")
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
         vaccinationRepoMock.shouldTrustListUpdate = true
@@ -40,8 +38,6 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
     func testWithLastUpdateFreshDate() {
         var userDefaults = UserDefaultsPersistence()
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
-        userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
-        userDefaults.lastUpdatedValueSets = DateUtils.parseDate("2021-04-26T15:05:00")
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.rulesShouldBeUpdated = false
         certLogicMock.valueSetsShouldBeUpdated = false
@@ -56,8 +52,6 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
     func testWithLastUpdateTapOnRefresh() {
         var userDefaults = UserDefaultsPersistence()
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
-        userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
-        userDefaults.lastUpdatedValueSets = DateUtils.parseDate("2021-04-26T15:05:00")
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
         vaccinationRepoMock.shouldTrustListUpdate = true

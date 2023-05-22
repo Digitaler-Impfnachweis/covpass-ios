@@ -11,10 +11,6 @@ import PromiseKit
 
 public protocol DCCCertLogicProtocol {
     var countries: [Country] { get }
-    var rulesShouldBeUpdated: Bool { get }
-    var boosterRulesShouldBeUpdated: Bool { get }
-    var valueSetsShouldBeUpdated: Bool { get }
-    var domesticRulesShouldBeUpdated: Bool { get }
     func rulesAvailable(logicType: DCCCertLogic.LogicType, region: String?) -> Bool
     func rules(logicType: DCCCertLogic.LogicType, country: String?, region: String?) -> [Rule]
     func validate(type: DCCCertLogic.LogicType,
@@ -22,12 +18,4 @@ public protocol DCCCertLogicProtocol {
                   region: String?,
                   validationClock: Date,
                   certificate: CBORWebToken) throws -> [ValidationResult]
-    func updateRulesIfNeeded() -> Promise<Void>
-    func updateRules() -> Promise<Void>
-    func updateDomesticIfNeeded() -> Promise<Void>
-    func updateDomesticRules() -> Promise<Void>
-    mutating func updateBoosterRules() -> Promise<Void>
-    mutating func updateBoosterRulesIfNeeded() -> Promise<Void>
-    func updateValueSets() -> Promise<Void>
-    func updateValueSetsIfNeeded() -> Promise<Void>
 }

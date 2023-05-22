@@ -20,14 +20,13 @@ protocol CertificatesOverviewViewModelProtocol {
     var accessibilityMoreInformation: String { get }
     var openingAnnouncment: String { get }
     var closingAnnouncment: String { get }
+    var informationTitle: String { get }
+    var informationCopy: String { get }
     func revokeIfNeeded()
     func refresh() -> Promise<Void>
     func updateTrustList()
-    func updateBoosterRules()
-    func updateValueSets()
     func scanCertificate(withIntroduction: Bool)
     func showAppInformation()
-    func showRuleCheck()
     func showNotificationsIfNeeded()
     func handleOpen(url: URL) -> Bool
     func viewModel(for row: Int) -> CardViewModel

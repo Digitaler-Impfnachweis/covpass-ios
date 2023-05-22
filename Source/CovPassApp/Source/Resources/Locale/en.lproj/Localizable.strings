@@ -36,13 +36,13 @@
 
 "accessibility_page_indicator" = "Page %d of %d";
 
-"vaccination_first_onboarding_page_title" = "Step one: upload your EU Digital COVID Certificate to your smartphone";
+"vaccination_first_onboarding_page_title" = "Upload your EU Digital COVID Certificate to your smartphone";
 
 "vaccination_first_onboarding_page_message" = "Use the CovPass app to scan the EU Digital COVID Certificate for a Covid-19 vaccination or recovery from a Covid-19 infection. To do this, hold your smartphone’s camera above the QR code. Your EU Digital COVID Certificate will be transferred to your smartphone immediately.";
 
-"vaccination_second_onboarding_page_title" = "Step two: open the QR code in the CovPass app";
+"vaccination_second_onboarding_page_title" = "Open the QR code in the CovPass app";
 
-"vaccination_second_onboarding_page_message" = "You can use the QR code to track Corona vaccinations and recoveries from Corona infection. Likewise, the app shows whether or not you need to wear a mask on public transportation in certain states and in indoor spaces open to the public, such as restaurants or recreational events.";
+"vaccination_second_onboarding_page_message" = "You can use the QR code to track Corona vaccinations and recoveries from Corona infection. You can show your QR code from the CovPass app when you need it. The person checking the QR code then scans it with the CovPassCheck app. You will also need to have an ID document at hand for this.";
 
 "vaccination_third_onboarding_page_title" = "Step three: show your QR code when needed";
 
@@ -1278,9 +1278,9 @@
 
 "accessibility_app_information_title_information_closing_announce" = "Information has been closed";
 
-"accessibility_app_information_title_checking_rules_announce" = "Update Checking Rules has been opened";
+"accessibility_app_information_title_checking_rules_announce" = "Checking Rules has been opened";
 
-"accessibility_app_information_title_checking_rules_closing_announce" = "Update checking rules has been closed";
+"accessibility_app_information_title_checking_rules_closing_announce" = "Checking rules has been closed";
 
 "accessibility_app_information_title_update_notifications_announce" = "Update notifications has been opened";
 
@@ -1330,6 +1330,24 @@
 
 "app_information_title_company_details_linked" = "#Legal information::$0#";
 
+"app_imprint_title" = "Publisher";
+
+"app_imprint_subtitle" = "(responsible according to § 5 para. 1 TMG, § 18 para. 1 MStV, DSGVO, BDSG)";
+
+"app_imprint_publisher" = "Robert Koch-Institut";
+
+"app_imprint_address" = "Nordufer 20\n13353 Berlin\nrepresented by the President";
+
+"app_imprint_contact_title" = "Contact";
+
+"app_imprint_contact_mail" = "#info@covpass-app.de::mailto:info@covpass-app.de#";
+
+"app_imprint_contact_form" = "or use the #contact-form of the Robert Koch-Institut::https://www.rki.de/SharedDocs/Kontaktformulare/weitere/covpass-app/covpass-app_Integrator.html#";
+
+"app_imprint_identnr_title" = "VAT identification number";
+
+"app_imprint_identnr_nr" = "DE 165 893 430";
+
 "app_information_title_company_easy_language_linked" = "#Leichte Sprache::$0#";
 
 "app_information_title_company_easy_language" = "Leichte Sprache";
@@ -1344,9 +1362,9 @@
 
 "app_information_title_accessibility_statement_linked" = "#Accessibility statement::$0#";
 
-"app_information_title_update" = "Update checking rules";
+"app_information_title_update" = "Checking rules";
 
-"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Covid-19 rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
+"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
 
 "app_information_list_update_notifications" = "Update notifications";
 
@@ -1986,3 +2004,7 @@
 "a11y_accordion_collapse_hint_ios" = "Double tap to collapse";
 
 "a11y_accordion_collapse_hint_android" = "Collapse";
+
+"start_infobox_title" = "Important information";
+
+"start_infobox_copy" = "The Corona entry regulation is expiring. You can no longer check your certificates in the app for validity when travelling.";

@@ -15,7 +15,7 @@ class PassConsentPageViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = PassConsentPageViewModel(type: .page4, router: ConsentRouter(sceneCoordinator: SceneCoordinatorMock()))
+        sut = PassConsentPageViewModel(type: .page3, router: ConsentRouter(sceneCoordinator: SceneCoordinatorMock()))
     }
 
     override func tearDown() {

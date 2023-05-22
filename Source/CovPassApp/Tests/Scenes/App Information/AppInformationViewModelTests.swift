@@ -17,7 +17,6 @@ class GermanAppInformationViewModelTests: XCTestCase {
             "app_information_list_update_notifications".localized,
             AppInformationBaseViewModel.Texts.faqTitle,
             AppInformationBaseViewModel.Texts.leichteSprache,
-            AppInformationBaseViewModel.Texts.contactTitle,
             AppInformationBaseViewModel.Texts.datenschutzTitle,
             AppInformationBaseViewModel.Texts.companyDetailsTitle,
             AppInformationBaseViewModel.Texts.openSourceLicenseTitle,
@@ -32,7 +31,7 @@ class GermanAppInformationViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 9)
+        XCTAssertEqual(entries.count, 8)
         for index in 0 ..< min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }
@@ -46,7 +45,6 @@ class EnglishAppInformationViewModelTests: XCTestCase {
             AppInformationBaseViewModel.Texts.appInformationTitle,
             "app_information_list_update_notifications".localized,
             AppInformationBaseViewModel.Texts.faqTitle,
-            AppInformationBaseViewModel.Texts.contactTitle,
             AppInformationBaseViewModel.Texts.datenschutzTitle,
             AppInformationBaseViewModel.Texts.companyDetailsTitle,
             AppInformationBaseViewModel.Texts.openSourceLicenseTitle,
@@ -61,7 +59,7 @@ class EnglishAppInformationViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 8)
+        XCTAssertEqual(entries.count, 7)
         for index in 0 ..< min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }

@@ -880,20 +880,6 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         wait(for: [router.showCertificateImportErrorExpectation], timeout: 1)
     }
 
-    func test_update_domestic_rules() throws {
-        // Given
-        configureSut(certificates: [])
-        certLogic.domesticRulesShouldBeUpdated = false
-        certLogic.domesticRulesUpdateTestExpectation.isInverted = true
-
-        // When
-        _ = sut.updateDomesticRules()
-
-        // Then
-        wait(for: [certLogic.domesticRulesUpdateIfNeededTestExpectation,
-                   certLogic.domesticRulesUpdateTestExpectation], timeout: 0.1)
-    }
-
     func testShowMultipleCertificateHolder_false() {
         // When
         let showMultipleCertificateHolder = sut.showMultipleCertificateHolder

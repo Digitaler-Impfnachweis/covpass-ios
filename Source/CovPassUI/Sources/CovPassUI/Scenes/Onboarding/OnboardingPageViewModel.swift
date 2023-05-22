@@ -50,7 +50,6 @@ public enum OnboardingPageViewModelType: CaseIterable {
     case page1
     case page2
     case page3
-    case page4
 }
 
 public protocol OnboardingPageViewModel {

@@ -83,10 +83,6 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
         .value(scanCountErrorResponse)
     }
 
-    func showRuleCheck() -> Promise<Void> {
-        .value
-    }
-
     func showQRCodeScanAndSelectionView() -> Promise<QRCodeImportResult> {
         showQRCodeScanAndSelectionViewExpectation.fulfill()
         if let error = error {

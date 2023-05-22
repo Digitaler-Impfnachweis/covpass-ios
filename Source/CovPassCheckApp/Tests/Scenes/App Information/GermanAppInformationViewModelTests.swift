@@ -19,7 +19,6 @@ class GermanAppInformationViewModelTests: XCTestCase {
             AppInformationBaseViewModel.Texts.faqTitle,
             "app_information_beep_when_checking_title".localized,
             AppInformationBaseViewModel.Texts.leichteSprache,
-            AppInformationBaseViewModel.Texts.contactTitle,
             AppInformationBaseViewModel.Texts.datenschutzTitle,
             AppInformationBaseViewModel.Texts.companyDetailsTitle,
             AppInformationBaseViewModel.Texts.openSourceLicenseTitle,
@@ -35,7 +34,7 @@ class GermanAppInformationViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 11)
+        XCTAssertEqual(entries.count, 10)
         for index in 0 ..< min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }

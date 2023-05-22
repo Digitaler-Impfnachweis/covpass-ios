@@ -32,6 +32,8 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     var openingAnnouncment = "announcement"
     var closingAnnouncment: String = "closingannouncement"
     var showMultipleCertificateHolder = true
+    var informationTitle: String = ""
+    var informationCopy: String = ""
 
     func handleOpen(url _: URL) -> Bool {
         true
@@ -97,8 +99,6 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     func showErrorDialog() {
         // TODO: Add tests
     }
-
-    func showRuleCheck() {}
 
     func showNotificationsIfNeeded() {}
 

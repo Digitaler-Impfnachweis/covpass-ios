@@ -510,6 +510,24 @@
 
 "app_information_title_company_details_linked" = "#Legal information::$0#";
 
+"app_imprint_title" = "Publisher";
+
+"app_imprint_subtitle" = "(responsible according to § 5 para. 1 TMG, § 18 para. 1 MStV, DSGVO, BDSG)";
+
+"app_imprint_publisher" = "Robert Koch-Institut";
+
+"app_imprint_address" = "Nordufer 20\n13353 Berlin\nrepresented by the President";
+
+"app_imprint_contact_title" = "Contact";
+
+"app_imprint_contact_mail" = "#info@covpass-app.de::mailto:info@covpass-app.de#";
+
+"app_imprint_contact_form" = "or use the #contact-form of the Robert Koch-Institut::https://www.rki.de/SharedDocs/Kontaktformulare/weitere/covpass-app/covpass-app_Integrator.html#";
+
+"app_imprint_identnr_title" = "VAT identification number";
+
+"app_imprint_identnr_nr" = "DE 165 893 430";
+
 "app_information_title_company_easy_language_linked" = "#Leichte Sprache::$0#";
 
 "app_information_title_company_easy_language" = "Leichte Sprache";
@@ -560,7 +578,7 @@
 
 "settings_rules_list_loading_cancel" = "Cancel";
 
-"app_information_message_update" = "Here you can update the rules according to which certificates are checked. If your smartphone is usually connected to the Internet, this happens automatically.";
+"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
 
 "app_information_rules_list_title" = "Rules";
 
@@ -1110,3 +1128,7 @@
 "entry_check_success_copy" = "Now match the following data with an identity document of the person being checked.";
 
 "entry_check_link" = "#More about the Coronavirus Entry Regulations::https://www.bundesgesundheitsministerium.de/en/service/gesetze-und-verordnungen/guv-19-lp/coronavirus-einreiseverordnung.html#";
+
+"start_infobox_title" = "Important information";
+
+"start_infobox_copy" = "The rules according to which the app checks certificates will no longer be updated and will remain at the status of 30 May 2023.";

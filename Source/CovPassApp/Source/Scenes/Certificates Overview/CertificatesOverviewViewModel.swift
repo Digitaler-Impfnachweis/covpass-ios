@@ -83,6 +83,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         countOfCells() > 1
     }
 
+    let informationTitle = "start_infobox_title".localized
+    let informationCopy = "start_infobox_copy".localized
+
     // MARK: - Lifecycle
 
     init(
@@ -150,18 +153,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                     self?.delegate?.viewModelDidUpdate()
                 }
             }
-    }
-
-    func updateDomesticRules() -> Promise<Void> {
-        certLogic.updateDomesticIfNeeded()
-    }
-
-    func updateBoosterRules() {
-        certLogic.updateBoosterRulesIfNeeded().cauterize()
-    }
-
-    func updateValueSets() {
-        certLogic.updateValueSetsIfNeeded().cauterize()
     }
 
     func revokeIfNeeded() {
@@ -364,14 +355,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
-    func showRuleCheck() {
-        if certificateList.certificates.filterValidAndNotExpiredCertsWhichArenNotFraud.isEmpty {
-            router.showFilteredCertsErrorDialog()
-        } else {
-            router.showRuleCheck().cauterize()
-        }
-    }
-
     func showAppInformation() {
         router.showAppInformation()
     }
@@ -383,7 +366,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             .then(showAnnouncementIfNeeded)
             .then(showBoosterNotificationIfNeeded)
             .then(showRevocationWarningIfNeeded)
-            .then(updateDomesticRules)
             .then(refresh)
             .catch { error in
                 print("\(#file):\(#function) Error: \(error.localizedDescription)")
