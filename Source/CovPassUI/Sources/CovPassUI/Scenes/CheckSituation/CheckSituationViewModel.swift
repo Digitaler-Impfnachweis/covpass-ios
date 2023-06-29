@@ -30,6 +30,8 @@ private enum Constants {
             static let statusUnavailable = "settings_rules_list_status_outofdate".localized(bundle: .main)
             static let certificateProviderTitle = "settings_rules_list_issuer".localized(bundle: .main)
             static let authorityListTitle = "settings_rules_list_authorities".localized(bundle: .main)
+            static let ifsgInfoTitle = "settings_rules_list_ifsg_title".localized(bundle: .main)
+            static let ifsgInfoSubtitle = "settings_rules_list_ifsg_subtitle".localized(bundle: .main)
             static let loadTitle = "app_information_message_update_button".localized(bundle: .main)
             static let loadingTitle = "settings_rules_list_loading_title".localized(bundle: .main)
             static let cancelTitle = "settings_rules_list_loading_cancel".localized(bundle: .main)
@@ -71,6 +73,8 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public let loadingHintTitle: String = Constants.Keys.Update.loadingTitle
     public let cancelButtonTitle: String = Constants.Keys.Update.cancelTitle
     public let listTitle: String = Constants.Keys.Update.listTitle
+    public let ifsgInfoTitle: String = Constants.Keys.Update.ifsgInfoTitle
+    public let ifsgInfoSubtitle: String = Constants.Keys.Update.ifsgInfoSubtitle
     public var downloadStateHintTitle: String {
         shouldSomethingBeUpdated ? Constants.Keys.Update.statusUnavailable : Constants.Keys.Update.statusAvailable
     }

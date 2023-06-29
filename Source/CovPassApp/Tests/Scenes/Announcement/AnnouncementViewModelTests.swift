@@ -45,7 +45,7 @@ class AnnouncementViewModelTests: XCTestCase {
         // When
         let value = try String(contentsOf: sut.whatsNewURL)
         // Then
-        XCTAssertEqual(value.sha256(), "c18593b6ba197e35c6af580d4d9a88545b000c1eb00373b6e2fa252952f6bc6c")
+        XCTAssertEqual(value.sha256(), "975d0f3c206bf371da2b8ffa72b77ed3c4e960b5ab526603ccde9ea5c766bd9c")
     }
 
     func testDone() {

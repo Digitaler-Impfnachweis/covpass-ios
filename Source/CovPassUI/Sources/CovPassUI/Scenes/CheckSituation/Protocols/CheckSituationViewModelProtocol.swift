@@ -38,6 +38,8 @@ public protocol CheckSituationViewModelProtocol {
     var downloadStateTextColor: UIColor { get }
     var certificateProviderTitle: String { get }
     var certificateProviderSubtitle: String { get }
+    var ifsgInfoTitle: String { get }
+    var ifsgInfoSubtitle: String { get }
     var authorityListTitle: String { get }
     var authorityListSubtitle: String { get }
     var isLoading: Bool { get }

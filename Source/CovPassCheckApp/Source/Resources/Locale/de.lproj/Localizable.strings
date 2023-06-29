@@ -568,6 +568,10 @@
 
 "settings_rules_list_issuer" = "Zertifikatsaussteller";
 
+"settings_rules_list_ifsg_title" = "Regeln nach Infektionsschutzgesetz § 22a";
+
+"settings_rules_list_ifsg_subtitle" = "Zuletzt aktualisiert am 30.04.2023";
+
 "settings_rules_list_countries" = "Länderlisten";
 
 "settings_rules_list_authorities" = "Behördenlisten";
@@ -1131,4 +1135,4 @@
 
 "start_infobox_title" = "Wichtige Information";
 
-"start_infobox_copy" = "Die Regeln, nach denen die App Zertifikate prüft, werden nicht mehr aktualisiert und verbleiben auf dem Stand vom 30. Mai 2023.";
+"start_infobox_copy" = "Zertifikate können derzeit nicht mehr mit der CovPassCheck-App auf Gültigkeit beim Reisen überprüft werden. Nutzerinnen und Nutzern wird empfohlen, sich im Vorfeld einer Reise über die in ihrem Bestimmungsland geltenden Regelungen zu informieren.";

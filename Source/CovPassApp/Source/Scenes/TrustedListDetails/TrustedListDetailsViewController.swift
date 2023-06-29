@@ -21,6 +21,9 @@ class TrustedListDetailsViewController: UIViewController {
     @IBOutlet var certificateProviderContainer: UIView!
     @IBOutlet var certificateProviderTitleLabel: PlainLabel!
     @IBOutlet var certificateProviderSubtitleLabel: PlainLabel!
+    @IBOutlet var ifsgInfo: UIView!
+    @IBOutlet var ifsgInfoTitleLabel: PlainLabel!
+    @IBOutlet var ifsgInfoSubTitleLabel: PlainLabel!
     @IBOutlet var cancelButton: MainButton!
     @IBOutlet var downloadingHintLabel: PlainLabel!
     @IBOutlet var activityIndicatorWrapper: UIView!
@@ -81,6 +84,7 @@ class TrustedListDetailsViewController: UIViewController {
         cancelButton.title = viewModel.cancelButtonTitle
         cancelButton.style = .plain
         certificateProviderTitleLabel.attributedText = viewModel.certificateProviderTitle.styledAs(.header_3)
+        ifsgInfoTitleLabel.attributedText = viewModel.ifsgInfoTitle.styledAs(.header_3)
         downloadingHintLabel.attributedText = viewModel.loadingHintTitle.styledAs(.header_3).colored(.gray)
         bodyTitleLabel.attributedText = viewModel.listTitle.styledAs(.header_2)
         bodyTitleLabel.accessibilityTraits = .header
@@ -125,6 +129,7 @@ class TrustedListDetailsViewController: UIViewController {
         downloadStateIconImageView.image = viewModel.downloadStateHintIcon
         downloadStateWrapper.backgroundColor = viewModel.downloadStateHintColor
         certificateProviderSubtitleLabel.attributedText = viewModel.certificateProviderSubtitle.styledAs(.body)
+        ifsgInfoSubTitleLabel.attributedText = viewModel.ifsgInfoSubtitle.styledAs(.body)
         configureAccessibility()
     }
 

@@ -19,6 +19,8 @@ private enum Constants {
         static let statusAvailable = "settings_rules_list_status_updated".localized
         static let statusUnavailable = "settings_rules_list_status_outofdate".localized
         static let certificateProviderTitle = "settings_rules_list_issuer".localized
+        static let ifsgInfoTitle = "settings_rules_list_ifsg_title".localized
+        static let ifsgInfoSubtitle = "settings_rules_list_ifsg_subtitle".localized
         static let loadTitle = "app_information_message_update_button".localized
         static let loadingTitle = "settings_rules_list_loading_title".localized
         static let cancelTitle = "settings_rules_list_loading_cancel".localized
@@ -44,6 +46,8 @@ class TrustedListDetailsViewModel {
     let loadingHintTitle: String = Constants.Keys.loadingTitle
     let cancelButtonTitle: String = Constants.Keys.cancelTitle
     let listTitle: String = Constants.Keys.listTitle
+    let ifsgInfoTitle: String = Constants.Keys.ifsgInfoTitle
+    let ifsgInfoSubtitle: String = Constants.Keys.ifsgInfoSubtitle
     var downloadStateHintTitle: String {
         shouldSomethingBeUpdated ? Constants.Keys.statusUnavailable : Constants.Keys.statusAvailable
     }

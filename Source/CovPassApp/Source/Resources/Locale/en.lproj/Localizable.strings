@@ -1394,6 +1394,10 @@
 
 "settings_rules_list_issuer" = "Certificate issuer";
 
+"settings_rules_list_ifsg_title" = "Rules according to § 22a of the Infection Protection Act";
+
+"settings_rules_list_ifsg_subtitle" = "Last updated 30.04.2023";
+
 "settings_rules_list_countries" = "Country lists";
 
 "settings_rules_list_loading_title" = "Lists are being updated…";
@@ -2007,4 +2011,4 @@
 
 "start_infobox_title" = "Important information";
 
-"start_infobox_copy" = "The Corona entry regulation is expiring. You can no longer check your certificates in the app for validity when travelling.";
+"start_infobox_copy" = "You can currently no longer check your certificates in the app for validity when travelling. Therefore, please inform yourself about the regulations applicable in your country of destination before travelling.";

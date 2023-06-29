@@ -6,7 +6,7 @@
 //
 
 import CovPassCommon
-import Foundation
+import UIKit
 
 open class AppInformationBaseViewModel: AppInformationViewModelProtocol {
     public let router: AppInformationRouterProtocol
@@ -101,14 +101,16 @@ public extension AppInformationEntry {
                          url: URL,
                          enableDynamicFonts: Bool = false,
                          openingAnnounce: String,
-                         closingAnnounce: String) -> AppInformationEntry {
+                         closingAnnounce: String,
+                         icon: UIImage = .chevronRight) -> AppInformationEntry {
         .init(
             title: title,
             scene: WebviewSceneFactory(title: title,
                                        url: url,
                                        enableDynamicFonts: enableDynamicFonts,
                                        openingAnnounce: openingAnnounce,
-                                       closingAnnounce: closingAnnounce)
+                                       closingAnnounce: closingAnnounce),
+            icon: icon
         )
     }
 }

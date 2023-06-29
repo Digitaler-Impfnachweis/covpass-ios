@@ -21,11 +21,13 @@ class GermanAppInformationViewModel: AppInformationBaseViewModel {
             .webEntry(title: Texts.faqTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/")!,
                       openingAnnounce: Accessibility.Opening.faqTitle,
-                      closingAnnounce: Accessibility.Closing.faqTitle),
+                      closingAnnounce: Accessibility.Closing.faqTitle,
+                      icon: .externalLink),
             .webEntry(title: Texts.leichteSprache,
                       url: URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpassapp")!,
                       openingAnnounce: Accessibility.Opening.leichteSprache,
-                      closingAnnounce: Accessibility.Closing.leichteSprache),
+                      closingAnnounce: Accessibility.Closing.leichteSprache,
+                      icon: .externalLink),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpass-de", withExtension: "html")!,
                       enableDynamicFonts: true,
@@ -43,7 +45,8 @@ class GermanAppInformationViewModel: AppInformationBaseViewModel {
             .webEntry(title: Texts.accessibilityStatementTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpass-app-ios-barrierefreiheitserklaerung/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
-                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle)
+                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle,
+                      icon: .externalLink)
         ]
     }
 }
@@ -59,7 +62,8 @@ class EnglishAppInformationViewModel: AppInformationBaseViewModel {
             .webEntry(title: Texts.faqTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!,
                       openingAnnounce: Accessibility.Opening.faqTitle,
-                      closingAnnounce: Accessibility.Closing.faqTitle),
+                      closingAnnounce: Accessibility.Closing.faqTitle,
+                      icon: .externalLink),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpass-en", withExtension: "html")!,
                       enableDynamicFonts: true,
@@ -77,7 +81,8 @@ class EnglishAppInformationViewModel: AppInformationBaseViewModel {
             .webEntry(title: Texts.accessibilityStatementTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpass-app-ios-accessibility-statement/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
-                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle)
+                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle,
+                      icon: .externalLink)
         ]
     }
 }
