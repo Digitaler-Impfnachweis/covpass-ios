@@ -86,6 +86,7 @@ open class AppInformationViewController: UIViewController {
         view.textLabel.attributedText = entry.title.styledAs(.header_3)
         view.rightTextLabel.attributedText = entry.rightTitle?.styledAs(.header_3)
         view.showSeperator = true
+        view.imageView.image = entry.icon
         view.action = { [weak self] in
             self?.viewModel.showSceneForEntry(entry)
         }

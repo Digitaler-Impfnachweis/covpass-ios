@@ -59,12 +59,14 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
             .webEntry(title: Texts.faqTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!,
                       openingAnnounce: Accessibility.Opening.faqTitle,
-                      closingAnnounce: Accessibility.Closing.faqTitle),
+                      closingAnnounce: Accessibility.Closing.faqTitle,
+                      icon: .externalLink),
             acousticFeedbackSettingsEntry,
             .webEntry(title: Texts.leichteSprache,
                       url: URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpasscheckapp")!,
                       openingAnnounce: Accessibility.Opening.leichteSprache,
-                      closingAnnounce: Accessibility.Closing.leichteSprache),
+                      closingAnnounce: Accessibility.Closing.leichteSprache,
+                      icon: .externalLink),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpasscheck-de", withExtension: "html")!,
                       enableDynamicFonts: true,
@@ -82,7 +84,8 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
             .webEntry(title: Texts.accessibilityStatementTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpasscheck-app-ios-barrierefreiheitserklaerung/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
-                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle),
+                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle,
+                      icon: .externalLink),
             revocationSettingsEntry
         ]
     }
@@ -96,7 +99,8 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
             .webEntry(title: Texts.faqTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!,
                       openingAnnounce: Accessibility.Opening.faqTitle,
-                      closingAnnounce: Accessibility.Closing.faqTitle),
+                      closingAnnounce: Accessibility.Closing.faqTitle,
+                      icon: .externalLink),
             acousticFeedbackSettingsEntry,
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpasscheck-en", withExtension: "html")!,
@@ -115,7 +119,8 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
             .webEntry(title: Texts.accessibilityStatementTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpasscheck-app-ios-accessibility-statement/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
-                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle),
+                      closingAnnounce: Accessibility.Closing.accessibilityStatementTitle,
+                      icon: .externalLink),
             revocationSettingsEntry
         ]
     }

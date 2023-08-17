@@ -568,6 +568,10 @@
 
 "settings_rules_list_issuer" = "Certificate issuer";
 
+"settings_rules_list_ifsg_title" = "Rules according to § 22a of the Infection Protection Act";
+
+"settings_rules_list_ifsg_subtitle" = "Last updated 30.04.2023";
+
 "settings_rules_list_countries" = "Country lists";
 
 "settings_rules_list_authorities" = "List of authorities";
@@ -1131,4 +1135,4 @@
 
 "start_infobox_title" = "Important information";
 
-"start_infobox_copy" = "The rules according to which the app checks certificates will no longer be updated and will remain at the status of 30 May 2023.";
+"start_infobox_copy" = "Certificates can currently no longer be checked for validity when travelling using the CovPassCheck app. Users are advised to find out about the regulations in force in their country of destination before travelling.";

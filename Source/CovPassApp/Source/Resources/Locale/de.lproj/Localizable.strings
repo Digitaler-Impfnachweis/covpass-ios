@@ -1394,6 +1394,10 @@
 
 "settings_rules_list_issuer" = "Zertifikatsaussteller";
 
+"settings_rules_list_ifsg_title" = "Regeln nach Infektionsschutzgesetz § 22a";
+
+"settings_rules_list_ifsg_subtitle" = "Zuletzt aktualisiert am 30.04.2023";
+
 "settings_rules_list_countries" = "Länderlisten";
 
 "settings_rules_list_loading_title" = "Listen werden aktualisiert…";
@@ -2007,4 +2011,4 @@
 
 "start_infobox_title" = "Wichtige Information";
 
-"start_infobox_copy" = "Die Corona-Einreiseverordnung läuft aus. Sie können ihre Zertifikate in der App nicht mehr auf Gültigkeit bei Reisen prüfen.";
+"start_infobox_copy" = "Sie können Ihre Zertifikate in der App derzeit nicht mehr auf Gültigkeit beim Reisen prüfen. Bitte informieren Sie sich daher im Vorfeld einer Reise über die in Ihrem Bestimmungsland geltenden Regelungen.";
