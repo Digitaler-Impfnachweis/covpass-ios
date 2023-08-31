@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
         "state": {
           "branch": null,
-          "revision": "95c18f1c1bc44d5547728621ed680850368f7a45",
-          "version": "1.7.0"
+          "revision": "32f641cf24fc7abc1c591a2025e9f2f572648b0f",
+          "version": "1.7.2"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/MobileNativeFoundation/Kronos.git",
         "state": {
           "branch": null,
-          "revision": "b7f54653a8bb503f42b59ab3160eb11f333b9d3f",
-          "version": "4.2.1"
+          "revision": "a46542ce639581af2a85ab9ec1616a507a5d4ae2",
+          "version": "4.2.2"
         }
       },
       {
