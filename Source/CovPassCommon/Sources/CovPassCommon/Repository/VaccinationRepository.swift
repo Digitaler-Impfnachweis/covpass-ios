@@ -295,7 +295,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
 
                     // Mark first certificate as favorite
                     if certList.certificates.count == 1 {
-                        certList.favoriteCertificateId = extendedCBORWebToken.vaccinationCertificate.hcert.dgc.v?.first?.ci
+                        certList.favoriteCertificateId = extendedCBORWebToken.vaccinationCertificate.hcert.dgc.uvci
                     }
 
                     return self.saveCertificateList(certList).asVoid()
