@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/filom/ASN1Decoder",
         "state": {
           "branch": null,
-          "revision": "65953a42a0f039f53c73e48fd88c02809f7db607",
-          "version": "1.8.0"
+          "revision": "d30708c89cbbf8f0f27122a53fbd98d0cda079fd",
+          "version": "1.9.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
         "state": {
           "branch": null,
-          "revision": "32f641cf24fc7abc1c591a2025e9f2f572648b0f",
-          "version": "1.7.2"
+          "revision": "db51c407d3be4a051484a141bf0bff36c43d3b1e",
+          "version": "1.8.0"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/mxcl/PromiseKit",
         "state": {
           "branch": null,
-          "revision": "8a98e31a47854d3180882c8068cc4d9381bf382d",
-          "version": "6.22.1"
+          "revision": "cb70b070cde06837cd10a1febdf6105c1a3bb348",
+          "version": "8.1.1"
         }
       },
       {

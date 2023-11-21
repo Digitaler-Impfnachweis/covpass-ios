@@ -1731,9 +1731,9 @@
 
 "renewal_bluebox_copy_expired" = "The technical validity of your certificate expired on %@ at %@. Renew your certificate now to continue using it.";
 
-"renewal_bluebox_copy_expiry_not_available" = "The technical validity of your certificate has expired on %@ at %@. If you still need the certificate, please visit a pharmacy to have a new certificate issued.";
+"renewal_bluebox_copy_expiry_not_available" = "The technical validity of your certificate has expired on %@ at %@. If you still need the certificate, please visit a participating pharmacy to have a new certificate issued.";
 
-"renewal_bluebox_copy_expiring_soon_not_available" = "The technical validity of your certificate expires on %@ at %@. If you still need the certificate, please visit a pharmacy to have a new certificate issued.";
+"renewal_bluebox_copy_expiring_soon_not_available" = "The technical validity of your certificate expires on %@ at %@. If you still need the certificate, please visit a participating pharmacy to have a new certificate issued.";
 
 "renewal_bluebox_copy_expiry_not_german" = "The technical validity of at least one of your certificates has expired. As your certificate was not issued in Germany, it cannot be renewed in the CovPass app. Please check the requirements of the country of issuance.";
 
