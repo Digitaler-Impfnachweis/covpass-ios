@@ -83,6 +83,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         countOfCells() > 1
     }
 
+    var addButtonIsHidden: Bool {
+        Date().passedFirstOfJanuary2024
+    }
+
+    var moreButtonTitle: String = "start_infobox_button".localized
     let informationTitle = "start_infobox_title".localized
     let informationCopy = "start_infobox_copy".localized
 
@@ -110,6 +115,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
 
     // MARK: - Methods
+
+    func moreButtonTapped() {
+        _ = router.showSundownInfo()
+    }
 
     func handleOpen(url: URL) -> Bool {
         when(fulfilled: pdfDocument(from: url), repository.getCertificateList())
@@ -364,6 +373,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         firstly { self.initalRefresh() }
             .then(showDataPrivacyIfNeeded)
             .then(showAnnouncementIfNeeded)
+            .then(showSundownInfoIfNeeded)
             .then(showBoosterNotificationIfNeeded)
             .then(showRevocationWarningIfNeeded)
             .then(refresh)
@@ -372,7 +382,15 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             }
     }
 
+    private func showSundownInfoIfNeeded() -> Promise<Void> {
+        if let showSundownInfo = userDefaults.showSundownInfo, showSundownInfo == false {
+            return .value
+        }
+        return router.showSundownInfo()
+    }
+
     private func showCertificatesBoosterRenewalIfNeeded() -> Guarantee<Void> {
+        if Date().passedFirstOfJanuary2024 { return .value }
         let partitions = certificateList.certificates.partitionedByOwner
         let showBoosterRenewalReissuePromises = partitions
             .filter(\.qualifiedForBoosterRenewal)
@@ -388,6 +406,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
 
     private func showVaccinationCertificatesExtensionReissueIfNeeded() -> Guarantee<Void> {
+        if Date().passedFirstOfJanuary2024 { return .value }
         let partitions = certificateList.certificates.partitionedByOwner
         let showBoosterRenewalReissuePromises = partitions
             .filter(\.areVaccinationsQualifiedForExpiryReissue)
@@ -404,6 +423,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
 
     private func showRecoveryCertificatesExtensionReissueIfNeeded() -> Guarantee<Void> {
+        if Date().passedFirstOfJanuary2024 { return .value }
         let partitions = certificateList.certificates.partitionedByOwner
         let showBoosterRenewalReissuePromises = partitions
             .filter(\.areRecoveriesQualifiedForExpiryReissue)

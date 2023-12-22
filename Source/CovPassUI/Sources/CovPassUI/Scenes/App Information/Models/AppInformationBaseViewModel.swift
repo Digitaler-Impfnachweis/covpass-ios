@@ -6,6 +6,7 @@
 //
 
 import CovPassCommon
+import Foundation
 import UIKit
 
 open class AppInformationBaseViewModel: AppInformationViewModelProtocol {
@@ -20,6 +21,7 @@ open class AppInformationBaseViewModel: AppInformationViewModelProtocol {
     public let persistence: Persistence
     public let mainBundle: Bundle
     public let licenseBundle: Bundle
+    public var nowNotPassedFirstOfJanuary2024: Bool { !Date().passedFirstOfJanuary2024 }
 
     public var whatsNewEntry: AppInformationEntry {
         let router = WhatsNewSettingsRouter(sceneCoordinator: router.sceneCoordinator)
@@ -102,7 +104,7 @@ public extension AppInformationEntry {
                          enableDynamicFonts: Bool = false,
                          openingAnnounce: String,
                          closingAnnounce: String,
-                         icon: UIImage = .chevronRight) -> AppInformationEntry {
+                         rightImage: UIImage = .chevronRight) -> AppInformationEntry {
         .init(
             title: title,
             scene: WebviewSceneFactory(title: title,
@@ -110,7 +112,7 @@ public extension AppInformationEntry {
                                        enableDynamicFonts: enableDynamicFonts,
                                        openingAnnounce: openingAnnounce,
                                        closingAnnounce: closingAnnounce),
-            icon: icon
+            rightImage: rightImage
         )
     }
 }

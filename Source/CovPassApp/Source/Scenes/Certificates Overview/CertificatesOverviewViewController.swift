@@ -21,6 +21,7 @@ private enum Constants {
 class CertificatesOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
+    @IBOutlet var moreButton: MainButton!
     @IBOutlet var informationIcon: UIImageView!
     @IBOutlet var settingsButton: UIButton!
     @IBOutlet var informationTitle: PlainLabel!
@@ -113,6 +114,11 @@ class CertificatesOverviewViewController: UIViewController {
     }
 
     private func setupActionButton() {
+        moreButton.style = .alternativeWhiteBackground
+        moreButton.title = viewModel.moreButtonTitle
+        moreButton.action = viewModel.moreButtonTapped
+
+        addButton.isHidden = viewModel.addButtonIsHidden
         addButton.icon = .plus
         addButton.innerButton.accessibilityLabel = viewModel.accessibilityAddCertificate
         addButton.action = { [weak self] in

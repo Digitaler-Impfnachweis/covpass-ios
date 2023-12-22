@@ -50,75 +50,12 @@ class CheckSituationViewModelTests: XCTestCase {
 
     func testSettingsContext() {
         // THEN
-        XCTAssertEqual(sut.footerText, "app_information_offline_revocation_copy_1")
+        XCTAssertEqual(sut.footerText, "app_information_message_update")
         XCTAssertEqual(sut.descriptionTextIsTop, true)
         XCTAssertEqual(sut.newBadgeIconIsHidden, true)
         XCTAssertEqual(sut.pageImageIsHidden, true)
         XCTAssertEqual(sut.buttonIsHidden, true)
         XCTAssertFalse(sut.offlineRevocationIsHidden)
-    }
-
-    func testOfflineRevocationIsEnabled_true() {
-        // Given
-        persistence.isCertificateRevocationOfflineServiceEnabled = true
-
-        // When
-        let isEnabled = sut.offlineRevocationIsEnabled
-
-        // Then
-        XCTAssertTrue(isEnabled)
-    }
-
-    func testOfflineRevocationIsEnabled_false() {
-        // Given
-        persistence.isCertificateRevocationOfflineServiceEnabled = false
-
-        // When
-        let isEnabled = sut.offlineRevocationIsEnabled
-
-        // Then
-        XCTAssertFalse(isEnabled)
-    }
-
-    func testToggleOfflineRevocation_enable() {
-        // Given
-        persistence.isCertificateRevocationOfflineServiceEnabled = false
-
-        // When
-        sut.toggleOfflineRevocation()
-
-        // Then
-        wait(for: [offlineRevocationService.updateExpectation], timeout: 1)
-        XCTAssertTrue(persistence.isCertificateRevocationOfflineServiceEnabled)
-    }
-
-    func testToggleOfflineRevocation_disable_user_confirmed() {
-        // Given
-        persistence.isCertificateRevocationOfflineServiceEnabled = true
-        router.disableOfflineRevocation = true
-
-        // When
-        sut.toggleOfflineRevocation()
-
-        // Then
-        wait(for: [offlineRevocationService.resetExpectation], timeout: 1)
-        XCTAssertFalse(persistence.isCertificateRevocationOfflineServiceEnabled)
-    }
-
-    func testToggleOfflineRevocation_disable_user_does_not_confirm() {
-        // Given
-        persistence.isCertificateRevocationOfflineServiceEnabled = true
-        router.disableOfflineRevocation = false
-        let expectation = XCTestExpectation()
-        expectation.expectedFulfillmentCount = 2
-        delegate.didUpdate = { expectation.fulfill() }
-
-        // When
-        sut.toggleOfflineRevocation()
-
-        // Then
-        wait(for: [expectation], timeout: 1)
-        XCTAssertTrue(persistence.isCertificateRevocationOfflineServiceEnabled)
     }
 
     func testPropertiesInitial() throws {
@@ -185,7 +122,7 @@ class CheckSituationViewModelTests: XCTestCase {
 
         // Then
         XCTAssertTrue(sut.isLoading)
-        wait(for: [exp1, exp2, offlineRevocationService.updateExpectation, exp3], timeout: 2, enforceOrder: true)
+        wait(for: [exp1, exp2, exp3], timeout: 2, enforceOrder: true)
         XCTAssertFalse(sut.isLoading)
     }
 

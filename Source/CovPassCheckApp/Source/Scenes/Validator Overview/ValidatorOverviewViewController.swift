@@ -15,6 +15,7 @@ import UIKit
 class ValidatorOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
+    @IBOutlet var moreButton: MainButton!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var informationIcon: UIImageView!
     @IBOutlet var settingsButton: UIButton!
@@ -24,17 +25,6 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var immunityCheckView: ImmunityScanCardView!
     @IBOutlet var timeHintContainerStackView: UIStackView!
     @IBOutlet var timeHintView: HintView!
-    @IBOutlet var offlineInformationView: UIView!
-    @IBOutlet var offlineInformationStateWrapperView: UIView!
-    @IBOutlet var offlineInformationTitleLabel: PlainLabel!
-    @IBOutlet var offlineInformationStateImageView: UIImageView!
-    @IBOutlet var offlineInformationStateTextLabel: PlainLabel!
-    @IBOutlet var offlineInformationDescriptionLabel: PlainLabel!
-    @IBOutlet var offlineInformationUpdateCellTitleLabel: PlainLabel!
-    @IBOutlet var offlineInformationUpdateCellSubtitleLabel: PlainLabel!
-    @IBOutlet var offlineInformationCellAccesoryImageView: UIImageView!
-    @IBOutlet var offlineInformationUpdateContainer: UIView!
-    @IBOutlet var offlineModusTopContainer: UIView!
     @IBOutlet var checkSituationContainerStackView: UIStackView!
     @IBOutlet var checkSituationView: ImageTitleSubtitleView!
 
@@ -58,7 +48,6 @@ class ValidatorOverviewViewController: UIViewController {
         viewModel.delegate = self
         setupHeaderView()
         setupCardView()
-        setupOfflineInformationView()
         setupCheckSituationView()
         viewModel.showNotificationsIfNeeded()
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -82,6 +71,10 @@ class ValidatorOverviewViewController: UIViewController {
     }
 
     private func setupHeaderView() {
+        moreButton.style = .alternativeWhiteBackground
+        moreButton.title = viewModel.moreButtonTitle
+        moreButton.action = viewModel.moreButtonTapped
+
         settingsButton.setImage(.settings, for: .normal)
         informationTitle.attributedText = viewModel.informationTitle.styledAs(.header_3)
         informationCopy.attributedText = viewModel.informationCopy.styledAs(.body)
@@ -141,27 +134,6 @@ class ValidatorOverviewViewController: UIViewController {
         timeHintView.setConstraintsToEdge()
     }
 
-    private func setupOfflineInformationView() {
-        offlineInformationView.layer.cornerRadius = 8
-        offlineInformationTitleLabel.attributedText = viewModel.offlineInformationTitle.styledAs(.header_3)
-        offlineInformationStateImageView.image = viewModel.offlineInformationStateIcon
-        offlineInformationStateWrapperView.backgroundColor = viewModel.offlineInformationStateBackgroundColor
-        offlineInformationStateWrapperView.layer.cornerRadius = 12
-        offlineInformationStateImageView.image = viewModel.offlineInformationStateIcon
-        offlineInformationStateTextLabel.attributedText = viewModel.offlineInformationStateText.styledAs(.label).colored(viewModel.offlineInformationStateTextColor)
-        offlineInformationDescriptionLabel.attributedText = viewModel.offlineInformationDescription.styledAs(.body)
-        offlineInformationUpdateCellTitleLabel.attributedText = viewModel.offlineInformationUpdateCellTitle.styledAs(.header_3)
-        offlineInformationUpdateCellSubtitleLabel.attributedText = viewModel.offlineInformationUpdateCellSubtitle.styledAs(.body)
-        offlineInformationCellAccesoryImageView.image = viewModel.offlineInformationCellIcon
-        offlineInformationUpdateContainer.enableAccessibility(label: viewModel.offlineInformationUpdateCellTitle,
-                                                              hint: viewModel.offlineInformationUpdateCellSubtitle,
-                                                              traits: .button)
-        let offlineInformationAccessibilityText = viewModel.offlineInformationTitle + " " + viewModel.offlineInformationStateText
-        offlineModusTopContainer.enableAccessibility(label: offlineInformationAccessibilityText,
-                                                     hint: viewModel.offlineInformationDescription,
-                                                     traits: .staticText)
-    }
-
     // MARK: - Actions
 
     @IBAction func routeToUpdateTapped(_: Any) {
@@ -172,7 +144,6 @@ class ValidatorOverviewViewController: UIViewController {
 extension ValidatorOverviewViewController: ViewModelDelegate {
     func viewModelDidUpdate() {
         setupCardView()
-        setupOfflineInformationView()
         setupCheckSituationView()
     }
 

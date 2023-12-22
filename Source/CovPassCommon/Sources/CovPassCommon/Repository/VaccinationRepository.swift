@@ -131,6 +131,9 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
            Date() < date {
             return false
         }
+        if Date().passedFirstOfJanuary2024 {
+            return false
+        }
         return true
     }
 

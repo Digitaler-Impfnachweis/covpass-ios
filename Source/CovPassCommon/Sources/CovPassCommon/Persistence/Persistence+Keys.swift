@@ -8,6 +8,16 @@
 import Foundation
 
 public extension Persistence {
+    var showSundownInfo: Bool? {
+        get {
+            let value = try? fetch(UserDefaults.keySundownInfo) as? Bool
+            return value
+        }
+        set {
+            try? store(UserDefaults.keySundownInfo, value: newValue as Any)
+        }
+    }
+
     var announcementVersion: String? {
         get {
             let value = try? fetch(UserDefaults.keyAnnouncement) as? String

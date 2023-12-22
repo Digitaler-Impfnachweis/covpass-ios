@@ -60,6 +60,12 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
 
     // MARK: - Methods
 
+    func showSundownInfo() -> Promise<Void> {
+        sceneCoordinator.present(
+            SundownInfoSceneFactory()
+        )
+    }
+
     func scanQRCode() -> Promise<QRCodeImportResult> {
         sceneCoordinator.present(
             ScanSceneFactory(

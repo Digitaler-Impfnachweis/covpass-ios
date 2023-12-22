@@ -22,6 +22,7 @@ private enum Constants {
                 static let titleRecovery = "renewal_bluebox_title_expiring_soon_recovery".localized
                 static let copy = "renewal_bluebox_copy_expiring_soon".localized
                 static let copyNotAvailable = "renewal_bluebox_copy_expiring_soon_not_available".localized
+                static let copyNotAvailableAfterFirstOfJuly = "renewal_bluebox_copy_expiring_soon_not_available_30_6".localized
                 static let copyNotGerman = "renewal_bluebox_copy_expiring_soon_not_german".localized
             }
 
@@ -30,6 +31,7 @@ private enum Constants {
                 static let titleRecovery = "renewal_bluebox_title_expired_recovery".localized
                 static let copy = "renewal_bluebox_copy_expired".localized
                 static let copyNotAvailable = "renewal_bluebox_copy_expiry_not_available".localized
+                static let copyNotAvailableAfterFirstOfJuly = "renewal_bluebox_copy_expiry_not_available_30_6".localized
                 static let copyNotGerman = "renewal_bluebox_copy_expiry_not_german".localized
             }
         }
@@ -45,7 +47,11 @@ extension CertificateDetailViewModel {
     var boosterReissueButtonTitle: String { Constants.Keys.Reissue.boosterButtonTitle }
     var vaccinationExpiryReissueButtonTitle: String { Constants.Keys.Reissue.vaccinationExpiryButtonTitle }
     var recoveryExpiryReissueButtonTitle: String { Constants.Keys.Reissue.recoveryExpiryButtonTitle }
-    var showBoosterReissueNotification: Bool { certificates.qualifiedForBoosterRenewal }
+    var showBoosterReissueNotification: Bool {
+        if Date().passedFirstOfJanuary2024 { return false }
+        return certificates.qualifiedForBoosterRenewal
+    }
+
     var boosterReissueTokens: [ExtendedCBORWebToken] { certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany }
     var expiryVaccination: ExtendedCBORWebToken? { certificates.sortLatest().firstVaccination }
 
@@ -54,7 +60,8 @@ extension CertificateDetailViewModel {
     }
 
     var showVaccinationExpiryReissueButtonInNotification: Bool {
-        certificates.areVaccinationsQualifiedForExpiryReissue
+        if Date().passedFirstOfJanuary2024 { return false }
+        return certificates.areVaccinationsQualifiedForExpiryReissue
     }
 
     private var vaccinationExpiryReissueTokens: [ExtendedCBORWebToken] {
@@ -87,17 +94,33 @@ extension CertificateDetailViewModel {
                 if !reissueableVaccination.vaccinationCertificate.isGermanIssuer {
                     copyText = Constants.Keys.Reissue.Expired.copyNotGerman
                 } else if !certificates.areVaccinationsQualifiedForExpiryReissue {
-                    copyText = Constants.Keys.Reissue.Expired.copyNotAvailable
+                    if Date().passedFirstOfJanuary2024 {
+                        copyText = Constants.Keys.Reissue.Expired.copyNotAvailableAfterFirstOfJuly
+                    } else {
+                        copyText = Constants.Keys.Reissue.Expired.copyNotAvailable
+                    }
                 } else {
-                    copyText = Constants.Keys.Reissue.Expired.copy
+                    if Date().passedFirstOfJanuary2024 {
+                        copyText = Constants.Keys.Reissue.Expired.copyNotAvailableAfterFirstOfJuly
+                    } else {
+                        copyText = Constants.Keys.Reissue.Expired.copy
+                    }
                 }
             } else {
                 if !reissueableVaccination.vaccinationCertificate.isGermanIssuer {
                     copyText = Constants.Keys.Reissue.AboutToExpire.copyNotGerman
                 } else if !certificates.areVaccinationsQualifiedForExpiryReissue {
-                    copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailable
+                    if Date().passedFirstOfJanuary2024 {
+                        copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailableAfterFirstOfJuly
+                    } else {
+                        copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailable
+                    }
                 } else {
-                    copyText = Constants.Keys.Reissue.AboutToExpire.copy
+                    if Date().passedFirstOfJanuary2024 {
+                        copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailableAfterFirstOfJuly
+                    } else {
+                        copyText = Constants.Keys.Reissue.AboutToExpire.copy
+                    }
                 }
             }
             guard let expireDate = reissueableVaccination.vaccinationCertificate.exp else {
@@ -130,17 +153,33 @@ extension CertificateDetailViewModel {
                 if !token.isGermanIssuer {
                     copyText = Constants.Keys.Reissue.AboutToExpire.copyNotGerman
                 } else if !certificates.areRecoveriesQualifiedForExpiryReissue {
-                    copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailable
+                    if Date().passedFirstOfJanuary2024 {
+                        copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailableAfterFirstOfJuly
+                    } else {
+                        copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailable
+                    }
                 } else {
-                    copyText = Constants.Keys.Reissue.AboutToExpire.copy
+                    if Date().passedFirstOfJanuary2024 {
+                        copyText = Constants.Keys.Reissue.AboutToExpire.copyNotAvailableAfterFirstOfJuly
+                    } else {
+                        copyText = Constants.Keys.Reissue.AboutToExpire.copy
+                    }
                 }
             } else {
                 if !token.isGermanIssuer {
                     copyText = Constants.Keys.Reissue.Expired.copyNotGerman
                 } else if !certificates.areVaccinationsQualifiedForExpiryReissue {
-                    copyText = Constants.Keys.Reissue.Expired.copyNotAvailable
+                    if Date().passedFirstOfJanuary2024 {
+                        copyText = Constants.Keys.Reissue.Expired.copyNotAvailableAfterFirstOfJuly
+                    } else {
+                        copyText = Constants.Keys.Reissue.Expired.copyNotAvailable
+                    }
                 } else {
-                    copyText = Constants.Keys.Reissue.Expired.copy
+                    if Date().passedFirstOfJanuary2024 {
+                        copyText = Constants.Keys.Reissue.Expired.copyNotAvailableAfterFirstOfJuly
+                    } else {
+                        copyText = Constants.Keys.Reissue.Expired.copy
+                    }
                 }
             }
             guard let expireDate = token.exp else {
@@ -154,6 +193,7 @@ extension CertificateDetailViewModel {
     }
 
     func showRecoveryExpiryReissueButtonInNotification(index: Int) -> Bool {
+        if Date().passedFirstOfJanuary2024 { return false }
         guard recoveriesPassed28Days.indices.contains(index) else {
             return false
         }

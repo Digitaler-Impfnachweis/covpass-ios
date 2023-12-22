@@ -130,6 +130,7 @@ class ValidatorOverviewViewModel {
     var doNotRemoveLastToken: Bool = false
     var isFirstScan: Bool { tokensToCheck.count < 1 }
     var shouldDropLastTokenOnError: Bool = false
+    var moreButtonTitle: String = "start_infobox_button".localized
 
     // MARK: - Lifecycle
 
@@ -153,9 +154,16 @@ class ValidatorOverviewViewModel {
         isFreshInstallation = userDefaults.privacyHash == nil
         currentDataPrivacyHash = privacyFile.sha256()
         setupTimer()
+        if Date().passedFirstOfJanuary2024 {
+            self.userDefaults.revocationExpertMode = false
+        }
     }
 
     // MARK: - Methods
+
+    func moreButtonTapped() {
+        router.showSundownInfo().cauterize()
+    }
 
     private func showDataPrivacyIfNeeded() -> Guarantee<Void> {
         guard let privacyHash = userDefaults.privacyHash else {
@@ -217,15 +225,21 @@ class ValidatorOverviewViewModel {
         firstly {
             showDataPrivacyIfNeeded()
         }
-        .then {
-            self.showAnnouncementIfNeeded()
-        }
+        .then(showAnnouncementIfNeeded)
+        .then(showSundownInfoIfNeeded)
         .done {
             self.delegate?.viewModelDidUpdate()
         }
         .catch { error in
             print(error.localizedDescription)
         }
+    }
+
+    private func showSundownInfoIfNeeded() -> Promise<Void> {
+        if let showSundownInfo = userDefaults.showSundownInfo, showSundownInfo == false {
+            return .value
+        }
+        return router.showSundownInfo()
     }
 
     func chooseAction() {

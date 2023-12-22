@@ -11,14 +11,10 @@ import UIKit
 public protocol CheckSituationViewModelProtocol {
     var navBarTitle: String { get }
     var footerText: String { get }
-    var offlineRevocationTitle: String { get }
-    var offlineRevocationDescription2: String { get }
-    var offlineRevocationSwitchTitle: String { get }
     var newBadgeIconIsHidden: Bool { get }
     var pageImageIsHidden: Bool { get }
     var subTitleIsHidden: Bool { get }
     var offlineRevocationIsHidden: Bool { get }
-    var offlineRevocationIsEnabled: Bool { get }
     var descriptionTextIsTop: Bool { get }
     var hStackViewIsHidden: Bool { get }
     var buttonIsHidden: Bool { get set }
@@ -38,13 +34,13 @@ public protocol CheckSituationViewModelProtocol {
     var downloadStateTextColor: UIColor { get }
     var certificateProviderTitle: String { get }
     var certificateProviderSubtitle: String { get }
-    var ifsgInfoTitle: String { get }
-    var ifsgInfoSubtitle: String { get }
     var authorityListTitle: String { get }
     var authorityListSubtitle: String { get }
+    var ifsgTitle: String { get }
+    var ifsgSubtitle: String { get }
     var isLoading: Bool { get }
+    var authorityListIsHidden: Bool { get }
     func doneIsTapped()
-    func toggleOfflineRevocation()
     func refresh()
     func cancel()
 }

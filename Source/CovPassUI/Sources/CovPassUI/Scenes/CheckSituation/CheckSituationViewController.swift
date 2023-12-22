@@ -11,13 +11,10 @@ import UIKit
 public class CheckSituationViewController: UIViewController {
     // MARK: - IBOutlet
 
+    @IBOutlet var bottomStackView: UIStackView!
     @IBOutlet var stackview: UIStackView!
     @IBOutlet var descriptionLabel: PlainLabel!
     @IBOutlet var descriptionContainerView: UIView!
-    @IBOutlet var offlineRevocationView: UIView!
-    @IBOutlet var offlineRevocationTitleLabel: UILabel!
-    @IBOutlet var offlineRevocationSwitch: LabeledSwitch!
-    @IBOutlet var offlineRevocationDescriptionLabel: UILabel!
     @IBOutlet var updateStackview: UIStackView!
     @IBOutlet var bodyTitleLabel: PlainLabel!
     @IBOutlet var downloadStateHintLabel: PlainLabel!
@@ -26,14 +23,13 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var certificateProviderStackView: UIStackView!
     @IBOutlet var certificateProviderTitleLabel: PlainLabel!
     @IBOutlet var certificateProviderSubtitleLabel: PlainLabel!
-    @IBOutlet var ifsgInfo: UIView!
-    @IBOutlet var ifsgInfoTitleLabel: PlainLabel!
-    @IBOutlet var ifsgInfoSubTitleLabel: PlainLabel!
     @IBOutlet var authorityListStackView: UIStackView!
     @IBOutlet var authorityListView: UIView!
     @IBOutlet var authorityListDivider: UIView!
     @IBOutlet var authorityListTitleLabel: PlainLabel!
     @IBOutlet var authorityListSubtitleLabel: PlainLabel!
+    @IBOutlet var ifsgTitleLabel: PlainLabel!
+    @IBOutlet var ifsgSubtitleLabel: PlainLabel!
     @IBOutlet var cancelButton: MainButton!
     @IBOutlet var downloadingHintLabel: PlainLabel!
     @IBOutlet var activityIndicatorWrapper: UIView!
@@ -71,11 +67,6 @@ public class CheckSituationViewController: UIViewController {
 
     override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        configureHidden()
-    }
-
-    private func configureHidden() {
-        descriptionContainerView.isHidden = viewModel.descriptionIsHidden
     }
 
     private func configureUpdateEntriesStackViews() {
@@ -94,33 +85,12 @@ public class CheckSituationViewController: UIViewController {
 
         descriptionLabel.attributedText = viewModel.footerText.styledAs(.body)
         configureUpdateEntriesStackViews()
-        configureHidden()
-        configureOfflineRevocationView()
         configureUpdateView()
-    }
-
-    private func configureOfflineRevocationView() {
-        offlineRevocationView.isHidden = viewModel.offlineRevocationIsHidden
-        offlineRevocationTitleLabel.attributedText = viewModel.offlineRevocationTitle.styledAs(.header_2)
-        offlineRevocationTitleLabel.accessibilityTraits = .header
-        offlineRevocationDescriptionLabel.attributedText = viewModel.offlineRevocationDescription2
-            .styledAs(.body)
-            .colored(.onBackground110)
-        offlineRevocationSwitch.label.attributedText = viewModel.offlineRevocationSwitchTitle
-            .styledAs(.header_3)
-            .colored(.onBackground110)
-        offlineRevocationSwitch.switchChanged = { [weak self] _ in
-            self?.viewModel.toggleOfflineRevocation()
-        }
-        offlineRevocationSwitch.uiSwitch.isOn = viewModel.offlineRevocationIsEnabled
-        offlineRevocationSwitch.updateAccessibility()
     }
 
     private func configureAccessibilityRespondsToUserInteraction() {
         if #available(iOS 13.0, *) {
             descriptionLabel.accessibilityRespondsToUserInteraction = true
-            offlineRevocationTitleLabel.accessibilityRespondsToUserInteraction = true
-            offlineRevocationDescriptionLabel.accessibilityRespondsToUserInteraction = true
             bodyTitleLabel.accessibilityRespondsToUserInteraction = true
             downloadStateHintLabel.accessibilityRespondsToUserInteraction = true
             certificateProviderStackView.accessibilityRespondsToUserInteraction = true
@@ -148,7 +118,7 @@ extension CheckSituationViewController {
         cancelButton.title = viewModel.cancelButtonTitle
         cancelButton.style = .plain
         certificateProviderTitleLabel.attributedText = viewModel.certificateProviderTitle.styledAs(.header_3)
-        ifsgInfoTitleLabel.attributedText = viewModel.ifsgInfoTitle.styledAs(.header_3)
+        ifsgTitleLabel.attributedText = viewModel.ifsgTitle.styledAs(.header_3)
         authorityListTitleLabel.attributedText = viewModel.authorityListTitle.styledAs(.header_3)
         certificateProviderStackView.accessibilityLabel = viewModel.certificateProviderTitle
         downloadingHintLabel.attributedText = viewModel.loadingHintTitle.styledAs(.header_3).colored(.gray)
@@ -157,6 +127,7 @@ extension CheckSituationViewController {
     }
 
     private func configureUpdateView() {
+        bottomStackView.isHidden = true
         setupActivityIndicator()
         setupButtonActions()
         updateUpdateRelatedViews()
@@ -188,25 +159,18 @@ extension CheckSituationViewController {
         downloadStateIconImageView.image = viewModel.downloadStateHintIcon
         downloadStateWrapper.backgroundColor = viewModel.downloadStateHintColor
         certificateProviderSubtitleLabel.attributedText = viewModel.certificateProviderSubtitle.styledAs(.body)
-        ifsgInfoSubTitleLabel.attributedText = viewModel.ifsgInfoSubtitle.styledAs(.body)
         certificateProviderStackView.accessibilityValue = viewModel.certificateProviderSubtitle
+        ifsgSubtitleLabel.attributedText = viewModel.ifsgSubtitle.styledAs(.body)
         authorityListSubtitleLabel.attributedText = viewModel.authorityListSubtitle.styledAs(.body)
         authorityListStackView.accessibilityValue = viewModel.authorityListSubtitle
-        authorityListView.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
-        authorityListDivider.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
+        authorityListView.isHidden = viewModel.authorityListIsHidden
+        authorityListDivider.isHidden = viewModel.authorityListIsHidden
     }
 }
 
 extension CheckSituationViewController: ViewModelDelegate {
     public func viewModelDidUpdate() {
         updateUpdateRelatedViews()
-        toggleOfflineRevocationIfNeeded()
-    }
-
-    private func toggleOfflineRevocationIfNeeded() {
-        if viewModel.offlineRevocationIsEnabled != offlineRevocationSwitch.uiSwitch.isOn {
-            configureOfflineRevocationView()
-        }
     }
 
     public func viewModelUpdateDidFailWithError(_: Error) {}

@@ -41,6 +41,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_: UIApplication, handleOpen url: URL) -> Bool {
+        if Date().passedFirstOfJanuary2024 { return true }
         guard let window = window,
               let rootViewController = window.rootViewController,
               let navigationController = rootViewController as? UINavigationController,

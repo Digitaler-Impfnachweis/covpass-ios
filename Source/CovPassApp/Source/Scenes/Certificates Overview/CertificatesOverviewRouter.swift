@@ -45,6 +45,12 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
 
     // MARK: - Methods
 
+    func showSundownInfo() -> Promise<Void> {
+        sceneCoordinator.present(
+            SundownInfoSceneFactory()
+        )
+    }
+
     func showAnnouncement() -> Promise<Void> {
         sceneCoordinator.present(
             AnnouncementSceneFactory(

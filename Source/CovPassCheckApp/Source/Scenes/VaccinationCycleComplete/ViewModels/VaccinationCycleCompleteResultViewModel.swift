@@ -57,7 +57,7 @@ final class VaccinationCycleCompleteResultViewModel: VaccinationCycleCompleteRes
         self.resolver = resolver
         self.router = router
         self.revocationKeyFilename = revocationKeyFilename
-        revocationInfoHidden = !persistence.revocationExpertMode
+        revocationInfoHidden = !persistence.revocationExpertMode || Date().passedFirstOfJanuary2024
         let dgc = token.vaccinationCertificate.hcert.dgc
         holderName = dgc.nam.fullName
         holderNameTransliterated = dgc.nam.fullNameTransliterated

@@ -22,19 +22,6 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(APP_NAME)</string>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeName</key>
-			<string>PDF</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.adobe.pdf</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconName</key>
@@ -56,10 +43,10 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>DCC_DOMESTIC_RULES_FILE</key>
-	<string>$(DCC_DOMESTIC_RULES_FILE)</string>
 	<key>DCC_BN_RULES_FILE</key>
 	<string>$(DCC_BN_RULES_FILE)</string>
+	<key>DCC_DOMESTIC_RULES_FILE</key>
+	<string>$(DCC_DOMESTIC_RULES_FILE)</string>
 	<key>DCC_RULES_TLS_CERTIFICATE_NAME</key>
 	<string>$(DCC_RULES_TLS_CERTIFICATE_NAME)</string>
 	<key>DOMESTIC_RULES_URL</key>
@@ -99,8 +86,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UISupportsDocumentBrowser</key>
-	<false/>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>

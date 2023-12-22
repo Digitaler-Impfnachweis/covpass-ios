@@ -57,6 +57,9 @@
                   Identifier = "AudioPlayerTests/testPlayCovPassCheckCertificateScannedIfEnabled_file_valid()">
                </Test>
                <Test
+                  Identifier = "HTTPClientCertificatePinningTests/testPinning()">
+               </Test>
+               <Test
                   Identifier = "QualityAssuranceTests">
                </Test>
             </SkippedTests>

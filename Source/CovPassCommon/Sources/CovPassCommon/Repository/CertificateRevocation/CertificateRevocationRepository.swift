@@ -17,6 +17,9 @@ public struct CertificateRevocationRepository: CertificateRevocationRepositoryPr
     }
 
     public func isRevoked(_ webToken: ExtendedCBORWebToken) -> Guarantee<Bool> {
+        if Date().passedFirstOfJanuary2024 {
+            return .value(false)
+        }
         do {
             let parameters = try RevocationParameters(webToken)
             return isRevoked(parameters).recover { _ in .value(false) }

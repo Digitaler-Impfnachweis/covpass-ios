@@ -108,10 +108,12 @@ class CertificateOverviewCardViewModel: CertificateCardViewModelProtocol {
         }
         if anyCertExpiredMoreThan90Days {
             return "certificates_overview_expired_title".localized
-        } else if anyCertExpiredForLessOrEqual90Days {
+        } else if anyCertExpiredForLessOrEqual90Days, !Date().passedFirstOfJanuary2024 {
             return "vaccination_start_screen_qrcode_renewal_note_subtitle".localized
-        } else if anyCertWillExpireInLessOrEqual28Days {
+        } else if anyCertWillExpireInLessOrEqual28Days, !Date().passedFirstOfJanuary2024 {
             return "vaccination_start_screen_qrcode_renewal_note_subtitle".localized
+        } else if Date().passedFirstOfJanuary2024 {
+            return nil
         } else {
             return "infschg_start_notification".localized
         }

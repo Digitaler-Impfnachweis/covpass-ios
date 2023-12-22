@@ -136,6 +136,9 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var renewalNeeded: Bool {
+        if Date().passedFirstOfJanuary2024 {
+            return false
+        }
         let cert = certificate.vaccinationCertificate
         return certificate.isNotRevoked && cert.expiresSoon && !cert.expiredMoreThan90Days && cert.isGermanIssuer
     }

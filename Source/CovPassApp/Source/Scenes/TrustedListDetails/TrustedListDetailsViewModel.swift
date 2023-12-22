@@ -19,8 +19,8 @@ private enum Constants {
         static let statusAvailable = "settings_rules_list_status_updated".localized
         static let statusUnavailable = "settings_rules_list_status_outofdate".localized
         static let certificateProviderTitle = "settings_rules_list_issuer".localized
-        static let ifsgInfoTitle = "settings_rules_list_ifsg_title".localized
-        static let ifsgInfoSubtitle = "settings_rules_list_ifsg_subtitle".localized
+        static let ifsgListTitle = "settings_rules_list_features".localized
+        static let ifsgListSubtitle = "settings_rules_list_features_lastupdated".localized
         static let loadTitle = "app_information_message_update_button".localized
         static let loadingTitle = "settings_rules_list_loading_title".localized
         static let cancelTitle = "settings_rules_list_loading_cancel".localized
@@ -46,8 +46,6 @@ class TrustedListDetailsViewModel {
     let loadingHintTitle: String = Constants.Keys.loadingTitle
     let cancelButtonTitle: String = Constants.Keys.cancelTitle
     let listTitle: String = Constants.Keys.listTitle
-    let ifsgInfoTitle: String = Constants.Keys.ifsgInfoTitle
-    let ifsgInfoSubtitle: String = Constants.Keys.ifsgInfoSubtitle
     var downloadStateHintTitle: String {
         shouldSomethingBeUpdated ? Constants.Keys.statusUnavailable : Constants.Keys.statusAvailable
     }
@@ -66,10 +64,14 @@ class TrustedListDetailsViewModel {
 
     let certificateProviderTitle: String = Constants.Keys.certificateProviderTitle
     var certificateProviderSubtitle: String {
-        guard let date = userDefaults.lastUpdatedTrustList else { return "" }
+        guard let date = userDefaults.lastUpdatedTrustList else {
+            return "settings_rules_list_issuer_lastupdated".localized
+        }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
 
+    let ifsgTitle: String = Constants.Keys.ifsgListTitle
+    let ifsgSubtitle: String = Constants.Keys.ifsgListSubtitle
     var accessibilityAnnounce = Constants.Accessibility.titleUpdate
     var accessibilityClose = Constants.Accessibility.closeView
     var isLoading = false {
