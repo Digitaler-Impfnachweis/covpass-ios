@@ -36,6 +36,10 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var thirdScanSameTokenExpectation = XCTestExpectation(description: "secondScanSameTokenTypeExpectation")
     var scanQRCodeResponse: String = ""
 
+    func showSundownInfo() -> Promise<Void> {
+        .value
+    }
+
     func sameTokenScanned() -> Promise<ValidatorDetailSceneResult> {
         secondScanSameTokenExpectation.fulfill()
         return .value(.rescan)

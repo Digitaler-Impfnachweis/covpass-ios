@@ -18,6 +18,7 @@ public extension UserDefaults {
     static let keyCheckVersionUpdate = "keyCheckVersionUpdate"
     static let keyValueSets = "keyValueSets"
     static let keyAnnouncement = "keyAnnouncement"
+    static let keySundownInfo = "sundownInfo"
     static let keyPrivacy = "keyPrivacy"
     static let keyPrivacyShownForAppVersion = "keyPrivacyShownForAppVersion"
     static let keyRevocationExpertMode = "keyRevocationSettingsType"

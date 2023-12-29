@@ -34,6 +34,10 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     var showMultipleCertificateHolder = true
     var informationTitle: String = ""
     var informationCopy: String = ""
+    var addButtonIsHidden: Bool = false
+    var moreButtonTitle: String = "MEHR"
+
+    func moreButtonTapped() {}
 
     func handleOpen(url _: URL) -> Bool {
         true

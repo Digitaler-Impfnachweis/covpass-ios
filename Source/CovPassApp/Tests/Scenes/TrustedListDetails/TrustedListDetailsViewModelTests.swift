@@ -48,7 +48,7 @@ class TrustedListDetailsViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(sut.title, "Checking rules")
-        XCTAssertEqual(sut.oflineModusDescription, "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.")
+        XCTAssertEqual(sut.oflineModusDescription, "The app will no longer be developed from 1 January 2024. The checking rules can no longer be updated.")
         XCTAssertEqual(sut.listTitle, "Checking rules")
         XCTAssertEqual(sut.downloadStateHintIcon, .warning)
         XCTAssertEqual(sut.downloadStateTextColor, .neutralBlack)
@@ -72,7 +72,7 @@ class TrustedListDetailsViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(sut.title, "Checking rules")
-        XCTAssertEqual(sut.oflineModusDescription, "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.")
+        XCTAssertEqual(sut.oflineModusDescription, "The app will no longer be developed from 1 January 2024. The checking rules can no longer be updated.")
         XCTAssertEqual(sut.listTitle, "Checking rules")
         XCTAssertEqual(sut.downloadStateHintIcon, .check)
         XCTAssertEqual(sut.downloadStateTextColor, .neutralWhite)

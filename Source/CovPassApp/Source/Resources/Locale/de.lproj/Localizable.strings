@@ -119,6 +119,10 @@
 
 "vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf die Taste \"Nachweis hinzufügen\" (Plus-Symbol), um ein digitales COVID-Zertifikat der EU hinzuzufügen.";
 
+"vaccination_start_screen_note_title_after_july" = "Keine Zertifikate vorhanden";
+
+"vaccination_start_screen_note_message_after_july" = "Seit dem 1. Januar 2024 wird die CovPass-App nicht mehr weiterentwickelt. Daher können keine Zertifikate mehr hinzugefügt werden.";
+
 "startscreen_card_title" = "Digitales COVID-Zertifikat der EU";
 
 "startscreen_card_button" = "Zertifikate anzeigen";
@@ -1364,7 +1368,7 @@
 
 "app_information_title_update" = "Prüfregeln";
 
-"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
+"app_information_message_update" = "Die App wird ab dem 1. Januar 2024 nicht mehr weiterentwickelt. Die Prüfregeln können nicht mehr aktualisiert werden.";
 
 "app_information_list_update_notifications" = "Update-Benachrichtigungen";
 
@@ -1390,7 +1394,11 @@
 
 "settings_rules_list_domestic" = "Inlandsregeln";
 
-"settings_rules_list_features" = "Regelmerkmale";
+"settings_rules_list_features" = "Regeln nach Infektionsschutzgesetz § 22a";
+
+"settings_rules_list_features_lastupdated" = "Zuletzt aktualisiert am 30.04.2023";
+
+"settings_rules_list_issuer_lastupdated" = "Zuletzt aktualisiert am 01.12.2023";
 
 "settings_rules_list_issuer" = "Zertifikatsaussteller";
 
@@ -1731,9 +1739,13 @@
 
 "renewal_bluebox_copy_expired" = "Die technische Gültigkeit Ihres Zertifikats ist am %@ um %@ abgelaufen. Erneuern Sie jetzt Ihr Zertifikat, um es weiterhin nutzen zu können.";
 
-"renewal_bluebox_copy_expiry_not_available" = "Die technische Gültigkeit Ihres Zertifikats ist am %@ um %@ abgelaufen. Wenn Sie das Zertifikat weiter benötigen, wenden Sie sich bitte an eine teilnehmende Apotheke, um sich ein neues Zertifikat ausstellen zu lassen.";
+"renewal_bluebox_copy_expiry_not_available" = "Die technische Gültigkeit Ihres Zertifikats ist am %@ um %@ abgelaufen. Wenn Sie das Zertifikat weiter benötigen, wenden Sie sich bitte bis zum 31.12.2023 an eine teilnehmende Apotheke, um sich ein neues Zertifikat ausstellen zu lassen.";
 
-"renewal_bluebox_copy_expiring_soon_not_available" = "Die technische Gültigkeit Ihres Zertifikats läuft am %@ um %@ ab. Wenn Sie das Zertifikat weiter benötigen, wenden Sie sich bitte an eine teilnehmende Apotheke, um sich ein neues Zertifikat ausstellen zu lassen.";
+"renewal_bluebox_copy_expiring_soon_not_available" = "Die technische Gültigkeit Ihres Zertifikats läuft am %@ um %@ ab. Wenn Sie das Zertifikat weiter benötigen, wenden Sie sich bitte bis zum 31.12.2023 an eine teilnehmende Apotheke, um sich ein neues Zertifikat ausstellen zu lassen.";
+
+"renewal_bluebox_copy_expiring_soon_not_available_30_6" = "Die technische Gültigkeit Ihres Zertifikats läuft am %@ um %@ ab.";
+
+"renewal_bluebox_copy_expiry_not_available_30_6" = "Die technische Gültigkeit Ihres Zertifikats ist am %@ um %@ abgelaufen.";
 
 "renewal_bluebox_copy_expiry_not_german" = "Die technische Gültigkeit mindestens eines Ihrer Zertifikate ist abgelaufen. Da Ihr Zertifikat nicht in Deutschland ausgestellt wurde, kann dieses nicht in der CovPass-App erneuert werden. Bitte prüfen Sie die Vorgaben des Ausstellungslandes.";
 
@@ -2009,6 +2021,34 @@
 
 "a11y_accordion_collapse_hint_android" = "Einklappen";
 
-"start_infobox_title" = "Wichtige Information";
+"start_infobox_title" = "Achtung";
 
-"start_infobox_copy" = "Sie können Ihre Zertifikate in der App derzeit nicht mehr auf Gültigkeit beim Reisen prüfen. Bitte informieren Sie sich daher im Vorfeld einer Reise über die in Ihrem Bestimmungsland geltenden Regelungen.";
+"start_infobox_copy" = "Die Entwicklung der CovPass-App endet, da die gesetzliche Grundlage wegfällt. Ihre Zertifikate bleiben jedoch erhalten.";
+
+"start_infobox_button" = "Mehr anzeigen";
+
+"popup_sundown_info_image" = "Das Bild zeigt eine glückliche Familie, eine Person hält ein Smartphone mit einem grünen Haken.";
+
+"popup_sundown_info_title" = "Achtung!";
+
+"popup_sundown_info_copy" = "Die Europäische Union hat im Jahr 2021 mit dem digitalen COVID-Zertifikat einen EU-weit anerkannten Nachweis über eine Impfung, eine Genesung oder eine negative Testung von COVID-19 eingeführt. Diese Verordnung trat zum 30. Juni 2023 außer Kraft. Übergangsweise betreibt die EU die technischen Systeme zur Ermöglichung der länderübergreifenden Zertifikatsprüfung bis zum 31. Dezember 2023 weiter. Der Übergangsbetrieb endet zu diesem Zeitpunkt. Derzeit steht kein internationales System mit vergleichbaren Funktionalitäten und vergleichbarer Reichweite bereit.\n\nIn Deutschland wird daher die Möglichkeit zur Ausstellung von digitalen COVID-Zertifikaten wie etwa Impf- und Genesenenzertifikaten zum 31. Dezember 2023 eingestellt. Eingestellt werden deshalb auch die CovPass-App und die CovPassCheck-App. Die CovPass-App wird in einen Walletmodus versetzt, in welchem die gespeicherten Zertifikate erhalten bleiben.";
+
+"popup_sundown_info_subtitle" = "Das bedeutet für Sie: Bis zum 31.12.2023 sind alle bisherigen Funktionalitäten verfügbar.\n\nAb dem 01.01.2024:";
+
+"popup_sundown_info_bullet1" = "Ihre in der CovPass-App vorhandenen Zertifikate bleiben auf Ihrem Smartphone gespeichert.";
+
+"popup_sundown_info_bullet2" = "Sie können in der CovPass-App weiterhin auf Ihre gespeicherten Zertifikate zugreifen.";
+
+"popup_sundown_info_bullet3" = "Sie können gespeicherte Zertifikate als PDF exportieren (Funktion „PDF erstellen“).";
+
+"popup_sundown_info_bullet4" = "Sie können keine Zertifikate mehr hinzufügen (Die Funktion zum Scannen von Zertifikaten haben wir entfernt).";
+
+"popup_sundown_info_bullet5" = "Sie können technisch abgelaufene Zertifikate nicht mehr in der App erneuern. Daher wird auch nicht mehr auf deren Ablauf und Erneuerung hingewiesen.";
+
+"popup_sundown_info_bullet6" = "Es wird kein Support mehr für die App angeboten.";
+
+"popup_sundown_info_bullet7" = "Die Apps sind im App-Store für einen (erneuten) Download nicht mehr verfügbar.";
+
+"popup_sundown_info_bullet8" = "Es werden keine neuen Funktionen veröffentlicht.";
+
+"popup_sundown_info_bullet9" = "Weitere Hinweise finden Sie außerdem in der Datenschutzerklärung der CovPass-App.";

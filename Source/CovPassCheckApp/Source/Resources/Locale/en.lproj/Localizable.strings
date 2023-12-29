@@ -568,6 +568,8 @@
 
 "settings_rules_list_issuer" = "Certificate issuer";
 
+"settings_rules_list_issuer_lastupdated" = "Last updated 01.12.2023";
+
 "settings_rules_list_ifsg_title" = "Rules according to § 22a of the Infection Protection Act";
 
 "settings_rules_list_ifsg_subtitle" = "Last updated 30.04.2023";
@@ -582,7 +584,7 @@
 
 "settings_rules_list_loading_cancel" = "Cancel";
 
-"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
+"app_information_message_update" = "The app will no longer be developed from 1 January 2024. The checking rules can no longer be updated.";
 
 "app_information_rules_list_title" = "Rules";
 
@@ -1133,6 +1135,24 @@
 
 "entry_check_link" = "#More about the Coronavirus Entry Regulations::https://www.bundesgesundheitsministerium.de/en/service/gesetze-und-verordnungen/guv-19-lp/coronavirus-einreiseverordnung.html#";
 
-"start_infobox_title" = "Important information";
+"start_infobox_title" = "Attention";
 
-"start_infobox_copy" = "Certificates can currently no longer be checked for validity when travelling using the CovPassCheck app. Users are advised to find out about the regulations in force in their country of destination before travelling.";
+"start_infobox_copy" = "The development of the CovPassCheck app ends as the legal basis ceases to exist.";
+
+"start_infobox_button" = "Show more";
+
+"popup_sundown_info_image" = "Image showing a happy family, one person is holding a smartphone with a green check.";
+
+"popup_sundown_info_title" = "Attention!";
+
+"popup_sundown_info_copy" = "In 2021, the European Union introduced the digital COVID certificate as an EU-wide recognised proof of vaccination, recovery or negative testing for COVID-19. This regulation expired on 30 June 2023. On a transitional basis, the EU will continue to operate the technical systems to enable cross-border certificate checks until 31 December 2023. The transitional operation will end on that date. There is currently no international system with comparable functions and scope.\n\nIn Germany, the possibility of issuing digital COVID certificates such as vaccination and recovery certificates will therefore be discontinued on 31 December 2023. The CovPass app and the CovPassCheck app will therefore also be discontinued. The CovPass app will be switched to wallet mode, where the stored certificates will be retained.";
+
+"popup_sundown_info_subtitle" = "What does this mean for you? All functionalities will continue to be available until 31 December 2023.\n\nFrom 1 January2024:";
+
+"popup_sundown_info_bullet1" = "Support for the app will no longer be offered.";
+
+"popup_sundown_info_bullet2" = "The apps will no longer be available for (re)download in the app store.";
+
+"popup_sundown_info_bullet3" = "No new functions will be published.";
+
+"popup_sundown_info_bullet4" = "Further information can also be found in the CovPassCheck app privacy policy.";

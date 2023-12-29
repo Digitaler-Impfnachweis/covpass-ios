@@ -19,24 +19,19 @@
                 <outlet property="authorityListTitleLabel" destination="Alu-bF-Bod" id="y6e-ay-bho"/>
                 <outlet property="authorityListView" destination="WS9-w0-mdz" id="YJd-8E-yMs"/>
                 <outlet property="bodyTitleLabel" destination="ne7-71-95X" id="0ro-P3-7qK"/>
+                <outlet property="bottomStackView" destination="oKN-Ex-2gz" id="TCD-e3-VHQ"/>
                 <outlet property="cancelButton" destination="yYe-dl-hMS" id="rbB-ab-ez2"/>
                 <outlet property="certificateProviderStackView" destination="5OC-6B-m0M" id="Ode-a4-WyK"/>
                 <outlet property="certificateProviderSubtitleLabel" destination="7pf-kH-iDz" id="Wmw-TC-KnH"/>
                 <outlet property="certificateProviderTitleLabel" destination="efu-GZ-x0y" id="rBC-as-DF2"/>
-                <outlet property="descriptionContainerView" destination="ADv-Ie-vgD" id="Bsb-M5-exP"/>
                 <outlet property="descriptionLabel" destination="jkW-LO-gqs" id="kbe-ym-Y4t"/>
                 <outlet property="downloadStateHintLabel" destination="HZM-Wa-tBr" id="pK1-zB-wIF"/>
                 <outlet property="downloadStateIconImageView" destination="Iwj-PS-kZ4" id="w5o-yH-PDf"/>
                 <outlet property="downloadStateWrapper" destination="BYh-5G-y0f" id="d3v-vp-YUw"/>
                 <outlet property="downloadingHintLabel" destination="1Nj-Gq-NfJ" id="Tdu-PL-C1G"/>
-                <outlet property="ifsgInfo" destination="Xcn-sr-0d4" id="auj-aE-15G"/>
-                <outlet property="ifsgInfoSubTitleLabel" destination="pkJ-8g-Vtb" id="yHe-iP-DB3"/>
-                <outlet property="ifsgInfoTitleLabel" destination="HNO-iL-iW1" id="eFn-Hq-Uqk"/>
+                <outlet property="ifsgSubtitleLabel" destination="43Z-MK-gD8" id="3JT-vY-LS5"/>
+                <outlet property="ifsgTitleLabel" destination="eYL-EH-ZDi" id="JT7-TG-Vkm"/>
                 <outlet property="mainButton" destination="Ivx-lO-k36" id="ZQN-bj-NHU"/>
-                <outlet property="offlineRevocationDescriptionLabel" destination="9hc-gd-3Aj" id="SVn-e4-W5n"/>
-                <outlet property="offlineRevocationSwitch" destination="s2Z-84-4oW" id="jEP-U3-edO"/>
-                <outlet property="offlineRevocationTitleLabel" destination="qDu-uB-ZZ0" id="ttp-00-B9h"/>
-                <outlet property="offlineRevocationView" destination="0xJ-YP-s2H" id="lM4-hl-372"/>
                 <outlet property="stackview" destination="AB7-iK-S63" id="D5F-U3-98G"/>
                 <outlet property="updateStackview" destination="dja-AL-WwP" id="6Bo-aI-ua0"/>
                 <outlet property="view" destination="iN0-l3-epB" id="5bK-nm-zTi"/>
@@ -47,59 +42,14 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Wg-Ev-lHI">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Wg-Ev-lHI">
                     <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AB7-iK-S63">
-                            <rect key="frame" x="0.0" y="32" width="414" height="2775"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AB7-iK-S63">
+                            <rect key="frame" x="0.0" y="32" width="414" height="2352"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="fI0-wE-LDZ" userLabel="Page Image">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </imageView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xJ-YP-s2H">
-                                    <rect key="frame" x="0.0" y="128" width="414" height="127"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDu-uB-ZZ0">
-                                            <rect key="frame" x="24" y="0.0" width="41.5" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hc-gd-3Aj">
-                                            <rect key="frame" x="24" y="32.5" width="41.5" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s2Z-84-4oW" customClass="LabeledSwitch" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="65" width="414" height="50"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" placeholder="YES" id="NKw-VX-ahf"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9hc-gd-3Aj" secondAttribute="trailing" constant="24" id="Ac6-CG-yZx"/>
-                                        <constraint firstAttribute="bottom" secondItem="s2Z-84-4oW" secondAttribute="bottom" constant="12" id="QXn-nz-B7m"/>
-                                        <constraint firstItem="qDu-uB-ZZ0" firstAttribute="top" secondItem="0xJ-YP-s2H" secondAttribute="top" id="S5l-fc-l5G"/>
-                                        <constraint firstItem="9hc-gd-3Aj" firstAttribute="top" secondItem="qDu-uB-ZZ0" secondAttribute="bottom" constant="12" id="TuZ-kw-JS6"/>
-                                        <constraint firstItem="s2Z-84-4oW" firstAttribute="leading" secondItem="0xJ-YP-s2H" secondAttribute="leading" id="iYD-sH-OMg"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qDu-uB-ZZ0" secondAttribute="trailing" constant="24" id="ism-fm-rsn"/>
-                                        <constraint firstItem="s2Z-84-4oW" firstAttribute="top" secondItem="9hc-gd-3Aj" secondAttribute="bottom" constant="12" id="uwl-AF-VIX"/>
-                                        <constraint firstAttribute="trailing" secondItem="s2Z-84-4oW" secondAttribute="trailing" id="wkW-wZ-Ymc"/>
-                                        <constraint firstItem="9hc-gd-3Aj" firstAttribute="leading" secondItem="qDu-uB-ZZ0" secondAttribute="leading" id="yft-PY-P0s"/>
-                                        <constraint firstItem="qDu-uB-ZZ0" firstAttribute="leading" secondItem="0xJ-YP-s2H" secondAttribute="leading" constant="24" id="zms-bg-0ho"/>
-                                    </constraints>
-                                </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ADv-Ie-vgD">
-                                    <rect key="frame" x="0.0" y="255" width="414" height="168"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="dja-AL-WwP" userLabel="updateStackview">
-                                    <rect key="frame" x="0.0" y="423" width="414" height="2352"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="dja-AL-WwP" userLabel="updateStackview">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="2352"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2lw-mO-LjI" userLabel="body">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="2176"/>
@@ -108,24 +58,28 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="336"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="26e-tG-9gF">
-                                                            <rect key="frame" x="24" y="28" width="366" height="296"/>
+                                                            <rect key="frame" x="24" y="0.0" width="366" height="324"/>
                                                             <subviews>
+                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="jkW-LO-gqs" userLabel="Description Label" customClass="PlainLabel" customModule="CovPassUI">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="164"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPf-DG-GZ9">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="148"/>
+                                                                    <rect key="frame" x="0.0" y="176" width="366" height="148"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="ne7-71-95X" userLabel="listTitle" customClass="PlainLabel" customModule="CovPassUI">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="148"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="148"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </view>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vW-H6-C4r" userLabel="spacer">
-                                                                            <rect key="frame" x="100" y="0.0" width="154" height="148"/>
+                                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vW-H6-C4r" userLabel="spacer">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="148"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </view>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYh-5G-y0f">
-                                                                            <rect key="frame" x="254" y="0.0" width="112" height="148"/>
+                                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYh-5G-y0f">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="32" height="148"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GQn-4O-coO">
-                                                                                    <rect key="frame" x="4" y="4" width="96" height="140"/>
+                                                                                    <rect key="frame" x="4" y="4" width="16" height="140"/>
                                                                                     <subviews>
                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iwj-PS-kZ4">
                                                                                             <rect key="frame" x="0.0" y="62" width="16" height="16"/>
@@ -136,7 +90,7 @@
                                                                                             </constraints>
                                                                                         </imageView>
                                                                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="HZM-Wa-tBr" userLabel="donwloadStateHintLabel" customClass="PlainLabel" customModule="CovPassUI">
-                                                                                            <rect key="frame" x="16" y="6" width="80" height="128"/>
+                                                                                            <rect key="frame" x="16" y="6" width="0.0" height="128"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         </view>
                                                                                     </subviews>
@@ -154,10 +108,6 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </stackView>
-                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="jkW-LO-gqs" userLabel="Description Label" customClass="PlainLabel" customModule="CovPassUI">
-                                                                    <rect key="frame" x="0.0" y="160" width="366" height="136"/>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                </view>
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
@@ -165,7 +115,7 @@
                                                     <constraints>
                                                         <constraint firstItem="26e-tG-9gF" firstAttribute="leading" secondItem="bic-sA-fCz" secondAttribute="leading" constant="24" id="AbC-Oz-CFa"/>
                                                         <constraint firstAttribute="trailing" secondItem="26e-tG-9gF" secondAttribute="trailing" constant="24" id="R9e-lE-ltD"/>
-                                                        <constraint firstItem="26e-tG-9gF" firstAttribute="top" secondItem="bic-sA-fCz" secondAttribute="top" constant="28" id="fep-dO-Aj4"/>
+                                                        <constraint firstItem="26e-tG-9gF" firstAttribute="top" secondItem="bic-sA-fCz" secondAttribute="top" id="fep-dO-Aj4"/>
                                                         <constraint firstAttribute="bottom" secondItem="26e-tG-9gF" secondAttribute="bottom" constant="12" id="pd7-rB-W2V"/>
                                                     </constraints>
                                                 </view>
@@ -207,17 +157,17 @@
                                                                         <constraint firstAttribute="height" constant="1" id="uNt-3q-2uM"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcn-sr-0d4" userLabel="ifsg">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eQ-3d-rFn" userLabel="ifsg">
                                                                     <rect key="frame" x="0.0" y="610" width="414" height="597"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pib-EL-JtD" userLabel="ifsg">
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mNr-at-WW6" userLabel="ifgs">
                                                                             <rect key="frame" x="24" y="0.0" width="366" height="597"/>
                                                                             <subviews>
-                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="HNO-iL-iW1" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
+                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="eYL-EH-ZDi" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="366" height="576"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 </view>
-                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="pkJ-8g-Vtb" userLabel="subtitle" customClass="PlainLabel" customModule="CovPassUI">
+                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="43Z-MK-gD8" userLabel="subtitle" customClass="PlainLabel" customModule="CovPassUI">
                                                                                     <rect key="frame" x="0.0" y="576" width="366" height="21"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 </view>
@@ -226,23 +176,23 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="pib-EL-JtD" secondAttribute="bottom" id="FC4-or-N7b"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="pib-EL-JtD" secondAttribute="trailing" constant="24" id="IOW-gz-j6N"/>
-                                                                        <constraint firstItem="pib-EL-JtD" firstAttribute="leading" secondItem="Xcn-sr-0d4" secondAttribute="leading" constant="24" id="brX-VQ-QG8"/>
-                                                                        <constraint firstItem="pib-EL-JtD" firstAttribute="top" secondItem="Xcn-sr-0d4" secondAttribute="top" id="koA-vz-D9R"/>
+                                                                        <constraint firstItem="mNr-at-WW6" firstAttribute="top" secondItem="2eQ-3d-rFn" secondAttribute="top" id="jnA-Q7-5oI"/>
+                                                                        <constraint firstItem="mNr-at-WW6" firstAttribute="leading" secondItem="2eQ-3d-rFn" secondAttribute="leading" constant="24" id="nct-Nk-fRc"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="mNr-at-WW6" secondAttribute="bottom" id="nqX-1a-x6r"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="mNr-at-WW6" secondAttribute="trailing" constant="24" id="tPV-zz-FIQ"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xtf-ux-aue" userLabel="divider">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MK0-Pu-bns" userLabel="divider">
                                                                     <rect key="frame" x="0.0" y="1213" width="414" height="1"/>
                                                                     <color key="backgroundColor" name="Divider"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="1" id="8nH-9q-Dot"/>
+                                                                        <constraint firstAttribute="height" constant="1" id="eEF-iY-VbV"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WS9-w0-mdz" userLabel="authorityList">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WS9-w0-mdz" userLabel="authList">
                                                                     <rect key="frame" x="0.0" y="1220" width="414" height="597"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Crd-KP-D4H" userLabel="authority">
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Crd-KP-D4H" userLabel="certProvider">
                                                                             <rect key="frame" x="24" y="0.0" width="366" height="597"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="Alu-bF-Bod" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
@@ -344,6 +294,9 @@
         <designable name="1Nj-Gq-NfJ">
             <size key="intrinsicContentSize" width="240" height="20"/>
         </designable>
+        <designable name="43Z-MK-gD8">
+            <size key="intrinsicContentSize" width="414" height="21"/>
+        </designable>
         <designable name="5Zh-kP-8w8">
             <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
@@ -353,14 +306,14 @@
         <designable name="Alu-bF-Bod">
             <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
-        <designable name="HNO-iL-iW1">
-            <size key="intrinsicContentSize" width="414" height="21"/>
-        </designable>
         <designable name="HZM-Wa-tBr">
             <size key="intrinsicContentSize" width="80" height="128"/>
         </designable>
         <designable name="Ivx-lO-k36">
             <size key="intrinsicContentSize" width="414" height="20"/>
+        </designable>
+        <designable name="eYL-EH-ZDi">
+            <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
         <designable name="efu-GZ-x0y">
             <size key="intrinsicContentSize" width="414" height="21"/>
@@ -370,9 +323,6 @@
         </designable>
         <designable name="ne7-71-95X">
             <size key="intrinsicContentSize" width="100" height="128"/>
-        </designable>
-        <designable name="pkJ-8g-Vtb">
-            <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
         <designable name="yYe-dl-hMS">
             <size key="intrinsicContentSize" width="414" height="20"/>

@@ -15,6 +15,7 @@ protocol CertificatesOverviewViewModelProtocol {
     var delegate: CertificatesOverviewViewModelDelegate? { get set }
     var hasCertificates: Bool { get }
     var isLoading: Bool { get set }
+    var addButtonIsHidden: Bool { get }
     var showMultipleCertificateHolder: Bool { get }
     var accessibilityAddCertificate: String { get }
     var accessibilityMoreInformation: String { get }
@@ -22,6 +23,7 @@ protocol CertificatesOverviewViewModelProtocol {
     var closingAnnouncment: String { get }
     var informationTitle: String { get }
     var informationCopy: String { get }
+    var moreButtonTitle: String { get }
     func revokeIfNeeded()
     func refresh() -> Promise<Void>
     func updateTrustList()
@@ -31,6 +33,7 @@ protocol CertificatesOverviewViewModelProtocol {
     func handleOpen(url: URL) -> Bool
     func viewModel(for row: Int) -> CardViewModel
     func countOfCells() -> Int
+    func moreButtonTapped() -> Void
 }
 
 extension CertificatesOverviewViewModelProtocol {

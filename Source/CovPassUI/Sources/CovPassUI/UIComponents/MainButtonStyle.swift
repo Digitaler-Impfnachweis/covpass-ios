@@ -14,6 +14,7 @@ public enum MainButtonStyle {
     case tertiary
     case plain
     case alternative
+    case alternativeWhiteBackground
     case alternativeWhiteTitle
     case invisible
 
@@ -27,7 +28,7 @@ public enum MainButtonStyle {
             return .neutralBlack
         case .plain:
             return .brandBase
-        case .alternative:
+        case .alternative, .alternativeWhiteBackground:
             return .brandBase
         case .alternativeWhiteTitle:
             return .white
@@ -46,7 +47,7 @@ public enum MainButtonStyle {
             return .neutralBlack
         case .plain:
             return .brandBase
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative, .alternativeWhiteBackground, .alternativeWhiteTitle:
             return .brandBase
         case .invisible:
             return .clear
@@ -63,7 +64,7 @@ public enum MainButtonStyle {
             return .neutralBlack
         case .plain:
             return .brandBase
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative, .alternativeWhiteBackground, .alternativeWhiteTitle:
             return .brandBase
         case .invisible:
             return .clear
@@ -80,7 +81,7 @@ public enum MainButtonStyle {
             return .neutralBlack
         case .plain:
             return .onBackground70
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative, .alternativeWhiteBackground, .alternativeWhiteTitle:
             return .brandBase
         case .invisible:
             return .clear
@@ -101,6 +102,8 @@ public enum MainButtonStyle {
             return .clear
         case .invisible:
             return .clear
+        case .alternativeWhiteBackground:
+            return .white
         }
     }
 
@@ -114,7 +117,7 @@ public enum MainButtonStyle {
             return .onBackground20
         case .plain:
             return .clear
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative, .alternativeWhiteBackground, .alternativeWhiteTitle:
             return .clear
         case .invisible:
             return .clear
@@ -131,7 +134,7 @@ public enum MainButtonStyle {
             return .onBackground20
         case .plain:
             return .clear
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative, .alternativeWhiteBackground, .alternativeWhiteTitle:
             return .clear
         case .invisible:
             return .clear
@@ -148,7 +151,7 @@ public enum MainButtonStyle {
             return .backgroundSecondary20
         case .plain:
             return .backgroundSecondary20
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative, .alternativeWhiteBackground, .alternativeWhiteTitle:
             return .clear
         case .invisible:
             return .clear
@@ -165,7 +168,7 @@ public enum MainButtonStyle {
             return .clear
         case .plain, .alternativeWhiteTitle:
             return .clear
-        case .alternative:
+        case .alternative, .alternativeWhiteBackground:
             return .brandBase
         case .invisible:
             return .clear
@@ -182,7 +185,7 @@ public enum MainButtonStyle {
             return .clear
         case .plain:
             return .clear
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative, .alternativeWhiteBackground, .alternativeWhiteTitle:
             return .brandBase
         case .invisible:
             return .clear
@@ -199,7 +202,7 @@ public enum MainButtonStyle {
             return .clear
         case .plain:
             return .clear
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative, .alternativeWhiteBackground, .alternativeWhiteTitle:
             return .brandBase
         case .invisible:
             return .clear
@@ -216,7 +219,7 @@ public enum MainButtonStyle {
             return .clear
         case .plain:
             return .clear
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative, .alternativeWhiteBackground, .alternativeWhiteTitle:
             return .brandBase
         case .invisible:
             return .clear
@@ -233,7 +236,7 @@ public enum MainButtonStyle {
             return .clear
         case .plain:
             return .clear
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative, .alternativeWhiteBackground, .alternativeWhiteTitle:
             return .clear
         case .invisible:
             return .clear

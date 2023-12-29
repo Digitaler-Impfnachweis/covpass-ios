@@ -568,6 +568,8 @@
 
 "settings_rules_list_issuer" = "Zertifikatsaussteller";
 
+"settings_rules_list_issuer_lastupdated" = "Zuletzt aktualisiert am 01.12.2023";
+
 "settings_rules_list_ifsg_title" = "Regeln nach Infektionsschutzgesetz § 22a";
 
 "settings_rules_list_ifsg_subtitle" = "Zuletzt aktualisiert am 30.04.2023";
@@ -582,7 +584,7 @@
 
 "settings_rules_list_loading_cancel" = "Abbrechen";
 
-"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
+"app_information_message_update" = "Die App wird ab dem 1. Januar 2024 nicht mehr weiterentwickelt. Die Prüfregeln können nicht mehr aktualisiert werden.";
 
 "app_information_rules_list_title" = "Regelwerk";
 
@@ -1133,6 +1135,24 @@
 
 "entry_check_link" = "#Mehr zur Coronavirus-Einreiseverordnung::https://www.bundesgesundheitsministerium.de/service/gesetze-und-verordnungen/guv-19-lp/coronaeinreisev.html#";
 
-"start_infobox_title" = "Wichtige Information";
+"start_infobox_title" = "Achtung";
 
-"start_infobox_copy" = "Zertifikate können derzeit nicht mehr mit der CovPassCheck-App auf Gültigkeit beim Reisen überprüft werden. Nutzerinnen und Nutzern wird empfohlen, sich im Vorfeld einer Reise über die in ihrem Bestimmungsland geltenden Regelungen zu informieren.";
+"start_infobox_copy" = "Die Entwicklung der CovPassCheck-App endet, da die gesetzliche Grundlage wegfällt.";
+
+"start_infobox_button" = "Mehr anzeigen";
+
+"popup_sundown_info_image" = "Das Bild zeigt eine glückliche Familie, eine Person hält ein Smartphone mit einem grünen Haken.";
+
+"popup_sundown_info_title" = "Achtung!";
+
+"popup_sundown_info_copy" = "Die Europäische Union hat im Jahr 2021 mit dem digitalen COVID-Zertifikat einen EU-weit anerkannten Nachweis über eine Impfung, eine Genesung oder eine negative Testung von COVID-19 eingeführt. Diese Verordnung trat zum 30. Juni 2023 außer Kraft. Übergangsweise betreibt die EU die technischen Systeme zur Ermöglichung der länderübergreifenden Zertifikatsprüfung bis zum 31. Dezember 2023 weiter. Der Übergangsbetrieb endet zu diesem Zeitpunkt. Derzeit steht kein internationales System mit vergleichbaren Funktionalitäten und vergleichbarer Reichweite bereit.\n\nIn Deutschland wird daher die Möglichkeit zur Ausstellung von digitalen COVID-Zertifikaten wie etwa Impf- und Genesenenzertifikaten zum 31. Dezember 2023 eingestellt. Eingestellt werden deshalb auch die CovPass-App und die CovPassCheck-App. Die CovPass-App wird in einen Walletmodus versetzt, in welchem die gespeicherten Zertifikate erhalten bleiben.";
+
+"popup_sundown_info_subtitle" = "Das bedeutet für Sie: Bis zum 31.12.2023 sind alle bisherigen Funktionalitäten verfügbar.\n\nAb dem 01.01.2024:";
+
+"popup_sundown_info_bullet1" = "Es wird kein Support mehr für die App angeboten.";
+
+"popup_sundown_info_bullet2" = "Die Apps sind im App-Store für einen (erneuten) Download nicht mehr verfügbar.";
+
+"popup_sundown_info_bullet3" = "Es werden keine neuen Funktionen veröffentlicht.";
+
+"popup_sundown_info_bullet4" = "Weitere Hinweise finden Sie außerdem in der Datenschutzerklärung der CovPassCheck-App.";

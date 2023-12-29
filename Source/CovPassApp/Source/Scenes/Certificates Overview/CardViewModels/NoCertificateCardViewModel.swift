@@ -18,9 +18,11 @@ struct NoCertificateCardViewModel: NoCertificateCardViewModelProtocol {
 
     let backgroundColor: UIColor = .backgroundSecondary20
 
-    let title: String = "vaccination_start_screen_note_title".localized
+    var title: String {
+        Date().passedFirstOfJanuary2024 ? "vaccination_start_screen_note_title_after_july".localized : "vaccination_start_screen_note_title".localized
+    }
 
-    let subtitle: String = "vaccination_start_screen_note_message".localized
+    var subtitle: String { Date().passedFirstOfJanuary2024 ? "vaccination_start_screen_note_message_after_july".localized : "vaccination_start_screen_note_message".localized }
 
     let image: UIImage = .noCertificate
 

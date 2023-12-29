@@ -8,6 +8,13 @@
 import Foundation
 
 public extension Date {
+    var passedFirstOfJanuary2024: Bool {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        guard let firstOfJuly2023 = formatter.date(from: "2024/01/01 00:00") else { return false }
+        return self > firstOfJuly2023
+    }
+
     var passed24Hours: Bool {
         guard let date = Calendar.current.date(byAdding: .day, value: 1, to: self) else {
             return false

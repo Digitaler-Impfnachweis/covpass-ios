@@ -35,6 +35,10 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     var receivedCertificatePickerTokens: [ExtendedCBORWebToken]?
     var showQRCodeScanAndSelectionViewValue = QRCodeImportResult.scanResult(.success(""))
 
+    func showSundownInfo() -> PromiseKit.Promise<Void> {
+        .value
+    }
+
     func showCertificateExpiredNotDe() {
         showCertificateExpiredNotDeExpectation.fulfill()
     }

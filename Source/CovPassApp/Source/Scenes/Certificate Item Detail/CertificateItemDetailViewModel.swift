@@ -180,6 +180,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
 
     var expirationHintButtonIsHidden: Bool? {
         guard !expirationHintIsHidden else { return nil }
+        if Date().passedFirstOfJanuary2024 { return true }
         return !isReissuable
     }
 
@@ -278,8 +279,14 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
             return "revocation_detail_locationID".localized.replaceIfAvailable(expirationDate: expirationDate)
         } else if isReissuable {
             if isExpired {
+                if Date().passedFirstOfJanuary2024 {
+                    return "renewal_bluebox_copy_expiry_not_available_30_6".localized.replaceIfAvailable(expirationDate: expirationDate)
+                }
                 return "renewal_bluebox_copy_expired".localized.replaceIfAvailable(expirationDate: expirationDate)
             } else {
+                if Date().passedFirstOfJanuary2024 {
+                    return "renewal_bluebox_copy_expiring_soon_not_available_30_6".localized.replaceIfAvailable(expirationDate: expirationDate)
+                }
                 return "renewal_bluebox_copy_expiring_soon".localized.replaceIfAvailable(expirationDate: expirationDate)
             }
         } else if isSuperseded {
@@ -290,10 +297,16 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
             }
         } else if !isReissuable {
             if isGerman, isExpired {
+                if Date().passedFirstOfJanuary2024 {
+                    return "renewal_bluebox_copy_expiry_not_available_30_6".localized.replaceIfAvailable(expirationDate: expirationDate)
+                }
                 return "renewal_bluebox_copy_expiry_not_available".localized.replaceIfAvailable(expirationDate: expirationDate)
             } else if !isGerman, isExpired {
                 return "renewal_bluebox_copy_expiry_not_german".localized.replaceIfAvailable(expirationDate: expirationDate)
             } else if isGerman, certificate.vaccinationCertificate.expiresSoon {
+                if Date().passedFirstOfJanuary2024 {
+                    return "renewal_bluebox_copy_expiring_soon_not_available_30_6".localized.replaceIfAvailable(expirationDate: expirationDate)
+                }
                 return "renewal_bluebox_copy_expiring_soon_not_available".localized.replaceIfAvailable(expirationDate: expirationDate)
             } else if !isGerman, certificate.vaccinationCertificate.expiresSoon {
                 return "renewal_bluebox_copy_expiring_soon_not_german".localized.replaceIfAvailable(expirationDate: expirationDate)

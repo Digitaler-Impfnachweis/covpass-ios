@@ -119,6 +119,10 @@
 
 "vaccination_start_screen_note_message" = "You do not have any EU Digital COVID Certificate saved at the moment. Tap the button \"Add a certificate\" (plus symbol) to add a Digital COVID Certificate.";
 
+"vaccination_start_screen_note_title_after_july" = "No certificates found";
+
+"vaccination_start_screen_note_message_after_july" = "Since 1st of January 2024, the CovPass app will not be developed any further. Therefore, certificates can no longer be added.";
+
 "startscreen_card_title" = "EU Digital COVID Certificate";
 
 "startscreen_card_button" = "Display certificates";
@@ -1364,7 +1368,7 @@
 
 "app_information_title_update" = "Checking rules";
 
-"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
+"app_information_message_update" = "The app will no longer be developed from 1 January 2024. The checking rules can no longer be updated.";
 
 "app_information_list_update_notifications" = "Update notifications";
 
@@ -1390,7 +1394,11 @@
 
 "settings_rules_list_domestic" = "Domestic rules";
 
-"settings_rules_list_features" = "Rule features";
+"settings_rules_list_features" = "Rules according to Infection Protection Act § 22a";
+
+"settings_rules_list_features_lastupdated" = "Last updated 30.04.2023";
+
+"settings_rules_list_issuer_lastupdated" = "Last updated 01.12.2023";
 
 "settings_rules_list_issuer" = "Certificate issuer";
 
@@ -1731,9 +1739,13 @@
 
 "renewal_bluebox_copy_expired" = "The technical validity of your certificate expired on %@ at %@. Renew your certificate now to continue using it.";
 
-"renewal_bluebox_copy_expiry_not_available" = "The technical validity of your certificate has expired on %@ at %@. If you still need the certificate, please visit a participating pharmacy to have a new certificate issued.";
+"renewal_bluebox_copy_expiry_not_available" = "The technical validity of your certificate has expired on %@ at %@. If you still need the certificate, please visit a participating pharmacy until 31.12.2023 to have a new certificate issued.";
 
-"renewal_bluebox_copy_expiring_soon_not_available" = "The technical validity of your certificate expires on %@ at %@. If you still need the certificate, please visit a participating pharmacy to have a new certificate issued.";
+"renewal_bluebox_copy_expiring_soon_not_available" = "The technical validity of your certificate expires on %@ at %@. If you still need the certificate, please visit a participating pharmacy until 31.12.2023 to have a new certificate issued.";
+
+"renewal_bluebox_copy_expiring_soon_not_available_30_6" = "The technical validity of your certificate expires on %@ at %@.";
+
+"renewal_bluebox_copy_expiry_not_available_30_6" = "The technical validity of your certificate has expired on %@ at %@.";
 
 "renewal_bluebox_copy_expiry_not_german" = "The technical validity of at least one of your certificates has expired. As your certificate was not issued in Germany, it cannot be renewed in the CovPass app. Please check the requirements of the country of issuance.";
 
@@ -2009,6 +2021,34 @@
 
 "a11y_accordion_collapse_hint_android" = "Collapse";
 
-"start_infobox_title" = "Important information";
+"start_infobox_title" = "Attention";
 
-"start_infobox_copy" = "You can currently no longer check your certificates in the app for validity when travelling. Therefore, please inform yourself about the regulations applicable in your country of destination before travelling.";
+"start_infobox_copy" = "The development of the CovPass app ends as the legal basis no longer exists. However, your certificates will remain.";
+
+"start_infobox_button" = "Show more";
+
+"popup_sundown_info_image" = "Image showing a happy family, one person is holding a smartphone with a green check.";
+
+"popup_sundown_info_title" = "Attention!";
+
+"popup_sundown_info_copy" = "In 2021, the European Union introduced the digital COVID certificate as an EU-wide recognised proof of vaccination, recovery or negative testing for COVID-19. This regulation expired on 30 June 2023. On a transitional basis, the EU will continue to operate the technical systems to enable cross-border certificate checks until 31 December 2023. The transitional operation will end on that date. There is currently no international system with comparable functions and scope.\n\nIn Germany, the possibility of issuing digital COVID certificates such as vaccination and recovery certificates will therefore be discontinued on 31 December 2023. The CovPass app and the CovPassCheck app will therefore also be discontinued. The CovPass app will be switched to wallet mode, where the stored certificates will be retained.";
+
+"popup_sundown_info_subtitle" = "What does this mean for you? All functionalities will continue to be available until 31 December 2023.\n\nFrom 1 January 2024:";
+
+"popup_sundown_info_bullet1" = "Your existing certificates in the CovPass app will still be stored on your smartphone.";
+
+"popup_sundown_info_bullet2" = "You will still be able to access your saved certificates in the CovPass app.";
+
+"popup_sundown_info_bullet3" = "You will be able to export saved certificates as a PDF (\"Create PDF\" function).";
+
+"popup_sundown_info_bullet4" = "You will no longer be able to add new certificates (we have removed the function for scanning certificates.)";
+
+"popup_sundown_info_bullet5" = "You will no longer be able to renew technically expired certificates in the app. Therefore, no reference is made to their expiry or renewal.";
+
+"popup_sundown_info_bullet6" = "Support for the app will no longer be offered.";
+
+"popup_sundown_info_bullet7" = "The apps will no longer be available for (re)download in the app store.";
+
+"popup_sundown_info_bullet8" = "No new functions will be published.";
+
+"popup_sundown_info_bullet9" = "Further information can also be found in the CovPass app privacy policy.";

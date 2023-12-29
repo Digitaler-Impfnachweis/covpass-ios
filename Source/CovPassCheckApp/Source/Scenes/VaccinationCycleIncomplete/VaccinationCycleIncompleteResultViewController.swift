@@ -111,10 +111,14 @@ final class VaccinationCycleIncompleteResultViewController: UIViewController {
     }
 
     private func configureLink() {
-        linkLabel.attributedText = NSMutableAttributedString(string: viewModel.faqLinkTitle)
-            .replaceLink()
-            .styledAs(.header_3)
-            .colored(.brandAccent)
+        if !Date().passedFirstOfJanuary2024 {
+            linkLabel.attributedText = NSMutableAttributedString(string: viewModel.faqLinkTitle)
+                .replaceLink()
+                .styledAs(.header_3)
+                .colored(.brandAccent)
+        } else {
+            linkLabel.attributedText = "".styledAs(.header_3)
+        }
         linkLabel.linkCallback = { [weak self] url in
             self?.viewModel.openFAQ(url)
         }

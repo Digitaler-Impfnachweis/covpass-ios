@@ -63,7 +63,7 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
         self.rescanIsHidden = rescanIsHidden
         self.router = router
         self.revocationKeyFilename = revocationKeyFilename
-        revocationInfoHidden = !persistence.revocationExpertMode || token == nil
+        revocationInfoHidden = !persistence.revocationExpertMode || token == nil || Date().passedFirstOfJanuary2024
         reasonViewModels = Self.reasonViewModels()
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
     }

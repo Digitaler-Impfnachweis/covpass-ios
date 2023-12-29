@@ -13,6 +13,7 @@ import Scanner
 import UIKit
 
 protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanQRCodeProtocol, CheckImmunityRouterProtocol {
+    func showSundownInfo() -> Promise<Void>
     func showAppInformation(userDefaults: Persistence)
     func showDataPrivacy() -> Promise<Void>
     func showAnnouncement() -> Promise<Void>
